@@ -1,0 +1,92 @@
+<form novalidate autocomplete="off" #createTenantForm="ngForm" (ngSubmit)="save()" [busy]="saving">
+    <div class="p-3">
+        <div class="field">
+            <label for="TenancyName" class="text-900 font-medium">{{l('TenancyName')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="tenancyName"
+                   id="tenancyName"
+                   minlength="2"
+                   maxlength="64"
+                   required
+                   [(ngModel)]="tenant.tenancyName"
+                   #tenancyNameModel="ngModel"
+                   #tenancyNameEl />
+            <abp-validation-summary [control]="tenancyNameModel"
+                                    [controlEl]="tenancyNameEl"></abp-validation-summary>
+        </div>
+        <div class="field">
+            <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="name"
+                   id="name"
+                   maxlength="128"
+                   required
+                   [(ngModel)]="tenant.name"
+                   #nameModel="ngModel"
+                   #nameEl />
+            <abp-validation-summary [control]="nameModel"
+                                    [controlEl]="nameEl"></abp-validation-summary>
+        </div>
+        <div class="field">
+            <label for="adminEmailAddress" class="text-900 font-medium">{{l('AdminEmailAddress')}}<span class="text-red-600">*</span></label>
+            <input type="email"
+                   pInputText
+                   class="w-full"
+                   name="adminEmailAddress"
+                   id="adminEmailAddress"
+                   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                   maxlength="256"
+                   required
+                   [(ngModel)]="tenant.adminEmailAddress"
+                   #adminEmailAddressModel="ngModel"
+                   #adminEmailAddressEl />
+            <abp-validation-summary [control]="adminEmailAddressModel"
+                                    [controlEl]="adminEmailAddressEl"></abp-validation-summary>
+        </div>
+
+        <div class="field"
+             findEdition
+             name="selectEdition"
+             [label]="l('Edition')"
+             [required]="true"
+             [(selectedModel)]="edition"
+             (selectedModelChange)="tenant.editionId = $event?.id">
+            <input type="hidden" required [(ngModel)]="tenant.editionId" name="editionId" />
+        </div>
+
+        <div class="field">
+            <label for="connectionString" class="text-900 font-medium">{{l('DatabaseConnectionString')}}</label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="connectionString"
+                   id="connectionString"
+                   maxlength="1024"
+                   [(ngModel)]="tenant.connectionString" />
+        </div>
+
+        <div class="field">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="isActive" [(ngModel)]="tenant.isActive"></p-inputSwitch>
+                <span class="mb-3">{{l('IsActive')}}</span>
+            </div>
+            <p-message severity="info" [text]="l('DefaultPasswordIs', '123qwe')" styleClass="w-full justify-content-start"></p-message>
+        </div>
+
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-end flex-wrap">
+            <button pButton pRipple
+                    label="{{'Save' | localize}}"
+                    class=""
+                    icon="pi pi-save"
+                    type="submit"
+                    [disabled]="!createTenantForm.form.valid || saving"></button>
+        </div>
+    </div>
+</form>

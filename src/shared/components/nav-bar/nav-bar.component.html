@@ -1,0 +1,12 @@
+<button type="button" pButton pRipple
+        icon="pi pi-table"
+        class="p-button-rounded p-button-text mr-3"
+        (click)="settingClick.emit($event)"
+        *ngIf="!hideSetting"></button>
+<h5 class="my-0" *ngIf="navs && navs.length">
+    <ng-container *ngFor="let n of navs; let i=index">
+        <ng-container *ngIf="i>0"> / </ng-container>
+        <a [routerLink]="[n.routerLink]" *ngIf="n.routerLink">{{n.label}}</a>
+        <ng-container *ngIf="!n.routerLink">{{n.label}}</ng-container> 
+    </ng-container>
+</h5>

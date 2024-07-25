@@ -1,0 +1,30 @@
+<div class="flex gap-2" [ngClass]="{'flex-grow-1': hideAction}">
+    <button type="button" pButton pRipple
+            icon="pi pi-table"
+            class="p-button-rounded p-button-text"
+            (click)="showSetting.emit($event)"></button>
+    <button pButton pRipple
+            class="p-button-rounded p-button-text"
+            [icon]="cardView? 'pi pi-th-large':'pi pi-list'"
+            type="button"
+            (click)="onSwitchView($event)"></button>
+    <div class="flex-1" *ngIf="hideAction"></div>
+    <span class="p-input-icon-right" >
+        <input pInputText type="text"
+               class="w-full"
+               [placeholder]="l('Search')"
+               [(ngModel)]="searchModel"
+               (ngModelChange)="searchModelChange.emit($event)"
+               (keydown.enter)="search.emit($event)" />
+        <i class="pi pi-search" (click)="search.emit($event)"></i>
+    </span>
+</div>
+
+<button pButton pRipple
+        label="{{'Select' | localize}}"
+        class=""
+        icon="pi pi-check"
+        type="button"
+        [disabled]="selectDisabled"
+        (click)="select.emit($event)"
+        *ngIf="!hideAction"></button>

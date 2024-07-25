@@ -1,0 +1,418 @@
+<div [@routerTransition]>
+    <div class="card">
+        <div class="flex justify-content-between flex-wrap pb-3">
+            <div class="flex align-items-center"
+                 navBar
+                 [hideSetting]="true"
+                 [navs]="navBarItems">
+            </div>
+        </div>
+
+        <form novalidate autocomplete="off" #hostSettingsForm="ngForm" (ngSubmit)="saveAll()" [busy]="saving">
+
+            <p-tabView styleClass="" [scrollable]="isMobile">
+                <p-tabPanel [header]="l('General')" [selected]="true">
+                    <div style="min-height: 50vh;" >
+                        <div class="formgrid grid">
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3" *ngIf="showTimezoneSelection">
+                                <label for="timezone" class="block text-900 font-medium mb-2">{{l('Timezone')}}</label>
+                                <app-select-timezone [(selectedModel)]="hostSettings.general.timezone"
+                                                     name="selectTimezone"></app-select-timezone>
+
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel [header]="l('TenantManagement')">
+                    <div style="min-height: 50vh;">
+                        <div class="formgrid grid">
+                            <div class="field col-12 mb-3">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="allowSelfRegistration" [(ngModel)]="hostSettings.tenantManagement.allowSelfRegistration"></p-inputSwitch>
+                                    <span class="mb-3">{{l('AllowSelfRegistration')}}</span>
+                                </div>
+                                <small class="text-sm">{{l('IfYouDisableThisTenantsWillOnlyBeAddedByAdminUsingTenantManagementPage')}}</small>
+                            </div>
+                            <div class="field col-12 mb-3" *ngIf="hostSettings.tenantManagement.allowSelfRegistration">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="isNewRegisteredTenantActiveByDefault" [(ngModel)]="hostSettings.tenantManagement.isNewRegisteredTenantActiveByDefault"></p-inputSwitch>
+                                    <span class="mb-3">{{l('IsNewRegisteredTenantActiveByDefault')}}</span>
+                                </div>
+                                <small class="text-sm">{{l('IfYouDisableThisNewTenantsWillNotBeActiveAndCanNotLoginUntilAdminManuallyActivateTheAccount')}}</small>
+                            </div>
+                            <div class="field col-12 mb-3" *ngIf="hostSettings.tenantManagement.allowSelfRegistration">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="useCaptchaOnRegistration" [(ngModel)]="hostSettings.tenantManagement.useCaptchaOnRegistration"></p-inputSwitch>
+                                    <span class="mb-3">{{l('UseCaptchaOnRegistration')}}</span>
+                                </div>
+                            </div>                        
+                            <div class="field col-4 mb-3"
+                                 findEdition
+                                 name="selectEdition"
+                                 [label]="l('Edition')"
+                                 [(selectedModel)]="edition"
+                                 (selectedModelChange)="hostSettings.tenantManagement.defaultEditionId = $event?.id">
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel [header]="l('UserManagement')">
+                    <div style="min-height: 50vh;">
+                        <div class="formgrid grid">
+                            <div class="field col-12 mb-3">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="isEmailConfirmationRequiredForLogin" [(ngModel)]="hostSettings.userManagement.isEmailConfirmationRequiredForLogin"></p-inputSwitch>
+                                    <span class="mb-3">{{l('IsEmailConfirmationRequiredForLogin')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 mb-3">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="smsVerificationEnabled" [(ngModel)]="hostSettings.userManagement.smsVerificationEnabled"></p-inputSwitch>
+                                    <span class="mb-3">{{l('SMSVerificationEnabled')}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel [header]="l('Security')">
+                    <div style="min-height: 50vh;">
+                        <div class="formgrid grid">
+
+                            <div class="field col-12 mb-3">
+                                <label class="block text-900 font-bold mb-2">{{l('PasswodComplexitySettings')}} </label>
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="useDefaultPasswordComplexitySettings" [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings"></p-inputSwitch>
+                                    <span class="mb-3">{{l('UseDefaultPasswordComplexitySettings')}}</span>
+                                </div>
+                            </div>
+
+                            <div class="field col-12 mb-3">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="requireDigit"
+                                                   [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings? hostSettings.security.defaultPasswordComplexity.requireDigit : hostSettings.security.passwordComplexity.requireDigit"></p-inputSwitch>
+                                    <span class="mb-3">{{l('RequireDigit')}}</span>
+                                </div>
+                            </div>
+
+                            <div class="field col-12 mb-3">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="requireLowercase"
+                                                   [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings? hostSettings.security.defaultPasswordComplexity.requireLowercase : hostSettings.security.passwordComplexity.requireLowercase"></p-inputSwitch>
+                                    <span class="mb-3">{{l('RequireLowercase')}}</span>
+                                </div>
+                            </div>
+
+                            <div class="field col-12 mb-3">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="requireUppercase"
+                                                   [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings? hostSettings.security.defaultPasswordComplexity.requireUppercase : hostSettings.security.passwordComplexity.requireUppercase"></p-inputSwitch>
+                                    <span class="mb-3">{{l('RequireUppercase')}}</span>
+                                </div>
+                            </div>
+
+                            <div class="field col-12 mb-3">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="requireNonAlphanumeric"
+                                                   [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings? hostSettings.security.defaultPasswordComplexity.requireNonAlphanumeric : hostSettings.security.passwordComplexity.requireNonAlphanumeric"></p-inputSwitch>
+                                    <span class="mb-3">{{l('RequireNonAlphanumeric')}}</span>
+                                </div>
+                            </div>
+
+                            <div class="field col-4 mb-3">
+                                <label class="block text-900 font-medium mb-2">{{l('RequiredLength')}} <span class="text-red-600">*</span></label>
+                                <ng-container *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings">
+                                    <input type="text"
+                                           pInputText
+                                           class="w-full"
+                                           name="requiredLength"
+                                           id="requiredLength"
+                                           disabled="disabled"
+                                           required
+                                           maxlength="32"
+                                           [(ngModel)]="hostSettings.security.defaultPasswordComplexity.requiredLength"
+                                           #requiredLengthModel="ngModel"
+                                           #requiredLengthEl />
+                                    <abp-validation-summary [control]="requiredLengthModel"
+                                                            [controlEl]="requiredLengthEl"></abp-validation-summary>
+                                </ng-container>
+                                <ng-container *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings">
+                                    <input type="text"
+                                           pInputText
+                                           class="w-full"
+                                           name="requiredLength"
+                                           id="requiredLength"
+                                           required
+                                           maxlength="32"
+                                           [(ngModel)]="hostSettings.security.passwordComplexity.requiredLength"
+                                           #requiredLengthModel="ngModel"
+                                           #requiredLengthEl />
+                                    <abp-validation-summary [control]="requiredLengthModel"
+                                                            [controlEl]="requiredLengthEl"></abp-validation-summary>
+                                </ng-container>
+                            </div>
+
+                            <div class="field col-12 mb-3">
+                                <label class="block text-900 font-bold mb-2">{{l('TwoFactorLogin')}} </label>
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="twoFactorLogin" [(ngModel)]="hostSettings.security.twoFactorLogin.isEnabled"></p-inputSwitch>
+                                    <span class="mb-3">{{l('EnableTwoFactorLogin')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 mb-3" *ngIf="hostSettings.security.twoFactorLogin.isEnabled">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="isEnabledForApplication" [(ngModel)]="hostSettings.security.twoFactorLogin.isEnabledForApplication"></p-inputSwitch>
+                                    <span class="mb-3">{{l('EnabledForApplication')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 mb-3" *ngIf="hostSettings.security.twoFactorLogin.isEnabled">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="isEmailProviderEnabled" [(ngModel)]="hostSettings.security.twoFactorLogin.isEmailProviderEnabled"></p-inputSwitch>
+                                    <span class="mb-3">{{l('EmailProviderEnabled')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 mb-3" *ngIf="hostSettings.security.twoFactorLogin.isEnabled">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="isSmsProviderEnabled" [(ngModel)]="hostSettings.security.twoFactorLogin.isSmsProviderEnabled"></p-inputSwitch>
+                                    <span class="mb-3">{{l('SmsProviderEnabled')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 mb-3" *ngIf="hostSettings.security.twoFactorLogin.isEnabled">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="isGoogleAuthenticatorEnabled" [(ngModel)]="hostSettings.security.twoFactorLogin.isGoogleAuthenticatorEnabled"></p-inputSwitch>
+                                    <span class="mb-3">{{l('GoogleAuthenticatorEnabled')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 mb-3" *ngIf="hostSettings.security.twoFactorLogin.isEnabled">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="isRememberBrowserEnabled" [(ngModel)]="hostSettings.security.twoFactorLogin.isRememberBrowserEnabled"></p-inputSwitch>
+                                    <span class="mb-3">{{l('RememberBrowserEnabled')}}</span>
+                                </div>
+                                <small class="text-sm">{{l('IfYouAllowsThisUsersCanSelectToRememberBrowserToSkipSecondTimeTwoFactorLoginForTheSameBrowser')}}</small>
+                            </div>
+
+
+                            <div class="field col-12 mb-3">
+                                <label class="block text-900 font-bold mb-2">{{l('UserLockOut')}} </label>
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="userLockOut" [(ngModel)]="hostSettings.security.userLockOut.isEnabled"></p-inputSwitch>
+                                    <span class="mb-3">{{l('EnableUserLockOut')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 mb-3" *ngIf="hostSettings.security.userLockOut.isEnabled">
+                                <label class="block text-900 font-medium mb-2">{{l('MaxFailedAccessAttemptsBeforeLockout')}} <span class="text-red-600">*</span></label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="maxFailedAccessAttemptsBeforeLockout"
+                                       id="maxFailedAccessAttemptsBeforeLockout"
+                                       required
+                                       maxlength="32"
+                                       [(ngModel)]="hostSettings.security.userLockOut.maxFailedAccessAttemptsBeforeLockout"
+                                       #maxFailedAccessAttemptsBeforeLockoutModel="ngModel"
+                                       #maxFailedAccessAttemptsBeforeLockoutEl />
+                                <abp-validation-summary [control]="maxFailedAccessAttemptsBeforeLockoutModel"
+                                                        [controlEl]="maxFailedAccessAttemptsBeforeLockoutEl"></abp-validation-summary>
+                            </div>
+                            <div class="field col-12 mb-3" *ngIf="hostSettings.security.userLockOut.isEnabled">
+                                <label class="block text-900 font-medium mb-2">{{l('DefaultAccountLockoutSeconds')}} <span class="text-red-600">*</span></label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="defaultAccountLockoutSeconds"
+                                       id="defaultAccountLockoutSeconds"
+                                       required
+                                       maxlength="32"
+                                       [(ngModel)]="hostSettings.security.userLockOut.defaultAccountLockoutSeconds"
+                                       #defaultAccountLockoutSecondsModel="ngModel"
+                                       #defaultAccountLockoutSecondsEl />
+                                <abp-validation-summary [control]="defaultAccountLockoutSecondsModel"
+                                                        [controlEl]="defaultAccountLockoutSecondsEl"></abp-validation-summary>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel [header]="l('SMTPMail')">
+                    <div style="min-height: 50vh;">
+                        <div class="formgrid grid">
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3">
+                                <label class="block text-900 font-medium mb-2">{{l('DefaultFromDisplayName')}} <span class="text-red-600">*</span></label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="defaultFromDisplayName"
+                                       id="defaultFromDisplayName"
+                                       required
+                                       maxlength="32"
+                                       [(ngModel)]="hostSettings.email.defaultFromDisplayName"
+                                       #defaultFromDisplayNameModel="ngModel"
+                                       #defaultFromDisplayNameEl />
+                                <abp-validation-summary [control]="defaultFromDisplayNameModel"
+                                                        [controlEl]="defaultFromDisplayNameEl"></abp-validation-summary>
+                            </div>
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3">
+                                <label class="block text-900 font-medium mb-2">{{l('DefaultFromAddress')}} <span class="text-red-600">*</span></label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="defaultFromAddress"
+                                       id="defaultFromAddress"
+                                       required
+                                       maxlength="32"
+                                       [(ngModel)]="hostSettings.email.defaultFromAddress"
+                                       #defaultFromAddressModel="ngModel"
+                                       #defaultFromAddressEl />
+                                <abp-validation-summary [control]="defaultFromAddressModel"
+                                                        [controlEl]="defaultFromAddressEl"></abp-validation-summary>
+                            </div>
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3">
+                                <label class="block text-900 font-medium mb-2">{{l('Host')}} <span class="text-red-600">*</span></label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="smtpHost"
+                                       id="smtpHost"
+                                       required
+                                       maxlength="64"
+                                       [(ngModel)]="hostSettings.email.smtpHost"
+                                       #smtpHostModel="ngModel"
+                                       #smtpHostEl />
+                                <abp-validation-summary [control]="smtpHostModel"
+                                                        [controlEl]="smtpHostEl"></abp-validation-summary>
+                            </div>
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3">
+                                <label class="block text-900 font-medium mb-2">{{l('Port')}} <span class="text-red-600">*</span></label>
+                                <input type="number"
+                                       pInputText
+                                       class="w-full"
+                                       name="smtpPort"
+                                       id="smtpPort"
+                                       required
+                                       maxlength="32"
+                                       [(ngModel)]="hostSettings.email.smtpPort"
+                                       #smtpPortModel="ngModel"
+                                       #smtpPortEl />
+                                <abp-validation-summary [control]="smtpPortModel"
+                                                        [controlEl]="smtpPortEl"></abp-validation-summary>
+                            </div>
+
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3">
+                                <label class="block text-900 font-medium mb-2">&nbsp;</label>
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="smtpEnableSsl" [(ngModel)]="hostSettings.email.smtpEnableSsl"></p-inputSwitch>
+                                    <span class="mb-3">{{l('SSLEnable')}}</span>
+                                </div>
+                            </div>
+
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3">
+                                <label class="block text-900 font-medium mb-2">&nbsp;</label>
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="smtpUseDefaultCredentials" [(ngModel)]="hostSettings.email.smtpUseDefaultCredentials"></p-inputSwitch>
+                                    <span class="mb-3">{{l('UseDefaultCredentials')}}</span>
+                                </div>
+                            </div>
+
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3" *ngIf="!hostSettings.email.smtpUseDefaultCredentials">
+                                <label class="block text-900 font-medium mb-2">{{l('Domain')}}</label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="smtpDomain"
+                                       id="smtpDomain"
+                                       maxlength="32"
+                                       [(ngModel)]="hostSettings.email.smtpDomain"
+                                       #smtpDomainModel="ngModel"
+                                       #smtpDomainEl />
+                                <abp-validation-summary [control]="smtpDomainModel"
+                                                        [controlEl]="smtpDomainEl"></abp-validation-summary>
+                            </div>
+
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3" *ngIf="!hostSettings.email.smtpUseDefaultCredentials">
+                                <label class="block text-900 font-medium mb-2">{{l('User')}} <span class="text-red-600">*</span></label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="smtpUser"
+                                       id="smtpUser"
+                                       required
+                                       maxlength="32"
+                                       [(ngModel)]="hostSettings.email.smtpUserName"
+                                       #smtpUserModel="ngModel"
+                                       #smtpUserEl />
+                                <abp-validation-summary [control]="smtpUserModel"
+                                                        [controlEl]="smtpUserEl"></abp-validation-summary>
+                            </div>
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3" *ngIf="!hostSettings.email.smtpUseDefaultCredentials">
+                                <label class="block text-900 font-medium mb-2">{{l('Password')}} <span class="text-red-600">*</span></label>
+                                <input type="password"
+                                       pInputText
+                                       class="w-full"
+                                       name="smtpPassword"
+                                       id="smtpPassword"
+                                       required
+                                       maxlength="32"
+                                       [(ngModel)]="hostSettings.email.smtpPassword"
+                                       #smtpPasswordModel="ngModel"
+                                       #smtpPasswordEl />
+                                <abp-validation-summary [control]="smtpPasswordModel"
+                                                        [controlEl]="smtpPasswordEl"></abp-validation-summary>
+                            </div>
+
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel [header]="l('Billing')">
+                    <div style="min-height: 50vh;">
+                        <div class="formgrid grid">
+                            <div class="field col-12 mb-3">
+                                <label class="block text-900 font-medium mb-2">{{l('LegalName')}}</label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="legalName"
+                                       id="legalName"
+                                       maxlength="64"
+                                       [(ngModel)]="hostSettings.billing.legalName"
+                                       #legalNameModel="ngModel"
+                                       #legalNameEl />
+                                <abp-validation-summary [control]="legalNameModel"
+                                                        [controlEl]="legalNameEl"></abp-validation-summary>
+                            </div>
+                            <div class="field col-12 mb-3">
+                                <label class="block text-900 font-medium mb-2">{{l('Address')}}</label>
+                                <textarea rows="5"
+                                          cols="30"
+                                          pInputTextarea
+                                          [(ngModel)]="hostSettings.billing.address"
+                                          class="w-full"
+                                          name="address"
+                                          id="address"
+                                          maxlength="128"
+                                          #addressModel="ngModel"
+                                          #addressEl></textarea>
+                                <abp-validation-summary [control]="addressModel"
+                                                        [controlEl]="addressEl"></abp-validation-summary>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+
+            <div class="flex justify-content-end">
+                <button type="button"
+                        pButton
+                        pRipple
+                        class="py-1"
+                        icon="pi pi-save"
+                        [label]="l('SaveAll')"
+                        (click)="saveAll()"
+                        [disabled]="!hostSettingsForm.form.valid || saving">
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

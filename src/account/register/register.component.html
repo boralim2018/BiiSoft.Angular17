@@ -1,0 +1,298 @@
+<!--<div [@routerTransition]>
+    <h4 class="text-center mb-3">{{ "Register" | localize }}</h4>
+    <form autocomplete="off" #registerForm="ngForm" (ngSubmit)="save()">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       name="name"
+                       placeholder="{{ 'Name' | localize }}"
+                       required
+                       maxlength="64"
+                       [(ngModel)]="model.name"
+                       #nameModel="ngModel"
+                       #nameEl />
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-arrow-left"></span>
+                    </div>
+                </div>
+            </div>
+            <abp-validation-summary [control]="nameModel"
+                                    [controlEl]="nameEl"></abp-validation-summary>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       name="surname"
+                       placeholder="{{ 'Surname' | localize }}"
+                       required
+                       maxlength="64"
+                       [(ngModel)]="model.surname"
+                       #surnameModel="ngModel"
+                       #surnameEl />
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-arrow-left"></span>
+                    </div>
+                </div>
+            </div>
+            <abp-validation-summary [control]="surnameModel"
+                                    [controlEl]="surnameEl"></abp-validation-summary>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="email"
+                       class="form-control"
+                       name="emailAddress"
+                       placeholder="{{ 'EmailAddress' | localize }}"
+                       required
+                       maxlength="256"
+                       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                       [(ngModel)]="model.emailAddress"
+                       #emailAddressModel="ngModel"
+                       #emailAddressEl />
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+            </div>
+            <abp-validation-summary [control]="emailAddressModel"
+                                    [controlEl]="emailAddressEl"></abp-validation-summary>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="email"
+                       class="form-control"
+                       name="userName"
+                       placeholder=" {{ 'UserName' | localize }}"
+                       required
+                       maxlength="32"
+                       [(ngModel)]="model.userName"
+                       #userNameModel="ngModel"
+                       #userNameEl />
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                    </div>
+                </div>
+            </div>
+            <abp-validation-summary [control]="userNameModel"
+                                    [controlEl]="userNameEl"></abp-validation-summary>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="password"
+                       class="form-control"
+                       name="password"
+                       placeholder="{{ 'Password' | localize }}"
+                       [(ngModel)]="model.password"
+                       required
+                       maxlength="32"
+                       #passwordModel="ngModel"
+                       #passwordEl />
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            <abp-validation-summary [control]="passwordModel"
+                                    [controlEl]="passwordEl"></abp-validation-summary>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <button type="button"
+                        class="btn btn-default"
+                        [disabled]="saving"
+                        [routerLink]="['../login']">
+                    <i class="fa fa-arrow-circle-left"></i> {{ "Back" | localize }}
+                </button>
+            </div>
+            <div class="col-4">
+                <button type="submit"
+                        class="btn btn-primary btn-block"
+                        [disabled]="!registerForm.form.valid || saving">
+                    {{ "Register" | localize }}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>-->
+
+
+<div [@routerTransition]>
+    <form novalidate autocomplete="off" #registerForm="ngForm" (ngSubmit)="save(registerForm)" [busy]="saving">
+        <h4 class="text-center mb-3">{{ "SignUp" | localize }}</h4>
+
+        <div class="w-full md:w-10 mx-auto">
+            <div class="field mb-3">
+                <label for="name" class="block text-900 font-medium mb-2">{{l('Name')}}</label>
+                <span class="p-input-icon-right w-full">
+                    <i class="pi pi-user"></i>
+                    <input pInputText
+                           id="name"
+                           name="name"
+                           type="text"
+                           placeholder="Name"
+                           class="w-full"
+                           [(ngModel)]="model.name"
+                           [ngClass]="{'ng-dirty': name.invalid && name.dirty }"
+                           required
+                           minlength="2"
+                           maxlength="32"
+                           #name="ngModel"
+                           #nameEl>
+                </span>
+                <abp-validation-summary *ngIf="name.invalid && name.dirty"
+                                        [control]="name"
+                                        [controlEl]="nameEl"></abp-validation-summary>
+            </div>
+
+            <div class="field mb-3">
+                <label for="surname" class="block text-900 font-medium mb-2">{{l('Surname')}}</label>
+                <span class="p-input-icon-right w-full">
+                    <i class="pi pi-user"></i>
+                    <input pInputText
+                           id="surname"
+                           name="surname"
+                           type="text"
+                           placeholder="Surname"
+                           class="w-full"
+                           [(ngModel)]="model.surname"
+                           [ngClass]="{'ng-dirty': surname.invalid && surname.dirty }"
+                           required
+                           minlength="2"
+                           maxlength="32"
+                           #surname="ngModel"
+                           #surnameEl>
+                </span>
+                <abp-validation-summary *ngIf="surname.invalid && surname.dirty"
+                                        [control]="surname"
+                                        [controlEl]="surnameEl"></abp-validation-summary>
+            </div>
+
+            <div class="field mb-3">
+                <label for="emailAddress" class="block text-900 font-medium mb-2">{{l('EmailAddress')}}</label>
+                <span class="p-input-icon-right w-full">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input pInputText
+                           id="emailAddress"
+                           name="emailAddress"
+                           type="email"
+                           placeholder="email@example.com"
+                           class="w-full"
+                           [(ngModel)]="model.emailAddress"
+                           [ngClass]="{'ng-dirty': emailAddress.invalid && emailAddress.dirty }"
+                           required
+                           minlength="2"
+                           maxlength="256"
+                           pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                           #emailAddress="ngModel"
+                           #emailAddressEl>
+                </span>
+                <abp-validation-summary *ngIf="emailAddress.invalid && emailAddress.dirty"
+                                        [control]="emailAddress"
+                                        [controlEl]="emailAddressEl"></abp-validation-summary>
+            </div>
+
+            <div class="field mb-3">
+                <label for="userName" class="block text-900 font-medium mb-2">{{l('UserName')}}</label>
+                <span class="p-input-icon-right w-full">
+                    <i class="pi pi-user"></i>
+                    <input pInputText
+                           id="userName"
+                           name="userName"
+                           type="text"
+                           placeholder="User Name"
+                           class="w-full"
+                           [(ngModel)]="model.userName"
+                           [ngClass]="{'ng-dirty': userName.invalid && userName.dirty }"
+                           required
+                           minlength="2"
+                           maxlength="32"
+                           #userName="ngModel"
+                           #userNameEl>
+                </span>
+                <abp-validation-summary *ngIf="userName.invalid && userName.dirty"
+                                        [control]="userName"
+                                        [controlEl]="userNameEl"></abp-validation-summary>
+            </div>
+
+            <div class="field mb-3">
+                <label for="password" class="block text-900 font-medium mb-2">{{l('Password')}}</label>
+                <span class="p-input-icon-right w-full">
+                    <i class="pi"
+                       [ngClass]="showPassword? 'pi-eye-slash' : 'pi-eye'"
+                       (click)="showPassword=!showPassword"></i>
+                    <input [type]="showPassword?'text':'password'"
+                           pInputText
+                           class="w-full"
+                           [ngClass]="{'ng-invalid': passwordModel.invalid && passwordModel.dirty}"
+                           name="password"
+                           id="password"
+                           required
+                           maxlength="32"
+                           validateEqual="confirmPassword"
+                           reverse="true"
+                           pattern="{{passwordComplexitySetting.pattern}}"
+                           [(ngModel)]="model.password"
+                           #passwordModel="ngModel"
+                           #passwordEl />
+                </span>
+                <abp-validation-summary [control]="passwordModel"
+                                        [controlEl]="passwordEl"
+                                        [customValidationErrors]="passwordValidationErrors"></abp-validation-summary>
+            </div>
+            <div class="field mb-3">
+                <label for="confirmPassword" class="block text-900 font-medium mb-2">{{l('ConfirmPassword')}}</label>
+                <span class="p-input-icon-right w-full">
+                    <i class="pi"
+                       [ngClass]="showConfirmPassword? 'pi-eye-slash' : 'pi-eye'"
+                       (click)="showConfirmPassword=!showConfirmPassword"></i>
+                    <input [type]="showConfirmPassword?'text':'password'"
+                           pInputText
+                           class="w-full"
+                           [ngClass]="{'ng-invalid': confirmPasswordModel.invalid && confirmPasswordModel.dirty}"
+                           name="confirmPassword"
+                           id="confirmPassword"
+                           required
+                           maxlength="32"
+                           validateEqual="password"
+                           reverse="false"
+                           ngModel
+                           #confirmPasswordModel="ngModel"
+                           #confirmPasswordEl />
+                </span>
+                <abp-validation-summary [control]="confirmPasswordModel"
+                                        [controlEl]="confirmPasswordEl"
+                                        [customValidationErrors]="confirmPasswordValidationErrors"></abp-validation-summary>
+            </div>
+
+            <div *ngIf="useCaptcha" class="form-group mt-2 captcha-container">
+                <re-captcha #recaptchaRef size="invisible" (resolved)="$event && captchaResolved($event)" [siteKey]="recaptchaSiteKey"></re-captcha>
+                <re-captcha #recaptchaRefLogin size="invisible" (resolved)="$event && captchaResolvedLogin($event)" [siteKey]="recaptchaSiteKey"></re-captcha>
+            </div>
+
+            <div class="flex align-items-center justify-content-between mt-5">
+                <button pButton pRipple
+                        label="{{'Back' | localize}}"
+                        class="flex p-button-outlined p-button-secondary"
+                        icon="fas fa-arrow-circle-left"
+                        type="button"
+                        [routerLink]="['../login']"></button>
+
+                <button pButton pRipple
+                        label="{{'SignUp' | localize}}"
+                        class="flex"
+                        icon="fa-solid fa-paper-plane"
+                        type="submit"
+                        [loading]="saving"
+                        [disabled]="registerForm.form.invalid || saving"></button>
+            </div>
+
+        </div>
+    </form>
+</div>

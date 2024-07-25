@@ -1,0 +1,22 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center" style="min-width:80%">
+        <account-header></account-header>
+        <div class="col-12 xl:col-6" style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+            <div class="h-full w-full m-0 pt-6 pb-4 px-4" style="border-radius:53px; background: linear-gradient(180deg, var(--surface-50) 38.9%, var(--surface-0));">
+
+                <div class="w-full md:w-10 mx-auto" *ngIf="showTenantChange">
+                    <tenant-change></tenant-change>
+                    <p-divider></p-divider>
+                </div>
+                <div class="w-full md:w-10 mx-auto">
+                    <router-outlet></router-outlet>
+                </div>
+                <div class="w-full md:w-10 mx-auto py-3">
+                    <account-languages></account-languages>
+                    <p-divider></p-divider>
+                    <account-footer></account-footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

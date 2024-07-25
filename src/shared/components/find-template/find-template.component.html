@@ -1,0 +1,36 @@
+<label *ngIf="label" class="flex flex-wrap align-items-center gap-1 mb-2">
+    <p-checkbox name="{{'exclude_' + name}}"
+                [label]="l('Exclude')"
+                [binary]="true"
+                [(ngModel)]="exclude"
+                (ngModelChange)="excludeChange.emit($event)"
+                inputId="'exclude' + name"
+                *ngIf="showExclude"></p-checkbox>
+    {{label}} <span class="text-red-500" *ngIf="required">*</span>
+</label>
+
+<div class="find" [ngClass]="{'ng-invalid': invalid, 'ng-dirty': dirty}">
+    <div class="p-multiselect">
+        <div class="p-inputtext border-none pr-0 flex justify-content-between align-items-center">
+            <div class="flex-1 flex justify-content-between align-items-center">
+                <div class="p-placeholder cursor-pointer" *ngIf="invalid" (click)="find()">{{placeholder}}</div>
+                <ng-container *ngIf="!invalid">
+                    <span *ngIf="!multiple">{{getDisplay(selectedModel)}}</span>
+                    <div class="flex flex-wrap gap-1" *ngIf="multiple">
+                        <ng-container *ngFor="let m of selectedModel; let i=index">
+                            <span class="border-1 border-round border-300 bg-primary px-2">
+                                {{getDisplay(m)}}
+                                <i class="pi pi-times text-xs cursor-pointer" (click)="remove(i)" *ngIf="showClear"></i>
+                            </span>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <span class="pi pi-times text-xs cursor-pointer"
+                      *ngIf="showClear && !invalid && (!multiple || selectedModel.length > 1)"
+                      (click)="clear()"></span>
+            </div>
+            <div class="p-multiselect-trigger text-center cursor-pointer" (click)="find()" #fButton><i class="pi pi-search"></i></div>
+        </div>
+    </div>
+    <small *ngIf="(required && invalid && dirty) && validateMessage" class="p-error block">{{ validateMessage }}</small>
+</div>

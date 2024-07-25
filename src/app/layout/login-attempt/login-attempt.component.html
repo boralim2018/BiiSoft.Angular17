@@ -1,0 +1,47 @@
+<form novalidate autocomplete="off" #loginAttemptForm="ngForm" (ngSubmit)="close()" [busy]="loading">
+    <div class="p-3">
+        <ng-container *ngIf="userLoginAttempts && userLoginAttempts.length">
+            <ng-container *ngFor="let log of userLoginAttempts">
+                <div class="flex align-items-center py-3 border-300 border-bottom-1">
+                    <div class="flex justify-content-center align-items-center border-round"
+                         [ngClass]="{'bg-indigo-400': !appSession.user.profilePictureId}"
+                         style="height: 5rem; width: 5rem;">
+                        <img [src]="userProfilePictureUrl | safeResourceUrl"
+                             class="border-round"
+                             style="width: 100%; object-fit: cover;" />
+                    </div>
+                    <div class="flex-grow-1 ml-4">
+                        <div class="flex">
+                            <span class="text-600 label-width">{{l('LoginTime')}}</span>:
+                            <span class="flex-grow-1 text-900 pl-3">{{log.creationTime}}</span>
+                        </div>
+                        <div class="flex">
+                            <span class="text-600 label-width">{{l('Result')}}</span>:
+                            <span class="flex-grow-1 text-900 pl-3">{{log.result}}</span>
+                        </div>
+                        <div class="flex">
+                            <span class="text-600 label-width">{{l('ClientIpAddress')}}</span>:
+                            <span class="flex-grow-1 text-900 pl-3">{{log.clientIpAddress}}</span>
+                        </div>
+                        <div class="flex">
+                            <span class="text-600 label-width">{{l('BrowserInfo')}}</span>:
+                            <span class="flex-grow-1 text-900 pl-3">{{log.browserInfo}}</span>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>            
+        </ng-container>
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-end flex-wrap">
+            <button pButton pRipple
+                    label="{{'Close' | localize}}"
+                    class="p-button-outlined"
+                    icon="pi pi-arrow-left" 
+                    type="submit"
+                    [disabled]="loading"></button>
+        </div>
+    </div>
+</form>
+

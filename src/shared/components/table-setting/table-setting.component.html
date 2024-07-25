@@ -1,0 +1,24 @@
+<button pButton pRipple
+        type="button"
+        icon="pi pi-ban"
+        label="Clear Setting"
+        class="p-button-text p-button-warning text-left w-full mt-2"
+        (click)="clearSetting.emit($event)"></button>
+<div class="flex justify-content-between flex-wrap px-3 py-2">
+    <div class="flex align-items-center"><i class="pi pi-table mr-2"></i> {{l('GridLine')}}</div>
+    <p-inputSwitch [(ngModel)]="gridLine" (ngModelChange)="gridLineChange.emit($event)" styleClass="flex align-items-center"></p-inputSwitch>
+</div>
+<p-listbox [options]="columns"
+           [(ngModel)]="selectedColumns"
+           (ngModelChange)="selectedColumnsChange.emit($event)"
+           [metaKeySelection]="false"
+           [checkbox]="true"
+           [filter]="true"
+           [multiple]="true"
+           optionLabel="header"
+           styleClass="border-none"
+           listStyleClass="max-h-25rem">
+    <ng-template let-col pTemplate="item">
+        {{l(col.header)}}
+    </ng-template>
+</p-listbox>

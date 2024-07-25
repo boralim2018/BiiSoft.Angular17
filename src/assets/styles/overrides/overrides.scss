@@ -1,0 +1,250 @@
+// Suggested location to add your overrides so that migration would be easy by just updating the SASS folder in the future
+
+//override font family
+@font-face {
+    font-family: google-khmer;
+    src: url('../../fonts/Khmer-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: battambang;
+    src: url('../../fonts/Battambang-Regular.ttf') format('opentype');
+}
+
+
+$vPadding: 0.5rem;
+$font-family: battambang, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+:root {
+    --font-family: battambang, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+}
+
+.bg-none{ background: none; }
+
+.card.app { width: 168px; color: var(--primary-color); }
+.card.app:hover, .card.app.selected { color: white; background-color: var(--primary-color); }
+
+.p-component,
+.p-link,
+.p-inputtext,
+.p-terminal .p-terminal-input,
+.p-chips .p-chips-multiple-container .p-chips-input-token input,
+.p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-input-token input {
+    font-family: $font-family;
+}
+
+//using khmer font affect line height, so reduce padding for all elements
+.p-inputtext {
+    padding: $vPadding 0.75rem;
+}
+
+[ng-reflect-required='true'] .find.ng-dirty.ng-invalid > .p-multiselect {
+    border-color: #f44435;
+}
+
+.p-input-filled [ng-reflect-required='true'] .find.ng-dirty.ng-invalid .p-multiselect {
+    border-color: transparent;
+    background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+}
+
+.input-min-height {
+    min-height: 41px;
+}
+
+.p-button {
+    padding: $vPadding 0.75rem;
+    min-width: 5rem;
+}
+.p-button.p-button-icon-only {
+    padding: $vPadding;
+    width: 2.5rem;
+    min-width: auto;
+}
+.p-button.p-button-icon-only.p-button-rounded {
+    height: 2.5rem;
+}
+.layout-menu li a {
+    padding: $vPadding 1rem;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: $vPadding 1.25rem;
+}
+.p-datatable .p-datatable-tbody > tr > td {
+    padding: $vPadding 1rem;
+}
+
+
+//override dialog heeder
+.p-dialog .p-dialog-header {
+    border-bottom: 1px solid var(--surface-border);
+}
+
+.p-dynamic-dialog .p-dialog-content {
+    padding: 0;
+    min-height: 200px;
+    max-height: calc(100vh - 250px);
+}
+
+/*.p-dynamic-dialog .p-dialog-footer{
+    padding-top: 1rem;
+}*/
+
+.p-password input {
+    width: 100%;
+}
+
+//override sweed alert 2
+.swal2-popup {
+    background-color: var(--surface-card);
+    border: 1px solid var(--surface-border);
+    color: var(--text-color);
+}
+
+.swal2-content {
+    color: var(--text-color-secondary);
+}
+
+.swal2-title {
+    color: var(--text-color);
+}
+
+.swal2-styled.swal2-confirm {
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
+}
+
+.p-overlaypanel.p-0 .p-overlaypanel-content {
+    padding: 0;
+}
+
+//phone screen w:540px, h:960px
+@media (max-width: 540px) {
+    .layout-footer { flex-direction: column; }
+}
+/*
+p-tree button.p-tree-toggler .pi-chevron-right:before {
+    content: "\e963";
+}
+
+p-tree button.p-tree-toggler .pi-chevron-down:before {
+    content: "\e964";
+}
+*/
+.swal2-container {
+    z-index: 9999;
+}
+
+//calendar
+.p-datepicker table td {
+     padding: 0; 
+}
+
+//dropdown
+.p-dropdown-panel .p-dropdown-header {
+    padding: 0;
+}
+
+.p-multiselect-panel .p-multiselect-header {
+    padding : 0;
+}
+
+.p-multiselect-panel .p-multiselect-header .p-multiselect-close{
+    display: none;
+}
+
+.layout-config .layout-config-button {
+    background-color: transparent; /*var(--primary-color);*/
+    color: var(--primary-color); /*var(--primary-color-text);*/
+    top: calc((100vh - 32px)/2);
+}
+
+.layout-config-button .rotate {
+    -moz-transition: all 400ms linear;
+    -webkit-transition: all 400ms linear;
+    transition: all 400ms linear;
+}
+
+.layout-config-button .rotate.rotate-down {
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+.invert {
+    -webkit-filter: invert(0.7);
+    filter: invert(0.7);
+}
+
+.profile-picture {
+    width: 64px;
+    border-radius: 32px;
+    display: block;
+    margin: 5px auto;
+}
+
+.image-profile {
+    width: 24px;
+    border-radius: 10px;
+}
+
+.image-profile.overlay {
+    -webkit-filter: invert(0.40);
+    filter: invert(0.40);
+}
+
+.image-profile:hover.overlay {
+    -webkit-filter: invert(0);
+    filter: invert(0);
+}
+
+.image-profile:hover.overlay.invert {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+}
+
+.layout-topbar .layout-topbar-button span.p-badge {
+    display: block;
+}
+
+.layout-topbar .layout-topbar-button .p-badge-mobile span.p-badge {
+    display: none;
+}
+
+.p-menu {
+    width: auto;
+    max-width: 20rem;
+    min-width: 12.5rem;
+}
+
+.empty-message{
+    text-align: center !important;
+    vertical-align: middle;
+    height: 80px;
+    color: red;
+}
+
+.card-container{ min-height: 54px; }
+
+@media screen and (max-width: 960px) {
+    .p-datatable-tbody > tr > td > .p-column-title {
+        margin-right: 10px;
+    }
+
+    .p-datatable-tbody > tr > td {
+        overflow: hidden;
+    }
+
+    .image-profile {
+        width: 16px;
+        border-radius: 5px;
+        margin-right: 0.5rem;
+    }
+
+    .layout-topbar .layout-topbar-button span.p-badge {
+        display: none;
+    }
+
+    .layout-topbar .layout-topbar-button .p-badge-mobile span.p-badge {
+        display: block;
+    }
+}

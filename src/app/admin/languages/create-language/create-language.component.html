@@ -1,0 +1,82 @@
+<form novalidate autocomplete="off" #createLanguageForm="ngForm" (ngSubmit)="save()" [busy]="saving">
+    <div class="p-3">
+        <div class="field">
+            <label for="name" class="text-900 font-medium">{{l('Name')}}</label>
+            <p-dropdown [options]="languages"
+                        [(ngModel)]="selectedLanguage"
+                        (onChange)="onLanguageChange($event)"
+                        styleClass="w-full"
+                        name="Name"
+                        [placeholder]="l('Name')"
+                        optionLabel="displayText"
+                        appendTo="body"
+                        [emptyFilterMessage]="l('RecordNotFound')"
+                        [emptyMessage]="l('RecordNotFound')"
+                        [required]="true"
+                        #name="ngModel">
+                <ng-template pTemplate="selectedItem">
+                    {{selectedLanguage.value}}
+                </ng-template>
+                <ng-template let-lang pTemplate="item">
+                    {{lang.displayText}}
+                </ng-template>
+            </p-dropdown>
+            <small *ngIf="name.invalid && name.dirty"
+                   class="p-error block">{{'NameIsRequired' | localize}}</small>
+        </div>
+        <div class="field">
+            <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}</label>
+            <span class="p-input-icon-right w-full">
+                <i class="pi pi-user"></i>
+                <input pInputText
+                       id="displayName"
+                       name="displayName"
+                       type="text"
+                       [placeholder]="l('DispalyName')"
+                       class="w-full"
+                       [(ngModel)]="model.displayName"
+                       [ngClass]="{'ng-dirty': displayName.invalid && displayName.dirty }"
+                       required
+                       minlength="2"
+                       maxlength="10"
+                       #displayName="ngModel"
+                       #displayNameEl>
+            </span>
+            <abp-validation-summary *ngIf="displayName.invalid && displayName.dirty"
+                                    [control]="displayName"
+                                    [controlEl]="displayNameEl"></abp-validation-summary>
+        </div>
+        <div class="field">
+            <label for="icon" class="text-900 font-medium">{{l('Icon')}}</label>
+            <p-dropdown [options]="flags"
+                        [(ngModel)]="selectedFlag"
+                        (onChange)="onFlagChange($event)"
+                        styleClass="w-full"
+                        name="icon"
+                        [placeholder]="l('Icon')"
+                        optionLabel="displayText"
+                        appendTo="body"
+                        [emptyFilterMessage]="l('RecordNotFound')"
+                        [emptyMessage]="l('RecordNotFound')"
+                        [required]="true">
+                <ng-template pTemplate="selectedItem">
+                    <i class="fi fi-{{selectedFlag.value}}"></i> {{selectedFlag.displayText}}
+                </ng-template>
+                <ng-template let-flag pTemplate="item">
+                    <i class="fi fi-{{flag.value}}"></i> {{flag.displayText}}
+                </ng-template>
+            </p-dropdown>
+        </div>
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-end flex-wrap">
+            <button pButton pRipple
+                    label="{{'Save' | localize}}"
+                    class=""
+                    icon="pi pi-save"
+                    type="submit"
+                    [disabled]="!createLanguageForm.form.valid || saving"></button>
+        </div>
+    </div>
+</form>

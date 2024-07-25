@@ -1,0 +1,113 @@
+
+<div class="layout-topbar">
+
+    <a class="layout-topbar-logo" routerLink="">
+        <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="logo">
+        <span class="ml-2">BiiSoft</span>
+    </a>
+
+    <a class="p-link layout-menu-button layout-topbar-button" href="javascript:;" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </a>
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <a href="javascript:;" class="p-link layout-topbar-button" (click)="backToMyAccount()" *ngIf="isImpersonatedLogin">
+            <i class="fa-solid fa-reply" style="color:red;"></i>
+            <span style="color:red;">{{l('BackToMyAccount')}}</span>
+        </a>
+
+        <ng-container *ngFor="let language of languages">
+            <a *ngIf="language.name != currentLanguage.name"
+               class="p-link layout-topbar-button"
+               href="javascript:;"
+               (click)="changeLanguage(language.name)">
+                <i class="fi fi-{{language.icon}} fis"></i>
+                <span>{{ language.displayName }}</span>
+            </a>
+        </ng-container>
+
+        <a href="javascript:;" class="p-link layout-topbar-button" (click)="showNotifications($event)">
+            <i class="pi pi-bell" pBadge [value]="3" severity="danger"></i>
+            <span>{{l('Notification')}}</span> <p-badge [value]="3" severity="danger" class="p-badge-mobile ml-2"></p-badge>
+        </a>
+
+        <a href="javascript:;" class="p-link layout-topbar-button" (click)="showUserSetting=true;">
+            <img class="image-profile"
+                 [src]="profilePictureUrl | safeResourceUrl"
+                 alt="Profile Image"
+                 [ngClass]="{invert: layoutService.config.colorScheme === 'light' && !appSession.user.profilePictureId, overlay: !appSession.user.profilePictureId }" />
+            <span>{{l('MyAccount')}}</span>
+        </a>
+
+    </div>
+
+</div>
+
+<p-sidebar [(visible)]="showUserSetting" position="right">
+    <div class="layout-config" [ngClass]="{'layout-config-active': showUserSetting}">
+        <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-text layout-config-close" (click)="showUserSetting=false"></button>
+        <div class="layout-config-content">
+
+            <div class="text-center">
+                <img class="profile-picture"
+                     [src]="profilePictureUrl | safeResourceUrl"
+                     alt="Profile Image"
+                     [ngClass]="{invert: layoutService.config.colorScheme === 'light' && !appSession.user.profilePictureId, overlay: !appSession.user.profilePictureId }" />
+
+                <span *ngIf="isMultiTenancyEnabled">{{tenancyName}}\</span>{{userName}}
+            </div>
+
+
+            <h6>{{l('MyAccount')}}</h6>
+            <p-divider></p-divider>
+            <button pButton class="p-button-text w-full px-0" type="button" (click)="showProfile()">
+                <i class="pi pi-user"></i> <span class="px-3">{{ l('Profile') }}</span>
+            </button>
+            <button pButton class="p-button-text w-full px-0" type="button" (click)="showChangePassword()">
+                <i class="fa-solid fa-unlock-keyhole"></i> <span class="px-3">{{ l('ChangePassword') }}</span>
+            </button>
+            <button pButton class="p-button-text w-full px-0" type="button" (click)="showLoginAttempt()">
+                <i class="fa-solid fa-clock"></i> <span class="px-3">{{ l('LoginAttempt') }}</span>
+            </button>
+
+            <h6>{{l('LinkAccount')}}</h6>
+            <p-divider></p-divider>
+            <button pButton class="p-button-text w-full px-0" type="button" (click)="showManageLinkAccount()">
+                <i class="fa-solid fa-link"></i> <span class="px-3">{{ l('ManageLinkAccount') }}</span>
+            </button>
+            <ng-container *ngIf="recentlyLinkedUsers && recentlyLinkedUsers.length">
+                <ng-container *ngFor="let u of recentlyLinkedUsers">
+                    <button pButton pRipple class="p-button-text w-full px-5" type="button" (click)="switchToUser(u)" icon="fa-solid fa-angle-right">
+                        <span class="px-3">{{ getShownLinkedUserName(u) }}</span>
+                    </button>
+                </ng-container>
+            </ng-container>
+
+            <h6>{{l('Settings')}}</h6>
+            <p-divider></p-divider>
+            <div class="flex justify-content-between align-items-center">
+                <span class="text-primary"><i class="pi pi-palette"></i><span class="px-3">{{l("UISettings")}}</span> </span>
+                <p-inputSwitch name="uiSettings" [(ngModel)]="layoutService.config.uiSettingEnable" (ngModelChange)="onUIEnableChange($event)"></p-inputSwitch>
+            </div>
+
+            <p-divider></p-divider>
+            <button pButton class="p-button-text w-full px-0" type="button" (click)="logout()">
+                <i class="fa-solid fa-power-off"></i> <span class="px-3">{{ l('Logout') }}</span>
+            </button>
+        </div>
+    </div>
+</p-sidebar>
+
+<p-sidebar [(visible)]="showNotificationSetting" position="right">
+    <div class="layout-config" [ngClass]="{'layout-config-active': showNotificationSetting}">
+        <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-text layout-config-close" (click)="showNotificationSetting=false"></button>
+        <div class="layout-config-content">
+            <h6>{{l('Notification')}} <p-badge [value]="3" severity="danger"></p-badge></h6>
+
+        </div>
+    </div>
+</p-sidebar>

@@ -1,0 +1,95 @@
+<div [@routerTransition]>
+    <div class="card">
+
+        <p-menu #inlineActionMenu [popup]="true" appendTo="body"></p-menu>
+
+        <p-overlayPanel #op styleClass="p-0">
+            <table-setting [columns]="columns"
+                           [(selectedColumns)]="selectedColumns"
+                           (clearSetting)="deleteTableCache()"
+                           [(gridLine)]="showGridLine"
+                           (gridLineChange)="showGridLineChange($event)"></table-setting>
+        </p-overlayPanel>
+
+        <div class="flex justify-content-between flex-wrap gap-3 pb-3">
+            <div class="flex align-items-center"
+                 navBar
+                 (settingClick)="op.show($event)"
+                 [navs]="navBarItems">
+            </div>
+            <div searchAction
+                 class="flex align-items-center gap-2"
+                 [actionMenuItems]="actionMenuItems"
+                 (onSearch)="refresh($event)"
+                 [(keyword)]="filterInput.keyword">
+            </div>
+        </div>
+
+        <p-table #languageTable
+                 [columns]="selectedColumns"
+                 [value]="listItems"
+                 [paginator]="true"
+                 [rowsPerPageOptions]="rowsPerPageOptions"
+                 [loading]="isTableLoading"
+                 [rowHover]="true"
+                 [rows]="filterInput.maxResultCount"
+                 [first]="filterInput.skipCount"
+                 [sortField]="filterInput.sortField"
+                 [sortOrder]="filterInput.sortMode"
+                 [totalRecords]="totalCount"
+                 [showCurrentPageReport]="true"
+                 currentPageReportTemplate="{{l('Total')}}: {totalRecords}"
+                 responsiveLayout="stack"
+                 [filterDelay]="0"
+                 [lazy]="true"
+                 [lazyLoadOnInit]="false"
+                 (onLazyLoad)="loadData($event)">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th pFrozenColumn [ngStyle]="{'width': responsiveWidth(actionColumnWidth), 'max-width': responsiveWidth(actionColumnWidth)}">{{l('Actions')}}</th>
+                    <ng-container *ngFor="let col of columns">
+                        <th *ngIf="col.sort"
+                            pReorderableColumn
+                            pResizableColumn
+                            [pSortableColumn]="col.name"
+                            [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}"
+                            [id]="col.name">{{l(col.header)}} <p-sortIcon [field]="col.name"></p-sortIcon></th>
+                        <th *ngIf="!col.sort"
+                            pReorderableColumn
+                            pResizableColumn
+                            [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}"
+                            [id]="col.name">{{l(col.header)}}</th>
+                    </ng-container>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row let-index="rowIndex" let-columns="columns">
+                <tr>
+                    <td pFrozenColumn [ngStyle]="{'width': responsiveWidth(actionColumnWidth), 'max-width': responsiveWidth(actionColumnWidth)}">
+                        <span class="p-column-title">{{l('Actions')}}</span>
+                        <button pButton pRipple type="button" class="p-button-rounded p-button-text" icon="pi pi-cog" (click)="showInlineActions(row, $event);" *ngIf="inlineActionVisible"></button>
+                    </td>
+                    <ng-container *ngFor="let col of columns">
+                        <td [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}">
+                            <span class="p-column-title">{{l(col.header)}}</span>
+                            <i *ngIf="col.name=='Icon'" class="fi fi-{{row.icon}}"></i>
+                            <p-tag *ngIf="col.name==='IsDisabled'" styleClass="px-3" [severity]="!row.isDisabled ? 'success' : 'warning'" [value]="!row.isDisabled ? this.l('Active') : this.l('Inactive')"></p-tag>
+                            <ng-container *ngIf="col.name!=='isDisabled' && col.name!=='icon'">
+                                {{getObjValue(row, col.name)}}
+                                <p-tag *ngIf="col.name==='Name' && row.name==defaultLanguage" styleClass="ml-3" [value]="this.l('Default')"></p-tag>
+                            </ng-container>
+                        </td>
+                    </ng-container>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="columns.length + 1" class="empty-message">
+                        <div recordNotFound [minHeight]="minHeight-70"></div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+

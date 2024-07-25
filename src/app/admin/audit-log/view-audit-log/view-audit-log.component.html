@@ -1,0 +1,60 @@
+<div [busy]="loading">
+    <div class="grid grid-nogutter p-3">
+        <div class="col-12">
+            <div class="field mb-3">
+                <label class="block text-900 font-medium mb-2">{{l('ExecutionTime')}}</label>
+                <div class="p-inputtext">{{auditLog.executionTime}}</div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="field mb-3">
+                <label class="block text-900 font-medium mb-2">{{l('ServiceName')}}</label>
+                <div class="p-inputtext">{{auditLog.serviceName}}</div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="field mb-3">
+                <label class="block text-900 font-medium mb-2">{{l('MethodName')}}</label>
+                <div class="p-inputtext">{{auditLog.methodName}}</div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="field mb-3">
+                <label class="block text-900 font-medium mb-2">{{l('UserName')}}</label>
+                <div class="p-inputtext">{{auditLog.userName}}</div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="field mb-3">
+                <label class="block text-900 font-medium mb-2">{{l('Duration')}}</label>
+                <div class="p-inputtext">{{auditLog.executionDuration}} ms</div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="field mb-3">
+                <label class="block text-900 font-medium mb-2">{{l('Input')}}</label>
+                <div class="p-inputtext overflow-auto">{{auditLog.parameters}}</div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="field mb-3">
+                <label class="block text-900 font-medium mb-2">{{l('Exception')}}</label>
+                <div class="p-inputtext overflow-auto input-min-height">{{auditLog.exception}}</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex flex-row-reverse flex-wrap">
+            <button pButton pRipple
+                    label="{{'Close' | localize}}"
+                    class="p-button-outlined"
+                    type="button"
+                    (click)="close()"></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<!--<ul class="layout-menu" (keydown)="onKeydown($event)">
+    <ng-container *ngFor="let item of model; let i = index;">
+        <li app-menuitem *ngIf="showMenuItem(item)" [item]="item" [index]="i" [root]="true"></li>
+    </ng-container>
+</ul>-->
+
+<button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-text fa-pull-right lg:hidden -mr-3" (click)="layoutService.onMenuToggle()"></button>
+
+<ul class="layout-menu" role="menu" (keydown)="onKeydown($event)">
+    <ng-container *ngFor="let item of model; let i = index;">
+        <li class="layout-menuitem-category" role="none" [attr.index]="i" *ngIf="showMenuItem(item)">
+            <div class="layout-menuitem-root-text" [attr.aria-label]="item.label">{{item.label}}</div>
+            <ul role="menu">
+                <ng-container *ngFor="let child of item.items">
+                    <li app-menuitem *ngIf="showMenuItem(child)" [item]="child" [index]="i" role="none"></li>
+                </ng-container>
+            </ul>
+        </li>
+    </ng-container>
+</ul>

@@ -1,0 +1,27 @@
+<p-dropdown [options]="models"
+            [(ngModel)]="selectedModel"
+            (onChange)="onChange($event)"
+            styleClass="w-full"
+            name="{{name}}"
+            [attr.name]="name"
+            [placeholder]="placeholder"
+            [appendTo]="appendTo"
+            [emptyFilterMessage]="l('RecordNotFound')"
+            [emptyMessage]="l('RecordNotFound')"
+            [required]="required"
+            [showClear]="showClear"
+            [virtualScroll]="true"
+            [virtualScrollItemSize]="39">
+    <ng-template pTemplate="header" *ngIf="filter">
+        <span class="p-input-icon-right w-full">
+            <i class="pi pi-search"></i>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="{{'filterInput_' + name}}"
+                   (keyup)="keyup.next($event)" />
+        </span>
+    </ng-template>
+</p-dropdown>
+<small *ngIf="required && dirty"
+       class="p-error block">{{ l('IsRequired', l('Timezone'))}}</small>

@@ -1,0 +1,33 @@
+<div class="grid mt-3">
+    <h5 class="col-12 py-2 m-0" *ngIf="title">{{title}}</h5>
+</div>
+
+<p-divider></p-divider>
+
+<div class="grid">
+
+    <div class="col-4 lg:col-2 py-2"> {{l('HouseNo')}} </div>
+    <div class="col-8 lg:col-4 py-2 font-bold">: {{model.houseNo}} </div>
+
+    <div class="col-4 lg:col-2 py-2"> {{l('Street')}} </div>
+    <div class="col-8 lg:col-4 py-2 font-bold">: {{model.street}} </div>
+
+    <div class="col-4 lg:col-2 py-2"> {{l('PostalCode')}} </div>
+    <div class="col-8 lg:col-4 py-2 font-bold">: {{model.postalCode}} </div>
+
+    <div class="col-4 lg:col-2 py-2"> {{l('Village')}} </div>
+    <div class="col-8 lg:col-4 py-2 font-bold">: {{model.vilageName}}</div>
+
+    <div class="col-4 lg:col-2 py-2"> {{l('SangkatCommune')}} </div>
+    <div class="col-8 lg:col-4 py-2 font-bold">: {{model.sangkatCommuneName}}</div>
+
+    <div class="col-4 lg:col-2 py-2"> {{l('KhanDistrict')}} </div>
+    <div class="col-8 lg:col-4 py-2 font-bold">: {{model.khanDistrictName}}</div>
+
+    <div class="col-4 lg:col-2 py-2"> {{l('CityProvince')}} </div>
+    <div class="col-8 lg:col-4 py-2 font-bold">: {{model.cityProvinceName}}</div>
+
+    <div class="col-4 lg:col-2 py-2"> {{l('Country')}} </div>
+    <div class="col-8 lg:col-4 py-2 font-bold">: {{model.countryName}}</div>
+
+</div>

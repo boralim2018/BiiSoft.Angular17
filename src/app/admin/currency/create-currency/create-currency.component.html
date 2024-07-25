@@ -1,0 +1,87 @@
+<form novalidate autocomplete="off" #createCurrencyForm="ngForm" (ngSubmit)="save()" [busy]="saving">
+    <div class="p-3">
+        <div class="field ">
+            <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="name"
+                   id="name"
+                   maxlength="128"
+                   required
+                   [(ngModel)]="model.name"
+                   #nameModel="ngModel"
+                   #nameEl />
+            <abp-validation-summary [control]="nameModel"
+                                    [controlEl]="nameEl"></abp-validation-summary>
+        </div>
+        <div class="field">
+            <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="displayName"
+                   id="displayName"
+                   minlength="2"
+                   maxlength="64"
+                   required
+                   [(ngModel)]="model.displayName"
+                   #displayNameModel="ngModel"
+                   #displayNameEl />
+            <abp-validation-summary [control]="displayNameModel"
+                                    [controlEl]="displayNameEl"></abp-validation-summary>
+        </div>
+        <div class="field">
+            <label for="code" class="text-900 font-medium">{{l('Code')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="code"
+                   id="code"
+                   minlength="3"
+                   maxlength="3"
+                   required
+                   [(ngModel)]="model.code"
+                   #codeModel="ngModel"
+                   #codeEl />
+            <abp-validation-summary [control]="codeModel"
+                                    [controlEl]="codeEl"></abp-validation-summary>
+        </div>
+
+        <div class="field">
+            <label for="symbol" class="text-900 font-medium">{{l('Symbol')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="symbol"
+                   id="symbol"
+                   minlength="1"
+                   maxlength="3"
+                   required
+                   [(ngModel)]="model.symbol"
+                   #symbolModel="ngModel"
+                   #symbolEl />
+            <abp-validation-summary [control]="symbolModel"
+                                    [controlEl]="symbolEl"></abp-validation-summary>
+        </div>
+
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-end flex-wrap">
+            <button pButton pRipple
+                    label="{{'SaveNew' | localize}}"
+                    class=""
+                    icon="pi pi-save"
+                    type="button"
+                    (click)="saveNew(createCurrencyForm)"
+                    [disabled]="!(createCurrencyForm.form.valid )|| saving"></button>
+            <button pButton pRipple
+                    label="{{'Save' | localize}}"
+                    class=""
+                    icon="pi pi-save"
+                    type="submit"
+                    [disabled]="!(createCurrencyForm.form.valid )|| saving"></button>
+        </div>
+    </div>
+</form>

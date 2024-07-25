@@ -1,0 +1,40 @@
+<form novalidate autocomplete="off" #editLanguageTextsForm="ngForm" (ngSubmit)="save()" [busy]="saving">
+    <div class="p-3">
+        <div class="field">
+            <label class="text-900 font-medium">{{l('Key')}}</label>
+            <div class="p-inputtext">{{model.key}}</div>
+        </div>
+        <div class="field">
+            <label class="text-900 font-medium">
+                <i class="inline-block {{baseLanguage?.icon}}"></i> {{baseLanguage?.displayName}}
+            </label>
+            <textarea pInputTextarea
+                      name="baseText"
+                      class="w-full"
+                      readonly
+                      rows="4"
+                      [ngModel]="baseText"></textarea>
+        </div>
+        <div class="field">
+            <label class="text-900 font-medium">
+                <i class="inline-block {{targetLanguage?.icon}}"></i> {{targetLanguage?.displayName}}
+            </label>
+            <textarea pInputTextarea
+                      name="value"
+                      class="w-full"
+                      rows="4"
+                      [(ngModel)]="model.value"></textarea>
+        </div>
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-end flex-wrap">
+            <button pButton pRipple
+                    label="{{'Save' | localize}}"
+                    class=""
+                    icon="pi pi-save"
+                    type="submit"
+                    [disabled]="!editLanguageTextsForm.form.valid || saving"></button>
+        </div>
+    </div>
+</form>

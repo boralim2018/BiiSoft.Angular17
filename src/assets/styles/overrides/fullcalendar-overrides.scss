@@ -1,0 +1,69 @@
+/*#region full calendar*/
+/*
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button {
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color-text);
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.fc.fc-theme-standard .fc-toolbar .fc-button-group .fc-button.fc-dayGridMonth-button:focus,
+.fc.fc-theme-standard .fc-toolbar .fc-button-group .fc-button.fc-timeGridWeek-button:focus,
+.fc.fc-theme-standard .fc-toolbar .fc-button-group .fc-button.fc-timeGridDay-button:focus {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+}
+
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button:hover,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button:hover,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button:hover,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button:focus,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button:focus,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button:focus,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active
+{
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--primary-color-text);
+    filter: brightness(90%);
+}
+
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active:hover,
+.fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--primary-color-text);
+    filter: brightness(80%);
+}
+
+.fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-block-event .fc-event-main {
+    color: inherit;
+}
+
+.layout-theme-dark .fc.fc-theme-standard .fc-view-harness .fc-multimonth-daygrid-table td {
+    background: var(--surface-b);
+}
+
+.layout-theme-dark .fc.fc-theme-standard .fc-view-harness .fc-multimonth-daygrid-table td.fc-day-disabled {
+    background: var(--surface-a);
+}
+*/
+.layout-theme-dark .fc .fc-list-event:hover td {
+    //background-color: var(--surface-b);
+    background-color: var(--surface-d);
+}
+/*
+.layout-theme-dark .fc .fc-multimonth-singlecol .fc-multimonth-header {
+    background: var(--surface-a);
+}
+
+.fc.fc-theme-standard .fc-view-harness .fc-dayGridMonth-view td.fc-day-other {
+    background: var(--surface-b);
+}
+
+/*#endregion*/

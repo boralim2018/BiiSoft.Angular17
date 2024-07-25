@@ -1,0 +1,80 @@
+<div [@routerTransition]>
+    <form novalidate autocomplete="off" #loginForm="ngForm" (ngSubmit)="login(loginForm)" [busy]="submitting">
+
+        <div class="text-center mb-5">
+            <img src="assets/layout/images/avatar.png" alt="Image" height="50" class="mb-3">
+            <div class="text-900 text-3xl font-medium mb-3">{{l('Welcome')}}, Isabel!</div>
+            <span class="text-600 font-medium">Sign in to continue</span>
+        </div>
+
+        <div class="w-full md:w-10 mx-auto">
+            <div class="field mb-3">
+                <label for="userNameOrEmailAddress" class="block text-900 font-medium mb-2">{{l('UserNameOrEmail')}}</label>
+                <span class="p-input-icon-right w-full">
+                    <i class="pi pi-user"></i>
+                    <input pInputText
+                           id="userNameOrEmailAddress"
+                           name="userNameOrEmailAddress"
+                           type="text"
+                           placeholder="User Name Or Email"
+                           class="w-full"
+                           [(ngModel)]="authService.authenticateModel.userNameOrEmailAddress"
+                           [ngClass]="{'ng-dirty': userNameOrEmailAddress.invalid && userNameOrEmailAddress.dirty }"
+                           required
+                           minlength="2"
+                           maxlength="32"
+                           #userNameOrEmailAddress="ngModel"
+                           #userNameOrEmailAddressEl>
+                </span>
+                <abp-validation-summary *ngIf="userNameOrEmailAddress.invalid && userNameOrEmailAddress.dirty"
+                                        [control]="userNameOrEmailAddress"
+                                        [controlEl]="userNameOrEmailAddressEl"></abp-validation-summary>
+            </div>
+            <div class="field mb-3">
+                <label for="password" class="block text-900 font-medium mb-2">{{l('Password')}}</label>
+                <p-password id="password"
+                            name="password"
+                            placeholder="Password"
+                            styleClass="w-full"
+                            [ngClass]="{'ng-invalid': password.invalid && password.dirty}"
+                            [(ngModel)]="authService.authenticateModel.password"
+                            [toggleMask]="true"
+                            [feedback]="false"
+                            required
+                            #password="ngModel">
+                </p-password>
+                <small *ngIf="password.invalid && password.dirty"
+                       class="p-error block">{{'PasswordIsRequired' | localize}}</small>
+            </div>
+
+            <div class="flex align-items-center justify-content-between mb-5">
+                <div class="flex align-items-center">
+                    <p-checkbox id="rememberme"
+                                name="rememberMe"
+                                label="{{'RememberMe' | localize}}"
+                                styleClass="mr-2"
+                                [(ngModel)]="authService.rememberMe"
+                                [binary]="true"></p-checkbox>
+                </div>
+                <a [routerLink]="['../forgot-password']" class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">{{l('ForgotPassword')}}</a>
+            </div>
+
+            <p *ngIf="isSelfRegistrationAllowed">
+                <a [routerLink]="['../register']" class="text-primary">
+                    {{ "SignUp" | localize }}
+                </a>
+            </p>
+
+            <div *ngIf="useCaptcha" class="form-group mt-2 captcha-container">
+                <re-captcha #recaptchaRef size="invisible" (resolved)="$event && captchaResolved($event)" [siteKey]="recaptchaSiteKey"></re-captcha>
+            </div>
+
+            <button pButton pRipple
+                    label="{{'SignIn' | localize}}"
+                    class="w-full text-2xl"
+                    type="submit"
+                    [loading]="submitting"
+                    [disabled]="loginForm.form.invalid || submitting"></button>
+        </div>
+    </form>
+</div>

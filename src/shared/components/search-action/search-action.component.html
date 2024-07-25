@@ -1,0 +1,12 @@
+<span class="p-input-icon-right" *ngIf="search">
+    <i class="pi pi-search" (click)="onSearch.emit($event)"></i>
+    <input pInputText type="text" [placeholder]="l('Search')" [(ngModel)]="keyword" (ngModelChange)="keywordChange.emit($event)" (keydown.enter)="onSearch.emit($event)" />
+</span>
+<button type="button" pButton pRipple icon="pi pi-filter" class="p-button-rounded p-button-text" (click)="filterClick.emit($event)" *ngIf="showFilter"></button>
+<ng-container *ngIf="actionMenuItems && actionMenuItems.length == 1">
+    <button type="button" pButton pRipple [icon]="actionMenuItems[0].icon" class="p-button-rounded p-button-text" (click)="actionMenuItems[0].command()" [title]="actionMenuItems[0].label"></button>
+</ng-container>
+<ng-container *ngIf="actionMenuItems && actionMenuItems.length > 1">
+    <button type="button" pButton pRipple icon="pi pi-cog" class="p-button-rounded p-button-text" (click)="actionMenu.show($event)"></button>
+    <p-menu #actionMenu [model]="actionMenuItems" [popup]="true"></p-menu>
+</ng-container>

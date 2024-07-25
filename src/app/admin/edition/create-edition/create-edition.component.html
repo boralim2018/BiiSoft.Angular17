@@ -1,0 +1,93 @@
+<form novalidate autocomplete="off" #createEditionForm="ngForm" (ngSubmit)="save()" [busy]="saving">
+
+    <p-tabView styleClass="mt-3">
+        <p-tabPanel header="Edition Info" [selected]="true">
+            <div class="p-3">
+                <div class="field">
+                    <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
+                    <input type="text"
+                           pInputText
+                           class="w-full"
+                           name="name"
+                           id="name"
+                           required
+                           minlength="2"
+                           maxlength="32"
+                           [(ngModel)]="edition.name"
+                           #nameModel="ngModel"
+                           #nameEl />
+                    <abp-validation-summary [control]="nameModel"
+                                            [controlEl]="nameEl"></abp-validation-summary>
+                </div>
+                <div class="field">
+                    <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
+                    <input type="text"
+                           pInputText
+                           class="w-full"
+                           name="displayName"
+                           id="displayName"
+                           required
+                           minlength="2"
+                           maxlength="32"
+                           [(ngModel)]="edition.displayName"
+                           #displayNameModel="ngModel"
+                           #displayNameEl />
+                    <abp-validation-summary [control]="displayNameModel"
+                                            [controlEl]="displayNameEl"></abp-validation-summary>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Features">
+            <div class="p-3">
+                <p-tree [value]="nodeItems"
+                        selectionMode="checkbox"
+                        [(selection)]="selectedNodes"
+                        [propagateSelectionUp]="false"
+                        [propagateSelectionDown]="true">
+                    <ng-template let-node pTemplate="default">
+                        <span>{{node.label}}</span>
+                        <ng-container *ngIf="node.data.inputType.name === 'SINGLE_LINE_STRING'">
+                            <p-inputNumber *ngIf="node.data.inputType.validator && node.data.inputType.validator.name === 'NUMERIC'"
+                                           [(ngModel)]="node.data.defaultValue"
+                                           (onInput)="onInputChange(node, $event.value)"
+                                           name="{{node.data.name}}"
+                                           styleClass="ml-3"
+                                           inputId="{{node.data.name}}"></p-inputNumber>
+                            <input *ngIf="!(node.data.inputType.validator && node.data.inputType.validator.name === 'NUMERIC')"
+                                   type="text"
+                                   pInputText
+                                   name="{{node.data.name}}"
+                                   [(ngModel)]="node.data.defaultValue"
+                                   (ngModelChange)="onInputChange(node, $event)"
+                                   class="ml-3">
+                        </ng-container>
+
+                        <p-dropdown *ngIf="node.data.inputType.name === 'COMBOBOX'"
+                                    name="{{node.data.name}}"
+                                    [options]="node.data.inputType.itemSource.items"
+                                    [(ngModel)]="node.data.defaultValue"
+                                    (ngModelChange)="onInputChange(node, $event)"
+                                    optionLabel="displayText"
+                                    optionValue="value"
+                                    filterBy="displayText"
+                                    [showClear]="false"
+                                    [placeholder]="node.label"
+                                    styleClass="ml-3">
+                        </p-dropdown>
+                    </ng-template>
+                </p-tree>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-end flex-wrap">
+            <button pButton pRipple
+                    label="{{'Save' | localize}}"
+                    class=""
+                    icon="pi pi-save"
+                    type="submit"
+                    [disabled]="!createEditionForm.form.valid || saving"></button>
+        </div>
+    </div>
+</form>

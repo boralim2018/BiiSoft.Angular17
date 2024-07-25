@@ -1,0 +1,151 @@
+<form novalidate autocomplete="off" #changeProfileForm="ngForm" (ngSubmit)="save()" [busy]="saving || loading">
+    <div class="p-3">
+        <div class="mb-3">
+            <div class="flex justify-content-center">
+                <img #image
+                     class="profile-picture"
+                     [src]="profileImageUrl | safeResourceUrl"
+                     alt="Profile Image"
+                     [ngClass]="{invert: layoutService.config.colorScheme === 'light' && !appSession.user.profilePictureId && !inputFile.files.length, overlay: !appSession.user.profilePictureId}" />
+            </div>
+            <div class="flex justify-content-center">
+                <input type="file" name="file" accept="image/*" class="hidden" #inputFile (change)="fileChange($event)" />
+
+                <button pButton pRipple class="p-button-outlined py-0" icon="pi pi-folder-open" type="button" (click)="inputFile.click()" *ngIf="!inputFile.files.length">
+                    <span class="px-2">{{l("ChoosePhoto")}}</span>
+                </button>
+
+                <button pButton pRipple class="p-button-outlined py-0" icon="pi pi-times" type="button" (click)="clearUpload(inputFile)" *ngIf="inputFile.files.length">
+                    <span class="px-2">{{l("Cancel")}}</span>
+                </button>
+                <button pButton pRipple class="p-button-outlined py-0 ml-3" icon="pi pi-cloud-upload" type="button" (click)="uploadProfile(inputFile)" *ngIf="inputFile.files.length">
+                    <span class="px-2">{{l("Upload")}}</span>
+                </button>
+            </div>
+        </div>
+        <div class="field">
+            <label for="name" class="text-900 font-medium">{{l('Name')}}</label>
+            <span class="p-input-icon-right w-full">
+                <i class="pi pi-user"></i>
+                <input pInputText
+                       id="name"
+                       name="name"
+                       type="text"
+                       [placeholder]="l('Name')"
+                       class="w-full"
+                       [(ngModel)]="model.name"
+                       [ngClass]="{'ng-dirty': name.invalid && name.dirty }"
+                       required
+                       minlength="2"
+                       maxlength="32"
+                       #name="ngModel"
+                       #nameEl>
+            </span>
+            <abp-validation-summary *ngIf="name.invalid && name.dirty"
+                                    [control]="name"
+                                    [controlEl]="nameEl"></abp-validation-summary>
+        </div>
+
+        <div class="field">
+            <label for="surname" class="text-900 font-medium">{{l('Surname')}}</label>
+            <span class="p-input-icon-right w-full">
+                <i class="pi pi-user"></i>
+                <input pInputText
+                       id="surname"
+                       name="surname"
+                       type="text"
+                       [placeholder]="l('Surname')"
+                       class="w-full"
+                       [(ngModel)]="model.surname"
+                       [ngClass]="{'ng-dirty': surname.invalid && surname.dirty }"
+                       required
+                       minlength="2"
+                       maxlength="32"
+                       #surname="ngModel"
+                       #surnameEl>
+            </span>
+            <abp-validation-summary *ngIf="surname.invalid && surname.dirty"
+                                    [control]="surname"
+                                    [controlEl]="surnameEl"></abp-validation-summary>
+        </div>
+        <div class="field">
+            <label for="userName" class="text-900 font-medium">{{l('UserName')}}</label>
+            <span class="p-input-icon-right w-full">
+                <i class="pi pi-user"></i>
+                <input pInputText
+                       id="userName"
+                       name="userName"
+                       type="text"
+                       [placeholder]="l('UserName')"
+                       class="w-full"
+                       [(ngModel)]="model.userName"
+                       [ngClass]="{'ng-dirty': userName.invalid && userName.dirty }"
+                       required
+                       minlength="2"
+                       maxlength="32"
+                       #userName="ngModel"
+                       #userNameEl>
+            </span>
+            <abp-validation-summary *ngIf="userName.invalid && userName.dirty"
+                                    [control]="userName"
+                                    [controlEl]="userNameEl"></abp-validation-summary>
+        </div>
+        <div class="field">
+            <label for="emailAddress" class="text-900 font-medium">{{l('EmailAddress')}}</label>
+            <span class="p-input-icon-right w-full">
+                <i class="fa-solid fa-envelope"></i>
+                <input pInputText
+                       id="emailAddress"
+                       name="emailAddress"
+                       type="email"
+                       placeholder="email@example.com"
+                       class="w-full"
+                       [(ngModel)]="model.emailAddress"
+                       [ngClass]="{'ng-dirty': emailAddress.invalid && emailAddress.dirty }"
+                       required
+                       minlength="2"
+                       maxlength="256"
+                       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                       #emailAddress="ngModel"
+                       #emailAddressEl>
+            </span>
+            <abp-validation-summary *ngIf="emailAddress.invalid && emailAddress.dirty"
+                                    [control]="emailAddress"
+                                    [controlEl]="emailAddressEl"></abp-validation-summary>
+        </div>
+
+        <div class="field">
+            <label for="phoneNumber" class="text-900 font-medium">{{l('PhoneNumber')}}</label>
+            <span class="p-input-icon-right w-full">
+                <i class="pi pi-user"></i>
+                <input pInputText
+                       id="phoneNumber"
+                       name="phoneNumber"
+                       type="text"
+                       [placeholder]="l('PhoneNumber')"
+                       class="w-full"
+                       [(ngModel)]="model.phoneNumber"
+                       [ngClass]="{'ng-dirty': phoneNumber.invalid && phoneNumber.dirty }"
+                       minlength="9"
+                       maxlength="64"
+                       #phoneNumber="ngModel"
+                       #phoneNumberEl>
+            </span>
+            <abp-validation-summary *ngIf="phoneNumber.invalid && phoneNumber.dirty"
+                                    [control]="phoneNumber"
+                                    [controlEl]="phoneNumberEl"></abp-validation-summary>
+        </div>
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-end flex-wrap">
+            <button pButton pRipple
+                    label="{{'Save' | localize}}"
+                    class=""
+                    icon="pi pi-save"
+                    type="submit"
+                    [disabled]="!changeProfileForm.form.valid || saving"></button>
+        </div>
+    </div>
+</form>
+

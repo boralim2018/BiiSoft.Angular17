@@ -1,0 +1,56 @@
+<div [@routerTransition]>
+    <p-menu #inlineActionMenu [popup]="true" appendTo="body"></p-menu>
+
+    <p-table #chooseUserTable
+                [columns]="selectedColumns"
+                [value]="listItems"
+                [paginator]="true"
+                [rowsPerPageOptions]="rowsPerPageOptions"
+                [loading]="isTableLoading"
+                [rowHover]="true"
+                [rows]="filterInput.maxResultCount"
+                [first]="filterInput.skipCount"
+                [sortField]="filterInput.sortField"
+                [sortOrder]="filterInput.sortMode"
+                [totalRecords]="totalCount"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Total: {totalRecords}"
+                responsiveLayout="stack"
+                [filterDelay]="0"
+                [lazy]="true"
+                [lazyLoadOnInit]="false"
+                (onLazyLoad)="loadData($event)">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th [ngStyle]="{'width': responsiveWidth(actionColumnWidth), 'max-width': responsiveWidth(actionColumnWidth)}">{{l('Actions')}}</th>
+                <ng-container *ngFor="let col of columns">
+                    <th *ngIf="col.sort"
+                        pReorderableColumn
+                        pResizableColumn
+                        [pSortableColumn]="col.name"
+                        [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}"
+                        [id]="col.name">{{l(col.header)}} <p-sortIcon [field]="col.name"></p-sortIcon></th>
+                    <th *ngIf="!col.sort"
+                        pReorderableColumn
+                        pResizableColumn
+                        [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}"
+                        [id]="col.name">{{l(col.header)}}</th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row let-index="rowIndex" let-columns="columns">
+            <tr>
+                <td [ngStyle]="{'width': responsiveWidth(actionColumnWidth), 'max-width': responsiveWidth(actionColumnWidth)}">
+                    <span class="p-column-title">{{l('Actions')}}</span>
+                    <button pButton pRipple type="button" class="p-button-rounded p-button-text" icon="pi pi-cog" (click)="showInlineActions(row, $event);" *ngIf="inlineActionVisible"></button>
+                </td>
+                <ng-container *ngFor="let col of columns">
+                    <td [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}">
+                        <span class="p-column-title">{{l(col.header)}}</span>
+                        {{getObjValue(row, col.name)}}
+                    </td>
+                </ng-container>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

@@ -1,0 +1,37 @@
+<form novalidate autocomplete="off" #importExcelForm="ngForm" (ngSubmit)="onUpload(fileRef)" [busy]="loading">
+
+    <div class="p-5">
+        <input type="file"
+               name="file"
+               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+               #fileRef
+               (change)="onFileChange($event, fileRef, fileName)"
+               class="hidden"
+               required/>
+
+        <div class="flex flex-column cursor-pointer border-round-2xl border-2 border-dashed border-primary p-5 mb-3" (click)="fileRef.click()">
+            <i class="pi pi-cloud-upload text-center text-primary" style="font-size: 4rem"></i>
+            <div #fileName class="text-center text-primary" href="javascript:;">{{l('SelectTemplate')}}</div>
+        </div>
+
+        <small class="text-primary">{{l("NoImportTemplateTemplateMessage")}}</small>
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-between flex-wrap">
+            <button pButton pRipple
+                    label="{{'DownloadTemplate' | localize}}"
+                    class="p-button p-button-outlined"
+                    icon="pi pi-cloud-download"
+                    type="button"
+                    (click)="onDownload()"></button>
+
+            <button pButton pRipple
+                    label="{{'Import' | localize}}"
+                    class=""
+                    icon="pi pi-cloud-upload"
+                    type="submit"
+                    [disabled]="!fileRef.files.length || loading"></button>
+        </div>
+    </div>
+</form>

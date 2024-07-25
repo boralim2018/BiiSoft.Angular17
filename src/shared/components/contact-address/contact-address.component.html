@@ -1,0 +1,88 @@
+<h5 class="col-12" *ngIf="title">{{title}}</h5>
+<div class="field col-12 md:col-6"
+     findCountry
+     name="selectCountry"
+     [required]="true"
+     [label]="l('Country')"
+     [(selectedModel)]="country"
+     (selectedModelChange)="onCountryChange($event)">
+</div>
+<div class="field col-12 md:col-6"
+     findCityProvince
+     name="selectCityProvince"
+     [label]="l('CityProvince')"
+     [countries]="country"
+     [(selectedModel)]="cityProvince"
+     (selectedModelChange)="onCityProvinceChange($event)">
+</div>
+<div class="field col-12 md:col-6"
+     findKhanDistrict
+     name="selectKhanDistrict"
+     [label]="l('KhanDistrict')"
+     [countries]="country"
+     [cityProvinces]="cityProvince"
+     [(selectedModel)]="khanDistrict"
+     (selectedModelChange)="onKhanDistrictChange($event)">
+</div>
+<div class="field col-12 md:col-6"
+     findSangkatCommune
+     name="selectSangkatCommune"
+     [label]="l('SangkatCommune')"
+     [countries]="country"
+     [cityProvinces]="cityProvince"
+     [khanDistricts]="khanDistrict"
+     [(selectedModel)]="sangkatCommune"
+     (selectedModelChange)="onSangkatCommuneChange($event)">
+</div>
+<div class="field col-12 md:col-6"
+     findVillage
+     name="selectVillage"
+     [label]="l('Village')"
+     [countries]="country"
+     [cityProvinces]="cityProvince"
+     [khanDistricts]="khanDistrict"
+     [(selectedModel)]="sangkatCommune"
+     (selectedModelChange)="onSangkatCommuneChange($event)">
+</div>
+<div class="field col-12 md:col-6">
+    <label class="text-900 font-medium">{{l('PostalCode')}}</label>
+    <input type="text"
+           pInputText
+           class="w-full"
+           name="postalCode"
+           id="postalCode"
+           maxlength="32"
+           [(ngModel)]="model.postalCode"
+           #postalCodeModel="ngModel"
+           #postalCodeEl />
+    <abp-validation-summary [control]="postalCodeModel"
+                            [controlEl]="postalCodeEl"></abp-validation-summary>
+</div>
+<div class="field col-12 md:col-6">
+    <label class="text-900 font-medium">{{l('Street')}}</label>
+    <input type="text"
+           pInputText
+           class="w-full"
+           name="street"
+           id="street"
+           maxlength="32"
+           [(ngModel)]="model.street"
+           #streetModel="ngModel"
+           #streetEl />
+    <abp-validation-summary [control]="streetModel"
+                            [controlEl]="streetEl"></abp-validation-summary>
+</div>
+<div class="field col-12 md:col-6">
+    <label class="text-900 font-medium">{{l('HouseNo')}}</label>
+    <input type="text"
+           pInputText
+           class="w-full"
+           name="houseNo"
+           id="houseNo"
+           maxlength="32"
+           [(ngModel)]="model.houseNo"
+           #houseNoModel="ngModel"
+           #houseNoEl />
+    <abp-validation-summary [control]="houseNoModel"
+                            [controlEl]="houseNoEl"></abp-validation-summary>
+</div>

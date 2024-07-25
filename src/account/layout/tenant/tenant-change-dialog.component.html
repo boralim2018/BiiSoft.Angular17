@@ -1,0 +1,17 @@
+<div [@routerTransition]>
+    <form novalidate autocomplete="off" #changeTenantForm="ngForm" (ngSubmit)="save()" [busy]="saving">
+        <div class="p-5">
+
+            <div class="field">
+                <label for="tenancyName" class="text-900 font-medium">{{l('TenancyName')}}</label>
+                <input id="tenancyName" name="tenancyName" type="text" placeholder="Tenancy Name" pInputText class="w-full" [(ngModel)]="tenancyName">
+            </div>
+            <div class="field">
+                <p-message severity="info" [text]="l('LeaveEmptyToSwitchToHost')" styleClass="w-full justify-content-start"></p-message>
+            </div>
+        </div>
+        <div class="flex justify-content-end flex-wrap pb-5 px-5">
+            <button pButton pRipple label="{{'Change' | localize}}" icon="fa-solid fa-paper-plane" class="flex" type="submit"></button>
+        </div>
+    </form>
+</div>

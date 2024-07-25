@@ -1,0 +1,36 @@
+<form novalidate autocomplete="off" #confirmForm="ngForm" (ngSubmit)="save()">
+    <div class="p-3">
+        <div class="field">
+            <h5>{{l('DeleteWarningMessage', deleteLabel, deleteObj)}}</h5>
+        </div>
+
+        <div class="field">
+            <label for="fonfirm" class="text-900 font-medium">{{l('PleaseEnterDeleteToConfirm')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="confirm"
+                   id="confirm"
+                   placeholder="Delete"
+                   required
+                   [(ngModel)]="model" />
+        </div>
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-end flex-wrap">
+            <button pButton pRipple
+                    label="{{'Cancel' | localize}}"
+                    class="p-button-outlined"
+                    icon="pi pi-arrow-left"
+                    type="button"
+                    (click)="close()"></button>
+            <button pButton pRipple
+                    label="{{'Delete' | localize}}"
+                    class="p-button-danger"
+                    icon="pi pi-trash"
+                    type="submit"
+                    [disabled]="!model || model.toLowerCase() != 'delete'"></button>
+        </div>
+    </div>
+</form>
