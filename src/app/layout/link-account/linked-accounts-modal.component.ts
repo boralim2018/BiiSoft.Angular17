@@ -27,6 +27,7 @@ import { PrimeTemplate } from 'primeng/api';
 export class LinkedAccountsModalComponent extends PrimeNgListComponentBase<LinkedUserDto> {
 
     protected get sortField(): string { return 'UserName'; }
+    protected get margin(): number { return 560; }
 
     @ViewChild('linkUserTable') table: Table;
     @ViewChild('inlineActionMenu') inlineActionMenu: Menu;

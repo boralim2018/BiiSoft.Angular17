@@ -192,12 +192,16 @@ export abstract class PrimeNgListComponentBase<TOutputDto> extends AppComponentB
         return th;
     }
 
+    protected get margin(): number {
+        return 460; //Header + Footer + margin = 460;
+    }
+
     protected setMinHeight() {
         if (!this.table) return;
 
         const min = 200;
 
-        this.minHeight = window.screen.height - 452; //Header + Footer + margin = 452;
+        this.minHeight = window.screen.height - this.margin;
         if (this.minHeight < min) this.minHeight = min; 
 
         let container = this.table.containerViewChild.nativeElement as HTMLElement;

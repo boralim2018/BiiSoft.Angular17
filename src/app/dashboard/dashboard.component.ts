@@ -92,7 +92,8 @@ export class DashboardComponent extends Mixin(AppComponentBase, NavBarComponentB
     initGoogleMaps() {
         //const options: LoaderOptions = { language: 'ja', region: 'JP' };
         const options: LoaderOptions = { language: 'en', region: 'KH' };
-        const loader = new Loader('AIzaSyB4j90EdshV2r8UNm71wicnwv421hcUczE', options);
+        //const loader = new Loader('AIzaSyB4j90EdshV2r8UNm71wicnwv421hcUczE', options);
+        const loader = new Loader('AIzaSyDKqUQ4QmbTWM_KNhkYg7erVxakz_0-noE', options);
 
         loader.load().then(function (google) {
             const map = new google.maps.Map(document.getElementById('map'), {
