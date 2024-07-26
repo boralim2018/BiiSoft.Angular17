@@ -100,7 +100,7 @@ export class UsersComponent extends Mixin(PrimeNgListComponentBase<UserDto>, Nav
 
     private initActionMenuItems() {
         this.actionMenuItems = [];
-        if (this.canCreate) this.actionMenuItems.push({ label: this.l('Create'), icon: 'pi pi-fw pi-user-plus', command: () => { this.createUser(); } });
+        if (this.canCreate) this.actionMenuItems.push({ label: this.l('Create'), icon: 'pi pi-plus-circle', command: () => { this.createUser(); } });
     }
 
     protected initFilterInput() {

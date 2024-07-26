@@ -129,7 +129,7 @@ export class CreateEditionComponent extends DynamicDialogBase implements OnInit 
             .pipe(finalize(() => { this.saving = false; }))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
-                this._dialogRef.close(result);
+                this._dialogRef.close(true);
             });
     }
 

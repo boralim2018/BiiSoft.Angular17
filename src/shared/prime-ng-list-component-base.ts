@@ -264,6 +264,7 @@ export abstract class FindCardListComponentBase<TOutput> extends PrimeNgListComp
     cardView: boolean = true;
     multiple: boolean;
     multiCache: boolean;
+    protected get margin(): number { return 560; }
     protected get tableCacheKey(): string | undefined { return !super.tableCacheKey ? undefined : this.multiCache ? super.tableCacheKey + "1" : super.tableCacheKey; }
     protected set tableCacheKey(value: string | undefined) { super.tableCacheKey = value; }
 
