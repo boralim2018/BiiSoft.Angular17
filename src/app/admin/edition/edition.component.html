@@ -11,10 +11,6 @@
                     <div class="field">
                         <input pInputText class="w-full" type="text" placeholder="Search" [(ngModel)]="filterInput.keyword" (keydown.enter)="refresh($event)" />
                     </div>
-                    <div class="field">
-                        <label for="isActive">{{l('IsActive')}}</label>
-                        <p-dropdown [options]="isActiveModels" [(ngModel)]="filterInput.isActive" styleClass="w-full"></p-dropdown>
-                    </div>
                 </div>
                 <div class="layout-config-footer" searchFooter [loading]="isTableLoading" (onSearch)="refresh($event)">
                 </div>

@@ -53,7 +53,6 @@ export class EditionComponent extends Mixin(PrimeNgListComponentBase<EditionList
     inlineActionVisible: boolean;
 
     showFilter: boolean;
-    isActiveModels: any[];
 
     constructor(
         injector: Injector,
@@ -71,11 +70,6 @@ export class EditionComponent extends Mixin(PrimeNgListComponentBase<EditionList
         this.initActionMenuItems();
         this.inlineActionVisible = this.canEdit || this.canDelete;
 
-        this.isActiveModels = [
-            { label: this.l('All'), value: '' },
-            { label: this.l('Active'), value: true },
-            { label: this.l('Inactive'), value: false }
-        ];
     }
 
     initNavBar() {
@@ -96,8 +90,7 @@ export class EditionComponent extends Mixin(PrimeNgListComponentBase<EditionList
     protected initColumns() {
         this.columns = [
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
-            { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
-            { name: 'IsActive', header: 'Status', sort: true }
+            { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true }
         ];
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
@@ -106,7 +99,7 @@ export class EditionComponent extends Mixin(PrimeNgListComponentBase<EditionList
     protected getList(input: any, callBack: Function) {
 
         this._editionService
-            .getEditions(input.isActive, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
+            .getEditions(input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;

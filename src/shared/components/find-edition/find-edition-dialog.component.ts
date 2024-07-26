@@ -61,7 +61,7 @@ export class FindEditionDialogComponent extends Mixin(FindCardListComponentBase<
     }
     protected getList(input: any, callBack: Function): void {
         
-        this._editionService.getEditions(true, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
+        this._editionService.getEditions(input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
             .pipe(finalize(() => callBack()))
             .subscribe(result => {
                 this.totalCount = result.totalCount;

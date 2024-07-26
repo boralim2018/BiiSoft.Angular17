@@ -3531,7 +3531,6 @@ export class EditionServiceProxy {
     }
 
     /**
-     * @param isActive (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -3540,12 +3539,8 @@ export class EditionServiceProxy {
      * @param maxResultCount (optional) 
      * @return Success
      */
-    getEditions(isActive: boolean | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<EditionListDtoPagedResultDto> {
+    getEditions(keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<EditionListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditions?";
-        if (isActive === null)
-            throw new Error("The parameter 'isActive' cannot be null.");
-        else if (isActive !== undefined)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -3830,10 +3825,9 @@ export class EditionServiceProxy {
     /**
      * @param selectedEditionId (optional) 
      * @param addAllItem (optional) 
-     * @param onlyFreeItems (optional) 
      * @return Success
      */
-    getEditionComboboxItems(selectedEditionId: number | undefined, addAllItem: boolean | undefined, onlyFreeItems: boolean | undefined): Observable<SubscribableEditionComboboxItemDto[]> {
+    getEditionComboboxItems(selectedEditionId: number | undefined, addAllItem: boolean | undefined): Observable<ComboboxItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditionComboboxItems?";
         if (selectedEditionId === null)
             throw new Error("The parameter 'selectedEditionId' cannot be null.");
@@ -3843,10 +3837,6 @@ export class EditionServiceProxy {
             throw new Error("The parameter 'addAllItem' cannot be null.");
         else if (addAllItem !== undefined)
             url_ += "addAllItem=" + encodeURIComponent("" + addAllItem) + "&";
-        if (onlyFreeItems === null)
-            throw new Error("The parameter 'onlyFreeItems' cannot be null.");
-        else if (onlyFreeItems !== undefined)
-            url_ += "onlyFreeItems=" + encodeURIComponent("" + onlyFreeItems) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -3864,14 +3854,14 @@ export class EditionServiceProxy {
                 try {
                     return this.processGetEditionComboboxItems(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<SubscribableEditionComboboxItemDto[]>;
+                    return _observableThrow(e) as any as Observable<ComboboxItemDto[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<SubscribableEditionComboboxItemDto[]>;
+                return _observableThrow(response_) as any as Observable<ComboboxItemDto[]>;
         }));
     }
 
-    protected processGetEditionComboboxItems(response: HttpResponseBase): Observable<SubscribableEditionComboboxItemDto[]> {
+    protected processGetEditionComboboxItems(response: HttpResponseBase): Observable<ComboboxItemDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3885,7 +3875,7 @@ export class EditionServiceProxy {
             if (Array.isArray(resultData200)) {
                 result200 = [] as any;
                 for (let item of resultData200)
-                    result200.push(SubscribableEditionComboboxItemDto.fromJS(item));
+                    result200.push(ComboboxItemDto.fromJS(item));
             }
             else {
                 result200 = <any>null;
@@ -15187,11 +15177,6 @@ export class EditionEditDto implements IEditionEditDto {
     id: number | undefined;
     name: string;
     displayName: string | undefined;
-    monthlyPrice: number | undefined;
-    annualPrice: number | undefined;
-    trialDayCount: number | undefined;
-    waitingDayAfterExpire: number | undefined;
-    expiringEditionId: number | undefined;
 
     constructor(data?: IEditionEditDto) {
         if (data) {
@@ -15207,11 +15192,6 @@ export class EditionEditDto implements IEditionEditDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
-            this.monthlyPrice = _data["monthlyPrice"];
-            this.annualPrice = _data["annualPrice"];
-            this.trialDayCount = _data["trialDayCount"];
-            this.waitingDayAfterExpire = _data["waitingDayAfterExpire"];
-            this.expiringEditionId = _data["expiringEditionId"];
         }
     }
 
@@ -15227,11 +15207,6 @@ export class EditionEditDto implements IEditionEditDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
-        data["monthlyPrice"] = this.monthlyPrice;
-        data["annualPrice"] = this.annualPrice;
-        data["trialDayCount"] = this.trialDayCount;
-        data["waitingDayAfterExpire"] = this.waitingDayAfterExpire;
-        data["expiringEditionId"] = this.expiringEditionId;
         return data;
     }
 
@@ -15247,18 +15222,12 @@ export interface IEditionEditDto {
     id: number | undefined;
     name: string;
     displayName: string | undefined;
-    monthlyPrice: number | undefined;
-    annualPrice: number | undefined;
-    trialDayCount: number | undefined;
-    waitingDayAfterExpire: number | undefined;
-    expiringEditionId: number | undefined;
 }
 
 export class EditionListDto implements IEditionListDto {
     id: number;
     name: string | undefined;
     displayName: string | undefined;
-    isActive: boolean;
 
     constructor(data?: IEditionListDto) {
         if (data) {
@@ -15274,7 +15243,6 @@ export class EditionListDto implements IEditionListDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
-            this.isActive = _data["isActive"];
         }
     }
 
@@ -15290,7 +15258,6 @@ export class EditionListDto implements IEditionListDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
-        data["isActive"] = this.isActive;
         return data;
     }
 
@@ -15306,7 +15273,6 @@ export interface IEditionListDto {
     id: number;
     name: string | undefined;
     displayName: string | undefined;
-    isActive: boolean;
 }
 
 export class EditionListDtoPagedResultDto implements IEditionListDtoPagedResultDto {
@@ -22683,61 +22649,6 @@ export class StringListResultDto implements IStringListResultDto {
 
 export interface IStringListResultDto {
     items: string[] | undefined;
-}
-
-export class SubscribableEditionComboboxItemDto implements ISubscribableEditionComboboxItemDto {
-    value: string | undefined;
-    displayText: string | undefined;
-    isSelected: boolean;
-    isFree: boolean | undefined;
-
-    constructor(data?: ISubscribableEditionComboboxItemDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.value = _data["value"];
-            this.displayText = _data["displayText"];
-            this.isSelected = _data["isSelected"];
-            this.isFree = _data["isFree"];
-        }
-    }
-
-    static fromJS(data: any): SubscribableEditionComboboxItemDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new SubscribableEditionComboboxItemDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["value"] = this.value;
-        data["displayText"] = this.displayText;
-        data["isSelected"] = this.isSelected;
-        data["isFree"] = this.isFree;
-        return data;
-    }
-
-    clone(): SubscribableEditionComboboxItemDto {
-        const json = this.toJSON();
-        let result = new SubscribableEditionComboboxItemDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface ISubscribableEditionComboboxItemDto {
-    value: string | undefined;
-    displayText: string | undefined;
-    isSelected: boolean;
-    isFree: boolean | undefined;
 }
 
 export class SwitchToLinkedAccountInput implements ISwitchToLinkedAccountInput {
