@@ -12515,113 +12515,6 @@ export interface IAuthenticateResultModel {
     userId: number;
 }
 
-export class BranchContactAddressDto implements IBranchContactAddressDto {
-    id: string;
-    countryId: string | undefined;
-    countryName: string | undefined;
-    cityProvinceId: string | undefined;
-    cityProvinceName: string | undefined;
-    khanDistrictId: string | undefined;
-    khanDistrictName: string | undefined;
-    sangkatCommuneId: string | undefined;
-    sangkatCommuneName: string | undefined;
-    villageId: string | undefined;
-    villageName: string | undefined;
-    locationId: string | undefined;
-    locationName: string | undefined;
-    postalCode: string | undefined;
-    street: string | undefined;
-    houseNo: string | undefined;
-    isDefault: boolean;
-
-    constructor(data?: IBranchContactAddressDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.countryId = _data["countryId"];
-            this.countryName = _data["countryName"];
-            this.cityProvinceId = _data["cityProvinceId"];
-            this.cityProvinceName = _data["cityProvinceName"];
-            this.khanDistrictId = _data["khanDistrictId"];
-            this.khanDistrictName = _data["khanDistrictName"];
-            this.sangkatCommuneId = _data["sangkatCommuneId"];
-            this.sangkatCommuneName = _data["sangkatCommuneName"];
-            this.villageId = _data["villageId"];
-            this.villageName = _data["villageName"];
-            this.locationId = _data["locationId"];
-            this.locationName = _data["locationName"];
-            this.postalCode = _data["postalCode"];
-            this.street = _data["street"];
-            this.houseNo = _data["houseNo"];
-            this.isDefault = _data["isDefault"];
-        }
-    }
-
-    static fromJS(data: any): BranchContactAddressDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new BranchContactAddressDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["countryId"] = this.countryId;
-        data["countryName"] = this.countryName;
-        data["cityProvinceId"] = this.cityProvinceId;
-        data["cityProvinceName"] = this.cityProvinceName;
-        data["khanDistrictId"] = this.khanDistrictId;
-        data["khanDistrictName"] = this.khanDistrictName;
-        data["sangkatCommuneId"] = this.sangkatCommuneId;
-        data["sangkatCommuneName"] = this.sangkatCommuneName;
-        data["villageId"] = this.villageId;
-        data["villageName"] = this.villageName;
-        data["locationId"] = this.locationId;
-        data["locationName"] = this.locationName;
-        data["postalCode"] = this.postalCode;
-        data["street"] = this.street;
-        data["houseNo"] = this.houseNo;
-        data["isDefault"] = this.isDefault;
-        return data;
-    }
-
-    clone(): BranchContactAddressDto {
-        const json = this.toJSON();
-        let result = new BranchContactAddressDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IBranchContactAddressDto {
-    id: string;
-    countryId: string | undefined;
-    countryName: string | undefined;
-    cityProvinceId: string | undefined;
-    cityProvinceName: string | undefined;
-    khanDistrictId: string | undefined;
-    khanDistrictName: string | undefined;
-    sangkatCommuneId: string | undefined;
-    sangkatCommuneName: string | undefined;
-    villageId: string | undefined;
-    villageName: string | undefined;
-    locationId: string | undefined;
-    locationName: string | undefined;
-    postalCode: string | undefined;
-    street: string | undefined;
-    houseNo: string | undefined;
-    isDefault: boolean;
-}
-
 export class BranchDetailDto implements IBranchDetailDto {
     id: string;
     creatorUserId: number | undefined;
@@ -12644,7 +12537,9 @@ export class BranchDetailDto implements IBranchDetailDto {
     nextId: string | undefined;
     previousId: string | undefined;
     lastId: string | undefined;
-    contactAddresses: BranchContactAddressDto[] | undefined;
+    billingAddress: ContactAddressDto;
+    sameAsBillingAddress: boolean;
+    shippingAddress: ContactAddressDto;
 
     constructor(data?: IBranchDetailDto) {
         if (data) {
@@ -12678,11 +12573,9 @@ export class BranchDetailDto implements IBranchDetailDto {
             this.nextId = _data["nextId"];
             this.previousId = _data["previousId"];
             this.lastId = _data["lastId"];
-            if (Array.isArray(_data["contactAddresses"])) {
-                this.contactAddresses = [] as any;
-                for (let item of _data["contactAddresses"])
-                    this.contactAddresses.push(BranchContactAddressDto.fromJS(item));
-            }
+            this.billingAddress = _data["billingAddress"] ? ContactAddressDto.fromJS(_data["billingAddress"]) : <any>undefined;
+            this.sameAsBillingAddress = _data["sameAsBillingAddress"];
+            this.shippingAddress = _data["shippingAddress"] ? ContactAddressDto.fromJS(_data["shippingAddress"]) : <any>undefined;
         }
     }
 
@@ -12716,11 +12609,9 @@ export class BranchDetailDto implements IBranchDetailDto {
         data["nextId"] = this.nextId;
         data["previousId"] = this.previousId;
         data["lastId"] = this.lastId;
-        if (Array.isArray(this.contactAddresses)) {
-            data["contactAddresses"] = [];
-            for (let item of this.contactAddresses)
-                data["contactAddresses"].push(item.toJSON());
-        }
+        data["billingAddress"] = this.billingAddress ? this.billingAddress.toJSON() : <any>undefined;
+        data["sameAsBillingAddress"] = this.sameAsBillingAddress;
+        data["shippingAddress"] = this.shippingAddress ? this.shippingAddress.toJSON() : <any>undefined;
         return data;
     }
 
@@ -12754,7 +12645,9 @@ export interface IBranchDetailDto {
     nextId: string | undefined;
     previousId: string | undefined;
     lastId: string | undefined;
-    contactAddresses: BranchContactAddressDto[] | undefined;
+    billingAddress: ContactAddressDto;
+    sameAsBillingAddress: boolean;
+    shippingAddress: ContactAddressDto;
 }
 
 export class BranchListDto implements IBranchListDto {
@@ -13575,6 +13468,109 @@ export interface IComboboxItemDto {
     isSelected: boolean;
 }
 
+export class ContactAddressDto implements IContactAddressDto {
+    id: string;
+    countryId: string | undefined;
+    countryName: string | undefined;
+    cityProvinceId: string | undefined;
+    cityProvinceName: string | undefined;
+    khanDistrictId: string | undefined;
+    khanDistrictName: string | undefined;
+    sangkatCommuneId: string | undefined;
+    sangkatCommuneName: string | undefined;
+    villageId: string | undefined;
+    villageName: string | undefined;
+    locationId: string | undefined;
+    locationName: string | undefined;
+    postalCode: string | undefined;
+    street: string | undefined;
+    houseNo: string | undefined;
+
+    constructor(data?: IContactAddressDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.countryId = _data["countryId"];
+            this.countryName = _data["countryName"];
+            this.cityProvinceId = _data["cityProvinceId"];
+            this.cityProvinceName = _data["cityProvinceName"];
+            this.khanDistrictId = _data["khanDistrictId"];
+            this.khanDistrictName = _data["khanDistrictName"];
+            this.sangkatCommuneId = _data["sangkatCommuneId"];
+            this.sangkatCommuneName = _data["sangkatCommuneName"];
+            this.villageId = _data["villageId"];
+            this.villageName = _data["villageName"];
+            this.locationId = _data["locationId"];
+            this.locationName = _data["locationName"];
+            this.postalCode = _data["postalCode"];
+            this.street = _data["street"];
+            this.houseNo = _data["houseNo"];
+        }
+    }
+
+    static fromJS(data: any): ContactAddressDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ContactAddressDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["countryId"] = this.countryId;
+        data["countryName"] = this.countryName;
+        data["cityProvinceId"] = this.cityProvinceId;
+        data["cityProvinceName"] = this.cityProvinceName;
+        data["khanDistrictId"] = this.khanDistrictId;
+        data["khanDistrictName"] = this.khanDistrictName;
+        data["sangkatCommuneId"] = this.sangkatCommuneId;
+        data["sangkatCommuneName"] = this.sangkatCommuneName;
+        data["villageId"] = this.villageId;
+        data["villageName"] = this.villageName;
+        data["locationId"] = this.locationId;
+        data["locationName"] = this.locationName;
+        data["postalCode"] = this.postalCode;
+        data["street"] = this.street;
+        data["houseNo"] = this.houseNo;
+        return data;
+    }
+
+    clone(): ContactAddressDto {
+        const json = this.toJSON();
+        let result = new ContactAddressDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IContactAddressDto {
+    id: string;
+    countryId: string | undefined;
+    countryName: string | undefined;
+    cityProvinceId: string | undefined;
+    cityProvinceName: string | undefined;
+    khanDistrictId: string | undefined;
+    khanDistrictName: string | undefined;
+    sangkatCommuneId: string | undefined;
+    sangkatCommuneName: string | undefined;
+    villageId: string | undefined;
+    villageName: string | undefined;
+    locationId: string | undefined;
+    locationName: string | undefined;
+    postalCode: string | undefined;
+    street: string | undefined;
+    houseNo: string | undefined;
+}
+
 export class CountryDetailDto implements ICountryDetailDto {
     id: string;
     creatorUserId: number | undefined;
@@ -14187,7 +14183,9 @@ export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
     email: string | undefined;
     website: string | undefined;
     taxRegistrationNumber: string | undefined;
-    contactAddresses: BranchContactAddressDto[] | undefined;
+    billingAddress: ContactAddressDto;
+    sameAsBillingAddress: boolean;
+    shippingAddress: ContactAddressDto;
 
     constructor(data?: ICreateUpdateBranchInputDto) {
         if (data) {
@@ -14208,11 +14206,9 @@ export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
             this.email = _data["email"];
             this.website = _data["website"];
             this.taxRegistrationNumber = _data["taxRegistrationNumber"];
-            if (Array.isArray(_data["contactAddresses"])) {
-                this.contactAddresses = [] as any;
-                for (let item of _data["contactAddresses"])
-                    this.contactAddresses.push(BranchContactAddressDto.fromJS(item));
-            }
+            this.billingAddress = _data["billingAddress"] ? ContactAddressDto.fromJS(_data["billingAddress"]) : <any>undefined;
+            this.sameAsBillingAddress = _data["sameAsBillingAddress"];
+            this.shippingAddress = _data["shippingAddress"] ? ContactAddressDto.fromJS(_data["shippingAddress"]) : <any>undefined;
         }
     }
 
@@ -14233,11 +14229,9 @@ export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
         data["email"] = this.email;
         data["website"] = this.website;
         data["taxRegistrationNumber"] = this.taxRegistrationNumber;
-        if (Array.isArray(this.contactAddresses)) {
-            data["contactAddresses"] = [];
-            for (let item of this.contactAddresses)
-                data["contactAddresses"].push(item.toJSON());
-        }
+        data["billingAddress"] = this.billingAddress ? this.billingAddress.toJSON() : <any>undefined;
+        data["sameAsBillingAddress"] = this.sameAsBillingAddress;
+        data["shippingAddress"] = this.shippingAddress ? this.shippingAddress.toJSON() : <any>undefined;
         return data;
     }
 
@@ -14258,7 +14252,9 @@ export interface ICreateUpdateBranchInputDto {
     email: string | undefined;
     website: string | undefined;
     taxRegistrationNumber: string | undefined;
-    contactAddresses: BranchContactAddressDto[] | undefined;
+    billingAddress: ContactAddressDto;
+    sameAsBillingAddress: boolean;
+    shippingAddress: ContactAddressDto;
 }
 
 export class CreateUpdateCityProvinceInputDto implements ICreateUpdateCityProvinceInputDto {

@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
-import { CreateUpdateBranchInputDto, BranchDetailDto, BranchServiceProxy, BranchContactAddressDto } from '@shared/service-proxies/service-proxies';
+import { CreateUpdateBranchInputDto, BranchDetailDto, BranchServiceProxy, ContactAddressDto } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
@@ -22,7 +22,6 @@ import { FormsModule } from '@angular/forms';
 export class EditBranchComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateBranchInputDto;
-    contactAddress: BranchContactAddressDto;
 
     country: any;
     cityProvince: any;
@@ -46,7 +45,8 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
 
     initModel() {
         this.model = new CreateUpdateBranchInputDto();
-        this.contactAddress = new BranchContactAddressDto();
+        this.model.billingAddress = new ContactAddressDto();
+        this.model.shippingAddress = new ContactAddressDto();
     }
 
     getDetail() {
@@ -57,12 +57,12 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
             .pipe(finalize(() => { this.saving = false; }))
             .subscribe((result: BranchDetailDto) => {
                 this.model.init(result);
-                this.contactAddress = this.model.contactAddresses[0];
-                if (this.contactAddress.countryId) this.country = { id: this.contactAddress.countryId, name: this.contactAddress.countryName };
-                if (this.contactAddress.cityProvinceId) this.cityProvince = { id: this.contactAddress.cityProvinceId, name: this.contactAddress.cityProvinceName };
-                if (this.contactAddress.khanDistrictId) this.khanDistrict = { id: this.contactAddress.khanDistrictId, name: this.contactAddress.khanDistrictName };
-                if (this.contactAddress.sangkatCommuneId) this.sangkatCommune = { id: this.contactAddress.sangkatCommuneId, name: this.contactAddress.sangkatCommuneName };
-                if (this.contactAddress.villageId) this.village = { id: this.contactAddress.villageId, name: this.contactAddress.villageName };
+                
+                if (this.model.billingAddress.countryId) this.country = { id: this.model.billingAddress.countryId, name: this.model.billingAddress.countryName };
+                if (this.model.billingAddress.cityProvinceId) this.cityProvince = { id: this.model.billingAddress.cityProvinceId, name: this.model.billingAddress.cityProvinceName };
+                if (this.model.billingAddress.khanDistrictId) this.khanDistrict = { id: this.model.billingAddress.khanDistrictId, name: this.model.billingAddress.khanDistrictName };
+                if (this.model.billingAddress.sangkatCommuneId) this.sangkatCommune = { id: this.model.billingAddress.sangkatCommuneId, name: this.model.billingAddress.sangkatCommuneName };
+                if (this.model.billingAddress.villageId) this.village = { id: this.model.billingAddress.villageId, name: this.model.billingAddress.villageName };
             });
     }
 

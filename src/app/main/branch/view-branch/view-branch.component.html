@@ -68,9 +68,8 @@
 
         </div>
 
-        <ng-container *ngFor="let address of model.contactAddresses; let i=index;">
-            <view-contact-address [model]="address" [title]="l('ContactAddress') + ' ' + (i > 0 ? i + 1 : '')"></view-contact-address>
-        </ng-container>
+        <view-contact-address [model]="model.billingAddress" [title]="l('BillingAddress')"></view-contact-address>
+        <view-contact-address [model]="model.shippingAddress" [title]="l('ShippingAddress')"></view-contact-address>        
 
         <p-divider></p-divider>
 

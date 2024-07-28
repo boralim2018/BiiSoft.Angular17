@@ -115,13 +115,13 @@
 
     <div class="formgrid grid p-3 m-0"
          contactAddress
-         [(model)]="contactAddress"
+         [(model)]="model.billingAddress"
          [(country)]="country"
          [(cityProvince)]="cityProvince"
          [(khanDistrict)]="khanDistrict"
          [(sangkatCommune)]="sangkatCommune"
          [(village)]="village">
-        <input type="hidden" required name="countryId" [(ngModel)]="contactAddress.countryId" />
+        <input type="hidden" required name="countryId" [(ngModel)]="model.billingAddress.countryId" />
     </div>
 
     <div class="p-dialog-footer">

@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
-import { CreateUpdateBranchInputDto, BranchServiceProxy, BranchContactAddressDto } from '@shared/service-proxies/service-proxies';
+import { CreateUpdateBranchInputDto, BranchServiceProxy, ContactAddressDto } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
@@ -22,7 +22,6 @@ import { BusyDirective } from '../../../../shared/directives/busy.directive';
 export class CreateBranchComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateBranchInputDto = new CreateUpdateBranchInputDto();
-    contactAddress: BranchContactAddressDto = new BranchContactAddressDto();
 
     constructor(
         injector: Injector,
@@ -39,9 +38,9 @@ export class CreateBranchComponent extends DynamicDialogBase implements OnInit {
 
     initModel() {
         this.model = new CreateUpdateBranchInputDto();
-        this.contactAddress = new BranchContactAddressDto();
-        this.contactAddress.isDefault = true;
-        this.model.contactAddresses = [this.contactAddress];
+        this.model.billingAddress = new ContactAddressDto();
+        this.model.sameAsBillingAddress = true;
+        this.model.shippingAddress = new ContactAddressDto();
     };
 
     save(form?: NgForm): void {
