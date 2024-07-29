@@ -206,7 +206,7 @@ export class BranchComponent extends Mixin(PrimeNgListComponentBase<BranchListDt
     }
 
     createBranch(): void {
-        this.showCreateOrEditUserDialog();
+        this._router.navigate(['/app/main/branches/create']);
     }
 
     importExcel() {
@@ -278,30 +278,9 @@ export class BranchComponent extends Mixin(PrimeNgListComponentBase<BranchListDt
     }
 
     editBranch(branch: BranchListDto): void {
-        this.showCreateOrEditUserDialog(branch.id);
+        this._router.navigate(['/app/main/branches/edit', branch.id]);
     }
-
-    showCreateOrEditUserDialog(id?: string): void {
-        let createOrEditUserDialog: DynamicDialogRef;
-        if (!id) {
-            createOrEditUserDialog = this._dialogService.open(CreateBranchComponent, {
-                data: {},
-                header: this.l('Create') + ' ' + this.l('Branch'),
-                styleClass: this.responsiveDialogClass
-            });
-        } else {
-            createOrEditUserDialog = this._dialogService.open(EditBranchComponent, {
-                data: { id: id },
-                header: this.l('Edit') + ' ' + this.l('Branch'),
-                styleClass: this.responsiveDialogClass
-            });
-        }
-
-        createOrEditUserDialog.onClose.subscribe((result) => {
-            if (result) this.refresh();
-        });
-    }
-
+    
     enable(branch: BranchListDto) {
         this.message.confirm(
             this.l('EnableWarningMessage', branch.name), this.l('Enable'), (result) => {

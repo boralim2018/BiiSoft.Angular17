@@ -1,12 +1,11 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { AppComponentBase, NavBarComponentBase } from '@shared/app-component-base';
 import { BranchDetailDto, BranchServiceProxy, GuidEntityDto } from '@shared/service-proxies/service-proxies';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import * as moment from 'moment';
-import { EditBranchComponent } from '../edit-branch/edit-branch.component';
 import { AppPermissions } from '@shared/AppPermissions';
 import { ConfirmDeleteComponent } from '@shared/components/confirm-delete/confirm-delete.component';
 import { Mixin } from 'ts-mixer';
@@ -164,16 +163,7 @@ export class ViewBranchComponent extends Mixin(AppComponentBase, NavBarComponent
     }
 
     showEdit() {
-
-        let dialog = this._dialogService.open(EditBranchComponent, {
-            data: { id: this.model.id },
-            header: this.l('Edit') + ' ' + this.l('Branch'),
-            styleClass: this.responsiveDialogClass
-        });
-
-        dialog.onClose.subscribe((result) => {
-            if (result) this.getDetail();
-        });
+        this.router.navigate(['/app/main/branches/edit', this.model.id]);
     }
 
 }

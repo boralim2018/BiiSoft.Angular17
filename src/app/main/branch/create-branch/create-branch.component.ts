@@ -1,8 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateBranchInputDto, BranchServiceProxy, ContactAddressDto } from '@shared/service-proxies/service-proxies';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
@@ -11,28 +9,28 @@ import { ContactAddressComponent } from '../../../../shared/components/contact-a
 import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
+import { AppComponentBase } from '../../../../shared/app-component-base';
+import { DividerModule } from 'primeng/divider';
 
 @Component({
     selector: 'app-create-branch',
     templateUrl: './create-branch.component.html',
     providers: [BranchServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule]
 })
-export class CreateBranchComponent extends DynamicDialogBase implements OnInit {
+export class CreateBranchComponent extends AppComponentBase implements OnInit {
     saving = false;
     model: CreateUpdateBranchInputDto = new CreateUpdateBranchInputDto();
 
     constructor(
         injector: Injector,
-        public _branchService: BranchServiceProxy,
-        private _dialogRef: DynamicDialogRef
+        public _branchService: BranchServiceProxy
     ) {
         super(injector);
     }
 
     ngOnInit(): void {
-        super.ngOnInit();
         this.initModel();
     }
 
@@ -56,13 +54,17 @@ export class CreateBranchComponent extends DynamicDialogBase implements OnInit {
                     form.resetForm();
                 }
                 else {
-                    this._dialogRef.close(result);
+                    this.cancel();
                 }
             });
     }
 
     saveNew(form: NgForm) {
         this.save(form);
+    }
+
+    cancel() {
+        window.history.back();
     }
 
 }

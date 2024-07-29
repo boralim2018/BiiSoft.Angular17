@@ -1,139 +1,164 @@
-<form novalidate autocomplete="off" #createBranchForm="ngForm" (ngSubmit)="save()" [busy]="saving">
-    <div class="formgrid grid p-3 m-0">
-        <div class="field col-12 md:col-6">
-            <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="name"
-                   id="name"
-                   maxlength="128"
-                   required
-                   [(ngModel)]="model.name"
-                   #nameModel="ngModel"
-                   #nameEl />
-            <abp-validation-summary [control]="nameModel"
-                                    [controlEl]="nameEl"></abp-validation-summary>
-        </div>
-        <div class="field col-12 md:col-6">
-            <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="displayName"
-                   id="displayName"
-                   minlength="2"
-                   maxlength="64"
-                   required
-                   [(ngModel)]="model.displayName"
-                   #displayNameModel="ngModel"
-                   #displayNameEl />
-            <abp-validation-summary [control]="displayNameModel"
-                                    [controlEl]="displayNameEl"></abp-validation-summary>
-        </div>
-        <div class="field col-12 md:col-6">
-            <label class="text-900 font-medium">{{l('BusinessId')}}</label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="businessId"
-                   id="businessId"
-                   minlength="2"
-                   maxlength="32"
-                   [(ngModel)]="model.businessId"
-                   #businessIdModel="ngModel"
-                   #businessIdEl />
-            <abp-validation-summary [control]="businessIdModel"
-                                    [controlEl]="businessIdEl"></abp-validation-summary>
-        </div>
+<div [@routerTransition]>
+    <div class="card mb-5">
+        <form novalidate autocomplete="off" #createBranchForm="ngForm" (ngSubmit)="save()" [busy]="saving">
 
-        <div class="field col-12 md:col-6">
-            <label class="text-900 font-medium">{{l('PhoneNumber')}}</label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="phoneNumber"
-                   id="phoneNumber"
-                   minlength="9"
-                   maxlength="12"
-                   [(ngModel)]="model.phoneNumber"
-                   #phoneNumberModel="ngModel"
-                   #phoneNumberEl />
-            <abp-validation-summary [control]="phoneNumberModel"
-                                    [controlEl]="phoneNumberEl"></abp-validation-summary>
-        </div>
+            <h4>{{l('Create_', l('Branch'))}}</h4>
+            <p-divider></p-divider>
 
-        <div class="field col-12 md:col-6">
-            <label class="text-900 font-medium">{{l('Email')}}</label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="email"
-                   id="email"
-                   minlength="5"
-                   maxlength="32"
-                   [(ngModel)]="model.email"
-                   #emailModel="ngModel"
-                   #emailEl />
-            <abp-validation-summary [control]="emailModel"
-                                    [controlEl]="emailEl"></abp-validation-summary>
-        </div>
+            <div class="formgrid grid m-0">
+                <div class="field col-12 md:col-6">
+                    <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
+                    <input type="text"
+                           pInputText
+                           class="w-full"
+                           name="name"
+                           id="name"
+                           maxlength="128"
+                           required
+                           [(ngModel)]="model.name"
+                           #nameModel="ngModel"
+                           #nameEl />
+                    <abp-validation-summary [control]="nameModel"
+                                            [controlEl]="nameEl"></abp-validation-summary>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
+                    <input type="text"
+                           pInputText
+                           class="w-full"
+                           name="displayName"
+                           id="displayName"
+                           minlength="2"
+                           maxlength="64"
+                           required
+                           [(ngModel)]="model.displayName"
+                           #displayNameModel="ngModel"
+                           #displayNameEl />
+                    <abp-validation-summary [control]="displayNameModel"
+                                            [controlEl]="displayNameEl"></abp-validation-summary>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label class="text-900 font-medium">{{l('BusinessId')}}</label>
+                    <input type="text"
+                           pInputText
+                           class="w-full"
+                           name="businessId"
+                           id="businessId"
+                           minlength="2"
+                           maxlength="32"
+                           [(ngModel)]="model.businessId"
+                           #businessIdModel="ngModel"
+                           #businessIdEl />
+                    <abp-validation-summary [control]="businessIdModel"
+                                            [controlEl]="businessIdEl"></abp-validation-summary>
+                </div>
 
-        <div class="field col-12 md:col-6">
-            <label class="text-900 font-medium">{{l('Website')}}</label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="website"
-                   id="website"
-                   minlength="5"
-                   maxlength="32"
-                   [(ngModel)]="model.website"
-                   #websiteModel="ngModel"
-                   #websiteEl />
-            <abp-validation-summary [control]="websiteModel"
-                                    [controlEl]="websiteEl"></abp-validation-summary>
-        </div>
+                <div class="field col-12 md:col-6">
+                    <label class="text-900 font-medium">{{l('PhoneNumber')}}</label>
+                    <input type="text"
+                           pInputText
+                           class="w-full"
+                           name="phoneNumber"
+                           id="phoneNumber"
+                           minlength="9"
+                           maxlength="12"
+                           [(ngModel)]="model.phoneNumber"
+                           #phoneNumberModel="ngModel"
+                           #phoneNumberEl />
+                    <abp-validation-summary [control]="phoneNumberModel"
+                                            [controlEl]="phoneNumberEl"></abp-validation-summary>
+                </div>
 
-        <div class="field col-12 md:col-6">
-            <label class="text-900 font-medium">{{l('TaxRegistrationNumber')}}</label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="taxRegistrationNumber"
-                   id="taxRegistrationNumber"
-                   minlength="2"
-                   maxlength="32"
-                   [(ngModel)]="model.taxRegistrationNumber"
-                   #taxRegistrationNumberModel="ngModel"
-                   #taxRegistrationNumberEl />
-            <abp-validation-summary [control]="taxRegistrationNumberModel"
-                                    [controlEl]="taxRegistrationNumberEl"></abp-validation-summary>
-        </div>
+                <div class="field col-12 md:col-6">
+                    <label class="text-900 font-medium">{{l('Email')}}</label>
+                    <input type="text"
+                           pInputText
+                           class="w-full"
+                           name="email"
+                           id="email"
+                           minlength="5"
+                           maxlength="32"
+                           [(ngModel)]="model.email"
+                           #emailModel="ngModel"
+                           #emailEl />
+                    <abp-validation-summary [control]="emailModel"
+                                            [controlEl]="emailEl"></abp-validation-summary>
+                </div>
 
+                <div class="field col-12 md:col-6">
+                    <label class="text-900 font-medium">{{l('Website')}}</label>
+                    <input type="text"
+                           pInputText
+                           class="w-full"
+                           name="website"
+                           id="website"
+                           minlength="5"
+                           maxlength="32"
+                           [(ngModel)]="model.website"
+                           #websiteModel="ngModel"
+                           #websiteEl />
+                    <abp-validation-summary [control]="websiteModel"
+                                            [controlEl]="websiteEl"></abp-validation-summary>
+                </div>
+
+                <div class="field col-12 md:col-6">
+                    <label class="text-900 font-medium">{{l('TaxRegistrationNumber')}}</label>
+                    <input type="text"
+                           pInputText
+                           class="w-full"
+                           name="taxRegistrationNumber"
+                           id="taxRegistrationNumber"
+                           minlength="2"
+                           maxlength="32"
+                           [(ngModel)]="model.taxRegistrationNumber"
+                           #taxRegistrationNumberModel="ngModel"
+                           #taxRegistrationNumberEl />
+                    <abp-validation-summary [control]="taxRegistrationNumberModel"
+                                            [controlEl]="taxRegistrationNumberEl"></abp-validation-summary>
+                </div>
+
+            </div>
+
+            <div class="formgrid grid m-0"
+                 contactAddress
+                 [title]="l('BillingAddress')"
+                 [(model)]="model.billingAddress">
+                <input type="hidden" required name="countryId" [(ngModel)]="model.billingAddress.countryId" />
+            </div>
+
+            <div class="formgrid grid m-0"
+                 contactAddress
+                 [isShippingAddress]="true"
+                 [(sameAsBillingAddress)]="model.sameAsBillingAddress"
+                 [(model)]="model.shippingAddress">
+                <input type="hidden" required name="countryId" [(ngModel)]="model.billingAddress.countryId" />
+            </div>
+
+            <p-divider></p-divider>
+
+            <div class="flex justify-content-end flex-wrap gap-3">
+                <button pButton pRipple
+                        label="{{'Cancel' | localize}}"
+                        class=""
+                        [outlined]="true"
+                        icon="pi pi-arrow-circle-left"
+                        type="button"
+                        (click)="cancel()"></button>
+
+                <button pButton pRipple
+                        label="{{'SaveNew' | localize}}"
+                        class=""
+                        icon="pi pi-save"
+                        type="button"
+                        (click)="saveNew(createBranchForm)"
+                        [disabled]="!(createBranchForm.form.valid )|| saving"></button>
+                <button pButton pRipple
+                        label="{{'Save' | localize}}"
+                        class=""
+                        icon="pi pi-save"
+                        type="submit"
+                        [disabled]="!(createBranchForm.form.valid )|| saving"></button>
+            </div>
+        </form>
     </div>
-
-    <div class="formgrid grid p-3 m-0"
-         contactAddress
-         [(model)]="model.billingAddress">
-        <input type="hidden" required name="countryId" [(ngModel)]="model.billingAddress.countryId" />
-    </div>
-
-    <div class="p-dialog-footer">
-        <div class="flex justify-content-end flex-wrap">
-            <button pButton pRipple
-                    label="{{'SaveNew' | localize}}"
-                    class=""
-                    icon="pi pi-save"
-                    type="button"
-                    (click)="saveNew(createBranchForm)"
-                    [disabled]="!(createBranchForm.form.valid )|| saving"></button>
-            <button pButton pRipple
-                    label="{{'Save' | localize}}"
-                    class=""
-                    icon="pi pi-save"
-                    type="submit"
-                    [disabled]="!(createBranchForm.form.valid )|| saving"></button>
-        </div>
-    </div>
-</form>
+</div>

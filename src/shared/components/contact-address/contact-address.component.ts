@@ -9,12 +9,13 @@ import { FindKhanDistrictComponent } from '../find-khan-district/find-khan-distr
 import { FindCityProvinceComponent } from '../find-city-province/find-city-province.component';
 import { FindCountryComponent } from '../find-country/find-country.component';
 import { NgIf } from '@angular/common';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
     selector: '[contactAddress], contact-address',
     templateUrl: './contact-address.component.html',
     standalone: true,
-    imports: [NgIf, FindCountryComponent, FindCityProvinceComponent, FindKhanDistrictComponent, FindSangkatCommuneComponent, FindVillageComponent, FormsModule, InputTextModule, AbpValidationSummaryComponent]
+    imports: [NgIf, FindCountryComponent, FindCityProvinceComponent, FindKhanDistrictComponent, FindSangkatCommuneComponent, FindVillageComponent, FormsModule, InputTextModule, AbpValidationSummaryComponent, CheckboxModule]
 })
 export class ContactAddressComponent extends AppComponentBase implements OnInit {
 
@@ -32,6 +33,9 @@ export class ContactAddressComponent extends AppComponentBase implements OnInit 
     @Output() sangkatCommuneChange: EventEmitter<any> = new EventEmitter<any>();
     @Input() village: any;
     @Output() villageChange: EventEmitter<any> = new EventEmitter<any>();
+    @Input() isShippingAddress: boolean;
+    @Input() sameAsBillingAddress: boolean;
+    @Output() sameAsBillingAddressChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(
         injector: Injector
@@ -40,7 +44,7 @@ export class ContactAddressComponent extends AppComponentBase implements OnInit 
     }
 
     ngOnInit() {
-        
+        if (this.isShippingAddress) this.title = this.l('ShippingAddress');
     }
 
     onCountryChange(event) {

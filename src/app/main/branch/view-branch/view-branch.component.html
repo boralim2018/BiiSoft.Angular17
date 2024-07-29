@@ -21,7 +21,7 @@
 
         <div class="grid">
 
-            <div class="col-4 lg:col-2 py-2"> {{l('No')}} </div>
+            <div class="col-4 lg:col-2 py-2"> {{l('No.')}} </div>
             <div class="col-8 lg:col-4 py-2 font-bold">: {{model.no}} </div>
 
             <div class="col-4 lg:col-2 py-2"> {{l('Name')}} </div>
@@ -69,7 +69,7 @@
         </div>
 
         <view-contact-address [model]="model.billingAddress" [title]="l('BillingAddress')"></view-contact-address>
-        <view-contact-address [model]="model.shippingAddress" [title]="l('ShippingAddress')"></view-contact-address>        
+        <view-contact-address [model]="model.shippingAddress" [isShippingAddress]="true" [sameAsBillingAddress]="model.sameAsBillingAddress"></view-contact-address>        
 
         <p-divider></p-divider>
 
