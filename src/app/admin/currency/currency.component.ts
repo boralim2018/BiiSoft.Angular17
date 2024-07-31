@@ -276,13 +276,17 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
             createOrEditUserDialog = this._dialogService.open(CreateCurrencyComponent, {
                 data: {},
                 header: this.l('Create') + ' ' + this.l('Currency'),
-                styleClass: this.responsiveDialogClass
+                styleClass: this.responsiveDialogClass,
+                //maximizable: true,
+                //breakpoints: "{ '1199px': '75vw', '575px': '90vw' }" 
             });
         } else {
             createOrEditUserDialog = this._dialogService.open(EditCurrencyComponent, {
                 data: { id: id },
                 header: this.l('Edit') + ' ' + this.l('Currency'),
-                styleClass: this.responsiveDialogClass
+                styleClass: this.responsiveDialogClass,
+                //maximizable: true,
+                //breakpoints: "{ '1199px': '75vw', '575px': '90vw' }" 
             });
         }
 
