@@ -93,36 +93,6 @@
             <input type="hidden" required [(ngModel)]="model.sangkatCommuneId" name="sangkatCommuneId" />
         </div>
 
-        <div class="field col-12 md:col-6">
-            <label for="latitude" class="text-900 font-medium">{{l('Latitude')}}</label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="latitude"
-                   id="latitude"
-                   minlength="2"
-                   maxlength="64"
-                   [(ngModel)]="model.latitude"
-                   #latitudeModel="ngModel"
-                   #latitudeEl />
-            <abp-validation-summary [control]="latitudeModel"
-                                    [controlEl]="latitudeEl"></abp-validation-summary>
-        </div>
-        <div class="field col-12 md:col-6">
-            <label for="longitude" class="text-900 font-medium">{{l('Longitude')}}</label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="longitude"
-                   id="longitude"
-                   minlength="2"
-                   maxlength="64"
-                   [(ngModel)]="model.longitude"
-                   #longitudeModel="ngModel"
-                   #longitudeEl />
-            <abp-validation-summary [control]="longitudeModel"
-                                    [controlEl]="longitudeEl"></abp-validation-summary>
-        </div>
     </div>
 
     <div class="p-dialog-footer">

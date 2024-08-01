@@ -134,8 +134,6 @@ export class CityProvinceComponent extends Mixin(PrimeNgListComponentBase<CityPr
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
             { name: 'ISO', header: 'ISO', width: '15rem', sort: true },
             { name: 'CountryName', header: 'Country', width: '15rem', sort: true },
-            { name: 'Latitude', header: 'Latitude', width: '15rem', sort: true, visible: false },
-            { name: 'Longitude', header: 'Longitude', width: '15rem', sort: true, visible: false },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText },
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },

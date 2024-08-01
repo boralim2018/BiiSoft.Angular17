@@ -54,7 +54,7 @@ import { SidebarModule } from 'primeng/sidebar';
 })
 export class CountryComponent extends Mixin(PrimeNgListComponentBase<CountryListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
 
-    protected get sortField(): string { return 'CountryCode'; }
+    protected get sortField(): string { return 'Code'; }
 
     @ViewChild('countryTable') table: Table;
     canCreate: boolean = this.isGranted(AppPermissions.pages.setup.locations.countries.create);
@@ -128,7 +128,7 @@ export class CountryComponent extends Mixin(PrimeNgListComponentBase<CountryList
 
     protected initColumns() {
         this.columns = [
-            { name: 'CountryCode', header: 'Code', width: '15rem', sort: true },
+            { name: 'Code', header: 'Code', width: '15rem', sort: true },
             { name: 'Flag', header: 'Flag', width: '15rem' },
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
@@ -136,8 +136,6 @@ export class CountryComponent extends Mixin(PrimeNgListComponentBase<CountryList
             { name: 'ISO2', header: 'ISO2', width: '15rem', sort: true },
             { name: 'PhonePrefix', header: 'PhonePrefix', width: '15rem', sort: true },
             { name: 'CurrencyCode', header: 'Currency', width: '15rem', sort: true, visible: false },
-            { name: 'Latitude', header: 'Latitude', width: '15rem', sort: true, visible: false },
-            { name: 'Longitude', header: 'Longitude', width: '15rem', sort: true, visible: false },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText },
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
@@ -185,7 +183,7 @@ export class CountryComponent extends Mixin(PrimeNgListComponentBase<CountryList
 
         this._dialogService.open(ConfirmDeleteComponent, {
             data: {
-                deleteObj: country.countryCode + " - " + country.name,
+                deleteObj: country.code + " - " + country.name,
                 deleteLabel: this.l('Country')
             },
             header: this.l('ConfirmDelete'),

@@ -13047,8 +13047,6 @@ export class CityProvinceDetailDto implements ICityProvinceDetailDto {
     no: number;
     code: string | undefined;
     iso: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -13082,8 +13080,6 @@ export class CityProvinceDetailDto implements ICityProvinceDetailDto {
             this.no = _data["no"];
             this.code = _data["code"];
             this.iso = _data["iso"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
             this.firstId = _data["firstId"];
             this.nextId = _data["nextId"];
             this.previousId = _data["previousId"];
@@ -13117,8 +13113,6 @@ export class CityProvinceDetailDto implements ICityProvinceDetailDto {
         data["no"] = this.no;
         data["code"] = this.code;
         data["iso"] = this.iso;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         data["firstId"] = this.firstId;
         data["nextId"] = this.nextId;
         data["previousId"] = this.previousId;
@@ -13152,8 +13146,6 @@ export interface ICityProvinceDetailDto {
     no: number;
     code: string | undefined;
     iso: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -13179,8 +13171,6 @@ export class CityProvinceListDto implements ICityProvinceListDto {
     code: string | undefined;
     iso: string | undefined;
     countryName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 
     constructor(data?: ICityProvinceListDto) {
         if (data) {
@@ -13209,8 +13199,6 @@ export class CityProvinceListDto implements ICityProvinceListDto {
             this.code = _data["code"];
             this.iso = _data["iso"];
             this.countryName = _data["countryName"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
         }
     }
 
@@ -13239,8 +13227,6 @@ export class CityProvinceListDto implements ICityProvinceListDto {
         data["code"] = this.code;
         data["iso"] = this.iso;
         data["countryName"] = this.countryName;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         return data;
     }
 
@@ -13269,8 +13255,6 @@ export interface ICityProvinceListDto {
     code: string | undefined;
     iso: string | undefined;
     countryName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 }
 
 export class CityProvinceListDtoPagedResultDto implements ICityProvinceListDtoPagedResultDto {
@@ -13586,14 +13570,11 @@ export class CountryDetailDto implements ICountryDetailDto {
     cannotDelete: boolean;
     no: number;
     code: string | undefined;
-    countryCode: number;
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
     currencyId: number | undefined;
     currencyCode: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -13624,14 +13605,11 @@ export class CountryDetailDto implements ICountryDetailDto {
             this.cannotDelete = _data["cannotDelete"];
             this.no = _data["no"];
             this.code = _data["code"];
-            this.countryCode = _data["countryCode"];
             this.iso = _data["iso"];
             this.isO2 = _data["isO2"];
             this.phonePrefix = _data["phonePrefix"];
             this.currencyId = _data["currencyId"];
             this.currencyCode = _data["currencyCode"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
             this.firstId = _data["firstId"];
             this.nextId = _data["nextId"];
             this.previousId = _data["previousId"];
@@ -13662,14 +13640,11 @@ export class CountryDetailDto implements ICountryDetailDto {
         data["cannotDelete"] = this.cannotDelete;
         data["no"] = this.no;
         data["code"] = this.code;
-        data["countryCode"] = this.countryCode;
         data["iso"] = this.iso;
         data["isO2"] = this.isO2;
         data["phonePrefix"] = this.phonePrefix;
         data["currencyId"] = this.currencyId;
         data["currencyCode"] = this.currencyCode;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         data["firstId"] = this.firstId;
         data["nextId"] = this.nextId;
         data["previousId"] = this.previousId;
@@ -13700,14 +13675,11 @@ export interface ICountryDetailDto {
     cannotDelete: boolean;
     no: number;
     code: string | undefined;
-    countryCode: number;
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
     currencyId: number | undefined;
     currencyCode: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -13729,12 +13701,9 @@ export class CountryListDto implements ICountryListDto {
     cannotDelete: boolean;
     no: number;
     code: string | undefined;
-    countryCode: number;
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     currencyCode: string | undefined;
 
     constructor(data?: ICountryListDto) {
@@ -13762,12 +13731,9 @@ export class CountryListDto implements ICountryListDto {
             this.cannotDelete = _data["cannotDelete"];
             this.no = _data["no"];
             this.code = _data["code"];
-            this.countryCode = _data["countryCode"];
             this.iso = _data["iso"];
             this.isO2 = _data["isO2"];
             this.phonePrefix = _data["phonePrefix"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
             this.currencyCode = _data["currencyCode"];
         }
     }
@@ -13795,12 +13761,9 @@ export class CountryListDto implements ICountryListDto {
         data["cannotDelete"] = this.cannotDelete;
         data["no"] = this.no;
         data["code"] = this.code;
-        data["countryCode"] = this.countryCode;
         data["iso"] = this.iso;
         data["isO2"] = this.isO2;
         data["phonePrefix"] = this.phonePrefix;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         data["currencyCode"] = this.currencyCode;
         return data;
     }
@@ -13828,12 +13791,9 @@ export interface ICountryListDto {
     cannotDelete: boolean;
     no: number;
     code: string | undefined;
-    countryCode: number;
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     currencyCode: string | undefined;
 }
 
@@ -14264,8 +14224,6 @@ export class CreateUpdateCityProvinceInputDto implements ICreateUpdateCityProvin
     code: string | undefined;
     iso: string | undefined;
     countryId: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 
     constructor(data?: ICreateUpdateCityProvinceInputDto) {
         if (data) {
@@ -14284,8 +14242,6 @@ export class CreateUpdateCityProvinceInputDto implements ICreateUpdateCityProvin
             this.code = _data["code"];
             this.iso = _data["iso"];
             this.countryId = _data["countryId"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
         }
     }
 
@@ -14304,8 +14260,6 @@ export class CreateUpdateCityProvinceInputDto implements ICreateUpdateCityProvin
         data["code"] = this.code;
         data["iso"] = this.iso;
         data["countryId"] = this.countryId;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         return data;
     }
 
@@ -14324,8 +14278,6 @@ export interface ICreateUpdateCityProvinceInputDto {
     code: string | undefined;
     iso: string | undefined;
     countryId: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 }
 
 export class CreateUpdateCountryInputDto implements ICreateUpdateCountryInputDto {
@@ -14333,13 +14285,10 @@ export class CreateUpdateCountryInputDto implements ICreateUpdateCountryInputDto
     name: string | undefined;
     displayName: string | undefined;
     code: string | undefined;
-    countryCode: number;
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
     currencyId: number | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 
     constructor(data?: ICreateUpdateCountryInputDto) {
         if (data) {
@@ -14356,13 +14305,10 @@ export class CreateUpdateCountryInputDto implements ICreateUpdateCountryInputDto
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.code = _data["code"];
-            this.countryCode = _data["countryCode"];
             this.iso = _data["iso"];
             this.isO2 = _data["isO2"];
             this.phonePrefix = _data["phonePrefix"];
             this.currencyId = _data["currencyId"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
         }
     }
 
@@ -14379,13 +14325,10 @@ export class CreateUpdateCountryInputDto implements ICreateUpdateCountryInputDto
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["code"] = this.code;
-        data["countryCode"] = this.countryCode;
         data["iso"] = this.iso;
         data["isO2"] = this.isO2;
         data["phonePrefix"] = this.phonePrefix;
         data["currencyId"] = this.currencyId;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         return data;
     }
 
@@ -14402,13 +14345,10 @@ export interface ICreateUpdateCountryInputDto {
     name: string | undefined;
     displayName: string | undefined;
     code: string | undefined;
-    countryCode: number;
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
     currencyId: number | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 }
 
 export class CreateUpdateCurrencyInputDto implements ICreateUpdateCurrencyInputDto {
@@ -14481,8 +14421,6 @@ export class CreateUpdateKhanDistrictInputDto implements ICreateUpdateKhanDistri
     code: string | undefined;
     countryId: string | undefined;
     cityProvinceId: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 
     constructor(data?: ICreateUpdateKhanDistrictInputDto) {
         if (data) {
@@ -14501,8 +14439,6 @@ export class CreateUpdateKhanDistrictInputDto implements ICreateUpdateKhanDistri
             this.code = _data["code"];
             this.countryId = _data["countryId"];
             this.cityProvinceId = _data["cityProvinceId"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
         }
     }
 
@@ -14521,8 +14457,6 @@ export class CreateUpdateKhanDistrictInputDto implements ICreateUpdateKhanDistri
         data["code"] = this.code;
         data["countryId"] = this.countryId;
         data["cityProvinceId"] = this.cityProvinceId;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         return data;
     }
 
@@ -14541,15 +14475,12 @@ export interface ICreateUpdateKhanDistrictInputDto {
     code: string | undefined;
     countryId: string | undefined;
     cityProvinceId: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 }
 
 export class CreateUpdateLocationInputDto implements ICreateUpdateLocationInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
-    code: string | undefined;
     latitude: number | undefined;
     longitude: number | undefined;
 
@@ -14567,7 +14498,6 @@ export class CreateUpdateLocationInputDto implements ICreateUpdateLocationInputD
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
-            this.code = _data["code"];
             this.latitude = _data["latitude"];
             this.longitude = _data["longitude"];
         }
@@ -14585,7 +14515,6 @@ export class CreateUpdateLocationInputDto implements ICreateUpdateLocationInputD
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
-        data["code"] = this.code;
         data["latitude"] = this.latitude;
         data["longitude"] = this.longitude;
         return data;
@@ -14603,7 +14532,6 @@ export interface ICreateUpdateLocationInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
-    code: string | undefined;
     latitude: number | undefined;
     longitude: number | undefined;
 }
@@ -14616,8 +14544,6 @@ export class CreateUpdateSangkatCommuneInputDto implements ICreateUpdateSangkatC
     countryId: string | undefined;
     cityProvinceId: string | undefined;
     khanDistrictId: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 
     constructor(data?: ICreateUpdateSangkatCommuneInputDto) {
         if (data) {
@@ -14637,8 +14563,6 @@ export class CreateUpdateSangkatCommuneInputDto implements ICreateUpdateSangkatC
             this.countryId = _data["countryId"];
             this.cityProvinceId = _data["cityProvinceId"];
             this.khanDistrictId = _data["khanDistrictId"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
         }
     }
 
@@ -14658,8 +14582,6 @@ export class CreateUpdateSangkatCommuneInputDto implements ICreateUpdateSangkatC
         data["countryId"] = this.countryId;
         data["cityProvinceId"] = this.cityProvinceId;
         data["khanDistrictId"] = this.khanDistrictId;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         return data;
     }
 
@@ -14679,8 +14601,6 @@ export interface ICreateUpdateSangkatCommuneInputDto {
     countryId: string | undefined;
     cityProvinceId: string | undefined;
     khanDistrictId: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 }
 
 export class CreateUpdateVillageInputDto implements ICreateUpdateVillageInputDto {
@@ -14692,8 +14612,6 @@ export class CreateUpdateVillageInputDto implements ICreateUpdateVillageInputDto
     cityProvinceId: string | undefined;
     khanDistrictId: string | undefined;
     sangkatCommuneId: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 
     constructor(data?: ICreateUpdateVillageInputDto) {
         if (data) {
@@ -14714,8 +14632,6 @@ export class CreateUpdateVillageInputDto implements ICreateUpdateVillageInputDto
             this.cityProvinceId = _data["cityProvinceId"];
             this.khanDistrictId = _data["khanDistrictId"];
             this.sangkatCommuneId = _data["sangkatCommuneId"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
         }
     }
 
@@ -14736,8 +14652,6 @@ export class CreateUpdateVillageInputDto implements ICreateUpdateVillageInputDto
         data["cityProvinceId"] = this.cityProvinceId;
         data["khanDistrictId"] = this.khanDistrictId;
         data["sangkatCommuneId"] = this.sangkatCommuneId;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         return data;
     }
 
@@ -14758,8 +14672,6 @@ export interface ICreateUpdateVillageInputDto {
     cityProvinceId: string | undefined;
     khanDistrictId: string | undefined;
     sangkatCommuneId: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 }
 
 export class CreateUserDto implements ICreateUserDto {
@@ -16859,7 +16771,6 @@ export class FindCountryDto implements IFindCountryDto {
     displayName: string | undefined;
     isActive: boolean;
     code: string | undefined;
-    countryCode: number;
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
@@ -16880,7 +16791,6 @@ export class FindCountryDto implements IFindCountryDto {
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
             this.code = _data["code"];
-            this.countryCode = _data["countryCode"];
             this.iso = _data["iso"];
             this.isO2 = _data["isO2"];
             this.phonePrefix = _data["phonePrefix"];
@@ -16901,7 +16811,6 @@ export class FindCountryDto implements IFindCountryDto {
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
         data["code"] = this.code;
-        data["countryCode"] = this.countryCode;
         data["iso"] = this.iso;
         data["isO2"] = this.isO2;
         data["phonePrefix"] = this.phonePrefix;
@@ -16922,7 +16831,6 @@ export interface IFindCountryDto {
     displayName: string | undefined;
     isActive: boolean;
     code: string | undefined;
-    countryCode: number;
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
@@ -17232,7 +17140,6 @@ export class FindLocationDto implements IFindLocationDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
-    code: string | undefined;
 
     constructor(data?: IFindLocationDto) {
         if (data) {
@@ -17249,7 +17156,6 @@ export class FindLocationDto implements IFindLocationDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
-            this.code = _data["code"];
         }
     }
 
@@ -17266,7 +17172,6 @@ export class FindLocationDto implements IFindLocationDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
-        data["code"] = this.code;
         return data;
     }
 
@@ -17283,7 +17188,6 @@ export interface IFindLocationDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
-    code: string | undefined;
 }
 
 export class FindLocationDtoPagedResultDto implements IFindLocationDtoPagedResultDto {
@@ -19037,8 +18941,6 @@ export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
     countryName: string | undefined;
     cityProvinceId: string | undefined;
     cityProvinceName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -19073,8 +18975,6 @@ export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
             this.countryName = _data["countryName"];
             this.cityProvinceId = _data["cityProvinceId"];
             this.cityProvinceName = _data["cityProvinceName"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
             this.firstId = _data["firstId"];
             this.nextId = _data["nextId"];
             this.previousId = _data["previousId"];
@@ -19109,8 +19009,6 @@ export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
         data["countryName"] = this.countryName;
         data["cityProvinceId"] = this.cityProvinceId;
         data["cityProvinceName"] = this.cityProvinceName;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         data["firstId"] = this.firstId;
         data["nextId"] = this.nextId;
         data["previousId"] = this.previousId;
@@ -19145,8 +19043,6 @@ export interface IKhanDistrictDetailDto {
     countryName: string | undefined;
     cityProvinceId: string | undefined;
     cityProvinceName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -19170,8 +19066,6 @@ export class KhanDistrictListDto implements IKhanDistrictListDto {
     code: string | undefined;
     countryName: string | undefined;
     cityProvinceName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 
     constructor(data?: IKhanDistrictListDto) {
         if (data) {
@@ -19200,8 +19094,6 @@ export class KhanDistrictListDto implements IKhanDistrictListDto {
             this.code = _data["code"];
             this.countryName = _data["countryName"];
             this.cityProvinceName = _data["cityProvinceName"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
         }
     }
 
@@ -19230,8 +19122,6 @@ export class KhanDistrictListDto implements IKhanDistrictListDto {
         data["code"] = this.code;
         data["countryName"] = this.countryName;
         data["cityProvinceName"] = this.cityProvinceName;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         return data;
     }
 
@@ -19260,8 +19150,6 @@ export interface IKhanDistrictListDto {
     code: string | undefined;
     countryName: string | undefined;
     cityProvinceName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 }
 
 export class KhanDistrictListDtoPagedResultDto implements IKhanDistrictListDtoPagedResultDto {
@@ -19753,7 +19641,6 @@ export class LocationDetailDto implements ILocationDetailDto {
     cannotEdit: boolean;
     cannotDelete: boolean;
     no: number;
-    code: string | undefined;
     latitude: number | undefined;
     longitude: number | undefined;
     firstId: string | undefined;
@@ -19785,7 +19672,6 @@ export class LocationDetailDto implements ILocationDetailDto {
             this.cannotEdit = _data["cannotEdit"];
             this.cannotDelete = _data["cannotDelete"];
             this.no = _data["no"];
-            this.code = _data["code"];
             this.latitude = _data["latitude"];
             this.longitude = _data["longitude"];
             this.firstId = _data["firstId"];
@@ -19817,7 +19703,6 @@ export class LocationDetailDto implements ILocationDetailDto {
         data["cannotEdit"] = this.cannotEdit;
         data["cannotDelete"] = this.cannotDelete;
         data["no"] = this.no;
-        data["code"] = this.code;
         data["latitude"] = this.latitude;
         data["longitude"] = this.longitude;
         data["firstId"] = this.firstId;
@@ -19849,7 +19734,6 @@ export interface ILocationDetailDto {
     cannotEdit: boolean;
     cannotDelete: boolean;
     no: number;
-    code: string | undefined;
     latitude: number | undefined;
     longitude: number | undefined;
     firstId: string | undefined;
@@ -19872,7 +19756,6 @@ export class LocationListDto implements ILocationListDto {
     cannotEdit: boolean;
     cannotDelete: boolean;
     no: number;
-    code: string | undefined;
     latitude: number | undefined;
     longitude: number | undefined;
 
@@ -19900,7 +19783,6 @@ export class LocationListDto implements ILocationListDto {
             this.cannotEdit = _data["cannotEdit"];
             this.cannotDelete = _data["cannotDelete"];
             this.no = _data["no"];
-            this.code = _data["code"];
             this.latitude = _data["latitude"];
             this.longitude = _data["longitude"];
         }
@@ -19928,7 +19810,6 @@ export class LocationListDto implements ILocationListDto {
         data["cannotEdit"] = this.cannotEdit;
         data["cannotDelete"] = this.cannotDelete;
         data["no"] = this.no;
-        data["code"] = this.code;
         data["latitude"] = this.latitude;
         data["longitude"] = this.longitude;
         return data;
@@ -19956,7 +19837,6 @@ export interface ILocationListDto {
     cannotEdit: boolean;
     cannotDelete: boolean;
     no: number;
-    code: string | undefined;
     latitude: number | undefined;
     longitude: number | undefined;
 }
@@ -22096,8 +21976,6 @@ export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
     cityProvinceName: string | undefined;
     khanDistrictId: string | undefined;
     khanDistrictName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -22134,8 +22012,6 @@ export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
             this.cityProvinceName = _data["cityProvinceName"];
             this.khanDistrictId = _data["khanDistrictId"];
             this.khanDistrictName = _data["khanDistrictName"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
             this.firstId = _data["firstId"];
             this.nextId = _data["nextId"];
             this.previousId = _data["previousId"];
@@ -22172,8 +22048,6 @@ export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
         data["cityProvinceName"] = this.cityProvinceName;
         data["khanDistrictId"] = this.khanDistrictId;
         data["khanDistrictName"] = this.khanDistrictName;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         data["firstId"] = this.firstId;
         data["nextId"] = this.nextId;
         data["previousId"] = this.previousId;
@@ -22210,8 +22084,6 @@ export interface ISangkatCommuneDetailDto {
     cityProvinceName: string | undefined;
     khanDistrictId: string | undefined;
     khanDistrictName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -22236,8 +22108,6 @@ export class SangkatCommuneListDto implements ISangkatCommuneListDto {
     countryName: string | undefined;
     cityProvinceName: string | undefined;
     khanDistrictName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 
     constructor(data?: ISangkatCommuneListDto) {
         if (data) {
@@ -22267,8 +22137,6 @@ export class SangkatCommuneListDto implements ISangkatCommuneListDto {
             this.countryName = _data["countryName"];
             this.cityProvinceName = _data["cityProvinceName"];
             this.khanDistrictName = _data["khanDistrictName"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
         }
     }
 
@@ -22298,8 +22166,6 @@ export class SangkatCommuneListDto implements ISangkatCommuneListDto {
         data["countryName"] = this.countryName;
         data["cityProvinceName"] = this.cityProvinceName;
         data["khanDistrictName"] = this.khanDistrictName;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         return data;
     }
 
@@ -22329,8 +22195,6 @@ export interface ISangkatCommuneListDto {
     countryName: string | undefined;
     cityProvinceName: string | undefined;
     khanDistrictName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 }
 
 export class SangkatCommuneListDtoPagedResultDto implements ISangkatCommuneListDtoPagedResultDto {
@@ -24195,8 +24059,6 @@ export class VillageDetailDto implements IVillageDetailDto {
     khanDistrictName: string | undefined;
     sangkatCommuneId: string | undefined;
     sangkatCommuneName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -24235,8 +24097,6 @@ export class VillageDetailDto implements IVillageDetailDto {
             this.khanDistrictName = _data["khanDistrictName"];
             this.sangkatCommuneId = _data["sangkatCommuneId"];
             this.sangkatCommuneName = _data["sangkatCommuneName"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
             this.firstId = _data["firstId"];
             this.nextId = _data["nextId"];
             this.previousId = _data["previousId"];
@@ -24275,8 +24135,6 @@ export class VillageDetailDto implements IVillageDetailDto {
         data["khanDistrictName"] = this.khanDistrictName;
         data["sangkatCommuneId"] = this.sangkatCommuneId;
         data["sangkatCommuneName"] = this.sangkatCommuneName;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         data["firstId"] = this.firstId;
         data["nextId"] = this.nextId;
         data["previousId"] = this.previousId;
@@ -24315,8 +24173,6 @@ export interface IVillageDetailDto {
     khanDistrictName: string | undefined;
     sangkatCommuneId: string | undefined;
     sangkatCommuneName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
     firstId: string | undefined;
     nextId: string | undefined;
     previousId: string | undefined;
@@ -24342,8 +24198,6 @@ export class VillageListDto implements IVillageListDto {
     cityProvinceName: string | undefined;
     khanDistrictName: string | undefined;
     sangkatCommuneName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 
     constructor(data?: IVillageListDto) {
         if (data) {
@@ -24374,8 +24228,6 @@ export class VillageListDto implements IVillageListDto {
             this.cityProvinceName = _data["cityProvinceName"];
             this.khanDistrictName = _data["khanDistrictName"];
             this.sangkatCommuneName = _data["sangkatCommuneName"];
-            this.latitude = _data["latitude"];
-            this.longitude = _data["longitude"];
         }
     }
 
@@ -24406,8 +24258,6 @@ export class VillageListDto implements IVillageListDto {
         data["cityProvinceName"] = this.cityProvinceName;
         data["khanDistrictName"] = this.khanDistrictName;
         data["sangkatCommuneName"] = this.sangkatCommuneName;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
         return data;
     }
 
@@ -24438,8 +24288,6 @@ export interface IVillageListDto {
     cityProvinceName: string | undefined;
     khanDistrictName: string | undefined;
     sangkatCommuneName: string | undefined;
-    latitude: number | undefined;
-    longitude: number | undefined;
 }
 
 export class VillageListDtoPagedResultDto implements IVillageListDtoPagedResultDto {

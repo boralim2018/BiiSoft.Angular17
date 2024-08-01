@@ -120,7 +120,6 @@ export class LocationComponent extends Mixin(PrimeNgListComponentBase<LocationLi
 
     protected initColumns() {
         this.columns = [
-            { name: 'Code', header: 'Code', width: '15rem', sort: true },
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
             { name: 'Latitude', header: 'Latitude', width: '15rem', sort: true },
@@ -170,7 +169,7 @@ export class LocationComponent extends Mixin(PrimeNgListComponentBase<LocationLi
 
         this._dialogService.open(ConfirmDeleteComponent, {
             data: {
-                deleteObj: location.code + " - " + location.name,
+                deleteObj: location.no + " - " + location.name,
                 deleteLabel: this.l('Location')
             },
             header: this.l('ConfirmDelete'),

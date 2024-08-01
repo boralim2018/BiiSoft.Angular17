@@ -65,23 +65,6 @@
         </div>
 
         <div class="field col-12 md:col-6">
-            <label class="text-900 font-medium">{{l('Code_', l('Country'))}}<span class="text-red-600">*</span></label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="countryCode"
-                   id="countryCode"
-                   minlength="1"
-                   maxlength="3"
-                   required
-                   [(ngModel)]="model.countryCode"
-                   #countryCodeModel="ngModel"
-                   #countryCodeEl />
-            <abp-validation-summary [control]="countryCodeModel"
-                                    [controlEl]="countryCodeEl"></abp-validation-summary>
-        </div>
-
-        <div class="field col-12 md:col-6">
             <label for="code" class="text-900 font-medium">{{l('Code_',l('Location'))}}<span class="text-red-600">*</span></label>
             <input type="text"
                    pInputText
@@ -121,36 +104,7 @@
              [(selectedModel)]="currency"
              (selectedModelChange)="model.currencyId = $event?.id">
         </div>
-        <div class="field col-12 md:col-6">
-            <label for="latitude" class="text-900 font-medium">{{l('Latitude')}}</label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="latitude"
-                   id="latitude"
-                   minlength="2"
-                   maxlength="64"
-                   [(ngModel)]="model.latitude"
-                   #latitudeModel="ngModel"
-                   #latitudeEl />
-            <abp-validation-summary [control]="latitudeModel"
-                                    [controlEl]="latitudeEl"></abp-validation-summary>
-        </div>
-        <div class="field col-12 md:col-6">
-            <label for="longitude" class="text-900 font-medium">{{l('Longitude')}}</label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="longitude"
-                   id="longitude"
-                   minlength="2"
-                   maxlength="64"
-                   [(ngModel)]="model.longitude"
-                   #longitudeModel="ngModel"
-                   #longitudeEl />
-            <abp-validation-summary [control]="longitudeModel"
-                                    [controlEl]="longitudeEl"></abp-validation-summary>
-        </div>
+        
     </div>
 
     <div class="p-dialog-footer">

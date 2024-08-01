@@ -82,7 +82,7 @@ export class ViewCountryComponent extends Mixin(AppComponentBase, NavBarComponen
 
         this._dialogService.open(ConfirmDeleteComponent, {
             data: {
-                deleteObj: this.model.countryCode + " - " + this.model.name,
+                deleteObj: this.model.code + " - " + this.model.name,
                 deleteLabel: this.l('Country')
             },
             header: this.l('ConfirmDelete'),

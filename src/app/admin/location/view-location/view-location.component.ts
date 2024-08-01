@@ -82,7 +82,7 @@ export class ViewLocationComponent extends Mixin(AppComponentBase, NavBarCompone
 
         this._dialogService.open(ConfirmDeleteComponent, {
             data: {
-                deleteObj: this.model.code + " - " + this.model.name,
+                deleteObj: this.model.no + " - " + this.model.name,
                 deleteLabel: this.l('Location')
             },
             header: this.l('ConfirmDelete'),

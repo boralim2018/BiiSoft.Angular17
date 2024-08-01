@@ -143,8 +143,6 @@ export class SangkatCommuneComponent extends Mixin(PrimeNgListComponentBase<Sang
             { name: 'KhanDistrictName', header: 'KhanDistrict', width: '15rem', sort: true },
             { name: 'CityProvinceName', header: 'CityProvince', width: '15rem', sort: true },
             { name: 'CountryName', header: 'Country', width: '15rem', sort: true },
-            { name: 'Latitude', header: 'Latitude', width: '15rem', sort: true, visible: false },
-            { name: 'Longitude', header: 'Longitude', width: '15rem', sort: true, visible: false },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText },
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
