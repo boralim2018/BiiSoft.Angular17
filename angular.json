@@ -45,7 +45,7 @@
             ],
             "scripts": [
               "node_modules/moment/min/moment.min.js",
-              "node_modules/@aspnet/signalr/dist/browser/signalr.min.js",
+              "node_modules/@microsoft/signalr/dist/browser/signalr.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
               "src/assets/freeze-ui/freeze-ui.js",
               "node_modules/push.js/bin/push.min.js",
@@ -151,7 +151,7 @@
             ],
             "scripts": [
               "node_modules/moment/min/moment.min.js",
-              "node_modules/@aspnet/signalr/dist/browser/signalr.min.js",
+              "node_modules/@microsoft/signalr/dist/browser/signalr.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
               "src/assets/freeze-ui/freeze-ui.js",
               "node_modules/push.js/bin/push.min.js",
@@ -182,7 +182,8 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "style": "scss"
+      "style": "scss",
+      "project": "BiiSoft"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

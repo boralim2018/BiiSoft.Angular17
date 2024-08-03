@@ -30,7 +30,7 @@ export class AccountServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     isTenantAvailable(body: IsTenantAvailableInput | undefined): Observable<IsTenantAvailableOutput> {
         let url_ = this.baseUrl + "/api/services/app/Account/IsTenantAvailable";
@@ -86,7 +86,7 @@ export class AccountServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     register(body: RegisterInput | undefined): Observable<RegisterOutput> {
         let url_ = this.baseUrl + "/api/services/app/Account/Register";
@@ -142,7 +142,7 @@ export class AccountServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     resetPassword(body: ResetPasswordInput | undefined): Observable<ResetPasswordOutput> {
         let url_ = this.baseUrl + "/api/services/app/Account/ResetPassword";
@@ -198,7 +198,7 @@ export class AccountServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     resolveTenantId(body: ResolveTenantIdInput | undefined): Observable<number> {
         let url_ = this.baseUrl + "/api/services/app/Account/ResolveTenantId";
@@ -255,7 +255,7 @@ export class AccountServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     sendPasswordResetCode(body: SendPasswordResetCodeInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Account/SendPasswordResetCode";
@@ -307,7 +307,7 @@ export class AccountServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     impersonate(body: ImpersonateInput | undefined): Observable<ImpersonateOutput> {
         let url_ = this.baseUrl + "/api/services/app/Account/Impersonate";
@@ -362,7 +362,7 @@ export class AccountServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     backToImpersonator(): Observable<ImpersonateOutput> {
         let url_ = this.baseUrl + "/api/services/app/Account/BackToImpersonator";
@@ -414,7 +414,7 @@ export class AccountServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     switchToLinkedAccount(body: SwitchToLinkedAccountInput | undefined): Observable<SwitchToLinkedAccountOutput> {
         let url_ = this.baseUrl + "/api/services/app/Account/SwitchToLinkedAccount";
@@ -470,7 +470,7 @@ export class AccountServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     changeLanguage(body: ChangeUserLanguageDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Account/ChangeLanguage";
@@ -548,7 +548,7 @@ export class AuditLogServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getAuditLogs(startDate: moment.Moment | undefined, endDate: moment.Moment | undefined, userName: string | undefined, serviceName: string | undefined, methodName: string | undefined, browserInfo: string | undefined, hasException: boolean | undefined, minExecutionDuration: number | undefined, maxExecutionDuration: number | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<AuditLogListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/GetAuditLogs?";
@@ -660,7 +660,7 @@ export class AuditLogServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     exportExcel(body: ExportAuditLogsInput | undefined): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/ExportExcel";
@@ -728,7 +728,7 @@ export class BranchServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateUpdateBranchInputDto | undefined): Observable<string> {
         let url_ = this.baseUrl + "/api/services/app/Branch/Create";
@@ -785,7 +785,7 @@ export class BranchServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: string | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Branch/Delete?";
@@ -837,7 +837,7 @@ export class BranchServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Branch/Disable";
@@ -889,7 +889,7 @@ export class BranchServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Branch/Enable";
@@ -941,7 +941,7 @@ export class BranchServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     setAsDefault(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Branch/SetAsDefault";
@@ -993,7 +993,7 @@ export class BranchServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     find(body: PageBranchInputDto | undefined): Observable<FindBranchDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Branch/Find";
@@ -1049,7 +1049,7 @@ export class BranchServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getDetail(id: string | undefined): Observable<BranchDetailDto> {
         let url_ = this.baseUrl + "/api/services/app/Branch/GetDetail?";
@@ -1115,7 +1115,7 @@ export class BranchServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<BranchListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Branch/GetList?";
@@ -1211,7 +1211,7 @@ export class BranchServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     exportExcel(body: ExportExcelBranchInputDto | undefined): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Branch/ExportExcel";
@@ -1266,7 +1266,7 @@ export class BranchServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     exportExcelTemplate(): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Branch/ExportExcelTemplate";
@@ -1318,7 +1318,7 @@ export class BranchServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     importExcel(body: FileTokenInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Branch/ImportExcel";
@@ -1370,7 +1370,7 @@ export class BranchServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: CreateUpdateBranchInputDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Branch/Update";
@@ -1434,7 +1434,7 @@ export class CityProvinceServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateUpdateCityProvinceInputDto | undefined): Observable<string> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/Create";
@@ -1491,7 +1491,7 @@ export class CityProvinceServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: string | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/Delete?";
@@ -1543,7 +1543,7 @@ export class CityProvinceServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/Disable";
@@ -1595,7 +1595,7 @@ export class CityProvinceServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/Enable";
@@ -1647,7 +1647,7 @@ export class CityProvinceServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     find(body: PageCityProvinceInputDto | undefined): Observable<FindCityProvinceDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/Find";
@@ -1703,7 +1703,7 @@ export class CityProvinceServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getDetail(id: string | undefined): Observable<CityProvinceDetailDto> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/GetDetail?";
@@ -1771,7 +1771,7 @@ export class CityProvinceServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CityProvinceListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/GetList?";
@@ -1875,7 +1875,7 @@ export class CityProvinceServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     exportExcel(body: ExportExcelCityProvinceInputDto | undefined): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/ExportExcel";
@@ -1930,7 +1930,7 @@ export class CityProvinceServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     exportExcelTemplate(): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/ExportExcelTemplate";
@@ -1982,7 +1982,7 @@ export class CityProvinceServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     importExcel(body: FileTokenInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/ImportExcel";
@@ -2034,7 +2034,7 @@ export class CityProvinceServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: CreateUpdateCityProvinceInputDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/Update";
@@ -2098,7 +2098,7 @@ export class ConfigurationServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     changeUiTheme(body: ChangeUiThemeInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Configuration/ChangeUiTheme";
@@ -2162,7 +2162,7 @@ export class CountryServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateUpdateCountryInputDto | undefined): Observable<string> {
         let url_ = this.baseUrl + "/api/services/app/Country/Create";
@@ -2219,7 +2219,7 @@ export class CountryServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: string | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Country/Delete?";
@@ -2271,7 +2271,7 @@ export class CountryServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Country/Disable";
@@ -2323,7 +2323,7 @@ export class CountryServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Country/Enable";
@@ -2375,7 +2375,7 @@ export class CountryServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     find(body: PageCountryInputDto | undefined): Observable<FindCountryDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Country/Find";
@@ -2431,7 +2431,7 @@ export class CountryServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getDetail(id: string | undefined): Observable<CountryDetailDto> {
         let url_ = this.baseUrl + "/api/services/app/Country/GetDetail?";
@@ -2499,7 +2499,7 @@ export class CountryServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getList(currencies_Exclude: boolean | undefined, currencies_Ids: number[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CountryListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Country/GetList?";
@@ -2603,7 +2603,7 @@ export class CountryServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     exportExcel(body: ExportExcelCountryInputDto | undefined): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Country/ExportExcel";
@@ -2658,7 +2658,7 @@ export class CountryServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     exportExcelTemplate(): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Country/ExportExcelTemplate";
@@ -2710,7 +2710,7 @@ export class CountryServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     importExcel(body: FileTokenInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Country/ImportExcel";
@@ -2762,7 +2762,7 @@ export class CountryServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: CreateUpdateCountryInputDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Country/Update";
@@ -2826,7 +2826,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateUpdateCurrencyInputDto | undefined): Observable<number> {
         let url_ = this.baseUrl + "/api/services/app/Currency/Create";
@@ -2883,7 +2883,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Currency/Delete?";
@@ -2935,7 +2935,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: Int64EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Currency/Disable";
@@ -2987,7 +2987,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: Int64EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Currency/Enable";
@@ -3039,7 +3039,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     setAsDefault(body: Int64EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Currency/SetAsDefault";
@@ -3091,7 +3091,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     find(body: PageCurrencyInputDto | undefined): Observable<FindCurrencyDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Currency/Find";
@@ -3147,7 +3147,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getDetail(id: number | undefined): Observable<CurrencyDetailDto> {
         let url_ = this.baseUrl + "/api/services/app/Currency/GetDetail?";
@@ -3213,7 +3213,7 @@ export class CurrencyServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CurrencyListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Currency/GetList?";
@@ -3309,7 +3309,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     exportExcel(body: ExportExcelCurrencyInputDto | undefined): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Currency/ExportExcel";
@@ -3364,7 +3364,7 @@ export class CurrencyServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     exportExcelTemplate(): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Currency/ExportExcelTemplate";
@@ -3416,7 +3416,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     importExcel(body: FileTokenInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Currency/ImportExcel";
@@ -3468,7 +3468,7 @@ export class CurrencyServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: CreateUpdateCurrencyInputDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Currency/Update";
@@ -3537,7 +3537,7 @@ export class EditionServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getEditions(keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<EditionListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditions?";
@@ -3613,7 +3613,7 @@ export class EditionServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getEditionForEdit(id: number | undefined): Observable<GetEditionEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditionForEdit?";
@@ -3668,7 +3668,7 @@ export class EditionServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getFeatures(): Observable<FlatFeatureDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetFeatures";
@@ -3720,7 +3720,7 @@ export class EditionServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     createOrUpdateEdition(body: CreateOrUpdateEditionDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Edition/CreateOrUpdateEdition";
@@ -3772,7 +3772,7 @@ export class EditionServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     deleteEdition(id: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Edition/DeleteEdition?";
@@ -3825,7 +3825,7 @@ export class EditionServiceProxy {
     /**
      * @param selectedEditionId (optional) 
      * @param addAllItem (optional) 
-     * @return Success
+     * @return OK
      */
     getEditionComboboxItems(selectedEditionId: number | undefined, addAllItem: boolean | undefined): Observable<ComboboxItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditionComboboxItems?";
@@ -3903,7 +3903,7 @@ export class HostSettingsServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getAllSettings(): Observable<HostSettingsEditDto> {
         let url_ = this.baseUrl + "/api/services/app/HostSettings/GetAllSettings";
@@ -3955,7 +3955,7 @@ export class HostSettingsServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     updateAllSettings(body: HostSettingsEditDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/HostSettings/UpdateAllSettings";
@@ -4010,7 +4010,7 @@ export class HostSettingsServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getTimeZones(keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<StringListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/HostSettings/GetTimeZones?";
@@ -4078,7 +4078,7 @@ export class HostSettingsServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     sendTestEmail(body: SendTestEmailInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/HostSettings/SendTestEmail";
@@ -4142,7 +4142,7 @@ export class KhanDistrictServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateUpdateKhanDistrictInputDto | undefined): Observable<string> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/Create";
@@ -4199,7 +4199,7 @@ export class KhanDistrictServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: string | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/Delete?";
@@ -4251,7 +4251,7 @@ export class KhanDistrictServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/Disable";
@@ -4303,7 +4303,7 @@ export class KhanDistrictServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/Enable";
@@ -4355,7 +4355,7 @@ export class KhanDistrictServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     find(body: PageKhanDistrictInputDto | undefined): Observable<FindKhanDistrictDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/Find";
@@ -4411,7 +4411,7 @@ export class KhanDistrictServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getDetail(id: string | undefined): Observable<KhanDistrictDetailDto> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/GetDetail?";
@@ -4481,7 +4481,7 @@ export class KhanDistrictServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, cityProvinces_Exclude: boolean | undefined, cityProvinces_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<KhanDistrictListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/GetList?";
@@ -4593,7 +4593,7 @@ export class KhanDistrictServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     exportExcel(body: ExportExcelKhanDistrictInputDto | undefined): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/ExportExcel";
@@ -4648,7 +4648,7 @@ export class KhanDistrictServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     exportExcelTemplate(): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/ExportExcelTemplate";
@@ -4700,7 +4700,7 @@ export class KhanDistrictServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     importExcel(body: FileTokenInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/ImportExcel";
@@ -4752,7 +4752,7 @@ export class KhanDistrictServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: CreateUpdateKhanDistrictInputDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/Update";
@@ -4821,7 +4821,7 @@ export class LanguageServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getLanguages(keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedLanguagesResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Language/GetLanguages?";
@@ -4897,7 +4897,7 @@ export class LanguageServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getLanguageForEdit(id: number | undefined): Observable<GetLanguageForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Language/GetLanguageForEdit?";
@@ -4953,7 +4953,7 @@ export class LanguageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     createOrUpdateLanguage(body: CreateOrUpdateLanguageInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Language/CreateOrUpdateLanguage";
@@ -5005,7 +5005,7 @@ export class LanguageServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     deleteLanguage(id: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Language/DeleteLanguage?";
@@ -5057,7 +5057,7 @@ export class LanguageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Language/Enable";
@@ -5109,7 +5109,7 @@ export class LanguageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Language/Disable";
@@ -5161,7 +5161,7 @@ export class LanguageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     setDefaultLanguage(body: SetDefaultLanguageInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Language/SetDefaultLanguage";
@@ -5220,7 +5220,7 @@ export class LanguageServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getLanguageTexts(sourceName: string, baseLanguageName: string | undefined, targetLanguageName: string, targetValueFilter: string | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<LanguageTextListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Language/GetLanguageTexts?";
@@ -5312,7 +5312,7 @@ export class LanguageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     updateLanguageText(body: UpdateLanguageTextInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Language/UpdateLanguageText";
@@ -5376,7 +5376,7 @@ export class LocationServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateUpdateLocationInputDto | undefined): Observable<string> {
         let url_ = this.baseUrl + "/api/services/app/Location/Create";
@@ -5433,7 +5433,7 @@ export class LocationServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: string | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Location/Delete?";
@@ -5485,7 +5485,7 @@ export class LocationServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Location/Disable";
@@ -5537,7 +5537,7 @@ export class LocationServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Location/Enable";
@@ -5589,7 +5589,7 @@ export class LocationServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     find(body: PageLocationInputDto | undefined): Observable<FindLocationDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Location/Find";
@@ -5645,7 +5645,7 @@ export class LocationServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getDetail(id: string | undefined): Observable<LocationDetailDto> {
         let url_ = this.baseUrl + "/api/services/app/Location/GetDetail?";
@@ -5711,7 +5711,7 @@ export class LocationServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<LocationListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Location/GetList?";
@@ -5807,7 +5807,7 @@ export class LocationServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     exportExcel(body: ExportExcelLocationInputDto | undefined): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Location/ExportExcel";
@@ -5862,7 +5862,7 @@ export class LocationServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     exportExcelTemplate(): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Location/ExportExcelTemplate";
@@ -5914,7 +5914,7 @@ export class LocationServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     importExcel(body: FileTokenInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Location/ImportExcel";
@@ -5966,7 +5966,7 @@ export class LocationServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: CreateUpdateLocationInputDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Location/Update";
@@ -6029,7 +6029,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getOrganizationUnits(): Observable<OrganizationUnitDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/GetOrganizationUnits";
@@ -6086,7 +6086,7 @@ export class OrganizationUnitServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getOrganizationUnitUsers(id: number | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<OrganizationUnitUserListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/GetOrganizationUnitUsers?";
@@ -6162,7 +6162,7 @@ export class OrganizationUnitServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     createOrganizationUnit(body: CreateOrganizationUnitInput | undefined): Observable<OrganizationUnitDto> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/CreateOrganizationUnit";
@@ -6218,7 +6218,7 @@ export class OrganizationUnitServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     updateOrganizationUnit(body: UpdateOrganizationUnitInput | undefined): Observable<OrganizationUnitDto> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/UpdateOrganizationUnit";
@@ -6274,7 +6274,7 @@ export class OrganizationUnitServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     moveOrganizationUnit(body: MoveOrganizationUnitInput | undefined): Observable<OrganizationUnitDto> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/MoveOrganizationUnit";
@@ -6330,7 +6330,7 @@ export class OrganizationUnitServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     deleteOrganizationUnit(id: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/DeleteOrganizationUnit?";
@@ -6383,7 +6383,7 @@ export class OrganizationUnitServiceProxy {
     /**
      * @param userId (optional) 
      * @param organizationUnitId (optional) 
-     * @return Success
+     * @return OK
      */
     removeUserFromOrganizationUnit(userId: number | undefined, organizationUnitId: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/RemoveUserFromOrganizationUnit?";
@@ -6439,7 +6439,7 @@ export class OrganizationUnitServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     addUsersToOrganizationUnit(body: UsersToOrganizationUnitInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/AddUsersToOrganizationUnit";
@@ -6491,7 +6491,7 @@ export class OrganizationUnitServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     findUsers(body: FindOrganizationUnitUsersInput | undefined): Observable<NameValueDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/FindUsers";
@@ -6558,7 +6558,7 @@ export class ProfileServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getCurrentUserProfileForEdit(): Observable<CurrentUserProfileEditDto> {
         let url_ = this.baseUrl + "/api/services/app/Profile/GetCurrentUserProfileForEdit";
@@ -6609,7 +6609,7 @@ export class ProfileServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     updateGoogleAuthenticatorKey(): Observable<UpdateGoogleAuthenticatorKeyOutput> {
         let url_ = this.baseUrl + "/api/services/app/Profile/UpdateGoogleAuthenticatorKey";
@@ -6660,7 +6660,7 @@ export class ProfileServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     sendVerificationSms(): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Profile/SendVerificationSms";
@@ -6708,7 +6708,7 @@ export class ProfileServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     verifySmsCode(body: VerifySmsCodeInputDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Profile/VerifySmsCode";
@@ -6760,7 +6760,7 @@ export class ProfileServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     updateCurrentUserProfile(body: CurrentUserProfileEditDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Profile/UpdateCurrentUserProfile";
@@ -6812,7 +6812,7 @@ export class ProfileServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     changePassword(body: ChangePasswordInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Profile/ChangePassword";
@@ -6863,7 +6863,7 @@ export class ProfileServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getPasswordComplexitySetting(): Observable<GetPasswordComplexitySettingOutput> {
         let url_ = this.baseUrl + "/api/services/app/Profile/GetPasswordComplexitySetting";
@@ -6927,7 +6927,7 @@ export class RoleServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateRoleDto | undefined): Observable<RoleDto> {
         let url_ = this.baseUrl + "/api/services/app/Role/Create";
@@ -6983,7 +6983,7 @@ export class RoleServiceProxy {
 
     /**
      * @param permission (optional) 
-     * @return Success
+     * @return OK
      */
     getRoles(permission: string | undefined): Observable<RoleListDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Role/GetRoles?";
@@ -7044,7 +7044,7 @@ export class RoleServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getAll(keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<RoleDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Role/GetAll?";
@@ -7120,7 +7120,7 @@ export class RoleServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: RoleDto | undefined): Observable<RoleDto> {
         let url_ = this.baseUrl + "/api/services/app/Role/Update";
@@ -7176,7 +7176,7 @@ export class RoleServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Role/Delete?";
@@ -7227,7 +7227,7 @@ export class RoleServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getAllPermissions(): Observable<PermissionDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Role/GetAllPermissions";
@@ -7279,7 +7279,7 @@ export class RoleServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getRoleForEdit(id: number | undefined): Observable<GetRoleForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Role/GetRoleForEdit?";
@@ -7335,7 +7335,7 @@ export class RoleServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     get(id: number | undefined): Observable<RoleDto> {
         let url_ = this.baseUrl + "/api/services/app/Role/Get?";
@@ -7403,7 +7403,7 @@ export class SangkatCommuneServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateUpdateSangkatCommuneInputDto | undefined): Observable<string> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/Create";
@@ -7460,7 +7460,7 @@ export class SangkatCommuneServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: string | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/Delete?";
@@ -7512,7 +7512,7 @@ export class SangkatCommuneServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/Disable";
@@ -7564,7 +7564,7 @@ export class SangkatCommuneServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/Enable";
@@ -7616,7 +7616,7 @@ export class SangkatCommuneServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     find(body: PageSangkatCommuneInputDto | undefined): Observable<FindSangkatCommuneDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/Find";
@@ -7672,7 +7672,7 @@ export class SangkatCommuneServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getDetail(id: string | undefined): Observable<SangkatCommuneDetailDto> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/GetDetail?";
@@ -7744,7 +7744,7 @@ export class SangkatCommuneServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, cityProvinces_Exclude: boolean | undefined, cityProvinces_Ids: string[] | undefined, khanDistricts_Exclude: boolean | undefined, khanDistricts_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<SangkatCommuneListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/GetList?";
@@ -7864,7 +7864,7 @@ export class SangkatCommuneServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     exportExcel(body: ExportExcelSangkatCommuneInputDto | undefined): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/ExportExcel";
@@ -7919,7 +7919,7 @@ export class SangkatCommuneServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     exportExcelTemplate(): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/ExportExcelTemplate";
@@ -7971,7 +7971,7 @@ export class SangkatCommuneServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     importExcel(body: FileTokenInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/ImportExcel";
@@ -8023,7 +8023,7 @@ export class SangkatCommuneServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: CreateUpdateSangkatCommuneInputDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/Update";
@@ -8086,7 +8086,7 @@ export class SessionServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getCurrentLoginInformations(): Observable<GetCurrentLoginInformationsOutput> {
         let url_ = this.baseUrl + "/api/services/app/Session/GetCurrentLoginInformations";
@@ -8150,7 +8150,7 @@ export class TenantServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     get(id: number | undefined): Observable<TenantDto> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/Get?";
@@ -8212,7 +8212,7 @@ export class TenantServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getAll(isActive: boolean | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<TenantDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetAll?";
@@ -8292,7 +8292,7 @@ export class TenantServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateTenantDto | undefined): Observable<TenantDto> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/Create";
@@ -8348,7 +8348,7 @@ export class TenantServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: TenantDto | undefined): Observable<TenantDto> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/Update";
@@ -8404,7 +8404,7 @@ export class TenantServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/Delete?";
@@ -8456,7 +8456,7 @@ export class TenantServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getTenantFeaturesForEdit(id: number | undefined): Observable<GetTenantFeaturesEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetTenantFeaturesForEdit?";
@@ -8512,7 +8512,7 @@ export class TenantServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     updateTenantFeatures(body: UpdateTenantFeaturesInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/UpdateTenantFeatures";
@@ -8564,7 +8564,7 @@ export class TenantServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     resetTenantSpecificFeatures(body: EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/ResetTenantSpecificFeatures";
@@ -8616,7 +8616,7 @@ export class TenantServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/Enable";
@@ -8668,7 +8668,7 @@ export class TenantServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/Disable";
@@ -8735,7 +8735,7 @@ export class TestServiceProxy {
      * @param subject (optional) 
      * @param message (optional) 
      * @param bodyHtml (optional) 
-     * @return Success
+     * @return OK
      */
     testSendMail(to: string | undefined, subject: string | undefined, message: string | undefined, bodyHtml: boolean | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Test/TestSendMail?";
@@ -8798,7 +8798,7 @@ export class TestServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     pdfBacord(): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Test/PdfBacord";
@@ -8845,7 +8845,7 @@ export class TestServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     testPdf(): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Test/TestPdf";
@@ -8892,7 +8892,7 @@ export class TestServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     testHangfire(): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Test/TestHangfire";
@@ -8940,7 +8940,7 @@ export class TestServiceProxy {
 
     /**
      * @param records (optional) 
-     * @return Success
+     * @return OK
      */
     testBulkInsert(records: number | undefined): Observable<number> {
         let url_ = this.baseUrl + "/api/services/app/Test/TestBulkInsert?";
@@ -8999,7 +8999,7 @@ export class TestServiceProxy {
      * @param orderBy (optional) 
      * @param skip (optional) 
      * @param take (optional) 
-     * @return Success
+     * @return OK
      */
     getLinqSkipTake(orderBy: string | undefined, skip: number | undefined, take: number | undefined): Observable<TestModelOutput[]> {
         let url_ = this.baseUrl + "/api/services/app/Test/GetLinqSkipTake?";
@@ -9069,7 +9069,7 @@ export class TestServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     timeZones(): Observable<string[]> {
         let url_ = this.baseUrl + "/api/services/app/Test/TimeZones";
@@ -9140,7 +9140,7 @@ export class TimingServiceProxy {
 
     /**
      * @param defaultTimezoneScope (optional) 
-     * @return Success
+     * @return OK
      */
     getTimezones(defaultTimezoneScope: SettingScopes | undefined): Observable<NameValueDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Timing/GetTimezones?";
@@ -9196,7 +9196,7 @@ export class TimingServiceProxy {
 
     /**
      * @param selectedTimezoneId (optional) 
-     * @return Success
+     * @return OK
      */
     getTimezoneComboboxItems(selectedTimezoneId: string | undefined): Observable<ComboboxItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/Timing/GetTimezoneComboboxItems?";
@@ -9271,7 +9271,7 @@ export class TokenAuthServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     authenticate(body: AuthenticateModel | undefined): Observable<AuthenticateResultModel> {
         let url_ = this.baseUrl + "/api/TokenAuth/Authenticate";
@@ -9327,7 +9327,7 @@ export class TokenAuthServiceProxy {
 
     /**
      * @param switchAccountToken (optional) 
-     * @return Success
+     * @return OK
      */
     linkedAccountAuthenticate(switchAccountToken: string | undefined): Observable<SwitchedAccountAuthenticateResultModel> {
         let url_ = this.baseUrl + "/api/TokenAuth/LinkedAccountAuthenticate?";
@@ -9383,7 +9383,7 @@ export class TokenAuthServiceProxy {
 
     /**
      * @param impersonationToken (optional) 
-     * @return Success
+     * @return OK
      */
     impersonatedAuthenticate(impersonationToken: string | undefined): Observable<ImpersonatedAuthenticateResultModel> {
         let url_ = this.baseUrl + "/api/TokenAuth/ImpersonatedAuthenticate?";
@@ -9438,7 +9438,7 @@ export class TokenAuthServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     logOut(): Observable<void> {
         let url_ = this.baseUrl + "/api/TokenAuth/LogOut";
@@ -9485,7 +9485,7 @@ export class TokenAuthServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getExternalAuthenticationProviders(): Observable<ExternalLoginProviderInfoModel[]> {
         let url_ = this.baseUrl + "/api/TokenAuth/GetExternalAuthenticationProviders";
@@ -9544,7 +9544,7 @@ export class TokenAuthServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     externalAuthenticate(body: ExternalAuthenticateModel | undefined): Observable<ExternalAuthenticateResultModel> {
         let url_ = this.baseUrl + "/api/TokenAuth/ExternalAuthenticate";
@@ -9611,7 +9611,7 @@ export class UnitServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     bulkInsert(): Observable<number> {
         let url_ = this.baseUrl + "/api/services/app/Unit/BulkInsert";
@@ -9663,7 +9663,7 @@ export class UnitServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     bulkDelete(): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Unit/BulkDelete";
@@ -9710,7 +9710,7 @@ export class UnitServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     bulkSoftDelete(): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Unit/BulkSoftDelete";
@@ -9757,7 +9757,7 @@ export class UnitServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     testDate(): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Unit/TestDate";
@@ -9804,7 +9804,7 @@ export class UnitServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     testSetting(): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Unit/TestSetting";
@@ -9852,7 +9852,7 @@ export class UnitServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     find(body: PagedActiveSortFilterInputDto | undefined): Observable<UnitDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Unit/Find";
@@ -9907,7 +9907,7 @@ export class UnitServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     testPdf(): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Unit/TestPdf";
@@ -9955,7 +9955,7 @@ export class UnitServiceProxy {
 
     /**
      * @param productKey (optional) 
-     * @return Success
+     * @return OK
      */
     generateLicenseKey(productKey: string | undefined): Observable<string> {
         let url_ = this.baseUrl + "/api/services/app/Unit/GenerateLicenseKey?";
@@ -10024,7 +10024,7 @@ export class UserServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     get(id: number | undefined): Observable<UserDto> {
         let url_ = this.baseUrl + "/api/services/app/User/Get?";
@@ -10080,7 +10080,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     findUsers(body: FindUsersInput | undefined): Observable<UserSummaryDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/User/FindUsers";
@@ -10142,7 +10142,7 @@ export class UserServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getAll(isActive: boolean | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<UserDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/User/GetAll?";
@@ -10222,7 +10222,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateUserDto | undefined): Observable<UserDto> {
         let url_ = this.baseUrl + "/api/services/app/User/Create";
@@ -10278,7 +10278,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: UserDto | undefined): Observable<UserDto> {
         let url_ = this.baseUrl + "/api/services/app/User/Update";
@@ -10334,7 +10334,7 @@ export class UserServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/User/Delete?";
@@ -10386,7 +10386,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: Int64EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/User/Enable";
@@ -10438,7 +10438,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: Int64EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/User/Disable";
@@ -10490,7 +10490,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     activate(body: Int64EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/User/Activate";
@@ -10542,7 +10542,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     deactivate(body: Int64EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/User/Deactivate";
@@ -10593,7 +10593,7 @@ export class UserServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getRoles(): Observable<RoleDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/User/GetRoles";
@@ -10645,7 +10645,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     changePassword(body: ChangePasswordDto | undefined): Observable<boolean> {
         let url_ = this.baseUrl + "/api/services/app/User/ChangePassword";
@@ -10702,7 +10702,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     resetPassword(body: ResetPasswordDto | undefined): Observable<boolean> {
         let url_ = this.baseUrl + "/api/services/app/User/ResetPassword";
@@ -10759,7 +10759,7 @@ export class UserServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getUserPermissionsForEdit(id: number | undefined): Observable<GetUserPermissionsForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/User/GetUserPermissionsForEdit?";
@@ -10815,7 +10815,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     updateUserPermissions(body: UpdateUserPermissionsInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/User/UpdateUserPermissions";
@@ -10867,7 +10867,7 @@ export class UserServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     resetUserSpecificPermissions(body: Int64EntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/User/ResetUserSpecificPermissions";
@@ -10931,7 +10931,7 @@ export class UserLinkServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     linkToUser(body: LinkToUserInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/UserLink/LinkToUser";
@@ -10987,7 +10987,7 @@ export class UserLinkServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getLinkedUsers(sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<LinkedUserDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/UserLink/GetLinkedUsers?";
@@ -11058,7 +11058,7 @@ export class UserLinkServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getRecentlyUsedLinkedUsers(): Observable<LinkedUserDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/UserLink/GetRecentlyUsedLinkedUsers";
@@ -11110,7 +11110,7 @@ export class UserLinkServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     unlinkUser(body: UnlinkUserInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/UserLink/UnlinkUser";
@@ -11173,7 +11173,7 @@ export class UserLoginServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     getRecentUserLoginAttempts(): Observable<UserLoginAttemptDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/UserLogin/GetRecentUserLoginAttempts";
@@ -11237,7 +11237,7 @@ export class UserSettingsServiceProxy {
 
     /**
      * @param input (optional) 
-     * @return Success
+     * @return OK
      */
     updateUIEnable(input: boolean | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/UserSettings/UpdateUIEnable?";
@@ -11289,7 +11289,7 @@ export class UserSettingsServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     sendTestEmail(body: SendTestEmailInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/UserSettings/SendTestEmail";
@@ -11353,7 +11353,7 @@ export class VillageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     create(body: CreateUpdateVillageInputDto | undefined): Observable<string> {
         let url_ = this.baseUrl + "/api/services/app/Village/Create";
@@ -11410,7 +11410,7 @@ export class VillageServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     delete(id: string | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Village/Delete?";
@@ -11462,7 +11462,7 @@ export class VillageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     disable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Village/Disable";
@@ -11514,7 +11514,7 @@ export class VillageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     enable(body: GuidEntityDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Village/Enable";
@@ -11566,7 +11566,7 @@ export class VillageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     find(body: PageVillageInputDto | undefined): Observable<FindVillageDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Village/Find";
@@ -11622,7 +11622,7 @@ export class VillageServiceProxy {
 
     /**
      * @param id (optional) 
-     * @return Success
+     * @return OK
      */
     getDetail(id: string | undefined): Observable<VillageDetailDto> {
         let url_ = this.baseUrl + "/api/services/app/Village/GetDetail?";
@@ -11696,7 +11696,7 @@ export class VillageServiceProxy {
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
-     * @return Success
+     * @return OK
      */
     getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, cityProvinces_Exclude: boolean | undefined, cityProvinces_Ids: string[] | undefined, khanDistricts_Exclude: boolean | undefined, khanDistricts_Ids: string[] | undefined, sangkatCommunes_Exclude: boolean | undefined, sangkatCommunes_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<VillageListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Village/GetList?";
@@ -11824,7 +11824,7 @@ export class VillageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     exportExcel(body: ExportExcelVillageInputDto | undefined): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Village/ExportExcel";
@@ -11879,7 +11879,7 @@ export class VillageServiceProxy {
     }
 
     /**
-     * @return Success
+     * @return OK
      */
     exportExcelTemplate(): Observable<ExportFileOutput> {
         let url_ = this.baseUrl + "/api/services/app/Village/ExportExcelTemplate";
@@ -11931,7 +11931,7 @@ export class VillageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     importExcel(body: FileTokenInput | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Village/ImportExcel";
@@ -11983,7 +11983,7 @@ export class VillageServiceProxy {
 
     /**
      * @param body (optional) 
-     * @return Success
+     * @return OK
      */
     update(body: CreateUpdateVillageInputDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Village/Update";

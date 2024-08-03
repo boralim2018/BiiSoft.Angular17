@@ -89,8 +89,13 @@
                             <div class="field col-12 mb-3">
                                 <div class="flex align-content-center gap-3">
                                     <p-inputSwitch name="requireDigit"
+                                                   *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
                                                    [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
-                                                   [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings? hostSettings.security.defaultPasswordComplexity.requireDigit : hostSettings.security.passwordComplexity.requireDigit"></p-inputSwitch>
+                                                   [(ngModel)]="hostSettings.security.defaultPasswordComplexity.requireDigit"></p-inputSwitch>
+                                    <p-inputSwitch name="requireDigit"
+                                                   *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [(ngModel)]="hostSettings.security.passwordComplexity.requireDigit"></p-inputSwitch>
                                     <span class="mb-3">{{l('RequireDigit')}}</span>
                                 </div>
                             </div>
@@ -98,8 +103,13 @@
                             <div class="field col-12 mb-3">
                                 <div class="flex align-content-center gap-3">
                                     <p-inputSwitch name="requireLowercase"
+                                                   *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
                                                    [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
-                                                   [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings? hostSettings.security.defaultPasswordComplexity.requireLowercase : hostSettings.security.passwordComplexity.requireLowercase"></p-inputSwitch>
+                                                   [(ngModel)]="hostSettings.security.defaultPasswordComplexity.requireLowercase"></p-inputSwitch>
+                                    <p-inputSwitch name="requireLowercase"
+                                                   *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [(ngModel)]="hostSettings.security.passwordComplexity.requireLowercase"></p-inputSwitch>
                                     <span class="mb-3">{{l('RequireLowercase')}}</span>
                                 </div>
                             </div>
@@ -107,8 +117,13 @@
                             <div class="field col-12 mb-3">
                                 <div class="flex align-content-center gap-3">
                                     <p-inputSwitch name="requireUppercase"
+                                                   *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
                                                    [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
-                                                   [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings? hostSettings.security.defaultPasswordComplexity.requireUppercase : hostSettings.security.passwordComplexity.requireUppercase"></p-inputSwitch>
+                                                   [(ngModel)]="hostSettings.security.defaultPasswordComplexity.requireUppercase"></p-inputSwitch>
+                                    <p-inputSwitch name="requireUppercase"
+                                                   *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [(ngModel)]="hostSettings.security.passwordComplexity.requireUppercase"></p-inputSwitch>
                                     <span class="mb-3">{{l('RequireUppercase')}}</span>
                                 </div>
                             </div>
@@ -116,8 +131,13 @@
                             <div class="field col-12 mb-3">
                                 <div class="flex align-content-center gap-3">
                                     <p-inputSwitch name="requireNonAlphanumeric"
+                                                   *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
                                                    [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
-                                                   [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings? hostSettings.security.defaultPasswordComplexity.requireNonAlphanumeric : hostSettings.security.passwordComplexity.requireNonAlphanumeric"></p-inputSwitch>
+                                                   [(ngModel)]="hostSettings.security.defaultPasswordComplexity.requireNonAlphanumeric"></p-inputSwitch>
+                                    <p-inputSwitch name="requireNonAlphanumeric"
+                                                   *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [disabled]="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                                   [(ngModel)]="hostSettings.security.passwordComplexity.requireNonAlphanumeric"></p-inputSwitch>
                                     <span class="mb-3">{{l('RequireNonAlphanumeric')}}</span>
                                 </div>
                             </div>
