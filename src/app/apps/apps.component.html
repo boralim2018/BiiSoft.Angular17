@@ -5,17 +5,29 @@
         <div class="flex flex-wrap gap-4" #menuContainer>
             <ng-container *ngFor="let m of h.items">
                 <ng-container *ngIf="!m.apps && showMenuItem(m)">
-                    <a [routerLink]="m.routerLink" class="flex flex-column gap-2 card app mb-0 cursor-pointer" *ngIf="m.routerLink">
+                    <a [routerLink]="m.routerLink"
+                       class="flex flex-column gap-2 card app mb-0 cursor-pointer"
+                       *ngIf="m.routerLink">
                         <i class="{{m.icon}} text-7xl text-center"></i>
                         <span class="text-center font-medium">{{m.label}} </span>
                     </a>
-                    <span class="flex flex-column gap-2 card app mb-0" *ngIf="!m.routerLink" (click)="m.showChild = !m.showChild" [ngClass]="{'selected': m.showChild, 'cursor-pointer': !m.showChild }">
-                        <i class="{{m.icon}} text-7xl text-center"></i>
-                        <span class="text-center font-medium">{{m.label}} </span>
-                    </span>
+                    <div class="card app mb-0 cursor-pointer relative"
+                         *ngIf="!m.routerLink"
+                         (click)="m.showChild = !m.showChild"
+                         [ngClass]="{'selected': m.showChild}">
+                        <span class="absolute pi"
+                              [ngClass]="m.showChild ? 'pi-chevron-up' : 'pi-chevron-down'"
+                              style="top: 10px; right: 10px;"></span>
+                        <div class="flex flex-column gap-2">
+                            <i class="{{m.icon}} text-7xl text-center"></i>
+                            <span class="text-center font-medium">{{m.label}} </span>
+                        </div>
+                    </div>
                     <ng-container *ngIf="m.showChild && m.items && m.items.length">
                         <ng-container *ngFor="let mi of m.items">
-                            <a [routerLink]="mi.routerLink" class="flex flex-column gap-2 card app mb-0 cursor-pointer" *ngIf="!mi.apps && showMenuItem(mi)">
+                            <a [routerLink]="mi.routerLink"
+                               class="flex flex-column gap-2 card app mb-0 cursor-pointer"
+                               *ngIf="!mi.apps && showMenuItem(mi)">
                                 <i class="{{mi.icon}} text-7xl text-center"></i>
                                 <span class="text-center font-medium">{{mi.label}} </span>
                             </a>
