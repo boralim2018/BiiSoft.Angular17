@@ -28,7 +28,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 })
 export class FindCountryDialogComponent extends Mixin(FindCardListComponentBase<FindCountryDto>, AppDynamicDialogBase) implements OnInit {
 
-    protected get sortField(): string { return 'CountryCode' };
+    protected get sortField(): string { return 'Code' };
 
     @ViewChild('findCountryTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
@@ -52,7 +52,7 @@ export class FindCountryDialogComponent extends Mixin(FindCardListComponentBase<
 
     protected initColumns(): void {
         this.columns = [
-            { name: 'CountryCode', header: 'Code', width: '15rem', sort: true },
+            { name: 'Code', header: 'Code', width: '15rem', sort: true },
             { name: 'Flag', header: 'Flag', width: '15rem' },
             { name: 'Name', header: 'Name', width: '15rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '15rem', sort: true },

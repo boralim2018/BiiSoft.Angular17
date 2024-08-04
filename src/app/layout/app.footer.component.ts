@@ -15,7 +15,7 @@ export class AppFooterComponent extends AppComponentBase {
     constructor(injector: Injector, public layoutService: LayoutService) {
         super(injector);
 
-        this.currentYear = new Date().getFullYear();
+        this.currentYear = this.appSession.application.releaseDate.toDate().getFullYear();
         this.versionText = this.appSession.application.version + ' [' + this.appSession.application.releaseDate.format('YYYY-MM-DD') + ']';
     }
 }

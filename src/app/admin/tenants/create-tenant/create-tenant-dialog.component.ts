@@ -50,4 +50,8 @@ export class CreateTenantDialogComponent extends DynamicDialogBase implements On
             });
     }
 
+    onEditionChange(event) {
+        this.tenant.editionId = event?.id;
+    }
+
 }

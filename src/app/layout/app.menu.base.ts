@@ -46,9 +46,10 @@ export abstract class AppMenuBase extends AppMenuPermission {
                 { label: this.l('Tenants'), icon: 'fa-solid fa-building-user', routerLink: ['/app/admin/tenants'], permissionName: AppPermissions.pages.tenants.page },
                 { label: this.l('Editions'), icon: 'fa-solid fa-list-check', routerLink: ['/app/admin/editions'], permissionName: AppPermissions.pages.editions.page },
 
+                { label: this.l('Company'), icon: 'fa-solid fa-building', routerLink: ['/app/main/company'], permissionName: AppPermissions.pages.company.page },
                 { label: this.l('Branches'), icon: 'fa-solid fa-tents', routerLink: ['/app/main/branches'], permissionName: AppPermissions.pages.company.branches.page },
             ]
-        },
+        }, 
         {
             label: this.l('Setup'),
             items: [

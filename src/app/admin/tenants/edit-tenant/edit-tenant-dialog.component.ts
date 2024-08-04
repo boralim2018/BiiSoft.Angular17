@@ -51,4 +51,7 @@ export class EditTenantDialogComponent extends DynamicDialogBase implements OnIn
             });
     }
 
+    onEditionChange(event) {
+        this.tenant.editionId = event?.id;
+    }
 }
