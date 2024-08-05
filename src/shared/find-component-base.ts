@@ -1,5 +1,4 @@
-import { getLocaleCurrencyName } from '@angular/common';
-import { Component, EventEmitter, Injector, Input, OnInit, AfterViewInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, AfterViewInit, Output } from '@angular/core';
 import { AppComponentBase } from 'shared/app-component-base';
 
 @Component({ template: '' })

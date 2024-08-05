@@ -36,8 +36,8 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
             .pipe(finalize(() => { this.loading = false; }))
             .subscribe(result => {
                 this.mapResult(result.items);
-                if (callBack) callBack();
+                callBack();
             },
-            err => { callBack(); this.message.error(err.message) });
+            err => { callBack(); this.message.error(err.message); });
     }
 }
