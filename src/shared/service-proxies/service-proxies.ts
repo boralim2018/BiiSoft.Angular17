@@ -2086,6 +2086,323 @@ export class CityProvinceServiceProxy {
 }
 
 @Injectable()
+export class CommonLookupServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param keyword (optional) 
+     * @param usePagination (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return OK
+     */
+    getTimeZones(keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<StringListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetTimeZones?";
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
+            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (usePagination === null)
+            throw new Error("The parameter 'usePagination' cannot be null.");
+        else if (usePagination !== undefined)
+            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetTimeZones(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetTimeZones(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<StringListResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<StringListResultDto>;
+        }));
+    }
+
+    protected processGetTimeZones(response: HttpResponseBase): Observable<StringListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = StringListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
+export class CompanySettingServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    createOrUpdateProfile(body: CreateUpdateBranchInputDto | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/api/services/app/CompanySetting/CreateOrUpdateProfile";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrUpdateProfile(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrUpdateProfile(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<string>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<string>;
+        }));
+    }
+
+    protected processCreateOrUpdateProfile(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    createOrUpdateGeneralSetting(body: CreateUpdateCompanyGeneralSettingInputDto | undefined): Observable<number> {
+        let url_ = this.baseUrl + "/api/services/app/CompanySetting/CreateOrUpdateGeneralSetting";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrUpdateGeneralSetting(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrUpdateGeneralSetting(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number>;
+        }));
+    }
+
+    protected processCreateOrUpdateGeneralSetting(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    createOrUpdateAdvanceSetting(body: CreateUpdateCompanyAdvanceSettingInputDto | undefined): Observable<number> {
+        let url_ = this.baseUrl + "/api/services/app/CompanySetting/CreateOrUpdateAdvanceSetting";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrUpdateAdvanceSetting(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrUpdateAdvanceSetting(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number>;
+        }));
+    }
+
+    protected processCreateOrUpdateAdvanceSetting(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getDetail(): Observable<CompanySettingDto> {
+        let url_ = this.baseUrl + "/api/services/app/CompanySetting/GetDetail";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDetail(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDetail(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<CompanySettingDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<CompanySettingDto>;
+        }));
+    }
+
+    protected processGetDetail(response: HttpResponseBase): Observable<CompanySettingDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = CompanySettingDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
 export class ConfigurationServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -3996,77 +4313,6 @@ export class HostSettingsServiceProxy {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             return _observableOf(null as any);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * @param keyword (optional) 
-     * @param usePagination (optional) 
-     * @param skipCount (optional) 
-     * @param maxResultCount (optional) 
-     * @return OK
-     */
-    getTimeZones(keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<StringListResultDto> {
-        let url_ = this.baseUrl + "/api/services/app/HostSettings/GetTimeZones?";
-        if (keyword === null)
-            throw new Error("The parameter 'keyword' cannot be null.");
-        else if (keyword !== undefined)
-            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
-        if (usePagination === null)
-            throw new Error("The parameter 'usePagination' cannot be null.");
-        else if (usePagination !== undefined)
-            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
-        if (skipCount === null)
-            throw new Error("The parameter 'skipCount' cannot be null.");
-        else if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
-        if (maxResultCount === null)
-            throw new Error("The parameter 'maxResultCount' cannot be null.");
-        else if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetTimeZones(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetTimeZones(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<StringListResultDto>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<StringListResultDto>;
-        }));
-    }
-
-    protected processGetTimeZones(response: HttpResponseBase): Observable<StringListResultDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = StringListResultDto.fromJS(resultData200);
-            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -12034,6 +12280,14 @@ export class VillageServiceProxy {
     }
 }
 
+export enum AddressLevel {
+    _0 = 0,
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+}
+
 export class ApplicationInfoDto implements IApplicationInfoDto {
     version: string | undefined;
     releaseDate: moment.Moment;
@@ -13452,6 +13706,207 @@ export interface IComboboxItemDto {
     isSelected: boolean;
 }
 
+export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
+    id: number | undefined;
+    multiBranchesEnable: boolean;
+    multiCurrencyEnable: boolean;
+    lineDiscountEnable: boolean;
+    totalDiscountEnable: boolean;
+    customTransactionNoEnable: boolean;
+    classEnable: boolean;
+    contactAddressLevel: AddressLevel;
+
+    constructor(data?: ICompanyAdvanceSettingDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.multiBranchesEnable = _data["multiBranchesEnable"];
+            this.multiCurrencyEnable = _data["multiCurrencyEnable"];
+            this.lineDiscountEnable = _data["lineDiscountEnable"];
+            this.totalDiscountEnable = _data["totalDiscountEnable"];
+            this.customTransactionNoEnable = _data["customTransactionNoEnable"];
+            this.classEnable = _data["classEnable"];
+            this.contactAddressLevel = _data["contactAddressLevel"];
+        }
+    }
+
+    static fromJS(data: any): CompanyAdvanceSettingDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompanyAdvanceSettingDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["multiBranchesEnable"] = this.multiBranchesEnable;
+        data["multiCurrencyEnable"] = this.multiCurrencyEnable;
+        data["lineDiscountEnable"] = this.lineDiscountEnable;
+        data["totalDiscountEnable"] = this.totalDiscountEnable;
+        data["customTransactionNoEnable"] = this.customTransactionNoEnable;
+        data["classEnable"] = this.classEnable;
+        data["contactAddressLevel"] = this.contactAddressLevel;
+        return data;
+    }
+
+    clone(): CompanyAdvanceSettingDto {
+        const json = this.toJSON();
+        let result = new CompanyAdvanceSettingDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompanyAdvanceSettingDto {
+    id: number | undefined;
+    multiBranchesEnable: boolean;
+    multiCurrencyEnable: boolean;
+    lineDiscountEnable: boolean;
+    totalDiscountEnable: boolean;
+    customTransactionNoEnable: boolean;
+    classEnable: boolean;
+    contactAddressLevel: AddressLevel;
+}
+
+export class CompanyGeneralSettingDto implements ICompanyGeneralSettingDto {
+    id: number | undefined;
+    countryId: string | undefined;
+    countryName: string | undefined;
+    defaultTimeZone: string | undefined;
+    currencyId: number | undefined;
+    currencyCode: string | undefined;
+    businessStartDate: moment.Moment | undefined;
+    roundTotalDigits: number;
+    roundCostDigts: number;
+    logoId: string | undefined;
+
+    constructor(data?: ICompanyGeneralSettingDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.countryId = _data["countryId"];
+            this.countryName = _data["countryName"];
+            this.defaultTimeZone = _data["defaultTimeZone"];
+            this.currencyId = _data["currencyId"];
+            this.currencyCode = _data["currencyCode"];
+            this.businessStartDate = _data["businessStartDate"] ? moment(_data["businessStartDate"].toString()) : <any>undefined;
+            this.roundTotalDigits = _data["roundTotalDigits"];
+            this.roundCostDigts = _data["roundCostDigts"];
+            this.logoId = _data["logoId"];
+        }
+    }
+
+    static fromJS(data: any): CompanyGeneralSettingDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompanyGeneralSettingDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["countryId"] = this.countryId;
+        data["countryName"] = this.countryName;
+        data["defaultTimeZone"] = this.defaultTimeZone;
+        data["currencyId"] = this.currencyId;
+        data["currencyCode"] = this.currencyCode;
+        data["businessStartDate"] = this.businessStartDate ? this.businessStartDate.toISOString() : <any>undefined;
+        data["roundTotalDigits"] = this.roundTotalDigits;
+        data["roundCostDigts"] = this.roundCostDigts;
+        data["logoId"] = this.logoId;
+        return data;
+    }
+
+    clone(): CompanyGeneralSettingDto {
+        const json = this.toJSON();
+        let result = new CompanyGeneralSettingDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompanyGeneralSettingDto {
+    id: number | undefined;
+    countryId: string | undefined;
+    countryName: string | undefined;
+    defaultTimeZone: string | undefined;
+    currencyId: number | undefined;
+    currencyCode: string | undefined;
+    businessStartDate: moment.Moment | undefined;
+    roundTotalDigits: number;
+    roundCostDigts: number;
+    logoId: string | undefined;
+}
+
+export class CompanySettingDto implements ICompanySettingDto {
+    branch: BranchDetailDto;
+    generalSetting: CompanyGeneralSettingDto;
+    advanceSetting: CompanyAdvanceSettingDto;
+
+    constructor(data?: ICompanySettingDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.branch = _data["branch"] ? BranchDetailDto.fromJS(_data["branch"]) : <any>undefined;
+            this.generalSetting = _data["generalSetting"] ? CompanyGeneralSettingDto.fromJS(_data["generalSetting"]) : <any>undefined;
+            this.advanceSetting = _data["advanceSetting"] ? CompanyAdvanceSettingDto.fromJS(_data["advanceSetting"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): CompanySettingDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompanySettingDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["branch"] = this.branch ? this.branch.toJSON() : <any>undefined;
+        data["generalSetting"] = this.generalSetting ? this.generalSetting.toJSON() : <any>undefined;
+        data["advanceSetting"] = this.advanceSetting ? this.advanceSetting.toJSON() : <any>undefined;
+        return data;
+    }
+
+    clone(): CompanySettingDto {
+        const json = this.toJSON();
+        let result = new CompanySettingDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompanySettingDto {
+    branch: BranchDetailDto;
+    generalSetting: CompanyGeneralSettingDto;
+    advanceSetting: CompanyAdvanceSettingDto;
+}
+
 export class ContactAddressDto implements IContactAddressDto {
     id: string;
     countryId: string | undefined;
@@ -14278,6 +14733,148 @@ export interface ICreateUpdateCityProvinceInputDto {
     code: string | undefined;
     iso: string | undefined;
     countryId: string | undefined;
+}
+
+export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateCompanyAdvanceSettingInputDto {
+    id: number | undefined;
+    multiBranchesEnable: boolean;
+    multiCurrencyEnable: boolean;
+    lineDiscountEnable: boolean;
+    totalDiscountEnable: boolean;
+    customTransactionNoEnable: boolean;
+    classEnable: boolean;
+    contactAddressLevel: AddressLevel;
+
+    constructor(data?: ICreateUpdateCompanyAdvanceSettingInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.multiBranchesEnable = _data["multiBranchesEnable"];
+            this.multiCurrencyEnable = _data["multiCurrencyEnable"];
+            this.lineDiscountEnable = _data["lineDiscountEnable"];
+            this.totalDiscountEnable = _data["totalDiscountEnable"];
+            this.customTransactionNoEnable = _data["customTransactionNoEnable"];
+            this.classEnable = _data["classEnable"];
+            this.contactAddressLevel = _data["contactAddressLevel"];
+        }
+    }
+
+    static fromJS(data: any): CreateUpdateCompanyAdvanceSettingInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateUpdateCompanyAdvanceSettingInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["multiBranchesEnable"] = this.multiBranchesEnable;
+        data["multiCurrencyEnable"] = this.multiCurrencyEnable;
+        data["lineDiscountEnable"] = this.lineDiscountEnable;
+        data["totalDiscountEnable"] = this.totalDiscountEnable;
+        data["customTransactionNoEnable"] = this.customTransactionNoEnable;
+        data["classEnable"] = this.classEnable;
+        data["contactAddressLevel"] = this.contactAddressLevel;
+        return data;
+    }
+
+    clone(): CreateUpdateCompanyAdvanceSettingInputDto {
+        const json = this.toJSON();
+        let result = new CreateUpdateCompanyAdvanceSettingInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateUpdateCompanyAdvanceSettingInputDto {
+    id: number | undefined;
+    multiBranchesEnable: boolean;
+    multiCurrencyEnable: boolean;
+    lineDiscountEnable: boolean;
+    totalDiscountEnable: boolean;
+    customTransactionNoEnable: boolean;
+    classEnable: boolean;
+    contactAddressLevel: AddressLevel;
+}
+
+export class CreateUpdateCompanyGeneralSettingInputDto implements ICreateUpdateCompanyGeneralSettingInputDto {
+    id: number | undefined;
+    countryId: string | undefined;
+    defaultTimeZone: string | undefined;
+    currencyId: number | undefined;
+    businessStartDate: moment.Moment | undefined;
+    roundTotalDigits: number;
+    roundCostDigts: number;
+    logoId: string | undefined;
+
+    constructor(data?: ICreateUpdateCompanyGeneralSettingInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.countryId = _data["countryId"];
+            this.defaultTimeZone = _data["defaultTimeZone"];
+            this.currencyId = _data["currencyId"];
+            this.businessStartDate = _data["businessStartDate"] ? moment(_data["businessStartDate"].toString()) : <any>undefined;
+            this.roundTotalDigits = _data["roundTotalDigits"];
+            this.roundCostDigts = _data["roundCostDigts"];
+            this.logoId = _data["logoId"];
+        }
+    }
+
+    static fromJS(data: any): CreateUpdateCompanyGeneralSettingInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateUpdateCompanyGeneralSettingInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["countryId"] = this.countryId;
+        data["defaultTimeZone"] = this.defaultTimeZone;
+        data["currencyId"] = this.currencyId;
+        data["businessStartDate"] = this.businessStartDate ? this.businessStartDate.toISOString() : <any>undefined;
+        data["roundTotalDigits"] = this.roundTotalDigits;
+        data["roundCostDigts"] = this.roundCostDigts;
+        data["logoId"] = this.logoId;
+        return data;
+    }
+
+    clone(): CreateUpdateCompanyGeneralSettingInputDto {
+        const json = this.toJSON();
+        let result = new CreateUpdateCompanyGeneralSettingInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateUpdateCompanyGeneralSettingInputDto {
+    id: number | undefined;
+    countryId: string | undefined;
+    defaultTimeZone: string | undefined;
+    currencyId: number | undefined;
+    businessStartDate: moment.Moment | undefined;
+    roundTotalDigits: number;
+    roundCostDigts: number;
+    logoId: string | undefined;
 }
 
 export class CreateUpdateCountryInputDto implements ICreateUpdateCountryInputDto {

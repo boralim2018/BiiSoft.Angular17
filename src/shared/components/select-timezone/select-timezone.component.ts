@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { HostSettingsServiceProxy } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { CommonLookupServiceProxy, StringListResultDto } from '@shared/service-proxies/service-proxies';
+import { finalize, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { SelectComponentBase } from 'shared/select-component-base';
 import { InputTextModule } from 'primeng/inputtext';
 import { PrimeTemplate } from 'primeng/api';
@@ -11,6 +12,7 @@ import { DropdownModule } from 'primeng/dropdown';
 @Component({
     selector: 'app-select-timezone',
     templateUrl: './select-timezone.component.html',
+    providers: [CommonLookupServiceProxy],
     standalone: true,
     imports: [DropdownModule, FormsModule, NgIf, PrimeTemplate, InputTextModule]
 })
@@ -19,7 +21,7 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
     sortField: string;
     
     constructor(injector: Injector,
-        private _settingService: HostSettingsServiceProxy
+        private _service: CommonLookupServiceProxy
     ) {
         super(injector);
     }
@@ -32,12 +34,19 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
     onFilter(filter: string, callBack?: Function) {
         this.models = [];
         this.loading = true;
-        this._settingService.getTimeZones(filter, this.usePagination, this.skipCount, this.maxResultCount)
-            .pipe(finalize(() => { this.loading = false; }))
-            .subscribe(result => {
+        this._service.getTimeZones(filter, this.usePagination, this.skipCount, this.maxResultCount)
+            .pipe(
+                finalize(() => {
+                    this.loading = false;
+                    callBack();
+                }),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(new StringListResultDto({ items: [] }));
+                })
+            )
+            .subscribe((result: any | null) => {
                 this.mapResult(result.items);
-                callBack();
-            },
-            err => { callBack(); this.message.error(err.message); });
+            });
     }
 }

@@ -7,9 +7,50 @@
         </div>
         <p-divider></p-divider>
 
-        <p-stepper orientation="vertical" [activeStep]="activeStep" [linear]="true">
-            <p-stepperPanel header="{{l('CompanyProfile')}}">
+        <p-stepper orientation="vertical" [activeStep]="activeStep">
+            <p-stepperPanel header="{{l('GeneralSetting')}}">
                 <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+
+                    <p-divider></p-divider>
+
+                    <div class="formgrid grid m-0">
+                        <div class="field col-12 md:col-6"
+                             findCountry
+                             name="selectRegionCountry"
+                             [required]="true"
+                             [label]="l('RegionCountry')"
+                             [(selectedModel)]="regionCountry"
+                             (selectedModelChange)="onRegionCountryChange($event)">
+                        </div>
+
+                        <div class="field col-12 md:col-6">
+                            <label for="timezone" class="block text-900 font-medium mb-2">{{l('Timezone')}}</label>
+                            <app-select-timezone [(selectedModel)]="generalSetting.defaultTimeZone"
+                                                 name="selectTimezone"></app-select-timezone>
+
+                        </div>
+
+                        <div class="field col-12 md:col-6"
+                             findCurrency
+                             name="currency"
+                             [label]="l('Currency')"
+                             [(selectedModel)]="currency"
+                             (selectedModelChange)="generalSetting.currencyId = $event?.id">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-content-end gap-2 py-4">
+                        <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
+                        <p-button [label]="l('SaveNext')" (onClick)="saveGeneralSetting(nextCallback)" [loading]="saving" />
+                        <p-button [label]="l('Save')" (onClick)="saveGeneralSetting()" [loading]="saving" />
+                    </div>
+
+                    <p-divider></p-divider>
+
+                </ng-template>
+            </p-stepperPanel>
+            <p-stepperPanel header="{{l('CompanyProfile')}}">
+                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
 
                     <p-divider></p-divider>
 
@@ -23,7 +64,7 @@
                                    id="name"
                                    maxlength="128"
                                    required
-                                   [(ngModel)]="model.name"
+                                   [(ngModel)]="branch.name"
                                    #nameModel="ngModel"
                                    #nameEl />
                             <abp-validation-summary [control]="nameModel"
@@ -39,7 +80,7 @@
                                    minlength="2"
                                    maxlength="64"
                                    required
-                                   [(ngModel)]="model.displayName"
+                                   [(ngModel)]="branch.displayName"
                                    #displayNameModel="ngModel"
                                    #displayNameEl />
                             <abp-validation-summary [control]="displayNameModel"
@@ -54,7 +95,7 @@
                                    id="businessId"
                                    minlength="2"
                                    maxlength="32"
-                                   [(ngModel)]="model.businessId"
+                                   [(ngModel)]="branch.businessId"
                                    #businessIdModel="ngModel"
                                    #businessIdEl />
                             <abp-validation-summary [control]="businessIdModel"
@@ -70,7 +111,7 @@
                                    id="phoneNumber"
                                    minlength="9"
                                    maxlength="12"
-                                   [(ngModel)]="model.phoneNumber"
+                                   [(ngModel)]="branch.phoneNumber"
                                    #phoneNumberModel="ngModel"
                                    #phoneNumberEl />
                             <abp-validation-summary [control]="phoneNumberModel"
@@ -86,7 +127,7 @@
                                    id="email"
                                    minlength="5"
                                    maxlength="32"
-                                   [(ngModel)]="model.email"
+                                   [(ngModel)]="branch.email"
                                    #emailModel="ngModel"
                                    #emailEl />
                             <abp-validation-summary [control]="emailModel"
@@ -102,7 +143,7 @@
                                    id="website"
                                    minlength="5"
                                    maxlength="32"
-                                   [(ngModel)]="model.website"
+                                   [(ngModel)]="branch.website"
                                    #websiteModel="ngModel"
                                    #websiteEl />
                             <abp-validation-summary [control]="websiteModel"
@@ -118,7 +159,7 @@
                                    id="taxRegistrationNumber"
                                    minlength="2"
                                    maxlength="32"
-                                   [(ngModel)]="model.taxRegistrationNumber"
+                                   [(ngModel)]="branch.taxRegistrationNumber"
                                    #taxRegistrationNumberModel="ngModel"
                                    #taxRegistrationNumberEl />
                             <abp-validation-summary [control]="taxRegistrationNumberModel"
@@ -129,45 +170,32 @@
 
                     <div class="formgrid grid m-0"
                          contactAddress
-                         [(model)]="model.billingAddress"
+                         [(model)]="branch.billingAddress"
                          [(country)]="country"
                          [(cityProvince)]="cityProvince"
                          [(khanDistrict)]="khanDistrict"
                          [(sangkatCommune)]="sangkatCommune"
                          [(village)]="village">
-                        <input type="hidden" required name="countryId" [(ngModel)]="model.billingAddress.countryId" />
+                        <input type="hidden" required name="countryId" [(ngModel)]="branch.billingAddress.countryId" />
                     </div>
                     <div class="formgrid grid m-0"
                          contactAddress
                          [isShippingAddress]="true"
-                         [(sameAsBillingAddress)]="model.sameAsBillingAddress"
-                         [(model)]="model.shippingAddress"
+                         [(sameAsBillingAddress)]="branch.sameAsBillingAddress"
+                         [(model)]="branch.shippingAddress"
                          [(country)]="country2"
                          [(cityProvince)]="cityProvince2"
                          [(khanDistrict)]="khanDistrict2"
                          [(sangkatCommune)]="sangkatCommune2"
                          [(village)]="village2">
-                        <input type="hidden" required name="countryId" [(ngModel)]="model.billingAddress.countryId" />
+                        <input type="hidden" required name="countryId" [(ngModel)]="branch.billingAddress.countryId" />
                     </div>
 
                     <div class="flex justify-content-end gap-2 py-4">
-                        <p-button label="Save" />
-                        <p-button label="Save Next" (onClick)="nextCallback.emit()" />
-                    </div>
-
-                    <p-divider></p-divider>
-
-                </ng-template>
-            </p-stepperPanel>
-            <p-stepperPanel header="{{l('GeneralSetting')}}">
-                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
-
-                    <p-divider></p-divider>
-
-                    <div class="flex justify-content-end gap-2 py-4">
-                        <p-button label="Back" [outlined]="true" (onClick)="prevCallback.emit()" />
-                        <p-button label="Save" />
-                        <p-button label="Save Next" (onClick)="nextCallback.emit()" />
+                        <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
+                        <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
+                        <p-button [label]="l('SaveNext')" (onClick)="saveProfile(nextCallback)" [loading]="saving" />
+                        <p-button [label]="l('Save')" (onClick)="saveProfile()" [loading]="saving" />
                     </div>
 
                     <p-divider></p-divider>
@@ -178,9 +206,10 @@
                     <p-divider></p-divider>
 
                     <div class="flex justify-content-end gap-2 py-4">
-                        <p-button label="Back" [outlined]="true" (onClick)="prevCallback.emit()" />
-                        <p-button label="Save" />
-                        <p-button label="Save Next" (onClick)="nextCallback.emit()" />
+                        <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
+                        <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
+                        <p-button [label]="l('SaveNext')" (onClick)="saveProfile(nextCallback)" [loading]="saving" />
+                        <p-button [label]="l('Save')" (onClick)="saveProfile()" [loading]="saving" />
                     </div>
 
                     <p-divider></p-divider>
@@ -190,10 +219,20 @@
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
                     <p-divider></p-divider>
 
-                    <div class="flex justify-content-end gap-2 py-4">
-                        <p-button label="Back" [outlined]="true" (onClick)="prevCallback.emit()" />
-                        <p-button label="Save" />
+                    <div class="formgrid grid m-0">
+                        <div class="field col-12 md:col-6">
+                            <div class="flex align-content-center gap-3">
+                                <p-inputSwitch name="multiBranchesEnable" [(ngModel)]="advanceSetting.multiBranchesEnable"></p-inputSwitch>
+                                <span class="mb-3">{{l('MultiBranchesEnable')}}</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="flex justify-content-end gap-2 py-4">
+                        <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
+                        <p-button [label]="l('Save')" (onClick)="saveAdvanceSetting()" [loading]="saving" />
+                    </div>
+
                 </ng-template>
             </p-stepperPanel>
         </p-stepper>
