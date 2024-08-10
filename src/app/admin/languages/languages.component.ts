@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     LanguageServiceProxy,
@@ -27,6 +27,7 @@ import { SearchActionComponent } from '../../../shared/components/search-action/
 import { NavBarComponent } from '../../../shared/components/nav-bar/nav-bar.component';
 import { TableSettingComponent } from '../../../shared/components/table-setting/table-setting.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { of } from 'rxjs';
 
 @Component({
     templateUrl: './languages.component.html',
@@ -96,7 +97,13 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
         
         this._languageService
             .getLanguages(input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -113,7 +120,13 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
 
                     this.isTableLoading = true;
                     this._languageService.deleteLanguage(language.id)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -134,7 +147,13 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
 
                     this.isTableLoading = true;
                     this._languageService.enable(input)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -155,7 +174,13 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
 
                     this.isTableLoading = true;                    
                     this._languageService.disable(input)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -176,7 +201,13 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
 
                     this.isTableLoading = true;
                     this._languageService.setDefaultLanguage(input)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();

@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     LanguageServiceProxy,
@@ -29,6 +29,7 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-language-texts',
@@ -148,7 +149,13 @@ export class LanguageTextsComponent extends Mixin(PrimeNgListComponentBase<Langu
 
         this._languageService
             .getLanguageTexts(this.sourceName, this.baseLanguageName, this.targetLanguageName, this.targetValueFilter, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;

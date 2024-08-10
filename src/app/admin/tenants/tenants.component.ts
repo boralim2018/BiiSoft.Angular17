@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { TenantServiceProxy, TenantDto, TenantDtoPagedResultDto, UserDto, EntityDto, AccountServiceProxy } from '@shared/service-proxies/service-proxies';
 import { CreateTenantDialogComponent } from './create-tenant/create-tenant-dialog.component';
@@ -30,6 +30,7 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
+import { of } from 'rxjs';
 
 @Component({
     templateUrl: './tenants.component.html',
@@ -115,7 +116,13 @@ export class TenantsComponent extends Mixin(PrimeNgListComponentBase<TenantDto>,
 
         this._tenantService
             .getAll(input.isActive, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: TenantDtoPagedResultDto) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -138,7 +145,13 @@ export class TenantsComponent extends Mixin(PrimeNgListComponentBase<TenantDto>,
             if (result) {
                 this.isTableLoading = true;
                 this._tenantService.delete(tenant.id)
-                    .pipe(finalize(() => { this.isTableLoading = false; }))
+                    .pipe(
+                        finalize(() => this.isTableLoading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();
@@ -155,7 +168,13 @@ export class TenantsComponent extends Mixin(PrimeNgListComponentBase<TenantDto>,
 
                     this.isTableLoading = true;
                     this._tenantService.enable(EntityDto.fromJS({id: tenant.id}))
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -173,7 +192,13 @@ export class TenantsComponent extends Mixin(PrimeNgListComponentBase<TenantDto>,
 
                     this.isTableLoading = true;
                     this._tenantService.disable(EntityDto.fromJS({ id: tenant.id }))
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();

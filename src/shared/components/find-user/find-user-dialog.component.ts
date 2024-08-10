@@ -2,7 +2,7 @@ import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { FindUsersInput, UserSummaryDto, UserServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
-import { finalize } from 'rxjs';
+import { catchError, finalize, of } from 'rxjs';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { Paginator, PaginatorModule } from 'primeng/paginator';
@@ -71,15 +71,20 @@ export class FindUserDialogComponent extends Mixin(FindCardListComponentBase<Use
         this.isTableLoading = true;
 
         this._userService.findUsers(findInput)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe(result => {
                 this.totalCount = result.totalCount;
                 this.listItems = result.items.map(m => {
                     m['checked'] = false;
                     return m;
                 });
-            },
-            err => { callBack(); this.message.error(err.message); });
+            });
 
     }
 

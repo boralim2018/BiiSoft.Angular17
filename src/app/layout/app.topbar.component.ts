@@ -9,7 +9,7 @@ import { filter as _filter } from 'lodash-es';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LinkedAccountsModalComponent } from './link-account/linked-accounts-modal.component';
 import { LinkedAccountService } from './link-account/linked-account.service';
-import { finalize } from 'rxjs';
+import { catchError, finalize, of } from 'rxjs';
 import { ChangeProfileComponent } from './profile/change-profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { LoginAttemptComponent } from './login-attempt/login-attempt.component';
@@ -168,7 +168,13 @@ export class AppTopBarComponent extends BFileComponentBase {
     getRecentlyLinkUsers(): void {
         this.loading = true;
         this._userLinkService.getRecentlyUsedLinkedUsers()
-            .pipe(finalize(() => { this.loading = false; }))
+            .pipe(
+                finalize(() => this.loading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe(result => {
                 this.recentlyLinkedUsers = result.items;
             }

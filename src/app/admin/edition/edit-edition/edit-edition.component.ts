@@ -9,7 +9,7 @@ import {
 } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TreeNode, PrimeTemplate } from 'primeng/api';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
@@ -23,6 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TabViewModule } from 'primeng/tabview';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-edit',
@@ -57,7 +58,13 @@ export class EditEditionComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
         this._editionService
             .getEditionForEdit(this._dialogConfig.data.id)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: GetEditionEditOutput) => {
                 this.edition = result.edition;
                 this.mapNode(result.features, result.featureValues);
@@ -143,7 +150,13 @@ export class EditEditionComponent extends DynamicDialogBase implements OnInit {
 
         this._editionService
             .createOrUpdateEdition(_edition)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

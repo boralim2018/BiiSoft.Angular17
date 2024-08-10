@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     VillageServiceProxy,
@@ -47,6 +47,7 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf, DatePipe } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-village',
@@ -188,7 +189,13 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
 
         this._villageService
             .getList(input.countries.exclude, input.countries.ids, input.cityProvinces.exclude, input.cityProvinces.ids, input.khanDistricts.exclude, input.khanDistricts.ids, input.sangkatCommunes.exclude, input.sangkatCommunes.ids, input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -211,7 +218,13 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
             if (result) {
                 this.isTableLoading = true;
                 this._villageService.delete(village.id)
-                    .pipe(finalize(() => { this.isTableLoading = false; }))
+                    .pipe(
+                        finalize(() => this.isTableLoading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();
@@ -243,7 +256,13 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
 
                 instance.loading = true;
                 this._villageService.importExcel(fileInput)
-                    .pipe(finalize(() => { instance.loading = false; }))
+                    .pipe(
+                        finalize(() => instance.loading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.info(this.l('SavedSuccessfully'));
                         instance.close();
@@ -255,7 +274,13 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
         instance.download.subscribe(result => {
             instance.loading = true;
             this._villageService.exportExcelTemplate()
-                .pipe(finalize(() => { instance.loading = false; }))
+                .pipe(
+                    finalize(() => instance.loading = false),
+                    catchError((err: any) => {
+                        this.message.error(err.message);
+                        return of(null);
+                    })
+                )
                 .subscribe(result => {
                     this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, result.fileName);
                 });
@@ -287,7 +312,13 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
 
         this._villageService
             .exportExcel(input)
-            .pipe(finalize(() => { this.isTableLoading = false; }))
+            .pipe(
+                finalize(() => this.isTableLoading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: ExportFileOutput) => {
                 this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `Village_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
             });
@@ -328,7 +359,13 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
 
                     this.isTableLoading = true;
                     this._villageService.enable(input)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -348,7 +385,13 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
 
                     this.isTableLoading = true;
                     this._villageService.disable(input)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();

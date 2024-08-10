@@ -12,7 +12,7 @@ import {
 } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TreeNode } from 'primeng/api';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
@@ -20,6 +20,7 @@ import { ButtonDirective } from 'primeng/button';
 import { TreeModule } from 'primeng/tree';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     templateUrl: 'change-permissions-dialog.component.html',
@@ -51,7 +52,13 @@ export class ChangePermissionsDialogComponent extends DynamicDialogBase implemen
         this.saving = true;
         this._userService
             .getUserPermissionsForEdit(this._dialogConfig.data.id)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: GetUserPermissionsForEditOutput) => {
                 this.mapNode(result.permissions, result.grantedPermissionNames);
             });
@@ -99,7 +106,13 @@ export class ChangePermissionsDialogComponent extends DynamicDialogBase implemen
 
         this._userService
             .updateUserPermissions(input)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(result);                    

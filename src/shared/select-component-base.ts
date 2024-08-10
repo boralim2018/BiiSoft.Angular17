@@ -15,7 +15,21 @@ export abstract class SelectComponentBase extends AppComponentBase implements On
     @Input() required: boolean;
     @Input() multiple: boolean;
     @Input() optionValue: string = 'id';
-    @Input() selectedModel: any;
+
+    private _selectedModel: any;
+    @Input()
+    set selectedModel(value: any) {
+        this._selectedModel = value;
+
+        if (value && !this.initModel && !this.loaded) {
+            this.onFilter("");
+            this.loaded = true;
+        }
+    }
+    get selectedModel(): any {
+        return this._selectedModel;
+    }
+
     @Output() selectedModelChange: EventEmitter<any> = new EventEmitter<any>();
     models: any[] = [];
 
@@ -43,9 +57,6 @@ export abstract class SelectComponentBase extends AppComponentBase implements On
     ngOnInit(): void {
         if (this.initModel) {
             this.onFilter('', () => { this.loaded = true; });
-        }
-        else {
-            this.loaded = true;
         }
     }
 

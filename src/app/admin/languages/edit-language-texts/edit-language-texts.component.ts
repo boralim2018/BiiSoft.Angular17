@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { LanguageServiceProxy, UpdateLanguageTextInput } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import * as _ from 'lodash-es';
@@ -10,6 +10,7 @@ import { ButtonDirective } from 'primeng/button';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-edit-language-texts',
@@ -57,16 +58,16 @@ export class EditLanguageTextsComponent extends DynamicDialogBase implements OnI
         this.saving = true;
 
         this._languageService.updateLanguageText(this.model)
-            .pipe(finalize(() => { this.saving = false; }))
-            .subscribe(
-                () => {
-                    this.notify.info(this.l('SavedSuccessfully'));
-                    this._dialogRef.close(true);
-                },
-                err => {
-                    this.saving = false;
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
                     this.message.error(err.message);
-                }
-            );
+                    return of(null);
+                })
+            )
+            .subscribe(() => {
+                this.notify.info(this.l('SavedSuccessfully'));
+                this._dialogRef.close(true);
+            });
     }
 }

@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ApplicationLanguageEditDto, ComboboxItemDto, CreateOrUpdateLanguageInput, LanguageServiceProxy } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
@@ -13,6 +13,7 @@ import { PrimeTemplate } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-create-language',
@@ -46,19 +47,19 @@ export class CreateLanguageComponent extends DynamicDialogBase implements OnInit
     getModel() {
         this.saving = true;
         this._languageService.getLanguageForEdit(undefined)
-            .pipe(finalize(() => { this.saving = false; } ))
-            .subscribe(
-                result => {
-                    this.flags = result.flags;
-                    this.languages = result.languageNames;
-                    this.selectedLanguage = result.languageNames.find(s => s.isSelected);
-                    this.selectedFlag = result.flags.find(s => s.isSelected);
-                },
-                err => {
-                    this.saving = false;
-                    this.message.error(err.message)
-                }
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
             )
+            .subscribe(result => {
+                this.flags = result.flags;
+                this.languages = result.languageNames;
+                this.selectedLanguage = result.languageNames.find(s => s.isSelected);
+                this.selectedFlag = result.flags.find(s => s.isSelected);
+            })
     }
 
     save(): void {
@@ -67,17 +68,17 @@ export class CreateLanguageComponent extends DynamicDialogBase implements OnInit
         var input = new CreateOrUpdateLanguageInput();
         input.language = this.model;
         this._languageService.createOrUpdateLanguage(input)
-            .pipe(finalize(() => { this.saving = false; }))
-            .subscribe(
-                () => {
-                    this.notify.info(this.l('SavedSuccessfully'));
-                    this._dialogRef.close(true);
-                },
-                err => {
-                    this.saving = false;
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
                     this.message.error(err.message);
-                }
-            );
+                    return of(null);
+                })
+            )
+            .subscribe(() => {
+                this.notify.info(this.l('SavedSuccessfully'));
+                this._dialogRef.close(true);
+            });
     }
 
     onFlagChange(event: any) {

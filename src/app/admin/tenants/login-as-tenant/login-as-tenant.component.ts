@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { FindUsersInput, UserDto, UserDtoPagedResultDto, UserServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { PrimeNgListComponentBase } from '@shared/prime-ng-list-component-base';
 import { Table, TableModule } from 'primeng/table';
 import { Menu, MenuModule } from 'primeng/menu';
@@ -10,6 +10,7 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgStyle, NgFor, NgIf } from '@angular/common';
 import { PrimeTemplate } from 'primeng/api';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-login-as-tenant',
@@ -58,7 +59,13 @@ export class LoginAsTenantComponent extends PrimeNgListComponentBase<UserDto> im
 
         this._userService
             .findUsers(filterInput)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: UserDtoPagedResultDto) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;

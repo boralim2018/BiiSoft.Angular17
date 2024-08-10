@@ -12,7 +12,7 @@
                 <input type="file" name="file" accept="image/*" class="hidden" #inputFile (change)="fileChange($event)" />
 
                 <button pButton pRipple class="p-button-outlined py-0" icon="pi pi-folder-open" type="button" (click)="inputFile.click()" *ngIf="!inputFile.files.length">
-                    <span class="px-2">{{l("ChoosePhoto")}}</span>
+                    <span class="px-2">{{l("Choose_", l("Photo"))}}</span>
                 </button>
 
                 <button pButton pRipple class="p-button-outlined py-0" icon="pi pi-times" type="button" (click)="clearUpload(inputFile)" *ngIf="inputFile.files.length">

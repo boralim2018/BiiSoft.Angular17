@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateBranchInputDto, BranchDetailDto, BranchServiceProxy, ContactAddressDto } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
@@ -12,6 +12,7 @@ import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DividerModule } from 'primeng/divider';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-edit-branch',
@@ -63,7 +64,13 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
         this._branchService
             .getDetail(this.route.snapshot.params.id)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: BranchDetailDto) => {
                 this.model.init(result);
                 
@@ -85,7 +92,13 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
 
         this._branchService.update(this.model)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
 

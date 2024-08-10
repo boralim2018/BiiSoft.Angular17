@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Injector, OnInit, Output, ViewChild } from '@angular/core';
 import { LinkToUserInput, UserLinkServiceProxy } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
@@ -12,6 +12,7 @@ import { AbpValidationSummaryComponent } from '../../../shared/components/valida
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'createLinkAccountModal',
@@ -46,10 +47,16 @@ export class CreateLinkAccountModalComponent extends DynamicDialogBase implement
     save(): void {
         this.saving = true;
         this._userLinkService.linkToUser(this.linkUser)
-        .pipe(finalize(() => { this.saving = false; }))
-        .subscribe(() => {
-            this.notify.info(this.l('SavedSuccessfully'));
-            this._dialogRef.close(true);
-        });
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
+            .subscribe(() => {
+                this.notify.info(this.l('SavedSuccessfully'));
+                this._dialogRef.close(true);
+            });
     }
 }

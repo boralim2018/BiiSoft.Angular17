@@ -15,7 +15,7 @@ import {
 } from '@shared/service-proxies/service-proxies';
 import { AbpValidationError } from '@shared/components/validation/abp-validation.api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { Mixin } from 'ts-mixer';
 import { PasswordComponentBase } from '@shared/app-component-base';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
@@ -30,6 +30,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TabViewModule } from 'primeng/tabview';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     templateUrl: './create-user-dialog.component.html',
@@ -66,7 +67,13 @@ export class CreateUserDialogComponent extends Mixin(PasswordComponentBase, Dyna
         this.saving = true;
 
         this._userService.create(this.user)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((user) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(user);

@@ -2097,14 +2097,19 @@ export class CommonLookupServiceProxy {
     }
 
     /**
+     * @param selectedTimeZones (optional) 
      * @param keyword (optional) 
      * @param usePagination (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getTimeZones(keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<StringListResultDto> {
+    getTimeZones(selectedTimeZones: string[] | undefined, keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<StringListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetTimeZones?";
+        if (selectedTimeZones === null)
+            throw new Error("The parameter 'selectedTimeZones' cannot be null.");
+        else if (selectedTimeZones !== undefined)
+            selectedTimeZones && selectedTimeZones.forEach(item => { url_ += "SelectedTimeZones=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -13786,8 +13791,7 @@ export class CompanyGeneralSettingDto implements ICompanyGeneralSettingDto {
     currencyCode: string | undefined;
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
-    roundCostDigts: number;
-    logoId: string | undefined;
+    roundCostDigits: number;
 
     constructor(data?: ICompanyGeneralSettingDto) {
         if (data) {
@@ -13808,8 +13812,7 @@ export class CompanyGeneralSettingDto implements ICompanyGeneralSettingDto {
             this.currencyCode = _data["currencyCode"];
             this.businessStartDate = _data["businessStartDate"] ? moment(_data["businessStartDate"].toString()) : <any>undefined;
             this.roundTotalDigits = _data["roundTotalDigits"];
-            this.roundCostDigts = _data["roundCostDigts"];
-            this.logoId = _data["logoId"];
+            this.roundCostDigits = _data["roundCostDigits"];
         }
     }
 
@@ -13830,8 +13833,7 @@ export class CompanyGeneralSettingDto implements ICompanyGeneralSettingDto {
         data["currencyCode"] = this.currencyCode;
         data["businessStartDate"] = this.businessStartDate ? this.businessStartDate.toISOString() : <any>undefined;
         data["roundTotalDigits"] = this.roundTotalDigits;
-        data["roundCostDigts"] = this.roundCostDigts;
-        data["logoId"] = this.logoId;
+        data["roundCostDigits"] = this.roundCostDigits;
         return data;
     }
 
@@ -13852,11 +13854,11 @@ export interface ICompanyGeneralSettingDto {
     currencyCode: string | undefined;
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
-    roundCostDigts: number;
-    logoId: string | undefined;
+    roundCostDigits: number;
 }
 
 export class CompanySettingDto implements ICompanySettingDto {
+    companyLogo: UpdateLogoInput;
     branch: BranchDetailDto;
     generalSetting: CompanyGeneralSettingDto;
     advanceSetting: CompanyAdvanceSettingDto;
@@ -13872,6 +13874,7 @@ export class CompanySettingDto implements ICompanySettingDto {
 
     init(_data?: any) {
         if (_data) {
+            this.companyLogo = _data["companyLogo"] ? UpdateLogoInput.fromJS(_data["companyLogo"]) : <any>undefined;
             this.branch = _data["branch"] ? BranchDetailDto.fromJS(_data["branch"]) : <any>undefined;
             this.generalSetting = _data["generalSetting"] ? CompanyGeneralSettingDto.fromJS(_data["generalSetting"]) : <any>undefined;
             this.advanceSetting = _data["advanceSetting"] ? CompanyAdvanceSettingDto.fromJS(_data["advanceSetting"]) : <any>undefined;
@@ -13887,6 +13890,7 @@ export class CompanySettingDto implements ICompanySettingDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["companyLogo"] = this.companyLogo ? this.companyLogo.toJSON() : <any>undefined;
         data["branch"] = this.branch ? this.branch.toJSON() : <any>undefined;
         data["generalSetting"] = this.generalSetting ? this.generalSetting.toJSON() : <any>undefined;
         data["advanceSetting"] = this.advanceSetting ? this.advanceSetting.toJSON() : <any>undefined;
@@ -13902,6 +13906,7 @@ export class CompanySettingDto implements ICompanySettingDto {
 }
 
 export interface ICompanySettingDto {
+    companyLogo: UpdateLogoInput;
     branch: BranchDetailDto;
     generalSetting: CompanyGeneralSettingDto;
     advanceSetting: CompanyAdvanceSettingDto;
@@ -14813,8 +14818,7 @@ export class CreateUpdateCompanyGeneralSettingInputDto implements ICreateUpdateC
     currencyId: number | undefined;
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
-    roundCostDigts: number;
-    logoId: string | undefined;
+    roundCostDigits: number;
 
     constructor(data?: ICreateUpdateCompanyGeneralSettingInputDto) {
         if (data) {
@@ -14833,8 +14837,7 @@ export class CreateUpdateCompanyGeneralSettingInputDto implements ICreateUpdateC
             this.currencyId = _data["currencyId"];
             this.businessStartDate = _data["businessStartDate"] ? moment(_data["businessStartDate"].toString()) : <any>undefined;
             this.roundTotalDigits = _data["roundTotalDigits"];
-            this.roundCostDigts = _data["roundCostDigts"];
-            this.logoId = _data["logoId"];
+            this.roundCostDigits = _data["roundCostDigits"];
         }
     }
 
@@ -14853,8 +14856,7 @@ export class CreateUpdateCompanyGeneralSettingInputDto implements ICreateUpdateC
         data["currencyId"] = this.currencyId;
         data["businessStartDate"] = this.businessStartDate ? this.businessStartDate.toISOString() : <any>undefined;
         data["roundTotalDigits"] = this.roundTotalDigits;
-        data["roundCostDigts"] = this.roundCostDigts;
-        data["logoId"] = this.logoId;
+        data["roundCostDigits"] = this.roundCostDigits;
         return data;
     }
 
@@ -14873,8 +14875,7 @@ export interface ICreateUpdateCompanyGeneralSettingInputDto {
     currencyId: number | undefined;
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
-    roundCostDigts: number;
-    logoId: string | undefined;
+    roundCostDigits: number;
 }
 
 export class CreateUpdateCountryInputDto implements ICreateUpdateCountryInputDto {
@@ -17371,6 +17372,8 @@ export class FindCountryDto implements IFindCountryDto {
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
+    currencyId: number | undefined;
+    currencyCode: string | undefined;
 
     constructor(data?: IFindCountryDto) {
         if (data) {
@@ -17391,6 +17394,8 @@ export class FindCountryDto implements IFindCountryDto {
             this.iso = _data["iso"];
             this.isO2 = _data["isO2"];
             this.phonePrefix = _data["phonePrefix"];
+            this.currencyId = _data["currencyId"];
+            this.currencyCode = _data["currencyCode"];
         }
     }
 
@@ -17411,6 +17416,8 @@ export class FindCountryDto implements IFindCountryDto {
         data["iso"] = this.iso;
         data["isO2"] = this.isO2;
         data["phonePrefix"] = this.phonePrefix;
+        data["currencyId"] = this.currencyId;
+        data["currencyCode"] = this.currencyCode;
         return data;
     }
 
@@ -17431,6 +17438,8 @@ export interface IFindCountryDto {
     iso: string | undefined;
     isO2: string | undefined;
     phonePrefix: string | undefined;
+    currencyId: number | undefined;
+    currencyCode: string | undefined;
 }
 
 export class FindCountryDtoPagedResultDto implements IFindCountryDtoPagedResultDto {
@@ -23874,6 +23883,49 @@ export interface IUpdateLanguageTextInput {
     sourceName: string;
     key: string;
     value: string;
+}
+
+export class UpdateLogoInput implements IUpdateLogoInput {
+    logoId: string;
+
+    constructor(data?: IUpdateLogoInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.logoId = _data["logoId"];
+        }
+    }
+
+    static fromJS(data: any): UpdateLogoInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateLogoInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["logoId"] = this.logoId;
+        return data;
+    }
+
+    clone(): UpdateLogoInput {
+        const json = this.toJSON();
+        let result = new UpdateLogoInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUpdateLogoInput {
+    logoId: string;
 }
 
 export class UpdateOrganizationUnitInput implements IUpdateOrganizationUnitInput {

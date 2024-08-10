@@ -12,7 +12,7 @@ import {
 } from 'abp-ng2-module';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppSessionService } from '@shared/session/app-session.service';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import * as moment from 'moment';
 import { LayoutService } from '../app/layout/service/app.layout.service';
 import { PasswordComplexitySetting, ProfileServiceProxy } from './service-proxies/service-proxies';
@@ -21,6 +21,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BiiNotifyService } from './services/bii.nofity.service'
 import { CacheService } from '@shared/services/cache.service';
 import { camelCase } from 'lodash-es';
+import { of } from 'rxjs';
 
 export abstract class LocalizeComponent {
 
@@ -231,15 +232,17 @@ export abstract class PdfFileComponentBase extends AppComponentBase {
                 headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
                 responseType: 'blob'
             })
-            .pipe(finalize(() => { this.loading = false; }))
+            .pipe(
+                finalize(() => this.loading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((response: Blob) => {
                 let objectUrl = window.URL.createObjectURL(response);
                 let win = window.open(objectUrl);
                 win.print();
-            },
-            err => {
-                this.loading = false;
-                this.message.error(err.message);
             });
     }
 
@@ -251,17 +254,19 @@ export abstract class PdfFileComponentBase extends AppComponentBase {
                 headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
                 responseType: 'blob'
             })
-            .pipe(finalize(() => { this.loading = false; }))
+            .pipe(
+                finalize(() => this.loading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((response: Blob) => {
                 let objectUrl = window.URL.createObjectURL(response);
                 let anchor = document.createElement("a");
                 anchor.href = objectUrl;
                 anchor.download = downloadName ? downloadName : moment().format("YYYY-MM-DD-HH-mm-ss") + ".pdf";
                 anchor.click();
-            },
-            err => {
-                this.loading = false;
-                this.message.error(err.message);
             });
     }
 }
@@ -294,15 +299,17 @@ export abstract class ExcelFileComponentBase extends AppComponentBase {
 
         this.loading = true;
         this.http.post(url, formData, options,)
-            .pipe(finalize(() => { this.loading = false; }))
+            .pipe(
+                finalize(() => this.loading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((response: any) => {
                 if (response.success) {
                     if (onSuccess) onSuccess(response.result);
                 }
-            },
-            err => {
-                this.loading = false;
-                this.message.error(err.message);
             });
     }
 
@@ -314,17 +321,19 @@ export abstract class ExcelFileComponentBase extends AppComponentBase {
                 headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
                 responseType: 'blob'
             })
-            .pipe(finalize(() => { this.loading = false; }))
+            .pipe(
+                finalize(() => this.loading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((response: Blob) => {
                 let objectUrl = window.URL.createObjectURL(response);
                 let anchor = document.createElement("a");
                 anchor.href = objectUrl;
                 anchor.download = downloadName ? downloadName : moment().format("YYYY-MM-DD-HH-mm-ss") + ".xlsx";
                 anchor.click();
-            },
-            err => {
-                this.loading = false;
-                this.message.error(err.message);
             });
     }
 }
@@ -334,7 +343,7 @@ export abstract class BFileComponentBase extends AppComponentBase {
     private http: HttpClient;
     private _tokenService: TokenService;
 
-    blankProfileUrl: string = 'assets/images/blank-user.png';
+    blankImageUrl: string = 'assets/images/logo.png';
     uploadUrl: string = '/BFile/Upload';
 
     loading: boolean;
@@ -360,15 +369,17 @@ export abstract class BFileComponentBase extends AppComponentBase {
 
         this.loading = true;
         this.http.post(url, formData, options,)
-            .pipe(finalize(() => { this.loading = false; }))
+            .pipe(
+                finalize(() => this.loading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((response: any) => {
                 if (response.success) {
                     if (onSuccess) onSuccess(response.result);
                 }
-            },
-            err => {
-                this.loading = false;
-                this.message.error(err.message);
             });
     }
 
@@ -381,14 +392,24 @@ export abstract class BFileComponentBase extends AppComponentBase {
                 headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
                 responseType: responeType
             })
-            .pipe(finalize(() => { this.loading = false; }))
+            .pipe(
+                finalize(() => this.loading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((response: any) => {
                 if (onSuccess) onSuccess(response);
-            },
-            err => {
-                this.loading = false;
-                this.message.error(err.message);
             });
     }
 
+}
+
+export abstract class ProfileComponentBase extends BFileComponentBase {
+    blankImageUrl: string = 'assets/images/blank-user.png';
+    uploadUrl: string = '/UserProfile/Upload';
+    constructor(injector: Injector) {
+        super(injector);
+    }
 }

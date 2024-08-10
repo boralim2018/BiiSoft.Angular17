@@ -2,7 +2,7 @@ import { Component, Injector, ViewChild, OnInit } from '@angular/core';
 import { PageSangkatCommuneInputDto, FindSangkatCommuneDto, SangkatCommuneServiceProxy, GuidNullableFilterInputDto } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
-import { finalize } from 'rxjs';
+import { catchError, finalize, of } from 'rxjs';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { Paginator, PaginatorModule } from 'primeng/paginator';
@@ -94,15 +94,20 @@ export class FindSangkatCommuneDialogComponent extends Mixin(FindCardListCompone
         findInput.isActive = true;
 
         this._sangkatCommuneService.find(findInput)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe(result => {
                 this.totalCount = result.totalCount;
                 this.listItems = result.items.map(m => {
                     m['checked'] = false;
                     return m;
                 });
-            },
-            err => { callBack(); this.message.error(err.message); });
+            });
 
     }
 

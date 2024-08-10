@@ -8,6 +8,7 @@ import { PrimeTemplate } from 'primeng/api';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { isArray } from 'lodash-es';
 
 @Component({
     selector: 'app-select-timezone',
@@ -34,7 +35,10 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
     onFilter(filter: string, callBack?: Function) {
         this.models = [];
         this.loading = true;
-        this._service.getTimeZones(filter, this.usePagination, this.skipCount, this.maxResultCount)
+
+        let selected = !this.selectedModel ? []: this.multiple ? this.selectedModel : [this.selectedModel]; 
+
+        this._service.getTimeZones(selected, filter, this.usePagination, this.skipCount, this.maxResultCount)
             .pipe(
                 finalize(() => {
                     this.loading = false;

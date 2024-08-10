@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ChangePasswordInput, ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Mixin } from 'ts-mixer';
@@ -15,6 +15,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { PasswordModule } from 'primeng/password';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'changePassword',
@@ -47,16 +48,16 @@ export class ChangePasswordComponent extends Mixin(DynamicDialogBase, PasswordCo
         this.saving = true;
        
         this.profileService.changePassword(this.model)
-            .pipe(finalize(() => { this.saving = false; }))
-            .subscribe(
-                () => {
-                    this.notify.info(this.l('SavedSuccessfully'));
-                    this._dialogRef.close(true);
-                },
-                err => {
-                    this.saving = false;
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
                     this.message.error(err.message);
-                }
-        );
+                    return of(null);
+                })
+            )
+            .subscribe(() => {
+                this.notify.info(this.l('SavedSuccessfully'));
+                this._dialogRef.close(true);
+            });
     }
 }

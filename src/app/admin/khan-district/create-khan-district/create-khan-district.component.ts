@@ -3,7 +3,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateKhanDistrictInputDto, KhanDistrictServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
@@ -12,6 +12,7 @@ import { FindCountryComponent } from '../../../../shared/components/find-country
 import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-create-khan-district',
@@ -46,7 +47,13 @@ export class CreateKhanDistrictComponent extends DynamicDialogBase implements On
         this.saving = true;
 
         this._khanDistrictService.create(this.model)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
 

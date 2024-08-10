@@ -3,7 +3,7 @@ import { LinkedUserDto, UnlinkUserInput, UserLinkServiceProxy } from '@shared/se
 import { Table, TableModule } from 'primeng/table';
 import { PrimeNgListComponentBase } from '@shared/prime-ng-list-component-base';
 import { LinkedAccountService } from './linked-account.service';
-import { finalize } from 'rxjs';
+import { catchError, finalize, of } from 'rxjs';
 import { Menu, MenuModule } from 'primeng/menu';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateLinkAccountModalComponent } from './create-link-account-modal.component';
@@ -57,7 +57,13 @@ export class LinkedAccountsModalComponent extends PrimeNgListComponentBase<Linke
     protected getList(input: any, callBack: Function): void {
        
         this._userLinkService.getLinkedUsers(input.sortField, input.sortMode, false, input.skipCount, input.maxResultCount)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -91,7 +97,13 @@ export class LinkedAccountsModalComponent extends PrimeNgListComponentBase<Linke
                 unlinkUserInput.tenantId = linkedUser.tenantId;
 
                 this._userLinkService.unlinkUser(unlinkUserInput)
-                    .pipe(finalize(() => { this.isTableLoading = false; }))
+                    .pipe(
+                        finalize(() => this.isTableLoading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.refresh();
                         this.parent.getRecentlyLinkUsers();

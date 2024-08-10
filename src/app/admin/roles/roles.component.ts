@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     RoleServiceProxy,
@@ -25,6 +25,7 @@ import { SearchActionComponent } from '../../../shared/components/search-action/
 import { NavBarComponent } from '../../../shared/components/nav-bar/nav-bar.component';
 import { TableSettingComponent } from '../../../shared/components/table-setting/table-setting.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { of } from 'rxjs';
 
 @Component({
     templateUrl: './roles.component.html',
@@ -88,7 +89,13 @@ export class RolesComponent extends Mixin(PrimeNgListComponentBase<RoleDto>, Nav
         
         this._rolesService
             .getAll(input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: RoleDtoPagedResultDto) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -110,7 +117,13 @@ export class RolesComponent extends Mixin(PrimeNgListComponentBase<RoleDto>, Nav
             if (result) {
                 this.isTableLoading = true;
                 this._rolesService.delete(role.id)
-                    .pipe(finalize(() => { this.isTableLoading = false; }))
+                    .pipe(
+                        finalize(() => this.isTableLoading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();

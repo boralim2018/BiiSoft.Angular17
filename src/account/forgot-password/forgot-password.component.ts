@@ -5,7 +5,7 @@ import { AppComponentBase } from '@shared/app-component-base';
 //import { AppUrlService } from '@shared/common/nav/app-url.service';
 import { AccountServiceProxy, SendPasswordResetCodeInput } from '@shared/service-proxies/service-proxies';
 import { RecaptchaComponent, RecaptchaModule } from 'ng-recaptcha';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
@@ -15,6 +15,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     templateUrl: './forgot-password.component.html',
@@ -50,7 +51,13 @@ export class ForgotPasswordComponent extends AppComponentBase {
     requestSave(): void {
         this.saving = true;
         this._accountService.sendPasswordResetCode(this.model)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe(() => {
                 if (this.recaptchaRef) {
                     this.recaptchaRef.reset();

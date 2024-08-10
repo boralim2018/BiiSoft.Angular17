@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     SangkatCommuneServiceProxy,
@@ -46,6 +46,7 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf, DatePipe } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-sangkat-commune',
@@ -181,7 +182,13 @@ export class SangkatCommuneComponent extends Mixin(PrimeNgListComponentBase<Sang
 
         this._sangkatCommuneService
             .getList(input.countries.exclude, input.countries.ids, input.cityProvinces.exclude, input.cityProvinces.ids, input.khanDistricts.exclude, input.khanDistricts.ids, input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(finalize(() => callBack()))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -204,7 +211,13 @@ export class SangkatCommuneComponent extends Mixin(PrimeNgListComponentBase<Sang
             if (result) {
                 this.isTableLoading = true;
                 this._sangkatCommuneService.delete(sangkatCommune.id)
-                    .pipe(finalize(() => { this.isTableLoading = false; }))
+                    .pipe(
+                        finalize(() => this.isTableLoading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();
@@ -236,7 +249,13 @@ export class SangkatCommuneComponent extends Mixin(PrimeNgListComponentBase<Sang
 
                 instance.loading = true;
                 this._sangkatCommuneService.importExcel(fileInput)
-                    .pipe(finalize(() => { instance.loading = false; }))
+                    .pipe(
+                        finalize(() => instance.loading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.info(this.l('SavedSuccessfully'));
                         instance.close();
@@ -248,7 +267,13 @@ export class SangkatCommuneComponent extends Mixin(PrimeNgListComponentBase<Sang
         instance.download.subscribe(result => {
             instance.loading = true;
             this._sangkatCommuneService.exportExcelTemplate()
-                .pipe(finalize(() => { instance.loading = false; }))
+                .pipe(
+                    finalize(() => instance.loading = false),
+                    catchError((err: any) => {
+                        this.message.error(err.message);
+                        return of(null);
+                    })
+                )
                 .subscribe(result => {
                     this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, result.fileName);
                 });
@@ -280,7 +305,13 @@ export class SangkatCommuneComponent extends Mixin(PrimeNgListComponentBase<Sang
 
         this._sangkatCommuneService
             .exportExcel(input)
-            .pipe(finalize(() => { this.isTableLoading = false; }))
+            .pipe(
+                finalize(() => this.isTableLoading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: ExportFileOutput) => {
                 this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `SangkatCommune_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
             });
@@ -321,7 +352,13 @@ export class SangkatCommuneComponent extends Mixin(PrimeNgListComponentBase<Sang
 
                     this.isTableLoading = true;
                     this._sangkatCommuneService.enable(input)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -341,7 +378,13 @@ export class SangkatCommuneComponent extends Mixin(PrimeNgListComponentBase<Sang
 
                     this.isTableLoading = true;
                     this._sangkatCommuneService.disable(input)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();

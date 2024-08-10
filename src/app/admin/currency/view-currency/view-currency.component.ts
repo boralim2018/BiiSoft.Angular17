@@ -4,7 +4,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { AppComponentBase, NavBarComponentBase } from '@shared/app-component-base';
 import { Int64EntityDto, CurrencyDetailDto, CurrencyServiceProxy } from '@shared/service-proxies/service-proxies';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs';
+import { catchError, finalize, of } from 'rxjs';
 import * as moment from 'moment';
 import { EditCurrencyComponent } from '../edit-currency/edit-currency.component';
 import { AppPermissions } from '@shared/AppPermissions';
@@ -65,7 +65,13 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
         this.loading = true;
         this._currencyService
             .getDetail(this.route.snapshot.params.id)
-            .pipe(finalize(() => { this.loading = false; }))
+            .pipe(
+                finalize(() => this.loading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: CurrencyDetailDto) => {
                 this.model = result;
             });
@@ -93,7 +99,13 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
             if (result) {
                 this.loading = true;
                 this._currencyService.delete(this.model.id)
-                    .pipe(finalize(() => { this.loading = false; }))
+                    .pipe(
+                        finalize(() => this.loading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.goBack();
@@ -112,7 +124,13 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
 
                     this.loading = true;
                     this._currencyService.enable(input)
-                        .pipe(finalize(() => { this.loading = false; }))
+                        .pipe(
+                            finalize(() => this.loading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();
@@ -132,7 +150,13 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
 
                     this.loading = true;
                     this._currencyService.disable(input)
-                        .pipe(finalize(() => { this.loading = false; }))
+                        .pipe(
+                            finalize(() => this.loading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();
@@ -152,7 +176,13 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
 
                     this.loading = true;
                     this._currencyService.setAsDefault(input)
-                        .pipe(finalize(() => { this.loading = false; }))
+                        .pipe(
+                            finalize(() => this.loading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();

@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     AccountServiceProxy,
@@ -36,6 +36,7 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
+import { of } from 'rxjs';
 
 
 @Component({
@@ -124,7 +125,13 @@ export class UsersComponent extends Mixin(PrimeNgListComponentBase<UserDto>, Nav
         
         this._userService
             .getAll(input.isActive, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(finalize(() => { callBack(); }))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: UserDtoPagedResultDto) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -147,7 +154,13 @@ export class UsersComponent extends Mixin(PrimeNgListComponentBase<UserDto>, Nav
             if (result) {
                 this.isTableLoading = true;
                 this._userService.delete(user.id)
-                    .pipe(finalize(() => { this.isTableLoading = false; }))
+                    .pipe(
+                        finalize(() => this.isTableLoading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();
@@ -164,7 +177,13 @@ export class UsersComponent extends Mixin(PrimeNgListComponentBase<UserDto>, Nav
 
                     this.isTableLoading = true;
                     this._userService.enable(Int64EntityDto.fromJS({ id: user.id }))
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -182,7 +201,13 @@ export class UsersComponent extends Mixin(PrimeNgListComponentBase<UserDto>, Nav
 
                     this.isTableLoading = true;
                     this._userService.disable(Int64EntityDto.fromJS({ id: user.id }))
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -200,7 +225,13 @@ export class UsersComponent extends Mixin(PrimeNgListComponentBase<UserDto>, Nav
 
                     this.isTableLoading = true;
                     this._userService.activate(Int64EntityDto.fromJS({ id: user.id }))
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -218,7 +249,13 @@ export class UsersComponent extends Mixin(PrimeNgListComponentBase<UserDto>, Nav
 
                     this.isTableLoading = true;
                     this._userService.deactivate(Int64EntityDto.fromJS({ id: user.id }))
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();

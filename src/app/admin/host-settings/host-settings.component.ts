@@ -2,7 +2,7 @@ import { Component, HostListener, Injector, OnInit, ViewChild } from '@angular/c
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { AppComponentBase, NavBarComponentBase } from '@shared/app-component-base';
 import { EmailSettingsEditDto, GeneralSettingsEditDto, HostBillingSettingsEditDto, HostSettingsEditDto, HostSettingsServiceProxy, HostUserManagementSettingsEditDto, PasswordComplexitySetting, SecuritySettingsEditDto, TenantManagementSettingsEditDto, TwoFactorLoginSettingsEditDto, UserLockOutSettingsEditDto } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { Mixin } from 'ts-mixer';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
@@ -17,6 +17,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
 import { NavBarComponent } from '../../../shared/components/nav-bar/nav-bar.component';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-host-settings',
@@ -82,33 +83,33 @@ export class HostSettingsComponent extends Mixin(AppComponentBase, NavBarCompone
     getAllSettings() {
         this.saving = true;
         this._hostSettingsService.getAllSettings()
-            .pipe(finalize(() => { this.saving = false; }))
-            .subscribe(
-                result => {
-                    this.hostSettings = result;
-                    if (result.tenantManagement?.defaultEditionId) this.edition = { id: result.tenantManagement.defaultEditionId, name: result.tenantManagement.defaultEditionName };
-                },
-                ex => {
-                    this.saving = false;
-                    this.message.error(ex.message);
-                }
-            );
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
+            .subscribe(result => {
+                this.hostSettings = result;
+                if (result.tenantManagement?.defaultEditionId) this.edition = { id: result.tenantManagement.defaultEditionId, name: result.tenantManagement.defaultEditionName };
+            });
     }
 
     saveAll() {
         this.saving = true;
         this._hostSettingsService.updateAllSettings(this.hostSettings)
-            .pipe(finalize(() => { this.saving = false; }))
-            .subscribe(
-                () => {
-                    this.notify.success("SavedSuccessfully");
-                    window.location.reload();
-                },
-                ex => {
-                    this.saving = false;
-                    this.message.error(ex.message);
-                }
-            );
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
+            .subscribe(() => {
+                this.notify.success("SavedSuccessfully");
+                window.location.reload();
+            });
     }
 
 

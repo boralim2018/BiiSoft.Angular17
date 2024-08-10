@@ -2,7 +2,7 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { UserServiceProxy, ResetPasswordDto } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
@@ -10,6 +10,7 @@ import { AbpValidationSummaryComponent } from '../../../../shared/components/val
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-reset-password',
@@ -47,7 +48,13 @@ export class ResetPasswordDialogComponent extends DynamicDialogBase
     public resetPassword(): void {
         this.isLoading = true;
         this._userService.resetPassword(this.resetPasswordDto)
-            .pipe(finalize(() => { this.isLoading = false; }))
+            .pipe(
+                finalize(() => this.isLoading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.notify.success('Password Reset');
                 this._dialogRef.close();

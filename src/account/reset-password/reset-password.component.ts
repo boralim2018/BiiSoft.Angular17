@@ -4,7 +4,7 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { PasswordComponentBase } from '@shared/app-component-base';
 //import { AppUrlService } from '@shared/common/nav/app-url.service';
 import { AccountServiceProxy, PasswordComplexitySetting, ProfileServiceProxy, ResetPasswordOutput, ResolveTenantIdInput } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { ResetPasswordModel } from './reset-password.model';
 import { AppAuthService } from '@shared/auth/app-auth.service';
 import { RecaptchaComponent, RecaptchaModule } from 'ng-recaptcha';
@@ -19,6 +19,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { NgClass, NgIf } from '@angular/common';
 import { BusyDirective } from '../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     templateUrl: './reset-password.component.html',
@@ -84,7 +85,13 @@ export class ResetPasswordComponent extends PasswordComponentBase implements OnI
     requestSave(): void {
         this.saving = true;
         this._accountService.resetPassword(this.model)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: ResetPasswordOutput) => {
 
                 if (this.recaptchaRef) {

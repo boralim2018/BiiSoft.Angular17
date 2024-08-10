@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     LocationServiceProxy,
@@ -42,6 +42,7 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf, DatePipe } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-location',
@@ -156,7 +157,13 @@ export class LocationComponent extends Mixin(PrimeNgListComponentBase<LocationLi
 
         this._locationService
             .getList(input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(finalize(() => { callBack(); }))
+            .pipe(
+                finalize(() => callBack()),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -179,7 +186,13 @@ export class LocationComponent extends Mixin(PrimeNgListComponentBase<LocationLi
             if (result) {
                 this.isTableLoading = true;
                 this._locationService.delete(location.id)
-                    .pipe(finalize(() => { this.isTableLoading = false; }))
+                    .pipe(
+                        finalize(() => this.isTableLoading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();
@@ -211,7 +224,13 @@ export class LocationComponent extends Mixin(PrimeNgListComponentBase<LocationLi
 
                 instance.loading = true;
                 this._locationService.importExcel(fileInput)
-                    .pipe(finalize(() => { instance.loading = false; }))
+                    .pipe(
+                        finalize(() => instance.loading = false),
+                        catchError((err: any) => {
+                            this.message.error(err.message);
+                            return of(null);
+                        })
+                    )
                     .subscribe(() => {
                         this.notify.info(this.l('SavedSuccessfully'));
                         instance.close();
@@ -223,7 +242,13 @@ export class LocationComponent extends Mixin(PrimeNgListComponentBase<LocationLi
         instance.download.subscribe(result => {
             instance.loading = true;
             this._locationService.exportExcelTemplate()
-                .pipe(finalize(() => { instance.loading = false; }))
+                .pipe(
+                    finalize(() => instance.loading = false),
+                    catchError((err: any) => {
+                        this.message.error(err.message);
+                        return of(null);
+                    })
+                )
                 .subscribe(result => {
                     this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, result.fileName);
                 });
@@ -255,7 +280,13 @@ export class LocationComponent extends Mixin(PrimeNgListComponentBase<LocationLi
 
         this._locationService
             .exportExcel(input)
-            .pipe(finalize(() => { this.isTableLoading = false; }))
+            .pipe(
+                finalize(() => this.isTableLoading = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: ExportFileOutput) => {
                 this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `Location_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
             });
@@ -296,7 +327,13 @@ export class LocationComponent extends Mixin(PrimeNgListComponentBase<LocationLi
 
                     this.isTableLoading = true;
                     this._locationService.enable(input)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -316,7 +353,13 @@ export class LocationComponent extends Mixin(PrimeNgListComponentBase<LocationLi
 
                     this.isTableLoading = true;
                     this._locationService.disable(input)
-                        .pipe(finalize(() => { this.isTableLoading = false; }))
+                        .pipe(
+                            finalize(() => this.isTableLoading = false),
+                            catchError((err: any) => {
+                                this.message.error(err.message);
+                                return of(null);
+                            })
+                        )
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();

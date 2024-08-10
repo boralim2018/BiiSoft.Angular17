@@ -3,7 +3,7 @@ import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { RoleServiceProxy, GetRoleForEditOutput, RoleDto, PermissionDto, RoleEditDto } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TreeNode } from 'primeng/api';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TabViewModule } from 'primeng/tabview';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     templateUrl: 'edit-role-dialog.component.html',
@@ -46,7 +47,13 @@ export class EditRoleDialogComponent extends DynamicDialogBase implements OnInit
         this.saving = true;
         this._roleService
             .getRoleForEdit(this._dialogConfig.data.id)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result: GetRoleForEditOutput) => {
                 this.role = result.role;
                 this.mapNode(result.permissions, result.grantedPermissionNames);
@@ -93,7 +100,13 @@ export class EditRoleDialogComponent extends DynamicDialogBase implements OnInit
         role.grantedPermissions = this.selectedNodes.map(f => f.data.name);
 
         this._roleService.update(role)
-            .pipe(finalize(() => { this.saving = false; }))
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            )
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(result)

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Injector, OnDestroy, OnInit } from '@angular/core';
 import { CurrentUserProfileEditDto, ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LayoutService } from '../service/app.layout.service';
 import { Mixin } from 'ts-mixer';
-import { BFileComponentBase } from '@shared/app-component-base';
+import { ProfileComponentBase } from '@shared/app-component-base';
 import { SafeUrlPipe } from '@shared/pipes/safe-resource-url.pipe';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
@@ -15,6 +15,7 @@ import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgIf } from '@angular/common';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'changeProfile',
@@ -23,13 +24,12 @@ import { FormsModule } from '@angular/forms';
     standalone: true,
     imports: [FormsModule, BusyDirective, NgClass, NgIf, ButtonDirective, Ripple, InputTextModule, AbpValidationSummaryComponent, LocalizePipe, SafeUrlPipe]
 })
-export class ChangeProfileComponent extends Mixin(DynamicDialogBase, BFileComponentBase) implements OnInit {
+export class ChangeProfileComponent extends Mixin(DynamicDialogBase, ProfileComponentBase) implements OnInit {
 
     saving = false;
     model: CurrentUserProfileEditDto = new CurrentUserProfileEditDto();
-    containerClass: string = ".change-profile-dialog"
-    uploadUrl: string = '/UserProfile/Upload';
-    profileImageUrl: string = this.blankProfileUrl;
+    containerClass: string = ".change-profile-dialog";  
+    profileImageUrl: string = this.blankImageUrl;
     parent: any;
     profileUploaded: boolean;
 
@@ -62,23 +62,23 @@ export class ChangeProfileComponent extends Mixin(DynamicDialogBase, BFileCompon
             });
         }
         else {
-            this.profileImageUrl = this.blankProfileUrl;
+            this.profileImageUrl = this.blankImageUrl;
         }
     }
 
     getCurrentProfile() {
         this.loading = true;
         this._profileService.getCurrentUserProfileForEdit()
-            .pipe(finalize(() => { this.loading = false; }))
-            .subscribe(
-                (result: CurrentUserProfileEditDto) => {
-                    this.model = result;
-                },
-                err => {
-                    this.loading = false;
+            .pipe(
+                finalize(() => this.loading = false),
+                catchError((err: any) => {
                     this.message.error(err.message);
-                }
-            );
+                    return of(null);
+                })
+            )
+            .subscribe((result: CurrentUserProfileEditDto) => {
+                this.model = result;
+            });
     }
 
     fileChange(event: Event) {
@@ -109,17 +109,17 @@ export class ChangeProfileComponent extends Mixin(DynamicDialogBase, BFileCompon
     save(): void {
         this.saving = true;
         this._profileService.updateCurrentUserProfile(this.model)
-            .pipe(finalize(() => { this.saving = false; }))
-            .subscribe(
-                () => {
-                    this.notify.info(this.l('SavedSuccessfully'));
-                    this._dialogRef.close(true);
-                    window.location.reload();
-                },
-                err => {
-                    this.saving = false;
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
                     this.message.error(err.message);
-                }
-            );
+                    return of(null);
+                })
+            )
+            .subscribe(() => {
+                this.notify.info(this.l('SavedSuccessfully'));
+                this._dialogRef.close(true);
+                window.location.reload();
+            });
     }
 }
