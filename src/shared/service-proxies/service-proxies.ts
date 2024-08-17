@@ -2356,6 +2356,69 @@ export class CompanySettingServiceProxy {
     }
 
     /**
+     * @param body (optional) 
+     * @return OK
+     */
+    createOrUpdateTransactionNoSetting(body: CreateUpdateTransactionNoSettingInputDto[] | undefined): Observable<JournalTypeNameValueDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/CompanySetting/CreateOrUpdateTransactionNoSetting";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrUpdateTransactionNoSetting(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrUpdateTransactionNoSetting(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<JournalTypeNameValueDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<JournalTypeNameValueDto[]>;
+        }));
+    }
+
+    protected processCreateOrUpdateTransactionNoSetting(response: HttpResponseBase): Observable<JournalTypeNameValueDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(JournalTypeNameValueDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @return OK
      */
     getDetail(): Observable<CompanySettingDto> {
@@ -13717,7 +13780,6 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
-    customTransactionNoEnable: boolean;
     classEnable: boolean;
     contactAddressLevel: AddressLevel;
 
@@ -13737,7 +13799,6 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
             this.multiCurrencyEnable = _data["multiCurrencyEnable"];
             this.lineDiscountEnable = _data["lineDiscountEnable"];
             this.totalDiscountEnable = _data["totalDiscountEnable"];
-            this.customTransactionNoEnable = _data["customTransactionNoEnable"];
             this.classEnable = _data["classEnable"];
             this.contactAddressLevel = _data["contactAddressLevel"];
         }
@@ -13757,7 +13818,6 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
         data["multiCurrencyEnable"] = this.multiCurrencyEnable;
         data["lineDiscountEnable"] = this.lineDiscountEnable;
         data["totalDiscountEnable"] = this.totalDiscountEnable;
-        data["customTransactionNoEnable"] = this.customTransactionNoEnable;
         data["classEnable"] = this.classEnable;
         data["contactAddressLevel"] = this.contactAddressLevel;
         return data;
@@ -13777,7 +13837,6 @@ export interface ICompanyAdvanceSettingDto {
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
-    customTransactionNoEnable: boolean;
     classEnable: boolean;
     contactAddressLevel: AddressLevel;
 }
@@ -13862,6 +13921,7 @@ export class CompanySettingDto implements ICompanySettingDto {
     branch: BranchDetailDto;
     generalSetting: CompanyGeneralSettingDto;
     advanceSetting: CompanyAdvanceSettingDto;
+    transactionNoSettings: TransactionNoSettingDto[] | undefined;
 
     constructor(data?: ICompanySettingDto) {
         if (data) {
@@ -13878,6 +13938,11 @@ export class CompanySettingDto implements ICompanySettingDto {
             this.branch = _data["branch"] ? BranchDetailDto.fromJS(_data["branch"]) : <any>undefined;
             this.generalSetting = _data["generalSetting"] ? CompanyGeneralSettingDto.fromJS(_data["generalSetting"]) : <any>undefined;
             this.advanceSetting = _data["advanceSetting"] ? CompanyAdvanceSettingDto.fromJS(_data["advanceSetting"]) : <any>undefined;
+            if (Array.isArray(_data["transactionNoSettings"])) {
+                this.transactionNoSettings = [] as any;
+                for (let item of _data["transactionNoSettings"])
+                    this.transactionNoSettings.push(TransactionNoSettingDto.fromJS(item));
+            }
         }
     }
 
@@ -13894,6 +13959,11 @@ export class CompanySettingDto implements ICompanySettingDto {
         data["branch"] = this.branch ? this.branch.toJSON() : <any>undefined;
         data["generalSetting"] = this.generalSetting ? this.generalSetting.toJSON() : <any>undefined;
         data["advanceSetting"] = this.advanceSetting ? this.advanceSetting.toJSON() : <any>undefined;
+        if (Array.isArray(this.transactionNoSettings)) {
+            data["transactionNoSettings"] = [];
+            for (let item of this.transactionNoSettings)
+                data["transactionNoSettings"].push(item.toJSON());
+        }
         return data;
     }
 
@@ -13910,6 +13980,7 @@ export interface ICompanySettingDto {
     branch: BranchDetailDto;
     generalSetting: CompanyGeneralSettingDto;
     advanceSetting: CompanyAdvanceSettingDto;
+    transactionNoSettings: TransactionNoSettingDto[] | undefined;
 }
 
 export class ContactAddressDto implements IContactAddressDto {
@@ -14746,7 +14817,6 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
-    customTransactionNoEnable: boolean;
     classEnable: boolean;
     contactAddressLevel: AddressLevel;
 
@@ -14766,7 +14836,6 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
             this.multiCurrencyEnable = _data["multiCurrencyEnable"];
             this.lineDiscountEnable = _data["lineDiscountEnable"];
             this.totalDiscountEnable = _data["totalDiscountEnable"];
-            this.customTransactionNoEnable = _data["customTransactionNoEnable"];
             this.classEnable = _data["classEnable"];
             this.contactAddressLevel = _data["contactAddressLevel"];
         }
@@ -14786,7 +14855,6 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
         data["multiCurrencyEnable"] = this.multiCurrencyEnable;
         data["lineDiscountEnable"] = this.lineDiscountEnable;
         data["totalDiscountEnable"] = this.totalDiscountEnable;
-        data["customTransactionNoEnable"] = this.customTransactionNoEnable;
         data["classEnable"] = this.classEnable;
         data["contactAddressLevel"] = this.contactAddressLevel;
         return data;
@@ -14806,7 +14874,6 @@ export interface ICreateUpdateCompanyAdvanceSettingInputDto {
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
-    customTransactionNoEnable: boolean;
     classEnable: boolean;
     contactAddressLevel: AddressLevel;
 }
@@ -15199,6 +15266,73 @@ export interface ICreateUpdateSangkatCommuneInputDto {
     countryId: string | undefined;
     cityProvinceId: string | undefined;
     khanDistrictId: string | undefined;
+}
+
+export class CreateUpdateTransactionNoSettingInputDto implements ICreateUpdateTransactionNoSettingInputDto {
+    id: number | undefined;
+    journalType: JournalType;
+    customTransactionNoEnable: boolean;
+    prefix: string | undefined;
+    digits: number;
+    start: number;
+    requiredReference: boolean;
+
+    constructor(data?: ICreateUpdateTransactionNoSettingInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.journalType = _data["journalType"];
+            this.customTransactionNoEnable = _data["customTransactionNoEnable"];
+            this.prefix = _data["prefix"];
+            this.digits = _data["digits"];
+            this.start = _data["start"];
+            this.requiredReference = _data["requiredReference"];
+        }
+    }
+
+    static fromJS(data: any): CreateUpdateTransactionNoSettingInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateUpdateTransactionNoSettingInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["journalType"] = this.journalType;
+        data["customTransactionNoEnable"] = this.customTransactionNoEnable;
+        data["prefix"] = this.prefix;
+        data["digits"] = this.digits;
+        data["start"] = this.start;
+        data["requiredReference"] = this.requiredReference;
+        return data;
+    }
+
+    clone(): CreateUpdateTransactionNoSettingInputDto {
+        const json = this.toJSON();
+        let result = new CreateUpdateTransactionNoSettingInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateUpdateTransactionNoSettingInputDto {
+    id: number | undefined;
+    journalType: JournalType;
+    customTransactionNoEnable: boolean;
+    prefix: string | undefined;
+    digits: number;
+    start: number;
+    requiredReference: boolean;
 }
 
 export class CreateUpdateVillageInputDto implements ICreateUpdateVillageInputDto {
@@ -19528,6 +19662,77 @@ export interface IIsTenantAvailableOutput {
     tenantId: number | undefined;
 }
 
+export enum JournalType {
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
+    _7 = 7,
+    _8 = 8,
+    _9 = 9,
+    _10 = 10,
+    _11 = 11,
+    _12 = 12,
+    _13 = 13,
+    _14 = 14,
+    _15 = 15,
+    _16 = 16,
+    _17 = 17,
+    _18 = 18,
+    _19 = 19,
+    _20 = 20,
+    _21 = 21,
+}
+
+export class JournalTypeNameValueDto implements IJournalTypeNameValueDto {
+    name: string | undefined;
+    value: JournalType;
+
+    constructor(data?: IJournalTypeNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): JournalTypeNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new JournalTypeNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): JournalTypeNameValueDto {
+        const json = this.toJSON();
+        let result = new JournalTypeNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IJournalTypeNameValueDto {
+    name: string | undefined;
+    value: JournalType;
+}
+
 export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
     id: string;
     creatorUserId: number | undefined;
@@ -23573,6 +23778,77 @@ export interface ITestModelOutput {
     creationTime: moment.Moment;
     rowNumber: number;
     totalRecords: number;
+}
+
+export class TransactionNoSettingDto implements ITransactionNoSettingDto {
+    id: number | undefined;
+    journalType: JournalType;
+    journalTypeName: string | undefined;
+    customTransactionNoEnable: boolean;
+    prefix: string | undefined;
+    digits: number;
+    start: number;
+    requiredReference: boolean;
+
+    constructor(data?: ITransactionNoSettingDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.journalType = _data["journalType"];
+            this.journalTypeName = _data["journalTypeName"];
+            this.customTransactionNoEnable = _data["customTransactionNoEnable"];
+            this.prefix = _data["prefix"];
+            this.digits = _data["digits"];
+            this.start = _data["start"];
+            this.requiredReference = _data["requiredReference"];
+        }
+    }
+
+    static fromJS(data: any): TransactionNoSettingDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransactionNoSettingDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["journalType"] = this.journalType;
+        data["journalTypeName"] = this.journalTypeName;
+        data["customTransactionNoEnable"] = this.customTransactionNoEnable;
+        data["prefix"] = this.prefix;
+        data["digits"] = this.digits;
+        data["start"] = this.start;
+        data["requiredReference"] = this.requiredReference;
+        return data;
+    }
+
+    clone(): TransactionNoSettingDto {
+        const json = this.toJSON();
+        let result = new TransactionNoSettingDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ITransactionNoSettingDto {
+    id: number | undefined;
+    journalType: JournalType;
+    journalTypeName: string | undefined;
+    customTransactionNoEnable: boolean;
+    prefix: string | undefined;
+    digits: number;
+    start: number;
+    requiredReference: boolean;
 }
 
 export class TwoFactorLoginSettingsEditDto implements ITwoFactorLoginSettingsEditDto {

@@ -264,6 +264,86 @@
                     <p-divider></p-divider>
                 </ng-template>
             </p-stepperPanel>-->
+            <p-stepperPanel header="{{l('TransactionNo')}}">
+                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+                    <p-divider></p-divider>
+
+                    <ng-container *ngFor="let t of transactionNos; let i=index;">
+                        <div class="formgrid grid m-0">
+                            <div class="field col-12">
+                                <div class="flex align-content-center gap-3">
+                                    <span>{{t.journalTypeName}}</span>
+                                    <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="t.customTransactionNoEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('CustomTransactionNoEnable')}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="formgrid grid m-0">
+                            <div class="field col-12 md:col-2">
+                                <p-floatLabel>
+                                    <input type="text"
+                                           pInputText
+                                           class="w-full"
+                                           name="prefex_{{i}}"
+                                           id="prefix_{{i}}"
+                                           minlength="2"
+                                           maxlength="32"
+                                           [placeholder]="l('Prefix')"
+                                           [(ngModel)]="t.prefix"
+                                           #prefixModel="ngModel"
+                                           #prefixEl />
+                                    <label class="text-900 font-medium">{{l('Prefix')}}</label>
+                                    <abp-validation-summary [control]="prefixModel"
+                                                            [controlEl]="prefixEl"></abp-validation-summary>
+                                </p-floatLabel>
+                            </div>
+                            <div class="field col-12 md:col-2">
+                                <!--<label class="text-900 font-medium">{{l('Digits')}}</label>-->
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="digits_{{i}}"
+                                       id="digits_{{i}}"
+                                       minlength="2"
+                                       maxlength="32"
+                                       [placeholder]="l('Digits')"
+                                       [(ngModel)]="t.prefix"
+                                       #digitsModel="ngModel"
+                                       #digitsEl />
+                                <abp-validation-summary [control]="digitsModel"
+                                                        [controlEl]="digitsEl"></abp-validation-summary>
+                            </div>
+                            <div class="field col-12 md:col-2">
+                                <!--<label class="text-900 font-medium">{{l('Start')}}</label>-->
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="start_{{i}}"
+                                       id="start_{{i}}"
+                                       minlength="2"
+                                       maxlength="32"
+                                       [placeholder]="l('Start')"
+                                       [(ngModel)]="t.start"
+                                       #startModel="ngModel"
+                                       #startEl />
+                                <abp-validation-summary [control]="startModel"
+                                                        [controlEl]="startEl"></abp-validation-summary>
+                            </div>
+
+                        </div>
+                    </ng-container>
+
+                    <div class="flex justify-content-end gap-2 py-4">
+                        <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
+                        <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
+                        <p-button [label]="l('SaveNext')" (onClick)="saveTransactionNos(nextCallback)" [loading]="saving" />
+                        <p-button [label]="l('Save')" (onClick)="saveTransactionNos()" [loading]="saving" />
+                    </div>
+
+                    <p-divider></p-divider>
+                </ng-template>
+            </p-stepperPanel>
             <p-stepperPanel header="{{l('OtherSetting')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
                     <p-divider></p-divider>
@@ -291,12 +371,6 @@
                             <div class="flex align-content-center gap-3">
                                 <p-inputSwitch name="totalDiscountEnable" [(ngModel)]="advanceSetting.totalDiscountEnable"></p-inputSwitch>
                                 <span class="mb-3">{{l('TotalDiscountEnable')}}</span>
-                            </div>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <div class="flex align-content-center gap-3">
-                                <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="advanceSetting.customTransactionNoEnable"></p-inputSwitch>
-                                <span class="mb-3">{{l('CustomTransactionNoEnable')}}</span>
                             </div>
                         </div>
                         <div class="field col-12 md:col-6">

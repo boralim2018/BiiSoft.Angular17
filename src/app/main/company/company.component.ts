@@ -24,10 +24,11 @@ import { TableSettingComponent } from '../../../shared/components/table-setting/
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
-import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, FindCountryDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
+import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
 import { Ripple } from 'primeng/ripple';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @Component({
     selector: 'app-company',
@@ -37,9 +38,9 @@ import { NgIf } from '@angular/common';
     providers: [CompanySettingServiceProxy],
     standalone: true,
     imports: [
-        FormsModule, StepperModule, ButtonModule, OverlayPanelModule, NgIf,
+        FormsModule, StepperModule, ButtonModule, OverlayPanelModule, NgIf, NgFor,
         TableSettingComponent, DividerModule, NavBarComponent, BusyDirective,
-        InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent,
+        InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, FloatLabelModule,
         LocalizePipe, FindCountryComponent, InputSwitchModule, FindCurrencyComponent,
         SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple
     ],
@@ -55,6 +56,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
     branch: CreateUpdateBranchInputDto;
     generalSetting: CreateUpdateCompanyGeneralSettingInputDto;
     advanceSetting: CreateUpdateCompanyAdvanceSettingInputDto;
+    transactionNos: CreateUpdateTransactionNoSettingInputDto[];
 
     uploadUrl: string = '/CompanyProfile/Upload';
     logoImageUrl: string = this.blankImageUrl;
@@ -97,6 +99,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
         this.branch.shippingAddress = new ContactAddressDto();
         this.generalSetting = new CreateUpdateCompanyGeneralSettingInputDto();
         this.advanceSetting = new CreateUpdateCompanyAdvanceSettingInputDto();
+        this.transactionNos = [];
     }
 
     getDetail() {
@@ -138,6 +141,15 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
                     }
                   
                     if (result.advanceSetting) this.advanceSetting.init(result.advanceSetting);
+
+                    if (result.transactionNoSettings) {
+                        result.transactionNoSettings.map(t => {
+                            let tran = new CreateUpdateTransactionNoSettingInputDto();
+                            tran.init(t);
+                            tran['journalTypeName'] = t.journalTypeName;
+                            this.transactionNos.push(tran);
+                        });
+                    }
                 }
                
             });
@@ -213,6 +225,28 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
             ).subscribe((result: number) => {
                 if (!this.advanceSetting.id && result) {
                     this.advanceSetting.id = result;
+                }
+
+                if (next) next.emit();
+            });
+    }
+
+    saveTransactionNos(next?): void {
+        this.saving = true;
+
+        this._companySettingService.createOrUpdateTransactionNoSetting(this.transactionNos)
+            .pipe(
+                finalize(() => this.saving = false),
+                catchError((err: any) => {
+                    this.message.error(err.message);
+                    return of(null);
+                })
+            ).subscribe((result) => {
+                if (result && result.length) {
+                    result.map(t => {
+                        let find = this.transactionNos.find(f => f.journalType == t.value);
+                        if (find) find.id = +t.name;
+                    })
                 }
 
                 if (next) next.emit();
