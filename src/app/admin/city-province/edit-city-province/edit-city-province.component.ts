@@ -43,13 +43,7 @@ export class EditCityProvinceComponent extends DynamicDialogBase implements OnIn
         this.saving = true;
         this._cityProvinceService
             .getDetail(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: CityProvinceDetailDto) => {
                 this.model = new CreateUpdateCityProvinceInputDto();
                 this.model.init(result);
@@ -61,13 +55,7 @@ export class EditCityProvinceComponent extends DynamicDialogBase implements OnIn
         this.saving = true;
 
         this._cityProvinceService.update(this.model)
-             .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

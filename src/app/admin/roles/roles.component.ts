@@ -89,13 +89,7 @@ export class RolesComponent extends Mixin(PrimeNgListComponentBase<RoleDto>, Nav
         
         this._rolesService
             .getAll(input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe((result: RoleDtoPagedResultDto) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -117,13 +111,7 @@ export class RolesComponent extends Mixin(PrimeNgListComponentBase<RoleDto>, Nav
             if (result) {
                 this.isTableLoading = true;
                 this._rolesService.delete(role.id)
-                    .pipe(
-                        finalize(() => this.isTableLoading = false),
-                        catchError((err: any) => {
-                            this.message.error(err.message);
-                            return of(null);
-                        })
-                    )
+                    .pipe(finalize(() => this.isTableLoading = false))
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();

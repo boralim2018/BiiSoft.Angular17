@@ -54,13 +54,7 @@ export class EditUserDialogComponent extends DynamicDialogBase
         this.saving = true;
 
         this._userService.update(this.user)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(result)

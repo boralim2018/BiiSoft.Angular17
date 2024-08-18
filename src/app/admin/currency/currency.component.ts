@@ -163,13 +163,7 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
 
         this._currencyService
             .getList(input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -192,13 +186,7 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
             if (result) {
                 this.isTableLoading = true;
                 this._currencyService.delete(currency.id)
-                    .pipe(
-                        finalize(() => this.isTableLoading = false),
-                        catchError((err: any) => {
-                            this.message.error(err.message);
-                            return of(null);
-                        })
-                    )
+                    .pipe(finalize(() => this.isTableLoading = false))
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();
@@ -230,13 +218,7 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
 
                 instance.loading = true;
                 this._currencyService.importExcel(fileInput)
-                    .pipe(
-                        finalize(() => instance.loading = false),
-                        catchError((err: any) => {
-                            this.message.error(err.message);
-                            return of(null);
-                        })
-                    )
+                    .pipe(finalize(() => instance.loading = false))
                     .subscribe(() => {
                         this.notify.info(this.l('SavedSuccessfully'));
                         instance.close();
@@ -248,13 +230,7 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
         instance.download.subscribe(result => {
             instance.loading = true;
             this._currencyService.exportExcelTemplate()
-                .pipe(
-                    finalize(() => instance.loading = false),
-                    catchError((err: any) => {
-                        this.message.error(err.message);
-                        return of(null);
-                    })
-                )
+                .pipe(finalize(() => instance.loading = false))
                 .subscribe(result => {
                     this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, result.fileName);
                 });
@@ -286,13 +262,7 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
 
         this._currencyService
             .exportExcel(input)
-            .pipe(
-                finalize(() => this.isTableLoading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.isTableLoading = false))
             .subscribe((result: ExportFileOutput) => {
                 this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `Currency_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
             });
@@ -337,13 +307,7 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
 
                     this.isTableLoading = true;
                     this._currencyService.enable(input)
-                        .pipe(
-                            finalize(() => this.isTableLoading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -363,13 +327,7 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
 
                     this.isTableLoading = true;
                     this._currencyService.disable(input)
-                        .pipe(
-                            finalize(() => this.isTableLoading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -389,13 +347,7 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
 
                     this.isTableLoading = true;
                     this._currencyService.setAsDefault(input)
-                        .pipe(
-                            finalize(() => this.isTableLoading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();

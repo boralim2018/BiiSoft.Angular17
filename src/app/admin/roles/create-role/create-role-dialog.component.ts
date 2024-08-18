@@ -56,13 +56,7 @@ export class CreateRoleDialogComponent extends DynamicDialogBase implements OnIn
         this.saving = true;
         this._roleService
             .getAllPermissions()
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: PermissionDtoListResultDto) => {
                 this.mapNode(result.items);
             });
@@ -110,13 +104,7 @@ export class CreateRoleDialogComponent extends DynamicDialogBase implements OnIn
 
         this._roleService
             .create(role)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(result);                    

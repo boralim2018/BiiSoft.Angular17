@@ -41,13 +41,7 @@ export class EditLocationComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
         this._locationService
             .getDetail(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: LocationDetailDto) => {
                 this.model = new CreateUpdateLocationInputDto();
                 this.model.init(result);
@@ -58,13 +52,7 @@ export class EditLocationComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
 
         this._locationService.update(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

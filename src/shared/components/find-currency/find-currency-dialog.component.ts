@@ -69,13 +69,7 @@ export class FindCurrencyDialogComponent extends Mixin(FindCardListComponentBase
         findInput.isActive = true;
 
         this._currencyService.find(findInput)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe(result => {
                 this.totalCount = result.totalCount;
                 this.listItems = result.items.map(m => {

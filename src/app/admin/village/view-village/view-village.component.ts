@@ -64,13 +64,7 @@ export class ViewVillageComponent extends Mixin(AppComponentBase, NavBarComponen
         this.loading = true;
         this._villageService
             .getDetail(this.route.snapshot.params.id)
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((result: VillageDetailDto) => {
                 this.model = result;
             });
@@ -98,13 +92,7 @@ export class ViewVillageComponent extends Mixin(AppComponentBase, NavBarComponen
                 if (result) {
                     this.loading = true;
                     this._villageService.delete(this.model.id)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SuccessfullyDeleted'));
                             this.goBack();
@@ -123,13 +111,7 @@ export class ViewVillageComponent extends Mixin(AppComponentBase, NavBarComponen
 
                     this.loading = true;
                     this._villageService.enable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();
@@ -149,13 +131,7 @@ export class ViewVillageComponent extends Mixin(AppComponentBase, NavBarComponen
 
                     this.loading = true;
                     this._villageService.disable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();

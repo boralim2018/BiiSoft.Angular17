@@ -51,13 +51,7 @@ export class ForgotPasswordComponent extends AppComponentBase {
     requestSave(): void {
         this.saving = true;
         this._accountService.sendPasswordResetCode(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(() => {
                 if (this.recaptchaRef) {
                     this.recaptchaRef.reset();

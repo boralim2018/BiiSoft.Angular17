@@ -69,13 +69,7 @@ export class ChangeProfileComponent extends Mixin(DynamicDialogBase, ProfileComp
     getCurrentProfile() {
         this.loading = true;
         this._profileService.getCurrentUserProfileForEdit()
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((result: CurrentUserProfileEditDto) => {
                 this.model = result;
             });
@@ -109,13 +103,7 @@ export class ChangeProfileComponent extends Mixin(DynamicDialogBase, ProfileComp
     save(): void {
         this.saving = true;
         this._profileService.updateCurrentUserProfile(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

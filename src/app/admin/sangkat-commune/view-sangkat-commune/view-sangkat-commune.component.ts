@@ -64,13 +64,7 @@ export class ViewSangkatCommuneComponent extends Mixin(AppComponentBase, NavBarC
         this.loading = true;
         this._sangkatCommuneService
             .getDetail(this.route.snapshot.params.id)
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((result: SangkatCommuneDetailDto) => {
                 this.model = result;
             });
@@ -98,13 +92,7 @@ export class ViewSangkatCommuneComponent extends Mixin(AppComponentBase, NavBarC
                 if (result) {
                     this.loading = true;
                     this._sangkatCommuneService.delete(this.model.id)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SuccessfullyDeleted'));
                             this.goBack();
@@ -123,13 +111,7 @@ export class ViewSangkatCommuneComponent extends Mixin(AppComponentBase, NavBarC
 
                     this.loading = true;
                     this._sangkatCommuneService.enable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();
@@ -149,13 +131,7 @@ export class ViewSangkatCommuneComponent extends Mixin(AppComponentBase, NavBarC
 
                     this.loading = true;
                     this._sangkatCommuneService.disable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();

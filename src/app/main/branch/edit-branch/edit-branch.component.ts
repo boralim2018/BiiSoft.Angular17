@@ -64,13 +64,7 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
         this._branchService
             .getDetail(this.route.snapshot.params.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: BranchDetailDto) => {
                 this.model.init(result);
                 
@@ -92,13 +86,7 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
 
         this._branchService.update(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
 

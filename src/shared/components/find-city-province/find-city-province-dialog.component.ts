@@ -86,13 +86,7 @@ export class FindCityProvinceDialogComponent extends Mixin(FindCardListComponent
         findInput.isActive = true;
 
         this._cityProvinceService.find(findInput)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe(result => {
                 this.totalCount = result.totalCount;
                 this.listItems = result.items.map(m => {

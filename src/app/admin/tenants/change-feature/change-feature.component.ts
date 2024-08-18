@@ -58,13 +58,7 @@ export class ChangeFeatureComponent extends DynamicDialogBase implements OnInit 
         this.saving = true;
         this._tenantService
             .getTenantFeaturesForEdit(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: GetTenantFeaturesEditOutput) => {
                 this.mapNode(result.features, result.featureValues);
             });
@@ -147,13 +141,7 @@ export class ChangeFeatureComponent extends DynamicDialogBase implements OnInit 
 
         this._tenantService
             .updateTenantFeatures(input)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(result);
@@ -176,13 +164,7 @@ export class ChangeFeatureComponent extends DynamicDialogBase implements OnInit 
 
         this.saving = true;
         this._tenantService.resetTenantSpecificFeatures(input)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(() => {
                 this.notify.info(this.l('ResetSuccessfully'));
                 this.getDetail();

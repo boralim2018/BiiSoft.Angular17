@@ -62,13 +62,7 @@ export class FindEditionDialogComponent extends Mixin(FindCardListComponentBase<
     protected getList(input: any, callBack: Function): void {
         
         this._editionService.getEditions(input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe(result => {
                 this.totalCount = result.totalCount;
                 this.listItems = result.items.map(m => {

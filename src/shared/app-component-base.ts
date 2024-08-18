@@ -232,13 +232,7 @@ export abstract class PdfFileComponentBase extends AppComponentBase {
                 headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
                 responseType: 'blob'
             })
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((response: Blob) => {
                 let objectUrl = window.URL.createObjectURL(response);
                 let win = window.open(objectUrl);
@@ -254,13 +248,7 @@ export abstract class PdfFileComponentBase extends AppComponentBase {
                 headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
                 responseType: 'blob'
             })
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((response: Blob) => {
                 let objectUrl = window.URL.createObjectURL(response);
                 let anchor = document.createElement("a");
@@ -299,13 +287,7 @@ export abstract class ExcelFileComponentBase extends AppComponentBase {
 
         this.loading = true;
         this.http.post(url, formData, options,)
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((response: any) => {
                 if (response.success) {
                     if (onSuccess) onSuccess(response.result);
@@ -321,13 +303,7 @@ export abstract class ExcelFileComponentBase extends AppComponentBase {
                 headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
                 responseType: 'blob'
             })
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((response: Blob) => {
                 let objectUrl = window.URL.createObjectURL(response);
                 let anchor = document.createElement("a");
@@ -369,13 +345,7 @@ export abstract class BFileComponentBase extends AppComponentBase {
 
         this.loading = true;
         this.http.post(url, formData, options,)
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((response: any) => {
                 if (response.success) {
                     if (onSuccess) onSuccess(response.result);
@@ -392,13 +362,7 @@ export abstract class BFileComponentBase extends AppComponentBase {
                 headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
                 responseType: responeType
             })
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((response: any) => {
                 if (onSuccess) onSuccess(response);
             });

@@ -175,13 +175,7 @@ export class KhanDistrictComponent extends Mixin(PrimeNgListComponentBase<KhanDi
 
         this._khanDistrictService
             .getList(input.countries.exclude, input.countries.ids, input.cityProvinces.exclude, input.cityProvinces.ids, input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -204,13 +198,7 @@ export class KhanDistrictComponent extends Mixin(PrimeNgListComponentBase<KhanDi
             if (result) {
                 this.isTableLoading = true;
                 this._khanDistrictService.delete(khanDistrict.id)
-                    .pipe(
-                        finalize(() => this.isTableLoading = false),
-                        catchError((err: any) => {
-                            this.message.error(err.message);
-                            return of(null);
-                        })
-                    )
+                    .pipe(finalize(() => this.isTableLoading = false))
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();
@@ -242,13 +230,7 @@ export class KhanDistrictComponent extends Mixin(PrimeNgListComponentBase<KhanDi
 
                 instance.loading = true;
                 this._khanDistrictService.importExcel(fileInput)
-                    .pipe(
-                        finalize(() => instance.loading = false),
-                        catchError((err: any) => {
-                            this.message.error(err.message);
-                            return of(null);
-                        })
-                    )
+                    .pipe(finalize(() => instance.loading = false))
                     .subscribe(() => {
                         this.notify.info(this.l('SavedSuccessfully'));
                         instance.close();
@@ -260,13 +242,7 @@ export class KhanDistrictComponent extends Mixin(PrimeNgListComponentBase<KhanDi
         instance.download.subscribe(result => {
             instance.loading = true;
             this._khanDistrictService.exportExcelTemplate()
-                .pipe(
-                    finalize(() => instance.loading = false),
-                    catchError((err: any) => {
-                        this.message.error(err.message);
-                        return of(null);
-                    })
-                )
+                .pipe(finalize(() => instance.loading = false))
                 .subscribe(result => {
                     this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, result.fileName);
                 });
@@ -298,13 +274,7 @@ export class KhanDistrictComponent extends Mixin(PrimeNgListComponentBase<KhanDi
 
         this._khanDistrictService
             .exportExcel(input)
-            .pipe(
-                finalize(() => this.isTableLoading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.isTableLoading = false))
             .subscribe((result: ExportFileOutput) => {
                 this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `KhanDistrict_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
             });
@@ -345,13 +315,7 @@ export class KhanDistrictComponent extends Mixin(PrimeNgListComponentBase<KhanDi
 
                     this.isTableLoading = true;
                     this._khanDistrictService.enable(input)
-                        .pipe(
-                            finalize(() => this.isTableLoading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -371,13 +335,7 @@ export class KhanDistrictComponent extends Mixin(PrimeNgListComponentBase<KhanDi
 
                     this.isTableLoading = true;
                     this._khanDistrictService.disable(input)
-                        .pipe(
-                            finalize(() => this.isTableLoading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();

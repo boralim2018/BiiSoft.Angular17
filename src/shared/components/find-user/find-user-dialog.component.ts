@@ -71,13 +71,7 @@ export class FindUserDialogComponent extends Mixin(FindCardListComponentBase<Use
         this.isTableLoading = true;
 
         this._userService.findUsers(findInput)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe(result => {
                 this.totalCount = result.totalCount;
                 this.listItems = result.items.map(m => {

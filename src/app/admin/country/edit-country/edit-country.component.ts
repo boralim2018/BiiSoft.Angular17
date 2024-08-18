@@ -43,13 +43,7 @@ export class EditCountryComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
         this._countryService
             .getDetail(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: CountryDetailDto) => {
                 this.model = new CreateUpdateCountryInputDto();
                 this.model.init(result);
@@ -61,13 +55,7 @@ export class EditCountryComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
 
         this._countryService.update(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

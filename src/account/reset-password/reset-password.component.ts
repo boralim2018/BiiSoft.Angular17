@@ -85,13 +85,7 @@ export class ResetPasswordComponent extends PasswordComponentBase implements OnI
     requestSave(): void {
         this.saving = true;
         this._accountService.resetPassword(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: ResetPasswordOutput) => {
 
                 if (this.recaptchaRef) {

@@ -54,13 +54,7 @@ export class CreateEditionComponent extends DynamicDialogBase implements OnInit 
     getFeatures() {
         this.saving = true;
         this._editionService.getFeatures()
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(result => {
                 this.mapNode(result.items);
             });
@@ -133,13 +127,7 @@ export class CreateEditionComponent extends DynamicDialogBase implements OnInit 
 
         this._editionService
             .createOrUpdateEdition(_edition)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

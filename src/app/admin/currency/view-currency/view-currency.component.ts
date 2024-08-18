@@ -65,13 +65,7 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
         this.loading = true;
         this._currencyService
             .getDetail(this.route.snapshot.params.id)
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((result: CurrencyDetailDto) => {
                 this.model = result;
             });
@@ -99,13 +93,7 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
             if (result) {
                 this.loading = true;
                 this._currencyService.delete(this.model.id)
-                    .pipe(
-                        finalize(() => this.loading = false),
-                        catchError((err: any) => {
-                            this.message.error(err.message);
-                            return of(null);
-                        })
-                    )
+                    .pipe(finalize(() => this.loading = false))
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.goBack();
@@ -124,13 +112,7 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
 
                     this.loading = true;
                     this._currencyService.enable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();
@@ -150,13 +132,7 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
 
                     this.loading = true;
                     this._currencyService.disable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();
@@ -176,13 +152,7 @@ export class ViewCurrencyComponent extends Mixin(AppComponentBase, NavBarCompone
 
                     this.loading = true;
                     this._currencyService.setAsDefault(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();

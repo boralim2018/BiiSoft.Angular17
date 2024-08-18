@@ -149,13 +149,7 @@ export class LanguageTextsComponent extends Mixin(PrimeNgListComponentBase<Langu
 
         this._languageService
             .getLanguageTexts(this.sourceName, this.baseLanguageName, this.targetLanguageName, this.targetValueFilter, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;

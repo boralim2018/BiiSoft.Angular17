@@ -45,13 +45,7 @@ export class EditKhanDistrictComponent extends DynamicDialogBase implements OnIn
         this.saving = true;
         this._khanDistrictService
             .getDetail(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: KhanDistrictDetailDto) => {
                 this.model = new CreateUpdateKhanDistrictInputDto();
                 this.model.init(result);
@@ -64,13 +58,7 @@ export class EditKhanDistrictComponent extends DynamicDialogBase implements OnIn
         this.saving = true;
 
         this._khanDistrictService.update(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

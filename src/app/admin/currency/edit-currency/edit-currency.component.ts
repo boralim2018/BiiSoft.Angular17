@@ -41,13 +41,7 @@ export class EditCurrencyComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
         this._currencyService
             .getDetail(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: CurrencyDetailDto) => {
                 this.model = new CreateUpdateCurrencyInputDto();
                 this.model.init(result);
@@ -58,13 +52,7 @@ export class EditCurrencyComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
 
         this._currencyService.update(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

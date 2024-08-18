@@ -47,13 +47,7 @@ export class CreateKhanDistrictComponent extends DynamicDialogBase implements On
         this.saving = true;
 
         this._khanDistrictService.create(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
 

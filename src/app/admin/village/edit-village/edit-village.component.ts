@@ -49,13 +49,7 @@ export class EditVillageComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
         this._villageService
             .getDetail(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: VillageDetailDto) => {
                 this.model = new CreateUpdateVillageInputDto();
                 this.model.init(result);
@@ -70,13 +64,7 @@ export class EditVillageComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
 
         this._villageService.update(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

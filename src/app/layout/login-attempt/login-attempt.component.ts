@@ -48,13 +48,7 @@ export class LoginAttemptComponent extends Mixin(DynamicDialogBase, ProfileCompo
         this.loading = true;
 
         this._userLoginService.getRecentUserLoginAttempts()
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe(result => {
                 this.userLoginAttempts = result.items;
             });

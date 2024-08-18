@@ -65,13 +65,7 @@ export class ViewBranchComponent extends Mixin(AppComponentBase, NavBarComponent
         this.loading = true;
         this._branchService
             .getDetail(this.route.snapshot.params.id)
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((result: BranchDetailDto) => {
                 this.model = result;
             });
@@ -99,13 +93,7 @@ export class ViewBranchComponent extends Mixin(AppComponentBase, NavBarComponent
             if (result) {
                 this.loading = true;
                 this._branchService.delete(this.model.id)
-                    .pipe(
-                        finalize(() => this.loading = false),
-                        catchError((err: any) => {
-                            this.message.error(err.message);
-                            return of(null);
-                        })
-                    )
+                    .pipe(finalize(() => this.loading = false))
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.goBack();
@@ -124,13 +112,7 @@ export class ViewBranchComponent extends Mixin(AppComponentBase, NavBarComponent
 
                     this.loading = true;
                     this._branchService.enable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();
@@ -150,13 +132,7 @@ export class ViewBranchComponent extends Mixin(AppComponentBase, NavBarComponent
 
                     this.loading = true;
                     this._branchService.disable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();
@@ -176,13 +152,7 @@ export class ViewBranchComponent extends Mixin(AppComponentBase, NavBarComponent
 
                     this.loading = true;
                     this._branchService.setAsDefault(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();

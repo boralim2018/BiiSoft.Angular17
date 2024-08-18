@@ -64,13 +64,7 @@ export class ViewCityProvinceComponent extends Mixin(AppComponentBase, NavBarCom
         this.loading = true;
         this._cityProvinceService
             .getDetail(this.route.snapshot.params.id)
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe((result: CityProvinceDetailDto) => {
                 this.model = result;
             });
@@ -98,13 +92,7 @@ export class ViewCityProvinceComponent extends Mixin(AppComponentBase, NavBarCom
                 if (result) {
                     this.loading = true;
                     this._cityProvinceService.delete(this.model.id)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SuccessfullyDeleted'));
                             this.goBack();
@@ -123,13 +111,7 @@ export class ViewCityProvinceComponent extends Mixin(AppComponentBase, NavBarCom
 
                     this.loading = true;
                     this._cityProvinceService.enable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();
@@ -149,13 +131,7 @@ export class ViewCityProvinceComponent extends Mixin(AppComponentBase, NavBarCom
 
                     this.loading = true;
                     this._cityProvinceService.disable(input)
-                        .pipe(
-                            finalize(() => this.loading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.getDetail();

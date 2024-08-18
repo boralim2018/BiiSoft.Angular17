@@ -47,13 +47,7 @@ export class CreateLinkAccountModalComponent extends DynamicDialogBase implement
     save(): void {
         this.saving = true;
         this._userLinkService.linkToUser(this.linkUser)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

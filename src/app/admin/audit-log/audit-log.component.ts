@@ -131,13 +131,7 @@ export class AuditLogComponent extends Mixin(PrimeNgListComponentBase<AuditLogLi
             .getAuditLogs(input.startDate, input.endDate, input.userName, input.serviceName, input.methodName,
                 input.browserInfo, input.hasException, input.minExecutionDuration, input.maxExecutionDuration, 
                 input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe((result: AuditLogListDtoPagedResultDto) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -183,13 +177,7 @@ export class AuditLogComponent extends Mixin(PrimeNgListComponentBase<AuditLogLi
 
         this._service
             .exportExcel(input)
-            .pipe(
-                finalize(() => this.isTableLoading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.isTableLoading = false))
             .subscribe((result: ExportFileOutput) => {
                 this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `AuditLogs_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
             });

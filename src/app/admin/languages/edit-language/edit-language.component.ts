@@ -48,13 +48,7 @@ export class EditLanguageComponent extends DynamicDialogBase implements OnInit {
     getModel() {
         this.saving = true;
         this._languageService.getLanguageForEdit(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(result => {
                 this.model = result.language;
                 this.flags = result.flags;
@@ -70,13 +64,7 @@ export class EditLanguageComponent extends DynamicDialogBase implements OnInit {
         var input = new CreateOrUpdateLanguageInput();
         input.language = this.model;
         this._languageService.createOrUpdateLanguage(input)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

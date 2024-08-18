@@ -47,13 +47,7 @@ export class EditSangkatCommuneComponent extends DynamicDialogBase implements On
         this.saving = true;
         this._sangkatCommuneService
             .getDetail(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: SangkatCommuneDetailDto) => {
                 this.model = new CreateUpdateSangkatCommuneInputDto();
                 this.model.init(result);
@@ -67,13 +61,7 @@ export class EditSangkatCommuneComponent extends DynamicDialogBase implements On
         this.saving = true;
 
         this._sangkatCommuneService.update(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

@@ -10,241 +10,239 @@
         <p-stepper orientation="vertical" [activeStep]="activeStep">
             <p-stepperPanel header="{{l('GeneralSetting')}}">
                 <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+                    <div class="pt-3">
+                        <div class="flex flex-column align-items-start gap-2">
+                            <div class="flex justify-content-center">
+                                <img #image
+                                     class="company-logo"
+                                     [src]="logoImageUrl | safeResourceUrl"
+                                     alt="Logo Image" />
+                            </div>
+                            <div class="flex justify-content-center">
+                                <input type="file" name="file" accept="image/*" class="hidden" #inputFile (change)="fileChange($event)" />
 
-                    <p-divider></p-divider>
+                                <button pButton pRipple class="p-button-outlined py-0" icon="pi pi-folder-open" type="button" (click)="inputFile.click()" *ngIf="!inputFile.files.length">
+                                    <span class="px-2">{{l("Choose_", l("Logo"))}}</span>
+                                </button>
 
-                    <div class="flex flex-column align-items-start gap-2">
-                        <div class="flex justify-content-center">
-                            <img #image
-                                 class="company-logo"
-                                 [src]="logoImageUrl | safeResourceUrl"
-                                 alt="Logo Image" />
+                                <button pButton pRipple class="p-button-outlined py-0" icon="pi pi-times" type="button" (click)="clearUpload(inputFile)" *ngIf="inputFile.files.length">
+                                    <span class="px-2">{{l("Cancel")}}</span>
+                                </button>
+                                <button pButton pRipple class="p-button-outlined py-0 ml-3" icon="pi pi-cloud-upload" type="button" (click)="uploadLogo(inputFile)" *ngIf="inputFile.files.length">
+                                    <span class="px-2">{{l("Upload")}}</span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="flex justify-content-center">
-                            <input type="file" name="file" accept="image/*" class="hidden" #inputFile (change)="fileChange($event)" />
 
-                            <button pButton pRipple class="p-button-outlined py-0" icon="pi pi-folder-open" type="button" (click)="inputFile.click()" *ngIf="!inputFile.files.length">
-                                <span class="px-2">{{l("Choose_", l("Logo"))}}</span>
-                            </button>
+                        <p-divider></p-divider>
 
-                            <button pButton pRipple class="p-button-outlined py-0" icon="pi pi-times" type="button" (click)="clearUpload(inputFile)" *ngIf="inputFile.files.length">
-                                <span class="px-2">{{l("Cancel")}}</span>
-                            </button>
-                            <button pButton pRipple class="p-button-outlined py-0 ml-3" icon="pi pi-cloud-upload" type="button" (click)="uploadLogo(inputFile)" *ngIf="inputFile.files.length">
-                                <span class="px-2">{{l("Upload")}}</span>
-                            </button>
+                        <div class="formgrid grid m-0">
+                            <div class="field col-12 md:col-6"
+                                 findCountry
+                                 name="selectRegionCountry"
+                                 [required]="true"
+                                 [label]="l('RegionCountry')"
+                                 [(selectedModel)]="regionCountry"
+                                 (selectedModelChange)="onRegionCountryChange($event)">
+                            </div>
+                            <div class="field col-12 md:col-6"
+                                 findCurrency
+                                 name="currency"
+                                 [label]="l('Currency')"
+                                 [(selectedModel)]="currency"
+                                 (selectedModelChange)="generalSetting.currencyId = $event?.id">
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label>{{l('Timezone')}}</label>
+                                <app-select-timezone [(selectedModel)]="generalSetting.defaultTimeZone"
+                                                     name="selectTimezone"
+                                                     [initModel]="false"></app-select-timezone>
+
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label>{{l('BusinessStartDate')}}</label>
+                                <p-calendar inputId="businessStartDate"
+                                            [(ngModel)]="businessStartDate"
+                                            [placeholder]="this.l('BusinessStartDate')"
+                                            [showIcon]="true"
+                                            [iconDisplay]="'input'"
+                                            [showButtonBar]="true"
+                                            dateFormat="dd-mm-yy"
+                                            styleClass="w-full"></p-calendar>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label>{{l('Rounding_',l('Total'))}}</label>
+                                <p-dropdown [options]="[1,2,3,4,5,6]"
+                                            [(ngModel)]="generalSetting.roundTotalDigits"
+                                            [placeholder]="l('Select_', l('Rounding'))"
+                                            styleClass="w-full" />
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label>{{l('Rounding_',l('Cost'))}}</label>
+                                <p-dropdown [options]="[1,2,3,4,5,6]"
+                                            [(ngModel)]="generalSetting.roundCostDigits"
+                                            [placeholder]="l('Select_', l('Rounding'))"
+                                            styleClass="w-full" />
+                            </div>
+                        </div>
+
+                        <div class="flex justify-content-end gap-2 py-4">
+                            <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('SaveNext')" (onClick)="saveGeneralSetting(nextCallback)" [loading]="saving" />
+                            <p-button [label]="l('Save')" (onClick)="saveGeneralSetting()" [loading]="saving" />
                         </div>
                     </div>
 
                     <p-divider></p-divider>
-
-                    <div class="formgrid grid m-0">
-                        <div class="field col-12 md:col-6"
-                             findCountry
-                             name="selectRegionCountry"
-                             [required]="true"
-                             [label]="l('RegionCountry')"
-                             [(selectedModel)]="regionCountry"
-                             (selectedModelChange)="onRegionCountryChange($event)">
-                        </div>
-                        <div class="field col-12 md:col-6"
-                             findCurrency
-                             name="currency"
-                             [label]="l('Currency')"
-                             [(selectedModel)]="currency"
-                             (selectedModelChange)="generalSetting.currencyId = $event?.id">
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <label>{{l('Timezone')}}</label>
-                            <app-select-timezone [(selectedModel)]="generalSetting.defaultTimeZone"
-                                                 name="selectTimezone"
-                                                 [initModel]="false"></app-select-timezone>
-
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <label>{{l('BusinessStartDate')}}</label>
-                            <p-calendar inputId="businessStartDate"
-                                        [(ngModel)]="businessStartDate"
-                                        [placeholder]="this.l('BusinessStartDate')"
-                                        [showIcon]="true"
-                                        [iconDisplay]="'input'"
-                                        [showButtonBar]="true"
-                                        dateFormat="dd-mm-yy"
-                                        styleClass="w-full"></p-calendar>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <label>{{l('Rounding_',l('Total'))}}</label>
-                            <p-dropdown [options]="[1,2,3,4,5,6]"
-                                        [(ngModel)]="generalSetting.roundTotalDigits"
-                                        [placeholder]="l('Select_', l('Rounding'))"
-                                        styleClass="w-full" />
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <label>{{l('Rounding_',l('Cost'))}}</label>
-                            <p-dropdown [options]="[1,2,3,4,5,6]"
-                                        [(ngModel)]="generalSetting.roundCostDigits"
-                                        [placeholder]="l('Select_', l('Rounding'))"
-                                        styleClass="w-full" />
-                        </div>
-                    </div>
-
-                    <div class="flex justify-content-end gap-2 py-4">
-                        <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
-                        <p-button [label]="l('SaveNext')" (onClick)="saveGeneralSetting(nextCallback)" [loading]="saving" />
-                        <p-button [label]="l('Save')" (onClick)="saveGeneralSetting()" [loading]="saving" />
-                    </div>
-
-                    <p-divider></p-divider>
-
                 </ng-template>
             </p-stepperPanel>
             <p-stepperPanel header="{{l('CompanyProfile')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+                    <div class="pt-3">
+                        <div class="formgrid grid m-0">
+                            <div class="field col-12 md:col-6">
+                                <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="name"
+                                       id="name"
+                                       maxlength="128"
+                                       required
+                                       [(ngModel)]="branch.name"
+                                       #nameModel="ngModel"
+                                       #nameEl />
+                                <abp-validation-summary [control]="nameModel"
+                                                        [controlEl]="nameEl"></abp-validation-summary>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="displayName"
+                                       id="displayName"
+                                       minlength="2"
+                                       maxlength="64"
+                                       required
+                                       [(ngModel)]="branch.displayName"
+                                       #displayNameModel="ngModel"
+                                       #displayNameEl />
+                                <abp-validation-summary [control]="displayNameModel"
+                                                        [controlEl]="displayNameEl"></abp-validation-summary>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label class="text-900 font-medium">{{l('BusinessId')}}</label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="businessId"
+                                       id="businessId"
+                                       minlength="2"
+                                       maxlength="32"
+                                       [(ngModel)]="branch.businessId"
+                                       #businessIdModel="ngModel"
+                                       #businessIdEl />
+                                <abp-validation-summary [control]="businessIdModel"
+                                                        [controlEl]="businessIdEl"></abp-validation-summary>
+                            </div>
 
-                    <p-divider></p-divider>
+                            <div class="field col-12 md:col-6">
+                                <label class="text-900 font-medium">{{l('PhoneNumber')}}</label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="phoneNumber"
+                                       id="phoneNumber"
+                                       minlength="9"
+                                       maxlength="12"
+                                       [(ngModel)]="branch.phoneNumber"
+                                       #phoneNumberModel="ngModel"
+                                       #phoneNumberEl />
+                                <abp-validation-summary [control]="phoneNumberModel"
+                                                        [controlEl]="phoneNumberEl"></abp-validation-summary>
+                            </div>
 
-                    <div class="formgrid grid m-0">
-                        <div class="field col-12 md:col-6">
-                            <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
-                            <input type="text"
-                                   pInputText
-                                   class="w-full"
-                                   name="name"
-                                   id="name"
-                                   maxlength="128"
-                                   required
-                                   [(ngModel)]="branch.name"
-                                   #nameModel="ngModel"
-                                   #nameEl />
-                            <abp-validation-summary [control]="nameModel"
-                                                    [controlEl]="nameEl"></abp-validation-summary>
+                            <div class="field col-12 md:col-6">
+                                <label class="text-900 font-medium">{{l('Email')}}</label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="email"
+                                       id="email"
+                                       minlength="5"
+                                       maxlength="32"
+                                       [(ngModel)]="branch.email"
+                                       #emailModel="ngModel"
+                                       #emailEl />
+                                <abp-validation-summary [control]="emailModel"
+                                                        [controlEl]="emailEl"></abp-validation-summary>
+                            </div>
+
+                            <div class="field col-12 md:col-6">
+                                <label class="text-900 font-medium">{{l('Website')}}</label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="website"
+                                       id="website"
+                                       minlength="5"
+                                       maxlength="32"
+                                       [(ngModel)]="branch.website"
+                                       #websiteModel="ngModel"
+                                       #websiteEl />
+                                <abp-validation-summary [control]="websiteModel"
+                                                        [controlEl]="websiteEl"></abp-validation-summary>
+                            </div>
+
+                            <div class="field col-12 md:col-6">
+                                <label class="text-900 font-medium">{{l('TaxRegistrationNumber')}}</label>
+                                <input type="text"
+                                       pInputText
+                                       class="w-full"
+                                       name="taxRegistrationNumber"
+                                       id="taxRegistrationNumber"
+                                       minlength="2"
+                                       maxlength="32"
+                                       [(ngModel)]="branch.taxRegistrationNumber"
+                                       #taxRegistrationNumberModel="ngModel"
+                                       #taxRegistrationNumberEl />
+                                <abp-validation-summary [control]="taxRegistrationNumberModel"
+                                                        [controlEl]="taxRegistrationNumberEl"></abp-validation-summary>
+                            </div>
+
                         </div>
-                        <div class="field col-12 md:col-6">
-                            <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
-                            <input type="text"
-                                   pInputText
-                                   class="w-full"
-                                   name="displayName"
-                                   id="displayName"
-                                   minlength="2"
-                                   maxlength="64"
-                                   required
-                                   [(ngModel)]="branch.displayName"
-                                   #displayNameModel="ngModel"
-                                   #displayNameEl />
-                            <abp-validation-summary [control]="displayNameModel"
-                                                    [controlEl]="displayNameEl"></abp-validation-summary>
+
+                        <div class="formgrid grid m-0"
+                             contactAddress
+                             [(model)]="branch.billingAddress"
+                             [(country)]="country"
+                             [(cityProvince)]="cityProvince"
+                             [(khanDistrict)]="khanDistrict"
+                             [(sangkatCommune)]="sangkatCommune"
+                             [(village)]="village">
+                            <input type="hidden" required name="countryId" [(ngModel)]="branch.billingAddress.countryId" />
                         </div>
-                        <div class="field col-12 md:col-6">
-                            <label class="text-900 font-medium">{{l('BusinessId')}}</label>
-                            <input type="text"
-                                   pInputText
-                                   class="w-full"
-                                   name="businessId"
-                                   id="businessId"
-                                   minlength="2"
-                                   maxlength="32"
-                                   [(ngModel)]="branch.businessId"
-                                   #businessIdModel="ngModel"
-                                   #businessIdEl />
-                            <abp-validation-summary [control]="businessIdModel"
-                                                    [controlEl]="businessIdEl"></abp-validation-summary>
+                        <div class="formgrid grid m-0"
+                             contactAddress
+                             [isShippingAddress]="true"
+                             [(sameAsBillingAddress)]="branch.sameAsBillingAddress"
+                             [(model)]="branch.shippingAddress"
+                             [(country)]="country2"
+                             [(cityProvince)]="cityProvince2"
+                             [(khanDistrict)]="khanDistrict2"
+                             [(sangkatCommune)]="sangkatCommune2"
+                             [(village)]="village2">
+                            <input type="hidden" required name="countryId" [(ngModel)]="branch.billingAddress.countryId" />
                         </div>
 
-                        <div class="field col-12 md:col-6">
-                            <label class="text-900 font-medium">{{l('PhoneNumber')}}</label>
-                            <input type="text"
-                                   pInputText
-                                   class="w-full"
-                                   name="phoneNumber"
-                                   id="phoneNumber"
-                                   minlength="9"
-                                   maxlength="12"
-                                   [(ngModel)]="branch.phoneNumber"
-                                   #phoneNumberModel="ngModel"
-                                   #phoneNumberEl />
-                            <abp-validation-summary [control]="phoneNumberModel"
-                                                    [controlEl]="phoneNumberEl"></abp-validation-summary>
+                        <div class="flex justify-content-end gap-2 py-4">
+                            <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('SaveNext')" (onClick)="saveProfile(nextCallback)" [loading]="saving" />
+                            <p-button [label]="l('Save')" (onClick)="saveProfile()" [loading]="saving" />
                         </div>
 
-                        <div class="field col-12 md:col-6">
-                            <label class="text-900 font-medium">{{l('Email')}}</label>
-                            <input type="text"
-                                   pInputText
-                                   class="w-full"
-                                   name="email"
-                                   id="email"
-                                   minlength="5"
-                                   maxlength="32"
-                                   [(ngModel)]="branch.email"
-                                   #emailModel="ngModel"
-                                   #emailEl />
-                            <abp-validation-summary [control]="emailModel"
-                                                    [controlEl]="emailEl"></abp-validation-summary>
-                        </div>
-
-                        <div class="field col-12 md:col-6">
-                            <label class="text-900 font-medium">{{l('Website')}}</label>
-                            <input type="text"
-                                   pInputText
-                                   class="w-full"
-                                   name="website"
-                                   id="website"
-                                   minlength="5"
-                                   maxlength="32"
-                                   [(ngModel)]="branch.website"
-                                   #websiteModel="ngModel"
-                                   #websiteEl />
-                            <abp-validation-summary [control]="websiteModel"
-                                                    [controlEl]="websiteEl"></abp-validation-summary>
-                        </div>
-
-                        <div class="field col-12 md:col-6">
-                            <label class="text-900 font-medium">{{l('TaxRegistrationNumber')}}</label>
-                            <input type="text"
-                                   pInputText
-                                   class="w-full"
-                                   name="taxRegistrationNumber"
-                                   id="taxRegistrationNumber"
-                                   minlength="2"
-                                   maxlength="32"
-                                   [(ngModel)]="branch.taxRegistrationNumber"
-                                   #taxRegistrationNumberModel="ngModel"
-                                   #taxRegistrationNumberEl />
-                            <abp-validation-summary [control]="taxRegistrationNumberModel"
-                                                    [controlEl]="taxRegistrationNumberEl"></abp-validation-summary>
-                        </div>
-
-                    </div>
-
-                    <div class="formgrid grid m-0"
-                         contactAddress
-                         [(model)]="branch.billingAddress"
-                         [(country)]="country"
-                         [(cityProvince)]="cityProvince"
-                         [(khanDistrict)]="khanDistrict"
-                         [(sangkatCommune)]="sangkatCommune"
-                         [(village)]="village">
-                        <input type="hidden" required name="countryId" [(ngModel)]="branch.billingAddress.countryId" />
-                    </div>
-                    <div class="formgrid grid m-0"
-                         contactAddress
-                         [isShippingAddress]="true"
-                         [(sameAsBillingAddress)]="branch.sameAsBillingAddress"
-                         [(model)]="branch.shippingAddress"
-                         [(country)]="country2"
-                         [(cityProvince)]="cityProvince2"
-                         [(khanDistrict)]="khanDistrict2"
-                         [(sangkatCommune)]="sangkatCommune2"
-                         [(village)]="village2">
-                        <input type="hidden" required name="countryId" [(ngModel)]="branch.billingAddress.countryId" />
-                    </div>
-
-                    <div class="flex justify-content-end gap-2 py-4">
-                        <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
-                        <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
-                        <p-button [label]="l('SaveNext')" (onClick)="saveProfile(nextCallback)" [loading]="saving" />
-                        <p-button [label]="l('Save')" (onClick)="saveProfile()" [loading]="saving" />
                     </div>
 
                     <p-divider></p-divider>
@@ -252,7 +250,6 @@
             </p-stepperPanel>
             <!--<p-stepperPanel header="{{l('DefaultSetting')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
-                    <p-divider></p-divider>
 
                     <div class="flex justify-content-end gap-2 py-4">
                         <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
@@ -266,79 +263,88 @@
             </p-stepperPanel>-->
             <p-stepperPanel header="{{l('TransactionNo')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
-                    <p-divider></p-divider>
+                    <div class="pt-3">
+                        <ng-container *ngFor="let t of transactionNos; let i=index;">
+                            <div class="formgrid grid m-0">
+                                <div class="field col-12">
+                                    <div class="flex align-content-center gap-3">
+                                        <span class="w-10rem font-medium text-900">{{l(t.journalTypeName)}}</span>
 
-                    <ng-container *ngFor="let t of transactionNos; let i=index;">
-                        <div class="formgrid grid m-0">
-                            <div class="field col-12">
-                                <div class="flex align-content-center gap-3">
-                                    <span>{{t.journalTypeName}}</span>
-                                    <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="t.customTransactionNoEnable"></p-inputSwitch>
-                                    <span class="mb-3">{{l('CustomTransactionNoEnable')}}</span>
+                                        <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="t.customTransactionNoEnable"></p-inputSwitch>
+                                        <span class="mb-3">{{l('CustomTransactionNoEnable')}}</span>
+
+                                        <p-inputSwitch name="requiredReference" [(ngModel)]="t.requiredReference"></p-inputSwitch>
+                                        <span class="mb-3">{{l('RequiredReference')}}</span>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="formgrid grid m-0">
-                            <div class="field col-12 md:col-2">
-                                <p-floatLabel>
+                            <div class="formgrid grid m-0" *ngIf="!t.customTransactionNoEnable">
+                                <div class="field col-12 md:col-2">
+                                    <label class="text-900 font-medium">{{l('Prefix')}}</label>
                                     <input type="text"
                                            pInputText
                                            class="w-full"
                                            name="prefex_{{i}}"
                                            id="prefix_{{i}}"
-                                           minlength="2"
-                                           maxlength="32"
+                                           maxlength="8"
                                            [placeholder]="l('Prefix')"
                                            [(ngModel)]="t.prefix"
                                            #prefixModel="ngModel"
                                            #prefixEl />
-                                    <label class="text-900 font-medium">{{l('Prefix')}}</label>
+
                                     <abp-validation-summary [control]="prefixModel"
                                                             [controlEl]="prefixEl"></abp-validation-summary>
-                                </p-floatLabel>
-                            </div>
-                            <div class="field col-12 md:col-2">
-                                <!--<label class="text-900 font-medium">{{l('Digits')}}</label>-->
-                                <input type="text"
-                                       pInputText
-                                       class="w-full"
-                                       name="digits_{{i}}"
-                                       id="digits_{{i}}"
-                                       minlength="2"
-                                       maxlength="32"
-                                       [placeholder]="l('Digits')"
-                                       [(ngModel)]="t.prefix"
-                                       #digitsModel="ngModel"
-                                       #digitsEl />
-                                <abp-validation-summary [control]="digitsModel"
-                                                        [controlEl]="digitsEl"></abp-validation-summary>
-                            </div>
-                            <div class="field col-12 md:col-2">
-                                <!--<label class="text-900 font-medium">{{l('Start')}}</label>-->
-                                <input type="text"
-                                       pInputText
-                                       class="w-full"
-                                       name="start_{{i}}"
-                                       id="start_{{i}}"
-                                       minlength="2"
-                                       maxlength="32"
-                                       [placeholder]="l('Start')"
-                                       [(ngModel)]="t.start"
-                                       #startModel="ngModel"
-                                       #startEl />
-                                <abp-validation-summary [control]="startModel"
-                                                        [controlEl]="startEl"></abp-validation-summary>
+                                </div>
+                                <div class="field col-12 md:col-2">
+                                    <label class="text-900 font-medium">{{l('Digits')}}</label>
+                                    <input type="text"
+                                           pInputText
+                                           class="w-full"
+                                           name="digits_{{i}}"
+                                           id="digits_{{i}}"
+                                           minlength="1"
+                                           maxlength="2"
+                                           [placeholder]="l('Digits')"
+                                           [(ngModel)]="t.digits"
+                                           #digitsModel="ngModel"
+                                           #digitsEl />
+                                    <abp-validation-summary [control]="digitsModel"
+                                                            [controlEl]="digitsEl"></abp-validation-summary>
+                                </div>
+                                <div class="field col-12 md:col-2">
+                                    <label class="text-900 font-medium">{{l('Start')}}</label>
+                                    <input type="text"
+                                           pInputText
+                                           class="w-full"
+                                           name="start_{{i}}"
+                                           id="start_{{i}}"
+                                           minlength="1"
+                                           maxlength="3"
+                                           [placeholder]="l('Start')"
+                                           [(ngModel)]="t.start"
+                                           #startModel="ngModel"
+                                           #startEl />
+                                    <abp-validation-summary [control]="startModel"
+                                                            [controlEl]="startEl"></abp-validation-summary>
+                                </div>
+                                <div class="field col-12 md:col-2">
+                                    <label class="text-900 font-medium">{{l('Format')}}</label>
+                                    <div class="p-inputtext" disabled>{{getTransactionNoFormat(t)}}</div>
+                                </div>
+
                             </div>
 
+                            <p-divider></p-divider>
+                        </ng-container>
+
+                        <div class="flex justify-content-end gap-2 py-4">
+                            <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('SaveNext')" (onClick)="saveTransactionNos(nextCallback)" [loading]="saving" />
+                            <p-button [label]="l('Save')" (onClick)="saveTransactionNos()" [loading]="saving" />
                         </div>
-                    </ng-container>
-
-                    <div class="flex justify-content-end gap-2 py-4">
-                        <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
-                        <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
-                        <p-button [label]="l('SaveNext')" (onClick)="saveTransactionNos(nextCallback)" [loading]="saving" />
-                        <p-button [label]="l('Save')" (onClick)="saveTransactionNos()" [loading]="saving" />
                     </div>
 
                     <p-divider></p-divider>
@@ -346,55 +352,54 @@
             </p-stepperPanel>
             <p-stepperPanel header="{{l('OtherSetting')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
-                    <p-divider></p-divider>
+                    <div class="pt-3">
+                        <div class="formgrid grid m-0">
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="multiBranchesEnable" [(ngModel)]="advanceSetting.multiBranchesEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('MultiBranchesEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="multiCurrencyEnable" [(ngModel)]="advanceSetting.multiCurrencyEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('MultiCurrencyEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="lineDiscountEnable" [(ngModel)]="advanceSetting.lineDiscountEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('LineDiscountEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="totalDiscountEnable" [(ngModel)]="advanceSetting.totalDiscountEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('TotalDiscountEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="classEnable" [(ngModel)]="advanceSetting.classEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('ClassEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label>{{l('ContactAddressLevel')}}</label>
+                                <p-dropdown [options]="[{id:0, name:l('Country')+' (L0)'},{id:1,name:l('CityProvince')+ ' (L1)'},{id:2,name:l('KhanDistrict')+' (L2)'},{id:3,name:l('SangkatCommune')+' (L3)'},{id:4,name:l('Village')+' (L4)'}]"
+                                            [(ngModel)]="advanceSetting.contactAddressLevel"
+                                            [placeholder]="l('Select_',l('ContactAddressLevel'))"
+                                            optionValue="id"
+                                            optionLabel="name"
+                                            styleClass="w-full" />
+                            </div>
+                        </div>
 
-                    <div class="formgrid grid m-0">
-                        <div class="field col-12 md:col-6">
-                            <div class="flex align-content-center gap-3">
-                                <p-inputSwitch name="multiBranchesEnable" [(ngModel)]="advanceSetting.multiBranchesEnable"></p-inputSwitch>
-                                <span class="mb-3">{{l('MultiBranchesEnable')}}</span>
-                            </div>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <div class="flex align-content-center gap-3">
-                                <p-inputSwitch name="multiCurrencyEnable" [(ngModel)]="advanceSetting.multiCurrencyEnable"></p-inputSwitch>
-                                <span class="mb-3">{{l('MultiCurrencyEnable')}}</span>
-                            </div>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <div class="flex align-content-center gap-3">
-                                <p-inputSwitch name="lineDiscountEnable" [(ngModel)]="advanceSetting.lineDiscountEnable"></p-inputSwitch>
-                                <span class="mb-3">{{l('LineDiscountEnable')}}</span>
-                            </div>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <div class="flex align-content-center gap-3">
-                                <p-inputSwitch name="totalDiscountEnable" [(ngModel)]="advanceSetting.totalDiscountEnable"></p-inputSwitch>
-                                <span class="mb-3">{{l('TotalDiscountEnable')}}</span>
-                            </div>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <div class="flex align-content-center gap-3">
-                                <p-inputSwitch name="classEnable" [(ngModel)]="advanceSetting.classEnable"></p-inputSwitch>
-                                <span class="mb-3">{{l('ClassEnable')}}</span>
-                            </div>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <label>{{l('ContactAddressLevel')}}</label>
-                            <p-dropdown [options]="[{id:0, name:l('Country')+' (L0)'},{id:1,name:l('CityProvince')+ ' (L1)'},{id:2,name:l('KhanDistrict')+' (L2)'},{id:3,name:l('SangkatCommune')+' (L3)'},{id:4,name:l('Village')+' (L4)'}]"
-                                        [(ngModel)]="advanceSetting.contactAddressLevel"
-                                        [placeholder]="l('Select_',l('ContactAddressLevel'))"
-                                        optionValue="id"
-                                        optionLabel="name"
-                                        styleClass="w-full" />
+                        <div class="flex justify-content-end gap-2 py-4">
+                            <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('Save')" (onClick)="saveAdvanceSetting()" [loading]="saving" />
                         </div>
                     </div>
-
-                    <div class="flex justify-content-end gap-2 py-4">
-                        <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
-                        <p-button [label]="l('Save')" (onClick)="saveAdvanceSetting()" [loading]="saving" />
-                    </div>
-
                 </ng-template>
             </p-stepperPanel>
         </p-stepper>

@@ -58,13 +58,7 @@ export class EditEditionComponent extends DynamicDialogBase implements OnInit {
         this.saving = true;
         this._editionService
             .getEditionForEdit(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: GetEditionEditOutput) => {
                 this.edition = result.edition;
                 this.mapNode(result.features, result.featureValues);
@@ -150,13 +144,7 @@ export class EditEditionComponent extends DynamicDialogBase implements OnInit {
 
         this._editionService
             .createOrUpdateEdition(_edition)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);

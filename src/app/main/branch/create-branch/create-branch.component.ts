@@ -46,13 +46,7 @@ export class CreateBranchComponent extends AppComponentBase implements OnInit {
         this.saving = true;
 
         this._branchService.create(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
 

@@ -59,13 +59,7 @@ export class LoginAsTenantComponent extends PrimeNgListComponentBase<UserDto> im
 
         this._userService
             .findUsers(filterInput)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe((result: UserDtoPagedResultDto) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;

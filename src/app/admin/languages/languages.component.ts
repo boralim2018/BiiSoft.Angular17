@@ -97,13 +97,7 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
         
         this._languageService
             .getLanguages(input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -120,13 +114,7 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
 
                     this.isTableLoading = true;
                     this._languageService.deleteLanguage(language.id)
-                        .pipe(
-                            finalize(() => this.isTableLoading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -147,13 +135,7 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
 
                     this.isTableLoading = true;
                     this._languageService.enable(input)
-                        .pipe(
-                            finalize(() => this.isTableLoading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -174,13 +156,7 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
 
                     this.isTableLoading = true;                    
                     this._languageService.disable(input)
-                        .pipe(
-                            finalize(() => this.isTableLoading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();
@@ -201,13 +177,7 @@ export class LanguagesComponent extends Mixin(PrimeNgListComponentBase<Applicati
 
                     this.isTableLoading = true;
                     this._languageService.setDefaultLanguage(input)
-                        .pipe(
-                            finalize(() => this.isTableLoading = false),
-                            catchError((err: any) => {
-                                this.message.error(err.message);
-                                return of(null);
-                            })
-                        )
+                        .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
                             this.refresh();

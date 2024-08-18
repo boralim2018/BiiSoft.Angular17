@@ -52,13 +52,7 @@ export class ChangePermissionsDialogComponent extends DynamicDialogBase implemen
         this.saving = true;
         this._userService
             .getUserPermissionsForEdit(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: GetUserPermissionsForEditOutput) => {
                 this.mapNode(result.permissions, result.grantedPermissionNames);
             });
@@ -106,13 +100,7 @@ export class ChangePermissionsDialogComponent extends DynamicDialogBase implemen
 
         this._userService
             .updateUserPermissions(input)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(result);                    

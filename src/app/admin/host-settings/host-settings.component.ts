@@ -83,13 +83,7 @@ export class HostSettingsComponent extends Mixin(AppComponentBase, NavBarCompone
     getAllSettings() {
         this.saving = true;
         this._hostSettingsService.getAllSettings()
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(result => {
                 this.hostSettings = result;
                 if (result.tenantManagement?.defaultEditionId) this.edition = { id: result.tenantManagement.defaultEditionId, name: result.tenantManagement.defaultEditionName };
@@ -99,13 +93,7 @@ export class HostSettingsComponent extends Mixin(AppComponentBase, NavBarCompone
     saveAll() {
         this.saving = true;
         this._hostSettingsService.updateAllSettings(this.hostSettings)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(() => {
                 this.notify.success("SavedSuccessfully");
                 window.location.reload();

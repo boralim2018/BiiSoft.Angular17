@@ -168,13 +168,7 @@ export class AppTopBarComponent extends BFileComponentBase {
     getRecentlyLinkUsers(): void {
         this.loading = true;
         this._userLinkService.getRecentlyUsedLinkedUsers()
-            .pipe(
-                finalize(() => this.loading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.loading = false))
             .subscribe(result => {
                 this.recentlyLinkedUsers = result.items;
             }

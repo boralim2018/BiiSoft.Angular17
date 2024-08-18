@@ -45,13 +45,7 @@ export class CreateCountryComponent extends DynamicDialogBase implements OnInit 
         this.saving = true;
 
         this._countryService.create(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
 

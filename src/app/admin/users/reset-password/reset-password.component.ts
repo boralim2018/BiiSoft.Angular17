@@ -48,13 +48,7 @@ export class ResetPasswordDialogComponent extends DynamicDialogBase
     public resetPassword(): void {
         this.isLoading = true;
         this._userService.resetPassword(this.resetPasswordDto)
-            .pipe(
-                finalize(() => this.isLoading = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.isLoading = false))
             .subscribe((result) => {
                 this.notify.success('Password Reset');
                 this._dialogRef.close();

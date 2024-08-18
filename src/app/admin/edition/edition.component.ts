@@ -101,13 +101,7 @@ export class EditionComponent extends Mixin(PrimeNgListComponentBase<EditionList
 
         this._editionService
             .getEditions(input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
-            .pipe(
-                finalize(() => callBack()),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
                 this.totalCount = result.totalCount;
@@ -130,13 +124,7 @@ export class EditionComponent extends Mixin(PrimeNgListComponentBase<EditionList
             if (result) {
                 this.isTableLoading = true;
                 this._editionService.deleteEdition(edition.id)
-                    .pipe(
-                        finalize(() => this.isTableLoading = false),
-                        catchError((err: any) => {
-                            this.message.error(err.message);
-                            return of(null);
-                        })
-                    )
+                    .pipe(finalize(() => this.isTableLoading = false))
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
                         this.refresh();

@@ -49,13 +49,7 @@ export class CreateSangkatCommuneComponent extends DynamicDialogBase implements 
         this.saving = true;
 
         this._sangkatCommuneService.create(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
 

@@ -15269,7 +15269,7 @@ export interface ICreateUpdateSangkatCommuneInputDto {
 }
 
 export class CreateUpdateTransactionNoSettingInputDto implements ICreateUpdateTransactionNoSettingInputDto {
-    id: number | undefined;
+    id: string | undefined;
     journalType: JournalType;
     customTransactionNoEnable: boolean;
     prefix: string | undefined;
@@ -15326,7 +15326,7 @@ export class CreateUpdateTransactionNoSettingInputDto implements ICreateUpdateTr
 }
 
 export interface ICreateUpdateTransactionNoSettingInputDto {
-    id: number | undefined;
+    id: string | undefined;
     journalType: JournalType;
     customTransactionNoEnable: boolean;
     prefix: string | undefined;
@@ -23781,7 +23781,7 @@ export interface ITestModelOutput {
 }
 
 export class TransactionNoSettingDto implements ITransactionNoSettingDto {
-    id: number | undefined;
+    id: string | undefined;
     journalType: JournalType;
     journalTypeName: string | undefined;
     customTransactionNoEnable: boolean;
@@ -23841,7 +23841,7 @@ export class TransactionNoSettingDto implements ITransactionNoSettingDto {
 }
 
 export interface ITransactionNoSettingDto {
-    id: number | undefined;
+    id: string | undefined;
     journalType: JournalType;
     journalTypeName: string | undefined;
     customTransactionNoEnable: boolean;

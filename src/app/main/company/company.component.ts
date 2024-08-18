@@ -24,7 +24,7 @@ import { TableSettingComponent } from '../../../shared/components/table-setting/
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
-import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
+import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
 import { Ripple } from 'primeng/ripple';
 import { NgFor, NgIf } from '@angular/common';
@@ -107,13 +107,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
         this.saving = true;
         this._companySettingService
             .getDetail()
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: CompanySettingDto | null) => {
                 if (result) {
                     this.model = result;
@@ -175,13 +169,8 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
         this.saving = true;
 
         this._companySettingService.createOrUpdateProfile(this.branch)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null); 
-                })
-            ).subscribe((result: string) => {
+            .pipe(finalize(() => this.saving = false))
+            .subscribe((result: string) => {
                 if (!this.branch.id && result) {
                     this.branch.id = result;
                 }
@@ -196,13 +185,8 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
         this.generalSetting.businessStartDate = !this.businessStartDate ? undefined : moment(this.businessStartDate);
 
         this._companySettingService.createOrUpdateGeneralSetting(this.generalSetting)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            ).subscribe((result: number) => {
+            .pipe(finalize(() => this.saving = false))
+            .subscribe((result: number) => {
                 if (!this.generalSetting.id && result) {
                     this.generalSetting.id = result;
                 }
@@ -216,13 +200,8 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
         this.saving = true;
 
         this._companySettingService.createOrUpdateAdvanceSetting(this.advanceSetting)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            ).subscribe((result: number) => {
+            .pipe(finalize(() => this.saving = false))
+            .subscribe((result: number) => {
                 if (!this.advanceSetting.id && result) {
                     this.advanceSetting.id = result;
                 }
@@ -235,17 +214,12 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
         this.saving = true;
 
         this._companySettingService.createOrUpdateTransactionNoSetting(this.transactionNos)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            ).subscribe((result) => {
+            .pipe(finalize(() => this.saving = false))
+            .subscribe((result) => {
                 if (result && result.length) {
                     result.map(t => {
                         let find = this.transactionNos.find(f => f.journalType == t.value);
-                        if (find) find.id = +t.name;
+                        if (find) find.id = t.name;
                     })
                 }
 
@@ -288,4 +262,31 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
             })
         }
     }
+
+    getTransactionNoFormat(t: TransactionNoSettingDto) : string {
+        if (!t || t.customTransactionNoEnable) return '';
+               
+        let prefix = t.prefix ? this.replaceYearInPrefix(t.prefix) : '';
+        let format = t.start.toString().padStart(t.digits, '0');
+
+        return `${prefix}${format}`;
+    }
+
+    private replaceYearInPrefix(prefix: string): string {
+        const currentDate = new Date();
+        const fullYear = currentDate.getFullYear();
+        const twoDigitYear = fullYear % 100;
+
+        // Convert years to strings for replacement
+        const twoDigitYearStr = twoDigitYear.toString().padStart(2, '0');
+        const fullYearStr = fullYear.toString();
+
+        // Replace 'y' with two-digit year and 'Y' with full year
+        let result = prefix
+            .replace(/YY/g, fullYearStr)
+            .replace(/Y/g, twoDigitYearStr);            
+
+        return result;
+    }
+
 }

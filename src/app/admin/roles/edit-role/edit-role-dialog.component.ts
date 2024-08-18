@@ -47,13 +47,7 @@ export class EditRoleDialogComponent extends DynamicDialogBase implements OnInit
         this.saving = true;
         this._roleService
             .getRoleForEdit(this._dialogConfig.data.id)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result: GetRoleForEditOutput) => {
                 this.role = result.role;
                 this.mapNode(result.permissions, result.grantedPermissionNames);
@@ -100,13 +94,7 @@ export class EditRoleDialogComponent extends DynamicDialogBase implements OnInit
         role.grantedPermissions = this.selectedNodes.map(f => f.data.name);
 
         this._roleService.update(role)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(result)

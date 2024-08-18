@@ -39,16 +39,7 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
         let selected = !this.selectedModel ? []: this.multiple ? this.selectedModel : [this.selectedModel]; 
 
         this._service.getTimeZones(selected, filter, this.usePagination, this.skipCount, this.maxResultCount)
-            .pipe(
-                finalize(() => {
-                    this.loading = false;
-                    callBack();
-                }),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(new StringListResultDto({ items: [] }));
-                })
-            )
+            .pipe(finalize(() => { callBack(); this.loading = false; }))
             .subscribe((result: any | null) => {
                 this.mapResult(result.items);
             });

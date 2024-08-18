@@ -67,13 +67,7 @@ export class CreateUserDialogComponent extends Mixin(PasswordComponentBase, Dyna
         this.saving = true;
 
         this._userService.create(this.user)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe((user) => {
                 this.notify.success(this.l('SavedSuccessfully'));
                 this._dialogRef.close(user);

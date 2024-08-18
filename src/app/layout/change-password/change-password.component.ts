@@ -48,13 +48,7 @@ export class ChangePasswordComponent extends Mixin(DynamicDialogBase, PasswordCo
         this.saving = true;
        
         this.profileService.changePassword(this.model)
-            .pipe(
-                finalize(() => this.saving = false),
-                catchError((err: any) => {
-                    this.message.error(err.message);
-                    return of(null);
-                })
-            )
+            .pipe(finalize(() => this.saving = false))
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this._dialogRef.close(true);
