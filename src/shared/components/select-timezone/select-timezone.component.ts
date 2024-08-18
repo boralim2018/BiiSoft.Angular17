@@ -1,17 +1,15 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { CommonLookupServiceProxy, StringListResultDto } from '@shared/service-proxies/service-proxies';
 import { finalize, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { SelectComponentBase } from 'shared/select-component-base';
 import { InputTextModule } from 'primeng/inputtext';
 import { PrimeTemplate } from 'primeng/api';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
-import { isArray } from 'lodash-es';
 
 @Component({
-    selector: 'app-select-timezone',
+    selector: 'select-timezone, [selectTimezone]',
     templateUrl: './select-timezone.component.html',
     providers: [CommonLookupServiceProxy],
     standalone: true,

@@ -1,3 +1,6 @@
+<label *ngIf="label" class="mb-2">
+    {{label}} <span class="text-red-500" *ngIf="required">*</span>
+</label>
 <p-dropdown [options]="models"
             [(ngModel)]="selectedModel"
             (onChange)="onChange($event)"

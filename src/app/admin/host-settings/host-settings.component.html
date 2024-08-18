@@ -14,11 +14,12 @@
                 <p-tabPanel [header]="l('General')" [selected]="true">
                     <div style="min-height: 50vh;" >
                         <div class="formgrid grid">
-                            <div class="field col-12 md:col-6 lg:col-4 mb-3" *ngIf="showTimezoneSelection">
-                                <label for="timezone" class="block text-900 font-medium mb-2">{{l('Timezone')}}</label>
-                                <app-select-timezone [(selectedModel)]="hostSettings.general.timezone"
-                                                     name="selectTimezone"></app-select-timezone>
-
+                            <div class="field col-12 md:col-6 lg:col-4 mb-3"
+                                 selectTimezone
+                                 *ngIf="showTimezoneSelection"
+                                 name="selectTimezone"
+                                 [label]="l('Timezone')"
+                                 [(selectedModel)]="hostSettings.general.timezone">
                             </div>
                         </div>
                     </div>

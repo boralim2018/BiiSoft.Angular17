@@ -29,6 +29,7 @@ import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
 import { Ripple } from 'primeng/ripple';
 import { NgFor, NgIf } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { SelectDateComponent } from '../../../shared/components/select-date/select-date.component';
 
 @Component({
     selector: 'app-company',
@@ -41,7 +42,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
         FormsModule, StepperModule, ButtonModule, OverlayPanelModule, NgIf, NgFor,
         TableSettingComponent, DividerModule, NavBarComponent, BusyDirective,
         InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, FloatLabelModule,
-        LocalizePipe, FindCountryComponent, InputSwitchModule, FindCurrencyComponent,
+        LocalizePipe, FindCountryComponent, InputSwitchModule, FindCurrencyComponent, SelectDateComponent,
         SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple
     ],
 })
@@ -176,6 +177,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
                 }
 
                 if (next) next.emit();
+                this.notify.info(this.l('SavedSuccessfully'));
             });
     }
 
@@ -192,6 +194,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
                 }
 
                 if (next) next.emit();
+                this.notify.info(this.l('SavedSuccessfully'));
             });
     }
 
@@ -207,6 +210,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
                 }
 
                 if (next) next.emit();
+                this.notify.info(this.l('SavedSuccessfully'));
             });
     }
 
@@ -224,6 +228,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
                 }
 
                 if (next) next.emit();
+                this.notify.info(this.l('SavedSuccessfully'));
             });
     }
 

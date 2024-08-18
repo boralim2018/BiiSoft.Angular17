@@ -33,8 +33,11 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
 
-                        <p-divider></p-divider>
+                    <p-divider></p-divider>
+
+                    <form novalidate autocomplete="off" #genaralSettingForm="ngForm" (ngSubmit)="saveGeneralSetting()" [busy]="saving">
 
                         <div class="formgrid grid m-0">
                             <div class="field col-12 md:col-6"
@@ -48,37 +51,37 @@
                             <div class="field col-12 md:col-6"
                                  findCurrency
                                  name="currency"
+                                 [required]="true"
                                  [label]="l('Currency')"
                                  [(selectedModel)]="currency"
                                  (selectedModelChange)="generalSetting.currencyId = $event?.id">
                             </div>
-                            <div class="field col-12 md:col-6">
-                                <label>{{l('Timezone')}}</label>
-                                <app-select-timezone [(selectedModel)]="generalSetting.defaultTimeZone"
-                                                     name="selectTimezone"
-                                                     [initModel]="false"></app-select-timezone>
-
+                            <div class="field col-12 md:col-6"
+                                 selectTimezone
+                                 name="selectTimezone"
+                                 [initModel]="false"
+                                 [required]="true"
+                                 [label]="l('Timezone')"
+                                 [(selectedModel)]="generalSetting.defaultTimeZone">
+                            </div>
+                            <div class="field col-12 md:col-6"
+                                 selectDate
+                                 name="businessStartDate"
+                                 inputId="businessStartDate"
+                                 [(selectedModel)]="businessStartDate"
+                                 [placeholder]="l('BusinessStartDate')"
+                                 [label]="l('BusinessStartDate')"
+                                 [required]="true">
                             </div>
                             <div class="field col-12 md:col-6">
-                                <label>{{l('BusinessStartDate')}}</label>
-                                <p-calendar inputId="businessStartDate"
-                                            [(ngModel)]="businessStartDate"
-                                            [placeholder]="this.l('BusinessStartDate')"
-                                            [showIcon]="true"
-                                            [iconDisplay]="'input'"
-                                            [showButtonBar]="true"
-                                            dateFormat="dd-mm-yy"
-                                            styleClass="w-full"></p-calendar>
-                            </div>
-                            <div class="field col-12 md:col-6">
-                                <label>{{l('Rounding_',l('Total'))}}</label>
+                                <label>{{l('Rounding_',l('Total'))}} <span class="text-red-500">*</span></label>
                                 <p-dropdown [options]="[1,2,3,4,5,6]"
                                             [(ngModel)]="generalSetting.roundTotalDigits"
                                             [placeholder]="l('Select_', l('Rounding'))"
                                             styleClass="w-full" />
                             </div>
                             <div class="field col-12 md:col-6">
-                                <label>{{l('Rounding_',l('Cost'))}}</label>
+                                <label>{{l('Rounding_',l('Cost'))}} <span class="text-red-500">*</span></label>
                                 <p-dropdown [options]="[1,2,3,4,5,6]"
                                             [(ngModel)]="generalSetting.roundCostDigits"
                                             [placeholder]="l('Select_', l('Rounding'))"
@@ -88,12 +91,13 @@
 
                         <div class="flex justify-content-end gap-2 py-4">
                             <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
-                            <p-button [label]="l('SaveNext')" (onClick)="saveGeneralSetting(nextCallback)" [loading]="saving" />
-                            <p-button [label]="l('Save')" (onClick)="saveGeneralSetting()" [loading]="saving" />
+                            <p-button [label]="l('SaveNext')" (onClick)="saveGeneralSetting(nextCallback)" [loading]="saving" [disabled]="genaralSettingForm.form.invalid || saving"/>
+                            <p-button [label]="l('Save')" (onClick)="saveGeneralSetting()" [loading]="saving" [disabled]="genaralSettingForm.form.invalid || saving"/>
                         </div>
-                    </div>
+                    </form>
 
                     <p-divider></p-divider>
+
                 </ng-template>
             </p-stepperPanel>
             <p-stepperPanel header="{{l('CompanyProfile')}}">
@@ -246,7 +250,9 @@
                     </div>
 
                     <p-divider></p-divider>
+                     <
                 </ng-template>
+                 <
             </p-stepperPanel>
             <!--<p-stepperPanel header="{{l('DefaultSetting')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">

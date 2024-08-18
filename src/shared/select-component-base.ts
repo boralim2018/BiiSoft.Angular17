@@ -7,6 +7,7 @@ import { AppComponentBase } from 'shared/app-component-base';
 export abstract class SelectComponentBase extends AppComponentBase implements OnInit, OnDestroy {
 
     @Input() name: string;
+    @Input() label: string;
     @Input() placeholder: string;
     @Input() filter: boolean = true;
     @Input() initModel: boolean = true;
