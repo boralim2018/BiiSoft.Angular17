@@ -2,11 +2,11 @@
     {{label}} <span class="text-red-500" *ngIf="required">*</span>
 </label>
 <p-dropdown [options]="models"
-            [(ngModel)]="selectedModel"
-            (onChange)="onChange($event)"
+            [(ngModel)]="value"
+            (onChange)="onChange($event.value)"
+            (onBlur)="onTouched()"
+            [disabled]="disabled"
             styleClass="w-full"
-            name="{{name}}"
-            [attr.name]="name"
             [placeholder]="placeholder"
             [appendTo]="appendTo"
             [emptyFilterMessage]="l('RecordNotFound')"

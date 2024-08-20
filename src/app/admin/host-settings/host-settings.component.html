@@ -19,7 +19,7 @@
                                  *ngIf="showTimezoneSelection"
                                  name="selectTimezone"
                                  [label]="l('Timezone')"
-                                 [(selectedModel)]="hostSettings.general.timezone">
+                                 [(ngModel)]="hostSettings.general.timezone">
                             </div>
                         </div>
                     </div>

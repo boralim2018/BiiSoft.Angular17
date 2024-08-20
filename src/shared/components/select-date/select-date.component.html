@@ -1,16 +1,16 @@
 <label *ngIf="label">{{label}} <span class="text-red-500" *ngIf="required">*</span></label>
 <p-calendar [inputId]="inputId"
             [appendTo]="appendTo"
-            name="{{name}}"
-            [(ngModel)]="selectedModel"
             [placeholder]="placeholder"
             [showIcon]="true"
             [iconDisplay]="'input'"
             [showButtonBar]="true"
             [required]="required"
-            (onInput)="onInput($event)"
-            (onClearClick)="onClearClick($event)"
+            [(ngModel)]="value"
+            (onChange)="onChange($event.value)"
+            (onBlur)="onTouched()"
+            [disabled]="disabled"
             dateFormat="dd-mm-yy"
             styleClass="w-full"></p-calendar>
-<small *ngIf="required && dirty"
-       class="p-error block">{{ l('IsRequired', label)}}</small>
+<small *ngIf="invalid" class="p-error block">{{ l('IsRequired', label)}}</small>      
+

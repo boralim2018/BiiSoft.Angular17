@@ -22,6 +22,7 @@ import { BiiNotifyService } from './services/bii.nofity.service'
 import { CacheService } from '@shared/services/cache.service';
 import { camelCase } from 'lodash-es';
 import { of } from 'rxjs';
+import { ControlValueAccessor } from '@angular/forms';
 
 export abstract class LocalizeComponent {
 
@@ -162,6 +163,41 @@ export abstract class NavBarComponentBase extends LocalizeComponent {
     }
 }
 
+export abstract class ControlValueAccessorComponentBase extends AppComponentBase implements ControlValueAccessor {
+    
+    disabled: boolean;
+    protected _value: any | undefined;
+    get value(): any | undefined {
+        return this._value;
+    }
+    set value(val: any | undefined) {
+        this._value = val;
+        this.onChange(val);
+    }
+
+    onChange: (value: any | undefined) => void = () => { };
+    onTouched: () => void = () => { };
+
+    constructor(injector: Injector) {
+        super(injector);
+    }
+    
+    writeValue(value: any): void {
+        this._value = value;
+    }
+
+    registerOnChange(fn: (value: any) => void): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: () => void): void {
+        this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+    }
+}
 
 export abstract class PasswordComponentBase extends AppComponentBase {
 

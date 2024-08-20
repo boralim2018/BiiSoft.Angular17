@@ -293,5 +293,5 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
 
         return result;
     }
-
+    
 }

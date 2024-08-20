@@ -1,17 +1,24 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { CommonLookupServiceProxy, StringListResultDto } from '@shared/service-proxies/service-proxies';
-import { finalize, catchError } from 'rxjs/operators';
+import { Component, forwardRef, Injector, OnInit } from '@angular/core';
+import { CommonLookupServiceProxy } from '@shared/service-proxies/service-proxies';
+import { finalize } from 'rxjs/operators';
 import { SelectComponentBase } from 'shared/select-component-base';
 import { InputTextModule } from 'primeng/inputtext';
 import { PrimeTemplate } from 'primeng/api';
 import { NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
     selector: 'select-timezone, [selectTimezone]',
     templateUrl: './select-timezone.component.html',
-    providers: [CommonLookupServiceProxy],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SelectTimezoneComponent),
+            multi: true,
+        },
+        CommonLookupServiceProxy
+    ],
     standalone: true,
     imports: [DropdownModule, FormsModule, NgIf, PrimeTemplate, InputTextModule]
 })
@@ -34,7 +41,8 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
         this.models = [];
         this.loading = true;
 
-        let selected = !this.selectedModel ? []: this.multiple ? this.selectedModel : [this.selectedModel]; 
+        //let selected = !this.selectedModel ? []: this.multiple ? this.selectedModel : [this.selectedModel]; 
+        let selected = !this.value ? []: this.multiple ? this.value : [this.value]; 
 
         this._service.getTimeZones(selected, filter, this.usePagination, this.skipCount, this.maxResultCount)
             .pipe(finalize(() => { callBack(); this.loading = false; }))

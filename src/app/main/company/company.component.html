@@ -59,40 +59,54 @@
                             <div class="field col-12 md:col-6"
                                  selectTimezone
                                  name="selectTimezone"
-                                 [initModel]="false"
+                                 [initModel]="true"
                                  [required]="true"
                                  [label]="l('Timezone')"
-                                 [(selectedModel)]="generalSetting.defaultTimeZone">
+                                 [(ngModel)]="generalSetting.defaultTimeZone"
+                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.selectTimezone.errors?.required">
                             </div>
                             <div class="field col-12 md:col-6"
                                  selectDate
                                  name="businessStartDate"
                                  inputId="businessStartDate"
-                                 [(selectedModel)]="businessStartDate"
+                                 [(ngModel)]="businessStartDate"
                                  [placeholder]="l('BusinessStartDate')"
                                  [label]="l('BusinessStartDate')"
-                                 [required]="true">
+                                 [required]="true"
+                                 [disabled]="false"
+                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.businessStartDate.errors?.required">
                             </div>
+                            
                             <div class="field col-12 md:col-6">
                                 <label>{{l('Rounding_',l('Total'))}} <span class="text-red-500">*</span></label>
-                                <p-dropdown [options]="[1,2,3,4,5,6]"
+                                <p-dropdown name="roundTotalDigits"
+                                            [options]="[1,2,3,4,5,6]"
                                             [(ngModel)]="generalSetting.roundTotalDigits"
                                             [placeholder]="l('Select_', l('Rounding'))"
-                                            styleClass="w-full" />
+                                            styleClass="w-full"
+                                            required
+                                            #roundTotalDigits="ngModel" />
+                                <small *ngIf="roundTotalDigits.invalid && (roundTotalDigits.dirty || roundTotalDigits.touched)"
+                                       class="p-error block">{{l('IsRequired', l('Rounding_', l('Total')))}}</small>
                             </div>
                             <div class="field col-12 md:col-6">
                                 <label>{{l('Rounding_',l('Cost'))}} <span class="text-red-500">*</span></label>
-                                <p-dropdown [options]="[1,2,3,4,5,6]"
+                                <p-dropdown name="roundCostDigits"
+                                            [options]="[1,2,3,4,5,6]"
                                             [(ngModel)]="generalSetting.roundCostDigits"
                                             [placeholder]="l('Select_', l('Rounding'))"
-                                            styleClass="w-full" />
+                                            styleClass="w-full"
+                                            required
+                                            #roundCostDigits="ngModel" />
+                                <small *ngIf="roundCostDigits.invalid && (roundCostDigits.dirty || roundCostDigits.touched)"
+                                       class="p-error block">{{l('IsRequired', l('Rounding_', l('Cost')))}}</small>
                             </div>
                         </div>
 
                         <div class="flex justify-content-end gap-2 py-4">
                             <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
-                            <p-button [label]="l('SaveNext')" (onClick)="saveGeneralSetting(nextCallback)" [loading]="saving" [disabled]="genaralSettingForm.form.invalid || saving"/>
-                            <p-button [label]="l('Save')" (onClick)="saveGeneralSetting()" [loading]="saving" [disabled]="genaralSettingForm.form.invalid || saving"/>
+                            <p-button [label]="l('SaveNext')" (onClick)="saveGeneralSetting(nextCallback)" [loading]="saving" [disabled]="genaralSettingForm.form.invalid || saving" />
+                            <p-button [label]="l('Save')" (onClick)="saveGeneralSetting()" [loading]="saving" [disabled]="genaralSettingForm.form.invalid || saving" />
                         </div>
                     </form>
 
@@ -250,9 +264,9 @@
                     </div>
 
                     <p-divider></p-divider>
-                     <
+                    <
                 </ng-template>
-                 <
+                <
             </p-stepperPanel>
             <!--<p-stepperPanel header="{{l('DefaultSetting')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">

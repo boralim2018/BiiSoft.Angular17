@@ -1,10 +1,10 @@
 import { Component, ElementRef, EventEmitter, Injector, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { AppComponentBase } from 'shared/app-component-base';
+import { ControlValueAccessorComponentBase } from 'shared/app-component-base';
 
 @Component({ template: '' })
-export abstract class SelectComponentBase extends AppComponentBase implements OnInit, OnDestroy {
+export abstract class SelectComponentBase extends ControlValueAccessorComponentBase implements OnInit, OnDestroy {
 
     @Input() name: string;
     @Input() label: string;
@@ -16,22 +16,32 @@ export abstract class SelectComponentBase extends AppComponentBase implements On
     @Input() required: boolean;
     @Input() multiple: boolean;
     @Input() optionValue: string = 'id';
+    @Input() invalid: boolean;
 
-    private _selectedModel: any;
-    @Input()
-    set selectedModel(value: any) {
-        this._selectedModel = value;
+    //set value(val: any | undefined) {
+    //    this._value = val;        
+    //    if (val && !this.initModel && !this.loaded) {
+    //        this.onFilter("");
+    //        this.loaded = true;
+    //    }
 
-        if (value && !this.initModel && !this.loaded) {
-            this.onFilter("");
-            this.loaded = true;
-        }
-    }
-    get selectedModel(): any {
-        return this._selectedModel;
-    }
+    //    this.onChange(val);
+    //}
+    //private _selectedModel: any;
+    //@Input()
+    //set selectedModel(value: any) {
+    //    this._selectedModel = value;
 
-    @Output() selectedModelChange: EventEmitter<any> = new EventEmitter<any>();
+    //    if (value && !this.initModel && !this.loaded) {
+    //        this.onFilter("");
+    //        this.loaded = true;
+    //    }
+    //}
+    //get selectedModel(): any {
+    //    return this._selectedModel;
+    //}
+
+    //@Output() selectedModelChange: EventEmitter<any> = new EventEmitter<any>();
     models: any[] = [];
 
     loaded: boolean;
@@ -74,37 +84,39 @@ export abstract class SelectComponentBase extends AppComponentBase implements On
         });
     }
 
-    onChange(event: any) {
-        this.selectedModelChange.emit(event.value);
-        this.dirty = !this.selectedModel || (this.multiple && !(this.selectedModel && this.selectedModel.length))
-    }
+    //onChange(event: any) {
+    //    this.selectedModelChange.emit(event.value);
+    //    this.dirty = !this.selectedModel || (this.multiple && !(this.selectedModel && this.selectedModel.length))
+    //}
 
     abstract onFilter(filter: string, callBack?: Function);
 
     protected mapResult(items: any[]) {
         if (this.multiple) {
-            if (this.selectedModel && this.selectedModel.length) {
+            if (this.value && this.value.length) {
                 let found: boolean;
-                this.selectedModel.map((m, i) => {
+                this.value.map((m, i) => {
                     let find = items.find(f => (f == m || f.id === m.id && f.displayName === m.displayName));
                     if (!find) items.push(m);
                     else {
-                        this.selectedModel[i] = find;
+                        this.value[i] = find;
                         found = true;
                     }
                 })
-                if (found) this.selectedModelChange.emit(this.selectedModel);
+                //if (found) this.selectedModelChange.emit(this.value);
+                if (found) this.onChange(this.value);
             }
         }
         else {
-            if (this.selectedModel) {
-                let find = items.find(f => (f == this.selectedModel || f.id === this.selectedModel.id && f.displayName === this.selectedModel.displayName));
+            if (this.value) {
+                let find = items.find(f => (f == this.value || f.id === this.value.id && f.displayName === this.value.displayName));
                 if (!find) {
-                    items.push(this.selectedModel);
+                    items.push(this.value);
                 }
                 else {
-                    this.selectedModel = find;
-                    this.selectedModelChange.emit(this.selectedModel);
+                    this.value = find;
+                    //this.selectedModelChange.emit(this.value);
+                    this.onChange(this.value);
                 }
             }
         }
