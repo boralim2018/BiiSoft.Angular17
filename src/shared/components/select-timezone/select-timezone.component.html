@@ -14,7 +14,9 @@
             [required]="required"
             [showClear]="showClear"
             [virtualScroll]="true"
-            [virtualScrollItemSize]="39">
+            [virtualScrollItemSize]="38"
+            (onLazyLoad)="onLazyLoad($event)"
+            [loading]="loading">
     <ng-template pTemplate="header" *ngIf="filter">
         <span class="p-input-icon-right w-full">
             <i class="pi pi-search"></i>

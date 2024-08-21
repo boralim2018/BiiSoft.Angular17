@@ -32,14 +32,14 @@
                                     [controlEl]="displayNameEl"></abp-validation-summary>
         </div>
         <div class="field col-12 md:col-6">
-            <label for="code" class="text-900 font-medium">{{l('Code_',l('Location'))}}<span class="text-red-600">*</span></label>
+            <label for="code" class="text-900 font-medium">{{l('Code_',l('SangkatCommune'))}}<span class="text-red-600">*</span></label>
             <input type="text"
                    pInputText
                    class="w-full"
                    name="code"
                    id="code"
-                   minlength="11"
-                   maxlength="11"
+                   minlength="10"
+                   maxlength="12"
                    required
                    [(ngModel)]="model.code"
                    #codeModel="ngModel"

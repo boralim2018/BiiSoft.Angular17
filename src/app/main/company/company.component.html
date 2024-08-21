@@ -59,11 +59,12 @@
                             <div class="field col-12 md:col-6"
                                  selectTimezone
                                  name="selectTimezone"
-                                 [initModel]="true"
+                                 [initModel]="false"
                                  [required]="true"
                                  [label]="l('Timezone')"
                                  [(ngModel)]="generalSetting.defaultTimeZone"
-                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.selectTimezone.errors?.required">
+                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.selectTimezone.errors?.required"
+                                 #timezone>
                             </div>
                             <div class="field col-12 md:col-6"
                                  selectDate

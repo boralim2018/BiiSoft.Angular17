@@ -1,10 +1,10 @@
-import { Component, Injector, OnInit, EventEmitter, Input, Output, forwardRef } from '@angular/core';
+import { Component, Injector, OnInit, Input, forwardRef } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
-import { ControlValueAccessorComponentBase } from '../../app-component-base';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbpValidationSummaryComponent } from '../validation/abp-validation.summary.component';
+import { ControlValueAccessorComponentBase } from '../../control-value-accessor-component-base';
 
 @Component({
     selector: 'select-date, [selectDate]',

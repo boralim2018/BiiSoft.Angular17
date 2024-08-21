@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Injector, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ControlValueAccessorComponentBase } from 'shared/app-component-base';
+import { ControlValueAccessorComponentBase } from 'shared/control-value-accessor-component-base';
 
 @Component({ template: '' })
 export abstract class SelectComponentBase extends ControlValueAccessorComponentBase implements OnInit, OnDestroy {
@@ -13,35 +13,9 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     @Input() initModel: boolean = true;
     @Input() appendTo: any = 'body'
     @Input() showClear: boolean = true;
-    @Input() required: boolean;
     @Input() multiple: boolean;
     @Input() optionValue: string = 'id';
-    @Input() invalid: boolean;
-
-    //set value(val: any | undefined) {
-    //    this._value = val;        
-    //    if (val && !this.initModel && !this.loaded) {
-    //        this.onFilter("");
-    //        this.loaded = true;
-    //    }
-
-    //    this.onChange(val);
-    //}
-    //private _selectedModel: any;
-    //@Input()
-    //set selectedModel(value: any) {
-    //    this._selectedModel = value;
-
-    //    if (value && !this.initModel && !this.loaded) {
-    //        this.onFilter("");
-    //        this.loaded = true;
-    //    }
-    //}
-    //get selectedModel(): any {
-    //    return this._selectedModel;
-    //}
-
-    //@Output() selectedModelChange: EventEmitter<any> = new EventEmitter<any>();
+    
     models: any[] = [];
 
     loaded: boolean;
@@ -83,13 +57,8 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
             this.onFilter((event.target as HTMLInputElement).value);
         });
     }
-
-    //onChange(event: any) {
-    //    this.selectedModelChange.emit(event.value);
-    //    this.dirty = !this.selectedModel || (this.multiple && !(this.selectedModel && this.selectedModel.length))
-    //}
-
-    abstract onFilter(filter: string, callBack?: Function);
+    
+    abstract onFilter(filter: string, selectedValue?: any);
 
     protected mapResult(items: any[]) {
         if (this.multiple) {
@@ -103,7 +72,6 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
                         found = true;
                     }
                 })
-                //if (found) this.selectedModelChange.emit(this.value);
                 if (found) this.onChange(this.value);
             }
         }
@@ -115,7 +83,6 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
                 }
                 else {
                     this.value = find;
-                    //this.selectedModelChange.emit(this.value);
                     this.onChange(this.value);
                 }
             }

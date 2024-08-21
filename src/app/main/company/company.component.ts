@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as moment from 'moment';
 import { ButtonDirective, ButtonModule } from 'primeng/button';
@@ -9,8 +9,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { StepperModule } from 'primeng/stepper';
-import { of } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { Mixin } from 'ts-mixer';
 import { appModuleAnimation } from '../../../shared/animations/routerTransition';
 import { AppComponentBase, BFileComponentBase, NavBarComponentBase } from '../../../shared/app-component-base';
@@ -79,7 +78,9 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
     village2: any;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.company.edit);
-    
+
+    @ViewChild('timezone') timezone: SelectTimezoneComponent;
+
     constructor(
         injector: Injector,
         private _companySettingService: CompanySettingServiceProxy)
@@ -118,6 +119,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
 
                     if (result.generalSetting) {
                         this.generalSetting.init(result.generalSetting);
+
                         if (result.generalSetting.countryId) {
                             this.regionCountry = { id: result.generalSetting.countryId, name: result.generalSetting.countryName };
                         }
@@ -145,6 +147,8 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
                             this.transactionNos.push(tran);
                         });
                     }
+
+                    if (this.timezone) this.timezone.onFilter("", this.generalSetting.defaultTimeZone);
                 }
                
             });
