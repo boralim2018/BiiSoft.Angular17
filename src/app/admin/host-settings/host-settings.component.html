@@ -51,8 +51,8 @@
                                  findEdition
                                  name="selectEdition"
                                  [label]="l('Edition')"
-                                 [(selectedModel)]="edition"
-                                 (selectedModelChange)="hostSettings.tenantManagement.defaultEditionId = $event?.id">
+                                 [(ngModel)]="edition"
+                                 (ngModelChange)="hostSettings.tenantManagement.defaultEditionId = $event?.id">
                             </div>
                         </div>
                     </div>

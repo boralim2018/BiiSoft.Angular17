@@ -53,9 +53,8 @@
              name="selectEdition"
              [label]="l('Edition')"
              [required]="true"
-             [(selectedModel)]="edition"
-             (selectedModelChange)="onEditionChange($event)">
-            <input type="hidden" required [(ngModel)]="tenant.editionId" name="editionId" />
+             [(ngModel)]="edition"
+             (ngModelChange)="onEditionChange($event)">
         </div>
 
         <div class="field">

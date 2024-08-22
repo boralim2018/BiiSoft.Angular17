@@ -123,7 +123,6 @@
                  contactAddress
                  [title]="l('BillingAddress')"
                  [(model)]="model.billingAddress">
-                <input type="hidden" required name="countryId" [(ngModel)]="model.billingAddress.countryId" />
             </div>
 
             <div class="formgrid grid m-0"
@@ -131,7 +130,6 @@
                  [isShippingAddress]="true"
                  [(sameAsBillingAddress)]="model.sameAsBillingAddress"
                  [(model)]="model.shippingAddress">
-                <input type="hidden" required name="countryId" [(ngModel)]="model.billingAddress.countryId" />
             </div>
 
             <p-divider></p-divider>

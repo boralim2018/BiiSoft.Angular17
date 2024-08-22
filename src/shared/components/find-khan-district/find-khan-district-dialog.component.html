@@ -12,16 +12,16 @@
                  findCountry
                  name="selectCountries"
                  [multiple]="multiple"
-                 [(selectedModel)]="countries"
-                 (selectedModelChange)="onCountriesChange($event)">
+                 [(ngModel)]="countries"
+                 (ngModelChange)="onCountriesChange($event)">
             </div>
             <div class="field flex-1"
                  findCityProvince
                  name="selectCityProvinces"
                  [countries]="countries"
                  [multiple]="multiple"
-                 [(selectedModel)]="cityProvinces"
-                 (selectedModelChange)="onCityProvincesChange($event)">
+                 [(ngModel)]="cityProvinces"
+                 (ngModelChange)="onCityProvincesChange($event)">
             </div>
         </div>
         <div class="flex justify-content-between flex-wrap gap-3"

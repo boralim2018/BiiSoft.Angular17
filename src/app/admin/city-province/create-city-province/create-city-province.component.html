@@ -70,8 +70,7 @@
              name="country"
              [required]="true"
              [label]="l('Country')"
-             (selectedModelChange)="model.countryId = $event?.id">
-            <input type="hidden" required [(ngModel)]="model.countryId" name="countryId" />
+             (ngModelChange)="model.countryId = $event?.id">
         </div>
 
         <div class="field col-12 md:col-6 hidden md:block">

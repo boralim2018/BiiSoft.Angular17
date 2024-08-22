@@ -14,16 +14,16 @@
          name="selectCountry"
          [required]="true"
          [label]="l('Country')"
-         [(selectedModel)]="country"
-         (selectedModelChange)="onCountryChange($event)">
+         [(ngModel)]="country"
+         (ngModelChange)="onCountryChange($event)">
     </div>
     <div class="field col-12 md:col-6"
          findCityProvince
          name="selectCityProvince"
          [label]="l('CityProvince')"
          [countries]="country"
-         [(selectedModel)]="cityProvince"
-         (selectedModelChange)="onCityProvinceChange($event)">
+         [(ngModel)]="cityProvince"
+         (ngModelChange)="onCityProvinceChange($event)">
     </div>
     <div class="field col-12 md:col-6"
          findKhanDistrict
@@ -31,8 +31,8 @@
          [label]="l('KhanDistrict')"
          [countries]="country"
          [cityProvinces]="cityProvince"
-         [(selectedModel)]="khanDistrict"
-         (selectedModelChange)="onKhanDistrictChange($event)">
+         [(ngModel)]="khanDistrict"
+         (ngModelChange)="onKhanDistrictChange($event)">
     </div>
     <div class="field col-12 md:col-6"
          findSangkatCommune
@@ -41,8 +41,8 @@
          [countries]="country"
          [cityProvinces]="cityProvince"
          [khanDistricts]="khanDistrict"
-         [(selectedModel)]="sangkatCommune"
-         (selectedModelChange)="onSangkatCommuneChange($event)">
+         [(ngModel)]="sangkatCommune"
+         (ngModelChange)="onSangkatCommuneChange($event)">
     </div>
     <div class="field col-12 md:col-6"
          findVillage
@@ -51,8 +51,8 @@
          [countries]="country"
          [cityProvinces]="cityProvince"
          [khanDistricts]="khanDistrict"
-         [(selectedModel)]="sangkatCommune"
-         (selectedModelChange)="onSangkatCommuneChange($event)">
+         [(ngModel)]="sangkatCommune"
+         (ngModelChange)="onSangkatCommuneChange($event)">
     </div>
     <div class="field col-12 md:col-6">
         <label class="text-900 font-medium">{{l('PostalCode')}}</label>

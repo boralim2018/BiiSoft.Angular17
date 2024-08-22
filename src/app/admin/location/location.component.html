@@ -22,8 +22,8 @@
                          [multiple]="true"
                          [showExclude]="true"
                          [(exclude)]="filterInput.creators.exclude"
-                         [(selectedModel)]="creators"
-                         (selectedModelChange)="onCreatorsChange($event)">
+                         [(ngModel)]="creators"
+                         (ngModelChange)="onCreatorsChange($event)">
                     </div>
                     <div class="field"
                          findUser
@@ -32,8 +32,8 @@
                          [multiple]="true"
                          [showExclude]="true"
                          [(exclude)]="filterInput.modifiers.exclude"
-                         [(selectedModel)]="modifiers"
-                         (selectedModelChange)="onModifiersChange($event)">
+                         [(ngModel)]="modifiers"
+                         (ngModelChange)="onModifiersChange($event)">
                     </div>
                 </div>
                 <div class="layout-config-footer" searchFooter [loading]="isTableLoading" (onSearch)="refresh($event)">

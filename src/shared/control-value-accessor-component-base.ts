@@ -40,4 +40,9 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
     }
+
+    setValue(value: any) {
+        this.writeValue(value);
+        this.onChange(value);
+    }
 }

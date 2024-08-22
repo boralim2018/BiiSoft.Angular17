@@ -1,15 +1,22 @@
-import { Component, Injector, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Injector, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FindComponentBase } from 'shared/find-component-base';
 import { FindCityProvinceDialogComponent } from './find-city-province-dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
     selector: 'find-city-province, [findCityProvince]',
     templateUrl: '../find-template/find-template.component.html',
-    providers: [DialogService],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FindCityProvinceComponent),
+            multi: true
+        },
+        DialogService
+    ],
     standalone: true,
     imports: [NgIf, CheckboxModule, FormsModule, NgClass, NgFor]
 })

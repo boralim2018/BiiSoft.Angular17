@@ -1,15 +1,22 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, forwardRef, Injector, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FindComponentBase } from 'shared/find-component-base';
 import { FindUserDialogComponent } from './find-user-dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
     selector: 'find-user, [findUser]',
     templateUrl: '../find-template/find-template.component.html',
-    providers: [DialogService],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FindUserComponent),
+            multi: true
+        },
+        DialogService
+    ],
     standalone: true,
     imports: [NgIf, CheckboxModule, FormsModule, NgClass, NgFor]
 })

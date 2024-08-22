@@ -101,7 +101,7 @@
              findCurrency
              name="currency"
              [label]="l('Currency')"
-             (selectedModelChange)="model.currencyId = $event?.id">
+             (ngModelChange)="model.currencyId = $event?.id">
         </div>
         
     </div>

@@ -45,16 +45,18 @@
                                  name="selectRegionCountry"
                                  [required]="true"
                                  [label]="l('RegionCountry')"
-                                 [(selectedModel)]="regionCountry"
-                                 (selectedModelChange)="onRegionCountryChange($event)">
+                                 [(ngModel)]="regionCountry"
+                                 (ngModelChange)="onRegionCountryChange($event)"
+                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.selectRegionCountry.errors?.required">
                             </div>
                             <div class="field col-12 md:col-6"
                                  findCurrency
                                  name="currency"
                                  [required]="true"
                                  [label]="l('Currency')"
-                                 [(selectedModel)]="currency"
-                                 (selectedModelChange)="generalSetting.currencyId = $event?.id">
+                                 [(ngModel)]="currency"
+                                 (ngModelChange)="generalSetting.currencyId = $event?.id"
+                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.currency.errors?.required">
                             </div>
                             <div class="field col-12 md:col-6"
                                  selectTimezone

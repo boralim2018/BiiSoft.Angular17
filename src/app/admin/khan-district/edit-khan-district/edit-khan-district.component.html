@@ -55,9 +55,8 @@
              name="country"
              [required]="true"
              [label]="l('Country')"
-             [(selectedModel)]="country"
-             (selectedModelChange)="model.countryId = $event?.id">
-            <input type="hidden" required [(ngModel)]="model.countryId" name="countryId" />
+             [(ngModel)]="country"
+             (ngModelChange)="model.countryId = $event?.id">
         </div>
         <div class="field col-12 md:col-6"
              findCityProvince
@@ -65,9 +64,8 @@
              [countries]="country"
              [required]="true"
              [label]="l('CityProvince')"
-             [(selectedModel)]="cityProvince"
-             (selectedModelChange)="model.cityProvinceId = $event?.id">
-            <input type="hidden" required [(ngModel)]="model.cityProvinceId" name="cityProvinceId" />
+             [(ngModel)]="cityProvince"
+             (ngModelChange)="model.cityProvinceId = $event?.id">
         </div>
 
     </div>
