@@ -9,16 +9,15 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     @Input() name: string;
     @Input() label: string;
     @Input() placeholder: string;
-    @Input() filter: boolean = true;
     @Input() initModel: boolean = true;
     @Input() appendTo: any = 'body'
     @Input() showClear: boolean = true;
     @Input() multiple: boolean;
-    @Input() optionValue: string = 'id';
+    @Input() showFilter: boolean = true;
     
-    models: any[] = [];
-    
+    models: any[] = [];    
     loading: boolean;
+    filter: string;
     
     //pagination
     skipCount: number = 0;

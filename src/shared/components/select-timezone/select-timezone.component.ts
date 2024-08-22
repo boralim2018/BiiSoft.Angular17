@@ -25,7 +25,7 @@ import { DropdownModule } from 'primeng/dropdown';
 export class SelectTimezoneComponent extends SelectComponentBase implements OnInit {
 
     sortField: string;
-    //usePagination: boolean = false;
+    usePagination: boolean = false;
     
     constructor(injector: Injector,
         private _service: CommonLookupServiceProxy
@@ -54,6 +54,8 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
     }
 
     onLazyLoad(event, selectedValue?: any) {
+
+        if (this.filter) return;
 
         if (!this.models) this.models = [];
 
