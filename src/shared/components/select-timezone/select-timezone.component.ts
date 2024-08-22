@@ -1,6 +1,6 @@
 import { Component, forwardRef, Injector, OnInit } from '@angular/core';
 import { CommonLookupServiceProxy } from '@shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs/operators';
+import { finalize, first } from 'rxjs/operators';
 import { SelectComponentBase } from 'shared/select-component-base';
 import { InputTextModule } from 'primeng/inputtext';
 import { PrimeTemplate, ScrollerOptions } from 'primeng/api';
@@ -25,9 +25,8 @@ import { DropdownModule } from 'primeng/dropdown';
 export class SelectTimezoneComponent extends SelectComponentBase implements OnInit {
 
     sortField: string;
-
-    page: number = 0;   
-
+    //usePagination: boolean = false;
+    
     constructor(injector: Injector,
         private _service: CommonLookupServiceProxy
     ) {
@@ -37,32 +36,41 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
     ngOnInit() {
         super.ngOnInit();
         this.placeholder = this.l('Select_', this.l('Timezone'));
-
-        this.onLazyLoad({ first: 0, rows: 10 });
     }
-
-    onLazyLoad(event) {
-        //this.loading = true;
-
-        const page = event.first / event.rows;
-        const size = event.rows;
-
-        console.log(event);
-    }
-
-
-    onFilter(filter: string, selectedValue?: any) {
+    
+    onFilter(filter: string) {
         this.models = [];
         this.loading = true;
+
+        this.skipCount = 0;
         
-        let selected = !selectedValue ? [] : this.multiple ? selectedValue : [selectedValue]; 
+        let selected = !this.value ? [] : this.value instanceof Array ? this.value : [this.value]; 
 
         this._service.getTimeZones(selected, filter, this.usePagination, this.skipCount, this.maxResultCount)
             .pipe(finalize(() => { this.loading = false; }))
-            .subscribe((result: any | null) => {
-                this.mapResult(result.items);
+            .subscribe((result) => {
+                this.models = result.items
             });
     }
 
+    onLazyLoad(event, selectedValue?: any) {
+
+        if (!this.models) this.models = [];
+
+        let page = Math.ceil(this.models.length / this.maxResultCount);
+        this.skipCount = page * this.maxResultCount;
+
+        if (this.totalRecords > 0 && this.totalRecords <= this.skipCount) return; 
+
+        this.loading = true;
+        let selected = !selectedValue ? [] : selectedValue instanceof Array ? selectedValue : [selectedValue];
+
+        this._service.getTimeZones(selected, "", this.usePagination, this.skipCount, this.maxResultCount)
+            .pipe(finalize(() => { this.loading = false; }))
+            .subscribe((result) => {
+                this.models = [...new Set([...this.models, ...result.items])];
+                this.totalRecords = result.totalCount;
+            });
+    }
 
 }

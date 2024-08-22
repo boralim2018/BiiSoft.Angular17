@@ -1,5 +1,5 @@
 <label *ngIf="label" class="mb-2">
-    {{label}} <span class="text-red-500" *ngIf="required">*</span>
+    {{label}} <span class="text-red-500" *ngIf="required">*</span>{{skipCount}}/{{totalRecords}}
 </label>
 <p-dropdown [options]="models"
             [(ngModel)]="value"
@@ -15,6 +15,7 @@
             [showClear]="showClear"
             [virtualScroll]="true"
             [virtualScrollItemSize]="38"
+            [lazy]="true"
             (onLazyLoad)="onLazyLoad($event)"
             [loading]="loading">
     <ng-template pTemplate="header" *ngIf="filter">
@@ -28,5 +29,4 @@
         </span>
     </ng-template>
 </p-dropdown>
-<small *ngIf="required && dirty"
-       class="p-error block">{{ l('IsRequired', l('Timezone'))}}</small>
+<small *ngIf="required && invalid" class="p-error block">{{ l('IsRequired', l('Timezone'))}}</small>

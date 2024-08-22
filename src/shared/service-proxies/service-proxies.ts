@@ -2104,7 +2104,7 @@ export class CommonLookupServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getTimeZones(selectedTimeZones: string[] | undefined, keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<StringListResultDto> {
+    getTimeZones(selectedTimeZones: string[] | undefined, keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<StringPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetTimeZones?";
         if (selectedTimeZones === null)
             throw new Error("The parameter 'selectedTimeZones' cannot be null.");
@@ -2143,14 +2143,14 @@ export class CommonLookupServiceProxy {
                 try {
                     return this.processGetTimeZones(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<StringListResultDto>;
+                    return _observableThrow(e) as any as Observable<StringPagedResultDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<StringListResultDto>;
+                return _observableThrow(response_) as any as Observable<StringPagedResultDto>;
         }));
     }
 
-    protected processGetTimeZones(response: HttpResponseBase): Observable<StringListResultDto> {
+    protected processGetTimeZones(response: HttpResponseBase): Observable<StringPagedResultDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2161,7 +2161,7 @@ export class CommonLookupServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = StringListResultDto.fromJS(resultData200);
+            result200 = StringPagedResultDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -23271,10 +23271,11 @@ export enum SortMode {
     __1 = -1,
 }
 
-export class StringListResultDto implements IStringListResultDto {
+export class StringPagedResultDto implements IStringPagedResultDto {
     items: string[] | undefined;
+    totalCount: number;
 
-    constructor(data?: IStringListResultDto) {
+    constructor(data?: IStringPagedResultDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -23290,12 +23291,13 @@ export class StringListResultDto implements IStringListResultDto {
                 for (let item of _data["items"])
                     this.items.push(item);
             }
+            this.totalCount = _data["totalCount"];
         }
     }
 
-    static fromJS(data: any): StringListResultDto {
+    static fromJS(data: any): StringPagedResultDto {
         data = typeof data === 'object' ? data : {};
-        let result = new StringListResultDto();
+        let result = new StringPagedResultDto();
         result.init(data);
         return result;
     }
@@ -23307,19 +23309,21 @@ export class StringListResultDto implements IStringListResultDto {
             for (let item of this.items)
                 data["items"].push(item);
         }
+        data["totalCount"] = this.totalCount;
         return data;
     }
 
-    clone(): StringListResultDto {
+    clone(): StringPagedResultDto {
         const json = this.toJSON();
-        let result = new StringListResultDto();
+        let result = new StringPagedResultDto();
         result.init(json);
         return result;
     }
 }
 
-export interface IStringListResultDto {
+export interface IStringPagedResultDto {
     items: string[] | undefined;
+    totalCount: number;
 }
 
 export class SwitchToLinkedAccountInput implements ISwitchToLinkedAccountInput {

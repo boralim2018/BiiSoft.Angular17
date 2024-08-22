@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Injector, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, Injector, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ControlValueAccessorComponentBase } from 'shared/control-value-accessor-component-base';
@@ -17,21 +17,20 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     @Input() optionValue: string = 'id';
     
     models: any[] = [];
-
-    loaded: boolean;
+    
     loading: boolean;
     
     //pagination
     skipCount: number = 0;
     maxResultCount: number = 25;
+    totalRecords: number = 0;   
     usePagination: boolean = true;
     sortMode: number = 1;
-    dirty: boolean;
 
     abstract sortField: string;
 
     keyup: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
-    keyupDelay: number = 200;
+    keyupDelay: number = 250;
     private keyupSubscription: Subscription;
 
     constructor(injector: Injector) {
@@ -40,9 +39,7 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     }
 
     ngOnInit(): void {
-        if (this.initModel) {
-            this.onFilter('', () => { this.loaded = true; });
-        }
+        if (this.initModel) this.onLazyLoad({ first: 0, last: this.maxResultCount });
     }
 
     ngOnDestroy(): void {
@@ -58,38 +55,7 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
         });
     }
     
-    abstract onFilter(filter: string, selectedValue?: any);
-
-    protected mapResult(items: any[]) {
-        if (this.multiple) {
-            if (this.value && this.value.length) {
-                let found: boolean;
-                this.value.map((m, i) => {
-                    let find = items.find(f => (f == m || f.id === m.id && f.displayName === m.displayName));
-                    if (!find) items.push(m);
-                    else {
-                        this.value[i] = find;
-                        found = true;
-                    }
-                })
-                if (found) this.onChange(this.value);
-            }
-        }
-        else {
-            if (this.value) {
-                let find = items.find(f => (f == this.value || f.id === this.value.id && f.displayName === this.value.displayName));
-                if (!find) {
-                    items.push(this.value);
-                }
-                else {
-                    this.value = find;
-                    this.onChange(this.value);
-                }
-            }
-        }
-
-        this.models = items;
-    }
-
+    abstract onFilter(filter: string);
+    abstract onLazyLoad(event, selected?: any);
 }
 

@@ -9,16 +9,16 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
     @Input() invalid: boolean;
 
     disabled: boolean;
-    protected _value: any | undefined;
-    get value(): any | undefined {
+    protected _value: any;
+    get value(): any {
         return this._value;
     }
-    set value(val: any | undefined) {
+    set value(val: any) {
         this._value = val;
         this.onChange(val);
     }
 
-    onChange: (value: any | undefined) => void = () => { };
+    onChange: (value: any) => void = () => { };
     onTouched: () => void = () => { };
 
     constructor(injector: Injector) {

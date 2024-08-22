@@ -148,7 +148,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
                         });
                     }
 
-                    if (this.timezone) this.timezone.onFilter("", this.generalSetting.defaultTimeZone);
+                    if (this.timezone) this.timezone.onLazyLoad({ first: 0, last: this.timezone.maxResultCount }, result.generalSetting.defaultTimeZone);
                 }
                
             });

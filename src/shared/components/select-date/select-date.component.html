@@ -12,5 +12,5 @@
             [disabled]="disabled"
             dateFormat="dd-mm-yy"
             styleClass="w-full"></p-calendar>
-<small *ngIf="invalid" class="p-error block">{{ l('IsRequired', label)}}</small>      
+<small *ngIf="required && invalid" class="p-error block">{{ l('IsRequired', label)}}</small>      
 
