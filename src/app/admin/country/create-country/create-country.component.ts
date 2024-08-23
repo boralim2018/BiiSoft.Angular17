@@ -23,7 +23,8 @@ import { of } from 'rxjs';
 export class CreateCountryComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateCountryInputDto = new CreateUpdateCountryInputDto();
-    
+    currency: any;
+
     constructor(
         injector: Injector,
         public _countryService: CountryServiceProxy,

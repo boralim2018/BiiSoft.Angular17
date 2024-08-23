@@ -30,11 +30,11 @@ export class FindKhanDistrictComponent extends FindComponentBase implements OnIn
         private _dialogService: DialogService,
     ) {
         super(injector);
+        this.placeholder = this.l('Select_', this.l('KhanDistrict'));
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this.placeholder = this.l('Select_', this.l('KhanDistrict'));
     }
 
     find() {

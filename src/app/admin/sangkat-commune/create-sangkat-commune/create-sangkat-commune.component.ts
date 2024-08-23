@@ -27,6 +27,7 @@ export class CreateSangkatCommuneComponent extends DynamicDialogBase implements 
     model: CreateUpdateSangkatCommuneInputDto = new CreateUpdateSangkatCommuneInputDto();
     country: any;
     cityProvince: any;
+    khanDistrict: any;
 
     constructor(
         injector: Injector,

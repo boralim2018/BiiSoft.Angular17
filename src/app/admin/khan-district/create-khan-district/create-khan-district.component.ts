@@ -25,6 +25,7 @@ export class CreateKhanDistrictComponent extends DynamicDialogBase implements On
     saving = false;
     model: CreateUpdateKhanDistrictInputDto = new CreateUpdateKhanDistrictInputDto();
     country: any;
+    cityProvince: any;
 
     constructor(
         injector: Injector,

@@ -1,9 +1,9 @@
 import { Component, forwardRef, Injector, OnInit } from '@angular/core';
 import { CommonLookupServiceProxy } from '@shared/service-proxies/service-proxies';
-import { finalize, first } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { SelectComponentBase } from 'shared/select-component-base';
 import { InputTextModule } from 'primeng/inputtext';
-import { PrimeTemplate, ScrollerOptions } from 'primeng/api';
+import { PrimeTemplate } from 'primeng/api';
 import { NgIf } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
@@ -25,17 +25,16 @@ import { DropdownModule } from 'primeng/dropdown';
 export class SelectTimezoneComponent extends SelectComponentBase implements OnInit {
 
     sortField: string;
-    usePagination: boolean = false;
-    
+    usePagination: boolean = true;
     constructor(injector: Injector,
         private _service: CommonLookupServiceProxy
     ) {
         super(injector);
+        this.placeholder = this.l('Select_', this.l('Timezone'));
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this.placeholder = this.l('Select_', this.l('Timezone'));
     }
     
     onFilter(filter: string) {
@@ -44,7 +43,7 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
 
         this.skipCount = 0;
         
-        let selected = !this.value ? [] : this.value instanceof Array ? this.value : [this.value]; 
+        let selected = !this.model ? [] : this.model instanceof Array ? this.model : [this.model]; 
 
         this._service.getTimeZones(selected, filter, this.usePagination, this.skipCount, this.maxResultCount)
             .pipe(finalize(() => { this.loading = false; }))

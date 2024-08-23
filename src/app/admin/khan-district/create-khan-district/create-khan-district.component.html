@@ -66,6 +66,7 @@
              [countries]="country"
              [required]="true"
              [label]="l('CityProvince')"
+             [(ngModel)]="cityProvince"
              (ngModelChange)="model.cityProvinceId = $event?.id">
         </div>
 

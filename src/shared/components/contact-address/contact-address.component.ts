@@ -1,8 +1,7 @@
-import { Component, Injector, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { AppComponentBase } from 'shared/app-component-base';
+import { Component, Injector, OnInit, EventEmitter, Output, Input, forwardRef } from '@angular/core';
 import { AbpValidationSummaryComponent } from '../validation/abp-validation.summary.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { AbstractControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { FindVillageComponent } from '../find-village/find-village.component';
 import { FindSangkatCommuneComponent } from '../find-sangkat-commune/find-sangkat-commune.component';
 import { FindKhanDistrictComponent } from '../find-khan-district/find-khan-district.component';
@@ -10,32 +9,42 @@ import { FindCityProvinceComponent } from '../find-city-province/find-city-provi
 import { FindCountryComponent } from '../find-country/find-country.component';
 import { NgIf } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ControlValueAccessorComponentBase } from '../../control-value-accessor-component-base';
 
 @Component({
     selector: '[contactAddress], contact-address',
     templateUrl: './contact-address.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ContactAddressComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => ContactAddressComponent),
+            multi: true
+        }
+    ],
     standalone: true,
     imports: [NgIf, FindCountryComponent, FindCityProvinceComponent, FindKhanDistrictComponent, FindSangkatCommuneComponent, FindVillageComponent, FormsModule, InputTextModule, AbpValidationSummaryComponent, CheckboxModule]
 })
-export class ContactAddressComponent extends AppComponentBase implements OnInit {
+export class ContactAddressComponent extends ControlValueAccessorComponentBase implements OnInit, Validator {
 
+    @Input() name: string;
     @Input() title: string = this.l('ContactAddress');
-    @Input() model: any;
-    @Output() modelChange: EventEmitter<any> = new EventEmitter<any>();
-
-    @Input() country: any;
-    @Output() countryChange: EventEmitter<any> = new EventEmitter<any>();
-    @Input() cityProvince: any;
-    @Output() cityProvinceChange: EventEmitter<any> = new EventEmitter<any>();
-    @Input() khanDistrict: any;
-    @Output() khanDistrictChange: EventEmitter<any> = new EventEmitter<any>();
-    @Input() sangkatCommune: any;
-    @Output() sangkatCommuneChange: EventEmitter<any> = new EventEmitter<any>();
-    @Input() village: any;
-    @Output() villageChange: EventEmitter<any> = new EventEmitter<any>();
+    
     @Input() isShippingAddress: boolean;
     @Input() sameAsBillingAddress: boolean;
     @Output() sameAsBillingAddressChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    addressLevel: number = 4;
+
+    touchedCountry: boolean;
+    touchedCityProvince: boolean;
+    touchedKhanDistrict: boolean;
+    touchedSangkatCommune: boolean;
+    touchedVillage: boolean;
 
     constructor(
         injector: Injector
@@ -49,26 +58,53 @@ export class ContactAddressComponent extends AppComponentBase implements OnInit 
 
     onCountryChange(event) {
         this.model.countryId = event?.id;
-        this.countryChange.emit(event);
+        this.onChange(this.model);
+        this.onTouched();
+        this.touchedCountry = true;
     }
 
     onCityProvinceChange(event) {
         this.model.cityProvinceId = event?.id;
-        this.cityProvinceChange.emit(event);
+        this.onChange(this.model);
+        this.onTouched();
+        this.touchedCityProvince = true;
     }
 
     onKhanDistrictChange(event) {
         this.model.khanDistrictId = event?.id;
-        this.khanDistrictChange.emit(event);
+        this.onChange(this.model);
+        this.onTouched();
+        this.touchedKhanDistrict = true;
     }
 
     onSangkatCommuneChange(event) {
         this.model.sangkatCommuneId = event?.id;
-        this.sangkatCommuneChange.emit(event);
+        this.onChange(this.model);
+        this.onTouched();
+        this.touchedSangkatCommune = true;
     }
 
     onVillageChange(event) {
         this.model.villageId = event?.id;
-        this.villageChange.emit(event);
+        this.onChange(this.model);
+        this.onTouched();
+        this.touchedVillage = true;
     }
+
+    validate(control: AbstractControl): { [key: string]: any } | null {
+        const isValid = this.sameAsBillingAddress || (
+            this.model.countryId &&
+            (this.addressLevel < 1 || this.model.cityProvinceId) && 
+            (this.addressLevel < 2 || this.model.khanDistrictId) && 
+            (this.addressLevel < 3 || this.model.sangkatCommuneId) && 
+            (this.addressLevel < 4 || this.model.villageId) &&
+            (!this.model.requiredPostalCode || this.model.postalCode) &&
+            (!this.model.requiredStreet || this.model.street) &&
+            (!this.model.requiredHouseNo || this.model.houseNo)
+        );
+
+        let result = isValid ? null : { invalid: true };
+        return result;
+    }
+
 }

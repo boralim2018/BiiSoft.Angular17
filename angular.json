@@ -103,21 +103,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "BiiSoft:build"
+            "buildTarget": "BiiSoft:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "BiiSoft:build:production"
+              "buildTarget": "BiiSoft:build:production"
             },
             "hmr": {
-              "browserTarget": "BiiSoft:build:hmr"
+              "buildTarget": "BiiSoft:build:hmr"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "BiiSoft:build"
+            "buildTarget": "BiiSoft:build"
           }
         },
         "test": {

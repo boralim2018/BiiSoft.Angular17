@@ -22,7 +22,7 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
     }
     
     ngOnInit(): void {
-        if (!this.validateMessage) this.validateMessage = this.placeholder ? this.placeholder : this.l("ThisFieldIsRequired");
+        if (!this.validateMessage) this.validateMessage = this.placeholder ?? this.l("ThisFieldIsRequired");
     }
     
     getDisplay(model: any): any {
@@ -34,9 +34,9 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
     }
 
     remove(i: number) {
-        if (this._value instanceof Array) {
-            this._value.splice(i, 1);
-            this.onChange(this._value);
+        if (this.model instanceof Array) {
+            this.model.splice(i, 1);
+            this.onChange(this.model);
             this.onTouched();
         }
     }
@@ -50,7 +50,7 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
         if (!result) return;
 
         if (this.multiple) {
-            let list = this._value instanceof Array ? this._value : [];
+            let list = this.model instanceof Array ? this.model : [];
             let newList = result.filter(s => list.find(f => f.id == s.id) === undefined);
             this.setValue(list.concat(newList));
         }

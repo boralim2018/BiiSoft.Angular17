@@ -121,15 +121,19 @@
 
             <div class="formgrid grid m-0"
                  contactAddress
+                 name="billingAddress"
                  [title]="l('BillingAddress')"
-                 [(model)]="model.billingAddress">
+                 [(ngModel)]="model.billingAddress"
+                 [required]="true">
             </div>
 
             <div class="formgrid grid m-0"
                  contactAddress
+                 name="shippingAddress"
                  [isShippingAddress]="true"
                  [(sameAsBillingAddress)]="model.sameAsBillingAddress"
-                 [(model)]="model.shippingAddress">
+                 [(ngModel)]="model.shippingAddress"
+                 [required]="true">
             </div>
 
             <p-divider></p-divider>

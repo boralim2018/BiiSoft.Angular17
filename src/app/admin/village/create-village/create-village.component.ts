@@ -29,6 +29,7 @@ export class CreateVillageComponent extends DynamicDialogBase implements OnInit 
     country: any;
     cityProvince: any;
     khanDistrict: any;
+    village: any;
 
     constructor(
         injector: Injector,

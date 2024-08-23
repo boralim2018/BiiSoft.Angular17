@@ -16,9 +16,9 @@
             <div class="flex-1 flex justify-content-between align-items-center">
                 <div class="p-placeholder cursor-pointer" *ngIf="invalid" (click)="find()">{{placeholder}}</div>
                 <ng-container *ngIf="!invalid">
-                    <span *ngIf="!multiple">{{getDisplay(value)}}</span>
+                    <span *ngIf="!multiple">{{getDisplay(model)}}</span>
                     <div class="flex flex-wrap gap-1" *ngIf="multiple">
-                        <ng-container *ngFor="let m of value; let i=index">
+                        <ng-container *ngFor="let m of model; let i=index">
                             <span class="border-1 border-round border-300 bg-primary px-2">
                                 {{getDisplay(m)}}
                                 <i class="pi pi-times text-xs cursor-pointer" (click)="remove(i)" *ngIf="showClear"></i>
@@ -27,7 +27,7 @@
                     </div>
                 </ng-container>
                 <span class="pi pi-times text-xs cursor-pointer"
-                      *ngIf="showClear && value && (!multiple || value.length > 1)"
+                      *ngIf="showClear && model && (!multiple || model.length > 1)"
                       (click)="clear()"></span>
             </div>
             <div class="p-multiselect-trigger text-center cursor-pointer" (click)="find()" #fButton><i class="pi pi-search"></i></div>

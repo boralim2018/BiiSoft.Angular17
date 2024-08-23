@@ -12,10 +12,11 @@
     <div class="field col-12 md:col-6"
          findCountry
          name="selectCountry"
-         [required]="true"
          [label]="l('Country')"
          [(ngModel)]="country"
-         (ngModelChange)="onCountryChange($event)">
+         (ngModelChange)="onCountryChange($event)"
+         [required]="true"
+         [invalid]="invalid && touchedCountry && !model.countryId">
     </div>
     <div class="field col-12 md:col-6"
          findCityProvince
@@ -23,7 +24,9 @@
          [label]="l('CityProvince')"
          [countries]="country"
          [(ngModel)]="cityProvince"
-         (ngModelChange)="onCityProvinceChange($event)">
+         (ngModelChange)="onCityProvinceChange($event)"
+         [required]="addressLevel >= 1"
+         [invalid]="invalid && touchedCityProvince && !model.cityProvinceId">
     </div>
     <div class="field col-12 md:col-6"
          findKhanDistrict
@@ -32,7 +35,9 @@
          [countries]="country"
          [cityProvinces]="cityProvince"
          [(ngModel)]="khanDistrict"
-         (ngModelChange)="onKhanDistrictChange($event)">
+         (ngModelChange)="onKhanDistrictChange($event)"
+         [required]="addressLevel >= 2"
+         [invalid]="invalid && touchedKhanDistrict && !model.khanDistrictId">
     </div>
     <div class="field col-12 md:col-6"
          findSangkatCommune
@@ -42,7 +47,9 @@
          [cityProvinces]="cityProvince"
          [khanDistricts]="khanDistrict"
          [(ngModel)]="sangkatCommune"
-         (ngModelChange)="onSangkatCommuneChange($event)">
+         (ngModelChange)="onSangkatCommuneChange($event)"
+         [required]="addressLevel >= 3"
+         [invalid]="invalid && touchedSangkatCommune && !model.sangkatCommuneId">
     </div>
     <div class="field col-12 md:col-6"
          findVillage
@@ -51,8 +58,11 @@
          [countries]="country"
          [cityProvinces]="cityProvince"
          [khanDistricts]="khanDistrict"
-         [(ngModel)]="sangkatCommune"
-         (ngModelChange)="onSangkatCommuneChange($event)">
+         [sangkatCommunes]="sangkatCommune"
+         [(ngModel)]="village"
+         (ngModelChange)="onVillageChange($event)"
+         [required]="addressLevel >= 4"
+         [invalid]="invalid && touchedVillage && !model.villageId">
     </div>
     <div class="field col-12 md:col-6">
         <label class="text-900 font-medium">{{l('PostalCode')}}</label>
@@ -63,6 +73,7 @@
                id="postalCode"
                maxlength="32"
                [(ngModel)]="model.postalCode"
+               [required]="model.requiredPostalCode"
                #postalCodeModel="ngModel"
                #postalCodeEl />
         <abp-validation-summary [control]="postalCodeModel"
@@ -77,6 +88,7 @@
                id="street"
                maxlength="32"
                [(ngModel)]="model.street"
+               [required]="model.requiredStreet"
                #streetModel="ngModel"
                #streetEl />
         <abp-validation-summary [control]="streetModel"
@@ -91,6 +103,7 @@
                id="houseNo"
                maxlength="32"
                [(ngModel)]="model.houseNo"
+               [required]="model.requiredHouseNo"
                #houseNoModel="ngModel"
                #houseNoEl />
         <abp-validation-summary [control]="houseNoModel"

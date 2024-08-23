@@ -9,14 +9,7 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
     @Input() invalid: boolean;
 
     disabled: boolean;
-    protected _value: any;
-    get value(): any {
-        return this._value;
-    }
-    set value(val: any) {
-        this._value = val;
-        this.onChange(val);
-    }
+    model: any;
 
     onChange: (value: any) => void = () => { };
     onTouched: () => void = () => { };
@@ -26,7 +19,7 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
     }
 
     writeValue(value: any): void {
-        this._value = value;
+        this.model = value;
     }
 
     registerOnChange(fn: (value: any) => void): void {
@@ -42,7 +35,7 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
     }
 
     setValue(value: any) {
-        this.writeValue(value);
+        this.model = value;
         this.onChange(value);
     }
 }

@@ -27,12 +27,11 @@ export class FindEditionComponent extends FindComponentBase implements OnInit {
         private _dialogService: DialogService,
     ) {
         super(injector);
+        this.placeholder = this.l('Select_', this.l('Edition'));
     }
 
     ngOnInit() {
         super.ngOnInit();
-
-        this.placeholder = this.l('Select_', this.l('Edition'));
     }
 
     find() {

@@ -31,11 +31,11 @@ export class FindSangkatCommuneComponent extends FindComponentBase implements On
         private _dialogService: DialogService,
     ) {
         super(injector);
+        this.placeholder = this.l('Select_', this.l('SangkatCommune'));
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this.placeholder = this.l('Select_', this.l('SangkatCommune'));
     }
 
     find() {

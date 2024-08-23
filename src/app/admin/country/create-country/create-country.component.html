@@ -101,6 +101,7 @@
              findCurrency
              name="currency"
              [label]="l('Currency')"
+             [(ngModel)]="currency"
              (ngModelChange)="model.currencyId = $event?.id">
         </div>
         

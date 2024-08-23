@@ -86,6 +86,7 @@
              [khanDistricts]="khanDistrict"
              [required]="true"
              [label]="l('SangkatCommune')"
+             [(ngModel)]="village"
              (ngModelChange)="model.sangkatCommuneId = $event?.id">
         </div>
 

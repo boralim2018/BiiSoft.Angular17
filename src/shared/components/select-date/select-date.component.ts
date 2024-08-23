@@ -28,10 +28,11 @@ export class SelectDateComponent extends ControlValueAccessorComponentBase imple
     
     constructor(injector: Injector) {
         super(injector);
+        this.placeholder = this.l('Select_', this.l('Date'));
     }
 
     ngOnInit(): void {      
-        this.placeholder = this.l('Select_', this.l('Date'));
+        
     }
     
 }
