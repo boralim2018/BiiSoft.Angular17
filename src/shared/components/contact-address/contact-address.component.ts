@@ -33,13 +33,15 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
 
     @Input() name: string;
     @Input() title: string = this.l('ContactAddress');
-    
+    @Input() addressLevel: number;
+    @Input() requiredPostalCode: boolean;
+    @Input() requiredStreet: boolean;
+    @Input() requiredHouseNo: boolean;
     @Input() isShippingAddress: boolean;
     @Input() sameAsBillingAddress: boolean;
     @Output() sameAsBillingAddressChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    addressLevel: number = 4;
-
+    
     touchedCountry: boolean;
     touchedCityProvince: boolean;
     touchedKhanDistrict: boolean;
@@ -98,9 +100,9 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
             (this.addressLevel < 2 || this.model.khanDistrictId) && 
             (this.addressLevel < 3 || this.model.sangkatCommuneId) && 
             (this.addressLevel < 4 || this.model.villageId) &&
-            (!this.model.requiredPostalCode || this.model.postalCode) &&
-            (!this.model.requiredStreet || this.model.street) &&
-            (!this.model.requiredHouseNo || this.model.houseNo)
+            (!this.requiredPostalCode || this.model.postalCode) &&
+            (!this.requiredStreet || this.model.street) &&
+            (!this.requiredHouseNo || this.model.houseNo)
         );
 
         let result = isValid ? null : { invalid: true };

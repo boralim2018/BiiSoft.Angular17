@@ -13,7 +13,7 @@
          findCountry
          name="selectCountry"
          [label]="l('Country')"
-         [(ngModel)]="country"
+         [(ngModel)]="model.country"
          (ngModelChange)="onCountryChange($event)"
          [required]="true"
          [invalid]="invalid && touchedCountry && !model.countryId">
@@ -22,8 +22,8 @@
          findCityProvince
          name="selectCityProvince"
          [label]="l('CityProvince')"
-         [countries]="country"
-         [(ngModel)]="cityProvince"
+         [countries]="model.country"
+         [(ngModel)]="model.cityProvince"
          (ngModelChange)="onCityProvinceChange($event)"
          [required]="addressLevel >= 1"
          [invalid]="invalid && touchedCityProvince && !model.cityProvinceId">
@@ -32,9 +32,9 @@
          findKhanDistrict
          name="selectKhanDistrict"
          [label]="l('KhanDistrict')"
-         [countries]="country"
-         [cityProvinces]="cityProvince"
-         [(ngModel)]="khanDistrict"
+         [countries]="model.country"
+         [cityProvinces]="model.cityProvince"
+         [(ngModel)]="model.khanDistrict"
          (ngModelChange)="onKhanDistrictChange($event)"
          [required]="addressLevel >= 2"
          [invalid]="invalid && touchedKhanDistrict && !model.khanDistrictId">
@@ -43,10 +43,10 @@
          findSangkatCommune
          name="selectSangkatCommune"
          [label]="l('SangkatCommune')"
-         [countries]="country"
-         [cityProvinces]="cityProvince"
-         [khanDistricts]="khanDistrict"
-         [(ngModel)]="sangkatCommune"
+         [countries]="model.country"
+         [cityProvinces]="model.cityProvince"
+         [khanDistricts]="model.khanDistrict"
+         [(ngModel)]="model.sangkatCommune"
          (ngModelChange)="onSangkatCommuneChange($event)"
          [required]="addressLevel >= 3"
          [invalid]="invalid && touchedSangkatCommune && !model.sangkatCommuneId">
@@ -55,17 +55,17 @@
          findVillage
          name="selectVillage"
          [label]="l('Village')"
-         [countries]="country"
-         [cityProvinces]="cityProvince"
-         [khanDistricts]="khanDistrict"
-         [sangkatCommunes]="sangkatCommune"
-         [(ngModel)]="village"
+         [countries]="model.country"
+         [cityProvinces]="model.cityProvince"
+         [khanDistricts]="model.khanDistrict"
+         [sangkatCommunes]="model.sangkatCommune"
+         [(ngModel)]="model.village"
          (ngModelChange)="onVillageChange($event)"
          [required]="addressLevel >= 4"
          [invalid]="invalid && touchedVillage && !model.villageId">
     </div>
     <div class="field col-12 md:col-6">
-        <label class="text-900 font-medium">{{l('PostalCode')}}</label>
+        <label class="text-900 font-medium">{{l('PostalCode')}}<span class="text-red-500" *ngIf="requiredPostalCode">*</span></label>
         <input type="text"
                pInputText
                class="w-full"
@@ -73,14 +73,14 @@
                id="postalCode"
                maxlength="32"
                [(ngModel)]="model.postalCode"
-               [required]="model.requiredPostalCode"
+               [required]="requiredPostalCode"
                #postalCodeModel="ngModel"
                #postalCodeEl />
         <abp-validation-summary [control]="postalCodeModel"
                                 [controlEl]="postalCodeEl"></abp-validation-summary>
     </div>
     <div class="field col-12 md:col-6">
-        <label class="text-900 font-medium">{{l('Street')}}</label>
+        <label class="text-900 font-medium">{{l('Street')}}<span class="text-red-500" *ngIf="requiredStreet">*</span></label>
         <input type="text"
                pInputText
                class="w-full"
@@ -88,14 +88,14 @@
                id="street"
                maxlength="32"
                [(ngModel)]="model.street"
-               [required]="model.requiredStreet"
+               [required]="requiredStreet"
                #streetModel="ngModel"
                #streetEl />
         <abp-validation-summary [control]="streetModel"
                                 [controlEl]="streetEl"></abp-validation-summary>
     </div>
     <div class="field col-12 md:col-6">
-        <label class="text-900 font-medium">{{l('HouseNo')}}</label>
+        <label class="text-900 font-medium">{{l('HouseNo')}}<span class="text-red-500" *ngIf="requiredHouseNo">*</span></label>
         <input type="text"
                pInputText
                class="w-full"
@@ -103,7 +103,7 @@
                id="houseNo"
                maxlength="32"
                [(ngModel)]="model.houseNo"
-               [required]="model.requiredHouseNo"
+               [required]="requiredHouseNo"
                #houseNoModel="ngModel"
                #houseNoEl />
         <abp-validation-summary [control]="houseNoModel"

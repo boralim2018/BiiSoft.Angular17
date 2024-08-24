@@ -7,7 +7,7 @@
         </div>
         <p-divider></p-divider>
 
-        <p-stepper orientation="vertical" [activeStep]="activeStep">
+        <p-stepper orientation="vertical" [(activeStep)]="activeStep">
             <p-stepperPanel header="{{l('GeneralSetting')}}">
                 <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
                     <div class="pt-3">
@@ -239,11 +239,10 @@
                                  name="billingAddress"
                                  contactAddress
                                  [(ngModel)]="branch.billingAddress"
-                                 [(country)]="country"
-                                 [(cityProvince)]="cityProvince"
-                                 [(khanDistrict)]="khanDistrict"
-                                 [(sangkatCommune)]="sangkatCommune"
-                                 [(village)]="village"
+                                 [addressLevel]="4"
+                                 [requiredPostalCode]="true"
+                                 [requiredStreet]="true"
+                                 [requiredHouseNo]="true"
                                  [required]="true"
                                  [invalid]="companyProfileForm.invalid && companyProfileForm.touched && companyProfileForm.controls.billingAddress.errors?.invalid">
                             </div>
@@ -253,15 +252,14 @@
                                  [isShippingAddress]="true"
                                  [(sameAsBillingAddress)]="branch.sameAsBillingAddress"
                                  [(ngModel)]="branch.shippingAddress"
-                                 [(country)]="country2"
-                                 [(cityProvince)]="cityProvince2"
-                                 [(khanDistrict)]="khanDistrict2"
-                                 [(sangkatCommune)]="sangkatCommune2"
-                                 [(village)]="village2"
+                                 [addressLevel]="4"
+                                 [requiredPostalCode]="true"
+                                 [requiredStreet]="true"
+                                 [requiredHouseNo]="true"
                                  [required]="true"
                                  [invalid]="companyProfileForm.invalid && companyProfileForm.touched && companyProfileForm.controls.shippingAddress.errors?.invalid">
                             </div>
-                           
+
                             <div class="flex justify-content-end gap-2 py-4">
                                 <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
                                 <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
@@ -277,26 +275,30 @@
                 </ng-template>
 
             </p-stepperPanel>
-            <!--<p-stepperPanel header="{{l('DefaultSetting')}}">
-                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
 
-                    <div class="flex justify-content-end gap-2 py-4">
-                        <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
-                        <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
-                        <p-button [label]="l('SaveNext')" (onClick)="saveProfile(nextCallback)" [loading]="saving" />
-                        <p-button [label]="l('Save')" (onClick)="saveProfile()" [loading]="saving" />
+            <p-stepperPanel>
+                <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
+                    <div class="flex align-items-center gap-3">
+                        <p-button role="tab" class="p-stepper-action" styleClass="w-13rem mr-2 bg-none border-none outline-none shadow-none p-0" tabindex="0" (click)="onClick.emit($event)">
+                            <span class="p-stepper-number">{{index + 1}}</span>
+                            <span class="p-stepper-title">{{l('TransactionNo')}}</span>
+                        </p-button>
+
+                        <ng-container *ngIf="activeStep==index">
+                            <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="customTransactionNoEnable" (onChange)="customTransactionNoEnableChange($event)"></p-inputSwitch>
+                            <span class="">{{l('CustomTransactionNoEnable')}}</span>
+
+                            <p-inputSwitch name="requiredReference" [(ngModel)]="requiredReference" (onChange)="requiredReferenceChange($event)"></p-inputSwitch>
+                            <span class="">{{l('RequiredReference')}}</span>
+                        </ng-container>
                     </div>
-
-                    <p-divider></p-divider>
                 </ng-template>
-            </p-stepperPanel>-->
-            <p-stepperPanel header="{{l('TransactionNo')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
                     <div class="pt-3">
                         <ng-container *ngFor="let t of transactionNos; let i=index;">
                             <div class="formgrid grid m-0">
                                 <div class="field col-12">
-                                    <div class="flex align-content-center gap-3">
+                                    <div class="flex align-items-center gap-3">
                                         <span class="w-10rem font-medium text-900">{{l(t.journalTypeName)}}</span>
 
                                         <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="t.customTransactionNoEnable"></p-inputSwitch>

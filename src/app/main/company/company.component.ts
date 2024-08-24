@@ -64,19 +64,9 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
     regionCountry: any;
     currency: any;
     businessStartDate: Date | undefined;
-
-    country: any;
-    cityProvince: any;
-    khanDistrict: any;
-    sangkatCommune: any;
-    village: any;
-
-    country2: any;
-    cityProvince2: any;
-    khanDistrict2: any;
-    sangkatCommune2: any;
-    village2: any;
-
+    customTransactionNoEnable: boolean;
+    requiredReference: boolean;
+    
     canEdit: boolean = this.isGranted(AppPermissions.pages.company.edit);
 
     @ViewChild('timezone') timezone: SelectTimezoneComponent;
@@ -133,19 +123,27 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
 
                     if (result.branch) {
                         this.branch.init(result.branch);
-                        this.setAddressDetails(result.branch.billingAddress, 'country', 'cityProvince', 'khanDistrict', 'sangkatCommune', 'village');
-                        this.setAddressDetails(result.branch.shippingAddress, 'country2', 'cityProvince2', 'khanDistrict2', 'sangkatCommune2', 'village2');
+                        this.setAddressDetails(result.branch.billingAddress);
+                        this.setAddressDetails(result.branch.shippingAddress);
                     }
                   
                     if (result.advanceSetting) this.advanceSetting.init(result.advanceSetting);
 
                     if (result.transactionNoSettings) {
+                        let customAll = true;
+                        let requiredAll = true;
                         result.transactionNoSettings.map(t => {
                             let tran = new CreateUpdateTransactionNoSettingInputDto();
                             tran.init(t);
                             tran['journalTypeName'] = t.journalTypeName;
                             this.transactionNos.push(tran);
+
+                            if (!t.customTransactionNoEnable) customAll = false;
+                            if (!t.requiredReference) requiredAll = false;
                         });
+
+                        this.customTransactionNoEnable = customAll;
+                        this.requiredReference = requiredAll;
                     }
 
                     if (this.timezone) this.timezone.onLazyLoad({ first: 0, last: this.timezone.maxResultCount }, result.generalSetting.defaultTimeZone);
@@ -162,12 +160,12 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
         }
     }
 
-    private setAddressDetails(address: ContactAddressDto, countryKey: string, cityProvinceKey: string, khanDistrictKey: string, sangkatCommuneKey: string, villageKey: string): void {
-        if (address.countryId) this[countryKey] = { id: address.countryId, name: address.countryName };
-        if (address.cityProvinceId) this[cityProvinceKey] = { id: address.cityProvinceId, name: address.cityProvinceName };
-        if (address.khanDistrictId) this[khanDistrictKey] = { id: address.khanDistrictId, name: address.khanDistrictName };
-        if (address.sangkatCommuneId) this[sangkatCommuneKey] = { id: address.sangkatCommuneId, name: address.sangkatCommuneName };
-        if (address.villageId) this[villageKey] = { id: address.villageId, name: address.villageName };
+    private setAddressDetails(address: ContactAddressDto): void {
+        if (address.countryId) address['country'] = { id: address.countryId, name: address.countryName };
+        if (address.cityProvinceId) address['cityProvince'] = { id: address.cityProvinceId, name: address.cityProvinceName };
+        if (address.khanDistrictId) address['khanDistrict'] = { id: address.khanDistrictId, name: address.khanDistrictName };
+        if (address.sangkatCommuneId) address['sangkatCommune'] = { id: address.sangkatCommuneId, name: address.sangkatCommuneName };
+        if (address.villageId) address['village'] = { id: address.villageId, name: address.villageName };
     }
 
     saveProfile(next?): void {
@@ -296,6 +294,18 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
             .replace(/Y/g, twoDigitYearStr);            
 
         return result;
+    }
+
+    customTransactionNoEnableChange(event) {
+        if (!this.transactionNos) return;
+
+        this.transactionNos.map(m => m.customTransactionNoEnable = event.checked);
+    }
+
+    requiredReferenceChange(event) {
+        if (!this.transactionNos) return;
+
+        this.transactionNos.map(m => m.requiredReference = event.checked);
     }
     
 }

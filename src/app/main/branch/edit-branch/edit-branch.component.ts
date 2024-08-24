@@ -24,19 +24,7 @@ import { of } from 'rxjs';
 export class EditBranchComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateBranchInputDto;
-
-    country: any;
-    cityProvince: any;
-    khanDistrict: any;
-    sangkatCommune: any;
-    village: any;
-
-    country2: any;
-    cityProvince2: any;
-    khanDistrict2: any;
-    sangkatCommune2: any;
-    village2: any;
-
+    
     constructor(
         injector: Injector,
         public _branchService: BranchServiceProxy,
@@ -67,19 +55,17 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
             .pipe(finalize(() => this.saving = false))
             .subscribe((result: BranchDetailDto) => {
                 this.model.init(result);
-                
-                if (this.model.billingAddress.countryId) this.country = { id: this.model.billingAddress.countryId, name: this.model.billingAddress.countryName };
-                if (this.model.billingAddress.cityProvinceId) this.cityProvince = { id: this.model.billingAddress.cityProvinceId, name: this.model.billingAddress.cityProvinceName };
-                if (this.model.billingAddress.khanDistrictId) this.khanDistrict = { id: this.model.billingAddress.khanDistrictId, name: this.model.billingAddress.khanDistrictName };
-                if (this.model.billingAddress.sangkatCommuneId) this.sangkatCommune = { id: this.model.billingAddress.sangkatCommuneId, name: this.model.billingAddress.sangkatCommuneName };
-                if (this.model.billingAddress.villageId) this.village = { id: this.model.billingAddress.villageId, name: this.model.billingAddress.villageName };
-
-                if (this.model.shippingAddress.countryId) this.country2 = { id: this.model.shippingAddress.countryId, name: this.model.shippingAddress.countryName };
-                if (this.model.shippingAddress.cityProvinceId) this.cityProvince2 = { id: this.model.shippingAddress.cityProvinceId, name: this.model.shippingAddress.cityProvinceName };
-                if (this.model.shippingAddress.khanDistrictId) this.khanDistrict2 = { id: this.model.shippingAddress.khanDistrictId, name: this.model.shippingAddress.khanDistrictName };
-                if (this.model.shippingAddress.sangkatCommuneId) this.sangkatCommune2 = { id: this.model.shippingAddress.sangkatCommuneId, name: this.model.shippingAddress.sangkatCommuneName };
-                if (this.model.shippingAddress.villageId) this.village2 = { id: this.model.shippingAddress.villageId, name: this.model.shippingAddress.villageName };
+                this.setAddressDetails(result.billingAddress);
+                this.setAddressDetails(result.shippingAddress);
             });
+    }
+
+    private setAddressDetails(address: ContactAddressDto): void {
+        if (address.countryId) address['country'] = { id: address.countryId, name: address.countryName };
+        if (address.cityProvinceId) address['cityProvince'] = { id: address.cityProvinceId, name: address.cityProvinceName };
+        if (address.khanDistrictId) address['khanDistrict'] = { id: address.khanDistrictId, name: address.khanDistrictName };
+        if (address.sangkatCommuneId) address['sangkatCommune'] = { id: address.sangkatCommuneId, name: address.sangkatCommuneName };
+        if (address.villageId) address['village'] = { id: address.villageId, name: address.villageName };
     }
 
     save(): void {
