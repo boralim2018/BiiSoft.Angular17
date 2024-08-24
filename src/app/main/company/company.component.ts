@@ -26,9 +26,10 @@ import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
 import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
 import { Ripple } from 'primeng/ripple';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { SelectDateComponent } from '../../../shared/components/select-date/select-date.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
     selector: 'app-company',
@@ -38,8 +39,8 @@ import { SelectDateComponent } from '../../../shared/components/select-date/sele
     providers: [CompanySettingServiceProxy],
     standalone: true,
     imports: [
-        FormsModule, StepperModule, ButtonModule, OverlayPanelModule, NgIf, NgFor,
-        TableSettingComponent, DividerModule, NavBarComponent, BusyDirective,
+        FormsModule, StepperModule, ButtonModule, OverlayPanelModule, NgIf, NgFor, NgClass,
+        TableSettingComponent, DividerModule, NavBarComponent, BusyDirective, TooltipModule,
         InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, FloatLabelModule,
         LocalizePipe, FindCountryComponent, InputSwitchModule, FindCurrencyComponent, SelectDateComponent,
         SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple

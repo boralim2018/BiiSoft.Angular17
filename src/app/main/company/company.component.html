@@ -276,95 +276,106 @@
 
             </p-stepperPanel>
 
-            <p-stepperPanel>
-                <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
-                    <div class="flex align-items-center gap-3">
-                        <p-button role="tab" class="p-stepper-action" styleClass="w-13rem mr-2 bg-none border-none outline-none shadow-none p-0" tabindex="0" (click)="onClick.emit($event)">
-                            <span class="p-stepper-number">{{index + 1}}</span>
-                            <span class="p-stepper-title">{{l('TransactionNo')}}</span>
-                        </p-button>
-
-                        <ng-container *ngIf="activeStep==index">
-                            <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="customTransactionNoEnable" (onChange)="customTransactionNoEnableChange($event)"></p-inputSwitch>
-                            <span class="">{{l('CustomTransactionNoEnable')}}</span>
-
-                            <p-inputSwitch name="requiredReference" [(ngModel)]="requiredReference" (onChange)="requiredReferenceChange($event)"></p-inputSwitch>
-                            <span class="">{{l('RequiredReference')}}</span>
-                        </ng-container>
-                    </div>
-                </ng-template>
+            <p-stepperPanel header="{{l('TransactionNo')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
                     <div class="pt-3">
-                        <ng-container *ngFor="let t of transactionNos; let i=index;">
-                            <div class="formgrid grid m-0">
-                                <div class="field col-12">
-                                    <div class="flex align-items-center gap-3">
-                                        <span class="w-10rem font-medium text-900">{{l(t.journalTypeName)}}</span>
 
-                                        <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="t.customTransactionNoEnable"></p-inputSwitch>
-                                        <span class="mb-3">{{l('CustomTransactionNoEnable')}}</span>
-
-                                        <p-inputSwitch name="requiredReference" [(ngModel)]="t.requiredReference"></p-inputSwitch>
-                                        <span class="mb-3">{{l('RequiredReference')}}</span>
-
-                                    </div>
-                                </div>
+                        <div class="flex flex-column md:flex-row md:align-content-center gap-3">
+                            <label class="w-full md:w-2 hidden md:block font-medium text-900">{{l("Name_",l("TransactionType"))}}</label>
+                            <label class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Prefix')}}</label>
+                            <label class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Digits')}}</label>
+                            <label class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Start')}}</label>
+                            <label class="w-full md:w-2 hidden md:block text-900 font-medium">{{l('Format')}}</label>
+                            <div class="flex align-content-center gap-3">
+                                <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="customTransactionNoEnable" (onChange)="customTransactionNoEnableChange($event)"></p-inputSwitch>
+                                <span>{{l('CustomNo')}}</span>
                             </div>
+                            <div class="flex align-content-center gap-3">
+                                <p-inputSwitch name="requiredReference" [(ngModel)]="requiredReference" (onChange)="requiredReferenceChange($event)"></p-inputSwitch>
+                                <span>{{l('RequiredReference')}}</span>
+                            </div>
+                        </div>
 
-                            <div class="formgrid grid m-0" *ngIf="!t.customTransactionNoEnable">
-                                <div class="field col-12 md:col-2">
-                                    <label class="text-900 font-medium">{{l('Prefix')}}</label>
-                                    <input type="text"
-                                           pInputText
-                                           class="w-full"
-                                           name="prefex_{{i}}"
-                                           id="prefix_{{i}}"
-                                           maxlength="8"
-                                           [placeholder]="l('Prefix')"
-                                           [(ngModel)]="t.prefix"
-                                           #prefixModel="ngModel"
-                                           #prefixEl />
+                        <p-divider></p-divider>
 
-                                    <abp-validation-summary [control]="prefixModel"
-                                                            [controlEl]="prefixEl"></abp-validation-summary>
+                        <ng-container *ngFor="let t of transactionNos; let i=index;">
+
+                            <div class="flex flex-column md:flex-row md:align-content-center gap-3">
+                                <span class="w-full md:w-2 font-medium text-900">{{l(t.journalTypeName)}}</span>
+
+                                <div class="w-full md:w-1 md:block field m-0" [ngClass]="{'hidden': t.customTransactionNoEnable}">
+                                    <div class="p-inputtext" disabled *ngIf="t.customTransactionNoEnable"></div>
+                                    <ng-container *ngIf="!t.customTransactionNoEnable">
+                                        <input type="text"
+                                               pInputText
+                                               class="w-full"
+                                               name="prefex_{{i}}"
+                                               id="prefix_{{i}}"
+                                               maxlength="8"
+                                               [placeholder]="l('Prefix')"
+                                               [(ngModel)]="t.prefix"
+                                               pTooltip="Y is 2 digits of current year, YY is full year. eg. if current year is 2024, INVY => INV24, INVYY => INV2024."
+                                               #prefixModel="ngModel"
+                                               #prefixEl />
+
+                                        <abp-validation-summary [control]="prefixModel"
+                                                                [controlEl]="prefixEl"></abp-validation-summary>
+                                    </ng-container>
                                 </div>
-                                <div class="field col-12 md:col-2">
-                                    <label class="text-900 font-medium">{{l('Digits')}}</label>
-                                    <input type="text"
-                                           pInputText
-                                           class="w-full"
-                                           name="digits_{{i}}"
-                                           id="digits_{{i}}"
-                                           minlength="1"
-                                           maxlength="2"
-                                           [placeholder]="l('Digits')"
-                                           [(ngModel)]="t.digits"
-                                           #digitsModel="ngModel"
-                                           #digitsEl />
-                                    <abp-validation-summary [control]="digitsModel"
-                                                            [controlEl]="digitsEl"></abp-validation-summary>
+
+                                <div class="w-full md:w-1 md:block field m-0" [ngClass]="{'hidden': t.customTransactionNoEnable}">
+                                    <div class="p-inputtext" disabled *ngIf="t.customTransactionNoEnable"></div>
+                                    <ng-container *ngIf="!t.customTransactionNoEnable">
+                                        <input type="text"
+                                               pInputText
+                                               class="w-full"
+                                               name="digits_{{i}}"
+                                               id="digits_{{i}}"
+                                               minlength="1"
+                                               maxlength="2"
+                                               [placeholder]="l('Digits')"
+                                               [(ngModel)]="t.digits"
+                                               [disabled]="t.customTransactionNoEnable"
+                                               #digitsModel="ngModel"
+                                               #digitsEl />
+                                        <abp-validation-summary [control]="digitsModel"
+                                                                [controlEl]="digitsEl"></abp-validation-summary>
+                                    </ng-container>
                                 </div>
-                                <div class="field col-12 md:col-2">
-                                    <label class="text-900 font-medium">{{l('Start')}}</label>
-                                    <input type="text"
-                                           pInputText
-                                           class="w-full"
-                                           name="start_{{i}}"
-                                           id="start_{{i}}"
-                                           minlength="1"
-                                           maxlength="3"
-                                           [placeholder]="l('Start')"
-                                           [(ngModel)]="t.start"
-                                           #startModel="ngModel"
-                                           #startEl />
-                                    <abp-validation-summary [control]="startModel"
-                                                            [controlEl]="startEl"></abp-validation-summary>
+
+                                <div class="w-full md:w-1 md:block field m-0" [ngClass]="{'hidden': t.customTransactionNoEnable}">
+                                    <div class="p-inputtext" disabled *ngIf="t.customTransactionNoEnable"></div>
+                                    <ng-container *ngIf="!t.customTransactionNoEnable">
+                                        <input type="text"
+                                               pInputText
+                                               class="w-full"
+                                               name="start_{{i}}"
+                                               id="start_{{i}}"
+                                               minlength="1"
+                                               maxlength="3"
+                                               [placeholder]="l('Start')"
+                                               [(ngModel)]="t.start"
+                                               [disabled]="t.customTransactionNoEnable"
+                                               #startModel="ngModel"
+                                               #startEl />
+                                        <abp-validation-summary [control]="startModel"
+                                                                [controlEl]="startEl"></abp-validation-summary>
+                                    </ng-container>
                                 </div>
-                                <div class="field col-12 md:col-2">
-                                    <label class="text-900 font-medium">{{l('Format')}}</label>
+
+                                <div class="w-full md:w-2 md:block field m-0" [ngClass]="{'hidden': t.customTransactionNoEnable}">
                                     <div class="p-inputtext" disabled>{{getTransactionNoFormat(t)}}</div>
                                 </div>
 
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="t.customTransactionNoEnable"></p-inputSwitch>
+                                    <span>{{l('CustomNo')}}</span>
+                                </div>
+
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="requiredReference" [(ngModel)]="t.requiredReference"></p-inputSwitch>
+                                    <span>{{l('RequiredReference')}}</span>
+                                </div>
                             </div>
 
                             <p-divider></p-divider>
