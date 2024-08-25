@@ -33,7 +33,6 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
 
     @Input() name: string;
     @Input() title: string = this.l('ContactAddress');
-    @Input() addressLevel: number;
     @Input() requiredPostalCode: boolean;
     @Input() requiredStreet: boolean;
     @Input() requiredHouseNo: boolean;
@@ -47,6 +46,10 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
     touchedKhanDistrict: boolean;
     touchedSangkatCommune: boolean;
     touchedVillage: boolean;
+
+    get addressLevel(): number {
+        return this.appSession.advanceSetting?.contactAddressLevel ?? 0;
+    }
 
     constructor(
         injector: Injector
@@ -91,6 +94,21 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
         this.onChange(this.model);
         this.onTouched();
         this.touchedVillage = true;
+    }
+
+    onPostalCodeChange(event) {
+        this.onChange(this.model);
+        this.onTouched();
+    }
+
+    onStreetChange(event) {
+        this.onChange(this.model);
+        this.onTouched();
+    }
+
+    onHouseNoChange(event) {
+        this.onChange(this.model);
+        this.onTouched();
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {

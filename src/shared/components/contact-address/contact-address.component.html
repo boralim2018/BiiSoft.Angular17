@@ -73,6 +73,7 @@
                id="postalCode"
                maxlength="32"
                [(ngModel)]="model.postalCode"
+               (ngModelChange)="onPostalCodeChange($event)"
                [required]="requiredPostalCode"
                #postalCodeModel="ngModel"
                #postalCodeEl />
@@ -88,6 +89,7 @@
                id="street"
                maxlength="32"
                [(ngModel)]="model.street"
+               (ngModelChange)="onStreetChange($event)"
                [required]="requiredStreet"
                #streetModel="ngModel"
                #streetEl />
@@ -103,6 +105,7 @@
                id="houseNo"
                maxlength="32"
                [(ngModel)]="model.houseNo"
+               (ngModelChange)="onHouseNoChange($event)"
                [required]="requiredHouseNo"
                #houseNoModel="ngModel"
                #houseNoEl />

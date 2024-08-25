@@ -12356,6 +12356,69 @@ export enum AddressLevel {
     _4 = 4,
 }
 
+export class AdvanceSettingDto implements IAdvanceSettingDto {
+    multiBranchesEnable: boolean;
+    multiCurrencyEnable: boolean;
+    lineDiscountEnable: boolean;
+    totalDiscountEnable: boolean;
+    classEnable: boolean;
+    contactAddressLevel: AddressLevel;
+
+    constructor(data?: IAdvanceSettingDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.multiBranchesEnable = _data["multiBranchesEnable"];
+            this.multiCurrencyEnable = _data["multiCurrencyEnable"];
+            this.lineDiscountEnable = _data["lineDiscountEnable"];
+            this.totalDiscountEnable = _data["totalDiscountEnable"];
+            this.classEnable = _data["classEnable"];
+            this.contactAddressLevel = _data["contactAddressLevel"];
+        }
+    }
+
+    static fromJS(data: any): AdvanceSettingDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AdvanceSettingDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["multiBranchesEnable"] = this.multiBranchesEnable;
+        data["multiCurrencyEnable"] = this.multiCurrencyEnable;
+        data["lineDiscountEnable"] = this.lineDiscountEnable;
+        data["totalDiscountEnable"] = this.totalDiscountEnable;
+        data["classEnable"] = this.classEnable;
+        data["contactAddressLevel"] = this.contactAddressLevel;
+        return data;
+    }
+
+    clone(): AdvanceSettingDto {
+        const json = this.toJSON();
+        let result = new AdvanceSettingDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAdvanceSettingDto {
+    multiBranchesEnable: boolean;
+    multiCurrencyEnable: boolean;
+    lineDiscountEnable: boolean;
+    totalDiscountEnable: boolean;
+    classEnable: boolean;
+    contactAddressLevel: AddressLevel;
+}
+
 export class ApplicationInfoDto implements IApplicationInfoDto {
     version: string | undefined;
     releaseDate: moment.Moment;
@@ -18485,6 +18548,77 @@ export interface IFlatFeatureDtoListResultDto {
     items: FlatFeatureDto[] | undefined;
 }
 
+export class GeneralSettingDto implements IGeneralSettingDto {
+    countryId: string | undefined;
+    countryName: string | undefined;
+    defaultTimeZone: string | undefined;
+    currencyId: number | undefined;
+    currencyCode: string | undefined;
+    businessStartDate: moment.Moment | undefined;
+    roundTotalDigits: number;
+    roundCostDigits: number;
+
+    constructor(data?: IGeneralSettingDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.countryId = _data["countryId"];
+            this.countryName = _data["countryName"];
+            this.defaultTimeZone = _data["defaultTimeZone"];
+            this.currencyId = _data["currencyId"];
+            this.currencyCode = _data["currencyCode"];
+            this.businessStartDate = _data["businessStartDate"] ? moment(_data["businessStartDate"].toString()) : <any>undefined;
+            this.roundTotalDigits = _data["roundTotalDigits"];
+            this.roundCostDigits = _data["roundCostDigits"];
+        }
+    }
+
+    static fromJS(data: any): GeneralSettingDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GeneralSettingDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["countryId"] = this.countryId;
+        data["countryName"] = this.countryName;
+        data["defaultTimeZone"] = this.defaultTimeZone;
+        data["currencyId"] = this.currencyId;
+        data["currencyCode"] = this.currencyCode;
+        data["businessStartDate"] = this.businessStartDate ? this.businessStartDate.toISOString() : <any>undefined;
+        data["roundTotalDigits"] = this.roundTotalDigits;
+        data["roundCostDigits"] = this.roundCostDigits;
+        return data;
+    }
+
+    clone(): GeneralSettingDto {
+        const json = this.toJSON();
+        let result = new GeneralSettingDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGeneralSettingDto {
+    countryId: string | undefined;
+    countryName: string | undefined;
+    defaultTimeZone: string | undefined;
+    currencyId: number | undefined;
+    currencyCode: string | undefined;
+    businessStartDate: moment.Moment | undefined;
+    roundTotalDigits: number;
+    roundCostDigits: number;
+}
+
 export class GeneralSettingsEditDto implements IGeneralSettingsEditDto {
     timezone: string | undefined;
     timezoneForComparison: string | undefined;
@@ -18536,6 +18670,8 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
     tenant: TenantLoginInfoDto;
+    generalSetting: GeneralSettingDto;
+    advanceSetting: AdvanceSettingDto;
 
     constructor(data?: IGetCurrentLoginInformationsOutput) {
         if (data) {
@@ -18551,6 +18687,8 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
             this.application = _data["application"] ? ApplicationInfoDto.fromJS(_data["application"]) : <any>undefined;
             this.user = _data["user"] ? UserLoginInfoDto.fromJS(_data["user"]) : <any>undefined;
             this.tenant = _data["tenant"] ? TenantLoginInfoDto.fromJS(_data["tenant"]) : <any>undefined;
+            this.generalSetting = _data["generalSetting"] ? GeneralSettingDto.fromJS(_data["generalSetting"]) : <any>undefined;
+            this.advanceSetting = _data["advanceSetting"] ? AdvanceSettingDto.fromJS(_data["advanceSetting"]) : <any>undefined;
         }
     }
 
@@ -18566,6 +18704,8 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
         data["application"] = this.application ? this.application.toJSON() : <any>undefined;
         data["user"] = this.user ? this.user.toJSON() : <any>undefined;
         data["tenant"] = this.tenant ? this.tenant.toJSON() : <any>undefined;
+        data["generalSetting"] = this.generalSetting ? this.generalSetting.toJSON() : <any>undefined;
+        data["advanceSetting"] = this.advanceSetting ? this.advanceSetting.toJSON() : <any>undefined;
         return data;
     }
 
@@ -18581,6 +18721,8 @@ export interface IGetCurrentLoginInformationsOutput {
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
     tenant: TenantLoginInfoDto;
+    generalSetting: GeneralSettingDto;
+    advanceSetting: AdvanceSettingDto;
 }
 
 export class GetEditionEditOutput implements IGetEditionEditOutput {

@@ -1,7 +1,9 @@
 import { AbpMultiTenancyService } from 'abp-ng2-module';
 import { Injectable } from '@angular/core';
 import {
+    AdvanceSettingDto,
     ApplicationInfoDto,
+    GeneralSettingDto,
     GetCurrentLoginInformationsOutput,
     SessionServiceProxy,
     TenantLoginInfoDto,
@@ -14,6 +16,8 @@ export class AppSessionService {
     private _user: UserLoginInfoDto;
     private _tenant: TenantLoginInfoDto;
     private _application: ApplicationInfoDto;
+    private _generalSetting: GeneralSettingDto;
+    private _advanceSetting: AdvanceSettingDto;
 
     constructor(
         private _sessionService: SessionServiceProxy,
@@ -40,6 +44,14 @@ export class AppSessionService {
         return this.tenant ? this.tenant.id : null;
     }
 
+    get generalSetting(): GeneralSettingDto {
+        return this._generalSetting;
+    }
+
+    get advanceSetting(): AdvanceSettingDto {
+        return this._advanceSetting;
+    }
+
     getShownLoginName(): string {
         const userName = this._user.userName;
         if (!this._abpMultiTenancyService.isEnabled) {
@@ -55,6 +67,8 @@ export class AppSessionService {
                 this._application = result.application;
                 this._user = result.user;
                 this._tenant = result.tenant;
+                this._generalSetting = result.generalSetting;
+                this._advanceSetting = result.advanceSetting;
 
                 resolve(true);
             }, (err) => {

@@ -239,7 +239,6 @@
                                  name="billingAddress"
                                  contactAddress
                                  [(ngModel)]="branch.billingAddress"
-                                 [addressLevel]="4"
                                  [requiredPostalCode]="true"
                                  [requiredStreet]="true"
                                  [requiredHouseNo]="true"
@@ -252,7 +251,6 @@
                                  [isShippingAddress]="true"
                                  [(sameAsBillingAddress)]="branch.sameAsBillingAddress"
                                  [(ngModel)]="branch.shippingAddress"
-                                 [addressLevel]="4"
                                  [requiredPostalCode]="true"
                                  [requiredStreet]="true"
                                  [requiredHouseNo]="true"
@@ -280,18 +278,24 @@
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
                     <div class="pt-3">
 
-                        <div class="flex flex-column md:flex-row md:align-content-center gap-3">
+                        <div class="flex flex-column md:flex-row md:align-items-center gap-3">
                             <label class="w-full md:w-2 hidden md:block font-medium text-900">{{l("Name_",l("TransactionType"))}}</label>
                             <label class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Prefix')}}</label>
                             <label class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Digits')}}</label>
                             <label class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Start')}}</label>
                             <label class="w-full md:w-2 hidden md:block text-900 font-medium">{{l('Format')}}</label>
-                            <div class="flex align-content-center gap-3">
-                                <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="customTransactionNoEnable" (onChange)="customTransactionNoEnableChange($event)"></p-inputSwitch>
+                            <div class="flex align-items-center gap-3">
+                                <p-inputSwitch name="customTransactionNoEnable"
+                                               class="flex align-items-center"
+                                               [(ngModel)]="customTransactionNoEnable"
+                                               (onChange)="customTransactionNoEnableChange($event)"></p-inputSwitch>
                                 <span>{{l('CustomNo')}}</span>
                             </div>
-                            <div class="flex align-content-center gap-3">
-                                <p-inputSwitch name="requiredReference" [(ngModel)]="requiredReference" (onChange)="requiredReferenceChange($event)"></p-inputSwitch>
+                            <div class="flex align-items-center gap-3">
+                                <p-inputSwitch name="requiredReference"
+                                               class="flex align-items-center"
+                                               [(ngModel)]="requiredReference"
+                                               (onChange)="requiredReferenceChange($event)"></p-inputSwitch>
                                 <span>{{l('RequiredReference')}}</span>
                             </div>
                         </div>
@@ -300,7 +304,7 @@
 
                         <ng-container *ngFor="let t of transactionNos; let i=index;">
 
-                            <div class="flex flex-column md:flex-row md:align-content-center gap-3">
+                            <div class="flex flex-column md:flex-row md:align-items-center gap-3">
                                 <span class="w-full md:w-2 font-medium text-900">{{l(t.journalTypeName)}}</span>
 
                                 <div class="w-full md:w-1 md:block field m-0" [ngClass]="{'hidden': t.customTransactionNoEnable}">
@@ -367,13 +371,17 @@
                                     <div class="p-inputtext" disabled>{{getTransactionNoFormat(t)}}</div>
                                 </div>
 
-                                <div class="flex align-content-center gap-3">
-                                    <p-inputSwitch name="customTransactionNoEnable" [(ngModel)]="t.customTransactionNoEnable"></p-inputSwitch>
+                                <div class="flex align-items-center gap-3">
+                                    <p-inputSwitch name="customTransactionNoEnable"
+                                                   class="flex align-items-center"
+                                                   [(ngModel)]="t.customTransactionNoEnable"></p-inputSwitch>
                                     <span>{{l('CustomNo')}}</span>
                                 </div>
 
-                                <div class="flex align-content-center gap-3">
-                                    <p-inputSwitch name="requiredReference" [(ngModel)]="t.requiredReference"></p-inputSwitch>
+                                <div class="flex align-items-center gap-3">
+                                    <p-inputSwitch name="requiredReference"
+                                                   class="flex align-items-center"
+                                                   [(ngModel)]="t.requiredReference"></p-inputSwitch>
                                     <span>{{l('RequiredReference')}}</span>
                                 </div>
                             </div>
