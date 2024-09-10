@@ -12902,6 +12902,10 @@ export interface IAuthenticateResultModel {
 
 export class BranchDetailDto implements IBranchDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -12918,10 +12922,6 @@ export class BranchDetailDto implements IBranchDetailDto {
     email: string | undefined;
     website: string | undefined;
     taxRegistrationNumber: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
     billingAddress: ContactAddressDto;
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
@@ -12938,6 +12938,10 @@ export class BranchDetailDto implements IBranchDetailDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
             this.creatorUserId = _data["creatorUserId"];
             this.creatorUserName = _data["creatorUserName"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
@@ -12954,10 +12958,6 @@ export class BranchDetailDto implements IBranchDetailDto {
             this.email = _data["email"];
             this.website = _data["website"];
             this.taxRegistrationNumber = _data["taxRegistrationNumber"];
-            this.firstId = _data["firstId"];
-            this.nextId = _data["nextId"];
-            this.previousId = _data["previousId"];
-            this.lastId = _data["lastId"];
             this.billingAddress = _data["billingAddress"] ? ContactAddressDto.fromJS(_data["billingAddress"]) : <any>undefined;
             this.sameAsBillingAddress = _data["sameAsBillingAddress"];
             this.shippingAddress = _data["shippingAddress"] ? ContactAddressDto.fromJS(_data["shippingAddress"]) : <any>undefined;
@@ -12974,6 +12974,10 @@ export class BranchDetailDto implements IBranchDetailDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
         data["creatorUserId"] = this.creatorUserId;
         data["creatorUserName"] = this.creatorUserName;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -12990,10 +12994,6 @@ export class BranchDetailDto implements IBranchDetailDto {
         data["email"] = this.email;
         data["website"] = this.website;
         data["taxRegistrationNumber"] = this.taxRegistrationNumber;
-        data["firstId"] = this.firstId;
-        data["nextId"] = this.nextId;
-        data["previousId"] = this.previousId;
-        data["lastId"] = this.lastId;
         data["billingAddress"] = this.billingAddress ? this.billingAddress.toJSON() : <any>undefined;
         data["sameAsBillingAddress"] = this.sameAsBillingAddress;
         data["shippingAddress"] = this.shippingAddress ? this.shippingAddress.toJSON() : <any>undefined;
@@ -13010,6 +13010,10 @@ export class BranchDetailDto implements IBranchDetailDto {
 
 export interface IBranchDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -13026,10 +13030,6 @@ export interface IBranchDetailDto {
     email: string | undefined;
     website: string | undefined;
     taxRegistrationNumber: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
     billingAddress: ContactAddressDto;
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
@@ -13053,14 +13053,6 @@ export class BranchListDto implements IBranchListDto {
     email: string | undefined;
     website: string | undefined;
     taxRegistrationNumber: string | undefined;
-    countryName: string | undefined;
-    cityProvinceName: string | undefined;
-    khanDistrictName: string | undefined;
-    sangkatCommuneName: string | undefined;
-    villageName: string | undefined;
-    postalCode: string | undefined;
-    street: string | undefined;
-    houseNo: string | undefined;
 
     constructor(data?: IBranchListDto) {
         if (data) {
@@ -13090,14 +13082,6 @@ export class BranchListDto implements IBranchListDto {
             this.email = _data["email"];
             this.website = _data["website"];
             this.taxRegistrationNumber = _data["taxRegistrationNumber"];
-            this.countryName = _data["countryName"];
-            this.cityProvinceName = _data["cityProvinceName"];
-            this.khanDistrictName = _data["khanDistrictName"];
-            this.sangkatCommuneName = _data["sangkatCommuneName"];
-            this.villageName = _data["villageName"];
-            this.postalCode = _data["postalCode"];
-            this.street = _data["street"];
-            this.houseNo = _data["houseNo"];
         }
     }
 
@@ -13127,14 +13111,6 @@ export class BranchListDto implements IBranchListDto {
         data["email"] = this.email;
         data["website"] = this.website;
         data["taxRegistrationNumber"] = this.taxRegistrationNumber;
-        data["countryName"] = this.countryName;
-        data["cityProvinceName"] = this.cityProvinceName;
-        data["khanDistrictName"] = this.khanDistrictName;
-        data["sangkatCommuneName"] = this.sangkatCommuneName;
-        data["villageName"] = this.villageName;
-        data["postalCode"] = this.postalCode;
-        data["street"] = this.street;
-        data["houseNo"] = this.houseNo;
         return data;
     }
 
@@ -13164,14 +13140,6 @@ export interface IBranchListDto {
     email: string | undefined;
     website: string | undefined;
     taxRegistrationNumber: string | undefined;
-    countryName: string | undefined;
-    cityProvinceName: string | undefined;
-    khanDistrictName: string | undefined;
-    sangkatCommuneName: string | undefined;
-    villageName: string | undefined;
-    postalCode: string | undefined;
-    street: string | undefined;
-    houseNo: string | undefined;
 }
 
 export class BranchListDtoPagedResultDto implements IBranchListDtoPagedResultDto {
@@ -13418,6 +13386,10 @@ export interface IChangeUserLanguageDto {
 
 export class CityProvinceDetailDto implements ICityProvinceDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -13432,10 +13404,6 @@ export class CityProvinceDetailDto implements ICityProvinceDetailDto {
     no: number;
     code: string | undefined;
     iso: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
     countryId: string | undefined;
     countryName: string | undefined;
 
@@ -13451,6 +13419,10 @@ export class CityProvinceDetailDto implements ICityProvinceDetailDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
             this.creatorUserId = _data["creatorUserId"];
             this.creatorUserName = _data["creatorUserName"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
@@ -13465,10 +13437,6 @@ export class CityProvinceDetailDto implements ICityProvinceDetailDto {
             this.no = _data["no"];
             this.code = _data["code"];
             this.iso = _data["iso"];
-            this.firstId = _data["firstId"];
-            this.nextId = _data["nextId"];
-            this.previousId = _data["previousId"];
-            this.lastId = _data["lastId"];
             this.countryId = _data["countryId"];
             this.countryName = _data["countryName"];
         }
@@ -13484,6 +13452,10 @@ export class CityProvinceDetailDto implements ICityProvinceDetailDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
         data["creatorUserId"] = this.creatorUserId;
         data["creatorUserName"] = this.creatorUserName;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -13498,10 +13470,6 @@ export class CityProvinceDetailDto implements ICityProvinceDetailDto {
         data["no"] = this.no;
         data["code"] = this.code;
         data["iso"] = this.iso;
-        data["firstId"] = this.firstId;
-        data["nextId"] = this.nextId;
-        data["previousId"] = this.previousId;
-        data["lastId"] = this.lastId;
         data["countryId"] = this.countryId;
         data["countryName"] = this.countryName;
         return data;
@@ -13517,6 +13485,10 @@ export class CityProvinceDetailDto implements ICityProvinceDetailDto {
 
 export interface ICityProvinceDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -13531,10 +13503,6 @@ export interface ICityProvinceDetailDto {
     no: number;
     code: string | undefined;
     iso: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
     countryId: string | undefined;
     countryName: string | undefined;
 }
@@ -14151,6 +14119,10 @@ export interface IContactAddressDto {
 
 export class CountryDetailDto implements ICountryDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -14169,10 +14141,6 @@ export class CountryDetailDto implements ICountryDetailDto {
     phonePrefix: string | undefined;
     currencyId: number | undefined;
     currencyCode: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 
     constructor(data?: ICountryDetailDto) {
         if (data) {
@@ -14186,6 +14154,10 @@ export class CountryDetailDto implements ICountryDetailDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
             this.creatorUserId = _data["creatorUserId"];
             this.creatorUserName = _data["creatorUserName"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
@@ -14204,10 +14176,6 @@ export class CountryDetailDto implements ICountryDetailDto {
             this.phonePrefix = _data["phonePrefix"];
             this.currencyId = _data["currencyId"];
             this.currencyCode = _data["currencyCode"];
-            this.firstId = _data["firstId"];
-            this.nextId = _data["nextId"];
-            this.previousId = _data["previousId"];
-            this.lastId = _data["lastId"];
         }
     }
 
@@ -14221,6 +14189,10 @@ export class CountryDetailDto implements ICountryDetailDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
         data["creatorUserId"] = this.creatorUserId;
         data["creatorUserName"] = this.creatorUserName;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -14239,10 +14211,6 @@ export class CountryDetailDto implements ICountryDetailDto {
         data["phonePrefix"] = this.phonePrefix;
         data["currencyId"] = this.currencyId;
         data["currencyCode"] = this.currencyCode;
-        data["firstId"] = this.firstId;
-        data["nextId"] = this.nextId;
-        data["previousId"] = this.previousId;
-        data["lastId"] = this.lastId;
         return data;
     }
 
@@ -14256,6 +14224,10 @@ export class CountryDetailDto implements ICountryDetailDto {
 
 export interface ICountryDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -14274,10 +14246,6 @@ export interface ICountryDetailDto {
     phonePrefix: string | undefined;
     currencyId: number | undefined;
     currencyCode: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 }
 
 export class CountryListDto implements ICountryListDto {
@@ -15550,6 +15518,10 @@ export interface ICreateUserDto {
 
 export class CurrencyDetailDto implements ICurrencyDetailDto {
     id: number;
+    firstId: number | undefined;
+    nextId: number | undefined;
+    previousId: number | undefined;
+    lastId: number | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -15562,10 +15534,6 @@ export class CurrencyDetailDto implements ICurrencyDetailDto {
     isDefault: boolean;
     code: string | undefined;
     symbol: string | undefined;
-    firstId: number | undefined;
-    nextId: number | undefined;
-    previousId: number | undefined;
-    lastId: number | undefined;
 
     constructor(data?: ICurrencyDetailDto) {
         if (data) {
@@ -15579,6 +15547,10 @@ export class CurrencyDetailDto implements ICurrencyDetailDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
             this.creatorUserId = _data["creatorUserId"];
             this.creatorUserName = _data["creatorUserName"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
@@ -15591,10 +15563,6 @@ export class CurrencyDetailDto implements ICurrencyDetailDto {
             this.isDefault = _data["isDefault"];
             this.code = _data["code"];
             this.symbol = _data["symbol"];
-            this.firstId = _data["firstId"];
-            this.nextId = _data["nextId"];
-            this.previousId = _data["previousId"];
-            this.lastId = _data["lastId"];
         }
     }
 
@@ -15608,6 +15576,10 @@ export class CurrencyDetailDto implements ICurrencyDetailDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
         data["creatorUserId"] = this.creatorUserId;
         data["creatorUserName"] = this.creatorUserName;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -15620,10 +15592,6 @@ export class CurrencyDetailDto implements ICurrencyDetailDto {
         data["isDefault"] = this.isDefault;
         data["code"] = this.code;
         data["symbol"] = this.symbol;
-        data["firstId"] = this.firstId;
-        data["nextId"] = this.nextId;
-        data["previousId"] = this.previousId;
-        data["lastId"] = this.lastId;
         return data;
     }
 
@@ -15637,6 +15605,10 @@ export class CurrencyDetailDto implements ICurrencyDetailDto {
 
 export interface ICurrencyDetailDto {
     id: number;
+    firstId: number | undefined;
+    nextId: number | undefined;
+    previousId: number | undefined;
+    lastId: number | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -15649,10 +15621,6 @@ export interface ICurrencyDetailDto {
     isDefault: boolean;
     code: string | undefined;
     symbol: string | undefined;
-    firstId: number | undefined;
-    nextId: number | undefined;
-    previousId: number | undefined;
-    lastId: number | undefined;
 }
 
 export class CurrencyListDto implements ICurrencyListDto {
@@ -19877,6 +19845,10 @@ export interface IJournalTypeNameValueDto {
 
 export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -19894,10 +19866,6 @@ export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
     countryName: string | undefined;
     cityProvinceId: string | undefined;
     cityProvinceName: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 
     constructor(data?: IKhanDistrictDetailDto) {
         if (data) {
@@ -19911,6 +19879,10 @@ export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
             this.creatorUserId = _data["creatorUserId"];
             this.creatorUserName = _data["creatorUserName"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
@@ -19928,10 +19900,6 @@ export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
             this.countryName = _data["countryName"];
             this.cityProvinceId = _data["cityProvinceId"];
             this.cityProvinceName = _data["cityProvinceName"];
-            this.firstId = _data["firstId"];
-            this.nextId = _data["nextId"];
-            this.previousId = _data["previousId"];
-            this.lastId = _data["lastId"];
         }
     }
 
@@ -19945,6 +19913,10 @@ export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
         data["creatorUserId"] = this.creatorUserId;
         data["creatorUserName"] = this.creatorUserName;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -19962,10 +19934,6 @@ export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
         data["countryName"] = this.countryName;
         data["cityProvinceId"] = this.cityProvinceId;
         data["cityProvinceName"] = this.cityProvinceName;
-        data["firstId"] = this.firstId;
-        data["nextId"] = this.nextId;
-        data["previousId"] = this.previousId;
-        data["lastId"] = this.lastId;
         return data;
     }
 
@@ -19979,6 +19947,10 @@ export class KhanDistrictDetailDto implements IKhanDistrictDetailDto {
 
 export interface IKhanDistrictDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -19996,10 +19968,6 @@ export interface IKhanDistrictDetailDto {
     countryName: string | undefined;
     cityProvinceId: string | undefined;
     cityProvinceName: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 }
 
 export class KhanDistrictListDto implements IKhanDistrictListDto {
@@ -20582,6 +20550,10 @@ export interface ILocalizableComboboxItemSourceDto {
 
 export class LocationDetailDto implements ILocationDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -20596,10 +20568,6 @@ export class LocationDetailDto implements ILocationDetailDto {
     no: number;
     latitude: number | undefined;
     longitude: number | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 
     constructor(data?: ILocationDetailDto) {
         if (data) {
@@ -20613,6 +20581,10 @@ export class LocationDetailDto implements ILocationDetailDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
             this.creatorUserId = _data["creatorUserId"];
             this.creatorUserName = _data["creatorUserName"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
@@ -20627,10 +20599,6 @@ export class LocationDetailDto implements ILocationDetailDto {
             this.no = _data["no"];
             this.latitude = _data["latitude"];
             this.longitude = _data["longitude"];
-            this.firstId = _data["firstId"];
-            this.nextId = _data["nextId"];
-            this.previousId = _data["previousId"];
-            this.lastId = _data["lastId"];
         }
     }
 
@@ -20644,6 +20612,10 @@ export class LocationDetailDto implements ILocationDetailDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
         data["creatorUserId"] = this.creatorUserId;
         data["creatorUserName"] = this.creatorUserName;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -20658,10 +20630,6 @@ export class LocationDetailDto implements ILocationDetailDto {
         data["no"] = this.no;
         data["latitude"] = this.latitude;
         data["longitude"] = this.longitude;
-        data["firstId"] = this.firstId;
-        data["nextId"] = this.nextId;
-        data["previousId"] = this.previousId;
-        data["lastId"] = this.lastId;
         return data;
     }
 
@@ -20675,6 +20643,10 @@ export class LocationDetailDto implements ILocationDetailDto {
 
 export interface ILocationDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -20689,10 +20661,6 @@ export interface ILocationDetailDto {
     no: number;
     latitude: number | undefined;
     longitude: number | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 }
 
 export class LocationListDto implements ILocationListDto {
@@ -22910,6 +22878,10 @@ export interface IRoleListDtoListResultDto {
 
 export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -22929,10 +22901,6 @@ export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
     cityProvinceName: string | undefined;
     khanDistrictId: string | undefined;
     khanDistrictName: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 
     constructor(data?: ISangkatCommuneDetailDto) {
         if (data) {
@@ -22946,6 +22914,10 @@ export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
             this.creatorUserId = _data["creatorUserId"];
             this.creatorUserName = _data["creatorUserName"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
@@ -22965,10 +22937,6 @@ export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
             this.cityProvinceName = _data["cityProvinceName"];
             this.khanDistrictId = _data["khanDistrictId"];
             this.khanDistrictName = _data["khanDistrictName"];
-            this.firstId = _data["firstId"];
-            this.nextId = _data["nextId"];
-            this.previousId = _data["previousId"];
-            this.lastId = _data["lastId"];
         }
     }
 
@@ -22982,6 +22950,10 @@ export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
         data["creatorUserId"] = this.creatorUserId;
         data["creatorUserName"] = this.creatorUserName;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -23001,10 +22973,6 @@ export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
         data["cityProvinceName"] = this.cityProvinceName;
         data["khanDistrictId"] = this.khanDistrictId;
         data["khanDistrictName"] = this.khanDistrictName;
-        data["firstId"] = this.firstId;
-        data["nextId"] = this.nextId;
-        data["previousId"] = this.previousId;
-        data["lastId"] = this.lastId;
         return data;
     }
 
@@ -23018,6 +22986,10 @@ export class SangkatCommuneDetailDto implements ISangkatCommuneDetailDto {
 
 export interface ISangkatCommuneDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -23037,10 +23009,6 @@ export interface ISangkatCommuneDetailDto {
     cityProvinceName: string | undefined;
     khanDistrictId: string | undefined;
     khanDistrictName: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 }
 
 export class SangkatCommuneListDto implements ISangkatCommuneListDto {
@@ -25109,6 +25077,10 @@ export interface IVerifySmsCodeInputDto {
 
 export class VillageDetailDto implements IVillageDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -25130,10 +25102,6 @@ export class VillageDetailDto implements IVillageDetailDto {
     khanDistrictName: string | undefined;
     sangkatCommuneId: string | undefined;
     sangkatCommuneName: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 
     constructor(data?: IVillageDetailDto) {
         if (data) {
@@ -25147,6 +25115,10 @@ export class VillageDetailDto implements IVillageDetailDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
             this.creatorUserId = _data["creatorUserId"];
             this.creatorUserName = _data["creatorUserName"];
             this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
@@ -25168,10 +25140,6 @@ export class VillageDetailDto implements IVillageDetailDto {
             this.khanDistrictName = _data["khanDistrictName"];
             this.sangkatCommuneId = _data["sangkatCommuneId"];
             this.sangkatCommuneName = _data["sangkatCommuneName"];
-            this.firstId = _data["firstId"];
-            this.nextId = _data["nextId"];
-            this.previousId = _data["previousId"];
-            this.lastId = _data["lastId"];
         }
     }
 
@@ -25185,6 +25153,10 @@ export class VillageDetailDto implements IVillageDetailDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
         data["creatorUserId"] = this.creatorUserId;
         data["creatorUserName"] = this.creatorUserName;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -25206,10 +25178,6 @@ export class VillageDetailDto implements IVillageDetailDto {
         data["khanDistrictName"] = this.khanDistrictName;
         data["sangkatCommuneId"] = this.sangkatCommuneId;
         data["sangkatCommuneName"] = this.sangkatCommuneName;
-        data["firstId"] = this.firstId;
-        data["nextId"] = this.nextId;
-        data["previousId"] = this.previousId;
-        data["lastId"] = this.lastId;
         return data;
     }
 
@@ -25223,6 +25191,10 @@ export class VillageDetailDto implements IVillageDetailDto {
 
 export interface IVillageDetailDto {
     id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
     creatorUserId: number | undefined;
     creatorUserName: string | undefined;
     creationTime: moment.Moment | undefined;
@@ -25244,10 +25216,6 @@ export interface IVillageDetailDto {
     khanDistrictName: string | undefined;
     sangkatCommuneId: string | undefined;
     sangkatCommuneName: string | undefined;
-    firstId: string | undefined;
-    nextId: string | undefined;
-    previousId: string | undefined;
-    lastId: string | undefined;
 }
 
 export class VillageListDto implements IVillageListDto {
