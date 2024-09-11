@@ -12362,7 +12362,6 @@ export class AdvanceSettingDto implements IAdvanceSettingDto {
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
     classEnable: boolean;
-    contactAddressLevel: AddressLevel;
 
     constructor(data?: IAdvanceSettingDto) {
         if (data) {
@@ -12380,7 +12379,6 @@ export class AdvanceSettingDto implements IAdvanceSettingDto {
             this.lineDiscountEnable = _data["lineDiscountEnable"];
             this.totalDiscountEnable = _data["totalDiscountEnable"];
             this.classEnable = _data["classEnable"];
-            this.contactAddressLevel = _data["contactAddressLevel"];
         }
     }
 
@@ -12398,7 +12396,6 @@ export class AdvanceSettingDto implements IAdvanceSettingDto {
         data["lineDiscountEnable"] = this.lineDiscountEnable;
         data["totalDiscountEnable"] = this.totalDiscountEnable;
         data["classEnable"] = this.classEnable;
-        data["contactAddressLevel"] = this.contactAddressLevel;
         return data;
     }
 
@@ -12416,7 +12413,6 @@ export interface IAdvanceSettingDto {
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
     classEnable: boolean;
-    contactAddressLevel: AddressLevel;
 }
 
 export class ApplicationInfoDto implements IApplicationInfoDto {
@@ -13812,7 +13808,6 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
     classEnable: boolean;
-    contactAddressLevel: AddressLevel;
 
     constructor(data?: ICompanyAdvanceSettingDto) {
         if (data) {
@@ -13831,7 +13826,6 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
             this.lineDiscountEnable = _data["lineDiscountEnable"];
             this.totalDiscountEnable = _data["totalDiscountEnable"];
             this.classEnable = _data["classEnable"];
-            this.contactAddressLevel = _data["contactAddressLevel"];
         }
     }
 
@@ -13850,7 +13844,6 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
         data["lineDiscountEnable"] = this.lineDiscountEnable;
         data["totalDiscountEnable"] = this.totalDiscountEnable;
         data["classEnable"] = this.classEnable;
-        data["contactAddressLevel"] = this.contactAddressLevel;
         return data;
     }
 
@@ -13869,7 +13862,6 @@ export interface ICompanyAdvanceSettingDto {
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
     classEnable: boolean;
-    contactAddressLevel: AddressLevel;
 }
 
 export class CompanyGeneralSettingDto implements ICompanyGeneralSettingDto {
@@ -13882,6 +13874,7 @@ export class CompanyGeneralSettingDto implements ICompanyGeneralSettingDto {
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
     roundCostDigits: number;
+    contactAddressLevel: AddressLevel;
 
     constructor(data?: ICompanyGeneralSettingDto) {
         if (data) {
@@ -13903,6 +13896,7 @@ export class CompanyGeneralSettingDto implements ICompanyGeneralSettingDto {
             this.businessStartDate = _data["businessStartDate"] ? moment(_data["businessStartDate"].toString()) : <any>undefined;
             this.roundTotalDigits = _data["roundTotalDigits"];
             this.roundCostDigits = _data["roundCostDigits"];
+            this.contactAddressLevel = _data["contactAddressLevel"];
         }
     }
 
@@ -13924,6 +13918,7 @@ export class CompanyGeneralSettingDto implements ICompanyGeneralSettingDto {
         data["businessStartDate"] = this.businessStartDate ? this.businessStartDate.toISOString() : <any>undefined;
         data["roundTotalDigits"] = this.roundTotalDigits;
         data["roundCostDigits"] = this.roundCostDigits;
+        data["contactAddressLevel"] = this.contactAddressLevel;
         return data;
     }
 
@@ -13945,6 +13940,7 @@ export interface ICompanyGeneralSettingDto {
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
     roundCostDigits: number;
+    contactAddressLevel: AddressLevel;
 }
 
 export class CompanySettingDto implements ICompanySettingDto {
@@ -14849,7 +14845,6 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
     classEnable: boolean;
-    contactAddressLevel: AddressLevel;
 
     constructor(data?: ICreateUpdateCompanyAdvanceSettingInputDto) {
         if (data) {
@@ -14868,7 +14863,6 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
             this.lineDiscountEnable = _data["lineDiscountEnable"];
             this.totalDiscountEnable = _data["totalDiscountEnable"];
             this.classEnable = _data["classEnable"];
-            this.contactAddressLevel = _data["contactAddressLevel"];
         }
     }
 
@@ -14887,7 +14881,6 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
         data["lineDiscountEnable"] = this.lineDiscountEnable;
         data["totalDiscountEnable"] = this.totalDiscountEnable;
         data["classEnable"] = this.classEnable;
-        data["contactAddressLevel"] = this.contactAddressLevel;
         return data;
     }
 
@@ -14906,7 +14899,6 @@ export interface ICreateUpdateCompanyAdvanceSettingInputDto {
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
     classEnable: boolean;
-    contactAddressLevel: AddressLevel;
 }
 
 export class CreateUpdateCompanyGeneralSettingInputDto implements ICreateUpdateCompanyGeneralSettingInputDto {
@@ -14917,6 +14909,7 @@ export class CreateUpdateCompanyGeneralSettingInputDto implements ICreateUpdateC
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
     roundCostDigits: number;
+    contactAddressLevel: AddressLevel;
 
     constructor(data?: ICreateUpdateCompanyGeneralSettingInputDto) {
         if (data) {
@@ -14936,6 +14929,7 @@ export class CreateUpdateCompanyGeneralSettingInputDto implements ICreateUpdateC
             this.businessStartDate = _data["businessStartDate"] ? moment(_data["businessStartDate"].toString()) : <any>undefined;
             this.roundTotalDigits = _data["roundTotalDigits"];
             this.roundCostDigits = _data["roundCostDigits"];
+            this.contactAddressLevel = _data["contactAddressLevel"];
         }
     }
 
@@ -14955,6 +14949,7 @@ export class CreateUpdateCompanyGeneralSettingInputDto implements ICreateUpdateC
         data["businessStartDate"] = this.businessStartDate ? this.businessStartDate.toISOString() : <any>undefined;
         data["roundTotalDigits"] = this.roundTotalDigits;
         data["roundCostDigits"] = this.roundCostDigits;
+        data["contactAddressLevel"] = this.contactAddressLevel;
         return data;
     }
 
@@ -14974,6 +14969,7 @@ export interface ICreateUpdateCompanyGeneralSettingInputDto {
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
     roundCostDigits: number;
+    contactAddressLevel: AddressLevel;
 }
 
 export class CreateUpdateCountryInputDto implements ICreateUpdateCountryInputDto {
@@ -18525,6 +18521,7 @@ export class GeneralSettingDto implements IGeneralSettingDto {
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
     roundCostDigits: number;
+    contactAddressLevel: AddressLevel;
 
     constructor(data?: IGeneralSettingDto) {
         if (data) {
@@ -18545,6 +18542,7 @@ export class GeneralSettingDto implements IGeneralSettingDto {
             this.businessStartDate = _data["businessStartDate"] ? moment(_data["businessStartDate"].toString()) : <any>undefined;
             this.roundTotalDigits = _data["roundTotalDigits"];
             this.roundCostDigits = _data["roundCostDigits"];
+            this.contactAddressLevel = _data["contactAddressLevel"];
         }
     }
 
@@ -18565,6 +18563,7 @@ export class GeneralSettingDto implements IGeneralSettingDto {
         data["businessStartDate"] = this.businessStartDate ? this.businessStartDate.toISOString() : <any>undefined;
         data["roundTotalDigits"] = this.roundTotalDigits;
         data["roundCostDigits"] = this.roundCostDigits;
+        data["contactAddressLevel"] = this.contactAddressLevel;
         return data;
     }
 
@@ -18585,6 +18584,7 @@ export interface IGeneralSettingDto {
     businessStartDate: moment.Moment | undefined;
     roundTotalDigits: number;
     roundCostDigits: number;
+    contactAddressLevel: AddressLevel;
 }
 
 export class GeneralSettingsEditDto implements IGeneralSettingsEditDto {

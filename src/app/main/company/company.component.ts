@@ -30,6 +30,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { SelectDateComponent } from '../../../shared/components/select-date/select-date.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { MessageModule } from 'primeng/message';
 
 @Component({
     selector: 'app-company',
@@ -43,7 +44,7 @@ import { TooltipModule } from 'primeng/tooltip';
         TableSettingComponent, DividerModule, NavBarComponent, BusyDirective, TooltipModule,
         InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, FloatLabelModule,
         LocalizePipe, FindCountryComponent, InputSwitchModule, FindCurrencyComponent, SelectDateComponent,
-        SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple
+        SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple, MessageModule
     ],
 })
 export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBase, BFileComponentBase) implements OnInit {
@@ -67,6 +68,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
     businessStartDate: Date | undefined;
     customTransactionNoEnable: boolean;
     requiredReference: boolean;
+    prefixMessage: string = "Prefix Format: Y is 2 digits of current year, YY is full year. eg. if current year is 2024, INVY => INV24, INVYY => INV2024.";
     
     canEdit: boolean = this.isGranted(AppPermissions.pages.company.edit);
 

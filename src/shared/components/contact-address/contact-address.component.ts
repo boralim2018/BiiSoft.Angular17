@@ -48,7 +48,7 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
     touchedVillage: boolean;
 
     get addressLevel(): number {
-        return this.appSession.advanceSetting?.contactAddressLevel ?? 0;
+        return this.appSession.generalSetting?.contactAddressLevel ?? 0;
     }
 
     constructor(
