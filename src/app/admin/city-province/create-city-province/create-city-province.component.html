@@ -70,6 +70,7 @@
              name="country"
              [required]="true"
              [label]="l('Country')"
+             [(ngModel)]="country"
              (ngModelChange)="model.countryId = $event?.id">
         </div>
 

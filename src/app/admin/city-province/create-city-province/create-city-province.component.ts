@@ -23,6 +23,7 @@ import { of } from 'rxjs';
 export class CreateCityProvinceComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateCityProvinceInputDto = new CreateUpdateCityProvinceInputDto();
+    country: any;
     
     constructor(
         injector: Injector,
