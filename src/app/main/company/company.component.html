@@ -106,7 +106,7 @@
                             </div>
                             <div class="field col-12 md:col-6">
                                 <label>{{l('ContactAddressLevel')}}</label>
-                                <p-dropdown [options]="[{id:0, name:l('Country')+' (L0)'},{id:1,name:l('CityProvince')+ ' (L1)'},{id:2,name:l('KhanDistrict')+' (L2)'},{id:3,name:l('SangkatCommune')+' (L3)'},{id:4,name:l('Village')+' (L4)'}]"
+                                <p-dropdown [options]="addressLevels"
                                             [(ngModel)]="generalSetting.contactAddressLevel"
                                             [placeholder]="l('Select_',l('ContactAddressLevel'))"
                                             name="addressLevel"

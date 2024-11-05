@@ -59,6 +59,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
     generalSetting: CreateUpdateCompanyGeneralSettingInputDto;
     advanceSetting: CreateUpdateCompanyAdvanceSettingInputDto;
     transactionNos: CreateUpdateTransactionNoSettingInputDto[];
+    addressLevels: any[];
 
     uploadUrl: string = '/CompanyProfile/Upload';
     logoImageUrl: string = this.blankImageUrl;
@@ -85,6 +86,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
     ngOnInit() {
         this.setTitle();
 
+        this.initModel();
         this.getDetail();
     }
 
@@ -95,10 +97,17 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
         this.generalSetting = new CreateUpdateCompanyGeneralSettingInputDto();
         this.advanceSetting = new CreateUpdateCompanyAdvanceSettingInputDto();
         this.transactionNos = [];
+        this.addressLevels = [
+            { id: 0, name: `L0 : ${this.l('Country')}` },
+            { id: 1, name: `L1 : ${this.l('CityProvince')}` }
+        ];
+
+        if (this.feature.isEnabled("App.Setup.Locations.KhanDistricts")) this.addressLevels.push({ id: 2, name: `L2 : ${this.l('KhanDistrict')}` });
+        if (this.feature.isEnabled("App.Setup.Locations.SangkatCommunes")) this.addressLevels.push({ id: 3, name: `L3 : ${this.l('SangkatCommune')}` });
+        if (this.feature.isEnabled("App.Setup.Locations.Villages")) this.addressLevels.push({ id: 4, name: `L4 : ${this.l('Village')}` });
     }
 
-    getDetail() {
-        this.initModel();
+    getDetail() {        
         this.saving = true;
         this._companySettingService
             .getDetail()
