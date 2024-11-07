@@ -16318,6 +16318,7 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
+    customAccountCodeEnable: boolean;
     classEnable: boolean;
 
     constructor(data?: ICreateUpdateCompanyAdvanceSettingInputDto) {
@@ -16336,6 +16337,7 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
             this.multiCurrencyEnable = _data["multiCurrencyEnable"];
             this.lineDiscountEnable = _data["lineDiscountEnable"];
             this.totalDiscountEnable = _data["totalDiscountEnable"];
+            this.customAccountCodeEnable = _data["customAccountCodeEnable"];
             this.classEnable = _data["classEnable"];
         }
     }
@@ -16354,6 +16356,7 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
         data["multiCurrencyEnable"] = this.multiCurrencyEnable;
         data["lineDiscountEnable"] = this.lineDiscountEnable;
         data["totalDiscountEnable"] = this.totalDiscountEnable;
+        data["customAccountCodeEnable"] = this.customAccountCodeEnable;
         data["classEnable"] = this.classEnable;
         return data;
     }
@@ -16372,6 +16375,7 @@ export interface ICreateUpdateCompanyAdvanceSettingInputDto {
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
+    customAccountCodeEnable: boolean;
     classEnable: boolean;
 }
 

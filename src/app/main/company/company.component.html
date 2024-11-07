@@ -159,6 +159,12 @@
                             </div>
                             <div class="field col-12 md:col-6">
                                 <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="customAccountCodeEnable" [(ngModel)]="advanceSetting.customAccountCodeEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('CustomAccountCodeEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
                                     <p-inputSwitch name="classEnable" [(ngModel)]="advanceSetting.classEnable"></p-inputSwitch>
                                     <span class="mb-3">{{l('ClassEnable')}}</span>
                                 </div>
