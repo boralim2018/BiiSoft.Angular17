@@ -74,6 +74,12 @@ export abstract class AppMenuBase extends AppMenuPermission {
             ]
         },
         {
+            label: this.l('Accounting'),
+            items: [
+                { label: this.l('ChartOfAccounts'), icon: 'fa-solid fa-language', routerLink: ['/app/main/chart-of-accounts'], permissionName: AppPermissions.pages.accounting.chartOfAccounts.page },
+            ]
+        },
+        {
             label: this.l('Administrations'),
             items: [
                 { label: this.l('Roles'), icon: 'fa-solid fa-user-check', routerLink: ['/app/admin/roles'], permissionName: AppPermissions.pages.administrations.roles.page },
