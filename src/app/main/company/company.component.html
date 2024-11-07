@@ -128,6 +128,58 @@
 
                 </ng-template>
             </p-stepperPanel>
+
+            <p-stepperPanel header="{{l('AdvanceSetting')}}">
+                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+                    <div class="pt-3">
+                        <div class="formgrid grid m-0">
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="multiBranchesEnable" [(ngModel)]="advanceSetting.multiBranchesEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('MultiBranchesEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="multiCurrencyEnable" [(ngModel)]="advanceSetting.multiCurrencyEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('MultiCurrencyEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="lineDiscountEnable" [(ngModel)]="advanceSetting.lineDiscountEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('LineDiscountEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="totalDiscountEnable" [(ngModel)]="advanceSetting.totalDiscountEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('TotalDiscountEnable')}}</span>
+                                </div>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <div class="flex align-content-center gap-3">
+                                    <p-inputSwitch name="classEnable" [(ngModel)]="advanceSetting.classEnable"></p-inputSwitch>
+                                    <span class="mb-3">{{l('ClassEnable')}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                       
+                        <div class="flex justify-content-end gap-2 py-4">
+                            <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('SaveNext')" (onClick)="saveAdvanceSetting(nextCallback)" [loading]="saving"  />
+                            <p-button [label]="l('Save')" (onClick)="saveAdvanceSetting()" [loading]="saving" />
+                        </div>
+
+                    </div>
+
+                    <p-divider></p-divider>
+
+                </ng-template>
+            </p-stepperPanel>
+
             <p-stepperPanel header="{{l('CompanyProfile')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
                     <form novalidate autocomplete="off" #companyProfileForm="ngForm" (ngSubmit)="saveProfile()" [busy]="saving">
@@ -285,8 +337,28 @@
 
             </p-stepperPanel>
 
-            <p-stepperPanel header="{{l('TransactionNo')}}">
+            <p-stepperPanel header="{{l('AccountSetting')}}">
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+                    <div class="pt-3">
+                        <div class="formgrid grid m-0">
+
+
+                        </div>
+                        <div class="flex justify-content-end gap-2 py-4">
+                            <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
+                            <p-button [label]="l('SaveNext')" (onClick)="saveAccountSetting(nextCallback)" [loading]="saving" />
+                            <p-button [label]="l('Save')" (onClick)="saveAccountSetting()" [loading]="saving" />
+                        </div>
+                    </div>
+
+                    <p-divider></p-divider>
+
+                </ng-template>
+            </p-stepperPanel>
+
+            <p-stepperPanel header="{{l('TransactionNo')}}">
+                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
                     <div class="pt-3">
                         <div class="mb-3">
                             <p-message severity="info" [text]="prefixMessage" styleClass="w-full justify-content-start"></p-message>
@@ -404,58 +476,13 @@
 
                         <div class="flex justify-content-end gap-2 py-4">
                             <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
-                            <p-button [label]="l('Next')" (onClick)="nextCallback.emit()" [outlined]="true" />
-                            <p-button [label]="l('SaveNext')" (onClick)="saveTransactionNos(nextCallback)" [loading]="saving" />
                             <p-button [label]="l('Save')" (onClick)="saveTransactionNos()" [loading]="saving" />
                         </div>
                     </div>
 
-                    <p-divider></p-divider>
                 </ng-template>
             </p-stepperPanel>
-            <p-stepperPanel header="{{l('OtherSetting')}}">
-                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
-                    <div class="pt-3">
-                        <div class="formgrid grid m-0">
-                            <div class="field col-12 md:col-6">
-                                <div class="flex align-content-center gap-3">
-                                    <p-inputSwitch name="multiBranchesEnable" [(ngModel)]="advanceSetting.multiBranchesEnable"></p-inputSwitch>
-                                    <span class="mb-3">{{l('MultiBranchesEnable')}}</span>
-                                </div>
-                            </div>
-                            <div class="field col-12 md:col-6">
-                                <div class="flex align-content-center gap-3">
-                                    <p-inputSwitch name="multiCurrencyEnable" [(ngModel)]="advanceSetting.multiCurrencyEnable"></p-inputSwitch>
-                                    <span class="mb-3">{{l('MultiCurrencyEnable')}}</span>
-                                </div>
-                            </div>
-                            <div class="field col-12 md:col-6">
-                                <div class="flex align-content-center gap-3">
-                                    <p-inputSwitch name="lineDiscountEnable" [(ngModel)]="advanceSetting.lineDiscountEnable"></p-inputSwitch>
-                                    <span class="mb-3">{{l('LineDiscountEnable')}}</span>
-                                </div>
-                            </div>
-                            <div class="field col-12 md:col-6">
-                                <div class="flex align-content-center gap-3">
-                                    <p-inputSwitch name="totalDiscountEnable" [(ngModel)]="advanceSetting.totalDiscountEnable"></p-inputSwitch>
-                                    <span class="mb-3">{{l('TotalDiscountEnable')}}</span>
-                                </div>
-                            </div>
-                            <div class="field col-12 md:col-6">
-                                <div class="flex align-content-center gap-3">
-                                    <p-inputSwitch name="classEnable" [(ngModel)]="advanceSetting.classEnable"></p-inputSwitch>
-                                    <span class="mb-3">{{l('ClassEnable')}}</span>
-                                </div>
-                            </div>
-                           
-                        </div>
-                        <div class="flex justify-content-end gap-2 py-4">
-                            <p-button [label]="l('Previous')" (onClick)="prevCallback.emit()" [outlined]="true" />
-                            <p-button [label]="l('Save')" (onClick)="saveAdvanceSetting()" [loading]="saving" />
-                        </div>
-                    </div>
-                </ng-template>
-            </p-stepperPanel>
+
         </p-stepper>
     </div>
 </div>

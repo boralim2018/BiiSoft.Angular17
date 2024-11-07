@@ -23,7 +23,7 @@ import { TableSettingComponent } from '../../../shared/components/table-setting/
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
-import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
+import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAccountSettingInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
 import { Ripple } from 'primeng/ripple';
 import { NgClass, NgFor, NgIf } from '@angular/common';
@@ -58,6 +58,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
     branch: CreateUpdateBranchInputDto;
     generalSetting: CreateUpdateCompanyGeneralSettingInputDto;
     advanceSetting: CreateUpdateCompanyAdvanceSettingInputDto;
+    accountSetting: CreateUpdateCompanyAccountSettingInputDto;
     transactionNos: CreateUpdateTransactionNoSettingInputDto[];
     addressLevels: any[];
 
@@ -96,6 +97,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
         this.branch.shippingAddress = new ContactAddressDto();
         this.generalSetting = new CreateUpdateCompanyGeneralSettingInputDto();
         this.advanceSetting = new CreateUpdateCompanyAdvanceSettingInputDto();
+        this.accountSetting = new CreateUpdateCompanyAccountSettingInputDto();
         this.transactionNos = [];
         this.addressLevels = [
             { id: 0, name: `L0 : ${this.l('Country')}` },
@@ -221,6 +223,21 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
             .subscribe((result: number) => {
                 if (!this.advanceSetting.id && result) {
                     this.advanceSetting.id = result;
+                }
+
+                if (next) next.emit();
+                this.notify.info(this.l('SavedSuccessfully'));
+            });
+    }
+
+    saveAccountSetting(next?): void {
+        this.saving = true;
+
+        this._companySettingService.createOrUpdateAccountSetting(this.accountSetting)
+            .pipe(finalize(() => this.saving = false))
+            .subscribe((result: number) => {
+                if (!this.accountSetting.id && result) {
+                    this.accountSetting.id = result;
                 }
 
                 if (next) next.emit();

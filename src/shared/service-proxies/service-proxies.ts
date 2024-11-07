@@ -1422,6 +1422,690 @@ export class BranchServiceProxy {
 }
 
 @Injectable()
+export class ChartOfAccountServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    create(body: CreateUpdateChartOfAccountInputDto | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<string>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<string>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return OK
+     */
+    delete(id: string | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    disable(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/Disable";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDisable(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDisable(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDisable(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    enable(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/Enable";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEnable(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEnable(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processEnable(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    find(body: PageChartOfAccountInputDto | undefined): Observable<FindChartOfAccountDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/Find";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFind(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFind(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FindChartOfAccountDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FindChartOfAccountDtoPagedResultDto>;
+        }));
+    }
+
+    protected processFind(response: HttpResponseBase): Observable<FindChartOfAccountDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FindChartOfAccountDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return OK
+     */
+    getDetail(id: string | undefined): Observable<ChartOfAccountDetailDto> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/GetDetail?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDetail(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDetail(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ChartOfAccountDetailDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ChartOfAccountDetailDto>;
+        }));
+    }
+
+    protected processGetDetail(response: HttpResponseBase): Observable<ChartOfAccountDetailDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ChartOfAccountDetailDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param accountTypes_Exclude (optional) 
+     * @param accountTypes_Ids (optional) 
+     * @param subAccountTypes_Exclude (optional) 
+     * @param subAccountTypes_Ids (optional) 
+     * @param parents_Exclude (optional) 
+     * @param parents_Ids (optional) 
+     * @param isActive (optional) 
+     * @param creators_Exclude (optional) 
+     * @param creators_Ids (optional) 
+     * @param modifiers_Exclude (optional) 
+     * @param modifiers_Ids (optional) 
+     * @param keyword (optional) 
+     * @param sortField (optional) 
+     * @param sortMode (optional) 
+     * @param usePagination (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return OK
+     */
+    getList(accountTypes_Exclude: boolean | undefined, accountTypes_Ids: AccountType[] | undefined, subAccountTypes_Exclude: boolean | undefined, subAccountTypes_Ids: SubAccountType[] | undefined, parents_Exclude: boolean | undefined, parents_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ChartOfAccountListDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/GetList?";
+        if (accountTypes_Exclude === null)
+            throw new Error("The parameter 'accountTypes_Exclude' cannot be null.");
+        else if (accountTypes_Exclude !== undefined)
+            url_ += "AccountTypes.Exclude=" + encodeURIComponent("" + accountTypes_Exclude) + "&";
+        if (accountTypes_Ids === null)
+            throw new Error("The parameter 'accountTypes_Ids' cannot be null.");
+        else if (accountTypes_Ids !== undefined)
+            accountTypes_Ids && accountTypes_Ids.forEach(item => { url_ += "AccountTypes.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (subAccountTypes_Exclude === null)
+            throw new Error("The parameter 'subAccountTypes_Exclude' cannot be null.");
+        else if (subAccountTypes_Exclude !== undefined)
+            url_ += "SubAccountTypes.Exclude=" + encodeURIComponent("" + subAccountTypes_Exclude) + "&";
+        if (subAccountTypes_Ids === null)
+            throw new Error("The parameter 'subAccountTypes_Ids' cannot be null.");
+        else if (subAccountTypes_Ids !== undefined)
+            subAccountTypes_Ids && subAccountTypes_Ids.forEach(item => { url_ += "SubAccountTypes.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (parents_Exclude === null)
+            throw new Error("The parameter 'parents_Exclude' cannot be null.");
+        else if (parents_Exclude !== undefined)
+            url_ += "Parents.Exclude=" + encodeURIComponent("" + parents_Exclude) + "&";
+        if (parents_Ids === null)
+            throw new Error("The parameter 'parents_Ids' cannot be null.");
+        else if (parents_Ids !== undefined)
+            parents_Ids && parents_Ids.forEach(item => { url_ += "Parents.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (isActive === null)
+            throw new Error("The parameter 'isActive' cannot be null.");
+        else if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (creators_Exclude === null)
+            throw new Error("The parameter 'creators_Exclude' cannot be null.");
+        else if (creators_Exclude !== undefined)
+            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
+        if (creators_Ids === null)
+            throw new Error("The parameter 'creators_Ids' cannot be null.");
+        else if (creators_Ids !== undefined)
+            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifiers_Exclude === null)
+            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
+        else if (modifiers_Exclude !== undefined)
+            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
+        if (modifiers_Ids === null)
+            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
+        else if (modifiers_Ids !== undefined)
+            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
+            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (sortField === null)
+            throw new Error("The parameter 'sortField' cannot be null.");
+        else if (sortField !== undefined)
+            url_ += "SortField=" + encodeURIComponent("" + sortField) + "&";
+        if (sortMode === null)
+            throw new Error("The parameter 'sortMode' cannot be null.");
+        else if (sortMode !== undefined)
+            url_ += "SortMode=" + encodeURIComponent("" + sortMode) + "&";
+        if (usePagination === null)
+            throw new Error("The parameter 'usePagination' cannot be null.");
+        else if (usePagination !== undefined)
+            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetList(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ChartOfAccountListDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ChartOfAccountListDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetList(response: HttpResponseBase): Observable<ChartOfAccountListDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ChartOfAccountListDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    exportExcel(body: ExportExcelChartOfAccountInputDto | undefined): Observable<ExportFileOutput> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/ExportExcel";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportExcel(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ExportFileOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ExportFileOutput>;
+        }));
+    }
+
+    protected processExportExcel(response: HttpResponseBase): Observable<ExportFileOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExportFileOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    exportExcelTemplate(): Observable<ExportFileOutput> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/ExportExcelTemplate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportExcelTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportExcelTemplate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ExportFileOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ExportFileOutput>;
+        }));
+    }
+
+    protected processExportExcelTemplate(response: HttpResponseBase): Observable<ExportFileOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExportFileOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    importExcel(body: FileTokenInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/ImportExcel";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processImportExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processImportExcel(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processImportExcel(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    update(body: CreateUpdateChartOfAccountInputDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
 export class CityProvinceServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -2333,6 +3017,63 @@ export class CompanySettingServiceProxy {
     }
 
     protected processCreateOrUpdateAdvanceSetting(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    createOrUpdateAccountSetting(body: CreateUpdateCompanyAccountSettingInputDto | undefined): Observable<number> {
+        let url_ = this.baseUrl + "/api/services/app/CompanySetting/CreateOrUpdateAccountSetting";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrUpdateAccountSetting(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrUpdateAccountSetting(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number>;
+        }));
+    }
+
+    protected processCreateOrUpdateAccountSetting(response: HttpResponseBase): Observable<number> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -12348,6 +13089,81 @@ export class VillageServiceProxy {
     }
 }
 
+export enum AccountType {
+    _10 = 10,
+    _11 = 11,
+    _12 = 12,
+    _13 = 13,
+    _14 = 14,
+    _15 = 15,
+    _16 = 16,
+    _20 = 20,
+    _21 = 21,
+    _22 = 22,
+    _23 = 23,
+    _30 = 30,
+    _40 = 40,
+    _41 = 41,
+    _50 = 50,
+    _51 = 51,
+    _52 = 52,
+}
+
+export class AccountTypeFilterInputDto implements IAccountTypeFilterInputDto {
+    exclude: boolean;
+    ids: AccountType[] | undefined;
+
+    constructor(data?: IAccountTypeFilterInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.exclude = _data["exclude"];
+            if (Array.isArray(_data["ids"])) {
+                this.ids = [] as any;
+                for (let item of _data["ids"])
+                    this.ids.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): AccountTypeFilterInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AccountTypeFilterInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["exclude"] = this.exclude;
+        if (Array.isArray(this.ids)) {
+            data["ids"] = [];
+            for (let item of this.ids)
+                data["ids"].push(item);
+        }
+        return data;
+    }
+
+    clone(): AccountTypeFilterInputDto {
+        const json = this.toJSON();
+        let result = new AccountTypeFilterInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAccountTypeFilterInputDto {
+    exclude: boolean;
+    ids: AccountType[] | undefined;
+}
+
 export enum AddressLevel {
     _0 = 0,
     _1 = 1,
@@ -13380,6 +14196,299 @@ export interface IChangeUserLanguageDto {
     languageName: string;
 }
 
+export class ChartOfAccountDetailDto implements IChartOfAccountDetailDto {
+    id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    cannotEdit: boolean;
+    cannotDelete: boolean;
+    no: number;
+    code: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    parentId: string | undefined;
+    parentAccountName: string | undefined;
+
+    constructor(data?: IChartOfAccountDetailDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creatorUserName = _data["creatorUserName"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModifierUserName = _data["lastModifierUserName"];
+            this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.cannotEdit = _data["cannotEdit"];
+            this.cannotDelete = _data["cannotDelete"];
+            this.no = _data["no"];
+            this.code = _data["code"];
+            this.accountType = _data["accountType"];
+            this.subAccountType = _data["subAccountType"];
+            this.parentId = _data["parentId"];
+            this.parentAccountName = _data["parentAccountName"];
+        }
+    }
+
+    static fromJS(data: any): ChartOfAccountDetailDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChartOfAccountDetailDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creatorUserName"] = this.creatorUserName;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModifierUserName"] = this.lastModifierUserName;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["cannotEdit"] = this.cannotEdit;
+        data["cannotDelete"] = this.cannotDelete;
+        data["no"] = this.no;
+        data["code"] = this.code;
+        data["accountType"] = this.accountType;
+        data["subAccountType"] = this.subAccountType;
+        data["parentId"] = this.parentId;
+        data["parentAccountName"] = this.parentAccountName;
+        return data;
+    }
+
+    clone(): ChartOfAccountDetailDto {
+        const json = this.toJSON();
+        let result = new ChartOfAccountDetailDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IChartOfAccountDetailDto {
+    id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    cannotEdit: boolean;
+    cannotDelete: boolean;
+    no: number;
+    code: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    parentId: string | undefined;
+    parentAccountName: string | undefined;
+}
+
+export class ChartOfAccountListDto implements IChartOfAccountListDto {
+    id: string;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    cannotEdit: boolean;
+    cannotDelete: boolean;
+    no: number;
+    code: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    parentId: string | undefined;
+    parentAccountName: string | undefined;
+
+    constructor(data?: IChartOfAccountListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creatorUserName = _data["creatorUserName"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModifierUserName = _data["lastModifierUserName"];
+            this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.cannotEdit = _data["cannotEdit"];
+            this.cannotDelete = _data["cannotDelete"];
+            this.no = _data["no"];
+            this.code = _data["code"];
+            this.accountType = _data["accountType"];
+            this.subAccountType = _data["subAccountType"];
+            this.parentId = _data["parentId"];
+            this.parentAccountName = _data["parentAccountName"];
+        }
+    }
+
+    static fromJS(data: any): ChartOfAccountListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChartOfAccountListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creatorUserName"] = this.creatorUserName;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModifierUserName"] = this.lastModifierUserName;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["cannotEdit"] = this.cannotEdit;
+        data["cannotDelete"] = this.cannotDelete;
+        data["no"] = this.no;
+        data["code"] = this.code;
+        data["accountType"] = this.accountType;
+        data["subAccountType"] = this.subAccountType;
+        data["parentId"] = this.parentId;
+        data["parentAccountName"] = this.parentAccountName;
+        return data;
+    }
+
+    clone(): ChartOfAccountListDto {
+        const json = this.toJSON();
+        let result = new ChartOfAccountListDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IChartOfAccountListDto {
+    id: string;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    cannotEdit: boolean;
+    cannotDelete: boolean;
+    no: number;
+    code: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    parentId: string | undefined;
+    parentAccountName: string | undefined;
+}
+
+export class ChartOfAccountListDtoPagedResultDto implements IChartOfAccountListDtoPagedResultDto {
+    items: ChartOfAccountListDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IChartOfAccountListDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(ChartOfAccountListDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): ChartOfAccountListDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChartOfAccountListDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): ChartOfAccountListDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new ChartOfAccountListDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IChartOfAccountListDtoPagedResultDto {
+    items: ChartOfAccountListDto[] | undefined;
+    totalCount: number;
+}
+
 export class CityProvinceDetailDto implements ICityProvinceDetailDto {
     id: string;
     firstId: string | undefined;
@@ -13801,12 +14910,192 @@ export interface IComboboxItemDto {
     isSelected: boolean;
 }
 
+export class CompanyAccountSettingDto implements ICompanyAccountSettingDto {
+    id: number | undefined;
+    defaultAPAccountId: string | undefined;
+    defaultAPAccountName: string | undefined;
+    defaultARAccountId: string | undefined;
+    defaultARAccountName: string | undefined;
+    defaultPurchaseDiscountAccountId: string | undefined;
+    defaultPurchaseDiscountAccountName: string | undefined;
+    defaultSaleDiscountAccountId: string | undefined;
+    defaultSaleDiscountAccountName: string | undefined;
+    defaultInventoryPurchaseAccountId: string | undefined;
+    defaultInventoryPurchaseAccountName: string | undefined;
+    defaultBillPaymentAccountId: string | undefined;
+    defaultBillPaymentAccountName: string | undefined;
+    defaultReceivePaymentAccountId: string | undefined;
+    defaultReceivePaymentAccountName: string | undefined;
+    defaultRetainEarningAccountId: string | undefined;
+    defaultRetainEarningAccountName: string | undefined;
+    defaultExchangeLossGainAccountId: string | undefined;
+    defaultExchangeLossGainAccountName: string | undefined;
+    defaultItemReceiptAccountId: string | undefined;
+    defaultItemReceiptAccountName: string | undefined;
+    defaultItemIssueAccountId: string | undefined;
+    defaultItemIssueAccountName: string | undefined;
+    defaultItemAdjustmentAccountId: string | undefined;
+    defaultItemAdjustmentAccountName: string | undefined;
+    defaultItemTransferAccountId: string | undefined;
+    defaultItemTransferAccountName: string | undefined;
+    defaultItemProductionAccountId: string | undefined;
+    defaultItemProductionAccountName: string | undefined;
+    defaultItemExchangeAccountId: string | undefined;
+    defaultItemExchangeAccountName: string | undefined;
+    defaultCashTransferAccountId: string | undefined;
+    defaultCashTransferAccountName: string | undefined;
+    defaultCashExchangeAccountId: string | undefined;
+    defaultCashExchangeAccountName: string | undefined;
+
+    constructor(data?: ICompanyAccountSettingDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.defaultAPAccountId = _data["defaultAPAccountId"];
+            this.defaultAPAccountName = _data["defaultAPAccountName"];
+            this.defaultARAccountId = _data["defaultARAccountId"];
+            this.defaultARAccountName = _data["defaultARAccountName"];
+            this.defaultPurchaseDiscountAccountId = _data["defaultPurchaseDiscountAccountId"];
+            this.defaultPurchaseDiscountAccountName = _data["defaultPurchaseDiscountAccountName"];
+            this.defaultSaleDiscountAccountId = _data["defaultSaleDiscountAccountId"];
+            this.defaultSaleDiscountAccountName = _data["defaultSaleDiscountAccountName"];
+            this.defaultInventoryPurchaseAccountId = _data["defaultInventoryPurchaseAccountId"];
+            this.defaultInventoryPurchaseAccountName = _data["defaultInventoryPurchaseAccountName"];
+            this.defaultBillPaymentAccountId = _data["defaultBillPaymentAccountId"];
+            this.defaultBillPaymentAccountName = _data["defaultBillPaymentAccountName"];
+            this.defaultReceivePaymentAccountId = _data["defaultReceivePaymentAccountId"];
+            this.defaultReceivePaymentAccountName = _data["defaultReceivePaymentAccountName"];
+            this.defaultRetainEarningAccountId = _data["defaultRetainEarningAccountId"];
+            this.defaultRetainEarningAccountName = _data["defaultRetainEarningAccountName"];
+            this.defaultExchangeLossGainAccountId = _data["defaultExchangeLossGainAccountId"];
+            this.defaultExchangeLossGainAccountName = _data["defaultExchangeLossGainAccountName"];
+            this.defaultItemReceiptAccountId = _data["defaultItemReceiptAccountId"];
+            this.defaultItemReceiptAccountName = _data["defaultItemReceiptAccountName"];
+            this.defaultItemIssueAccountId = _data["defaultItemIssueAccountId"];
+            this.defaultItemIssueAccountName = _data["defaultItemIssueAccountName"];
+            this.defaultItemAdjustmentAccountId = _data["defaultItemAdjustmentAccountId"];
+            this.defaultItemAdjustmentAccountName = _data["defaultItemAdjustmentAccountName"];
+            this.defaultItemTransferAccountId = _data["defaultItemTransferAccountId"];
+            this.defaultItemTransferAccountName = _data["defaultItemTransferAccountName"];
+            this.defaultItemProductionAccountId = _data["defaultItemProductionAccountId"];
+            this.defaultItemProductionAccountName = _data["defaultItemProductionAccountName"];
+            this.defaultItemExchangeAccountId = _data["defaultItemExchangeAccountId"];
+            this.defaultItemExchangeAccountName = _data["defaultItemExchangeAccountName"];
+            this.defaultCashTransferAccountId = _data["defaultCashTransferAccountId"];
+            this.defaultCashTransferAccountName = _data["defaultCashTransferAccountName"];
+            this.defaultCashExchangeAccountId = _data["defaultCashExchangeAccountId"];
+            this.defaultCashExchangeAccountName = _data["defaultCashExchangeAccountName"];
+        }
+    }
+
+    static fromJS(data: any): CompanyAccountSettingDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CompanyAccountSettingDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["defaultAPAccountId"] = this.defaultAPAccountId;
+        data["defaultAPAccountName"] = this.defaultAPAccountName;
+        data["defaultARAccountId"] = this.defaultARAccountId;
+        data["defaultARAccountName"] = this.defaultARAccountName;
+        data["defaultPurchaseDiscountAccountId"] = this.defaultPurchaseDiscountAccountId;
+        data["defaultPurchaseDiscountAccountName"] = this.defaultPurchaseDiscountAccountName;
+        data["defaultSaleDiscountAccountId"] = this.defaultSaleDiscountAccountId;
+        data["defaultSaleDiscountAccountName"] = this.defaultSaleDiscountAccountName;
+        data["defaultInventoryPurchaseAccountId"] = this.defaultInventoryPurchaseAccountId;
+        data["defaultInventoryPurchaseAccountName"] = this.defaultInventoryPurchaseAccountName;
+        data["defaultBillPaymentAccountId"] = this.defaultBillPaymentAccountId;
+        data["defaultBillPaymentAccountName"] = this.defaultBillPaymentAccountName;
+        data["defaultReceivePaymentAccountId"] = this.defaultReceivePaymentAccountId;
+        data["defaultReceivePaymentAccountName"] = this.defaultReceivePaymentAccountName;
+        data["defaultRetainEarningAccountId"] = this.defaultRetainEarningAccountId;
+        data["defaultRetainEarningAccountName"] = this.defaultRetainEarningAccountName;
+        data["defaultExchangeLossGainAccountId"] = this.defaultExchangeLossGainAccountId;
+        data["defaultExchangeLossGainAccountName"] = this.defaultExchangeLossGainAccountName;
+        data["defaultItemReceiptAccountId"] = this.defaultItemReceiptAccountId;
+        data["defaultItemReceiptAccountName"] = this.defaultItemReceiptAccountName;
+        data["defaultItemIssueAccountId"] = this.defaultItemIssueAccountId;
+        data["defaultItemIssueAccountName"] = this.defaultItemIssueAccountName;
+        data["defaultItemAdjustmentAccountId"] = this.defaultItemAdjustmentAccountId;
+        data["defaultItemAdjustmentAccountName"] = this.defaultItemAdjustmentAccountName;
+        data["defaultItemTransferAccountId"] = this.defaultItemTransferAccountId;
+        data["defaultItemTransferAccountName"] = this.defaultItemTransferAccountName;
+        data["defaultItemProductionAccountId"] = this.defaultItemProductionAccountId;
+        data["defaultItemProductionAccountName"] = this.defaultItemProductionAccountName;
+        data["defaultItemExchangeAccountId"] = this.defaultItemExchangeAccountId;
+        data["defaultItemExchangeAccountName"] = this.defaultItemExchangeAccountName;
+        data["defaultCashTransferAccountId"] = this.defaultCashTransferAccountId;
+        data["defaultCashTransferAccountName"] = this.defaultCashTransferAccountName;
+        data["defaultCashExchangeAccountId"] = this.defaultCashExchangeAccountId;
+        data["defaultCashExchangeAccountName"] = this.defaultCashExchangeAccountName;
+        return data;
+    }
+
+    clone(): CompanyAccountSettingDto {
+        const json = this.toJSON();
+        let result = new CompanyAccountSettingDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICompanyAccountSettingDto {
+    id: number | undefined;
+    defaultAPAccountId: string | undefined;
+    defaultAPAccountName: string | undefined;
+    defaultARAccountId: string | undefined;
+    defaultARAccountName: string | undefined;
+    defaultPurchaseDiscountAccountId: string | undefined;
+    defaultPurchaseDiscountAccountName: string | undefined;
+    defaultSaleDiscountAccountId: string | undefined;
+    defaultSaleDiscountAccountName: string | undefined;
+    defaultInventoryPurchaseAccountId: string | undefined;
+    defaultInventoryPurchaseAccountName: string | undefined;
+    defaultBillPaymentAccountId: string | undefined;
+    defaultBillPaymentAccountName: string | undefined;
+    defaultReceivePaymentAccountId: string | undefined;
+    defaultReceivePaymentAccountName: string | undefined;
+    defaultRetainEarningAccountId: string | undefined;
+    defaultRetainEarningAccountName: string | undefined;
+    defaultExchangeLossGainAccountId: string | undefined;
+    defaultExchangeLossGainAccountName: string | undefined;
+    defaultItemReceiptAccountId: string | undefined;
+    defaultItemReceiptAccountName: string | undefined;
+    defaultItemIssueAccountId: string | undefined;
+    defaultItemIssueAccountName: string | undefined;
+    defaultItemAdjustmentAccountId: string | undefined;
+    defaultItemAdjustmentAccountName: string | undefined;
+    defaultItemTransferAccountId: string | undefined;
+    defaultItemTransferAccountName: string | undefined;
+    defaultItemProductionAccountId: string | undefined;
+    defaultItemProductionAccountName: string | undefined;
+    defaultItemExchangeAccountId: string | undefined;
+    defaultItemExchangeAccountName: string | undefined;
+    defaultCashTransferAccountId: string | undefined;
+    defaultCashTransferAccountName: string | undefined;
+    defaultCashExchangeAccountId: string | undefined;
+    defaultCashExchangeAccountName: string | undefined;
+}
+
 export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
     id: number | undefined;
     multiBranchesEnable: boolean;
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
+    customAccountCodeEnable: boolean;
     classEnable: boolean;
 
     constructor(data?: ICompanyAdvanceSettingDto) {
@@ -13825,6 +15114,7 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
             this.multiCurrencyEnable = _data["multiCurrencyEnable"];
             this.lineDiscountEnable = _data["lineDiscountEnable"];
             this.totalDiscountEnable = _data["totalDiscountEnable"];
+            this.customAccountCodeEnable = _data["customAccountCodeEnable"];
             this.classEnable = _data["classEnable"];
         }
     }
@@ -13843,6 +15133,7 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
         data["multiCurrencyEnable"] = this.multiCurrencyEnable;
         data["lineDiscountEnable"] = this.lineDiscountEnable;
         data["totalDiscountEnable"] = this.totalDiscountEnable;
+        data["customAccountCodeEnable"] = this.customAccountCodeEnable;
         data["classEnable"] = this.classEnable;
         return data;
     }
@@ -13861,6 +15152,7 @@ export interface ICompanyAdvanceSettingDto {
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
+    customAccountCodeEnable: boolean;
     classEnable: boolean;
 }
 
@@ -13948,6 +15240,7 @@ export class CompanySettingDto implements ICompanySettingDto {
     branch: BranchDetailDto;
     generalSetting: CompanyGeneralSettingDto;
     advanceSetting: CompanyAdvanceSettingDto;
+    accountSetting: CompanyAccountSettingDto;
     transactionNoSettings: TransactionNoSettingDto[] | undefined;
 
     constructor(data?: ICompanySettingDto) {
@@ -13965,6 +15258,7 @@ export class CompanySettingDto implements ICompanySettingDto {
             this.branch = _data["branch"] ? BranchDetailDto.fromJS(_data["branch"]) : <any>undefined;
             this.generalSetting = _data["generalSetting"] ? CompanyGeneralSettingDto.fromJS(_data["generalSetting"]) : <any>undefined;
             this.advanceSetting = _data["advanceSetting"] ? CompanyAdvanceSettingDto.fromJS(_data["advanceSetting"]) : <any>undefined;
+            this.accountSetting = _data["accountSetting"] ? CompanyAccountSettingDto.fromJS(_data["accountSetting"]) : <any>undefined;
             if (Array.isArray(_data["transactionNoSettings"])) {
                 this.transactionNoSettings = [] as any;
                 for (let item of _data["transactionNoSettings"])
@@ -13986,6 +15280,7 @@ export class CompanySettingDto implements ICompanySettingDto {
         data["branch"] = this.branch ? this.branch.toJSON() : <any>undefined;
         data["generalSetting"] = this.generalSetting ? this.generalSetting.toJSON() : <any>undefined;
         data["advanceSetting"] = this.advanceSetting ? this.advanceSetting.toJSON() : <any>undefined;
+        data["accountSetting"] = this.accountSetting ? this.accountSetting.toJSON() : <any>undefined;
         if (Array.isArray(this.transactionNoSettings)) {
             data["transactionNoSettings"] = [];
             for (let item of this.transactionNoSettings)
@@ -14007,6 +15302,7 @@ export interface ICompanySettingDto {
     branch: BranchDetailDto;
     generalSetting: CompanyGeneralSettingDto;
     advanceSetting: CompanyAdvanceSettingDto;
+    accountSetting: CompanyAccountSettingDto;
     transactionNoSettings: TransactionNoSettingDto[] | undefined;
 }
 
@@ -14775,6 +16071,73 @@ export interface ICreateUpdateBranchInputDto {
     shippingAddress: ContactAddressDto;
 }
 
+export class CreateUpdateChartOfAccountInputDto implements ICreateUpdateChartOfAccountInputDto {
+    id: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
+    code: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    parentId: string | undefined;
+
+    constructor(data?: ICreateUpdateChartOfAccountInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.code = _data["code"];
+            this.accountType = _data["accountType"];
+            this.subAccountType = _data["subAccountType"];
+            this.parentId = _data["parentId"];
+        }
+    }
+
+    static fromJS(data: any): CreateUpdateChartOfAccountInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateUpdateChartOfAccountInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["code"] = this.code;
+        data["accountType"] = this.accountType;
+        data["subAccountType"] = this.subAccountType;
+        data["parentId"] = this.parentId;
+        return data;
+    }
+
+    clone(): CreateUpdateChartOfAccountInputDto {
+        const json = this.toJSON();
+        let result = new CreateUpdateChartOfAccountInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateUpdateChartOfAccountInputDto {
+    id: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
+    code: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    parentId: string | undefined;
+}
+
 export class CreateUpdateCityProvinceInputDto implements ICreateUpdateCityProvinceInputDto {
     id: string | undefined;
     name: string | undefined;
@@ -14836,6 +16199,117 @@ export interface ICreateUpdateCityProvinceInputDto {
     code: string | undefined;
     iso: string | undefined;
     countryId: string | undefined;
+}
+
+export class CreateUpdateCompanyAccountSettingInputDto implements ICreateUpdateCompanyAccountSettingInputDto {
+    id: number | undefined;
+    defaultAPAccountId: string | undefined;
+    defaultARAccountId: string | undefined;
+    defaultPurchaseDiscountAccountId: string | undefined;
+    defaultSaleDiscountAccountId: string | undefined;
+    defaultInventoryPurchaseAccountId: string | undefined;
+    defaultBillPaymentAccountId: string | undefined;
+    defaultReceivePaymentAccountId: string | undefined;
+    defaultRetainEarningAccountId: string | undefined;
+    defaultExchangeLossGainAccountId: string | undefined;
+    defaultItemReceiptAccountId: string | undefined;
+    defaultItemIssueAccountId: string | undefined;
+    defaultItemAdjustmentAccountId: string | undefined;
+    defaultItemTransferAccountId: string | undefined;
+    defaultItemProductionAccountId: string | undefined;
+    defaultItemExchangeAccountId: string | undefined;
+    defaultCashTransferAccountId: string | undefined;
+    defaultCashExchangeAccountId: string | undefined;
+
+    constructor(data?: ICreateUpdateCompanyAccountSettingInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.defaultAPAccountId = _data["defaultAPAccountId"];
+            this.defaultARAccountId = _data["defaultARAccountId"];
+            this.defaultPurchaseDiscountAccountId = _data["defaultPurchaseDiscountAccountId"];
+            this.defaultSaleDiscountAccountId = _data["defaultSaleDiscountAccountId"];
+            this.defaultInventoryPurchaseAccountId = _data["defaultInventoryPurchaseAccountId"];
+            this.defaultBillPaymentAccountId = _data["defaultBillPaymentAccountId"];
+            this.defaultReceivePaymentAccountId = _data["defaultReceivePaymentAccountId"];
+            this.defaultRetainEarningAccountId = _data["defaultRetainEarningAccountId"];
+            this.defaultExchangeLossGainAccountId = _data["defaultExchangeLossGainAccountId"];
+            this.defaultItemReceiptAccountId = _data["defaultItemReceiptAccountId"];
+            this.defaultItemIssueAccountId = _data["defaultItemIssueAccountId"];
+            this.defaultItemAdjustmentAccountId = _data["defaultItemAdjustmentAccountId"];
+            this.defaultItemTransferAccountId = _data["defaultItemTransferAccountId"];
+            this.defaultItemProductionAccountId = _data["defaultItemProductionAccountId"];
+            this.defaultItemExchangeAccountId = _data["defaultItemExchangeAccountId"];
+            this.defaultCashTransferAccountId = _data["defaultCashTransferAccountId"];
+            this.defaultCashExchangeAccountId = _data["defaultCashExchangeAccountId"];
+        }
+    }
+
+    static fromJS(data: any): CreateUpdateCompanyAccountSettingInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateUpdateCompanyAccountSettingInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["defaultAPAccountId"] = this.defaultAPAccountId;
+        data["defaultARAccountId"] = this.defaultARAccountId;
+        data["defaultPurchaseDiscountAccountId"] = this.defaultPurchaseDiscountAccountId;
+        data["defaultSaleDiscountAccountId"] = this.defaultSaleDiscountAccountId;
+        data["defaultInventoryPurchaseAccountId"] = this.defaultInventoryPurchaseAccountId;
+        data["defaultBillPaymentAccountId"] = this.defaultBillPaymentAccountId;
+        data["defaultReceivePaymentAccountId"] = this.defaultReceivePaymentAccountId;
+        data["defaultRetainEarningAccountId"] = this.defaultRetainEarningAccountId;
+        data["defaultExchangeLossGainAccountId"] = this.defaultExchangeLossGainAccountId;
+        data["defaultItemReceiptAccountId"] = this.defaultItemReceiptAccountId;
+        data["defaultItemIssueAccountId"] = this.defaultItemIssueAccountId;
+        data["defaultItemAdjustmentAccountId"] = this.defaultItemAdjustmentAccountId;
+        data["defaultItemTransferAccountId"] = this.defaultItemTransferAccountId;
+        data["defaultItemProductionAccountId"] = this.defaultItemProductionAccountId;
+        data["defaultItemExchangeAccountId"] = this.defaultItemExchangeAccountId;
+        data["defaultCashTransferAccountId"] = this.defaultCashTransferAccountId;
+        data["defaultCashExchangeAccountId"] = this.defaultCashExchangeAccountId;
+        return data;
+    }
+
+    clone(): CreateUpdateCompanyAccountSettingInputDto {
+        const json = this.toJSON();
+        let result = new CreateUpdateCompanyAccountSettingInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateUpdateCompanyAccountSettingInputDto {
+    id: number | undefined;
+    defaultAPAccountId: string | undefined;
+    defaultARAccountId: string | undefined;
+    defaultPurchaseDiscountAccountId: string | undefined;
+    defaultSaleDiscountAccountId: string | undefined;
+    defaultInventoryPurchaseAccountId: string | undefined;
+    defaultBillPaymentAccountId: string | undefined;
+    defaultReceivePaymentAccountId: string | undefined;
+    defaultRetainEarningAccountId: string | undefined;
+    defaultExchangeLossGainAccountId: string | undefined;
+    defaultItemReceiptAccountId: string | undefined;
+    defaultItemIssueAccountId: string | undefined;
+    defaultItemAdjustmentAccountId: string | undefined;
+    defaultItemTransferAccountId: string | undefined;
+    defaultItemProductionAccountId: string | undefined;
+    defaultItemExchangeAccountId: string | undefined;
+    defaultCashTransferAccountId: string | undefined;
+    defaultCashExchangeAccountId: string | undefined;
 }
 
 export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateCompanyAdvanceSettingInputDto {
@@ -16313,6 +17787,105 @@ export interface IExportExcelBranchInputDto {
     columns: ColumnOutput[] | undefined;
 }
 
+export class ExportExcelChartOfAccountInputDto implements IExportExcelChartOfAccountInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
+    parents: GuidNullableFilterInputDto;
+    columns: ColumnOutput[] | undefined;
+
+    constructor(data?: IExportExcelChartOfAccountInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.accountTypes = _data["accountTypes"] ? AccountTypeFilterInputDto.fromJS(_data["accountTypes"]) : <any>undefined;
+            this.subAccountTypes = _data["subAccountTypes"] ? SubAccountTypeFilterInputDto.fromJS(_data["subAccountTypes"]) : <any>undefined;
+            this.parents = _data["parents"] ? GuidNullableFilterInputDto.fromJS(_data["parents"]) : <any>undefined;
+            if (Array.isArray(_data["columns"])) {
+                this.columns = [] as any;
+                for (let item of _data["columns"])
+                    this.columns.push(ColumnOutput.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ExportExcelChartOfAccountInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExportExcelChartOfAccountInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["accountTypes"] = this.accountTypes ? this.accountTypes.toJSON() : <any>undefined;
+        data["subAccountTypes"] = this.subAccountTypes ? this.subAccountTypes.toJSON() : <any>undefined;
+        data["parents"] = this.parents ? this.parents.toJSON() : <any>undefined;
+        if (Array.isArray(this.columns)) {
+            data["columns"] = [];
+            for (let item of this.columns)
+                data["columns"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): ExportExcelChartOfAccountInputDto {
+        const json = this.toJSON();
+        let result = new ExportExcelChartOfAccountInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IExportExcelChartOfAccountInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
+    parents: GuidNullableFilterInputDto;
+    columns: ColumnOutput[] | undefined;
+}
+
 export class ExportExcelCityProvinceInputDto implements IExportExcelCityProvinceInputDto {
     maxResultCount: number;
     skipCount: number;
@@ -17399,6 +18972,116 @@ export class FindBranchDtoPagedResultDto implements IFindBranchDtoPagedResultDto
 
 export interface IFindBranchDtoPagedResultDto {
     items: FindBranchDto[] | undefined;
+    totalCount: number;
+}
+
+export class FindChartOfAccountDto implements IFindChartOfAccountDto {
+    id: string;
+    name: string | undefined;
+    displayName: string | undefined;
+    isActive: boolean;
+
+    constructor(data?: IFindChartOfAccountDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.isActive = _data["isActive"];
+        }
+    }
+
+    static fromJS(data: any): FindChartOfAccountDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindChartOfAccountDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["isActive"] = this.isActive;
+        return data;
+    }
+
+    clone(): FindChartOfAccountDto {
+        const json = this.toJSON();
+        let result = new FindChartOfAccountDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindChartOfAccountDto {
+    id: string;
+    name: string | undefined;
+    displayName: string | undefined;
+    isActive: boolean;
+}
+
+export class FindChartOfAccountDtoPagedResultDto implements IFindChartOfAccountDtoPagedResultDto {
+    items: FindChartOfAccountDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IFindChartOfAccountDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(FindChartOfAccountDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): FindChartOfAccountDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindChartOfAccountDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): FindChartOfAccountDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new FindChartOfAccountDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindChartOfAccountDtoPagedResultDto {
+    items: FindChartOfAccountDto[] | undefined;
     totalCount: number;
 }
 
@@ -21340,6 +23023,93 @@ export interface IPageBranchInputDto {
     isActive: boolean | undefined;
 }
 
+export class PageChartOfAccountInputDto implements IPageChartOfAccountInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
+    parents: GuidNullableFilterInputDto;
+
+    constructor(data?: IPageChartOfAccountInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.accountTypes = _data["accountTypes"] ? AccountTypeFilterInputDto.fromJS(_data["accountTypes"]) : <any>undefined;
+            this.subAccountTypes = _data["subAccountTypes"] ? SubAccountTypeFilterInputDto.fromJS(_data["subAccountTypes"]) : <any>undefined;
+            this.parents = _data["parents"] ? GuidNullableFilterInputDto.fromJS(_data["parents"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): PageChartOfAccountInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageChartOfAccountInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["accountTypes"] = this.accountTypes ? this.accountTypes.toJSON() : <any>undefined;
+        data["subAccountTypes"] = this.subAccountTypes ? this.subAccountTypes.toJSON() : <any>undefined;
+        data["parents"] = this.parents ? this.parents.toJSON() : <any>undefined;
+        return data;
+    }
+
+    clone(): PageChartOfAccountInputDto {
+        const json = this.toJSON();
+        let result = new PageChartOfAccountInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPageChartOfAccountInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
+    parents: GuidNullableFilterInputDto;
+}
+
 export class PageCityProvinceInputDto implements IPageCityProvinceInputDto {
     maxResultCount: number;
     skipCount: number;
@@ -23434,6 +25204,203 @@ export class StringPagedResultDto implements IStringPagedResultDto {
 export interface IStringPagedResultDto {
     items: string[] | undefined;
     totalCount: number;
+}
+
+export enum SubAccountType {
+    _1000 = 1000,
+    _1001 = 1001,
+    _1002 = 1002,
+    _1003 = 1003,
+    _1004 = 1004,
+    _1100 = 1100,
+    _1101 = 1101,
+    _1200 = 1200,
+    _1300 = 1300,
+    _1400 = 1400,
+    _1401 = 1401,
+    _1402 = 1402,
+    _1403 = 1403,
+    _1404 = 1404,
+    _1405 = 1405,
+    _1406 = 1406,
+    _1407 = 1407,
+    _1408 = 1408,
+    _1409 = 1409,
+    _1410 = 1410,
+    _1411 = 1411,
+    _1500 = 1500,
+    _1501 = 1501,
+    _1502 = 1502,
+    _1503 = 1503,
+    _1504 = 1504,
+    _1505 = 1505,
+    _1506 = 1506,
+    _1507 = 1507,
+    _1508 = 1508,
+    _1509 = 1509,
+    _1600 = 1600,
+    _1601 = 1601,
+    _1602 = 1602,
+    _1603 = 1603,
+    _1604 = 1604,
+    _1605 = 1605,
+    _1606 = 1606,
+    _1607 = 1607,
+    _1608 = 1608,
+    _1609 = 1609,
+    _1610 = 1610,
+    _2000 = 2000,
+    _2100 = 2100,
+    _2200 = 2200,
+    _2201 = 2201,
+    _2202 = 2202,
+    _2203 = 2203,
+    _2204 = 2204,
+    _2205 = 2205,
+    _2206 = 2206,
+    _2207 = 2207,
+    _2208 = 2208,
+    _2209 = 2209,
+    _2210 = 2210,
+    _2211 = 2211,
+    _2212 = 2212,
+    _2213 = 2213,
+    _2214 = 2214,
+    _2300 = 2300,
+    _2301 = 2301,
+    _2302 = 2302,
+    _2303 = 2303,
+    _2304 = 2304,
+    _2305 = 2305,
+    _2306 = 2306,
+    _3000 = 3000,
+    _3001 = 3001,
+    _3002 = 3002,
+    _3003 = 3003,
+    _3004 = 3004,
+    _3005 = 3005,
+    _3006 = 3006,
+    _3007 = 3007,
+    _3008 = 3008,
+    _3009 = 3009,
+    _3010 = 3010,
+    _3011 = 3011,
+    _3012 = 3012,
+    _3013 = 3013,
+    _3014 = 3014,
+    _4000 = 4000,
+    _4001 = 4001,
+    _4002 = 4002,
+    _4003 = 4003,
+    _4004 = 4004,
+    _4005 = 4005,
+    _4006 = 4006,
+    _4007 = 4007,
+    _4008 = 4008,
+    _4100 = 4100,
+    _4101 = 4101,
+    _4102 = 4102,
+    _4103 = 4103,
+    _4104 = 4104,
+    _4105 = 4105,
+    _4106 = 4106,
+    _4107 = 4107,
+    _5000 = 5000,
+    _5001 = 5001,
+    _5002 = 5002,
+    _5003 = 5003,
+    _5004 = 5004,
+    _5100 = 5100,
+    _5101 = 5101,
+    _5102 = 5102,
+    _5103 = 5103,
+    _5104 = 5104,
+    _5105 = 5105,
+    _5106 = 5106,
+    _5107 = 5107,
+    _5108 = 5108,
+    _5109 = 5109,
+    _5110 = 5110,
+    _5111 = 5111,
+    _5112 = 5112,
+    _5113 = 5113,
+    _5114 = 5114,
+    _5115 = 5115,
+    _5116 = 5116,
+    _5117 = 5117,
+    _5118 = 5118,
+    _5119 = 5119,
+    _5120 = 5120,
+    _5121 = 5121,
+    _5122 = 5122,
+    _5123 = 5123,
+    _5124 = 5124,
+    _5125 = 5125,
+    _5126 = 5126,
+    _5127 = 5127,
+    _5128 = 5128,
+    _5129 = 5129,
+    _5130 = 5130,
+    _5200 = 5200,
+    _5201 = 5201,
+    _5202 = 5202,
+    _5203 = 5203,
+    _5204 = 5204,
+}
+
+export class SubAccountTypeFilterInputDto implements ISubAccountTypeFilterInputDto {
+    exclude: boolean;
+    ids: SubAccountType[] | undefined;
+
+    constructor(data?: ISubAccountTypeFilterInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.exclude = _data["exclude"];
+            if (Array.isArray(_data["ids"])) {
+                this.ids = [] as any;
+                for (let item of _data["ids"])
+                    this.ids.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): SubAccountTypeFilterInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SubAccountTypeFilterInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["exclude"] = this.exclude;
+        if (Array.isArray(this.ids)) {
+            data["ids"] = [];
+            for (let item of this.ids)
+                data["ids"].push(item);
+        }
+        return data;
+    }
+
+    clone(): SubAccountTypeFilterInputDto {
+        const json = this.toJSON();
+        let result = new SubAccountTypeFilterInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ISubAccountTypeFilterInputDto {
+    exclude: boolean;
+    ids: SubAccountType[] | undefined;
 }
 
 export class SwitchToLinkedAccountInput implements ISwitchToLinkedAccountInput {
