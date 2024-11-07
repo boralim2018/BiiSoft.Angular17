@@ -193,7 +193,7 @@ export abstract class PrimeNgListComponentBase<TOutputDto> extends AppComponentB
     }
 
     protected get margin(): number {
-        return 460; //Header + Footer + margin = 460;
+        return 465; //Header + Footer + margin = 460;
     }
 
     protected setMinHeight() {

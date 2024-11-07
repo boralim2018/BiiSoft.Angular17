@@ -13,7 +13,7 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     @Input() appendTo: any = 'body'
     @Input() showClear: boolean = true;
     @Input() multiple: boolean;
-    @Input() showFilter: boolean = true;
+    @Input() showFilter: boolean;
     
     models: any[] = [];    
     loading: boolean;

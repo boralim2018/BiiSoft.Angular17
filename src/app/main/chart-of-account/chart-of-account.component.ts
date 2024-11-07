@@ -57,7 +57,7 @@ import { of } from 'rxjs';
 })
 export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<ChartOfAccountListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
 
-    protected get sortField(): string { return 'No'; }
+    protected get sortField(): string { return 'Code'; }
 
     @ViewChild('chartOfAccountTable') table: Table;
     canCreate: boolean = this.isGranted(AppPermissions.pages.accounting.chartOfAccounts.create);
@@ -128,6 +128,7 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
 
     protected initColumns() {
         this.columns = [
+            { name: 'Code', header: 'Code', width: '25rem', sort: true },
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
             { name: 'AccountType', header: 'AccountType', width: '15rem', sort: true },

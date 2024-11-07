@@ -2781,6 +2781,163 @@ export class CommonLookupServiceProxy {
     }
 
     /**
+     * @param selectedAccountTypes (optional) 
+     * @param keyword (optional) 
+     * @param usePagination (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return OK
+     */
+    getAccountTypes(selectedAccountTypes: AccountType[] | undefined, keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<AccountTypeNameValueDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetAccountTypes?";
+        if (selectedAccountTypes === null)
+            throw new Error("The parameter 'selectedAccountTypes' cannot be null.");
+        else if (selectedAccountTypes !== undefined)
+            selectedAccountTypes && selectedAccountTypes.forEach(item => { url_ += "SelectedAccountTypes=" + encodeURIComponent("" + item) + "&"; });
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
+            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (usePagination === null)
+            throw new Error("The parameter 'usePagination' cannot be null.");
+        else if (usePagination !== undefined)
+            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAccountTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAccountTypes(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AccountTypeNameValueDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AccountTypeNameValueDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetAccountTypes(response: HttpResponseBase): Observable<AccountTypeNameValueDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AccountTypeNameValueDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param accountTypes (optional) 
+     * @param selectedSubAccountTypes (optional) 
+     * @param keyword (optional) 
+     * @param usePagination (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return OK
+     */
+    getSubAccountTypes(accountTypes: AccountType[] | undefined, selectedSubAccountTypes: SubAccountType[] | undefined, keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<SubAccountTypeNameValueDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetSubAccountTypes?";
+        if (accountTypes === null)
+            throw new Error("The parameter 'accountTypes' cannot be null.");
+        else if (accountTypes !== undefined)
+            accountTypes && accountTypes.forEach(item => { url_ += "AccountTypes=" + encodeURIComponent("" + item) + "&"; });
+        if (selectedSubAccountTypes === null)
+            throw new Error("The parameter 'selectedSubAccountTypes' cannot be null.");
+        else if (selectedSubAccountTypes !== undefined)
+            selectedSubAccountTypes && selectedSubAccountTypes.forEach(item => { url_ += "SelectedSubAccountTypes=" + encodeURIComponent("" + item) + "&"; });
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
+            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (usePagination === null)
+            throw new Error("The parameter 'usePagination' cannot be null.");
+        else if (usePagination !== undefined)
+            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetSubAccountTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetSubAccountTypes(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<SubAccountTypeNameValueDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<SubAccountTypeNameValueDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetSubAccountTypes(response: HttpResponseBase): Observable<SubAccountTypeNameValueDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = SubAccountTypeNameValueDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @param selectedTimeZones (optional) 
      * @param keyword (optional) 
      * @param usePagination (optional) 
@@ -13162,6 +13319,108 @@ export class AccountTypeFilterInputDto implements IAccountTypeFilterInputDto {
 export interface IAccountTypeFilterInputDto {
     exclude: boolean;
     ids: AccountType[] | undefined;
+}
+
+export class AccountTypeNameValueDto implements IAccountTypeNameValueDto {
+    name: string | undefined;
+    value: AccountType;
+
+    constructor(data?: IAccountTypeNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): AccountTypeNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AccountTypeNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): AccountTypeNameValueDto {
+        const json = this.toJSON();
+        let result = new AccountTypeNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAccountTypeNameValueDto {
+    name: string | undefined;
+    value: AccountType;
+}
+
+export class AccountTypeNameValueDtoPagedResultDto implements IAccountTypeNameValueDtoPagedResultDto {
+    items: AccountTypeNameValueDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IAccountTypeNameValueDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(AccountTypeNameValueDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): AccountTypeNameValueDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AccountTypeNameValueDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): AccountTypeNameValueDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new AccountTypeNameValueDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAccountTypeNameValueDtoPagedResultDto {
+    items: AccountTypeNameValueDto[] | undefined;
+    totalCount: number;
 }
 
 export enum AddressLevel {
@@ -25405,6 +25664,108 @@ export class SubAccountTypeFilterInputDto implements ISubAccountTypeFilterInputD
 export interface ISubAccountTypeFilterInputDto {
     exclude: boolean;
     ids: SubAccountType[] | undefined;
+}
+
+export class SubAccountTypeNameValueDto implements ISubAccountTypeNameValueDto {
+    name: string | undefined;
+    value: SubAccountType;
+
+    constructor(data?: ISubAccountTypeNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): SubAccountTypeNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SubAccountTypeNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): SubAccountTypeNameValueDto {
+        const json = this.toJSON();
+        let result = new SubAccountTypeNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ISubAccountTypeNameValueDto {
+    name: string | undefined;
+    value: SubAccountType;
+}
+
+export class SubAccountTypeNameValueDtoPagedResultDto implements ISubAccountTypeNameValueDtoPagedResultDto {
+    items: SubAccountTypeNameValueDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: ISubAccountTypeNameValueDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(SubAccountTypeNameValueDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): SubAccountTypeNameValueDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SubAccountTypeNameValueDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): SubAccountTypeNameValueDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new SubAccountTypeNameValueDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ISubAccountTypeNameValueDtoPagedResultDto {
+    items: SubAccountTypeNameValueDto[] | undefined;
+    totalCount: number;
 }
 
 export class SwitchToLinkedAccountInput implements ISwitchToLinkedAccountInput {
