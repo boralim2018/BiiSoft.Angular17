@@ -45,20 +45,4 @@ export class SelectAccountTypeComponent extends SelectComponentBase implements O
                 this.models = result.items;
             });
     }
-    
-    onFilter(filter: string) {
-        //this.models = [];
-        //this.loading = true;
-
-        //this.skipCount = 0;
-        
-        //let selected = !this.model ? [] : this.model instanceof Array ? this.model : [this.model]; 
-
-        //this._service.getAccountTypes(selected, filter, this.usePagination, this.skipCount, this.maxResultCount)
-        //    .pipe(finalize(() => { this.loading = false; }))
-        //    .subscribe((result) => {
-        //        this.models = result.items
-        //    });
-    }
-
 }

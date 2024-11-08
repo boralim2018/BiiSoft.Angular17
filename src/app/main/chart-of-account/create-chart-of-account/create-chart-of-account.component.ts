@@ -12,9 +12,6 @@ import { SelectAccountTypeComponent } from "../../../../shared/components/select
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { of } from 'rxjs';
-import { DropdownModule } from 'primeng/dropdown';
-import { MessageModule } from 'primeng/message';
-import { NgIf, NgFor, NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-create-chart-of-account',
@@ -23,10 +20,10 @@ import { NgIf, NgFor, NgClass } from '@angular/common';
     standalone: true,
     imports: [
         SelectAccountTypeComponent,
-        FormsModule, ButtonModule, NgIf, NgFor, NgClass,
+        FormsModule, 
         BusyDirective, LocalizePipe,
-        InputTextModule, AbpValidationSummaryComponent,         
-        DropdownModule, ButtonDirective, Ripple, MessageModule]
+        InputTextModule, AbpValidationSummaryComponent,
+        ButtonDirective, Ripple]
 })
 export class CreateChartOfAccountComponent extends DynamicDialogBase implements OnInit {
     saving = false;

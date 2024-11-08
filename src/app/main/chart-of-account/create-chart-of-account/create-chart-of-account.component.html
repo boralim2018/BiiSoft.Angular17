@@ -36,9 +36,9 @@
              selectAccountType
              name="selectAccountType"
              [required]="true"
-             [(ngModel)]="model.accountType">
+             [(ngModel)]="model.accountType"
+             [invalid]="createChartOfAccountForm.invalid && createChartOfAccountForm.controls.selectAccountType.touched && createChartOfAccountForm.controls.selectAccountType.errors?.required">
         </div>
-
 
     </div>
 

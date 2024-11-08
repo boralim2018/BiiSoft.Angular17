@@ -14,18 +14,9 @@
             [required]="required"
             optionLabel="name"
             optionValue="value"
+            [filter]="showFilter"
+            filterBy="name"
             [showClear]="showClear"
             [loading]="loading">
-    <ng-template pTemplate="header" *ngIf="showFilter">
-        <span class="p-input-icon-right w-full">
-            <i class="pi pi-search"></i>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   [(ngModel)]="filter"
-                   name="{{'filterInput_' + name}}"
-                   (keyup)="keyup.next($event)" />
-        </span>
-    </ng-template>
 </p-dropdown>
 <small *ngIf="required && invalid" class="p-error block">{{ l('IsRequired', l('AccountType'))}}</small>

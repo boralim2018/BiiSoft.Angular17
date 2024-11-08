@@ -5,7 +5,7 @@ import { ControlValueAccessorComponentBase } from 'shared/control-value-accessor
 
 
 @Component({ template: '' })
-export abstract class SelectComponentBase extends ControlValueAccessorComponentBase implements OnInit, OnDestroy {
+export abstract class SelectComponentBase extends ControlValueAccessorComponentBase{
 
     @Input() name: string;
     @Input() label: string;
@@ -13,38 +13,15 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     @Input() appendTo: any = 'body'
     @Input() showClear: boolean = true;
     @Input() multiple: boolean;
-    @Input() showFilter: boolean;
+    @Input() showFilter: boolean = true;
 
     models: any[] = [];
     loading: boolean;
-    filter: string;
-
-    keyup: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
-    keyupDelay: number = 250;
-    private keyupSubscription: Subscription;
-
+   
     constructor(injector: Injector) {
         super(injector);
-        this.bindKeyupEvent();
     }
 
-    ngOnInit(): void {
-    }
-
-    ngOnDestroy(): void {
-        if (this.keyupSubscription) this.keyupSubscription.unsubscribe();
-    }
-
-    protected bindKeyupEvent() {
-        this.keyupSubscription = this.keyup.pipe(
-            debounceTime(this.keyupDelay),
-            distinctUntilChanged()
-        ).subscribe(event => {
-            this.onFilter((event.target as HTMLInputElement).value);
-        });
-    }
-
-    abstract onFilter(filter: string);
 }
 
 @Component({ template: '' })
@@ -61,18 +38,33 @@ export abstract class LazySelectComponentBase extends SelectComponentBase implem
 
     abstract sortField: string;
 
+    filter: string;
+
+    keyup: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
+    keyupDelay: number = 250;
+    private keyupSubscription: Subscription;
     constructor(injector: Injector) {
         super(injector);
+        this.bindKeyupEvent();
     }
 
     ngOnInit(): void {
-        super.ngOnInit();
         if (this.lazy) this.onLazyLoad({ first: 0, last: this.maxResultCount });
     }
 
     ngOnDestroy(): void {
-        super.ngOnDestroy();
+        if (this.keyupSubscription) this.keyupSubscription.unsubscribe();
     }
 
+    protected bindKeyupEvent() {
+        this.keyupSubscription = this.keyup.pipe(
+            debounceTime(this.keyupDelay),
+            distinctUntilChanged()
+        ).subscribe(event => {
+            this.onFilter((event.target as HTMLInputElement).value);
+        });
+    }
+
+    abstract onFilter(filter: string);
     abstract onLazyLoad(event, selected?: any);
 }
