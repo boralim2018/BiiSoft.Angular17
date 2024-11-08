@@ -12,11 +12,9 @@
             [emptyFilterMessage]="l('RecordNotFound')"
             [emptyMessage]="l('RecordNotFound')"
             [required]="required"
+            optionLabel="name"
+            optionValue="value"
             [showClear]="showClear"
-            [virtualScroll]="true"
-            [virtualScrollItemSize]="38"
-            [lazy]="true"
-            (onLazyLoad)="onLazyLoad($event, model)"
             [loading]="loading">
     <ng-template pTemplate="header" *ngIf="showFilter">
         <span class="p-input-icon-right w-full">

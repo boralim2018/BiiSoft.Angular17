@@ -1,7 +1,7 @@
 import { Component, forwardRef, Injector, OnInit } from '@angular/core';
 import { CommonLookupServiceProxy } from '@shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
-import { SelectComponentBase } from 'shared/select-component-base';
+import { LazySelectComponentBase } from 'shared/select-component-base';
 import { InputTextModule } from 'primeng/inputtext';
 import { PrimeTemplate } from 'primeng/api';
 import { NgIf } from '@angular/common';
@@ -22,7 +22,7 @@ import { DropdownModule } from 'primeng/dropdown';
     standalone: true,
     imports: [DropdownModule, FormsModule, NgIf, PrimeTemplate, InputTextModule]
 })
-export class SelectTimezoneComponent extends SelectComponentBase implements OnInit {
+export class SelectTimezoneComponent extends LazySelectComponentBase implements OnInit {
 
     sortField: string;
     usePagination: boolean = true;

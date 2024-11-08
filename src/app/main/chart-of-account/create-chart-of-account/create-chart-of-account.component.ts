@@ -6,18 +6,27 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
-import { ButtonDirective } from 'primeng/button';
+import { ButtonDirective, ButtonModule } from 'primeng/button';
 import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
+import { SelectAccountTypeComponent } from "../../../../shared/components/select-account-type/select-account-type.component";
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { of } from 'rxjs';
+import { DropdownModule } from 'primeng/dropdown';
+import { MessageModule } from 'primeng/message';
+import { NgIf, NgFor, NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-create-chart-of-account',
     templateUrl: './create-chart-of-account.component.html',
     providers: [ChartOfAccountServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [
+        SelectAccountTypeComponent,
+        FormsModule, ButtonModule, NgIf, NgFor, NgClass,
+        BusyDirective, LocalizePipe,
+        InputTextModule, AbpValidationSummaryComponent,         
+        DropdownModule, ButtonDirective, Ripple, MessageModule]
 })
 export class CreateChartOfAccountComponent extends DynamicDialogBase implements OnInit {
     saving = false;

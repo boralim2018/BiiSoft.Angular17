@@ -2781,35 +2781,10 @@ export class CommonLookupServiceProxy {
     }
 
     /**
-     * @param selectedAccountTypes (optional) 
-     * @param keyword (optional) 
-     * @param usePagination (optional) 
-     * @param skipCount (optional) 
-     * @param maxResultCount (optional) 
      * @return OK
      */
-    getAccountTypes(selectedAccountTypes: AccountType[] | undefined, keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<AccountTypeNameValueDtoPagedResultDto> {
-        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetAccountTypes?";
-        if (selectedAccountTypes === null)
-            throw new Error("The parameter 'selectedAccountTypes' cannot be null.");
-        else if (selectedAccountTypes !== undefined)
-            selectedAccountTypes && selectedAccountTypes.forEach(item => { url_ += "SelectedAccountTypes=" + encodeURIComponent("" + item) + "&"; });
-        if (keyword === null)
-            throw new Error("The parameter 'keyword' cannot be null.");
-        else if (keyword !== undefined)
-            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
-        if (usePagination === null)
-            throw new Error("The parameter 'usePagination' cannot be null.");
-        else if (usePagination !== undefined)
-            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
-        if (skipCount === null)
-            throw new Error("The parameter 'skipCount' cannot be null.");
-        else if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
-        if (maxResultCount === null)
-            throw new Error("The parameter 'maxResultCount' cannot be null.");
-        else if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+    getAccountTypes(): Observable<AccountTypeNameValueDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetAccountTypes";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -2827,14 +2802,14 @@ export class CommonLookupServiceProxy {
                 try {
                     return this.processGetAccountTypes(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<AccountTypeNameValueDtoPagedResultDto>;
+                    return _observableThrow(e) as any as Observable<AccountTypeNameValueDtoListResultDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<AccountTypeNameValueDtoPagedResultDto>;
+                return _observableThrow(response_) as any as Observable<AccountTypeNameValueDtoListResultDto>;
         }));
     }
 
-    protected processGetAccountTypes(response: HttpResponseBase): Observable<AccountTypeNameValueDtoPagedResultDto> {
+    protected processGetAccountTypes(response: HttpResponseBase): Observable<AccountTypeNameValueDtoListResultDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2845,7 +2820,7 @@ export class CommonLookupServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = AccountTypeNameValueDtoPagedResultDto.fromJS(resultData200);
+            result200 = AccountTypeNameValueDtoListResultDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -2857,40 +2832,20 @@ export class CommonLookupServiceProxy {
     }
 
     /**
-     * @param accountTypes (optional) 
-     * @param selectedSubAccountTypes (optional) 
-     * @param keyword (optional) 
-     * @param usePagination (optional) 
-     * @param skipCount (optional) 
-     * @param maxResultCount (optional) 
+     * @param accountTypeFilter_Exclude (optional) 
+     * @param accountTypeFilter_Ids (optional) 
      * @return OK
      */
-    getSubAccountTypes(accountTypes: AccountType[] | undefined, selectedSubAccountTypes: SubAccountType[] | undefined, keyword: string | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<SubAccountTypeNameValueDtoPagedResultDto> {
+    getSubAccountTypes(accountTypeFilter_Exclude: boolean | undefined, accountTypeFilter_Ids: AccountType[] | undefined): Observable<SubAccountTypeNameValueDtoListResultDto> {
         let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetSubAccountTypes?";
-        if (accountTypes === null)
-            throw new Error("The parameter 'accountTypes' cannot be null.");
-        else if (accountTypes !== undefined)
-            accountTypes && accountTypes.forEach(item => { url_ += "AccountTypes=" + encodeURIComponent("" + item) + "&"; });
-        if (selectedSubAccountTypes === null)
-            throw new Error("The parameter 'selectedSubAccountTypes' cannot be null.");
-        else if (selectedSubAccountTypes !== undefined)
-            selectedSubAccountTypes && selectedSubAccountTypes.forEach(item => { url_ += "SelectedSubAccountTypes=" + encodeURIComponent("" + item) + "&"; });
-        if (keyword === null)
-            throw new Error("The parameter 'keyword' cannot be null.");
-        else if (keyword !== undefined)
-            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
-        if (usePagination === null)
-            throw new Error("The parameter 'usePagination' cannot be null.");
-        else if (usePagination !== undefined)
-            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
-        if (skipCount === null)
-            throw new Error("The parameter 'skipCount' cannot be null.");
-        else if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
-        if (maxResultCount === null)
-            throw new Error("The parameter 'maxResultCount' cannot be null.");
-        else if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        if (accountTypeFilter_Exclude === null)
+            throw new Error("The parameter 'accountTypeFilter_Exclude' cannot be null.");
+        else if (accountTypeFilter_Exclude !== undefined)
+            url_ += "AccountTypeFilter.Exclude=" + encodeURIComponent("" + accountTypeFilter_Exclude) + "&";
+        if (accountTypeFilter_Ids === null)
+            throw new Error("The parameter 'accountTypeFilter_Ids' cannot be null.");
+        else if (accountTypeFilter_Ids !== undefined)
+            accountTypeFilter_Ids && accountTypeFilter_Ids.forEach(item => { url_ += "AccountTypeFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -2908,14 +2863,14 @@ export class CommonLookupServiceProxy {
                 try {
                     return this.processGetSubAccountTypes(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<SubAccountTypeNameValueDtoPagedResultDto>;
+                    return _observableThrow(e) as any as Observable<SubAccountTypeNameValueDtoListResultDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<SubAccountTypeNameValueDtoPagedResultDto>;
+                return _observableThrow(response_) as any as Observable<SubAccountTypeNameValueDtoListResultDto>;
         }));
     }
 
-    protected processGetSubAccountTypes(response: HttpResponseBase): Observable<SubAccountTypeNameValueDtoPagedResultDto> {
+    protected processGetSubAccountTypes(response: HttpResponseBase): Observable<SubAccountTypeNameValueDtoListResultDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2926,7 +2881,7 @@ export class CommonLookupServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = SubAccountTypeNameValueDtoPagedResultDto.fromJS(resultData200);
+            result200 = SubAccountTypeNameValueDtoListResultDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -13368,11 +13323,10 @@ export interface IAccountTypeNameValueDto {
     value: AccountType;
 }
 
-export class AccountTypeNameValueDtoPagedResultDto implements IAccountTypeNameValueDtoPagedResultDto {
+export class AccountTypeNameValueDtoListResultDto implements IAccountTypeNameValueDtoListResultDto {
     items: AccountTypeNameValueDto[] | undefined;
-    totalCount: number;
 
-    constructor(data?: IAccountTypeNameValueDtoPagedResultDto) {
+    constructor(data?: IAccountTypeNameValueDtoListResultDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -13388,13 +13342,12 @@ export class AccountTypeNameValueDtoPagedResultDto implements IAccountTypeNameVa
                 for (let item of _data["items"])
                     this.items.push(AccountTypeNameValueDto.fromJS(item));
             }
-            this.totalCount = _data["totalCount"];
         }
     }
 
-    static fromJS(data: any): AccountTypeNameValueDtoPagedResultDto {
+    static fromJS(data: any): AccountTypeNameValueDtoListResultDto {
         data = typeof data === 'object' ? data : {};
-        let result = new AccountTypeNameValueDtoPagedResultDto();
+        let result = new AccountTypeNameValueDtoListResultDto();
         result.init(data);
         return result;
     }
@@ -13406,21 +13359,19 @@ export class AccountTypeNameValueDtoPagedResultDto implements IAccountTypeNameVa
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        data["totalCount"] = this.totalCount;
         return data;
     }
 
-    clone(): AccountTypeNameValueDtoPagedResultDto {
+    clone(): AccountTypeNameValueDtoListResultDto {
         const json = this.toJSON();
-        let result = new AccountTypeNameValueDtoPagedResultDto();
+        let result = new AccountTypeNameValueDtoListResultDto();
         result.init(json);
         return result;
     }
 }
 
-export interface IAccountTypeNameValueDtoPagedResultDto {
+export interface IAccountTypeNameValueDtoListResultDto {
     items: AccountTypeNameValueDto[] | undefined;
-    totalCount: number;
 }
 
 export enum AddressLevel {
@@ -25713,11 +25664,10 @@ export interface ISubAccountTypeNameValueDto {
     value: SubAccountType;
 }
 
-export class SubAccountTypeNameValueDtoPagedResultDto implements ISubAccountTypeNameValueDtoPagedResultDto {
+export class SubAccountTypeNameValueDtoListResultDto implements ISubAccountTypeNameValueDtoListResultDto {
     items: SubAccountTypeNameValueDto[] | undefined;
-    totalCount: number;
 
-    constructor(data?: ISubAccountTypeNameValueDtoPagedResultDto) {
+    constructor(data?: ISubAccountTypeNameValueDtoListResultDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -25733,13 +25683,12 @@ export class SubAccountTypeNameValueDtoPagedResultDto implements ISubAccountType
                 for (let item of _data["items"])
                     this.items.push(SubAccountTypeNameValueDto.fromJS(item));
             }
-            this.totalCount = _data["totalCount"];
         }
     }
 
-    static fromJS(data: any): SubAccountTypeNameValueDtoPagedResultDto {
+    static fromJS(data: any): SubAccountTypeNameValueDtoListResultDto {
         data = typeof data === 'object' ? data : {};
-        let result = new SubAccountTypeNameValueDtoPagedResultDto();
+        let result = new SubAccountTypeNameValueDtoListResultDto();
         result.init(data);
         return result;
     }
@@ -25751,21 +25700,19 @@ export class SubAccountTypeNameValueDtoPagedResultDto implements ISubAccountType
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        data["totalCount"] = this.totalCount;
         return data;
     }
 
-    clone(): SubAccountTypeNameValueDtoPagedResultDto {
+    clone(): SubAccountTypeNameValueDtoListResultDto {
         const json = this.toJSON();
-        let result = new SubAccountTypeNameValueDtoPagedResultDto();
+        let result = new SubAccountTypeNameValueDtoListResultDto();
         result.init(json);
         return result;
     }
 }
 
-export interface ISubAccountTypeNameValueDtoPagedResultDto {
+export interface ISubAccountTypeNameValueDtoListResultDto {
     items: SubAccountTypeNameValueDto[] | undefined;
-    totalCount: number;
 }
 
 export class SwitchToLinkedAccountInput implements ISwitchToLinkedAccountInput {

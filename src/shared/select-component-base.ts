@@ -1,7 +1,8 @@
-import { Component, Injector, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ControlValueAccessorComponentBase } from 'shared/control-value-accessor-component-base';
+
 
 @Component({ template: '' })
 export abstract class SelectComponentBase extends ControlValueAccessorComponentBase implements OnInit, OnDestroy {
@@ -9,24 +10,14 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     @Input() name: string;
     @Input() label: string;
     @Input() placeholder: string;
-    @Input() initModel: boolean = true;
     @Input() appendTo: any = 'body'
     @Input() showClear: boolean = true;
     @Input() multiple: boolean;
     @Input() showFilter: boolean;
-    
-    models: any[] = [];    
+
+    models: any[] = [];
     loading: boolean;
     filter: string;
-    
-    //pagination
-    skipCount: number = 0;
-    maxResultCount: number = 25;
-    totalRecords: number = 0;   
-    usePagination: boolean = true;
-    sortMode: number = 1;
-
-    abstract sortField: string;
 
     keyup: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
     keyupDelay: number = 250;
@@ -38,7 +29,6 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     }
 
     ngOnInit(): void {
-        if (this.initModel) this.onLazyLoad({ first: 0, last: this.maxResultCount });
     }
 
     ngOnDestroy(): void {
@@ -53,8 +43,36 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
             this.onFilter((event.target as HTMLInputElement).value);
         });
     }
-    
+
     abstract onFilter(filter: string);
-    abstract onLazyLoad(event, selected?: any);
 }
 
+@Component({ template: '' })
+export abstract class LazySelectComponentBase extends SelectComponentBase implements OnInit, OnDestroy {
+
+    @Input() lazy: boolean = true;
+    
+    //pagination
+    skipCount: number = 0;
+    maxResultCount: number = 25;
+    totalRecords: number = 0;   
+    usePagination: boolean = true;
+    sortMode: number = 1;
+
+    abstract sortField: string;
+
+    constructor(injector: Injector) {
+        super(injector);
+    }
+
+    ngOnInit(): void {
+        super.ngOnInit();
+        if (this.lazy) this.onLazyLoad({ first: 0, last: this.maxResultCount });
+    }
+
+    ngOnDestroy(): void {
+        super.ngOnDestroy();
+    }
+
+    abstract onLazyLoad(event, selected?: any);
+}
