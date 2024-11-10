@@ -15,7 +15,7 @@ export abstract class AppMenuPermission extends AppComponentBase {
             }
             return false;
         }
-        else if (menuItem.permissionName instanceof Array) {
+        else if (Array.isArray(menuItem.permissionName)) {
             for (let item of menuItem.permissionName) {
                 if (this.isGranted(item.permissionName)) {
                     menuItem.routerLink = item.routerLink;

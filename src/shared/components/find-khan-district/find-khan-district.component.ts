@@ -8,7 +8,7 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
     selector: 'find-khan-district, [findKhanDistrict]',
-    templateUrl: '../find-template/find-template.component.html',
+    templateUrl: '../template/find-template.component.html',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

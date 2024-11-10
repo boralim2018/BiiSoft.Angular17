@@ -1,6 +1,42 @@
 <form novalidate autocomplete="off" #createChartOfAccountForm="ngForm" (ngSubmit)="save()" [busy]="saving">
     <div class="p-3">
-        <div class="field ">
+        <div class="field"
+             selectAccountType
+             name="selectAccountType"
+             [label]="l('AccountType')"
+             [required]="true"
+             [(ngModel)]="model.accountType"
+             [invalid]="createChartOfAccountForm.invalid &&
+                createChartOfAccountForm.controls.selectAccountType.touched &&
+                createChartOfAccountForm.controls.selectAccountType.errors?.required">
+        </div>
+        <div class="field"
+             selectSubAccountType
+             name="selectSubAccountType"
+             [label]="l('SubAccountType')"
+             [(accountTypeIds)]="model.accountType"
+             [required]="true"
+             [(ngModel)]="model.subAccountType"
+             [invalid]="createChartOfAccountForm.invalid &&
+                       createChartOfAccountForm.controls.selectSubAccountType.touched &&
+                       createChartOfAccountForm.controls.selectSubAccountType.errors?.required">
+        </div>
+        <div class="field" *ngIf="customCodeEnble">
+            <label for="code" class="text-900 font-medium">{{l('Code')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="code"
+                   id="code"
+                   maxlength="6"
+                   required
+                   [(ngModel)]="model.code"
+                   #codeModel="ngModel"
+                   #codeEl />
+            <abp-validation-summary [control]="codeModel"
+                                    [controlEl]="codeEl"></abp-validation-summary>
+        </div>
+        <div class="field">
             <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
             <input type="text"
                    pInputText
@@ -31,15 +67,13 @@
             <abp-validation-summary [control]="displayNameModel"
                                     [controlEl]="displayNameEl"></abp-validation-summary>
         </div>
-
         <div class="field"
-             selectAccountType
-             name="selectAccountType"
-             [required]="true"
-             [(ngModel)]="model.accountType"
-             [invalid]="createChartOfAccountForm.invalid && createChartOfAccountForm.controls.selectAccountType.touched && createChartOfAccountForm.controls.selectAccountType.errors?.required">
+             findChartOfAccount
+             name="parentAccount"
+             [label]="l('ParentAccount')"
+             [(ngModel)]="parentAccount"
+             (ngModelChange)="model.parentId = $event?.id">
         </div>
-
     </div>
 
     <div class="p-dialog-footer">

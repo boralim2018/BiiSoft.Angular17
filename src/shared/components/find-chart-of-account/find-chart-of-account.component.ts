@@ -1,18 +1,18 @@
 import { Component, Injector, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FindComponentBase } from 'shared/find-component-base';
-import { FindCityProvinceDialogComponent } from './find-city-province-dialog.component';
+import { FindChartOfAccountDialogComponent } from './find-chart-of-account-dialog.component';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
-    selector: 'find-city-province, [findCityProvince]',
+    selector: 'find-chart-of-account, [findChartOfAccount]',
     templateUrl: '../template/find-template.component.html',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FindCityProvinceComponent),
+            useExisting: forwardRef(() => FindChartOfAccountComponent),
             multi: true
         },
         DialogService
@@ -20,7 +20,7 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
     standalone: true,
     imports: [NgIf, CheckboxModule, FormsModule, NgClass, NgFor]
 })
-export class FindCityProvinceComponent extends FindComponentBase implements OnInit {
+export class FindChartOfAccountComponent extends FindComponentBase implements OnInit {
 
     @Input() countries: any;
 
@@ -29,7 +29,7 @@ export class FindCityProvinceComponent extends FindComponentBase implements OnIn
         private _dialogService: DialogService,
     ) {
         super(injector);
-        this.placeholder = this.l('Select_', this.l('CityProvince'));
+        this.placeholder = this.l('Select_', this.l('ChartOfAccount'));
     }
 
     ngOnInit() {
@@ -37,13 +37,13 @@ export class FindCityProvinceComponent extends FindComponentBase implements OnIn
     }
 
     find() {
-        this._dialogService.open(FindCityProvinceDialogComponent, {
+        this._dialogService.open(FindChartOfAccountDialogComponent, {
             data: {
                 multiple: this.multiple,
                 countries: this.countries
             },
-            header: this.l('FindCityProvinces'),
-            styleClass: this.responsiveDialogClass + ' find-city-province-dialog'
+            header: this.l('FindChartOfAccounts'),
+            styleClass: this.responsiveDialogClass + ' find-chart-of-account-dialog'
             })
             .onClose.subscribe(result => {
                 this.mapFindResult(result);

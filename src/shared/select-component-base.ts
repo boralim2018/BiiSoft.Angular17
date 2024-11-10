@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Injector, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ControlValueAccessorComponentBase } from 'shared/control-value-accessor-component-base';
@@ -14,12 +14,17 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     @Input() showClear: boolean = true;
     @Input() multiple: boolean;
     @Input() showFilter: boolean = true;
+    @Input() showExclude: boolean;
+    @Input() exclude: boolean;
+    @Output() excludeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     models: any[] = [];
     loading: boolean;
+    validateMessage: string;
    
     constructor(injector: Injector) {
         super(injector);
+        this.placeholder = this.l('Select_', this.label);
     }
 
 }

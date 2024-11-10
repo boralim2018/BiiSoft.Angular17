@@ -13387,6 +13387,7 @@ export class AdvanceSettingDto implements IAdvanceSettingDto {
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
+    customAccountCodeEnable: boolean;
     classEnable: boolean;
 
     constructor(data?: IAdvanceSettingDto) {
@@ -13404,6 +13405,7 @@ export class AdvanceSettingDto implements IAdvanceSettingDto {
             this.multiCurrencyEnable = _data["multiCurrencyEnable"];
             this.lineDiscountEnable = _data["lineDiscountEnable"];
             this.totalDiscountEnable = _data["totalDiscountEnable"];
+            this.customAccountCodeEnable = _data["customAccountCodeEnable"];
             this.classEnable = _data["classEnable"];
         }
     }
@@ -13421,6 +13423,7 @@ export class AdvanceSettingDto implements IAdvanceSettingDto {
         data["multiCurrencyEnable"] = this.multiCurrencyEnable;
         data["lineDiscountEnable"] = this.lineDiscountEnable;
         data["totalDiscountEnable"] = this.totalDiscountEnable;
+        data["customAccountCodeEnable"] = this.customAccountCodeEnable;
         data["classEnable"] = this.classEnable;
         return data;
     }
@@ -13438,6 +13441,7 @@ export interface IAdvanceSettingDto {
     multiCurrencyEnable: boolean;
     lineDiscountEnable: boolean;
     totalDiscountEnable: boolean;
+    customAccountCodeEnable: boolean;
     classEnable: boolean;
 }
 

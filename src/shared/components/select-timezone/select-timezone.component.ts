@@ -43,7 +43,7 @@ export class SelectTimezoneComponent extends LazySelectComponentBase implements 
 
         this.skipCount = 0;
         
-        let selected = !this.model ? [] : this.model instanceof Array ? this.model : [this.model]; 
+        let selected = !this.model ? [] : Array.isArray(this.model) ? this.model : [this.model]; 
 
         this._service.getTimeZones(selected, filter, this.usePagination, this.skipCount, this.maxResultCount)
             .pipe(finalize(() => { this.loading = false; }))
@@ -64,7 +64,7 @@ export class SelectTimezoneComponent extends LazySelectComponentBase implements 
         if (this.totalRecords > 0 && this.totalRecords <= this.skipCount) return; 
 
         this.loading = true;
-        let selected = !selectedValue ? [] : selectedValue instanceof Array ? selectedValue : [selectedValue];
+        let selected = !selectedValue ? [] : Array.isArray(selectedValue) ? selectedValue : [selectedValue];
 
         this._service.getTimeZones(selected, "", this.usePagination, this.skipCount, this.maxResultCount)
             .pipe(finalize(() => { this.loading = false; }))

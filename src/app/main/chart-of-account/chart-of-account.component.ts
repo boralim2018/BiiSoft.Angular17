@@ -175,11 +175,11 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
             });
     }
 
-    delete(location: ChartOfAccountListDto): void {
+    delete(model: ChartOfAccountListDto): void {
 
         this._dialogService.open(ConfirmDeleteComponent, {
             data: {
-                deleteObj: location.no + " - " + location.name,
+                deleteObj: model.no + " - " + model.name,
                 deleteLabel: this.l('ChartOfAccount')
             },
             header: this.l('ConfirmDelete'),
@@ -188,7 +188,7 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
         .onClose.subscribe(result => {
             if (result) {
                 this.isTableLoading = true;
-                this._chartOfAccountService.delete(location.id)
+                this._chartOfAccountService.delete(model.id)
                     .pipe(finalize(() => this.isTableLoading = false))
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
@@ -271,8 +271,8 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
             });
     }
 
-    editChartOfAccount(location: ChartOfAccountListDto): void {
-        this.showCreateOrEditUserDialog(location.id);
+    editChartOfAccount(model: ChartOfAccountListDto): void {
+        this.showCreateOrEditUserDialog(model.id);
     }
 
     showCreateOrEditUserDialog(id?: string): void {
@@ -296,13 +296,13 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
         });
     }
 
-    enable(location: ChartOfAccountListDto) {
+    enable(model: ChartOfAccountListDto) {
         this.message.confirm(
-            this.l('EnableWarningMessage', location.name), this.l('Enable'), (result) => {
+            this.l('EnableWarningMessage', model.name), this.l('Enable'), (result) => {
                 if (result) {
 
                     let input = new GuidEntityDto();
-                    input.id = location.id;
+                    input.id = model.id;
 
                     this.isTableLoading = true;
                     this._chartOfAccountService.enable(input)
@@ -316,13 +316,13 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
         );
     }
 
-    disable(location: ChartOfAccountListDto) {
+    disable(model: ChartOfAccountListDto) {
         this.message.confirm(
-            this.l('DisableWarningMessage', location.name), this.l('Disable'), (result) => {
+            this.l('DisableWarningMessage', model.name), this.l('Disable'), (result) => {
                 if (result) {
 
                     let input = new GuidEntityDto();
-                    input.id = location.id;
+                    input.id = model.id;
 
                     this.isTableLoading = true;
                     this._chartOfAccountService.disable(input)
@@ -336,29 +336,29 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
         );
     }
 
-    viewDetail(location: ChartOfAccountListDto) {
-        this._router.navigate(['/app/main/chart-of-account/view-detail', location.id]);
+    viewDetail(model: ChartOfAccountListDto) {
+        this._router.navigate(['/app/main/chart-of-accounts/view-detail', model.id]);
     }
 
-    showInlineActions(location: ChartOfAccountListDto, event: Event) {
+    showInlineActions(model: ChartOfAccountListDto, event: Event) {
         if (!this.inlineActionMenu) return;
 
         this.inlineActionMenu.model = [];
-        if (this.canView) this.inlineActionMenu.model.push({ label: this.l('View'), icon: 'pi pi-fw pi-eye', command: () => { this.viewDetail(location); } });
-        if (this.canEdit && !location.cannotEdit) this.inlineActionMenu.model.push({ label: this.l('Edit'), icon: 'pi pi-fw pi-pencil', command: () => { this.editChartOfAccount(location); } });
-        if (this.canDelete && !location.cannotDelete) this.inlineActionMenu.model.push({ label: this.l('Delete'), icon: 'pi pi-trash', command: () => { this.delete(location); } });
-        if (this.canEnable && !location.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(location); } });
-        if (this.canDisable && location.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(location); } });
+        if (this.canView) this.inlineActionMenu.model.push({ label: this.l('View'), icon: 'pi pi-fw pi-eye', command: () => { this.viewDetail(model); } });
+        if (this.canEdit && !model.cannotEdit) this.inlineActionMenu.model.push({ label: this.l('Edit'), icon: 'pi pi-fw pi-pencil', command: () => { this.editChartOfAccount(model); } });
+        if (this.canDelete && !model.cannotDelete) this.inlineActionMenu.model.push({ label: this.l('Delete'), icon: 'pi pi-trash', command: () => { this.delete(model); } });
+        if (this.canEnable && !model.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(model); } });
+        if (this.canDisable && model.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(model); } });
 
         this.inlineActionMenu.show(event);
     }
 
     onCreatorsChange(event) {
-        this.filterInput.creators.ids = !event ? undefined : event instanceof Array ? event.map(f => f.id) : [event.id];
+        this.filterInput.creators.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
     onModifiersChange(event) {
-        this.filterInput.modifiers.ids = !event ? undefined : event instanceof Array ? event.map(f => f.id) : [event.id];
+        this.filterInput.modifiers.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
 }

@@ -34,7 +34,7 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
     }
 
     remove(i: number) {
-        if (this.model instanceof Array) {
+        if (Array.isArray(this.model)) {
             this.model.splice(i, 1);
             this.onChange(this.model);
             this.onTouched();
@@ -50,7 +50,7 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
         if (!result) return;
 
         if (this.multiple) {
-            let list = this.model instanceof Array ? this.model : [];
+            let list = Array.isArray(this.model) ? this.model : [];
             let newList = result.filter(s => list.find(f => f.id == s.id) === undefined);
             this.setValue(list.concat(newList));
         }

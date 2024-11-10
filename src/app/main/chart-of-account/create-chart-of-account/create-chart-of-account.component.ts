@@ -9,9 +9,12 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective, ButtonModule } from 'primeng/button';
 import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
 import { SelectAccountTypeComponent } from "../../../../shared/components/select-account-type/select-account-type.component";
+import { SelectSubAccountTypeComponent } from "../../../../shared/components/select-account-type/select-sub-account-type.component";
+import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { of } from 'rxjs';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-create-chart-of-account',
@@ -20,7 +23,9 @@ import { of } from 'rxjs';
     standalone: true,
     imports: [
         SelectAccountTypeComponent,
-        FormsModule, 
+        SelectSubAccountTypeComponent,
+        FindChartOfAccountComponent,
+        FormsModule, NgIf,
         BusyDirective, LocalizePipe,
         InputTextModule, AbpValidationSummaryComponent,
         ButtonDirective, Ripple]
@@ -29,6 +34,8 @@ export class CreateChartOfAccountComponent extends DynamicDialogBase implements 
     saving = false;
     model: CreateUpdateChartOfAccountInputDto = new CreateUpdateChartOfAccountInputDto();
 
+    customCodeEnble: boolean;
+    parentAccount: any;
     constructor(
         injector: Injector,
         public _chartOfaccountService: ChartOfAccountServiceProxy,
@@ -36,6 +43,7 @@ export class CreateChartOfAccountComponent extends DynamicDialogBase implements 
         private _dialogConfig: DynamicDialogConfig
     ) {
         super(injector);
+        this.customCodeEnble = this.appSession.advanceSetting?.customAccountCodeEnable;
     }
 
     ngOnInit(): void {

@@ -133,7 +133,7 @@ export class FindCityProvinceDialogComponent extends Mixin(FindCardListComponent
         this.cardView = cache.cardView;
 
         //override from input
-        if (this._dialogConfig.data.countries && (!(this._dialogConfig.data.countries instanceof Array) || this._dialogConfig.data.countries.length)) {
+        if (this._dialogConfig.data.countries && (!(Array.isArray(this._dialogConfig.data.countries)) || this._dialogConfig.data.countries.length)) {
             this.countries = this._dialogConfig.data.countries;
             this.mapCountriesFilter(this.countries);
         }
@@ -143,7 +143,7 @@ export class FindCityProvinceDialogComponent extends Mixin(FindCardListComponent
     }
 
     mapCountriesFilter(event) {
-        this.filterInput.countries.ids = !event ? undefined : event instanceof Array ? event.map(f => f.id) : [event.id];
+        this.filterInput.countries.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
     onCountriesChange(event) {

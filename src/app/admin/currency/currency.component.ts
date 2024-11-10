@@ -376,10 +376,10 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
     }
 
     onCreatorsChange(event) {
-        this.filterInput.creators.ids = !event ? undefined : event instanceof Array ? event.map(f => f.id) : [event.id];
+        this.filterInput.creators.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
     onModifiersChange(event) {
-        this.filterInput.modifiers.ids = !event ? undefined : event instanceof Array ? event.map(f => f.id) : [event.id];
+        this.filterInput.modifiers.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 }

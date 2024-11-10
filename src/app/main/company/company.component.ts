@@ -1,3 +1,4 @@
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as moment from 'moment';
@@ -5,10 +6,14 @@ import { ButtonDirective, ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
+import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
+import { MessageModule } from 'primeng/message';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { Ripple } from 'primeng/ripple';
 import { StepperModule } from 'primeng/stepper';
+import { TooltipModule } from 'primeng/tooltip';
 import { finalize } from 'rxjs/operators';
 import { Mixin } from 'ts-mixer';
 import { appModuleAnimation } from '../../../shared/animations/routerTransition';
@@ -18,19 +23,14 @@ import { ContactAddressComponent } from '../../../shared/components/contact-addr
 import { FindCountryComponent } from '../../../shared/components/find-country/find-country.component';
 import { FindCurrencyComponent } from '../../../shared/components/find-currency/find-currency.component';
 import { NavBarComponent } from '../../../shared/components/nav-bar/nav-bar.component';
+import { SelectDateComponent } from '../../../shared/components/select-date/select-date.component';
 import { SelectTimezoneComponent } from '../../../shared/components/select-timezone/select-timezone.component';
 import { TableSettingComponent } from '../../../shared/components/table-setting/table-setting.component';
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
-import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAccountSettingInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
-import { Ripple } from 'primeng/ripple';
-import { NgClass, NgFor, NgIf } from '@angular/common';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { SelectDateComponent } from '../../../shared/components/select-date/select-date.component';
-import { TooltipModule } from 'primeng/tooltip';
-import { MessageModule } from 'primeng/message';
+import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAccountSettingInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
 
 @Component({
     selector: 'app-company',
@@ -239,7 +239,7 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
                 if (!this.accountSetting.id && result) {
                     this.accountSetting.id = result;
                 }
-
+                
                 if (next) next.emit();
                 this.notify.info(this.l('SavedSuccessfully'));
             });

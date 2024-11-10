@@ -1,5 +1,41 @@
-<form novalidate autocomplete="off" #editLocationForm="ngForm" (ngSubmit)="save()" [busy]="saving">
+<form novalidate autocomplete="off" #editChartOfAccountForm="ngForm" (ngSubmit)="save()" [busy]="saving">
     <div class="p-3">
+        <div class="field"
+             selectAccountType
+             name="selectAccountType"
+             [label]="l('AccountType')"
+             [required]="true"
+             [(ngModel)]="model.accountType"
+             [invalid]="editChartOfAccountForm.invalid &&
+                        editChartOfAccountForm.controls.selectAccountType.touched &&
+                        editChartOfAccountForm.controls.selectAccountType.errors?.required">
+        </div>
+        <div class="field"
+             selectSubAccountType
+             name="selectSubAccountType"
+             [label]="l('SubAccountType')"
+             [(accountTypeIds)]="model.accountType"
+             [required]="true"
+             [(ngModel)]="model.subAccountType"
+             [invalid]="editChartOfAccountForm.invalid &&
+                        editChartOfAccountForm.controls.selectSubAccountType.touched &&
+                        editChartOfAccountForm.controls.selectSubAccountType.errors?.required">
+        </div>
+        <div class="field" *ngIf="customCodeEnble">
+            <label for="code" class="text-900 font-medium">{{l('Code')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="code"
+                   id="code"
+                   maxlength="6"
+                   required
+                   [(ngModel)]="model.code"
+                   #codeModel="ngModel"
+                   #codeEl />
+            <abp-validation-summary [control]="codeModel"
+                                    [controlEl]="codeEl"></abp-validation-summary>
+        </div>
         <div class="field">
             <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
             <input type="text"
@@ -31,7 +67,7 @@
             <abp-validation-summary [control]="displayNameModel"
                                     [controlEl]="displayNameEl"></abp-validation-summary>
         </div>
-        
+
     </div>
 
     <div class="p-dialog-footer">
@@ -41,7 +77,7 @@
                     class=""
                     icon="pi pi-save"
                     type="submit"
-                    [disabled]="!(editLocationForm.form.valid )|| saving"></button>
+                    [disabled]="!(editChartOfAccountForm.form.valid )|| saving"></button>
         </div>
     </div>
 </form>

@@ -11,18 +11,28 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
+import { SelectAccountTypeComponent } from '../../../../shared/components/select-account-type/select-account-type.component';
+import { SelectSubAccountTypeComponent } from '../../../../shared/components/select-account-type/select-sub-account-type.component';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-edit-chart-of-account',
     templateUrl: './edit-chart-of-account.component.html',
     providers: [ChartOfAccountServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [
+        SelectAccountTypeComponent,
+        SelectSubAccountTypeComponent,
+        FormsModule, NgIf,
+        BusyDirective, LocalizePipe,
+        InputTextModule, AbpValidationSummaryComponent,
+        ButtonDirective, Ripple]
 })
 export class EditChartOfAccountComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateChartOfAccountInputDto = new CreateUpdateChartOfAccountInputDto();
 
+    customCodeEnble: boolean;
     constructor(
         injector: Injector,
         public _chartOfAccountService: ChartOfAccountServiceProxy,
@@ -30,6 +40,7 @@ export class EditChartOfAccountComponent extends DynamicDialogBase implements On
         private _dialogConfig: DynamicDialogConfig
     ) {
         super(injector);
+        this.customCodeEnble = this.appSession.advanceSetting?.customAccountCodeEnable;
     }
 
     ngOnInit(): void {

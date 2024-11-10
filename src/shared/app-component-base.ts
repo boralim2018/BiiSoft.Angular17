@@ -128,9 +128,6 @@ export abstract class AppComponentBase extends LocalizeComponent {
         return dialogRef.instance.componentRef.instance;
     }
 
-    isArray(arr: any): boolean {
-        return arr instanceof Array;
-    }
 }
 
 export abstract class NavBarComponentBase extends LocalizeComponent {
