@@ -9,11 +9,21 @@
     <div class="p-dialog-title surface-card p-3">
         <div class="flex justify-content-between flex-wrap gap-3">
             <div class="field flex-1"
-                 findCountry
-                 name="selectCountries"
-                 [multiple]="multiple"
-                 [(ngModel)]="countries"
-                 (ngModelChange)="onCountriesChange($event)">
+                 selectAccountType
+                 name="selectAccountType"
+                 [label]="l('AccountType')"
+                 [required]="true"
+                 [multiple]="true"
+                 [(ngModel)]="accountTypeFilter.ids">
+            </div>
+            <div class="field flex-1"
+                 selectSubAccountType
+                 name="selectSubAccountType"
+                 [label]="l('SubAccountType')"
+                 [accountTypeIds]="accountTypeFilter.ids"
+                 [required]="true"
+                 [multiple]="true"
+                 [(ngModel)]="subAccountTypeFilter.ids">
             </div>
         </div>
         <div class="flex justify-content-between flex-wrap gap-3"

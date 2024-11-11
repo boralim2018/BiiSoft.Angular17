@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { PageChartOfAccountInputDto, FindChartOfAccountDto, ChartOfAccountServiceProxy, GuidNullableFilterInputDto } from '@shared/service-proxies/service-proxies';
+import { PageChartOfAccountInputDto, FindChartOfAccountDto, ChartOfAccountServiceProxy, GuidNullableFilterInputDto, Int32FilterInputDto } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
 import { catchError, finalize, of } from 'rxjs';
@@ -16,7 +16,8 @@ import { RecordNotFoundComponent } from '../record-not-found/record-not-found.co
 import { BusyDirective } from '../../directives/busy.directive';
 import { NgIf, NgStyle, NgFor, NgClass } from '@angular/common';
 import { FindSearchActionComponent } from '../find-search-action/find-search-action.component';
-import { FindCountryComponent } from '../find-country/find-country.component';
+import { SelectAccountTypeComponent } from '../select-account-type/select-account-type.component';
+import { SelectSubAccountTypeComponent } from '../select-account-type/select-sub-account-type.component';
 import { TableSettingComponent } from '../table-setting/table-setting.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 
@@ -26,7 +27,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     animations: [appModuleAnimation()],
     providers: [ChartOfAccountServiceProxy],
     standalone: true,
-    imports: [OverlayPanelModule, TableSettingComponent, FindCountryComponent, FindSearchActionComponent, NgIf, NgStyle, BusyDirective, NgFor, NgClass, RecordNotFoundComponent, TableModule, PrimeTemplate, CheckboxModule, FormsModule, PaginatorModule]
+    imports: [OverlayPanelModule, TableSettingComponent, SelectAccountTypeComponent, SelectSubAccountTypeComponent, FindSearchActionComponent, NgIf, NgStyle, BusyDirective, NgFor, NgClass, RecordNotFoundComponent, TableModule, PrimeTemplate, CheckboxModule, FormsModule, PaginatorModule]
 })
 export class FindChartOfAccountDialogComponent extends Mixin(FindCardListComponentBase<FindChartOfAccountDto>, AppDynamicDialogBase) implements OnInit {
 
@@ -35,7 +36,8 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
     @ViewChild('findChartOfAccountTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
 
-    countries: any;
+    accountTypeFilter: Int32FilterInputDto;
+    subAccountTypeFilter: Int32FilterInputDto;
 
     constructor(
         injector: Injector,
@@ -61,8 +63,9 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
             { name: 'Code', header: 'Code', width: '15rem', sort: true },
             { name: 'Name', header: 'Name', width: '15rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '15rem', sort: true },
-            { name: 'ISO', header: 'ISO', width: '15rem', sort: true },
-            { name: 'CountryName', header: 'Country', width: '15rem', sort: true, visible: false }
+            { name: 'AccountType', header: 'AccountType', width: '15rem', sort: true },
+            { name: 'SubAccountType', header: 'SubAccountType', width: '15rem', sort: true, visible: false },
+            { name: 'ParentAccount', header: 'ParentAccount', width: '15rem', sort: true, visible: false },
         ];
         
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
@@ -76,7 +79,8 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
         super.initFilterInput();
         this.filterInput.isActive = undefined;
         this.filterInput.countries = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
-        this.countries = undefined;
+        this.accountTypeFilter = new Int32FilterInputDto({ exclude: false, ids: [] });
+        this.subAccountTypeFilter = new Int32FilterInputDto({ exclude: false, ids: [] });
     }
 
     protected getList(input: any, callBack: Function): void {
@@ -84,6 +88,8 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
         let findInput = new PageChartOfAccountInputDto();
         findInput.init(input);
         findInput.isActive = true;
+        findInput.accountTypes = this.accountTypeFilter;
+        findInput.subAccountTypes = this.subAccountTypeFilter;
 
         this._chartOfAccountService.find(findInput)
             .pipe(finalize(() => callBack()))
@@ -121,7 +127,8 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
 
         //Add more data in cache
         cache.cardView = this.cardView;
-        cache.countries = this.countries;
+        cache.accountTypes = this.accountTypeFilter;
+        cache.subAccountTypes = this.subAccountTypeFilter;
 
         return cache;
     }
@@ -131,23 +138,7 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
 
         //Init more data
         this.cardView = cache.cardView;
-
-        //override from input
-        if (this._dialogConfig.data.countries && (!(Array.isArray(this._dialogConfig.data.countries)) || this._dialogConfig.data.countries.length)) {
-            this.countries = this._dialogConfig.data.countries;
-            this.mapCountriesFilter(this.countries);
-        }
-        else {
-            this.countries = cache.countries
-        }
-    }
-
-    mapCountriesFilter(event) {
-        this.filterInput.countries.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
-    }
-
-    onCountriesChange(event) {
-        this.mapCountriesFilter(event);
-        this.refresh();
+        this.accountTypeFilter = cache.accountTypes;
+        this.subAccountTypeFilter = cache.subAccountTypes;
     }
 }

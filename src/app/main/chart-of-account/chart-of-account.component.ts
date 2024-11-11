@@ -10,9 +10,8 @@ import {
     ExportFileOutput,
     FileTokenInput,
     Int64NullableFilterInputDto,
-    AccountTypeFilterInputDto,
+    Int32FilterInputDto,
     GuidNullableFilterInputDto,
-    SubAccountTypeFilterInputDto,
 } from '@shared/service-proxies/service-proxies';
 import { CreateChartOfAccountComponent } from './create-chart-of-account/create-chart-of-account.component';
 import { EditChartOfAccountComponent } from './edit-chart-of-account/edit-chart-of-account.component';
@@ -120,8 +119,8 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
         this.filterInput.isActive = undefined;
         this.filterInput.creators = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.modifiers = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.accountTypes = new AccountTypeFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.subAccountTypes = new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.accountTypes = new Int32FilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.subAccountTypes = new Int32FilterInputDto({ exclude: false, ids: [] });
         this.filterInput.parents = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
 
     }
