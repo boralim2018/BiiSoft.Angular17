@@ -71,14 +71,9 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }
 
-    get showCountry(): boolean {
-        return this.selectedColumns && this.selectedColumns.find(f => f.name === 'CountryName') !== undefined;
-    }
-
     protected initFilterInput() {
         super.initFilterInput();
         this.filterInput.isActive = undefined;
-        this.filterInput.countries = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
         this.accountTypeFilter = new Int32FilterInputDto({ exclude: false, ids: [] });
         this.subAccountTypeFilter = new Int32FilterInputDto({ exclude: false, ids: [] });
     }
@@ -88,8 +83,10 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
         let findInput = new PageChartOfAccountInputDto();
         findInput.init(input);
         findInput.isActive = true;
-        findInput.accountTypes = this.accountTypeFilter;
-        findInput.subAccountTypes = this.subAccountTypeFilter;
+        findInput.accountTypes = new Int32FilterInputDto();
+        findInput.subAccountTypes = new Int32FilterInputDto();
+        findInput.accountTypes.init(this.accountTypeFilter);
+        findInput.subAccountTypes.init(this.subAccountTypeFilter);
 
         this._chartOfAccountService.find(findInput)
             .pipe(finalize(() => callBack()))

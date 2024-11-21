@@ -19143,6 +19143,10 @@ export class FindChartOfAccountDto implements IFindChartOfAccountDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
+    accountType: string | undefined;
+    subAccountType: string | undefined;
+    parentAccount: string | undefined;
 
     constructor(data?: IFindChartOfAccountDto) {
         if (data) {
@@ -19159,6 +19163,10 @@ export class FindChartOfAccountDto implements IFindChartOfAccountDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
+            this.accountType = _data["accountType"];
+            this.subAccountType = _data["subAccountType"];
+            this.parentAccount = _data["parentAccount"];
         }
     }
 
@@ -19175,6 +19183,10 @@ export class FindChartOfAccountDto implements IFindChartOfAccountDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
+        data["accountType"] = this.accountType;
+        data["subAccountType"] = this.subAccountType;
+        data["parentAccount"] = this.parentAccount;
         return data;
     }
 
@@ -19191,6 +19203,10 @@ export interface IFindChartOfAccountDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
+    accountType: string | undefined;
+    subAccountType: string | undefined;
+    parentAccount: string | undefined;
 }
 
 export class FindChartOfAccountDtoPagedResultDto implements IFindChartOfAccountDtoPagedResultDto {

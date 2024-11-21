@@ -5,6 +5,7 @@ import { FindChartOfAccountDialogComponent } from './find-chart-of-account-dialo
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgIf, NgClass, NgFor } from '@angular/common';
+import { Int32FilterInputDto } from '../../service-proxies/service-proxies';
 
 @Component({
     selector: 'find-chart-of-account, [findChartOfAccount]',
@@ -22,7 +23,8 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
 })
 export class FindChartOfAccountComponent extends FindComponentBase implements OnInit {
 
-    @Input() countries: any;
+    @Input() accountTypeFilter: Int32FilterInputDto;
+    @Input() subAccountTypeFilter: Int32FilterInputDto;
 
     constructor(
         injector: Injector,
@@ -40,7 +42,8 @@ export class FindChartOfAccountComponent extends FindComponentBase implements On
         this._dialogService.open(FindChartOfAccountDialogComponent, {
             data: {
                 multiple: this.multiple,
-                countries: this.countries
+                accountTypeFilter: this.accountTypeFilter,
+                subAccountTypeFilter: this.subAccountTypeFilter
             },
             header: this.l('FindChartOfAccounts'),
             styleClass: this.responsiveDialogClass + ' find-chart-of-account-dialog'
