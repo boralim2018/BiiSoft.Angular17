@@ -5,7 +5,7 @@ import { FindChartOfAccountDialogComponent } from './find-chart-of-account-dialo
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgIf, NgClass, NgFor } from '@angular/common';
-import { Int32FilterInputDto } from '../../service-proxies/service-proxies';
+import { AccountTypeFilterInputDto, SubAccountTypeFilterInputDto } from '../../service-proxies/service-proxies';
 
 @Component({
     selector: 'find-chart-of-account, [findChartOfAccount]',
@@ -23,8 +23,8 @@ import { Int32FilterInputDto } from '../../service-proxies/service-proxies';
 })
 export class FindChartOfAccountComponent extends FindComponentBase implements OnInit {
 
-    @Input() accountTypeFilter: Int32FilterInputDto;
-    @Input() subAccountTypeFilter: Int32FilterInputDto;
+    @Input() accountTypeFilter: AccountTypeFilterInputDto;
+    @Input() subAccountTypeFilter: SubAccountTypeFilterInputDto;
 
     constructor(
         injector: Injector,

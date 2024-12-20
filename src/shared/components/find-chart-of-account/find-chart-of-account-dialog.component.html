@@ -14,15 +14,20 @@
                  [label]="l('AccountType')"
                  [required]="true"
                  [multiple]="true"
+                 [showExclude]="true"
+                 [(exclude)]="accountTypeFilter.exclude"
                  [(ngModel)]="accountTypeFilter.ids">
             </div>
             <div class="field flex-1"
                  selectSubAccountType
                  name="selectSubAccountType"
                  [label]="l('SubAccountType')"
+                 [accountTypeExclude]="accountTypeFilter.exclude"
                  [accountTypeIds]="accountTypeFilter.ids"
                  [required]="true"
                  [multiple]="true"
+                 [showExclude]="true"
+                 [(exclude)]="subAccountTypeFilter.exclude"
                  [(ngModel)]="subAccountTypeFilter.ids">
             </div>
         </div>

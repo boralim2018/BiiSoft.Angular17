@@ -1777,7 +1777,7 @@ export class ChartOfAccountServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(accountTypes_Exclude: boolean | undefined, accountTypes_Ids: number[] | undefined, subAccountTypes_Exclude: boolean | undefined, subAccountTypes_Ids: number[] | undefined, parents_Exclude: boolean | undefined, parents_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ChartOfAccountListDtoPagedResultDto> {
+    getList(accountTypes_Exclude: boolean | undefined, accountTypes_Ids: AccountType[] | undefined, subAccountTypes_Exclude: boolean | undefined, subAccountTypes_Ids: SubAccountType[] | undefined, parents_Exclude: boolean | undefined, parents_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ChartOfAccountListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/GetList?";
         if (accountTypes_Exclude === null)
             throw new Error("The parameter 'accountTypes_Exclude' cannot be null.");
@@ -13221,6 +13221,61 @@ export enum AccountType {
     _52 = 52,
 }
 
+export class AccountTypeFilterInputDto implements IAccountTypeFilterInputDto {
+    exclude: boolean;
+    ids: AccountType[] | undefined;
+
+    constructor(data?: IAccountTypeFilterInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.exclude = _data["exclude"];
+            if (Array.isArray(_data["ids"])) {
+                this.ids = [] as any;
+                for (let item of _data["ids"])
+                    this.ids.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): AccountTypeFilterInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AccountTypeFilterInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["exclude"] = this.exclude;
+        if (Array.isArray(this.ids)) {
+            data["ids"] = [];
+            for (let item of this.ids)
+                data["ids"].push(item);
+        }
+        return data;
+    }
+
+    clone(): AccountTypeFilterInputDto {
+        const json = this.toJSON();
+        let result = new AccountTypeFilterInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAccountTypeFilterInputDto {
+    exclude: boolean;
+    ids: AccountType[] | undefined;
+}
+
 export class AccountTypeNameValueDto implements IAccountTypeNameValueDto {
     name: string | undefined;
     value: AccountType;
@@ -17960,8 +18015,8 @@ export class ExportExcelChartOfAccountInputDto implements IExportExcelChartOfAcc
     creators: Int64NullableFilterInputDto;
     modifiers: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
-    accountTypes: Int32FilterInputDto;
-    subAccountTypes: Int32FilterInputDto;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
     parents: GuidNullableFilterInputDto;
     columns: ColumnOutput[] | undefined;
 
@@ -17985,8 +18040,8 @@ export class ExportExcelChartOfAccountInputDto implements IExportExcelChartOfAcc
             this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
             this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
             this.isActive = _data["isActive"];
-            this.accountTypes = _data["accountTypes"] ? Int32FilterInputDto.fromJS(_data["accountTypes"]) : <any>undefined;
-            this.subAccountTypes = _data["subAccountTypes"] ? Int32FilterInputDto.fromJS(_data["subAccountTypes"]) : <any>undefined;
+            this.accountTypes = _data["accountTypes"] ? AccountTypeFilterInputDto.fromJS(_data["accountTypes"]) : <any>undefined;
+            this.subAccountTypes = _data["subAccountTypes"] ? SubAccountTypeFilterInputDto.fromJS(_data["subAccountTypes"]) : <any>undefined;
             this.parents = _data["parents"] ? GuidNullableFilterInputDto.fromJS(_data["parents"]) : <any>undefined;
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -18043,8 +18098,8 @@ export interface IExportExcelChartOfAccountInputDto {
     creators: Int64NullableFilterInputDto;
     modifiers: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
-    accountTypes: Int32FilterInputDto;
-    subAccountTypes: Int32FilterInputDto;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
     parents: GuidNullableFilterInputDto;
     columns: ColumnOutput[] | undefined;
 }
@@ -21391,61 +21446,6 @@ export interface IImpersonatedAuthenticateResultModel {
     expireInSeconds: number;
 }
 
-export class Int32FilterInputDto implements IInt32FilterInputDto {
-    exclude: boolean;
-    ids: number[] | undefined;
-
-    constructor(data?: IInt32FilterInputDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.exclude = _data["exclude"];
-            if (Array.isArray(_data["ids"])) {
-                this.ids = [] as any;
-                for (let item of _data["ids"])
-                    this.ids.push(item);
-            }
-        }
-    }
-
-    static fromJS(data: any): Int32FilterInputDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new Int32FilterInputDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["exclude"] = this.exclude;
-        if (Array.isArray(this.ids)) {
-            data["ids"] = [];
-            for (let item of this.ids)
-                data["ids"].push(item);
-        }
-        return data;
-    }
-
-    clone(): Int32FilterInputDto {
-        const json = this.toJSON();
-        let result = new Int32FilterInputDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IInt32FilterInputDto {
-    exclude: boolean;
-    ids: number[] | undefined;
-}
-
 export class Int64EntityDto implements IInt64EntityDto {
     id: number;
 
@@ -23267,8 +23267,8 @@ export class PageChartOfAccountInputDto implements IPageChartOfAccountInputDto {
     creators: Int64NullableFilterInputDto;
     modifiers: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
-    accountTypes: Int32FilterInputDto;
-    subAccountTypes: Int32FilterInputDto;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
     parents: GuidNullableFilterInputDto;
 
     constructor(data?: IPageChartOfAccountInputDto) {
@@ -23291,8 +23291,8 @@ export class PageChartOfAccountInputDto implements IPageChartOfAccountInputDto {
             this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
             this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
             this.isActive = _data["isActive"];
-            this.accountTypes = _data["accountTypes"] ? Int32FilterInputDto.fromJS(_data["accountTypes"]) : <any>undefined;
-            this.subAccountTypes = _data["subAccountTypes"] ? Int32FilterInputDto.fromJS(_data["subAccountTypes"]) : <any>undefined;
+            this.accountTypes = _data["accountTypes"] ? AccountTypeFilterInputDto.fromJS(_data["accountTypes"]) : <any>undefined;
+            this.subAccountTypes = _data["subAccountTypes"] ? SubAccountTypeFilterInputDto.fromJS(_data["subAccountTypes"]) : <any>undefined;
             this.parents = _data["parents"] ? GuidNullableFilterInputDto.fromJS(_data["parents"]) : <any>undefined;
         }
     }
@@ -23339,8 +23339,8 @@ export interface IPageChartOfAccountInputDto {
     creators: Int64NullableFilterInputDto;
     modifiers: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
-    accountTypes: Int32FilterInputDto;
-    subAccountTypes: Int32FilterInputDto;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
     parents: GuidNullableFilterInputDto;
 }
 
@@ -25580,6 +25580,61 @@ export enum SubAccountType {
     _5202 = 5202,
     _5203 = 5203,
     _5204 = 5204,
+}
+
+export class SubAccountTypeFilterInputDto implements ISubAccountTypeFilterInputDto {
+    exclude: boolean;
+    ids: SubAccountType[] | undefined;
+
+    constructor(data?: ISubAccountTypeFilterInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.exclude = _data["exclude"];
+            if (Array.isArray(_data["ids"])) {
+                this.ids = [] as any;
+                for (let item of _data["ids"])
+                    this.ids.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): SubAccountTypeFilterInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SubAccountTypeFilterInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["exclude"] = this.exclude;
+        if (Array.isArray(this.ids)) {
+            data["ids"] = [];
+            for (let item of this.ids)
+                data["ids"].push(item);
+        }
+        return data;
+    }
+
+    clone(): SubAccountTypeFilterInputDto {
+        const json = this.toJSON();
+        let result = new SubAccountTypeFilterInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ISubAccountTypeFilterInputDto {
+    exclude: boolean;
+    ids: SubAccountType[] | undefined;
 }
 
 export class SubAccountTypeNameValueDto implements ISubAccountTypeNameValueDto {

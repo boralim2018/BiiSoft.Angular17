@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { PageChartOfAccountInputDto, FindChartOfAccountDto, ChartOfAccountServiceProxy, GuidNullableFilterInputDto, Int32FilterInputDto } from '@shared/service-proxies/service-proxies';
+import { PageChartOfAccountInputDto, FindChartOfAccountDto, ChartOfAccountServiceProxy, AccountTypeFilterInputDto, SubAccountTypeFilterInputDto } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
 import { catchError, finalize, of } from 'rxjs';
@@ -36,8 +36,8 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
     @ViewChild('findChartOfAccountTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
 
-    accountTypeFilter: Int32FilterInputDto;
-    subAccountTypeFilter: Int32FilterInputDto;
+    accountTypeFilter: AccountTypeFilterInputDto;
+    subAccountTypeFilter: SubAccountTypeFilterInputDto;
 
     constructor(
         injector: Injector,
@@ -74,8 +74,8 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
     protected initFilterInput() {
         super.initFilterInput();
         this.filterInput.isActive = undefined;
-        this.accountTypeFilter = new Int32FilterInputDto({ exclude: false, ids: [] });
-        this.subAccountTypeFilter = new Int32FilterInputDto({ exclude: false, ids: [] });
+        this.accountTypeFilter = new AccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.subAccountTypeFilter = new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
     }
 
     protected getList(input: any, callBack: Function): void {
@@ -83,11 +83,9 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
         let findInput = new PageChartOfAccountInputDto();
         findInput.init(input);
         findInput.isActive = true;
-        findInput.accountTypes = new Int32FilterInputDto();
-        findInput.subAccountTypes = new Int32FilterInputDto();
-        findInput.accountTypes.init(this.accountTypeFilter);
-        findInput.subAccountTypes.init(this.subAccountTypeFilter);
-
+        findInput.accountTypes = new AccountTypeFilterInputDto(this.accountTypeFilter);
+        findInput.subAccountTypes = new SubAccountTypeFilterInputDto(this.subAccountTypeFilter);
+       
         this._chartOfAccountService.find(findInput)
             .pipe(finalize(() => callBack()))
             .subscribe(result => {
