@@ -14,6 +14,7 @@ import { of } from 'rxjs';
 import { SelectAccountTypeComponent } from '../../../../shared/components/select-account-type/select-account-type.component';
 import { SelectSubAccountTypeComponent } from '../../../../shared/components/select-account-type/select-sub-account-type.component';
 import { NgIf } from '@angular/common';
+import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
 
 @Component({
     selector: 'app-edit-chart-of-account',
@@ -23,6 +24,7 @@ import { NgIf } from '@angular/common';
     imports: [
         SelectAccountTypeComponent,
         SelectSubAccountTypeComponent,
+        FindChartOfAccountComponent,
         FormsModule, NgIf,
         BusyDirective, LocalizePipe,
         InputTextModule, AbpValidationSummaryComponent,
@@ -33,6 +35,7 @@ export class EditChartOfAccountComponent extends DynamicDialogBase implements On
     model: CreateUpdateChartOfAccountInputDto = new CreateUpdateChartOfAccountInputDto();
 
     customCodeEnble: boolean;
+    parentAccount: any;
     constructor(
         injector: Injector,
         public _chartOfAccountService: ChartOfAccountServiceProxy,
@@ -54,8 +57,8 @@ export class EditChartOfAccountComponent extends DynamicDialogBase implements On
             .getDetail(this._dialogConfig.data.id)
             .pipe(finalize(() => this.saving = false))
             .subscribe((result: ChartOfAccountDetailDto) => {
-                this.model = new CreateUpdateChartOfAccountInputDto();
-                this.model.init(result);
+                this.model = new CreateUpdateChartOfAccountInputDto(result);
+                this.parentAccount = result.parentId ? { id: result.parentId, name: result.parentAccountName } : undefined;
             });
     }
 

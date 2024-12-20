@@ -14431,6 +14431,8 @@ export class ChartOfAccountDetailDto implements IChartOfAccountDetailDto {
     code: string | undefined;
     accountType: AccountType;
     subAccountType: SubAccountType;
+    accountTypeName: string | undefined;
+    subAccountTypeName: string | undefined;
     parentId: string | undefined;
     parentAccountName: string | undefined;
 
@@ -14465,6 +14467,8 @@ export class ChartOfAccountDetailDto implements IChartOfAccountDetailDto {
             this.code = _data["code"];
             this.accountType = _data["accountType"];
             this.subAccountType = _data["subAccountType"];
+            this.accountTypeName = _data["accountTypeName"];
+            this.subAccountTypeName = _data["subAccountTypeName"];
             this.parentId = _data["parentId"];
             this.parentAccountName = _data["parentAccountName"];
         }
@@ -14499,6 +14503,8 @@ export class ChartOfAccountDetailDto implements IChartOfAccountDetailDto {
         data["code"] = this.code;
         data["accountType"] = this.accountType;
         data["subAccountType"] = this.subAccountType;
+        data["accountTypeName"] = this.accountTypeName;
+        data["subAccountTypeName"] = this.subAccountTypeName;
         data["parentId"] = this.parentId;
         data["parentAccountName"] = this.parentAccountName;
         return data;
@@ -14533,6 +14539,8 @@ export interface IChartOfAccountDetailDto {
     code: string | undefined;
     accountType: AccountType;
     subAccountType: SubAccountType;
+    accountTypeName: string | undefined;
+    subAccountTypeName: string | undefined;
     parentId: string | undefined;
     parentAccountName: string | undefined;
 }
@@ -14552,8 +14560,8 @@ export class ChartOfAccountListDto implements IChartOfAccountListDto {
     cannotDelete: boolean;
     no: number;
     code: string | undefined;
-    accountType: AccountType;
-    subAccountType: SubAccountType;
+    accountType: string | undefined;
+    subAccountType: string | undefined;
     parentId: string | undefined;
     parentAccountName: string | undefined;
 
@@ -14642,8 +14650,8 @@ export interface IChartOfAccountListDto {
     cannotDelete: boolean;
     no: number;
     code: string | undefined;
-    accountType: AccountType;
-    subAccountType: SubAccountType;
+    accountType: string | undefined;
+    subAccountType: string | undefined;
     parentId: string | undefined;
     parentAccountName: string | undefined;
 }

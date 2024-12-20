@@ -67,6 +67,13 @@
             <abp-validation-summary [control]="displayNameModel"
                                     [controlEl]="displayNameEl"></abp-validation-summary>
         </div>
+        <div class="field"
+             findChartOfAccount
+             name="parentAccount"
+             [label]="l('ParentAccount')"
+             [(ngModel)]="parentAccount"
+             (ngModelChange)="model.parentId = $event?.id">
+        </div>
 
     </div>
 

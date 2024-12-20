@@ -47,13 +47,12 @@
 
         <div class="flex flex-wrap gap-3 p-3 card-container" *ngIf="totalCount">
             <ng-container *ngFor="let row of listItems; let i=index">
-                <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column align-items-center"
+                <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column"
                      [ngClass]="{'border-primary text-primary':row.checked}"
                      (click)="multiple? row.checked=!row.checked : select(row)">
-                    <span class="font-medium">{{l("Code")}}: {{row.code}}</span>
-                    <span class="font-medium">{{l("Name")}}: {{getObjLocalizeName(row)}}</span>
-                    <span class="font-medium">{{l("SubAccountType")}}: {{row.subAccountType}}</span>
-                    <span class="font-medium">{{l("AccountType")}}: {{row.accountType}}</span>
+                    <span class="font-medium">{{row.code}}</span>
+                    <span class="font-medium">{{getObjLocalizeName(row)}}</span>
+                    <span class="font-medium">{{row.subAccountType}}</span>
                 </div>
             </ng-container>
         </div>
