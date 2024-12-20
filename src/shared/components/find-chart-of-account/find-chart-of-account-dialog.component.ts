@@ -36,9 +36,6 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
     @ViewChild('findChartOfAccountTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
 
-    accountTypeFilter: AccountTypeFilterInputDto;
-    subAccountTypeFilter: SubAccountTypeFilterInputDto;
-
     constructor(
         injector: Injector,
         private _chartOfAccountService: ChartOfAccountServiceProxy,
@@ -74,17 +71,14 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
     protected initFilterInput() {
         super.initFilterInput();
         this.filterInput.isActive = undefined;
-        this.accountTypeFilter = new AccountTypeFilterInputDto({ exclude: false, ids: [] });
-        this.subAccountTypeFilter = new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.accountTypes = new AccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.subAccountTypes = new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
     }
 
     protected getList(input: any, callBack: Function): void {
        
-        let findInput = new PageChartOfAccountInputDto();
-        findInput.init(input);
+        let findInput = new PageChartOfAccountInputDto(input);
         findInput.isActive = true;
-        findInput.accountTypes = new AccountTypeFilterInputDto(this.accountTypeFilter);
-        findInput.subAccountTypes = new SubAccountTypeFilterInputDto(this.subAccountTypeFilter);
        
         this._chartOfAccountService.find(findInput)
             .pipe(finalize(() => callBack()))
@@ -122,8 +116,6 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
 
         //Add more data in cache
         cache.cardView = this.cardView;
-        cache.accountTypes = this.accountTypeFilter;
-        cache.subAccountTypes = this.subAccountTypeFilter;
 
         return cache;
     }
@@ -133,7 +125,6 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
 
         //Init more data
         this.cardView = cache.cardView;
-        this.accountTypeFilter = cache.accountTypes;
-        this.subAccountTypeFilter = cache.subAccountTypes;
+
     }
 }
