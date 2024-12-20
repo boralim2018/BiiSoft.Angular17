@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { PageChartOfAccountInputDto, FindChartOfAccountDto, ChartOfAccountServiceProxy, AccountTypeFilterInputDto, SubAccountTypeFilterInputDto } from '@shared/service-proxies/service-proxies';
+import { FindChartOfAccountInputDto, FindChartOfAccountDto, ChartOfAccountServiceProxy, AccountTypeFilterInputDto, SubAccountTypeFilterInputDto } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
 import { catchError, finalize, of } from 'rxjs';
@@ -79,9 +79,9 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
 
         input.accountTypes = new AccountTypeFilterInputDto(input.accountTypes);
         input.subAccountTypes = new SubAccountTypeFilterInputDto(input.subAccountTypes);
-        let findInput = new PageChartOfAccountInputDto(input);
+        let findInput = new FindChartOfAccountInputDto(input);
         findInput.isActive = true;
-       
+        
         this._chartOfAccountService.find(findInput)
             .pipe(finalize(() => callBack()))
             .subscribe(result => {
@@ -128,5 +128,8 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
         //Init more data
         this.cardView = cache.cardView;
 
+        this.filterInput.excludeSubAccount = this._dialogConfig.data.excludeSubAccount;
+        this.filterInput.accountTypes = this._dialogConfig.data.accountTypeFilter ? this._dialogConfig.data.accountTypeFilter : new AccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.subAccountTypes = this._dialogConfig.data.subAccountTypeFilter ? this._dialogConfig.data.subAccountTypeFilter : new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
     }
 }

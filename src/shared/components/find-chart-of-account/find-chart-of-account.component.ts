@@ -25,6 +25,7 @@ export class FindChartOfAccountComponent extends FindComponentBase implements On
 
     @Input() accountTypeFilter: AccountTypeFilterInputDto;
     @Input() subAccountTypeFilter: SubAccountTypeFilterInputDto;
+    @Input() excludeSubAccount: boolean;
 
     constructor(
         injector: Injector,
@@ -43,7 +44,8 @@ export class FindChartOfAccountComponent extends FindComponentBase implements On
             data: {
                 multiple: this.multiple,
                 accountTypeFilter: this.accountTypeFilter,
-                subAccountTypeFilter: this.subAccountTypeFilter
+                subAccountTypeFilter: this.subAccountTypeFilter,
+                excludeSubAccount: this.excludeSubAccount
             },
             header: this.l('FindChartOfAccounts'),
             styleClass: this.responsiveDialogClass + ' find-chart-of-account-dialog'

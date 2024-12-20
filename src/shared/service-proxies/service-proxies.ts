@@ -1649,7 +1649,7 @@ export class ChartOfAccountServiceProxy {
      * @param body (optional) 
      * @return OK
      */
-    find(body: PageChartOfAccountInputDto | undefined): Observable<FindChartOfAccountDtoPagedResultDto> {
+    find(body: FindChartOfAccountInputDto | undefined): Observable<FindChartOfAccountDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/Find";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -19327,6 +19327,97 @@ export interface IFindChartOfAccountDtoPagedResultDto {
     totalCount: number;
 }
 
+export class FindChartOfAccountInputDto implements IFindChartOfAccountInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
+    parents: GuidNullableFilterInputDto;
+    excludeSubAccount: boolean;
+
+    constructor(data?: IFindChartOfAccountInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.accountTypes = _data["accountTypes"] ? AccountTypeFilterInputDto.fromJS(_data["accountTypes"]) : <any>undefined;
+            this.subAccountTypes = _data["subAccountTypes"] ? SubAccountTypeFilterInputDto.fromJS(_data["subAccountTypes"]) : <any>undefined;
+            this.parents = _data["parents"] ? GuidNullableFilterInputDto.fromJS(_data["parents"]) : <any>undefined;
+            this.excludeSubAccount = _data["excludeSubAccount"];
+        }
+    }
+
+    static fromJS(data: any): FindChartOfAccountInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindChartOfAccountInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["accountTypes"] = this.accountTypes ? this.accountTypes.toJSON() : <any>undefined;
+        data["subAccountTypes"] = this.subAccountTypes ? this.subAccountTypes.toJSON() : <any>undefined;
+        data["parents"] = this.parents ? this.parents.toJSON() : <any>undefined;
+        data["excludeSubAccount"] = this.excludeSubAccount;
+        return data;
+    }
+
+    clone(): FindChartOfAccountInputDto {
+        const json = this.toJSON();
+        let result = new FindChartOfAccountInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindChartOfAccountInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    accountTypes: AccountTypeFilterInputDto;
+    subAccountTypes: SubAccountTypeFilterInputDto;
+    parents: GuidNullableFilterInputDto;
+    excludeSubAccount: boolean;
+}
+
 export class FindCityProvinceDto implements IFindCityProvinceDto {
     id: string;
     name: string | undefined;
@@ -23263,93 +23354,6 @@ export interface IPageBranchInputDto {
     creators: Int64NullableFilterInputDto;
     modifiers: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
-}
-
-export class PageChartOfAccountInputDto implements IPageChartOfAccountInputDto {
-    maxResultCount: number;
-    skipCount: number;
-    usePagination: boolean;
-    sortField: string | undefined;
-    sortMode: SortMode;
-    keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
-    isActive: boolean | undefined;
-    accountTypes: AccountTypeFilterInputDto;
-    subAccountTypes: SubAccountTypeFilterInputDto;
-    parents: GuidNullableFilterInputDto;
-
-    constructor(data?: IPageChartOfAccountInputDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.maxResultCount = _data["maxResultCount"];
-            this.skipCount = _data["skipCount"];
-            this.usePagination = _data["usePagination"];
-            this.sortField = _data["sortField"];
-            this.sortMode = _data["sortMode"];
-            this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
-            this.isActive = _data["isActive"];
-            this.accountTypes = _data["accountTypes"] ? AccountTypeFilterInputDto.fromJS(_data["accountTypes"]) : <any>undefined;
-            this.subAccountTypes = _data["subAccountTypes"] ? SubAccountTypeFilterInputDto.fromJS(_data["subAccountTypes"]) : <any>undefined;
-            this.parents = _data["parents"] ? GuidNullableFilterInputDto.fromJS(_data["parents"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): PageChartOfAccountInputDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PageChartOfAccountInputDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["maxResultCount"] = this.maxResultCount;
-        data["skipCount"] = this.skipCount;
-        data["usePagination"] = this.usePagination;
-        data["sortField"] = this.sortField;
-        data["sortMode"] = this.sortMode;
-        data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
-        data["isActive"] = this.isActive;
-        data["accountTypes"] = this.accountTypes ? this.accountTypes.toJSON() : <any>undefined;
-        data["subAccountTypes"] = this.subAccountTypes ? this.subAccountTypes.toJSON() : <any>undefined;
-        data["parents"] = this.parents ? this.parents.toJSON() : <any>undefined;
-        return data;
-    }
-
-    clone(): PageChartOfAccountInputDto {
-        const json = this.toJSON();
-        let result = new PageChartOfAccountInputDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IPageChartOfAccountInputDto {
-    maxResultCount: number;
-    skipCount: number;
-    usePagination: boolean;
-    sortField: string | undefined;
-    sortMode: SortMode;
-    keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
-    isActive: boolean | undefined;
-    accountTypes: AccountTypeFilterInputDto;
-    subAccountTypes: SubAccountTypeFilterInputDto;
-    parents: GuidNullableFilterInputDto;
 }
 
 export class PageCityProvinceInputDto implements IPageCityProvinceInputDto {

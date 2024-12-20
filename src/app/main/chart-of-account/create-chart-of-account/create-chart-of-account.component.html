@@ -71,6 +71,7 @@
              findChartOfAccount
              name="parentAccount"
              [label]="l('ParentAccount')"
+             [excludeSubAccount]="true"
              [(ngModel)]="parentAccount"
              (ngModelChange)="model.parentId = $event?.id">
         </div>
