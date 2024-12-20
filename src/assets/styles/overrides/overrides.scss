@@ -34,7 +34,8 @@ $font-family: battambang, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 }
 
 //using khmer font affect line height, so reduce padding for all elements
-.p-inputtext {
+.p-inputtext,
+.p-multiselect .p-multiselect-label {
     padding: $vPadding 0.75rem;
 }
 
