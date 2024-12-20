@@ -52,6 +52,8 @@
                      (click)="multiple? row.checked=!row.checked : select(row)">
                     <span class="font-medium">{{l("Code")}}: {{row.code}}</span>
                     <span class="font-medium">{{l("Name")}}: {{getObjLocalizeName(row)}}</span>
+                    <span class="font-medium">{{l("SubAccountType")}}: {{row.subAccountType}}</span>
+                    <span class="font-medium">{{l("AccountType")}}: {{row.accountType}}</span>
                 </div>
             </ng-container>
         </div>
