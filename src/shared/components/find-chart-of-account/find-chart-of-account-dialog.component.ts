@@ -71,14 +71,14 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
     protected initFilterInput() {
         super.initFilterInput();
         this.filterInput.isActive = undefined;
-        this.filterInput.accountTypes = new AccountTypeFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.subAccountTypes = new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.accountTypeFilter = new AccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.subAccountTypeFilter = new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
     }
 
     protected getList(input: any, callBack: Function): void {
 
-        input.accountTypes = new AccountTypeFilterInputDto(input.accountTypes);
-        input.subAccountTypes = new SubAccountTypeFilterInputDto(input.subAccountTypes);
+        input.accountTypeFilter = new AccountTypeFilterInputDto(input.accountTypes);
+        input.subAccountTypeFilter = new SubAccountTypeFilterInputDto(input.subAccountTypes);
         let findInput = new FindChartOfAccountInputDto(input);
         findInput.isActive = true;
         
@@ -128,8 +128,9 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
         //Init more data
         this.cardView = cache.cardView;
 
+        //override cache from input
         this.filterInput.excludeSubAccount = this._dialogConfig.data.excludeSubAccount;
-        this.filterInput.accountTypes = this._dialogConfig.data.accountTypeFilter ? this._dialogConfig.data.accountTypeFilter : new AccountTypeFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.subAccountTypes = this._dialogConfig.data.subAccountTypeFilter ? this._dialogConfig.data.subAccountTypeFilter : new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.accountTypeFilter = this._dialogConfig.data.accountTypeFilter ? this._dialogConfig.data.accountTypeFilter : new AccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.subAccountTypeFilter = this._dialogConfig.data.subAccountTypeFilter ? this._dialogConfig.data.subAccountTypeFilter : new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
     }
 }
