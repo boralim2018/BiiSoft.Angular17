@@ -77,8 +77,8 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
 
     protected getList(input: any, callBack: Function): void {
 
-        input.accountTypeFilter = new AccountTypeFilterInputDto(input.accountTypes);
-        input.subAccountTypeFilter = new SubAccountTypeFilterInputDto(input.subAccountTypes);
+        input.accountTypeFilter = new AccountTypeFilterInputDto(input.accountTypeFilter);
+        input.subAccountTypeFilter = new SubAccountTypeFilterInputDto(input.subAccountTypeFilter);
         let findInput = new FindChartOfAccountInputDto(input);
         findInput.isActive = true;
         

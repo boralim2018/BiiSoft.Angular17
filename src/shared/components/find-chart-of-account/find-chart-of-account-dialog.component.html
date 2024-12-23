@@ -16,7 +16,8 @@
                  [multiple]="true"
                  [showExclude]="true"
                  [(exclude)]="filterInput.accountTypeFilter.exclude"
-                 [(ngModel)]="filterInput.accountTypeFilter.ids">
+                 [(ngModel)]="filterInput.accountTypeFilter.ids"
+                 (onClose)="refresh()">
             </div>
             <div class="field flex-1"
                  selectSubAccountType
@@ -28,7 +29,8 @@
                  [multiple]="true"
                  [showExclude]="true"
                  [(exclude)]="filterInput.subAccountTypeFilter.exclude"
-                 [(ngModel)]="filterInput.subAccountTypeFilter.ids">
+                 [(ngModel)]="filterInput.subAccountTypeFilter.ids"
+                 (onClose)="refresh()">
             </div>
         </div>
         <div class="flex justify-content-between flex-wrap gap-3"
