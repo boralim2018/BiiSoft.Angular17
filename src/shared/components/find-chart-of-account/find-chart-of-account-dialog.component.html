@@ -17,7 +17,9 @@
                  [showExclude]="true"
                  [(exclude)]="filterInput.accountTypeFilter.exclude"
                  [(ngModel)]="filterInput.accountTypeFilter.ids"
-                 (onClose)="refresh()">
+                 (excludeChange)="refresh()"
+                 (onHide)="refresh()"
+                 (onClear)="refresh()">
             </div>
             <div class="field flex-1"
                  selectSubAccountType
@@ -30,7 +32,9 @@
                  [showExclude]="true"
                  [(exclude)]="filterInput.subAccountTypeFilter.exclude"
                  [(ngModel)]="filterInput.subAccountTypeFilter.ids"
-                 (onClose)="refresh()">
+                 (excludeChange)="refresh()"
+                 (onHide)="refresh()"
+                 (onClear)="refresh()">
             </div>
         </div>
         <div class="flex justify-content-between flex-wrap gap-3"

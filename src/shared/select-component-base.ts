@@ -17,7 +17,8 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     @Input() showExclude: boolean;
     @Input() exclude: boolean;
     @Output() excludeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-    @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onHide: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onClear: EventEmitter<any> = new EventEmitter<any>();
    
     models: any[] = [];
     loading: boolean;
