@@ -56,9 +56,9 @@
                 <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column"
                      [ngClass]="{'border-primary text-primary':row.checked}"
                      (click)="multiple? row.checked=!row.checked : select(row)">
-                    <span class="font-medium">{{row.code}}</span>
-                    <span class="font-medium">{{getObjLocalizeName(row)}}</span>
-                    <span class="font-medium">{{row.subAccountType}}</span>
+                    <span class="overflow-hidden text-overflow-clip">{{row.code}}</span>
+                    <span class="overflow-hidden text-overflow-clip">{{getObjLocalizeName(row)}}</span>
+                    <span class="overflow-hidden text-overflow-clip">{{row.subAccountType}}</span>
                 </div>
             </ng-container>
         </div>

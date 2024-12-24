@@ -23,8 +23,9 @@
                 <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column"
                      [ngClass]="{'border-primary text-primary':row.checked}"
                      (click)="multiple? row.checked=!row.checked : select(row)">
-                    <span>{{row.userName}}</span>
-                    <span>{{row.fullName}}</span>
+                    <span class="overflow-hidden text-overflow-clip">{{row.userName}}</span>
+                    <span class="overflow-hidden text-overflow-clip">{{row.fullName}}</span>
+                    <span class="overflow-hidden text-overflow-clip">{{row.emailAddress}}</span>
                 </div>
             </ng-container>
         </div>
