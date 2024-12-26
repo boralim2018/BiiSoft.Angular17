@@ -35,9 +35,9 @@
                 <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column align-items-center"
                      [ngClass]="{'border-primary text-primary':row.checked}"
                      (click)="multiple? row.checked=!row.checked : select(row)">
-                    <span class="text-5xl">{{row.iso}}</span>
-                    <span class="font-medium">{{getObjLocalizeName(row)}}</span>
-                    <span class="font-medium" *ngIf="showCountry">{{row.countryName}}</span>
+                    <span class="overflow-hidden text-overflow-clip text-5xl">{{row.iso}}</span>
+                    <span class="overflow-hidden text-overflow-clip">{{getObjLocalizeName(row)}}</span>
+                    <span class="overflow-hidden text-overflow-clip" *ngIf="showCountry">{{row.countryName}}</span>
                 </div>
             </ng-container>
         </div>

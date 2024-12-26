@@ -24,8 +24,8 @@
                 <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column"
                      [ngClass]="{'border-primary text-primary':row.checked}"
                      (click)="multiple? row.checked=!row.checked : select(row)">
-                    <span>{{row.displayName}}</span>
-                    <span>{{row.name}}</span>
+                    <span class="overflow-hidden text-overflow-clip">{{row.displayName}}</span>
+                    <span class="overflow-hidden text-overflow-clip">{{row.name}}</span>
                 </div>
             </ng-container>
         </div>

@@ -25,7 +25,7 @@
                      [ngClass]="{'border-primary text-primary':row.checked}"
                      (click)="multiple? row.checked=!row.checked : select(row)">
                     <span class="fi fi-{{row.isO2.toLowerCase()}} text-6xl"></span>
-                    <span class="font-medium">{{getObjLocalizeName(row)}}({{row.iso}})</span>
+                    <span class="overflow-hidden text-overflow-clip">{{getObjLocalizeName(row)}}({{row.iso}})</span>
                 </div>
             </ng-container>
         </div>
