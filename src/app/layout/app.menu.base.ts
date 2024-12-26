@@ -57,7 +57,8 @@ export abstract class AppMenuBase extends AppMenuPermission {
                 { label: this.l('Settings'), icon: 'fa-solid fa-gear', routerLink: ['/app/admin/settings'], permissionName: AppPermissions.pages.settings.host },
 
                 { label: this.l('Settings'), icon: 'fa-solid fa-gear', routerLink: ['/app/main/settings'], permissionName: AppPermissions.pages.settings.tenant },
-                { label: this.l('Unit'), icon: 'fa-solid fa-u', routerLink: ['/app/main/units'], permissionName: AppPermissions.pages.setup.items.units.page },
+                { label: this.l('Taxes'), icon: 'fa-solid fa-money-check-dollar', routerLink: ['/app/main/taxes'], permissionName: AppPermissions.pages.setup.taxes.page },
+                { label: this.l('Units'), icon: 'fa-solid fa-u', routerLink: ['/app/main/units'], permissionName: AppPermissions.pages.setup.items.units.page },
                 { label: this.l('Currency'), icon: 'fa-solid fa-dollar-sign', routerLink: ['/app/admin/currencies'], permissionName: AppPermissions.pages.setup.currencies.page },
                 {
                     label: this.l('Location'),
@@ -70,13 +71,13 @@ export abstract class AppMenuBase extends AppMenuPermission {
                         { label: this.l('SangkatCommunes'), icon: 'fa-solid fa-building-flag', routerLink: ['/app/admin/sangkat-communes'], permissionName: AppPermissions.pages.setup.locations.sangkatCommunes.page },
                         { label: this.l('Villages'), icon: 'fa-solid fa-house-flag', routerLink: ['/app/admin/villages'], permissionName: AppPermissions.pages.setup.locations.villages.page },
                     ]
-                },                
+                },
             ]
         },
         {
             label: this.l('Accounting'),
             items: [
-                { label: this.l('ChartOfAccounts'), icon: 'fa-solid fa-font', routerLink: ['/app/main/chart-of-accounts'], permissionName: AppPermissions.pages.accounting.chartOfAccounts.page },
+                { label: this.l('ChartOfAccounts'), icon: 'fa-solid fa-book', routerLink: ['/app/main/chart-of-accounts'], permissionName: AppPermissions.pages.accounting.chartOfAccounts.page },
             ]
         },
         {

@@ -6,8 +6,8 @@ import { CountryComponent } from './country.component';
 @NgModule({
     imports: [
         RouterModule.forChild([
-            { path: '', component: CountryComponent, data: { Permissions: AppPermissions.pages.setup.currencies.page },},
-            { path: 'view-detail/:id', loadComponent: () => import('./view-country/view-country.component').then(c => c.ViewCountryComponent), data: { Permissions: AppPermissions.pages.setup.currencies.view }, }
+            { path: '', component: CountryComponent, data: { Permissions: AppPermissions.pages.setup.locations.countries.page },},
+            { path: 'view-detail/:id', loadComponent: () => import('./view-country/view-country.component').then(c => c.ViewCountryComponent), data: { Permissions: AppPermissions.pages.setup.locations.countries.view }, }
         ])
     ],
     exports: [

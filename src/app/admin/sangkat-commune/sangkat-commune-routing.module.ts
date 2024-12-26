@@ -6,8 +6,8 @@ import { SangkatCommuneComponent } from './sangkat-commune.component';
 @NgModule({
     imports: [
         RouterModule.forChild([
-            { path: '', component: SangkatCommuneComponent, data: { Permissions: AppPermissions.pages.setup.currencies.page },},
-            { path: 'view-detail/:id', loadComponent: () => import('./view-sangkat-commune/view-sangkat-commune.component').then(c => c.ViewSangkatCommuneComponent), data: { Permissions: AppPermissions.pages.setup.currencies.view }, }
+            { path: '', component: SangkatCommuneComponent, data: { Permissions: AppPermissions.pages.setup.locations.sangkatCommunes.page },},
+            { path: 'view-detail/:id', loadComponent: () => import('./view-sangkat-commune/view-sangkat-commune.component').then(c => c.ViewSangkatCommuneComponent), data: { Permissions: AppPermissions.pages.setup.locations.sangkatCommunes.view }, }
         ])
     ],
     exports: [

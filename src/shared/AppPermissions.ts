@@ -394,6 +394,7 @@ export class AppPermissions {
                 exportExcel: "Pages.Setup.Taxes.ExportExcel",
                 enable: "Pages.Setup.Taxes.Enable",
                 disable: "Pages.Setup.Taxes.Disable",
+                setAsDefault: "Pages.Setup.Taxes.SetAsDefault",
             },
         },
 

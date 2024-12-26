@@ -9305,6 +9305,712 @@ export class SessionServiceProxy {
 }
 
 @Injectable()
+export class TaxServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    create(body: CreateUpdateTaxInputDto | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<string>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<string>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return OK
+     */
+    delete(id: string | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    disable(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/Disable";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDisable(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDisable(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDisable(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    enable(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/Enable";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEnable(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEnable(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processEnable(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    setAsDefault(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/SetAsDefault";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSetAsDefault(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSetAsDefault(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processSetAsDefault(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    find(body: PageTaxInputDto | undefined): Observable<FindTaxDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/Find";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFind(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFind(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FindTaxDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FindTaxDtoPagedResultDto>;
+        }));
+    }
+
+    protected processFind(response: HttpResponseBase): Observable<FindTaxDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FindTaxDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return OK
+     */
+    getDetail(id: string | undefined): Observable<TaxDetailDto> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/GetDetail?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDetail(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDetail(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<TaxDetailDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<TaxDetailDto>;
+        }));
+    }
+
+    protected processGetDetail(response: HttpResponseBase): Observable<TaxDetailDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = TaxDetailDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param isActive (optional) 
+     * @param creators_Exclude (optional) 
+     * @param creators_Ids (optional) 
+     * @param modifiers_Exclude (optional) 
+     * @param modifiers_Ids (optional) 
+     * @param keyword (optional) 
+     * @param sortField (optional) 
+     * @param sortMode (optional) 
+     * @param usePagination (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return OK
+     */
+    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<TaxListDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/GetList?";
+        if (isActive === null)
+            throw new Error("The parameter 'isActive' cannot be null.");
+        else if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (creators_Exclude === null)
+            throw new Error("The parameter 'creators_Exclude' cannot be null.");
+        else if (creators_Exclude !== undefined)
+            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
+        if (creators_Ids === null)
+            throw new Error("The parameter 'creators_Ids' cannot be null.");
+        else if (creators_Ids !== undefined)
+            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifiers_Exclude === null)
+            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
+        else if (modifiers_Exclude !== undefined)
+            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
+        if (modifiers_Ids === null)
+            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
+        else if (modifiers_Ids !== undefined)
+            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
+            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (sortField === null)
+            throw new Error("The parameter 'sortField' cannot be null.");
+        else if (sortField !== undefined)
+            url_ += "SortField=" + encodeURIComponent("" + sortField) + "&";
+        if (sortMode === null)
+            throw new Error("The parameter 'sortMode' cannot be null.");
+        else if (sortMode !== undefined)
+            url_ += "SortMode=" + encodeURIComponent("" + sortMode) + "&";
+        if (usePagination === null)
+            throw new Error("The parameter 'usePagination' cannot be null.");
+        else if (usePagination !== undefined)
+            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetList(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<TaxListDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<TaxListDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetList(response: HttpResponseBase): Observable<TaxListDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = TaxListDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    exportExcel(body: ExportExcelTaxInputDto | undefined): Observable<ExportFileOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/ExportExcel";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportExcel(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ExportFileOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ExportFileOutput>;
+        }));
+    }
+
+    protected processExportExcel(response: HttpResponseBase): Observable<ExportFileOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExportFileOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    exportExcelTemplate(): Observable<ExportFileOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/ExportExcelTemplate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportExcelTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportExcelTemplate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ExportFileOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ExportFileOutput>;
+        }));
+    }
+
+    protected processExportExcelTemplate(response: HttpResponseBase): Observable<ExportFileOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExportFileOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    importExcel(body: FileTokenInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/ImportExcel";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processImportExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processImportExcel(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processImportExcel(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    update(body: CreateUpdateTaxInputDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Tax/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
 export class TenantServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -16995,6 +17701,69 @@ export interface ICreateUpdateSangkatCommuneInputDto {
     khanDistrictId: string | undefined;
 }
 
+export class CreateUpdateTaxInputDto implements ICreateUpdateTaxInputDto {
+    id: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
+    rate: number;
+    purchaseAccountId: string | undefined;
+    saleAccountId: string | undefined;
+
+    constructor(data?: ICreateUpdateTaxInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.rate = _data["rate"];
+            this.purchaseAccountId = _data["purchaseAccountId"];
+            this.saleAccountId = _data["saleAccountId"];
+        }
+    }
+
+    static fromJS(data: any): CreateUpdateTaxInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateUpdateTaxInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["rate"] = this.rate;
+        data["purchaseAccountId"] = this.purchaseAccountId;
+        data["saleAccountId"] = this.saleAccountId;
+        return data;
+    }
+
+    clone(): CreateUpdateTaxInputDto {
+        const json = this.toJSON();
+        let result = new CreateUpdateTaxInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateUpdateTaxInputDto {
+    id: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
+    rate: number;
+    purchaseAccountId: string | undefined;
+    saleAccountId: string | undefined;
+}
+
 export class CreateUpdateTransactionNoSettingInputDto implements ICreateUpdateTransactionNoSettingInputDto {
     id: string | undefined;
     journalType: JournalType;
@@ -18662,6 +19431,93 @@ export interface IExportExcelSangkatCommuneInputDto {
     columns: ColumnOutput[] | undefined;
 }
 
+export class ExportExcelTaxInputDto implements IExportExcelTaxInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    columns: ColumnOutput[] | undefined;
+
+    constructor(data?: IExportExcelTaxInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            if (Array.isArray(_data["columns"])) {
+                this.columns = [] as any;
+                for (let item of _data["columns"])
+                    this.columns.push(ColumnOutput.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ExportExcelTaxInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExportExcelTaxInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        if (Array.isArray(this.columns)) {
+            data["columns"] = [];
+            for (let item of this.columns)
+                data["columns"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): ExportExcelTaxInputDto {
+        const json = this.toJSON();
+        let result = new ExportExcelTaxInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IExportExcelTaxInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    columns: ColumnOutput[] | undefined;
+}
+
 export class ExportExcelVillageInputDto implements IExportExcelVillageInputDto {
     maxResultCount: number;
     skipCount: number;
@@ -20210,6 +21066,120 @@ export class FindSangkatCommuneDtoPagedResultDto implements IFindSangkatCommuneD
 
 export interface IFindSangkatCommuneDtoPagedResultDto {
     items: FindSangkatCommuneDto[] | undefined;
+    totalCount: number;
+}
+
+export class FindTaxDto implements IFindTaxDto {
+    id: string;
+    name: string | undefined;
+    displayName: string | undefined;
+    isActive: boolean;
+    rate: number;
+
+    constructor(data?: IFindTaxDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.isActive = _data["isActive"];
+            this.rate = _data["rate"];
+        }
+    }
+
+    static fromJS(data: any): FindTaxDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindTaxDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["isActive"] = this.isActive;
+        data["rate"] = this.rate;
+        return data;
+    }
+
+    clone(): FindTaxDto {
+        const json = this.toJSON();
+        let result = new FindTaxDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindTaxDto {
+    id: string;
+    name: string | undefined;
+    displayName: string | undefined;
+    isActive: boolean;
+    rate: number;
+}
+
+export class FindTaxDtoPagedResultDto implements IFindTaxDtoPagedResultDto {
+    items: FindTaxDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IFindTaxDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(FindTaxDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): FindTaxDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindTaxDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): FindTaxDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new FindTaxDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindTaxDtoPagedResultDto {
+    items: FindTaxDto[] | undefined;
     totalCount: number;
 }
 
@@ -23834,6 +24804,81 @@ export interface IPageSangkatCommuneInputDto {
     khanDistricts: GuidNullableFilterInputDto;
 }
 
+export class PageTaxInputDto implements IPageTaxInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+
+    constructor(data?: IPageTaxInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+        }
+    }
+
+    static fromJS(data: any): PageTaxInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageTaxInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        return data;
+    }
+
+    clone(): PageTaxInputDto {
+        const json = this.toJSON();
+        let result = new PageTaxInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPageTaxInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+}
+
 export class PageVillageInputDto implements IPageVillageInputDto {
     maxResultCount: number;
     skipCount: number;
@@ -25890,6 +26935,299 @@ export interface ISwitchedAccountAuthenticateResultModel {
     accessToken: string | undefined;
     encryptedAccessToken: string | undefined;
     expireInSeconds: number;
+}
+
+export class TaxDetailDto implements ITaxDetailDto {
+    id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    cannotEdit: boolean;
+    cannotDelete: boolean;
+    isDefault: boolean;
+    no: number;
+    rate: number;
+    purchaseAccountId: string | undefined;
+    purchaseAccountName: string | undefined;
+    saleAccountId: string | undefined;
+    saleAccountName: string | undefined;
+
+    constructor(data?: ITaxDetailDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creatorUserName = _data["creatorUserName"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModifierUserName = _data["lastModifierUserName"];
+            this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.cannotEdit = _data["cannotEdit"];
+            this.cannotDelete = _data["cannotDelete"];
+            this.isDefault = _data["isDefault"];
+            this.no = _data["no"];
+            this.rate = _data["rate"];
+            this.purchaseAccountId = _data["purchaseAccountId"];
+            this.purchaseAccountName = _data["purchaseAccountName"];
+            this.saleAccountId = _data["saleAccountId"];
+            this.saleAccountName = _data["saleAccountName"];
+        }
+    }
+
+    static fromJS(data: any): TaxDetailDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TaxDetailDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creatorUserName"] = this.creatorUserName;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModifierUserName"] = this.lastModifierUserName;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["cannotEdit"] = this.cannotEdit;
+        data["cannotDelete"] = this.cannotDelete;
+        data["isDefault"] = this.isDefault;
+        data["no"] = this.no;
+        data["rate"] = this.rate;
+        data["purchaseAccountId"] = this.purchaseAccountId;
+        data["purchaseAccountName"] = this.purchaseAccountName;
+        data["saleAccountId"] = this.saleAccountId;
+        data["saleAccountName"] = this.saleAccountName;
+        return data;
+    }
+
+    clone(): TaxDetailDto {
+        const json = this.toJSON();
+        let result = new TaxDetailDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ITaxDetailDto {
+    id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    cannotEdit: boolean;
+    cannotDelete: boolean;
+    isDefault: boolean;
+    no: number;
+    rate: number;
+    purchaseAccountId: string | undefined;
+    purchaseAccountName: string | undefined;
+    saleAccountId: string | undefined;
+    saleAccountName: string | undefined;
+}
+
+export class TaxListDto implements ITaxListDto {
+    id: string;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    cannotEdit: boolean;
+    cannotDelete: boolean;
+    isDefault: boolean;
+    no: number;
+    rate: number;
+    purchaseAccountName: string | undefined;
+    saleAccountName: string | undefined;
+
+    constructor(data?: ITaxListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creatorUserName = _data["creatorUserName"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModifierUserName = _data["lastModifierUserName"];
+            this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.cannotEdit = _data["cannotEdit"];
+            this.cannotDelete = _data["cannotDelete"];
+            this.isDefault = _data["isDefault"];
+            this.no = _data["no"];
+            this.rate = _data["rate"];
+            this.purchaseAccountName = _data["purchaseAccountName"];
+            this.saleAccountName = _data["saleAccountName"];
+        }
+    }
+
+    static fromJS(data: any): TaxListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TaxListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creatorUserName"] = this.creatorUserName;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModifierUserName"] = this.lastModifierUserName;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["cannotEdit"] = this.cannotEdit;
+        data["cannotDelete"] = this.cannotDelete;
+        data["isDefault"] = this.isDefault;
+        data["no"] = this.no;
+        data["rate"] = this.rate;
+        data["purchaseAccountName"] = this.purchaseAccountName;
+        data["saleAccountName"] = this.saleAccountName;
+        return data;
+    }
+
+    clone(): TaxListDto {
+        const json = this.toJSON();
+        let result = new TaxListDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ITaxListDto {
+    id: string;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    cannotEdit: boolean;
+    cannotDelete: boolean;
+    isDefault: boolean;
+    no: number;
+    rate: number;
+    purchaseAccountName: string | undefined;
+    saleAccountName: string | undefined;
+}
+
+export class TaxListDtoPagedResultDto implements ITaxListDtoPagedResultDto {
+    items: TaxListDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: ITaxListDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(TaxListDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): TaxListDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new TaxListDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): TaxListDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new TaxListDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ITaxListDtoPagedResultDto {
+    items: TaxListDto[] | undefined;
+    totalCount: number;
 }
 
 export enum TenantAvailabilityState {

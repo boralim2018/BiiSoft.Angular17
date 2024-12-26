@@ -6,8 +6,8 @@ import { KhanDistrictComponent } from './khan-district.component';
 @NgModule({
     imports: [
         RouterModule.forChild([
-            { path: '', component: KhanDistrictComponent, data: { Permissions: AppPermissions.pages.setup.currencies.page },},
-            { path: 'view-detail/:id', loadComponent: () => import('./view-khan-district/view-khan-district.component').then(c => c.ViewKhanDistrictComponent), data: { Permissions: AppPermissions.pages.setup.currencies.view }, }
+            { path: '', component: KhanDistrictComponent, data: { Permissions: AppPermissions.pages.setup.locations.khanDistricts.page },},
+            { path: 'view-detail/:id', loadComponent: () => import('./view-khan-district/view-khan-district.component').then(c => c.ViewKhanDistrictComponent), data: { Permissions: AppPermissions.pages.setup.locations.khanDistricts.view }, }
         ])
     ],
     exports: [
