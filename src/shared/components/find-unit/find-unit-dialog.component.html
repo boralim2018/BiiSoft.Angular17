@@ -24,7 +24,6 @@
                      [ngClass]="{'border-primary text-primary':row.checked}"
                      (click)="multiple? row.checked=!row.checked : select(row)">
                     <span class="overflow-hidden text-overflow-clip">{{getObjLocalizeName(row)}}</span>
-                    <span class="overflow-hidden text-overflow-clip">{{row.rate}}</span>
                 </div>
             </ng-container>
         </div>
@@ -32,7 +31,7 @@
         <div recordNotFound [minHeight]="minHeight" *ngIf="!totalCount"></div>
     </div>
 
-    <p-table #findTaxTable
+    <p-table #findUnitTable
              [columns]="selectedColumns"
              [value]="listItems"
              [paginator]="false"

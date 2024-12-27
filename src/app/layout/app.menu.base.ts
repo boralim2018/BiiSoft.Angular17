@@ -58,8 +58,15 @@ export abstract class AppMenuBase extends AppMenuPermission {
 
                 { label: this.l('Settings'), icon: 'fa-solid fa-gear', routerLink: ['/app/main/settings'], permissionName: AppPermissions.pages.settings.tenant },
                 { label: this.l('Taxes'), icon: 'fa-solid fa-money-check-dollar', routerLink: ['/app/main/taxes'], permissionName: AppPermissions.pages.setup.taxes.page },
-                { label: this.l('Units'), icon: 'fa-solid fa-pen-ruler', routerLink: ['/app/main/units'], permissionName: AppPermissions.pages.setup.items.units.page },
                 { label: this.l('Currency'), icon: 'fa-solid fa-dollar-sign', routerLink: ['/app/admin/currencies'], permissionName: AppPermissions.pages.setup.currencies.page },
+                {
+                    label: this.l('Items'),
+                    icon: 'fa-solid fa-box',
+                    items: [
+                        { label: this.l('Units'), icon: 'fa-solid fa-pen-ruler', routerLink: ['/app/main/units'], permissionName: AppPermissions.pages.setup.items.units.page },
+                        { label: this.l('ItemGroups'), icon: 'fa-solid fa-object-group', routerLink: ['/app/main/item-groups'], permissionName: AppPermissions.pages.setup.items.itemGroups.page },
+                    ]
+                },
                 {
                     label: this.l('Location'),
                     icon: 'fa-solid fa-earth-asia',

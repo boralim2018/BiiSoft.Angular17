@@ -2,9 +2,9 @@ import { Component, Injector, ViewChild, OnInit } from '@angular/core';
 import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
-    TaxServiceProxy,
-    TaxListDto,
-    ExportExcelTaxInputDto,
+    ItemGroupServiceProxy,
+    ItemGroupListDto,
+    ExportExcelItemGroupInputDto,
     ColumnOutput,
     ExportFileOutput,
     FileTokenInput,
@@ -12,8 +12,8 @@ import {
     GuidEntityDto,
     GuidNullableFilterInputDto,
 } from '@shared/service-proxies/service-proxies';
-import { CreateTaxComponent } from './create-tax/create-tax.component';
-import { EditTaxComponent } from './edit-tax/edit-tax.component';
+import { CreateItemGroupComponent } from './create-item-group/create-item-group.component';
+import { EditItemGroupComponent } from './edit-item-group/edit-item-group.component';
 import { PrimeNgListComponentBase } from '@shared/prime-ng-list-component-base';
 import { Menu, MenuModule } from 'primeng/menu';
 import { AppPermissions } from '@shared/AppPermissions';
@@ -46,27 +46,27 @@ import { SidebarModule } from 'primeng/sidebar';
 import { of } from 'rxjs';
 
 @Component({
-    selector: 'app-tax',
-    templateUrl: './tax.component.html',
+    selector: 'app-item-group',
+    templateUrl: './item-group.component.html',
     animations: [appModuleAnimation()],
-    providers: [DialogService, TaxServiceProxy],
+    providers: [DialogService, ItemGroupServiceProxy],
     standalone: true,
     imports: [MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule, DropdownModule, FindUserComponent, SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule, PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe]
 })
-export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
+export class ItemGroupComponent extends Mixin(PrimeNgListComponentBase<ItemGroupListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
 
     protected get sortField(): string { return 'Name'; }
 
-    @ViewChild('taxTable') table: Table;
-    canCreate: boolean = this.isGranted(AppPermissions.pages.setup.taxes.create);
-    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.taxes.edit);
-    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.taxes.delete);
-    canView: boolean = this.isGranted(AppPermissions.pages.setup.taxes.view);
-    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.taxes.enable);
-    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.taxes.disable);
-    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.setup.taxes.setAsDefault);
-    canImportExcel: boolean = this.isGranted(AppPermissions.pages.setup.taxes.importExcel);
-    canExportExcel: boolean = this.isGranted(AppPermissions.pages.setup.taxes.exportExcel);
+    @ViewChild('itemGroupTable') table: Table;
+    canCreate: boolean = this.isGranted(AppPermissions.pages.setup.items.itemGroups.create);
+    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.itemGroups.edit);
+    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.itemGroups.delete);
+    canView: boolean = this.isGranted(AppPermissions.pages.setup.items.itemGroups.view);
+    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.items.itemGroups.enable);
+    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.items.itemGroups.disable);
+    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.setup.items.itemGroups.setAsDefault);
+    canImportExcel: boolean = this.isGranted(AppPermissions.pages.setup.items.itemGroups.importExcel);
+    canExportExcel: boolean = this.isGranted(AppPermissions.pages.setup.items.itemGroups.exportExcel);
 
     actionMenuItems: any[];
 
@@ -81,7 +81,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
 
     constructor(
         injector: Injector,
-        private _taxService: TaxServiceProxy,
+        private _itemGroupService: ItemGroupServiceProxy,
         private _dialogService: DialogService,
         private _router: Router
     ) {
@@ -89,7 +89,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
     }
 
     ngOnInit() {
-        this.tableCacheKey = "TaxTableCacheKey";
+        this.tableCacheKey = "ItemGroupTableCacheKey";
         super.ngOnInit();
         this.initNavBar();
 
@@ -104,13 +104,13 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
     }
 
     initNavBar() {
-        this.title = this.l("Taxes");
+        this.title = this.l("ItemGroups");
         this.setTitle();
     }
 
     private initActionMenuItems() {
         this.actionMenuItems = [];
-        if (this.canCreate) this.actionMenuItems.push({ label: this.l('Create'), icon: 'pi pi-plus-circle', command: () => { this.createTax(); } });
+        if (this.canCreate) this.actionMenuItems.push({ label: this.l('Create'), icon: 'pi pi-plus-circle', command: () => { this.createItemGroup(); } });
         if (this.canImportExcel) this.actionMenuItems.push({ label: this.l('ImportExcel'), icon: 'fa-solid fa-cloud-arrow-up', command: () => { this.importExcel(); } });
         if (this.canExportExcel) this.actionMenuItems.push({ label: this.l('ExportExcel'), icon: 'fa-solid fa-file-excel', command: () => { this.exportExcel(); } });
     }
@@ -129,15 +129,10 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
         this.columns = [
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
-            { name: 'Rate', header: 'Rate', width: '15rem', sort: true },
-            { name: 'PurchaseAccountName', header: 'PurchaseAccount', width: '15rem', sort: true },
-            { name: 'SaleAccountName', header: 'SaleAccount', width: '15rem', sort: true },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'IsDefault', header: 'Default', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText },
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
-            { name: 'CannotEdit', header: 'CannotEdit', width: '10rem', sort: true, visible: false },
-            { name: 'CannotDelete', header: 'CannotDelete', width: '10rem', sort: true, visible: false },
         ];
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
@@ -163,7 +158,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
 
     protected getList(input: any, callBack: Function) {
 
-        this._taxService
+        this._itemGroupService
             .getList(input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
@@ -174,12 +169,12 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
             });
     }
 
-    delete(tax: TaxListDto): void {
+    delete(itemGroup: ItemGroupListDto): void {
 
         this._dialogService.open(ConfirmDeleteComponent, {
             data: {
-                deleteObj: tax.name,
-                deleteLabel: this.l('Tax')
+                deleteObj: itemGroup.name,
+                deleteLabel: this.l('ItemGroup')
             },
             header: this.l('ConfirmDelete'),
             styleClass: this.responsiveDialogClass
@@ -187,7 +182,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
         .onClose.subscribe(result => {
             if (result) {
                 this.isTableLoading = true;
-                this._taxService.delete(tax.id)
+                this._itemGroupService.delete(itemGroup.id)
                     .pipe(finalize(() => this.isTableLoading = false))
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
@@ -198,7 +193,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
 
     }
 
-    createTax(): void {
+    createItemGroup(): void {
         this.showCreateOrEditUserDialog();
     }
 
@@ -219,7 +214,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
                 });
 
                 instance.loading = true;
-                this._taxService.importExcel(fileInput)
+                this._itemGroupService.importExcel(fileInput)
                     .pipe(finalize(() => instance.loading = false))
                     .subscribe(() => {
                         this.notify.info(this.l('SavedSuccessfully'));
@@ -231,7 +226,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
 
         instance.download.subscribe(result => {
             instance.loading = true;
-            this._taxService.exportExcelTemplate()
+            this._itemGroupService.exportExcelTemplate()
                 .pipe(finalize(() => instance.loading = false))
                 .subscribe(result => {
                     this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, result.fileName);
@@ -241,7 +236,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
 
     exportExcel() {
 
-        let input = new ExportExcelTaxInputDto();
+        let input = new ExportExcelItemGroupInputDto();
         input.init(this.filterInput);
 
         input.columns = this.selectedColumns.filter(f => f.name != 'Flag').map((c, index) => {
@@ -262,30 +257,30 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
             return col;
         });
 
-        this._taxService
+        this._itemGroupService
             .exportExcel(input)
             .pipe(finalize(() => this.isTableLoading = false))
             .subscribe((result: ExportFileOutput) => {
-                this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `Tax_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
+                this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `ItemGroup_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
             });
     }
 
-    editTax(tax: TaxListDto): void {
-        this.showCreateOrEditUserDialog(tax.id);
+    editItemGroup(itemGroup: ItemGroupListDto): void {
+        this.showCreateOrEditUserDialog(itemGroup.id);
     }
 
     showCreateOrEditUserDialog(id?: string): void {
         let createOrEditUserDialog: DynamicDialogRef;
         if (!id) {
-            createOrEditUserDialog = this._dialogService.open(CreateTaxComponent, {
+            createOrEditUserDialog = this._dialogService.open(CreateItemGroupComponent, {
                 data: {},
-                header: this.l('Create') + ' ' + this.l('Tax'),
+                header: this.l('Create') + ' ' + this.l('ItemGroup'),
                 styleClass: this.responsiveDialogClass
             });
         } else {
-            createOrEditUserDialog = this._dialogService.open(EditTaxComponent, {
+            createOrEditUserDialog = this._dialogService.open(EditItemGroupComponent, {
                 data: { id: id },
-                header: this.l('Edit') + ' ' + this.l('Tax'),
+                header: this.l('Edit') + ' ' + this.l('ItemGroup'),
                 styleClass: this.responsiveDialogClass
             });
         }
@@ -295,16 +290,16 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
         });
     }
 
-    enable(tax: TaxListDto) {
+    enable(itemGroup: ItemGroupListDto) {
         this.message.confirm(
-            this.l('EnableWarningMessage', tax.name), this.l('Enable'), (result) => {
+            this.l('EnableWarningMessage', itemGroup.name), this.l('Enable'), (result) => {
                 if (result) {
 
                     let input = new GuidEntityDto();
-                    input.id = tax.id;
+                    input.id = itemGroup.id;
 
                     this.isTableLoading = true;
-                    this._taxService.enable(input)
+                    this._itemGroupService.enable(input)
                         .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
@@ -315,16 +310,16 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
         );
     }
 
-    disable(tax: TaxListDto) {
+    disable(itemGroup: ItemGroupListDto) {
         this.message.confirm(
-            this.l('DisableWarningMessage', tax.name), this.l('Disable'), (result) => {
+            this.l('DisableWarningMessage', itemGroup.name), this.l('Disable'), (result) => {
                 if (result) {
 
                     let input = new GuidEntityDto();
-                    input.id = tax.id;
+                    input.id = itemGroup.id;
 
                     this.isTableLoading = true;
-                    this._taxService.disable(input)
+                    this._itemGroupService.disable(input)
                         .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
@@ -336,16 +331,16 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
     }
 
 
-    setAsDefault(tax: TaxListDto) {
+    setAsDefault(itemGroup: ItemGroupListDto) {
         this.message.confirm(
-            this.l('DefaultWarningMessage', tax.name), this.l('SetAsDefault'), (result) => {
+            this.l('DefaultWarningMessage', itemGroup.name), this.l('SetAsDefault'), (result) => {
                 if (result) {
 
                     let input = new GuidEntityDto();
-                    input.id = tax.id;
+                    input.id = itemGroup.id;
 
                     this.isTableLoading = true;
-                    this._taxService.setAsDefault(input)
+                    this._itemGroupService.setAsDefault(input)
                         .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
@@ -356,20 +351,20 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
         );
     }
 
-    viewDetail(tax: TaxListDto) {
-        this._router.navigate(['/app/main/taxes/view-detail', tax.id]);
+    viewDetail(itemGroup: ItemGroupListDto) {
+        this._router.navigate(['/app/main/itemGroups/view-detail', itemGroup.id]);
     }
 
-    showInlineActions(tax: TaxListDto, event: Event) {
+    showInlineActions(itemGroup: ItemGroupListDto, event: Event) {
         if (!this.inlineActionMenu) return;
 
         this.inlineActionMenu.model = [];
-        if (this.canView) this.inlineActionMenu.model.push({ label: this.l('View'), icon: 'pi pi-fw pi-eye', command: () => { this.viewDetail(tax); } });
-        if (this.canEdit) this.inlineActionMenu.model.push({ label: this.l('Edit'), icon: 'pi pi-fw pi-pencil', command: () => { this.editTax(tax); } });
-        if (this.canDelete) this.inlineActionMenu.model.push({ label: this.l('Delete'), icon: 'pi pi-trash', command: () => { this.delete(tax); } });
-        if (this.canEnable && !tax.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(tax); } });
-        if (this.canDisable && tax.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(tax); } });
-        if (this.canSetAsDefault && !tax.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(tax); } });
+        if (this.canView) this.inlineActionMenu.model.push({ label: this.l('View'), icon: 'pi pi-fw pi-eye', command: () => { this.viewDetail(itemGroup); } });
+        if (this.canEdit) this.inlineActionMenu.model.push({ label: this.l('Edit'), icon: 'pi pi-fw pi-pencil', command: () => { this.editItemGroup(itemGroup); } });
+        if (this.canDelete) this.inlineActionMenu.model.push({ label: this.l('Delete'), icon: 'pi pi-trash', command: () => { this.delete(itemGroup); } });
+        if (this.canEnable && !itemGroup.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(itemGroup); } });
+        if (this.canDisable && itemGroup.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(itemGroup); } });
+        if (this.canSetAsDefault && !itemGroup.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(itemGroup); } });
 
         this.inlineActionMenu.show(event);
     }

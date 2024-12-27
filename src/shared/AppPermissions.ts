@@ -151,13 +151,12 @@ export class AppPermissions {
                     create: "Pages.Setup.Items.ItemGroups.Create",
                     view: "Pages.Setup.Items.ItemGroups.View",
                     edit: "Pages.Setup.Items.ItemGroups.Edit",
-                    editAccount: "Pages.Setup.Items.ItemGroups.EditAccount",
-                    seeAccount: "Pages.Setup.Items.ItemGroups.SeeAccount",
                     delete: "Pages.Setup.Items.ItemGroups.Delete",
                     importExcel: "Pages.Setup.Items.ItemGroups.ImportExcel",
                     exportExcel: "Pages.Setup.Items.ItemGroups.ExportExcel",
                     enable: "Pages.Setup.Items.ItemGroups.Enable",
                     disable: "Pages.Setup.Items.ItemGroups.Disable",
+                    setAsDefault: "Pages.Setup.Items.ItemGroups.SetAsDefault",
                 },
 
                 itemList: {
@@ -184,18 +183,20 @@ export class AppPermissions {
                     exportExcel: "Pages.Setup.Items.Units.ExportExcel",
                     enable: "Pages.Setup.Items.Units.Enable",
                     disable: "Pages.Setup.Items.Units.Disable",
+                    setAsDefault: "Pages.Setup.Items.Units.SetAsDefault",
                 },
 
-                weightUnits: {
-                    page: "Pages.Setup.WeightUnits",
-                    create: "Pages.Setup.Items.WeightUnits.Create",
-                    view: "Pages.Setup.Items.WeightUnits.View",
-                    edit: "Pages.Setup.Items.WeightUnits.Edit",
-                    delete: "Pages.Setup.Items.WeightUnits.Delete",
-                    importExcel: "Pages.Setup.Items.WeightUnits.ImportExcel",
-                    exportExcel: "Pages.Setup.Items.WeightUnits.ExportExcel",
-                    enable: "Pages.Setup.Items.WeightUnits.Enable",
-                    disable: "Pages.Setup.Items.WeightUnits.Disable",
+                models: {
+                    page: "Pages.Setup.Items.Models",
+                    create: "Pages.Setup.Items.Models.Create",
+                    view: "Pages.Setup.Items.Models.View",
+                    edit: "Pages.Setup.Items.Models.Edit",
+                    delete: "Pages.Setup.Items.Models.Delete",
+                    importExcel: "Pages.Setup.Items.Models.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.Models.ExportExcel",
+                    enable: "Pages.Setup.Items.Models.Enable",
+                    disable: "Pages.Setup.Items.Models.Disable",
+                    setAsDefault: "Pages.Setup.Items.Models.SetAsDefault",
                 },
 
                 grades: {
@@ -208,6 +209,7 @@ export class AppPermissions {
                     exportExcel: "Pages.Setup.Items.Grades.ExportExcel",
                     enable: "Pages.Setup.Items.Grades.Enable",
                     disable: "Pages.Setup.Items.Grades.Disable",
+                    setAsDefault: "Pages.Setup.Items.Grades.SetAsDefault",
                 },
 
                 sizes: {
@@ -220,6 +222,7 @@ export class AppPermissions {
                     exportExcel: "Pages.Setup.Items.Sizes.ExportExcel",
                     enable: "Pages.Setup.Items.Sizes.Enable",
                     disable: "Pages.Setup.Items.Sizes.Disable",
+                    setAsDefault: "Pages.Setup.Items.Sizes.SetAsDefault",
                 },
 
                 colorPatterns: {
@@ -232,6 +235,7 @@ export class AppPermissions {
                     exportExcel: "Pages.Setup.Items.ColorPatterns.ExportExcel",
                     enable: "Pages.Setup.Items.ColorPatterns.Enable",
                     disable: "Pages.Setup.Items.ColorPatterns.Disable",
+                    setAsDefault: "Pages.Setup.Items.ColorPatterns.SetAsDefault",
                 },
 
                 brands: {
@@ -244,6 +248,111 @@ export class AppPermissions {
                     exportExcel: "Pages.Setup.Items.Brands.ExportExcel",
                     enable: "Pages.Setup.Items.Brands.Enable",
                     disable: "Pages.Setup.Items.Brands.Disable",
+                    setAsDefault: "Pages.Setup.Items.Brands.SetAsDefault",
+                },
+
+                series: {
+                    page: "Pages.Setup.Items.Series",
+                    create: "Pages.Setup.Items.Series.Create",
+                    view: "Pages.Setup.Items.Series.View",
+                    edit: "Pages.Setup.Items.Series.Edit",
+                    delete: "Pages.Setup.Items.Series.Delete",
+                    importExcel: "Pages.Setup.Items.Series.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.Series.ExportExcel",
+                    enable: "Pages.Setup.Items.Series.Enable",
+                    disable: "Pages.Setup.Items.Series.Disable",
+                    setAsDefault: "Pages.Setup.Items.Series.SetAsDefault",
+                },
+
+                cpus: {
+                    page: "Pages.Setup.Items.CPUs",
+                    create: "Pages.Setup.Items.CPUs.Create",
+                    view: "Pages.Setup.Items.CPUs.View",
+                    edit: "Pages.Setup.Items.CPUs.Edit",
+                    delete: "Pages.Setup.Items.CPUs.Delete",
+                    importExcel: "Pages.Setup.Items.CPUs.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.CPUs.ExportExcel",
+                    enable: "Pages.Setup.Items.CPUs.Enable",
+                    disable: "Pages.Setup.Items.CPUs.Disable",
+                    setAsDefault: "Pages.Setup.Items.CPUs.SetAsDefault",
+                },
+
+                rams: {
+                    page: "Pages.Setup.Items.RAMs",
+                    create: "Pages.Setup.Items.RAMs.Create",
+                    view: "Pages.Setup.Items.RAMs.View",
+                    edit: "Pages.Setup.Items.RAMs.Edit",
+                    delete: "Pages.Setup.Items.RAMs.Delete",
+                    importExcel: "Pages.Setup.Items.RAMs.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.RAMs.ExportExcel",
+                    enable: "Pages.Setup.Items.RAMs.Enable",
+                    disable: "Pages.Setup.Items.RAMs.Disable",
+                    setAsDefault: "Pages.Setup.Items.RAMs.SetAsDefault",
+                },
+
+                vgas: {
+                    page: "Pages.Setup.Items.VGAs",
+                    create: "Pages.Setup.Items.VGAs.Create",
+                    view: "Pages.Setup.Items.VGAs.View",
+                    edit: "Pages.Setup.Items.VGAs.Edit",
+                    delete: "Pages.Setup.Items.VGAs.Delete",
+                    importExcel: "Pages.Setup.Items.VGAs.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.VGAs.ExportExcel",
+                    enable: "Pages.Setup.Items.VGAs.Enable",
+                    disable: "Pages.Setup.Items.VGAs.Disable",
+                    setAsDefault: "Pages.Setup.Items.VGAs.SetAsDefault",
+                },
+
+                hdds: {
+                    page: "Pages.Setup.Items.HDDs",
+                    create: "Pages.Setup.Items.HDDs.Create",
+                    view: "Pages.Setup.Items.HDDs.View",
+                    edit: "Pages.Setup.Items.HDDs.Edit",
+                    delete: "Pages.Setup.Items.HDDs.Delete",
+                    importExcel: "Pages.Setup.Items.HDDs.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.HDDs.ExportExcel",
+                    enable: "Pages.Setup.Items.HDDs.Enable",
+                    disable: "Pages.Setup.Items.HDDs.Disable",
+                    setAsDefault: "Pages.Setup.Items.HDDs.SetAsDefault",
+                },
+
+                screens: {
+                    page: "Pages.Setup.Items.Screens",
+                    create: "Pages.Setup.Items.Screens.Create",
+                    view: "Pages.Setup.Items.Screens.View",
+                    edit: "Pages.Setup.Items.Screens.Edit",
+                    delete: "Pages.Setup.Items.Screens.Delete",
+                    importExcel: "Pages.Setup.Items.Screens.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.Screens.ExportExcel",
+                    enable: "Pages.Setup.Items.Screens.Enable",
+                    disable: "Pages.Setup.Items.Screens.Disable",
+                    setAsDefault: "Pages.Setup.Items.Screens.SetAsDefault",
+                },
+
+                cameras: {
+                    page: "Pages.Setup.Items.Cameras",
+                    create: "Pages.Setup.Items.Cameras.Create",
+                    view: "Pages.Setup.Items.Cameras.View",
+                    edit: "Pages.Setup.Items.Cameras.Edit",
+                    delete: "Pages.Setup.Items.Cameras.Delete",
+                    importExcel: "Pages.Setup.Items.Cameras.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.Cameras.ExportExcel",
+                    enable: "Pages.Setup.Items.Cameras.Enable",
+                    disable: "Pages.Setup.Items.Cameras.Disable",
+                    setAsDefault: "Pages.Setup.Items.Cameras.SetAsDefault",
+                },
+
+                batteries: {
+                    page: "Pages.Setup.Items.Batteries",
+                    create: "Pages.Setup.Items.Batteries.Create",
+                    view: "Pages.Setup.Items.Batteries.View",
+                    edit: "Pages.Setup.Items.Batteries.Edit",
+                    delete: "Pages.Setup.Items.Batteries.Delete",
+                    importExcel: "Pages.Setup.Items.Batteries.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.Batteries.ExportExcel",
+                    enable: "Pages.Setup.Items.Batteries.Enable",
+                    disable: "Pages.Setup.Items.Batteries.Disable",
+                    setAsDefault: "Pages.Setup.Items.Batteries.SetAsDefault",
                 },
 
                 fieldAs: {
@@ -256,6 +365,7 @@ export class AppPermissions {
                     exportExcel: "Pages.Setup.Items.FieldAs.ExportExcel",
                     enable: "Pages.Setup.Items.FieldAs.Enable",
                     disable: "Pages.Setup.Items.FieldAs.Disable",
+                    setAsDefault: "Pages.Setup.Items.FieldAs.SetAsDefault",
                 },
 
                 fieldBs: {
@@ -268,6 +378,7 @@ export class AppPermissions {
                     exportExcel: "Pages.Setup.Items.FieldBs.ExportExcel",
                     enable: "Pages.Setup.Items.FieldBs.Enable",
                     disable: "Pages.Setup.Items.FieldBs.Disable",
+                    setAsDefault: "Pages.Setup.Items.FieldBs.SetAsDefault",
                 },
 
                 fieldCs: {
@@ -280,6 +391,7 @@ export class AppPermissions {
                     exportExcel: "Pages.Setup.Items.FieldCs.ExportExcel",
                     enable: "Pages.Setup.Items.FieldCs.Enable",
                     disable: "Pages.Setup.Items.FieldCs.Disable",
+                    setAsDefault: "Pages.Setup.Items.FieldCs.SetAsDefault",
                 },
 
                 priceLevels: {
@@ -304,19 +416,7 @@ export class AppPermissions {
                     exportExcel: "Pages.Setup.Items.Promotions.ExportExcel",
                     enable: "Pages.Setup.Items.Promotions.Enable",
                     disable: "Pages.Setup.Items.Promotions.Disable",
-                },
-
-                scores: {
-                    page: "Pages.Setup.Items.Scores",
-                    create: "Pages.Setup.Items.Scores.Create",
-                    view: "Pages.Setup.Items.Scores.View",
-                    edit: "Pages.Setup.Items.Scores.Edit",
-                    delete: "Pages.Setup.Items.Scores.Delete",
-                    importExcel: "Pages.Setup.Items.Scores.ImportExcel",
-                    exportExcel: "Pages.Setup.Items.Scores.ExportExcel",
-                    enable: "Pages.Setup.Items.Scores.Enable",
-                    disable: "Pages.Setup.Items.Scores.Disable",
-                },
+                }
             },
             //#endregion
 
