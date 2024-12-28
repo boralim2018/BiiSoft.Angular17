@@ -57,7 +57,7 @@ export class ViewItemGroupComponent extends Mixin(AppComponentBase, NavBarCompon
 
     initNavBar() {
         this.title = this.l("View_", this.l("ItemGroup"));
-        this.navBarItems.push({ label: this.l("ItemGroups"), routerLink: "/app/main/itemGroups" });
+        this.navBarItems.push({ label: this.l("ItemGroups"), routerLink: "/app/main/item-groups" });
         this.setTitle();
     }
 
@@ -72,11 +72,11 @@ export class ViewItemGroupComponent extends Mixin(AppComponentBase, NavBarCompon
     }
 
     goTo(id: string | undefined) {
-        if (id) this.router.navigate(['/app/main/itemGroups/view-detail', id]);
+        if (id) this.router.navigate(['/app/main/item-groups/view-detail', id]);
     }
 
     goBack() {
-        this.router.navigate(['/app/main/itemGroups']);
+        this.router.navigate(['/app/main/item-groups']);
     }
 
     delete(): void {

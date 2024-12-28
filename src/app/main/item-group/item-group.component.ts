@@ -352,7 +352,7 @@ export class ItemGroupComponent extends Mixin(PrimeNgListComponentBase<ItemGroup
     }
 
     viewDetail(itemGroup: ItemGroupListDto) {
-        this._router.navigate(['/app/main/itemGroups/view-detail', itemGroup.id]);
+        this._router.navigate(['/app/main/item-groups/view-detail', itemGroup.id]);
     }
 
     showInlineActions(itemGroup: ItemGroupListDto, event: Event) {
