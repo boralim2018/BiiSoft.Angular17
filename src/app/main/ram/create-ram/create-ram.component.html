@@ -1,0 +1,54 @@
+<form novalidate autocomplete="off" #createRAMForm="ngForm" (ngSubmit)="save()" [busy]="saving">
+    <div class="formgrid grid p-3 m-0">
+        <div class="field col-12 md:col-6">
+            <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="name"
+                   id="name"
+                   maxlength="128"
+                   required
+                   [(ngModel)]="model.name"
+                   #nameModel="ngModel"
+                   #nameEl />
+            <abp-validation-summary [control]="nameModel"
+                                    [controlEl]="nameEl"></abp-validation-summary>
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="displayName"
+                   id="displayName"
+                   minlength="2"
+                   maxlength="64"
+                   required
+                   [(ngModel)]="model.displayName"
+                   #displayNameModel="ngModel"
+                   #displayNameEl />
+            <abp-validation-summary [control]="displayNameModel"
+                                    [controlEl]="displayNameEl"></abp-validation-summary>
+        </div>
+
+    </div>
+
+    <div class="p-dialog-footer">
+        <div class="flex justify-content-end flex-wrap">
+            <button pButton pRipple
+                    label="{{'SaveNew' | localize}}"
+                    class=""
+                    icon="pi pi-save"
+                    type="button"
+                    (click)="saveNew(createRAMForm)"
+                    [disabled]="!createRAMForm.form.valid|| saving"></button>
+            <button pButton pRipple
+                    label="{{'Save' | localize}}"
+                    class=""
+                    icon="pi pi-save"
+                    type="submit"
+                    [disabled]="!createRAMForm.form.valid|| saving"></button>
+        </div>
+    </div>
+</form>

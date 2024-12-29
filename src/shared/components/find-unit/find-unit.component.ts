@@ -27,7 +27,6 @@ export class FindUnitComponent extends FindComponentBase implements OnInit {
         private _dialogService: DialogService,
     ) {
         super(injector);
-        this.optionLabel = 'unitName';
         this.placeholder = this.l('Select_', this.l('Unit'));
     }
 

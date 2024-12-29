@@ -1,0 +1,139 @@
+<div [@routerTransition]>
+    <div class="card">
+
+        <p-menu #inlineActionMenu [popup]="true" appendTo="body"></p-menu>
+
+        <p-sidebar [(visible)]="showFilter" position="right">
+            <div class="layout-config" [ngClass]="{'layout-config-active': showFilter}">
+                <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-outlined p-button-text layout-config-close" (click)="showFilter=false"></button>
+                <div class="layout-config-content has-footer">
+                    <h6 class="mt-0">{{l('Filter')}}</h6>
+                    <div class="field">
+                        <input pInputText class="w-full" type="text" placeholder="Search" [(ngModel)]="filterInput.keyword" (keydown.enter)="refresh($event)" />
+                    </div>
+                    <div class="field">
+                        <label>{{l('IsActive')}}</label>
+                        <p-dropdown [options]="isActiveModels" [(ngModel)]="filterInput.isActive" styleClass="w-full"></p-dropdown>
+                    </div>
+                    <div class="field"
+                         findUser
+                         name="created"
+                         [label]="l('Created')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.creators.exclude"
+                         [(ngModel)]="creators"
+                         (ngModelChange)="onCreatorsChange($event)">
+                    </div>
+                    <div class="field"
+                         findUser
+                         name="modified"
+                         [label]="l('Modified')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.modifiers.exclude"
+                         [(ngModel)]="modifiers"
+                         (ngModelChange)="onModifiersChange($event)">
+                    </div>
+                </div>
+                <div class="layout-config-footer" searchFooter [loading]="isTableLoading" (onSearch)="refresh($event)">
+                </div>
+            </div>
+        </p-sidebar>
+
+        <p-overlayPanel #op styleClass="p-0">
+            <table-setting [columns]="columns"
+                           [(selectedColumns)]="selectedColumns"
+                           (clearSetting)="deleteTableCache()"
+                           [(gridLine)]="showGridLine"
+                           (gridLineChange)="showGridLineChange($event)"></table-setting>
+        </p-overlayPanel>
+
+        <div class="flex justify-content-between flex-wrap gap-3 pb-3">
+            <div class="flex align-items-center"
+                 navBar
+                 (settingClick)="op.show($event)"
+                 [navs]="navBarItems">
+            </div>
+            <div searchAction
+                 class="flex align-items-center gap-2"
+                 [actionMenuItems]="actionMenuItems"
+                 [showFilter]="true"
+                 (filterClick)="showFilter=true;"
+                 (onSearch)="refresh($event)"
+                 [(keyword)]="filterInput.keyword">
+            </div>
+        </div>
+
+        <p-table #itemSeriesTable
+                 [columns]="selectedColumns"
+                 [value]="listItems"
+                 [paginator]="true"
+                 [rowsPerPageOptions]="rowsPerPageOptions"
+                 [loading]="isTableLoading"
+                 [rowHover]="true"
+                 [rows]="filterInput.maxResultCount"
+                 [first]="filterInput.skipCount"
+                 [sortField]="filterInput.sortField"
+                 [sortOrder]="filterInput.sortMode"
+                 [totalRecords]="totalCount"
+                 [showCurrentPageReport]="true"
+                 [currentPageReportTemplate]="currentPageReportTemplate"
+                 responsiveLayout="stack"
+                 [filterDelay]="0"
+                 [lazy]="true"
+                 [lazyLoadOnInit]="false"
+                 (onLazyLoad)="loadData($event)">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th pFrozenColumn [ngStyle]="{'width': responsiveWidth(actionColumnWidth), 'max-width': responsiveWidth(actionColumnWidth)}">{{l('Actions')}}</th>
+                    <ng-container *ngFor="let col of columns">
+                        <th *ngIf="col.sort"
+                            pReorderableColumn
+                            pResizableColumn
+                            [pSortableColumn]="col.name"
+                            [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}"
+                            [id]="col.name">{{l(col.header)}} <p-sortIcon [field]="col.name"></p-sortIcon></th>
+                        <th *ngIf="!col.sort"
+                            pReorderableColumn
+                            pResizableColumn
+                            [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}"
+                            [id]="col.name">{{l(col.header)}}</th>
+                    </ng-container>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row let-index="rowIndex" let-columns="columns">
+                <tr>
+                    <td pFrozenColumn [ngStyle]="{'width': responsiveWidth(actionColumnWidth), 'max-width': responsiveWidth(actionColumnWidth)}">
+                        <span class="p-column-title">{{l('Actions')}}</span>
+                        <button pButton pRipple type="button" class="p-button-rounded p-button-text" icon="pi pi-cog" (click)="showInlineActions(row, $event);" *ngIf="inlineActionVisible"></button>
+                    </td>
+                    <ng-container *ngFor="let col of columns">
+                        <td [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}">
+                            <span class="p-column-title">{{l(col.header)}}</span>
+                            <ng-container *ngIf="col.name!=='IsActive'">
+                                <span>{{getObjValue(row,col.name)}}</span> 
+                            </ng-container>
+                            <ng-container *ngIf="col.name==='CreatorUserName'">
+                                <br />
+                                <p-tag styleClass="bg-primary-reverse text-color" [value]="row.creationTime|date:'yyyy-MM-dd HH:mm:ss'"></p-tag>
+                            </ng-container>
+                            <ng-container *ngIf="col.name==='LastModifierUserName' && row.lastModificationTime">
+                                <br />
+                                <p-tag styleClass="bg-primary-reverse text-color" [value]="row.lastModificationTime|date:'yyyy-MM-dd HH:mm:ss'"></p-tag>
+                            </ng-container>
+                            <p-tag *ngIf="col.name==='IsActive'" styleClass="px-3" [severity]="row.isActive ? 'success' : 'warning'" [value]="row.isActive ? this.l('Active') : this.l('Inactive')"></p-tag>
+                        </td>
+                    </ng-container>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="columns.length + 1" class="empty-message">
+                        <div recordNotFound [minHeight]="minHeight-70"></div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

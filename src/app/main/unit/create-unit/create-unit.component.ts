@@ -23,7 +23,7 @@ import { FindChartOfAccountComponent } from '../../../../shared/components/find-
 export class CreateUnitComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateUnitInputDto = new CreateUpdateUnitInputDto();
-   
+
     constructor(
         injector: Injector,
         public _unitService: UnitServiceProxy,

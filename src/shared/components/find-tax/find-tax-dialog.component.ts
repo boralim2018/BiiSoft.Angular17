@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { FindTaxsInput, TaxSummaryDto, TaxServiceProxy } from '@shared/service-proxies/service-proxies';
+import { PageTaxInputDto, FindTaxDto, TaxServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
 import { catchError, finalize, of } from 'rxjs';
@@ -26,7 +26,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     standalone: true,
     imports: [OverlayPanelModule, TableSettingComponent, FindSearchActionComponent, NgIf, NgStyle, BusyDirective, NgFor, NgClass, RecordNotFoundComponent, TableModule, PrimeTemplate, CheckboxModule, FormsModule, PaginatorModule]
 })
-export class FindTaxDialogComponent extends Mixin(FindCardListComponentBase<TaxSummaryDto>, AppDynamicDialogBase) implements OnInit {
+export class FindTaxDialogComponent extends Mixin(FindCardListComponentBase<FindTaxDto>, AppDynamicDialogBase) implements OnInit {
 
     protected get sortField(): string { return 'Name'; }
 
@@ -65,12 +65,12 @@ export class FindTaxDialogComponent extends Mixin(FindCardListComponentBase<TaxS
       
         input.isActive = true;
 
-        let findInput = new FindTaxsInput();
+        let findInput = new PageTaxInputDto();
         findInput.init(input);
 
         this.isTableLoading = true;
 
-        this._taxService.findTaxs(findInput)
+        this._taxService.find(findInput)
             .pipe(finalize(() => callBack()))
             .subscribe(result => {
                 this.totalCount = result.totalCount;

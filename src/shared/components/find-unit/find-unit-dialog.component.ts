@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { FindUnitsInput, UnitSummaryDto, UnitServiceProxy } from '@shared/service-proxies/service-proxies';
+import { PageUnitInputDto, FindUnitDto, UnitServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
 import { catchError, finalize, of } from 'rxjs';
@@ -19,14 +19,14 @@ import { TableSettingComponent } from '../table-setting/table-setting.component'
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
-    selector: 'find-tax-dialog',
-    templateUrl: './find-tax-dialog.component.html',
+    selector: 'find-unit-dialog',
+    templateUrl: './find-unit-dialog.component.html',
     animations: [appModuleAnimation()],
     providers: [UnitServiceProxy],
     standalone: true,
     imports: [OverlayPanelModule, TableSettingComponent, FindSearchActionComponent, NgIf, NgStyle, BusyDirective, NgFor, NgClass, RecordNotFoundComponent, TableModule, PrimeTemplate, CheckboxModule, FormsModule, PaginatorModule]
 })
-export class FindUnitDialogComponent extends Mixin(FindCardListComponentBase<UnitSummaryDto>, AppDynamicDialogBase) implements OnInit {
+export class FindUnitDialogComponent extends Mixin(FindCardListComponentBase<FindUnitDto>, AppDynamicDialogBase) implements OnInit {
 
     protected get sortField(): string { return 'Name'; }
 
@@ -35,7 +35,7 @@ export class FindUnitDialogComponent extends Mixin(FindCardListComponentBase<Uni
 
     constructor(
         injector: Injector,
-        private _taxService: UnitServiceProxy,
+        private _unitService: UnitServiceProxy,
         private _dialogRef: DynamicDialogRef,
         private _dialogConfig: DynamicDialogConfig
     ) {
@@ -43,7 +43,7 @@ export class FindUnitDialogComponent extends Mixin(FindCardListComponentBase<Uni
 
         this.multiple = this._dialogConfig.data.multiple;
         this.tableCacheKey = "findUnitTableCache";
-        this.containerClass = '.find-tax-dialog';
+        this.containerClass = '.find-unit-dialog';
     }
 
     ngOnInit() {
@@ -54,8 +54,7 @@ export class FindUnitDialogComponent extends Mixin(FindCardListComponentBase<Uni
     protected initColumns(): void {
         this.columns = [
             { name: 'Name', header: 'Name', width: '15rem', sort: true },
-            { name: 'DisplayName', header: 'DisplayName', width: '15rem', sort: true },
-            { name: 'Rate', header: 'Rate', sort: true }
+            { name: 'DisplayName', header: 'DisplayName', width: '15rem', sort: true }
         ];
         
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
@@ -65,12 +64,12 @@ export class FindUnitDialogComponent extends Mixin(FindCardListComponentBase<Uni
       
         input.isActive = true;
 
-        let findInput = new FindUnitsInput();
+        let findInput = new PageUnitInputDto();
         findInput.init(input);
 
         this.isTableLoading = true;
 
-        this._taxService.findUnits(findInput)
+        this._unitService.find(findInput)
             .pipe(finalize(() => callBack()))
             .subscribe(result => {
                 this.totalCount = result.totalCount;
@@ -86,9 +85,9 @@ export class FindUnitDialogComponent extends Mixin(FindCardListComponentBase<Uni
         return this.listItems ? this.listItems.filter(f => f['checked']) : undefined;
     }
 
-    select(tax?: any) {
-        if (tax) {
-            this._dialogRef.close(tax);
+    select(unit?: any) {
+        if (unit) {
+            this._dialogRef.close(unit);
             return;
         }
 

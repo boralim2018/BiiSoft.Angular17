@@ -27,7 +27,6 @@ export class FindTaxComponent extends FindComponentBase implements OnInit {
         private _dialogService: DialogService,
     ) {
         super(injector);
-        this.optionLabel = 'taxName';
         this.placeholder = this.l('Select_', this.l('Tax'));
     }
 

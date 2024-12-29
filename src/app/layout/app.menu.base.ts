@@ -79,9 +79,9 @@ export abstract class AppMenuBase extends AppMenuPermission {
                         { label: this.l('Screens'), icon: 'fa-solid fa-display', routerLink: ['/app/main/screens'], permissionName: AppPermissions.pages.setup.items.screens.page },
                         { label: this.l('Cameras'), icon: 'fa-solid fa-camera', routerLink: ['/app/main/cameras'], permissionName: AppPermissions.pages.setup.items.cameras.page },
                         { label: this.l('Batteries'), icon: 'fa-solid fa-battery-half', routerLink: ['/app/main/batteries'], permissionName: AppPermissions.pages.setup.items.batteries.page },
-                        { label: this.l('FieldAs'), icon: 'fa-solid fa-database', routerLink: ['/app/main/fieldAs'], permissionName: AppPermissions.pages.setup.items.fieldAs.page },
-                        { label: this.l('FieldBs'), icon: 'fa-solid fa-database', routerLink: ['/app/main/fieldBs'], permissionName: AppPermissions.pages.setup.items.fieldBs.page },
-                        { label: this.l('FieldCs'), icon: 'fa-solid fa-database', routerLink: ['/app/main/fieldCs'], permissionName: AppPermissions.pages.setup.items.fieldCs.page },
+                        { label: this.l('FieldAs'), icon: 'fa-solid fa-database', routerLink: ['/app/main/field-a'], permissionName: AppPermissions.pages.setup.items.fieldAs.page },
+                        { label: this.l('FieldBs'), icon: 'fa-solid fa-database', routerLink: ['/app/main/field-b'], permissionName: AppPermissions.pages.setup.items.fieldBs.page },
+                        { label: this.l('FieldCs'), icon: 'fa-solid fa-database', routerLink: ['/app/main/field-c'], permissionName: AppPermissions.pages.setup.items.fieldCs.page },
                     ]
                 },
                 {
