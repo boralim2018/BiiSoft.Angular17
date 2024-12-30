@@ -54,7 +54,8 @@ export class FindBatteryDialogComponent extends Mixin(FindCardListComponentBase<
     protected initColumns(): void {
         this.columns = [
             { name: 'Name', header: 'Name', width: '15rem', sort: true },
-            { name: 'DisplayName', header: 'DisplayName', width: '15rem', sort: true }
+            { name: 'DisplayName', header: 'DisplayName', width: '15rem', sort: true },
+            { name: 'Code', header: 'Code', width: '15rem', sort: true }
         ];
         
         this.selectedColumns = this.columns.filter(s => s.visible !== false);

@@ -30,7 +30,20 @@
             <abp-validation-summary [control]="displayNameModel"
                                     [controlEl]="displayNameEl"></abp-validation-summary>
         </div>
-
+        <div class="field col-12 md:col-6">
+            <label for="code" class="text-900 font-medium">{{l('Code')}}</label>
+            <input type="text"
+                   pInputText
+                   class="w-full"
+                   name="code"
+                   id="code"
+                   maxlength="4"
+                   [(ngModel)]="model.code"
+                   #codeModel="ngModel"
+                   #codeEl />
+            <abp-validation-summary [control]="codeModel"
+                                    [controlEl]="codeEl"></abp-validation-summary>
+        </div>
     </div>
 
     <div class="p-dialog-footer">

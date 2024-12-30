@@ -129,6 +129,7 @@ export class CameraComponent extends Mixin(PrimeNgListComponentBase<CameraListDt
         this.columns = [
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
+            { name: 'Code', header: 'Code', width: '25rem', sort: true },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'IsDefault', header: 'Default', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText },

@@ -27965,6 +27965,7 @@ export class BatteryDetailDto implements IBatteryDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IBatteryDetailDto) {
         if (data) {
@@ -27993,6 +27994,7 @@ export class BatteryDetailDto implements IBatteryDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -28021,6 +28023,7 @@ export class BatteryDetailDto implements IBatteryDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -28049,6 +28052,7 @@ export interface IBatteryDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class BatteryListDto implements IBatteryListDto {
@@ -28064,6 +28068,7 @@ export class BatteryListDto implements IBatteryListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IBatteryListDto) {
         if (data) {
@@ -28088,6 +28093,7 @@ export class BatteryListDto implements IBatteryListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -28112,6 +28118,7 @@ export class BatteryListDto implements IBatteryListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -28136,6 +28143,7 @@ export interface IBatteryListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class BatteryListDtoPagedResultDto implements IBatteryListDtoPagedResultDto {
@@ -28507,6 +28515,7 @@ export class CPUDetailDto implements ICPUDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: ICPUDetailDto) {
         if (data) {
@@ -28535,6 +28544,7 @@ export class CPUDetailDto implements ICPUDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -28563,6 +28573,7 @@ export class CPUDetailDto implements ICPUDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -28591,6 +28602,7 @@ export interface ICPUDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class CPUListDto implements ICPUListDto {
@@ -28606,6 +28618,7 @@ export class CPUListDto implements ICPUListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: ICPUListDto) {
         if (data) {
@@ -28630,6 +28643,7 @@ export class CPUListDto implements ICPUListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -28654,6 +28668,7 @@ export class CPUListDto implements ICPUListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -28678,6 +28693,7 @@ export interface ICPUListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class CPUListDtoPagedResultDto implements ICPUListDtoPagedResultDto {
@@ -28752,6 +28768,7 @@ export class CameraDetailDto implements ICameraDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: ICameraDetailDto) {
         if (data) {
@@ -28780,6 +28797,7 @@ export class CameraDetailDto implements ICameraDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -28808,6 +28826,7 @@ export class CameraDetailDto implements ICameraDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -28836,6 +28855,7 @@ export interface ICameraDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class CameraListDto implements ICameraListDto {
@@ -28851,6 +28871,7 @@ export class CameraListDto implements ICameraListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: ICameraListDto) {
         if (data) {
@@ -28875,6 +28896,7 @@ export class CameraListDto implements ICameraListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -28899,6 +28921,7 @@ export class CameraListDto implements ICameraListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -28923,6 +28946,7 @@ export interface ICameraListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class CameraListDtoPagedResultDto implements ICameraListDtoPagedResultDto {
@@ -29766,6 +29790,7 @@ export class ColorPatternDetailDto implements IColorPatternDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IColorPatternDetailDto) {
         if (data) {
@@ -29794,6 +29819,7 @@ export class ColorPatternDetailDto implements IColorPatternDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -29822,6 +29848,7 @@ export class ColorPatternDetailDto implements IColorPatternDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -29850,6 +29877,7 @@ export interface IColorPatternDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ColorPatternListDto implements IColorPatternListDto {
@@ -29865,6 +29893,7 @@ export class ColorPatternListDto implements IColorPatternListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IColorPatternListDto) {
         if (data) {
@@ -29889,6 +29918,7 @@ export class ColorPatternListDto implements IColorPatternListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -29913,6 +29943,7 @@ export class ColorPatternListDto implements IColorPatternListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -29937,6 +29968,7 @@ export interface IColorPatternListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ColorPatternListDtoPagedResultDto implements IColorPatternListDtoPagedResultDto {
@@ -31216,6 +31248,7 @@ export class CreateUpdateBatteryInputDto implements ICreateUpdateBatteryInputDto
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateBatteryInputDto) {
         if (data) {
@@ -31231,6 +31264,7 @@ export class CreateUpdateBatteryInputDto implements ICreateUpdateBatteryInputDto
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -31246,6 +31280,7 @@ export class CreateUpdateBatteryInputDto implements ICreateUpdateBatteryInputDto
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -31261,6 +31296,7 @@ export interface ICreateUpdateBatteryInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
@@ -31350,6 +31386,7 @@ export class CreateUpdateCPUInputDto implements ICreateUpdateCPUInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateCPUInputDto) {
         if (data) {
@@ -31365,6 +31402,7 @@ export class CreateUpdateCPUInputDto implements ICreateUpdateCPUInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -31380,6 +31418,7 @@ export class CreateUpdateCPUInputDto implements ICreateUpdateCPUInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -31395,12 +31434,14 @@ export interface ICreateUpdateCPUInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateCameraInputDto implements ICreateUpdateCameraInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateCameraInputDto) {
         if (data) {
@@ -31416,6 +31457,7 @@ export class CreateUpdateCameraInputDto implements ICreateUpdateCameraInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -31431,6 +31473,7 @@ export class CreateUpdateCameraInputDto implements ICreateUpdateCameraInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -31446,6 +31489,7 @@ export interface ICreateUpdateCameraInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateChartOfAccountInputDto implements ICreateUpdateChartOfAccountInputDto {
@@ -31582,6 +31626,7 @@ export class CreateUpdateColorPatternInputDto implements ICreateUpdateColorPatte
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateColorPatternInputDto) {
         if (data) {
@@ -31597,6 +31642,7 @@ export class CreateUpdateColorPatternInputDto implements ICreateUpdateColorPatte
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -31612,6 +31658,7 @@ export class CreateUpdateColorPatternInputDto implements ICreateUpdateColorPatte
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -31627,6 +31674,7 @@ export interface ICreateUpdateColorPatternInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateCompanyAccountSettingInputDto implements ICreateUpdateCompanyAccountSettingInputDto {
@@ -32016,6 +32064,7 @@ export class CreateUpdateFieldAInputDto implements ICreateUpdateFieldAInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateFieldAInputDto) {
         if (data) {
@@ -32031,6 +32080,7 @@ export class CreateUpdateFieldAInputDto implements ICreateUpdateFieldAInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32046,6 +32096,7 @@ export class CreateUpdateFieldAInputDto implements ICreateUpdateFieldAInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32061,12 +32112,14 @@ export interface ICreateUpdateFieldAInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateFieldBInputDto implements ICreateUpdateFieldBInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateFieldBInputDto) {
         if (data) {
@@ -32082,6 +32135,7 @@ export class CreateUpdateFieldBInputDto implements ICreateUpdateFieldBInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32097,6 +32151,7 @@ export class CreateUpdateFieldBInputDto implements ICreateUpdateFieldBInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32112,12 +32167,14 @@ export interface ICreateUpdateFieldBInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateFieldCInputDto implements ICreateUpdateFieldCInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateFieldCInputDto) {
         if (data) {
@@ -32133,6 +32190,7 @@ export class CreateUpdateFieldCInputDto implements ICreateUpdateFieldCInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32148,6 +32206,7 @@ export class CreateUpdateFieldCInputDto implements ICreateUpdateFieldCInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32163,12 +32222,14 @@ export interface ICreateUpdateFieldCInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateHDDInputDto implements ICreateUpdateHDDInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateHDDInputDto) {
         if (data) {
@@ -32184,6 +32245,7 @@ export class CreateUpdateHDDInputDto implements ICreateUpdateHDDInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32199,6 +32261,7 @@ export class CreateUpdateHDDInputDto implements ICreateUpdateHDDInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32214,12 +32277,14 @@ export interface ICreateUpdateHDDInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateItemBrandInputDto implements ICreateUpdateItemBrandInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateItemBrandInputDto) {
         if (data) {
@@ -32235,6 +32300,7 @@ export class CreateUpdateItemBrandInputDto implements ICreateUpdateItemBrandInpu
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32250,6 +32316,7 @@ export class CreateUpdateItemBrandInputDto implements ICreateUpdateItemBrandInpu
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32265,12 +32332,14 @@ export interface ICreateUpdateItemBrandInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateItemGradeInputDto implements ICreateUpdateItemGradeInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateItemGradeInputDto) {
         if (data) {
@@ -32286,6 +32355,7 @@ export class CreateUpdateItemGradeInputDto implements ICreateUpdateItemGradeInpu
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32301,6 +32371,7 @@ export class CreateUpdateItemGradeInputDto implements ICreateUpdateItemGradeInpu
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32316,12 +32387,14 @@ export interface ICreateUpdateItemGradeInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateItemGroupInputDto implements ICreateUpdateItemGroupInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateItemGroupInputDto) {
         if (data) {
@@ -32337,6 +32410,7 @@ export class CreateUpdateItemGroupInputDto implements ICreateUpdateItemGroupInpu
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32352,6 +32426,7 @@ export class CreateUpdateItemGroupInputDto implements ICreateUpdateItemGroupInpu
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32367,12 +32442,14 @@ export interface ICreateUpdateItemGroupInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateItemModelInputDto implements ICreateUpdateItemModelInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateItemModelInputDto) {
         if (data) {
@@ -32388,6 +32465,7 @@ export class CreateUpdateItemModelInputDto implements ICreateUpdateItemModelInpu
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32403,6 +32481,7 @@ export class CreateUpdateItemModelInputDto implements ICreateUpdateItemModelInpu
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32418,12 +32497,14 @@ export interface ICreateUpdateItemModelInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateItemSeriesInputDto implements ICreateUpdateItemSeriesInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateItemSeriesInputDto) {
         if (data) {
@@ -32439,6 +32520,7 @@ export class CreateUpdateItemSeriesInputDto implements ICreateUpdateItemSeriesIn
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32454,6 +32536,7 @@ export class CreateUpdateItemSeriesInputDto implements ICreateUpdateItemSeriesIn
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32469,12 +32552,14 @@ export interface ICreateUpdateItemSeriesInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateItemSizeInputDto implements ICreateUpdateItemSizeInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateItemSizeInputDto) {
         if (data) {
@@ -32490,6 +32575,7 @@ export class CreateUpdateItemSizeInputDto implements ICreateUpdateItemSizeInputD
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32505,6 +32591,7 @@ export class CreateUpdateItemSizeInputDto implements ICreateUpdateItemSizeInputD
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32520,6 +32607,7 @@ export interface ICreateUpdateItemSizeInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateKhanDistrictInputDto implements ICreateUpdateKhanDistrictInputDto {
@@ -32648,6 +32736,7 @@ export class CreateUpdateRAMInputDto implements ICreateUpdateRAMInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateRAMInputDto) {
         if (data) {
@@ -32663,6 +32752,7 @@ export class CreateUpdateRAMInputDto implements ICreateUpdateRAMInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32678,6 +32768,7 @@ export class CreateUpdateRAMInputDto implements ICreateUpdateRAMInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32693,6 +32784,7 @@ export interface ICreateUpdateRAMInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateSangkatCommuneInputDto implements ICreateUpdateSangkatCommuneInputDto {
@@ -32766,6 +32858,7 @@ export class CreateUpdateScreenInputDto implements ICreateUpdateScreenInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateScreenInputDto) {
         if (data) {
@@ -32781,6 +32874,7 @@ export class CreateUpdateScreenInputDto implements ICreateUpdateScreenInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32796,6 +32890,7 @@ export class CreateUpdateScreenInputDto implements ICreateUpdateScreenInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32811,6 +32906,7 @@ export interface ICreateUpdateScreenInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateTaxInputDto implements ICreateUpdateTaxInputDto {
@@ -32947,6 +33043,7 @@ export class CreateUpdateUnitInputDto implements ICreateUpdateUnitInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateUnitInputDto) {
         if (data) {
@@ -32962,6 +33059,7 @@ export class CreateUpdateUnitInputDto implements ICreateUpdateUnitInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -32977,6 +33075,7 @@ export class CreateUpdateUnitInputDto implements ICreateUpdateUnitInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -32992,12 +33091,14 @@ export interface ICreateUpdateUnitInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateVGAInputDto implements ICreateUpdateVGAInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 
     constructor(data?: ICreateUpdateVGAInputDto) {
         if (data) {
@@ -33013,6 +33114,7 @@ export class CreateUpdateVGAInputDto implements ICreateUpdateVGAInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.code = _data["code"];
         }
     }
 
@@ -33028,6 +33130,7 @@ export class CreateUpdateVGAInputDto implements ICreateUpdateVGAInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["code"] = this.code;
         return data;
     }
 
@@ -33043,6 +33146,7 @@ export interface ICreateUpdateVGAInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    code: string | undefined;
 }
 
 export class CreateUpdateVillageInputDto implements ICreateUpdateVillageInputDto {
@@ -36689,6 +36793,7 @@ export class FieldADetailDto implements IFieldADetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IFieldADetailDto) {
         if (data) {
@@ -36717,6 +36822,7 @@ export class FieldADetailDto implements IFieldADetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -36745,6 +36851,7 @@ export class FieldADetailDto implements IFieldADetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -36773,6 +36880,7 @@ export interface IFieldADetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class FieldAListDto implements IFieldAListDto {
@@ -36788,6 +36896,7 @@ export class FieldAListDto implements IFieldAListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IFieldAListDto) {
         if (data) {
@@ -36812,6 +36921,7 @@ export class FieldAListDto implements IFieldAListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -36836,6 +36946,7 @@ export class FieldAListDto implements IFieldAListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -36860,6 +36971,7 @@ export interface IFieldAListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class FieldAListDtoPagedResultDto implements IFieldAListDtoPagedResultDto {
@@ -36934,6 +37046,7 @@ export class FieldBDetailDto implements IFieldBDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IFieldBDetailDto) {
         if (data) {
@@ -36962,6 +37075,7 @@ export class FieldBDetailDto implements IFieldBDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -36990,6 +37104,7 @@ export class FieldBDetailDto implements IFieldBDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -37018,6 +37133,7 @@ export interface IFieldBDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class FieldBListDto implements IFieldBListDto {
@@ -37033,6 +37149,7 @@ export class FieldBListDto implements IFieldBListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IFieldBListDto) {
         if (data) {
@@ -37057,6 +37174,7 @@ export class FieldBListDto implements IFieldBListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -37081,6 +37199,7 @@ export class FieldBListDto implements IFieldBListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -37105,6 +37224,7 @@ export interface IFieldBListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class FieldBListDtoPagedResultDto implements IFieldBListDtoPagedResultDto {
@@ -37179,6 +37299,7 @@ export class FieldCDetailDto implements IFieldCDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IFieldCDetailDto) {
         if (data) {
@@ -37207,6 +37328,7 @@ export class FieldCDetailDto implements IFieldCDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -37235,6 +37357,7 @@ export class FieldCDetailDto implements IFieldCDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -37263,6 +37386,7 @@ export interface IFieldCDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class FieldCListDto implements IFieldCListDto {
@@ -37278,6 +37402,7 @@ export class FieldCListDto implements IFieldCListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IFieldCListDto) {
         if (data) {
@@ -37302,6 +37427,7 @@ export class FieldCListDto implements IFieldCListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -37326,6 +37452,7 @@ export class FieldCListDto implements IFieldCListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -37350,6 +37477,7 @@ export interface IFieldCListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class FieldCListDtoPagedResultDto implements IFieldCListDtoPagedResultDto {
@@ -37455,6 +37583,7 @@ export class FindBatteryDto implements IFindBatteryDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindBatteryDto) {
         if (data) {
@@ -37471,6 +37600,7 @@ export class FindBatteryDto implements IFindBatteryDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -37487,6 +37617,7 @@ export class FindBatteryDto implements IFindBatteryDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -37503,6 +37634,7 @@ export interface IFindBatteryDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindBatteryDtoPagedResultDto implements IFindBatteryDtoPagedResultDto {
@@ -37687,6 +37819,7 @@ export class FindCPUDto implements IFindCPUDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindCPUDto) {
         if (data) {
@@ -37703,6 +37836,7 @@ export class FindCPUDto implements IFindCPUDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -37719,6 +37853,7 @@ export class FindCPUDto implements IFindCPUDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -37735,6 +37870,7 @@ export interface IFindCPUDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindCPUDtoPagedResultDto implements IFindCPUDtoPagedResultDto {
@@ -37797,6 +37933,7 @@ export class FindCameraDto implements IFindCameraDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindCameraDto) {
         if (data) {
@@ -37813,6 +37950,7 @@ export class FindCameraDto implements IFindCameraDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -37829,6 +37967,7 @@ export class FindCameraDto implements IFindCameraDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -37845,6 +37984,7 @@ export interface IFindCameraDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindCameraDtoPagedResultDto implements IFindCameraDtoPagedResultDto {
@@ -38246,6 +38386,7 @@ export class FindColorPatternDto implements IFindColorPatternDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindColorPatternDto) {
         if (data) {
@@ -38262,6 +38403,7 @@ export class FindColorPatternDto implements IFindColorPatternDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -38278,6 +38420,7 @@ export class FindColorPatternDto implements IFindColorPatternDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -38294,6 +38437,7 @@ export interface IFindColorPatternDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindColorPatternDtoPagedResultDto implements IFindColorPatternDtoPagedResultDto {
@@ -38612,6 +38756,7 @@ export class FindFieldADto implements IFindFieldADto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindFieldADto) {
         if (data) {
@@ -38628,6 +38773,7 @@ export class FindFieldADto implements IFindFieldADto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -38644,6 +38790,7 @@ export class FindFieldADto implements IFindFieldADto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -38660,6 +38807,7 @@ export interface IFindFieldADto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindFieldADtoPagedResultDto implements IFindFieldADtoPagedResultDto {
@@ -38722,6 +38870,7 @@ export class FindFieldBDto implements IFindFieldBDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindFieldBDto) {
         if (data) {
@@ -38738,6 +38887,7 @@ export class FindFieldBDto implements IFindFieldBDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -38754,6 +38904,7 @@ export class FindFieldBDto implements IFindFieldBDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -38770,6 +38921,7 @@ export interface IFindFieldBDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindFieldBDtoPagedResultDto implements IFindFieldBDtoPagedResultDto {
@@ -38832,6 +38984,7 @@ export class FindFieldCDto implements IFindFieldCDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindFieldCDto) {
         if (data) {
@@ -38848,6 +39001,7 @@ export class FindFieldCDto implements IFindFieldCDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -38864,6 +39018,7 @@ export class FindFieldCDto implements IFindFieldCDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -38880,6 +39035,7 @@ export interface IFindFieldCDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindFieldCDtoPagedResultDto implements IFindFieldCDtoPagedResultDto {
@@ -38942,6 +39098,7 @@ export class FindHDDDto implements IFindHDDDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindHDDDto) {
         if (data) {
@@ -38958,6 +39115,7 @@ export class FindHDDDto implements IFindHDDDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -38974,6 +39132,7 @@ export class FindHDDDto implements IFindHDDDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -38990,6 +39149,7 @@ export interface IFindHDDDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindHDDDtoPagedResultDto implements IFindHDDDtoPagedResultDto {
@@ -39052,6 +39212,7 @@ export class FindItemBrandDto implements IFindItemBrandDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindItemBrandDto) {
         if (data) {
@@ -39068,6 +39229,7 @@ export class FindItemBrandDto implements IFindItemBrandDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -39084,6 +39246,7 @@ export class FindItemBrandDto implements IFindItemBrandDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -39100,6 +39263,7 @@ export interface IFindItemBrandDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindItemBrandDtoPagedResultDto implements IFindItemBrandDtoPagedResultDto {
@@ -39162,6 +39326,7 @@ export class FindItemGradeDto implements IFindItemGradeDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindItemGradeDto) {
         if (data) {
@@ -39178,6 +39343,7 @@ export class FindItemGradeDto implements IFindItemGradeDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -39194,6 +39360,7 @@ export class FindItemGradeDto implements IFindItemGradeDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -39210,6 +39377,7 @@ export interface IFindItemGradeDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindItemGradeDtoPagedResultDto implements IFindItemGradeDtoPagedResultDto {
@@ -39272,6 +39440,7 @@ export class FindItemGroupDto implements IFindItemGroupDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindItemGroupDto) {
         if (data) {
@@ -39288,6 +39457,7 @@ export class FindItemGroupDto implements IFindItemGroupDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -39304,6 +39474,7 @@ export class FindItemGroupDto implements IFindItemGroupDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -39320,6 +39491,7 @@ export interface IFindItemGroupDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindItemGroupDtoPagedResultDto implements IFindItemGroupDtoPagedResultDto {
@@ -39382,6 +39554,7 @@ export class FindItemModelDto implements IFindItemModelDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindItemModelDto) {
         if (data) {
@@ -39398,6 +39571,7 @@ export class FindItemModelDto implements IFindItemModelDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -39414,6 +39588,7 @@ export class FindItemModelDto implements IFindItemModelDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -39430,6 +39605,7 @@ export interface IFindItemModelDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindItemModelDtoPagedResultDto implements IFindItemModelDtoPagedResultDto {
@@ -39492,6 +39668,7 @@ export class FindItemSeriesDto implements IFindItemSeriesDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindItemSeriesDto) {
         if (data) {
@@ -39508,6 +39685,7 @@ export class FindItemSeriesDto implements IFindItemSeriesDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -39524,6 +39702,7 @@ export class FindItemSeriesDto implements IFindItemSeriesDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -39540,6 +39719,7 @@ export interface IFindItemSeriesDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindItemSeriesDtoPagedResultDto implements IFindItemSeriesDtoPagedResultDto {
@@ -39602,6 +39782,7 @@ export class FindItemSizeDto implements IFindItemSizeDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindItemSizeDto) {
         if (data) {
@@ -39618,6 +39799,7 @@ export class FindItemSizeDto implements IFindItemSizeDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -39634,6 +39816,7 @@ export class FindItemSizeDto implements IFindItemSizeDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -39650,6 +39833,7 @@ export interface IFindItemSizeDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindItemSizeDtoPagedResultDto implements IFindItemSizeDtoPagedResultDto {
@@ -40003,6 +40187,7 @@ export class FindRAMDto implements IFindRAMDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindRAMDto) {
         if (data) {
@@ -40019,6 +40204,7 @@ export class FindRAMDto implements IFindRAMDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -40035,6 +40221,7 @@ export class FindRAMDto implements IFindRAMDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -40051,6 +40238,7 @@ export interface IFindRAMDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindRAMDtoPagedResultDto implements IFindRAMDtoPagedResultDto {
@@ -40239,6 +40427,7 @@ export class FindScreenDto implements IFindScreenDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindScreenDto) {
         if (data) {
@@ -40255,6 +40444,7 @@ export class FindScreenDto implements IFindScreenDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -40271,6 +40461,7 @@ export class FindScreenDto implements IFindScreenDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -40287,6 +40478,7 @@ export interface IFindScreenDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindScreenDtoPagedResultDto implements IFindScreenDtoPagedResultDto {
@@ -40463,6 +40655,7 @@ export class FindUnitDto implements IFindUnitDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindUnitDto) {
         if (data) {
@@ -40479,6 +40672,7 @@ export class FindUnitDto implements IFindUnitDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -40495,6 +40689,7 @@ export class FindUnitDto implements IFindUnitDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -40511,6 +40706,7 @@ export interface IFindUnitDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindUnitDtoPagedResultDto implements IFindUnitDtoPagedResultDto {
@@ -40644,6 +40840,7 @@ export class FindVGADto implements IFindVGADto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 
     constructor(data?: IFindVGADto) {
         if (data) {
@@ -40660,6 +40857,7 @@ export class FindVGADto implements IFindVGADto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.code = _data["code"];
         }
     }
 
@@ -40676,6 +40874,7 @@ export class FindVGADto implements IFindVGADto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["code"] = this.code;
         return data;
     }
 
@@ -40692,6 +40891,7 @@ export interface IFindVGADto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    code: string | undefined;
 }
 
 export class FindVGADtoPagedResultDto implements IFindVGADtoPagedResultDto {
@@ -41659,6 +41859,7 @@ export class HDDDetailDto implements IHDDDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IHDDDetailDto) {
         if (data) {
@@ -41687,6 +41888,7 @@ export class HDDDetailDto implements IHDDDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -41715,6 +41917,7 @@ export class HDDDetailDto implements IHDDDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -41743,6 +41946,7 @@ export interface IHDDDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class HDDListDto implements IHDDListDto {
@@ -41758,6 +41962,7 @@ export class HDDListDto implements IHDDListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IHDDListDto) {
         if (data) {
@@ -41782,6 +41987,7 @@ export class HDDListDto implements IHDDListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -41806,6 +42012,7 @@ export class HDDListDto implements IHDDListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -41830,6 +42037,7 @@ export interface IHDDListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class HDDListDtoPagedResultDto implements IHDDListDtoPagedResultDto {
@@ -42515,6 +42723,7 @@ export class ItemBrandDetailDto implements IItemBrandDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemBrandDetailDto) {
         if (data) {
@@ -42543,6 +42752,7 @@ export class ItemBrandDetailDto implements IItemBrandDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -42571,6 +42781,7 @@ export class ItemBrandDetailDto implements IItemBrandDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -42599,6 +42810,7 @@ export interface IItemBrandDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemBrandListDto implements IItemBrandListDto {
@@ -42614,6 +42826,7 @@ export class ItemBrandListDto implements IItemBrandListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemBrandListDto) {
         if (data) {
@@ -42638,6 +42851,7 @@ export class ItemBrandListDto implements IItemBrandListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -42662,6 +42876,7 @@ export class ItemBrandListDto implements IItemBrandListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -42686,6 +42901,7 @@ export interface IItemBrandListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemBrandListDtoPagedResultDto implements IItemBrandListDtoPagedResultDto {
@@ -42760,6 +42976,7 @@ export class ItemGradeDetailDto implements IItemGradeDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemGradeDetailDto) {
         if (data) {
@@ -42788,6 +43005,7 @@ export class ItemGradeDetailDto implements IItemGradeDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -42816,6 +43034,7 @@ export class ItemGradeDetailDto implements IItemGradeDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -42844,6 +43063,7 @@ export interface IItemGradeDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemGradeListDto implements IItemGradeListDto {
@@ -42859,6 +43079,7 @@ export class ItemGradeListDto implements IItemGradeListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemGradeListDto) {
         if (data) {
@@ -42883,6 +43104,7 @@ export class ItemGradeListDto implements IItemGradeListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -42907,6 +43129,7 @@ export class ItemGradeListDto implements IItemGradeListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -42931,6 +43154,7 @@ export interface IItemGradeListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemGradeListDtoPagedResultDto implements IItemGradeListDtoPagedResultDto {
@@ -43005,6 +43229,7 @@ export class ItemGroupDetailDto implements IItemGroupDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemGroupDetailDto) {
         if (data) {
@@ -43033,6 +43258,7 @@ export class ItemGroupDetailDto implements IItemGroupDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -43061,6 +43287,7 @@ export class ItemGroupDetailDto implements IItemGroupDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -43089,6 +43316,7 @@ export interface IItemGroupDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemGroupListDto implements IItemGroupListDto {
@@ -43104,6 +43332,7 @@ export class ItemGroupListDto implements IItemGroupListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemGroupListDto) {
         if (data) {
@@ -43128,6 +43357,7 @@ export class ItemGroupListDto implements IItemGroupListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -43152,6 +43382,7 @@ export class ItemGroupListDto implements IItemGroupListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -43176,6 +43407,7 @@ export interface IItemGroupListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemGroupListDtoPagedResultDto implements IItemGroupListDtoPagedResultDto {
@@ -43250,6 +43482,7 @@ export class ItemModelDetailDto implements IItemModelDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemModelDetailDto) {
         if (data) {
@@ -43278,6 +43511,7 @@ export class ItemModelDetailDto implements IItemModelDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -43306,6 +43540,7 @@ export class ItemModelDetailDto implements IItemModelDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -43334,6 +43569,7 @@ export interface IItemModelDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemModelListDto implements IItemModelListDto {
@@ -43349,6 +43585,7 @@ export class ItemModelListDto implements IItemModelListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemModelListDto) {
         if (data) {
@@ -43373,6 +43610,7 @@ export class ItemModelListDto implements IItemModelListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -43397,6 +43635,7 @@ export class ItemModelListDto implements IItemModelListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -43421,6 +43660,7 @@ export interface IItemModelListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemModelListDtoPagedResultDto implements IItemModelListDtoPagedResultDto {
@@ -43495,6 +43735,7 @@ export class ItemSeriesDetailDto implements IItemSeriesDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemSeriesDetailDto) {
         if (data) {
@@ -43523,6 +43764,7 @@ export class ItemSeriesDetailDto implements IItemSeriesDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -43551,6 +43793,7 @@ export class ItemSeriesDetailDto implements IItemSeriesDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -43579,6 +43822,7 @@ export interface IItemSeriesDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemSeriesListDto implements IItemSeriesListDto {
@@ -43594,6 +43838,7 @@ export class ItemSeriesListDto implements IItemSeriesListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemSeriesListDto) {
         if (data) {
@@ -43618,6 +43863,7 @@ export class ItemSeriesListDto implements IItemSeriesListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -43642,6 +43888,7 @@ export class ItemSeriesListDto implements IItemSeriesListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -43666,6 +43913,7 @@ export interface IItemSeriesListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemSeriesListDtoPagedResultDto implements IItemSeriesListDtoPagedResultDto {
@@ -43740,6 +43988,7 @@ export class ItemSizeDetailDto implements IItemSizeDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemSizeDetailDto) {
         if (data) {
@@ -43768,6 +44017,7 @@ export class ItemSizeDetailDto implements IItemSizeDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -43796,6 +44046,7 @@ export class ItemSizeDetailDto implements IItemSizeDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -43824,6 +44075,7 @@ export interface IItemSizeDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemSizeListDto implements IItemSizeListDto {
@@ -43839,6 +44091,7 @@ export class ItemSizeListDto implements IItemSizeListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IItemSizeListDto) {
         if (data) {
@@ -43863,6 +44116,7 @@ export class ItemSizeListDto implements IItemSizeListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -43887,6 +44141,7 @@ export class ItemSizeListDto implements IItemSizeListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -43911,6 +44166,7 @@ export interface IItemSizeListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ItemSizeListDtoPagedResultDto implements IItemSizeListDtoPagedResultDto {
@@ -47783,6 +48039,7 @@ export class RAMDetailDto implements IRAMDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IRAMDetailDto) {
         if (data) {
@@ -47811,6 +48068,7 @@ export class RAMDetailDto implements IRAMDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -47839,6 +48097,7 @@ export class RAMDetailDto implements IRAMDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -47867,6 +48126,7 @@ export interface IRAMDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class RAMListDto implements IRAMListDto {
@@ -47882,6 +48142,7 @@ export class RAMListDto implements IRAMListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IRAMListDto) {
         if (data) {
@@ -47906,6 +48167,7 @@ export class RAMListDto implements IRAMListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -47930,6 +48192,7 @@ export class RAMListDto implements IRAMListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -47954,6 +48217,7 @@ export interface IRAMListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class RAMListDtoPagedResultDto implements IRAMListDtoPagedResultDto {
@@ -48989,6 +49253,7 @@ export class ScreenDetailDto implements IScreenDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IScreenDetailDto) {
         if (data) {
@@ -49017,6 +49282,7 @@ export class ScreenDetailDto implements IScreenDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -49045,6 +49311,7 @@ export class ScreenDetailDto implements IScreenDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -49073,6 +49340,7 @@ export interface IScreenDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ScreenListDto implements IScreenListDto {
@@ -49088,6 +49356,7 @@ export class ScreenListDto implements IScreenListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IScreenListDto) {
         if (data) {
@@ -49112,6 +49381,7 @@ export class ScreenListDto implements IScreenListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -49136,6 +49406,7 @@ export class ScreenListDto implements IScreenListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -49160,6 +49431,7 @@ export interface IScreenListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class ScreenListDtoPagedResultDto implements IScreenListDtoPagedResultDto {
@@ -50677,6 +50949,7 @@ export class UnitDetailDto implements IUnitDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IUnitDetailDto) {
         if (data) {
@@ -50705,6 +50978,7 @@ export class UnitDetailDto implements IUnitDetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -50733,6 +51007,7 @@ export class UnitDetailDto implements IUnitDetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -50761,6 +51036,7 @@ export interface IUnitDetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class UnitListDto implements IUnitListDto {
@@ -50776,6 +51052,7 @@ export class UnitListDto implements IUnitListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IUnitListDto) {
         if (data) {
@@ -50800,6 +51077,7 @@ export class UnitListDto implements IUnitListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -50824,6 +51102,7 @@ export class UnitListDto implements IUnitListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -50848,6 +51127,7 @@ export interface IUnitListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class UnitListDtoPagedResultDto implements IUnitListDtoPagedResultDto {
@@ -51824,6 +52104,7 @@ export class VGADetailDto implements IVGADetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IVGADetailDto) {
         if (data) {
@@ -51852,6 +52133,7 @@ export class VGADetailDto implements IVGADetailDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -51880,6 +52162,7 @@ export class VGADetailDto implements IVGADetailDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -51908,6 +52191,7 @@ export interface IVGADetailDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class VGAListDto implements IVGAListDto {
@@ -51923,6 +52207,7 @@ export class VGAListDto implements IVGAListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 
     constructor(data?: IVGAListDto) {
         if (data) {
@@ -51947,6 +52232,7 @@ export class VGAListDto implements IVGAListDto {
             this.displayName = _data["displayName"];
             this.isDefault = _data["isDefault"];
             this.no = _data["no"];
+            this.code = _data["code"];
         }
     }
 
@@ -51971,6 +52257,7 @@ export class VGAListDto implements IVGAListDto {
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         data["no"] = this.no;
+        data["code"] = this.code;
         return data;
     }
 
@@ -51995,6 +52282,7 @@ export interface IVGAListDto {
     displayName: string | undefined;
     isDefault: boolean;
     no: number;
+    code: string | undefined;
 }
 
 export class VGAListDtoPagedResultDto implements IVGAListDtoPagedResultDto {
