@@ -20,7 +20,7 @@
 
         <div class="flex flex-wrap gap-3 p-3 card-container" *ngIf="totalCount">
             <ng-container *ngFor="let row of listItems; let i=index">
-                <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column"
+                <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column align-items-center"
                      [ngClass]="{'border-primary text-primary':row.checked}"
                      (click)="multiple? row.checked=!row.checked : select(row)">
                     <span class="overflow-hidden text-overflow-clip">{{getObjLocalizeName(row)}}</span>
