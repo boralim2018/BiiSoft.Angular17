@@ -12,18 +12,20 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { of } from 'rxjs';
 import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-create-item-model',
     templateUrl: './create-item-model.component.html',
     providers: [ItemModelServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindChartOfAccountComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindChartOfAccountComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class CreateItemModelComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateItemModelInputDto = new CreateUpdateItemModelInputDto();
-   
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+
     constructor(
         injector: Injector,
         public _itemModelService: ItemModelServiceProxy,

@@ -12,18 +12,20 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { of } from 'rxjs';
 import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-create-cpu',
     templateUrl: './create-cpu.component.html',
     providers: [CPUServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindChartOfAccountComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindChartOfAccountComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class CreateCPUComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateCPUInputDto = new CreateUpdateCPUInputDto();
-   
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+
     constructor(
         injector: Injector,
         public _cpuService: CPUServiceProxy,

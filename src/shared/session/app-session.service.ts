@@ -5,6 +5,7 @@ import {
     ApplicationInfoDto,
     GeneralSettingDto,
     GetCurrentLoginInformationsOutput,
+    ItemFieldSettingDto,
     SessionServiceProxy,
     TenantLoginInfoDto,
     UserLoginInfoDto
@@ -18,6 +19,7 @@ export class AppSessionService {
     private _application: ApplicationInfoDto;
     private _generalSetting: GeneralSettingDto;
     private _advanceSetting: AdvanceSettingDto;
+    private _itemFieldSetting: ItemFieldSettingDto;
 
     constructor(
         private _sessionService: SessionServiceProxy,
@@ -52,6 +54,10 @@ export class AppSessionService {
         return this._advanceSetting;
     }
 
+    get itemFieldSetting(): ItemFieldSettingDto {
+        return this._itemFieldSetting;
+    }
+
     getShownLoginName(): string {
         const userName = this._user.userName;
         if (!this._abpMultiTenancyService.isEnabled) {
@@ -69,7 +75,7 @@ export class AppSessionService {
                 this._tenant = result.tenant;
                 this._generalSetting = result.generalSetting;
                 this._advanceSetting = result.advanceSetting;
-
+                this._itemFieldSetting = result.itemFieldSetting;
                 resolve(true);
             }, (err) => {
                 reject(err);

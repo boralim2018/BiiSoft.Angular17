@@ -12,18 +12,20 @@ import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-edit-hdd',
     templateUrl: './edit-hdd.component.html',
     providers: [HDDServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindChartOfAccountComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindChartOfAccountComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class EditHDDComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateHDDInputDto = new CreateUpdateHDDInputDto();
-  
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+
     constructor(
         injector: Injector,
         public _hddService: HDDServiceProxy,
