@@ -30,6 +30,7 @@ export class ViewBatteryComponent extends Mixin(AppComponentBase, NavBarComponen
 
     loading: boolean;
     model: BatteryDetailDto;
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.delete);

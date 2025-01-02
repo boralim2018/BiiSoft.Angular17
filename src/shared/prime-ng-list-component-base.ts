@@ -142,7 +142,7 @@ export abstract class PrimeNgListComponentBase<TOutputDto> extends AppComponentB
         let newCols = this.columns.filter(f => !cache.columns.find(c => c.name == f.name));
 
         this.columns = cacheCols.concat(newCols);
-        this.selectedColumns = cache.selectedColumns;
+        this.selectedColumns = cache.selectedColumns.filter(f => this.columns.find(c => c.name == f.name));
     }
 
     protected initResponsiveLayout(tbl?: Table) {

@@ -30,6 +30,7 @@ export class ViewItemBrandComponent extends Mixin(AppComponentBase, NavBarCompon
 
     loading: boolean;
     model: ItemBrandDetailDto;
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.brands.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.brands.delete);

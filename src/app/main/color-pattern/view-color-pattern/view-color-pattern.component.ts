@@ -30,6 +30,7 @@ export class ViewColorPatternComponent extends Mixin(AppComponentBase, NavBarCom
 
     loading: boolean;
     model: ColorPatternDetailDto;
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.colorPatterns.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.colorPatterns.delete);

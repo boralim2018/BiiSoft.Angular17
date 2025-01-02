@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { PageColorPatternInputDto, FindColorPatternDto, ColorPatternServiceProxy } from '@shared/service-proxies/service-proxies';
+import { PageFieldCInputDto, FindFieldCDto, FieldCServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
 import { catchError, finalize, of } from 'rxjs';
@@ -19,32 +19,32 @@ import { TableSettingComponent } from '../table-setting/table-setting.component'
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
-    selector: 'find-color-pattern-dialog',
-    templateUrl: './find-color-pattern-dialog.component.html',
+    selector: 'find-field-c-dialog',
+    templateUrl: './find-field-c-dialog.component.html',
     animations: [appModuleAnimation()],
-    providers: [ColorPatternServiceProxy],
+    providers: [FieldCServiceProxy],
     standalone: true,
     imports: [OverlayPanelModule, TableSettingComponent, FindSearchActionComponent, NgIf, NgStyle, BusyDirective, NgFor, NgClass, RecordNotFoundComponent, TableModule, PrimeTemplate, CheckboxModule, FormsModule, PaginatorModule]
 })
-export class FindColorPatternDialogComponent extends Mixin(FindCardListComponentBase<FindColorPatternDto>, AppDynamicDialogBase) implements OnInit {
+export class FindFieldCDialogComponent extends Mixin(FindCardListComponentBase<FindFieldCDto>, AppDynamicDialogBase) implements OnInit {
 
     protected get sortField(): string { return 'Name'; }
 
-    @ViewChild('findColorPatternTable') table: Table;
+    @ViewChild('findFieldCTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
     useCode: boolean = this.appSession.itemFieldSetting.useCode;
 
     constructor(
         injector: Injector,
-        private _colorPatternService: ColorPatternServiceProxy,
+        private _fieldCService: FieldCServiceProxy,
         private _dialogRef: DynamicDialogRef,
         private _dialogConfig: DynamicDialogConfig
     ) {
         super(injector);
 
         this.multiple = this._dialogConfig.data.multiple;
-        this.tableCacheKey = "findColorPatternTableCache";
-        this.containerClass = '.find-color-pattern-dialog';
+        this.tableCacheKey = "findFieldCTableCache";
+        this.containerClass = '.find-field-c-dialog';
     }
 
     ngOnInit() {
@@ -68,12 +68,12 @@ export class FindColorPatternDialogComponent extends Mixin(FindCardListComponent
       
         input.isActive = true;
 
-        let findInput = new PageColorPatternInputDto();
+        let findInput = new PageFieldCInputDto();
         findInput.init(input);
 
         this.isTableLoading = true;
 
-        this._colorPatternService.find(findInput)
+        this._fieldCService.find(findInput)
             .pipe(finalize(() => callBack()))
             .subscribe(result => {
                 this.totalCount = result.totalCount;
@@ -89,15 +89,15 @@ export class FindColorPatternDialogComponent extends Mixin(FindCardListComponent
         return this.listItems ? this.listItems.filter(f => f['checked']) : undefined;
     }
 
-    select(colorPattern?: any) {
-        if (colorPattern) {
-            this._dialogRef.close(colorPattern);
+    select(fieldC?: any) {
+        if (fieldC) {
+            this._dialogRef.close(fieldC);
             return;
         }
 
         let selected = this.selectedModel;
         if (!selected) {
-            this.message.warn(this.l("PleaseSelect_", this.l("ColorPattern")));
+            this.message.warn(this.l("PleaseSelect_", this.l("FieldC")));
             return;
         }
         

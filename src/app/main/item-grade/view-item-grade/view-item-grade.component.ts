@@ -30,6 +30,7 @@ export class ViewItemGradeComponent extends Mixin(AppComponentBase, NavBarCompon
 
     loading: boolean;
     model: ItemGradeDetailDto;
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.grades.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.grades.delete);

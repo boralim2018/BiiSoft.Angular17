@@ -30,6 +30,7 @@ export class ViewCameraComponent extends Mixin(AppComponentBase, NavBarComponent
 
     loading: boolean;
     model: CameraDetailDto;
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.cameras.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.cameras.delete);

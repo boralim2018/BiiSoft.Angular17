@@ -30,6 +30,7 @@ export class ViewUnitComponent extends Mixin(AppComponentBase, NavBarComponentBa
 
     loading: boolean;
     model: UnitDetailDto;
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.units.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.units.delete);

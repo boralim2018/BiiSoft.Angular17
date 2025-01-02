@@ -30,6 +30,7 @@ export class ViewHDDComponent extends Mixin(AppComponentBase, NavBarComponentBas
 
     loading: boolean;
     model: HDDDetailDto;
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.hdds.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.hdds.delete);

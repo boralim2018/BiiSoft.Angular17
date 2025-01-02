@@ -78,6 +78,7 @@ export class CPUComponent extends Mixin(PrimeNgListComponentBase<CPUListDto>, Ex
 
     creators: any;
     modifiers: any;
+    useCode: boolean = this.appSession.itemFieldSetting.useCode;
 
     constructor(
         injector: Injector,
@@ -135,6 +136,8 @@ export class CPUComponent extends Mixin(PrimeNgListComponentBase<CPUListDto>, Ex
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText },
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
         ];
+
+        if (!this.useCode) this.columns = this.columns.filter(f => f.name != "Code");
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }
