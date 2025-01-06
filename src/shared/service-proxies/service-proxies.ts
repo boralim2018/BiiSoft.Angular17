@@ -27223,6 +27223,773 @@ export class VillageServiceProxy {
     }
 }
 
+@Injectable()
+export class WarehouseServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    create(body: CreateUpdateWarehouseInputDto | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<string>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<string>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return OK
+     */
+    delete(id: string | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    disable(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/Disable";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDisable(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDisable(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDisable(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    enable(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/Enable";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEnable(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEnable(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processEnable(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    setAsDefault(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/SetAsDefault";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSetAsDefault(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSetAsDefault(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processSetAsDefault(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getDefaultValue(): Observable<FindWarehouseDto> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/GetDefaultValue";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDefaultValue(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDefaultValue(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FindWarehouseDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FindWarehouseDto>;
+        }));
+    }
+
+    protected processGetDefaultValue(response: HttpResponseBase): Observable<FindWarehouseDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FindWarehouseDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    find(body: FindWarehouseInputDto | undefined): Observable<FindWarehouseDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/Find";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFind(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFind(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FindWarehouseDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FindWarehouseDtoPagedResultDto>;
+        }));
+    }
+
+    protected processFind(response: HttpResponseBase): Observable<FindWarehouseDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FindWarehouseDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return OK
+     */
+    getDetail(id: string | undefined): Observable<WarehouseDetailDto> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/GetDetail?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDetail(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDetail(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WarehouseDetailDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WarehouseDetailDto>;
+        }));
+    }
+
+    protected processGetDetail(response: HttpResponseBase): Observable<WarehouseDetailDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = WarehouseDetailDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param branchFilter_Exclude (optional) 
+     * @param branchFilter_Ids (optional) 
+     * @param isActive (optional) 
+     * @param creators_Exclude (optional) 
+     * @param creators_Ids (optional) 
+     * @param modifiers_Exclude (optional) 
+     * @param modifiers_Ids (optional) 
+     * @param keyword (optional) 
+     * @param sortField (optional) 
+     * @param sortMode (optional) 
+     * @param usePagination (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return OK
+     */
+    getList(branchFilter_Exclude: boolean | undefined, branchFilter_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<WarehouseListDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/GetList?";
+        if (branchFilter_Exclude === null)
+            throw new Error("The parameter 'branchFilter_Exclude' cannot be null.");
+        else if (branchFilter_Exclude !== undefined)
+            url_ += "BranchFilter.Exclude=" + encodeURIComponent("" + branchFilter_Exclude) + "&";
+        if (branchFilter_Ids === null)
+            throw new Error("The parameter 'branchFilter_Ids' cannot be null.");
+        else if (branchFilter_Ids !== undefined)
+            branchFilter_Ids && branchFilter_Ids.forEach(item => { url_ += "BranchFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (isActive === null)
+            throw new Error("The parameter 'isActive' cannot be null.");
+        else if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (creators_Exclude === null)
+            throw new Error("The parameter 'creators_Exclude' cannot be null.");
+        else if (creators_Exclude !== undefined)
+            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
+        if (creators_Ids === null)
+            throw new Error("The parameter 'creators_Ids' cannot be null.");
+        else if (creators_Ids !== undefined)
+            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifiers_Exclude === null)
+            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
+        else if (modifiers_Exclude !== undefined)
+            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
+        if (modifiers_Ids === null)
+            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
+        else if (modifiers_Ids !== undefined)
+            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
+            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (sortField === null)
+            throw new Error("The parameter 'sortField' cannot be null.");
+        else if (sortField !== undefined)
+            url_ += "SortField=" + encodeURIComponent("" + sortField) + "&";
+        if (sortMode === null)
+            throw new Error("The parameter 'sortMode' cannot be null.");
+        else if (sortMode !== undefined)
+            url_ += "SortMode=" + encodeURIComponent("" + sortMode) + "&";
+        if (usePagination === null)
+            throw new Error("The parameter 'usePagination' cannot be null.");
+        else if (usePagination !== undefined)
+            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetList(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WarehouseListDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WarehouseListDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetList(response: HttpResponseBase): Observable<WarehouseListDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = WarehouseListDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    exportExcel(body: ExportExcelWarehouseInputDto | undefined): Observable<ExportFileOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/ExportExcel";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportExcel(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ExportFileOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ExportFileOutput>;
+        }));
+    }
+
+    protected processExportExcel(response: HttpResponseBase): Observable<ExportFileOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExportFileOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    exportExcelTemplate(): Observable<ExportFileOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/ExportExcelTemplate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportExcelTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportExcelTemplate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ExportFileOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ExportFileOutput>;
+        }));
+    }
+
+    protected processExportExcelTemplate(response: HttpResponseBase): Observable<ExportFileOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExportFileOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    importExcel(body: FileTokenInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/ImportExcel";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processImportExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processImportExcel(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processImportExcel(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    update(body: CreateUpdateWarehouseInputDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Warehouse/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
 export enum AccountType {
     _10 = 10,
     _11 = 11,
@@ -28226,6 +28993,7 @@ export class BranchDetailDto implements IBranchDetailDto {
     billingAddress: ContactAddressDto;
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
+    sharing: Sharing;
 
     constructor(data?: IBranchDetailDto) {
         if (data) {
@@ -28262,6 +29030,7 @@ export class BranchDetailDto implements IBranchDetailDto {
             this.billingAddress = _data["billingAddress"] ? ContactAddressDto.fromJS(_data["billingAddress"]) : <any>undefined;
             this.sameAsBillingAddress = _data["sameAsBillingAddress"];
             this.shippingAddress = _data["shippingAddress"] ? ContactAddressDto.fromJS(_data["shippingAddress"]) : <any>undefined;
+            this.sharing = _data["sharing"];
         }
     }
 
@@ -28298,6 +29067,7 @@ export class BranchDetailDto implements IBranchDetailDto {
         data["billingAddress"] = this.billingAddress ? this.billingAddress.toJSON() : <any>undefined;
         data["sameAsBillingAddress"] = this.sameAsBillingAddress;
         data["shippingAddress"] = this.shippingAddress ? this.shippingAddress.toJSON() : <any>undefined;
+        data["sharing"] = this.sharing;
         return data;
     }
 
@@ -28334,6 +29104,7 @@ export interface IBranchDetailDto {
     billingAddress: ContactAddressDto;
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
+    sharing: Sharing;
 }
 
 export class BranchListDto implements IBranchListDto {
@@ -28496,6 +29267,11 @@ export class BranchListDtoPagedResultDto implements IBranchListDtoPagedResultDto
 export interface IBranchListDtoPagedResultDto {
     items: BranchListDto[] | undefined;
     totalCount: number;
+}
+
+export enum BranchSharing {
+    _0 = 0,
+    _1 = 1,
 }
 
 export class CPUDetailDto implements ICPUDetailDto {
@@ -31311,6 +32087,7 @@ export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
     billingAddress: ContactAddressDto;
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
+    sharing: Sharing;
 
     constructor(data?: ICreateUpdateBranchInputDto) {
         if (data) {
@@ -31334,6 +32111,7 @@ export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
             this.billingAddress = _data["billingAddress"] ? ContactAddressDto.fromJS(_data["billingAddress"]) : <any>undefined;
             this.sameAsBillingAddress = _data["sameAsBillingAddress"];
             this.shippingAddress = _data["shippingAddress"] ? ContactAddressDto.fromJS(_data["shippingAddress"]) : <any>undefined;
+            this.sharing = _data["sharing"];
         }
     }
 
@@ -31357,6 +32135,7 @@ export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
         data["billingAddress"] = this.billingAddress ? this.billingAddress.toJSON() : <any>undefined;
         data["sameAsBillingAddress"] = this.sameAsBillingAddress;
         data["shippingAddress"] = this.shippingAddress ? this.shippingAddress.toJSON() : <any>undefined;
+        data["sharing"] = this.sharing;
         return data;
     }
 
@@ -31380,6 +32159,7 @@ export interface ICreateUpdateBranchInputDto {
     billingAddress: ContactAddressDto;
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
+    sharing: Sharing;
 }
 
 export class CreateUpdateCPUInputDto implements ICreateUpdateCPUInputDto {
@@ -33218,6 +33998,77 @@ export interface ICreateUpdateVillageInputDto {
     cityProvinceId: string | undefined;
     khanDistrictId: string | undefined;
     sangkatCommuneId: string | undefined;
+}
+
+export class CreateUpdateWarehouseInputDto implements ICreateUpdateWarehouseInputDto {
+    id: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
+    code: string | undefined;
+    sharing: BranchSharing;
+    warehouseBranches: WarehouseBranchDto[] | undefined;
+
+    constructor(data?: ICreateUpdateWarehouseInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.code = _data["code"];
+            this.sharing = _data["sharing"];
+            if (Array.isArray(_data["warehouseBranches"])) {
+                this.warehouseBranches = [] as any;
+                for (let item of _data["warehouseBranches"])
+                    this.warehouseBranches.push(WarehouseBranchDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateUpdateWarehouseInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateUpdateWarehouseInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["code"] = this.code;
+        data["sharing"] = this.sharing;
+        if (Array.isArray(this.warehouseBranches)) {
+            data["warehouseBranches"] = [];
+            for (let item of this.warehouseBranches)
+                data["warehouseBranches"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateUpdateWarehouseInputDto {
+        const json = this.toJSON();
+        let result = new CreateUpdateWarehouseInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateUpdateWarehouseInputDto {
+    id: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
+    code: string | undefined;
+    sharing: BranchSharing;
+    warehouseBranches: WarehouseBranchDto[] | undefined;
 }
 
 export class CreateUserDto implements ICreateUserDto {
@@ -36502,6 +37353,97 @@ export interface IExportExcelVillageInputDto {
     cityProvinces: GuidNullableFilterInputDto;
     khanDistricts: GuidNullableFilterInputDto;
     sangkatCommunes: GuidNullableFilterInputDto;
+    columns: ColumnOutput[] | undefined;
+}
+
+export class ExportExcelWarehouseInputDto implements IExportExcelWarehouseInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    branchFilter: GuidFilterInputDto;
+    columns: ColumnOutput[] | undefined;
+
+    constructor(data?: IExportExcelWarehouseInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.branchFilter = _data["branchFilter"] ? GuidFilterInputDto.fromJS(_data["branchFilter"]) : <any>undefined;
+            if (Array.isArray(_data["columns"])) {
+                this.columns = [] as any;
+                for (let item of _data["columns"])
+                    this.columns.push(ColumnOutput.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ExportExcelWarehouseInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExportExcelWarehouseInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["branchFilter"] = this.branchFilter ? this.branchFilter.toJSON() : <any>undefined;
+        if (Array.isArray(this.columns)) {
+            data["columns"] = [];
+            for (let item of this.columns)
+                data["columns"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): ExportExcelWarehouseInputDto {
+        const json = this.toJSON();
+        let result = new ExportExcelWarehouseInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IExportExcelWarehouseInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    branchFilter: GuidFilterInputDto;
     columns: ColumnOutput[] | undefined;
 }
 
@@ -41079,6 +42021,199 @@ export interface IFindVillageDtoPagedResultDto {
     totalCount: number;
 }
 
+export class FindWarehouseDto implements IFindWarehouseDto {
+    id: string;
+    name: string | undefined;
+    displayName: string | undefined;
+    isActive: boolean;
+    code: string | undefined;
+
+    constructor(data?: IFindWarehouseDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.isActive = _data["isActive"];
+            this.code = _data["code"];
+        }
+    }
+
+    static fromJS(data: any): FindWarehouseDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindWarehouseDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["isActive"] = this.isActive;
+        data["code"] = this.code;
+        return data;
+    }
+
+    clone(): FindWarehouseDto {
+        const json = this.toJSON();
+        let result = new FindWarehouseDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindWarehouseDto {
+    id: string;
+    name: string | undefined;
+    displayName: string | undefined;
+    isActive: boolean;
+    code: string | undefined;
+}
+
+export class FindWarehouseDtoPagedResultDto implements IFindWarehouseDtoPagedResultDto {
+    items: FindWarehouseDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IFindWarehouseDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(FindWarehouseDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): FindWarehouseDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindWarehouseDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): FindWarehouseDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new FindWarehouseDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindWarehouseDtoPagedResultDto {
+    items: FindWarehouseDto[] | undefined;
+    totalCount: number;
+}
+
+export class FindWarehouseInputDto implements IFindWarehouseInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    branchFilter: GuidFilterInputDto;
+
+    constructor(data?: IFindWarehouseInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.branchFilter = _data["branchFilter"] ? GuidFilterInputDto.fromJS(_data["branchFilter"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): FindWarehouseInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindWarehouseInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["branchFilter"] = this.branchFilter ? this.branchFilter.toJSON() : <any>undefined;
+        return data;
+    }
+
+    clone(): FindWarehouseInputDto {
+        const json = this.toJSON();
+        let result = new FindWarehouseInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindWarehouseInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    branchFilter: GuidFilterInputDto;
+}
+
 export class FlatFeatureDto implements IFlatFeatureDto {
     parentName: string | undefined;
     name: string | undefined;
@@ -41789,6 +42924,61 @@ export class GuidEntityDto implements IGuidEntityDto {
 
 export interface IGuidEntityDto {
     id: string;
+}
+
+export class GuidFilterInputDto implements IGuidFilterInputDto {
+    exclude: boolean;
+    ids: string[] | undefined;
+
+    constructor(data?: IGuidFilterInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.exclude = _data["exclude"];
+            if (Array.isArray(_data["ids"])) {
+                this.ids = [] as any;
+                for (let item of _data["ids"])
+                    this.ids.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): GuidFilterInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GuidFilterInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["exclude"] = this.exclude;
+        if (Array.isArray(this.ids)) {
+            data["ids"] = [];
+            for (let item of this.ids)
+                data["ids"].push(item);
+        }
+        return data;
+    }
+
+    clone(): GuidFilterInputDto {
+        const json = this.toJSON();
+        let result = new GuidFilterInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGuidFilterInputDto {
+    exclude: boolean;
+    ids: string[] | undefined;
 }
 
 export class GuidNullableFilterInputDto implements IGuidNullableFilterInputDto {
@@ -49823,6 +51013,11 @@ export enum SettingScopes {
     _7 = 7,
 }
 
+export enum Sharing {
+    _0 = 0,
+    _1 = 1,
+}
+
 export enum SortMode {
     _1 = 1,
     __1 = -1,
@@ -52820,6 +54015,334 @@ export class VillageListDtoPagedResultDto implements IVillageListDtoPagedResultD
 
 export interface IVillageListDtoPagedResultDto {
     items: VillageListDto[] | undefined;
+    totalCount: number;
+}
+
+export class WarehouseBranchDto implements IWarehouseBranchDto {
+    id: string;
+    warehouseId: string;
+    branchId: string;
+    branchName: string | undefined;
+
+    constructor(data?: IWarehouseBranchDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.warehouseId = _data["warehouseId"];
+            this.branchId = _data["branchId"];
+            this.branchName = _data["branchName"];
+        }
+    }
+
+    static fromJS(data: any): WarehouseBranchDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new WarehouseBranchDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["warehouseId"] = this.warehouseId;
+        data["branchId"] = this.branchId;
+        data["branchName"] = this.branchName;
+        return data;
+    }
+
+    clone(): WarehouseBranchDto {
+        const json = this.toJSON();
+        let result = new WarehouseBranchDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IWarehouseBranchDto {
+    id: string;
+    warehouseId: string;
+    branchId: string;
+    branchName: string | undefined;
+}
+
+export class WarehouseDetailDto implements IWarehouseDetailDto {
+    id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    isDefault: boolean;
+    no: number;
+    code: string | undefined;
+    sharing: BranchSharing;
+    warehouseBranches: WarehouseBranchDto[] | undefined;
+
+    constructor(data?: IWarehouseDetailDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creatorUserName = _data["creatorUserName"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModifierUserName = _data["lastModifierUserName"];
+            this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.isDefault = _data["isDefault"];
+            this.no = _data["no"];
+            this.code = _data["code"];
+            this.sharing = _data["sharing"];
+            if (Array.isArray(_data["warehouseBranches"])) {
+                this.warehouseBranches = [] as any;
+                for (let item of _data["warehouseBranches"])
+                    this.warehouseBranches.push(WarehouseBranchDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): WarehouseDetailDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new WarehouseDetailDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creatorUserName"] = this.creatorUserName;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModifierUserName"] = this.lastModifierUserName;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["isDefault"] = this.isDefault;
+        data["no"] = this.no;
+        data["code"] = this.code;
+        data["sharing"] = this.sharing;
+        if (Array.isArray(this.warehouseBranches)) {
+            data["warehouseBranches"] = [];
+            for (let item of this.warehouseBranches)
+                data["warehouseBranches"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): WarehouseDetailDto {
+        const json = this.toJSON();
+        let result = new WarehouseDetailDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IWarehouseDetailDto {
+    id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    isDefault: boolean;
+    no: number;
+    code: string | undefined;
+    sharing: BranchSharing;
+    warehouseBranches: WarehouseBranchDto[] | undefined;
+}
+
+export class WarehouseListDto implements IWarehouseListDto {
+    id: string;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    isDefault: boolean;
+    no: number;
+    code: string | undefined;
+    sharing: BranchSharing;
+
+    constructor(data?: IWarehouseListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creatorUserName = _data["creatorUserName"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModifierUserName = _data["lastModifierUserName"];
+            this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.isDefault = _data["isDefault"];
+            this.no = _data["no"];
+            this.code = _data["code"];
+            this.sharing = _data["sharing"];
+        }
+    }
+
+    static fromJS(data: any): WarehouseListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new WarehouseListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creatorUserName"] = this.creatorUserName;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModifierUserName"] = this.lastModifierUserName;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["isDefault"] = this.isDefault;
+        data["no"] = this.no;
+        data["code"] = this.code;
+        data["sharing"] = this.sharing;
+        return data;
+    }
+
+    clone(): WarehouseListDto {
+        const json = this.toJSON();
+        let result = new WarehouseListDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IWarehouseListDto {
+    id: string;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    isDefault: boolean;
+    no: number;
+    code: string | undefined;
+    sharing: BranchSharing;
+}
+
+export class WarehouseListDtoPagedResultDto implements IWarehouseListDtoPagedResultDto {
+    items: WarehouseListDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IWarehouseListDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(WarehouseListDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): WarehouseListDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new WarehouseListDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): WarehouseListDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new WarehouseListDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IWarehouseListDtoPagedResultDto {
+    items: WarehouseListDto[] | undefined;
     totalCount: number;
 }
 
