@@ -24,7 +24,7 @@ import { NgIf } from '@angular/common';
 export class EditItemGradeComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateItemGradeInputDto = new CreateUpdateItemGradeInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

@@ -24,7 +24,7 @@ import { NgIf } from '@angular/common';
 export class CreateItemSizeComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateItemSizeInputDto = new CreateUpdateItemSizeInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

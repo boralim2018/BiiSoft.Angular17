@@ -30,7 +30,7 @@ export class ViewCPUComponent extends Mixin(AppComponentBase, NavBarComponentBas
 
     loading: boolean;
     model: CPUDetailDto;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.cpus.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.cpus.delete);

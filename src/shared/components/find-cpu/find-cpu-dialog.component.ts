@@ -32,7 +32,7 @@ export class FindCPUDialogComponent extends Mixin(FindCardListComponentBase<Find
 
     @ViewChild('findCPUTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

@@ -30,7 +30,7 @@ export class ViewRAMComponent extends Mixin(AppComponentBase, NavBarComponentBas
 
     loading: boolean;
     model: RAMDetailDto;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.rams.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.rams.delete);

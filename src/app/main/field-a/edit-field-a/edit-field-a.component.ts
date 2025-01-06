@@ -24,7 +24,7 @@ import { NgIf } from '@angular/common';
 export class EditFieldAComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateFieldAInputDto = new CreateUpdateFieldAInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

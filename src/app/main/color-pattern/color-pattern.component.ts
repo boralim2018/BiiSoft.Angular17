@@ -78,7 +78,7 @@ export class ColorPatternComponent extends Mixin(PrimeNgListComponentBase<ColorP
 
     creators: any;
     modifiers: any;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,
@@ -95,7 +95,7 @@ export class ColorPatternComponent extends Mixin(PrimeNgListComponentBase<ColorP
         this.initNavBar();
 
         this.initActionMenuItems();
-        this.inlineActionVisible = this.canEdit || this.canDelete || this.canEnable || this.canDisable;
+        this.inlineActionVisible = this.canEdit || this.canDelete || this.canEnable || this.canDisable || this.canSetAsDefault;
 
         this.isActiveModels = [
             { label: this.l('All'), value: '' },

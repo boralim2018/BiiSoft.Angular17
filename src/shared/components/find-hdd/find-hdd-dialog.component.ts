@@ -32,7 +32,7 @@ export class FindHDDDialogComponent extends Mixin(FindCardListComponentBase<Find
 
     @ViewChild('findHDDTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

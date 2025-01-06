@@ -32,7 +32,7 @@ export class FindCameraDialogComponent extends Mixin(FindCardListComponentBase<F
 
     @ViewChild('findCameraTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

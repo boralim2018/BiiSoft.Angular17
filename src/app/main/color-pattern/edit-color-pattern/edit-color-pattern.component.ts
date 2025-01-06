@@ -24,7 +24,7 @@ import { NgIf } from '@angular/common';
 export class EditColorPatternComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateColorPatternInputDto = new CreateUpdateColorPatternInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

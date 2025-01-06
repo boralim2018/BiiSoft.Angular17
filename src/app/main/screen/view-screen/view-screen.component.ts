@@ -30,7 +30,7 @@ export class ViewScreenComponent extends Mixin(AppComponentBase, NavBarComponent
 
     loading: boolean;
     model: ScreenDetailDto;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.screens.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.screens.delete);

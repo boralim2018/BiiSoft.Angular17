@@ -30,7 +30,7 @@ export class ViewItemSizeComponent extends Mixin(AppComponentBase, NavBarCompone
 
     loading: boolean;
     model: ItemSizeDetailDto;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.sizes.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.sizes.delete);

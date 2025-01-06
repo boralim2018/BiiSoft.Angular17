@@ -94,7 +94,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
         this.initNavBar();
 
         this.initActionMenuItems();
-        this.inlineActionVisible = this.canEdit || this.canDelete || this.canEnable || this.canDisable;
+        this.inlineActionVisible = this.canEdit || this.canDelete || this.canEnable || this.canDisable || this.canSetAsDefault;
 
         this.isActiveModels = [
             { label: this.l('All'), value: '' },

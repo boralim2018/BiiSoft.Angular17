@@ -32,7 +32,7 @@ export class FindScreenDialogComponent extends Mixin(FindCardListComponentBase<F
 
     @ViewChild('findScreenTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

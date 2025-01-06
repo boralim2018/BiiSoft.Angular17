@@ -24,7 +24,7 @@ import { NgIf } from '@angular/common';
 export class EditCPUComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateCPUInputDto = new CreateUpdateCPUInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

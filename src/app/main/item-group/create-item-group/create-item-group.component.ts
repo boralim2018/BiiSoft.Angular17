@@ -24,7 +24,7 @@ import { NgIf } from '@angular/common';
 export class CreateItemGroupComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateItemGroupInputDto = new CreateUpdateItemGroupInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

@@ -30,7 +30,7 @@ export class ViewFieldCComponent extends Mixin(AppComponentBase, NavBarComponent
 
     loading: boolean;
     model: FieldCDetailDto;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.fieldCs.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.fieldCs.delete);

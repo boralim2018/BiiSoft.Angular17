@@ -59,6 +59,7 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
 
     ngOnInit() {
         if (this.isShippingAddress) this.title = this.l('ShippingAddress');
+        if (!this.model) this.model = {};
     }
 
     onCountryChange(event) {
@@ -113,7 +114,7 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
 
     validate(control: AbstractControl): { [key: string]: any } | null {
         const isValid = this.sameAsBillingAddress || (
-            this.model.countryId &&
+            this.model && this.model.countryId &&
             (this.addressLevel < 1 || this.model.cityProvinceId) && 
             (this.addressLevel < 2 || this.model.khanDistrictId) && 
             (this.addressLevel < 3 || this.model.sangkatCommuneId) && 

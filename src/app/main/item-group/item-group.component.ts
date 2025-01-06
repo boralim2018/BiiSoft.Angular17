@@ -78,7 +78,7 @@ export class ItemGroupComponent extends Mixin(PrimeNgListComponentBase<ItemGroup
 
     creators: any;
     modifiers: any;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,
@@ -95,7 +95,7 @@ export class ItemGroupComponent extends Mixin(PrimeNgListComponentBase<ItemGroup
         this.initNavBar();
 
         this.initActionMenuItems();
-        this.inlineActionVisible = this.canEdit || this.canDelete || this.canEnable || this.canDisable;
+        this.inlineActionVisible = this.canEdit || this.canDelete || this.canEnable || this.canDisable || this.canSetAsDefault;
 
         this.isActiveModels = [
             { label: this.l('All'), value: '' },

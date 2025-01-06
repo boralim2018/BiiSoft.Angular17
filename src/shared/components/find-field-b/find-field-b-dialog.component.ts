@@ -32,7 +32,7 @@ export class FindFieldBDialogComponent extends Mixin(FindCardListComponentBase<F
 
     @ViewChild('findFieldBTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

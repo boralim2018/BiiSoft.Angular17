@@ -24,7 +24,7 @@ import { NgIf } from '@angular/common';
 export class EditRAMComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateRAMInputDto = new CreateUpdateRAMInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,

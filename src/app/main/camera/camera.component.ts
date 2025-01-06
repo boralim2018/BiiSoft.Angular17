@@ -78,7 +78,7 @@ export class CameraComponent extends Mixin(PrimeNgListComponentBase<CameraListDt
 
     creators: any;
     modifiers: any;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     constructor(
         injector: Injector,
@@ -95,7 +95,7 @@ export class CameraComponent extends Mixin(PrimeNgListComponentBase<CameraListDt
         this.initNavBar();
 
         this.initActionMenuItems();
-        this.inlineActionVisible = this.canEdit || this.canDelete || this.canEnable || this.canDisable;
+        this.inlineActionVisible = this.canEdit || this.canDelete || this.canEnable || this.canDisable || this.canSetAsDefault;
 
         this.isActiveModels = [
             { label: this.l('All'), value: '' },

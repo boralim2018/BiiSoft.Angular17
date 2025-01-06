@@ -30,7 +30,7 @@ export class ViewVGAComponent extends Mixin(AppComponentBase, NavBarComponentBas
 
     loading: boolean;
     model: VGADetailDto;
-    useCode: boolean = this.appSession.itemFieldSetting.useCode;
+    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.vgas.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.vgas.delete);

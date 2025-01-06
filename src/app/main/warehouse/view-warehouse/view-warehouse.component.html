@@ -1,0 +1,69 @@
+<div [@routerTransition]>
+    <div class="card" [busy]="loading">
+
+        <div class="flex justify-content-between flex-wrap gap-3 pb-3">
+            <div class="flex align-items-center"
+                 navBar
+                 [hideSetting]="true"
+                 [navs]="navBarItems">
+            </div>
+            <div class="flex align-items-center gap-2">
+                <button pButton pRipple class="p-button-rounded p-button-outlined" [title]="l('Back')" icon="pi pi-arrow-left" type="button" (click)="goBack()"></button>
+                <button pButton pRipple class="p-button-rounded p-button-success p-button-outlined" [title]="l('SetAsDefault')" icon="fa-solid fa-check-double" (click)="setAsDefault()" type="button" *ngIf="canSetAsDefault && !model.isDefault"></button>
+                <button pButton pRipple class="p-button-rounded p-button-success" [title]="l('Enable')" icon="pi pi-check" (click)="enable()" type="button" *ngIf="canEnable && !model.isActive"></button>
+                <button pButton pRipple class="p-button-rounded p-button-warning" [title]="l('Disable')" icon="pi pi-ban" (click)="disable()" type="button" *ngIf="canDisable && model.isActive"></button>
+                <button pButton pRipple class="p-button-rounded p-button-danger" [title]="l('Delete')" icon="pi pi-trash" (click)="delete()" type="button" *ngIf="canDelete"></button>
+                <button pButton pRipple class="p-button-rounded" icon="pi pi-pencil" [title]="l('Edit')" (click)="showEdit()" type="button" *ngIf="canEdit"></button>
+            </div>
+        </div>
+
+        <p-divider></p-divider>
+
+        <div class="grid">
+
+            <div class="col-4 lg:col-2 py-2"> {{l('No.')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.no}} </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('Name')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.name}} </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('DisplayName')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.displayName}} </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('Code')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.code}} </div>
+            
+            <div class="col-4 lg:col-2 py-2"> {{l('CreatedBy')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.creatorUserName}} </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('CreationTime')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.creationTime.toDate() | date:'yyyy-MM-dd HH:mm:ss'}} </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('LastModifiedBy')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.lastModifierUserName}} </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('LastModificationTime')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.lastModificationTime?.toDate() | date:'yyyy-MM-dd HH:mm:ss'}} </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('Id')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.id}} </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('Status')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: <p-tag styleClass="px-3" [severity]="model.isActive ? 'success' : 'warning'" [value]="model.isActive ? l('Active') : l('Inactive')"></p-tag>   </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('Default')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: <p-tag styleClass="px-3" [severity]="model.isDefault ? 'success' : 'warning' " [value]="model.isDefault ? l('True'): l('False')"></p-tag> </div>
+
+        </div>
+
+        <p-divider></p-divider>
+
+        <div class="flex justify-content-center">
+            <button type="button" pButton pRipple icon="pi pi-angle-double-left" class="p-button-rounded p-button-text" (click)="goTo(model.firstId)" [disabled]="!model.firstId"></button>
+            <button type="button" pButton pRipple icon="pi pi-angle-left" class="p-button-rounded p-button-text" (click)="goTo(model.previousId)" [disabled]="!model.previousId"></button>
+            <button type="button" pButton pRipple icon="pi pi-angle-right" class="p-button-rounded p-button-text" (click)="goTo(model.nextId)" [disabled]="!model.nextId"></button>
+            <button type="button" pButton pRipple icon="pi pi-angle-double-right" class="p-button-rounded p-button-text" (click)="goTo(model.lastId)" [disabled]="!model.lastId"></button>
+        </div>
+
+    </div>
+</div>
