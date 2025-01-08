@@ -36,6 +36,7 @@ import { TableSettingComponent } from '../../../shared/components/table-setting/
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { SearchFooterComponent } from '../../../shared/components/search-action/search-footer.component';
 import { FindUserComponent } from '../../../shared/components/find-user/find-user.component';
+import { FindBranchComponent } from '../../../shared/components/find-branch/find-branch.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
@@ -51,7 +52,7 @@ import { of } from 'rxjs';
     animations: [appModuleAnimation()],
     providers: [DialogService, WarehouseServiceProxy],
     standalone: true,
-    imports: [MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule, DropdownModule, FindUserComponent, SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule, PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe]
+    imports: [MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule, DropdownModule, FindBranchComponent, FindUserComponent, SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule, PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe]
 })
 export class WarehouseComponent extends Mixin(PrimeNgListComponentBase<WarehouseListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
 
@@ -78,6 +79,7 @@ export class WarehouseComponent extends Mixin(PrimeNgListComponentBase<Warehouse
 
     creators: any;
     modifiers: any;
+    branches: any;
 
     constructor(
         injector: Injector,
@@ -146,6 +148,7 @@ export class WarehouseComponent extends Mixin(PrimeNgListComponentBase<Warehouse
         //Add more data in cache
         cache.creators = this.creators;
         cache.modifiers = this.modifiers;
+        cache.branches = this.branches;
 
         return cache;
     }
@@ -156,6 +159,7 @@ export class WarehouseComponent extends Mixin(PrimeNgListComponentBase<Warehouse
         //Init more data
         this.creators = cache.creators;
         this.modifiers = cache.modifiers;
+        this.branches = cache.branches;
     }
 
     protected getList(input: any, callBack: Function) {
@@ -400,11 +404,8 @@ export class WarehouseComponent extends Mixin(PrimeNgListComponentBase<Warehouse
         this.filterInput.modifiers.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
-    onCountriesChange(event) {
-        this.filterInput.countries.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    onBranchesChange(event) {
+        this.filterInput.branchFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
-    onCityProvincesChange(event) {
-        this.filterInput.cityProvinces.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
-    }
 }

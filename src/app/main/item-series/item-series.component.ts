@@ -402,11 +402,4 @@ export class ItemSeriesComponent extends Mixin(PrimeNgListComponentBase<ItemSeri
         this.filterInput.modifiers.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
-    onCountriesChange(event) {
-        this.filterInput.countries.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
-    }
-
-    onCityProvincesChange(event) {
-        this.filterInput.cityProvinces.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
-    }
 }

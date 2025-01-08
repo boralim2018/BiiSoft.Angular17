@@ -16,14 +16,14 @@
                         <p-dropdown [options]="isActiveModels" [(ngModel)]="filterInput.isActive" styleClass="w-full"></p-dropdown>
                     </div>
                     <div class="field"
-                         findBranch
-                         name="branch"
-                         [label]="l('Branch')"
+                         findWarehouse
+                         name="warehouse"
+                         [label]="l('Warehouse')"
                          [multiple]="true"
                          [showExclude]="true"
-                         [(exclude)]="filterInput.branchFilter.exclude"
-                         [(ngModel)]="branches"
-                         (ngModelChange)="onBranchesChange($event)">
+                         [(exclude)]="filterInput.warehouseFilter.exclude"
+                         [(ngModel)]="warehouses"
+                         (ngModelChange)="onWarehousesChange($event)">
                     </div>
                     <div class="field"
                          findUser
@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <p-table #warehouseTable
+        <p-table #zoneTable
                  [columns]="selectedColumns"
                  [value]="listItems"
                  [paginator]="true"

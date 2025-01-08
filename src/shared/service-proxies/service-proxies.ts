@@ -36094,6 +36094,7 @@ export class CreateUpdateZoneInputDto implements ICreateUpdateZoneInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    warehouseId: string;
 
     constructor(data?: ICreateUpdateZoneInputDto) {
         if (data) {
@@ -36109,6 +36110,7 @@ export class CreateUpdateZoneInputDto implements ICreateUpdateZoneInputDto {
             this.id = _data["id"];
             this.name = _data["name"];
             this.displayName = _data["displayName"];
+            this.warehouseId = _data["warehouseId"];
         }
     }
 
@@ -36124,6 +36126,7 @@ export class CreateUpdateZoneInputDto implements ICreateUpdateZoneInputDto {
         data["id"] = this.id;
         data["name"] = this.name;
         data["displayName"] = this.displayName;
+        data["warehouseId"] = this.warehouseId;
         return data;
     }
 
@@ -36139,6 +36142,7 @@ export interface ICreateUpdateZoneInputDto {
     id: string | undefined;
     name: string | undefined;
     displayName: string | undefined;
+    warehouseId: string;
 }
 
 export class CreateUserDto implements ICreateUserDto {

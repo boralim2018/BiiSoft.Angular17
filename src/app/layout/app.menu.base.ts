@@ -85,6 +85,7 @@ export abstract class AppMenuBase extends AppMenuPermission {
                     ]
                 },
                 { label: this.l('Warehouse'), icon: 'fa-solid fa-warehouse', routerLink: ['/app/main/warehouses'], permissionName: AppPermissions.pages.setup.warehouses.page },
+                { label: this.l('Zone'), icon: 'fa-solid fa-warehouse', routerLink: ['/app/main/zones'], permissionName: AppPermissions.pages.setup.warehouses.zones.page },
                 {
                     label: this.l('Location'),
                     icon: 'fa-solid fa-earth-asia',

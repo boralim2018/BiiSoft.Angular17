@@ -1,0 +1,109 @@
+<div [@routerTransition]>
+    <p-overlayPanel #op styleClass="p-0">
+        <table-setting [columns]="columns"
+                       [(selectedColumns)]="selectedColumns"
+                       (clearSetting)="deleteTableCache()"
+                       [(gridLine)]="showGridLine"
+                       (gridLineChange)="showGridLineChange($event)"></table-setting>
+    </p-overlayPanel>
+    <div class="p-dialog-title surface-card flex justify-content-between gap-3 p-3"
+         findSearchAction
+         [(searchModel)]="filterInput.keyword"
+         (search)="refresh($event)"
+         [(cardView)]="cardView"
+         (showSetting)="op.show($event)"
+         [hideAction]="!multiple"
+         (select)="select()"
+         [selectDisabled]="!selectedModel || !selectedModel.length">
+    </div>
+    <div [ngStyle]="{'minHeight':minHeight + 'px'}" [busy]="isTableLoading" *ngIf="cardView">
+
+        <div class="flex flex-wrap gap-3 p-3 card-container" *ngIf="totalCount">
+            <ng-container *ngFor="let row of listItems; let i=index">
+                <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column align-items-center"
+                     [ngClass]="{'border-primary text-primary':row.checked}"
+                     (click)="multiple? row.checked=!row.checked : select(row)">
+                    <span class="overflow-hidden text-overflow-clip">{{getObjLocalizeName(row)}}</span>
+                </div>
+            </ng-container>
+        </div>
+
+        <div recordNotFound [minHeight]="minHeight" *ngIf="!totalCount"></div>
+    </div>
+
+    <p-table #findBranchTable
+             [columns]="selectedColumns"
+             [value]="listItems"
+             [paginator]="false"
+             [rowsPerPageOptions]="rowsPerPageOptions"
+             [loading]="isTableLoading"
+             [rowHover]="true"
+             [rows]="filterInput.maxResultCount"
+             [first]="filterInput.skipCount"
+             [sortField]="filterInput.sortField"
+             [sortOrder]="filterInput.sortMode"
+             [totalRecords]="totalCount"
+             [showCurrentPageReport]="true"
+             [currentPageReportTemplate]="currentPageReportTemplate"
+             responsiveLayout="stack"
+             [filterDelay]="0"
+             [lazy]="true"
+             [lazyLoadOnInit]="false"
+             (onLazyLoad)="loadData($event)"
+             [hidden]="cardView">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th [ngStyle]="{'width': responsiveWidth(actionColumnWidth), 'max-width': responsiveWidth(actionColumnWidth)}" *ngIf="multiple"></th>
+                <ng-container *ngFor="let col of columns">
+                    <th *ngIf="col.sort"
+                        pReorderableColumn
+                        pResizableColumn
+                        [pSortableColumn]="col.name"
+                        [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}"
+                        [id]="col.name">{{l(col.header)}} <p-sortIcon [field]="col.name"></p-sortIcon></th>
+                    <th *ngIf="!col.sort"
+                        pReorderableColumn
+                        pResizableColumn
+                        [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}"
+                        [id]="col.name">{{l(col.header)}}</th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row let-index="rowIndex" let-columns="columns">
+            <tr>
+                <td [ngStyle]="{'width': responsiveWidth(actionColumnWidth), 'max-width': responsiveWidth(actionColumnWidth)}" *ngIf="multiple">
+                    <span class="p-column-title">{{l('Select')}}</span>
+                    <p-checkbox name="check" [binary]="true" [(ngModel)]="row.checked" [inputId]="row.id"></p-checkbox>
+                </td>
+                <ng-container *ngFor="let col of columns">
+                    <td [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}">
+                        <span class="p-column-title">{{l(col.header)}}</span>
+                        <ng-container *ngIf="multiple">{{getObjValue(row,col.name)}}</ng-container>
+                        <span *ngIf="!multiple"
+                              class="cursor-pointer hover:text-primary hover:underline"
+                              (click)="select(row)">{{getObjValue(row,col.name)}}</span>
+                    </td>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="columns.length + 1" class="empty-message">
+                    <div recordNotFound [minHeight]="minHeight-70"></div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div class="p-dialog-footer p-0">
+        <p-paginator (onPageChange)="loadData($event)"
+                     [first]="filterInput.skipCount"
+                     [rows]="filterInput.maxResultCount"
+                     [totalRecords]="totalCount"
+                     [rowsPerPageOptions]="rowsPerPageOptions"
+                     [showCurrentPageReport]="true"
+                     [currentPageReportTemplate]="currentPageReportTemplate"
+                     dropdownAppendTo="body"
+                     #pg></p-paginator>
+    </div>
+</div>

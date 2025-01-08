@@ -2,9 +2,9 @@ import { Component, Injector, ViewChild, OnInit } from '@angular/core';
 import { catchError, finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
-    BatteryServiceProxy,
-    BatteryListDto,
-    ExportExcelBatteryInputDto,
+    ZoneServiceProxy,
+    ZoneListDto,
+    ExportExcelZoneInputDto,
     ColumnOutput,
     ExportFileOutput,
     FileTokenInput,
@@ -12,8 +12,8 @@ import {
     GuidEntityDto,
     GuidNullableFilterInputDto,
 } from '@shared/service-proxies/service-proxies';
-import { CreateBatteryComponent } from './create-battery/create-battery.component';
-import { EditBatteryComponent } from './edit-battery/edit-battery.component';
+import { CreateZoneComponent } from './create-zone/create-zone.component';
+import { EditZoneComponent } from './edit-zone/edit-zone.component';
 import { PrimeNgListComponentBase } from '@shared/prime-ng-list-component-base';
 import { Menu, MenuModule } from 'primeng/menu';
 import { AppPermissions } from '@shared/AppPermissions';
@@ -36,6 +36,7 @@ import { TableSettingComponent } from '../../../shared/components/table-setting/
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { SearchFooterComponent } from '../../../shared/components/search-action/search-footer.component';
 import { FindUserComponent } from '../../../shared/components/find-user/find-user.component';
+import { FindWarehouseComponent } from '../../../shared/components/find-warehouse/find-warehouse.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
@@ -46,27 +47,27 @@ import { SidebarModule } from 'primeng/sidebar';
 import { of } from 'rxjs';
 
 @Component({
-    selector: 'app-battery',
-    templateUrl: './battery.component.html',
+    selector: 'app-zone',
+    templateUrl: './zone.component.html',
     animations: [appModuleAnimation()],
-    providers: [DialogService, BatteryServiceProxy],
+    providers: [DialogService, ZoneServiceProxy],
     standalone: true,
-    imports: [MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule, DropdownModule, FindUserComponent, SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule, PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe]
+    imports: [MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule, DropdownModule, FindWarehouseComponent, FindUserComponent, SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule, PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe]
 })
-export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
+export class ZoneComponent extends Mixin(PrimeNgListComponentBase<ZoneListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
 
     protected get sortField(): string { return 'Name'; }
 
-    @ViewChild('batteryTable') table: Table;
-    canCreate: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.create);
-    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.edit);
-    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.delete);
-    canView: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.view);
-    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.enable);
-    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.disable);
-    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.setAsDefault);
-    canImportExcel: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.importExcel);
-    canExportExcel: boolean = this.isGranted(AppPermissions.pages.setup.items.batteries.exportExcel);
+    @ViewChild('zoneTable') table: Table;
+    canCreate: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.zones.create);
+    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.zones.edit);
+    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.zones.delete);
+    canView: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.zones.view);
+    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.zones.enable);
+    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.zones.disable);
+    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.zones.setAsDefault);
+    canImportExcel: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.zones.importExcel);
+    canExportExcel: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.zones.exportExcel);
 
     actionMenuItems: any[];
 
@@ -78,11 +79,11 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
 
     creators: any;
     modifiers: any;
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    warehouses: any;
 
     constructor(
         injector: Injector,
-        private _batteryService: BatteryServiceProxy,
+        private _zoneService: ZoneServiceProxy,
         private _dialogService: DialogService,
         private _router: Router
     ) {
@@ -90,7 +91,7 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
     }
 
     ngOnInit() {
-        this.tableCacheKey = "BatteryTableCacheKey";
+        this.tableCacheKey = "ZoneTableCacheKey";
         super.ngOnInit();
         this.initNavBar();
 
@@ -105,13 +106,13 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
     }
 
     initNavBar() {
-        this.title = this.l("Batteries");
+        this.title = this.l("Zones");
         this.setTitle();
     }
 
     private initActionMenuItems() {
         this.actionMenuItems = [];
-        if (this.canCreate) this.actionMenuItems.push({ label: this.l('Create'), icon: 'pi pi-plus-circle', command: () => { this.createBattery(); } });
+        if (this.canCreate) this.actionMenuItems.push({ label: this.l('Create'), icon: 'pi pi-plus-circle', command: () => { this.createZone(); } });
         if (this.canImportExcel) this.actionMenuItems.push({ label: this.l('ImportExcel'), icon: 'fa-solid fa-cloud-arrow-up', command: () => { this.importExcel(); } });
         if (this.canExportExcel) this.actionMenuItems.push({ label: this.l('ExportExcel'), icon: 'fa-solid fa-file-excel', command: () => { this.exportExcel(); } });
     }
@@ -121,6 +122,7 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         this.filterInput.isActive = undefined;
         this.filterInput.creators = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.modifiers = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.warehouseFilter = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
 
         this.creators = undefined;
         this.modifiers = undefined;
@@ -130,14 +132,12 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         this.columns = [
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
-            { name: 'Code', header: 'Code', width: '25rem', sort: true },
+            { name: 'WarehouseName', header: 'Warehouse', width: '25rem', sort: true },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'IsDefault', header: 'Default', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText },
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
         ];
-
-        if (!this.useCode) this.columns = this.columns.filter(f => f.name != "Code");
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }
@@ -148,6 +148,7 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         //Add more data in cache
         cache.creators = this.creators;
         cache.modifiers = this.modifiers;
+        cache.warehouses = this.warehouses;
 
         return cache;
     }
@@ -158,12 +159,13 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         //Init more data
         this.creators = cache.creators;
         this.modifiers = cache.modifiers;
+        this.warehouses = cache.warehouses;
     }
 
     protected getList(input: any, callBack: Function) {
 
-        this._batteryService
-            .getList(input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
+        this._zoneService
+            .getList(input.warehouseFilter.exclude, input.warehouseFilter.ids, input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
@@ -173,12 +175,12 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
             });
     }
 
-    delete(battery: BatteryListDto): void {
+    delete(zone: ZoneListDto): void {
 
         this._dialogService.open(ConfirmDeleteComponent, {
             data: {
-                deleteObj: battery.name,
-                deleteLabel: this.l('Battery')
+                deleteObj: zone.name,
+                deleteLabel: this.l('Zone')
             },
             header: this.l('ConfirmDelete'),
             styleClass: this.responsiveDialogClass
@@ -186,7 +188,7 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         .onClose.subscribe(result => {
             if (result) {
                 this.isTableLoading = true;
-                this._batteryService.delete(battery.id)
+                this._zoneService.delete(zone.id)
                     .pipe(finalize(() => this.isTableLoading = false))
                     .subscribe(() => {
                         this.notify.success(this.l('SuccessfullyDeleted'));
@@ -197,7 +199,7 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
 
     }
 
-    createBattery(): void {
+    createZone(): void {
         this.showCreateOrEditUserDialog();
     }
 
@@ -218,7 +220,7 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
                 });
 
                 instance.loading = true;
-                this._batteryService.importExcel(fileInput)
+                this._zoneService.importExcel(fileInput)
                     .pipe(finalize(() => instance.loading = false))
                     .subscribe(() => {
                         this.notify.info(this.l('SavedSuccessfully'));
@@ -230,7 +232,7 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
 
         instance.download.subscribe(result => {
             instance.loading = true;
-            this._batteryService.exportExcelTemplate()
+            this._zoneService.exportExcelTemplate()
                 .pipe(finalize(() => instance.loading = false))
                 .subscribe(result => {
                     this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, result.fileName);
@@ -240,7 +242,7 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
 
     exportExcel() {
 
-        let input = new ExportExcelBatteryInputDto();
+        let input = new ExportExcelZoneInputDto();
         input.init(this.filterInput);
 
         input.columns = this.selectedColumns.filter(f => f.name != 'Flag').map((c, index) => {
@@ -261,30 +263,30 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
             return col;
         });
 
-        this._batteryService
+        this._zoneService
             .exportExcel(input)
             .pipe(finalize(() => this.isTableLoading = false))
             .subscribe((result: ExportFileOutput) => {
-                this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `Battery_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
+                this.downloadExcel(AppConsts.remoteServiceBaseUrl + result.fileUrl, `Zone_${moment().format("YYYY-MM-DD-HH-mm-ss")}.xlsx`);
             });
     }
 
-    editBattery(battery: BatteryListDto): void {
-        this.showCreateOrEditUserDialog(battery.id);
+    editZone(zone: ZoneListDto): void {
+        this.showCreateOrEditUserDialog(zone.id);
     }
 
     showCreateOrEditUserDialog(id?: string): void {
         let createOrEditUserDialog: DynamicDialogRef;
         if (!id) {
-            createOrEditUserDialog = this._dialogService.open(CreateBatteryComponent, {
+            createOrEditUserDialog = this._dialogService.open(CreateZoneComponent, {
                 data: {},
-                header: this.l('Create') + ' ' + this.l('Battery'),
+                header: this.l('Create') + ' ' + this.l('Zone'),
                 styleClass: this.responsiveDialogClass
             });
         } else {
-            createOrEditUserDialog = this._dialogService.open(EditBatteryComponent, {
+            createOrEditUserDialog = this._dialogService.open(EditZoneComponent, {
                 data: { id: id },
-                header: this.l('Edit') + ' ' + this.l('Battery'),
+                header: this.l('Edit') + ' ' + this.l('Zone'),
                 styleClass: this.responsiveDialogClass
             });
         }
@@ -294,16 +296,16 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         });
     }
 
-    enable(battery: BatteryListDto) {
+    enable(zone: ZoneListDto) {
         this.message.confirm(
-            this.l('EnableWarningMessage', battery.name), this.l('Enable'), (result) => {
+            this.l('EnableWarningMessage', zone.name), this.l('Enable'), (result) => {
                 if (result) {
 
                     let input = new GuidEntityDto();
-                    input.id = battery.id;
+                    input.id = zone.id;
 
                     this.isTableLoading = true;
-                    this._batteryService.enable(input)
+                    this._zoneService.enable(input)
                         .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
@@ -314,16 +316,16 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         );
     }
 
-    disable(battery: BatteryListDto) {
+    disable(zone: ZoneListDto) {
         this.message.confirm(
-            this.l('DisableWarningMessage', battery.name), this.l('Disable'), (result) => {
+            this.l('DisableWarningMessage', zone.name), this.l('Disable'), (result) => {
                 if (result) {
 
                     let input = new GuidEntityDto();
-                    input.id = battery.id;
+                    input.id = zone.id;
 
                     this.isTableLoading = true;
-                    this._batteryService.disable(input)
+                    this._zoneService.disable(input)
                         .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
@@ -335,16 +337,36 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
     }
 
 
-    setAsDefault(battery: BatteryListDto) {
+    setAsDefault(zone: ZoneListDto) {
         this.message.confirm(
-            this.l('DefaultWarningMessage', battery.name), this.l('SetAsDefault'), (result) => {
+            this.l('DefaultWarningMessage', zone.name), this.l('SetAsDefault'), (result) => {
                 if (result) {
 
                     let input = new GuidEntityDto();
-                    input.id = battery.id;
+                    input.id = zone.id;
 
                     this.isTableLoading = true;
-                    this._batteryService.setAsDefault(input)
+                    this._zoneService.setAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
+    
+    unsetAsDefault(zone: ZoneListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', zone.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = zone.id;
+
+                    this.isTableLoading = true;
+                    this._zoneService.unsetAsDefault(input)
                         .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
@@ -355,41 +377,21 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         );
     }
 
-    unsetAsDefault(battery: BatteryListDto) {
-        this.message.confirm(
-            this.l('DefaultWarningMessage', battery.name), this.l('UnsetAsDefault'), (result) => {
-                if (result) {
-
-                    let input = new GuidEntityDto();
-                    input.id = battery.id;
-
-                    this.isTableLoading = true;
-                    this._batteryService.unsetAsDefault(input)
-                        .pipe(finalize(() => this.isTableLoading = false))
-                        .subscribe(() => {
-                            this.notify.success(this.l('SavedSuccessfully'));
-                            this.refresh();
-                        });
-                }
-            }
-        );
+    viewDetail(zone: ZoneListDto) {
+        this._router.navigate(['/app/main/zones/view-detail', zone.id]);
     }
 
-    viewDetail(battery: BatteryListDto) {
-        this._router.navigate(['/app/main/batteries/view-detail', battery.id]);
-    }
-
-    showInlineActions(battery: BatteryListDto, event: Event) {
+    showInlineActions(zone: ZoneListDto, event: Event) {
         if (!this.inlineActionMenu) return;
 
         this.inlineActionMenu.model = [];
-        if (this.canView) this.inlineActionMenu.model.push({ label: this.l('View'), icon: 'pi pi-fw pi-eye', command: () => { this.viewDetail(battery); } });
-        if (this.canEdit) this.inlineActionMenu.model.push({ label: this.l('Edit'), icon: 'pi pi-fw pi-pencil', command: () => { this.editBattery(battery); } });
-        if (this.canDelete) this.inlineActionMenu.model.push({ label: this.l('Delete'), icon: 'pi pi-trash', command: () => { this.delete(battery); } });
-        if (this.canEnable && !battery.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(battery); } });
-        if (this.canDisable && battery.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(battery); } });
-        if (this.canSetAsDefault && !battery.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(battery); } });
-        if (this.canSetAsDefault && battery.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(battery); } });
+        if (this.canView) this.inlineActionMenu.model.push({ label: this.l('View'), icon: 'pi pi-fw pi-eye', command: () => { this.viewDetail(zone); } });
+        if (this.canEdit) this.inlineActionMenu.model.push({ label: this.l('Edit'), icon: 'pi pi-fw pi-pencil', command: () => { this.editZone(zone); } });
+        if (this.canDelete) this.inlineActionMenu.model.push({ label: this.l('Delete'), icon: 'pi pi-trash', command: () => { this.delete(zone); } });
+        if (this.canEnable && !zone.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(zone); } });
+        if (this.canDisable && zone.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(zone); } });
+        if (this.canSetAsDefault && !zone.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(zone); } });
+        if (this.canSetAsDefault && zone.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(zone); } });
 
         this.inlineActionMenu.show(event);
     }
@@ -400,6 +402,10 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
 
     onModifiersChange(event) {
         this.filterInput.modifiers.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onWarehousesChange(event) {
+        this.filterInput.warehouseFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
 }

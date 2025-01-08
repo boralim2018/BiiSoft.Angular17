@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
-import { CreateUpdateWarehouseInputDto, WarehouseServiceProxy } from '@shared/service-proxies/service-proxies';
+import { CreateUpdateZoneInputDto, ZoneServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
@@ -10,22 +10,24 @@ import { ButtonDirective } from 'primeng/button';
 import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
+import { FindWarehouseComponent } from '../../../../shared/components/find-warehouse/find-warehouse.component';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-create-warehouse',
-    templateUrl: './create-warehouse.component.html',
-    providers: [WarehouseServiceProxy],
+    selector: 'app-create-zone',
+    templateUrl: './create-zone.component.html',
+    providers: [ZoneServiceProxy],
     standalone: true,
-    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindWarehouseComponent, FindWarehouseComponent, ButtonDirective, Ripple, LocalizePipe]
 })
-export class CreateWarehouseComponent extends DynamicDialogBase implements OnInit {
+export class CreateZoneComponent extends DynamicDialogBase implements OnInit {
     saving = false;
-    model: CreateUpdateWarehouseInputDto = new CreateUpdateWarehouseInputDto();
-  
+    model: CreateUpdateZoneInputDto = new CreateUpdateZoneInputDto();
+    warehouse: any;
+
     constructor(
         injector: Injector,
-        public _warehouseService: WarehouseServiceProxy,
+        public _zoneService: ZoneServiceProxy,
         private _dialogRef: DynamicDialogRef
     ) {
         super(injector);
@@ -37,13 +39,13 @@ export class CreateWarehouseComponent extends DynamicDialogBase implements OnIni
     }
 
     initModel() {
-        this.model = new CreateUpdateWarehouseInputDto();
+        this.model = new CreateUpdateZoneInputDto();
     };
 
     save(form?: NgForm): void {
         this.saving = true;
 
-        this._warehouseService.create(this.model)
+        this._zoneService.create(this.model)
             .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
                 this.notify.success(this.l('SavedSuccessfully'));

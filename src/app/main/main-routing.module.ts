@@ -30,6 +30,7 @@ import { AppPermissions } from '../../shared/AppPermissions';
             { path: 'field-b', loadChildren: () => import('./field-b/field-b-routing.module').then(m => m.FieldBRoutingModule), data: { permission: AppPermissions.pages.setup.items.fieldBs.page } },
             { path: 'field-c', loadChildren: () => import('./field-c/field-c-routing.module').then(m => m.FieldCRoutingModule), data: { permission: AppPermissions.pages.setup.items.fieldCs.page } },
             { path: 'warehouses', loadChildren: () => import('./warehouse/warehouse-routing.module').then(m => m.WarehouseRoutingModule), data: { permission: AppPermissions.pages.setup.warehouses.page } },
+            { path: 'zones', loadChildren: () => import('./zone/zone-routing.module').then(m => m.ZoneRoutingModule), data: { permission: AppPermissions.pages.setup.warehouses.zones.page } },
         ])
     ],
     exports: [
