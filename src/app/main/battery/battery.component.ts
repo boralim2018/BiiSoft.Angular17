@@ -355,8 +355,28 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         );
     }
 
+    unsetAsDefault(battery: BatteryListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', battery.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = battery.id;
+
+                    this.isTableLoading = true;
+                    this._batteryService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
+
     viewDetail(battery: BatteryListDto) {
-        this._router.navigate(['/app/main/batterys/view-detail', battery.id]);
+        this._router.navigate(['/app/main/batteries/view-detail', battery.id]);
     }
 
     showInlineActions(battery: BatteryListDto, event: Event) {
@@ -369,6 +389,7 @@ export class BatteryComponent extends Mixin(PrimeNgListComponentBase<BatteryList
         if (this.canEnable && !battery.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(battery); } });
         if (this.canDisable && battery.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(battery); } });
         if (this.canSetAsDefault && !battery.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(battery); } });
+        if (this.canSetAsDefault && battery.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(battery); } });
 
         this.inlineActionMenu.show(event);
     }

@@ -333,6 +333,26 @@ export class BranchComponent extends Mixin(PrimeNgListComponentBase<BranchListDt
             }
         );
     }
+    
+    unsetAsDefault(branch: BranchListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', branch.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = branch.id;
+
+                    this.isTableLoading = true;
+                    this._branchService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(branch: BranchListDto) {
         this._router.navigate(['/app/main/branches/view-detail', branch.id]);
@@ -348,6 +368,7 @@ export class BranchComponent extends Mixin(PrimeNgListComponentBase<BranchListDt
         if (this.canEnable && !branch.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(branch); } });
         if (this.canDisable && branch.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(branch); } });
         if (this.canSetAsDefault && !branch.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(branch); } });
+        if (this.canSetAsDefault && branch.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(branch); } });
 
         this.inlineActionMenu.show(event);
     }

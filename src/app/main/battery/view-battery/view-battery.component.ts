@@ -58,7 +58,7 @@ export class ViewBatteryComponent extends Mixin(AppComponentBase, NavBarComponen
 
     initNavBar() {
         this.title = this.l("View_", this.l("Battery"));
-        this.navBarItems.push({ label: this.l("Batteries"), routerLink: "/app/main/batterys" });
+        this.navBarItems.push({ label: this.l("Batteries"), routerLink: "/app/main/batteries" });
         this.setTitle();
     }
 
@@ -73,11 +73,11 @@ export class ViewBatteryComponent extends Mixin(AppComponentBase, NavBarComponen
     }
 
     goTo(id: string | undefined) {
-        if (id) this.router.navigate(['/app/main/batterys/view-detail', id]);
+        if (id) this.router.navigate(['/app/main/batteries/view-detail', id]);
     }
 
     goBack() {
-        this.router.navigate(['/app/main/batterys']);
+        this.router.navigate(['/app/main/batteries']);
     }
 
     delete(): void {
@@ -153,6 +153,26 @@ export class ViewBatteryComponent extends Mixin(AppComponentBase, NavBarComponen
 
                     this.loading = true;
                     this._batteryService.setAsDefault(input)
+                        .pipe(finalize(() => this.loading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.getDetail();
+                        });
+                }
+            }
+        );
+    }
+    
+    unsetAsDefault() {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', this.model.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = this.model.id;
+
+                    this.loading = true;
+                    this._batteryService.unsetAsDefault(input)
                         .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));

@@ -9,7 +9,8 @@
             </div>
             <div class="flex align-items-center gap-2">
                 <button pButton pRipple class="p-button-rounded p-button-outlined" [title]="l('Back')" icon="pi pi-arrow-left" type="button" (click)="goBack()"></button>
-                <button pButton pRipple class="p-button-rounded p-button-success p-button-outlined" [title]="l('SetAsDefault')" icon="fa-solid fa-check-double" (click)="setAsDefault()" type="button" *ngIf="canSetAsDefault && !model.isDefault"></button>
+                <button pButton pRipple class="p-button-rounded p-button-help" [title]="l('SetAsDefault')" icon="fa-solid fa-check-double" (click)="setAsDefault()" type="button" *ngIf="canSetAsDefault && !model.isDefault"></button>
+                <button pButton pRipple class="p-button-rounded p-button-help p-button-outlined" [title]="l('UnsetAsDefault')" icon="fa-solid fa-check-double" (click)="unsetAsDefault()" type="button" *ngIf="canSetAsDefault && model.isDefault"></button>
                 <button pButton pRipple class="p-button-rounded p-button-success" [title]="l('Enable')" icon="pi pi-check" (click)="enable()" type="button" *ngIf="canEnable && !model.isActive"></button>
                 <button pButton pRipple class="p-button-rounded p-button-warning" [title]="l('Disable')" icon="pi pi-ban" (click)="disable()" type="button" *ngIf="canDisable && model.isActive"></button>
                 <button pButton pRipple class="p-button-rounded p-button-danger" [title]="l('Delete')" icon="pi pi-trash" (click)="delete()" type="button" *ngIf="canDelete"></button>

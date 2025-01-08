@@ -354,6 +354,26 @@ export class ScreenComponent extends Mixin(PrimeNgListComponentBase<ScreenListDt
             }
         );
     }
+    
+    unsetAsDefault(screen: ScreenListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', screen.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = screen.id;
+
+                    this.isTableLoading = true;
+                    this._screenService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(screen: ScreenListDto) {
         this._router.navigate(['/app/main/screens/view-detail', screen.id]);
@@ -369,6 +389,7 @@ export class ScreenComponent extends Mixin(PrimeNgListComponentBase<ScreenListDt
         if (this.canEnable && !screen.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(screen); } });
         if (this.canDisable && screen.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(screen); } });
         if (this.canSetAsDefault && !screen.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(screen); } });
+        if (this.canSetAsDefault && screen.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(screen); } });
 
         this.inlineActionMenu.show(event);
     }

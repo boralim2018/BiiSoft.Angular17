@@ -354,6 +354,26 @@ export class CameraComponent extends Mixin(PrimeNgListComponentBase<CameraListDt
             }
         );
     }
+    
+    unsetAsDefault(camera: CameraListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', camera.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = camera.id;
+
+                    this.isTableLoading = true;
+                    this._cameraService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(camera: CameraListDto) {
         this._router.navigate(['/app/main/cameras/view-detail', camera.id]);
@@ -369,6 +389,7 @@ export class CameraComponent extends Mixin(PrimeNgListComponentBase<CameraListDt
         if (this.canEnable && !camera.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(camera); } });
         if (this.canDisable && camera.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(camera); } });
         if (this.canSetAsDefault && !camera.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(camera); } });
+        if (this.canSetAsDefault && camera.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(camera); } });
 
         this.inlineActionMenu.show(event);
     }

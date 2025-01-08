@@ -354,6 +354,26 @@ export class ColorPatternComponent extends Mixin(PrimeNgListComponentBase<ColorP
             }
         );
     }
+    
+    unsetAsDefault(colorPattern: ColorPatternListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', colorPattern.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = colorPattern.id;
+
+                    this.isTableLoading = true;
+                    this._colorPatternService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(colorPattern: ColorPatternListDto) {
         this._router.navigate(['/app/main/color-patterns/view-detail', colorPattern.id]);
@@ -369,6 +389,7 @@ export class ColorPatternComponent extends Mixin(PrimeNgListComponentBase<ColorP
         if (this.canEnable && !colorPattern.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(colorPattern); } });
         if (this.canDisable && colorPattern.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(colorPattern); } });
         if (this.canSetAsDefault && !colorPattern.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(colorPattern); } });
+        if (this.canSetAsDefault && colorPattern.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(colorPattern); } });
 
         this.inlineActionMenu.show(event);
     }

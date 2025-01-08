@@ -356,6 +356,26 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
             }
         );
     }
+    
+    unsetAsDefault(currency: CurrencyListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', currency.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new Int64EntityDto();
+                    input.id = currency.id;
+
+                    this.isTableLoading = true;
+                    this._currencyService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(currency: CurrencyListDto) {
         this._router.navigate(['/app/admin/currencies/view-detail', currency.id]);
@@ -371,6 +391,7 @@ export class CurrencyComponent extends Mixin(PrimeNgListComponentBase<CurrencyLi
         if (this.canEnable && !currency.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(currency); } });
         if (this.canDisable && currency.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(currency); } });
         if (this.canSetAsDefault && !currency.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(currency); } });
+        if (this.canSetAsDefault && currency.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(currency); } });
 
         this.inlineActionMenu.show(event);
     }

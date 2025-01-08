@@ -354,6 +354,26 @@ export class RAMComponent extends Mixin(PrimeNgListComponentBase<RAMListDto>, Ex
             }
         );
     }
+    
+    unsetAsDefault(ram: RAMListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', ram.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = ram.id;
+
+                    this.isTableLoading = true;
+                    this._ramService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(ram: RAMListDto) {
         this._router.navigate(['/app/main/ram/view-detail', ram.id]);
@@ -369,6 +389,7 @@ export class RAMComponent extends Mixin(PrimeNgListComponentBase<RAMListDto>, Ex
         if (this.canEnable && !ram.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(ram); } });
         if (this.canDisable && ram.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(ram); } });
         if (this.canSetAsDefault && !ram.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(ram); } });
+        if (this.canSetAsDefault && ram.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(ram); } });
 
         this.inlineActionMenu.show(event);
     }

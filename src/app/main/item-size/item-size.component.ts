@@ -354,6 +354,26 @@ export class ItemSizeComponent extends Mixin(PrimeNgListComponentBase<ItemSizeLi
             }
         );
     }
+    
+    unsetAsDefault(itemSize: ItemSizeListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', itemSize.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = itemSize.id;
+
+                    this.isTableLoading = true;
+                    this._itemSizeService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(itemSize: ItemSizeListDto) {
         this._router.navigate(['/app/main/item-sizes/view-detail', itemSize.id]);
@@ -369,6 +389,7 @@ export class ItemSizeComponent extends Mixin(PrimeNgListComponentBase<ItemSizeLi
         if (this.canEnable && !itemSize.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(itemSize); } });
         if (this.canDisable && itemSize.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(itemSize); } });
         if (this.canSetAsDefault && !itemSize.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(itemSize); } });
+        if (this.canSetAsDefault && itemSize.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(itemSize); } });
 
         this.inlineActionMenu.show(event);
     }

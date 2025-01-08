@@ -162,6 +162,26 @@ export class ViewFieldBComponent extends Mixin(AppComponentBase, NavBarComponent
             }
         );
     }
+    
+    unsetAsDefault() {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', this.model.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = this.model.id;
+
+                    this.loading = true;
+                    this._fieldBService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.loading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.getDetail();
+                        });
+                }
+            }
+        );
+    }
 
     showEdit() {
 

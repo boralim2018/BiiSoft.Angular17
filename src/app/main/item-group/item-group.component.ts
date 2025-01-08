@@ -354,6 +354,26 @@ export class ItemGroupComponent extends Mixin(PrimeNgListComponentBase<ItemGroup
             }
         );
     }
+    
+    unsetAsDefault(itemGroup: ItemGroupListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', itemGroup.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = itemGroup.id;
+
+                    this.isTableLoading = true;
+                    this._itemGroupService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(itemGroup: ItemGroupListDto) {
         this._router.navigate(['/app/main/item-groups/view-detail', itemGroup.id]);
@@ -369,6 +389,7 @@ export class ItemGroupComponent extends Mixin(PrimeNgListComponentBase<ItemGroup
         if (this.canEnable && !itemGroup.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(itemGroup); } });
         if (this.canDisable && itemGroup.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(itemGroup); } });
         if (this.canSetAsDefault && !itemGroup.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(itemGroup); } });
+        if (this.canSetAsDefault && itemGroup.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(itemGroup); } });
 
         this.inlineActionMenu.show(event);
     }

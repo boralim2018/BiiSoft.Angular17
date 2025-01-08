@@ -58,7 +58,7 @@ export class ViewItemSeriesComponent extends Mixin(AppComponentBase, NavBarCompo
 
     initNavBar() {
         this.title = this.l("View_", this.l("ItemSeries"));
-        this.navBarItems.push({ label: this.l("ItemSeries"), routerLink: "/app/main/item-seriess" });
+        this.navBarItems.push({ label: this.l("ItemSeries"), routerLink: "/app/main/item-series" });
         this.setTitle();
     }
 
@@ -73,11 +73,11 @@ export class ViewItemSeriesComponent extends Mixin(AppComponentBase, NavBarCompo
     }
 
     goTo(id: string | undefined) {
-        if (id) this.router.navigate(['/app/main/item-seriess/view-detail', id]);
+        if (id) this.router.navigate(['/app/main/item-series/view-detail', id]);
     }
 
     goBack() {
-        this.router.navigate(['/app/main/item-seriess']);
+        this.router.navigate(['/app/main/item-series']);
     }
 
     delete(): void {
@@ -153,6 +153,26 @@ export class ViewItemSeriesComponent extends Mixin(AppComponentBase, NavBarCompo
 
                     this.loading = true;
                     this._itemSeriesService.setAsDefault(input)
+                        .pipe(finalize(() => this.loading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.getDetail();
+                        });
+                }
+            }
+        );
+    }
+    
+    unsetAsDefault() {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', this.model.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = this.model.id;
+
+                    this.loading = true;
+                    this._itemSeriesService.unsetAsDefault(input)
                         .pipe(finalize(() => this.loading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));

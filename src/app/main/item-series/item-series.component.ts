@@ -354,9 +354,29 @@ export class ItemSeriesComponent extends Mixin(PrimeNgListComponentBase<ItemSeri
             }
         );
     }
+    
+    unsetAsDefault(itemSeries: ItemSeriesListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', itemSeries.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = itemSeries.id;
+
+                    this.isTableLoading = true;
+                    this._itemSeriesService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(itemSeries: ItemSeriesListDto) {
-        this._router.navigate(['/app/main/item-seriess/view-detail', itemSeries.id]);
+        this._router.navigate(['/app/main/item-series/view-detail', itemSeries.id]);
     }
 
     showInlineActions(itemSeries: ItemSeriesListDto, event: Event) {
@@ -369,6 +389,7 @@ export class ItemSeriesComponent extends Mixin(PrimeNgListComponentBase<ItemSeri
         if (this.canEnable && !itemSeries.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(itemSeries); } });
         if (this.canDisable && itemSeries.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(itemSeries); } });
         if (this.canSetAsDefault && !itemSeries.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(itemSeries); } });
+        if (this.canSetAsDefault && itemSeries.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(itemSeries); } });
 
         this.inlineActionMenu.show(event);
     }

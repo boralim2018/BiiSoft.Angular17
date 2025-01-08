@@ -355,6 +355,26 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
             }
         );
     }
+    
+    unsetAsDefault(tax: TaxListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', tax.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = tax.id;
+
+                    this.isTableLoading = true;
+                    this._taxService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(tax: TaxListDto) {
         this._router.navigate(['/app/main/taxes/view-detail', tax.id]);
@@ -370,6 +390,7 @@ export class TaxComponent extends Mixin(PrimeNgListComponentBase<TaxListDto>, Ex
         if (this.canEnable && !tax.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(tax); } });
         if (this.canDisable && tax.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(tax); } });
         if (this.canSetAsDefault && !tax.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(tax); } });
+        if (this.canSetAsDefault && tax.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(tax); } });
 
         this.inlineActionMenu.show(event);
     }

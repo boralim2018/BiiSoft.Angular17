@@ -352,6 +352,26 @@ export class WarehouseComponent extends Mixin(PrimeNgListComponentBase<Warehouse
             }
         );
     }
+    
+    unsetAsDefault(warehouse: WarehouseListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', warehouse.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = warehouse.id;
+
+                    this.isTableLoading = true;
+                    this._warehouseService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(warehouse: WarehouseListDto) {
         this._router.navigate(['/app/main/warehouses/view-detail', warehouse.id]);
@@ -367,6 +387,7 @@ export class WarehouseComponent extends Mixin(PrimeNgListComponentBase<Warehouse
         if (this.canEnable && !warehouse.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(warehouse); } });
         if (this.canDisable && warehouse.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(warehouse); } });
         if (this.canSetAsDefault && !warehouse.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(warehouse); } });
+        if (this.canSetAsDefault && warehouse.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(warehouse); } });
 
         this.inlineActionMenu.show(event);
     }

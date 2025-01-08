@@ -354,6 +354,26 @@ export class ItemGradeComponent extends Mixin(PrimeNgListComponentBase<ItemGrade
             }
         );
     }
+    
+    unsetAsDefault(itemGrade: ItemGradeListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', itemGrade.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = itemGrade.id;
+
+                    this.isTableLoading = true;
+                    this._itemGradeService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(itemGrade: ItemGradeListDto) {
         this._router.navigate(['/app/main/item-grades/view-detail', itemGrade.id]);
@@ -369,6 +389,7 @@ export class ItemGradeComponent extends Mixin(PrimeNgListComponentBase<ItemGrade
         if (this.canEnable && !itemGrade.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(itemGrade); } });
         if (this.canDisable && itemGrade.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(itemGrade); } });
         if (this.canSetAsDefault && !itemGrade.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(itemGrade); } });
+        if (this.canSetAsDefault && itemGrade.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(itemGrade); } });
 
         this.inlineActionMenu.show(event);
     }

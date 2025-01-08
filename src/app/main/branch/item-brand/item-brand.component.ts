@@ -330,7 +330,6 @@ export class ItemBrandComponent extends Mixin(PrimeNgListComponentBase<ItemBrand
         );
     }
 
-
     setAsDefault(itemBrand: ItemBrandListDto) {
         this.message.confirm(
             this.l('DefaultWarningMessage', itemBrand.name), this.l('SetAsDefault'), (result) => {
@@ -341,6 +340,26 @@ export class ItemBrandComponent extends Mixin(PrimeNgListComponentBase<ItemBrand
 
                     this.isTableLoading = true;
                     this._itemBrandService.setAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
+    
+    unsetAsDefault(itemBrand: ItemBrandListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', itemBrand.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = itemBrand.id;
+
+                    this.isTableLoading = true;
+                    this._itemBrandService.unsetAsDefault(input)
                         .pipe(finalize(() => this.isTableLoading = false))
                         .subscribe(() => {
                             this.notify.success(this.l('SavedSuccessfully'));
@@ -365,6 +384,7 @@ export class ItemBrandComponent extends Mixin(PrimeNgListComponentBase<ItemBrand
         if (this.canEnable && !itemBrand.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(itemBrand); } });
         if (this.canDisable && itemBrand.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(itemBrand); } });
         if (this.canSetAsDefault && !itemBrand.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(itemBrand); } });
+        if (this.canSetAsDefault && itemBrand.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(itemBrand); } });
 
         this.inlineActionMenu.show(event);
     }

@@ -354,6 +354,26 @@ export class UnitComponent extends Mixin(PrimeNgListComponentBase<UnitListDto>, 
             }
         );
     }
+    
+    unsetAsDefault(unit: UnitListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', unit.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = unit.id;
+
+                    this.isTableLoading = true;
+                    this._unitService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(unit: UnitListDto) {
         this._router.navigate(['/app/main/units/view-detail', unit.id]);
@@ -369,6 +389,7 @@ export class UnitComponent extends Mixin(PrimeNgListComponentBase<UnitListDto>, 
         if (this.canEnable && !unit.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(unit); } });
         if (this.canDisable && unit.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(unit); } });
         if (this.canSetAsDefault && !unit.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(unit); } });
+        if (this.canSetAsDefault && unit.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(unit); } });
 
         this.inlineActionMenu.show(event);
     }

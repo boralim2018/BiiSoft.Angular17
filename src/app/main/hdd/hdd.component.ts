@@ -354,6 +354,26 @@ export class HDDComponent extends Mixin(PrimeNgListComponentBase<HDDListDto>, Ex
             }
         );
     }
+    
+    unsetAsDefault(hdd: HDDListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', hdd.name), this.l('UnetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = hdd.id;
+
+                    this.isTableLoading = true;
+                    this._hddService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(hdd: HDDListDto) {
         this._router.navigate(['/app/main/hdd/view-detail', hdd.id]);
@@ -369,6 +389,7 @@ export class HDDComponent extends Mixin(PrimeNgListComponentBase<HDDListDto>, Ex
         if (this.canEnable && !hdd.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(hdd); } });
         if (this.canDisable && hdd.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(hdd); } });
         if (this.canSetAsDefault && !hdd.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(hdd); } });
+        if (this.canSetAsDefault && hdd.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(hdd); } });
 
         this.inlineActionMenu.show(event);
     }

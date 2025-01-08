@@ -354,6 +354,26 @@ export class CPUComponent extends Mixin(PrimeNgListComponentBase<CPUListDto>, Ex
             }
         );
     }
+    
+    unsetAsDefault(cpu: CPUListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', cpu.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = cpu.id;
+
+                    this.isTableLoading = true;
+                    this._cpuService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(cpu: CPUListDto) {
         this._router.navigate(['/app/main/cpu/view-detail', cpu.id]);
@@ -369,6 +389,7 @@ export class CPUComponent extends Mixin(PrimeNgListComponentBase<CPUListDto>, Ex
         if (this.canEnable && !cpu.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(cpu); } });
         if (this.canDisable && cpu.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(cpu); } });
         if (this.canSetAsDefault && !cpu.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(cpu); } });
+        if (this.canSetAsDefault && cpu.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(cpu); } });
 
         this.inlineActionMenu.show(event);
     }

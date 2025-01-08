@@ -354,6 +354,26 @@ export class VGAComponent extends Mixin(PrimeNgListComponentBase<VGAListDto>, Ex
             }
         );
     }
+    
+    unsetAsDefault(vga: VGAListDto) {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', vga.name), this.l('UnsetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = vga.id;
+
+                    this.isTableLoading = true;
+                    this._vgaService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.isTableLoading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.refresh();
+                        });
+                }
+            }
+        );
+    }
 
     viewDetail(vga: VGAListDto) {
         this._router.navigate(['/app/main/vga/view-detail', vga.id]);
@@ -369,6 +389,7 @@ export class VGAComponent extends Mixin(PrimeNgListComponentBase<VGAListDto>, Ex
         if (this.canEnable && !vga.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(vga); } });
         if (this.canDisable && vga.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(vga); } });
         if (this.canSetAsDefault && !vga.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(vga); } });
+        if (this.canSetAsDefault && vga.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(vga); } });
 
         this.inlineActionMenu.show(event);
     }

@@ -162,6 +162,26 @@ export class ViewVGAComponent extends Mixin(AppComponentBase, NavBarComponentBas
             }
         );
     }
+    
+    unsetAsDefault() {
+        this.message.confirm(
+            this.l('DefaultWarningMessage', this.model.name), this.l('UnetAsDefault'), (result) => {
+                if (result) {
+
+                    let input = new GuidEntityDto();
+                    input.id = this.model.id;
+
+                    this.loading = true;
+                    this._vgaService.unsetAsDefault(input)
+                        .pipe(finalize(() => this.loading = false))
+                        .subscribe(() => {
+                            this.notify.success(this.l('SavedSuccessfully'));
+                            this.getDetail();
+                        });
+                }
+            }
+        );
+    }
 
     showEdit() {
 
