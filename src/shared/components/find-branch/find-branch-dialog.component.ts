@@ -57,10 +57,7 @@ export class FindBranchDialogComponent extends Mixin(FindCardListComponentBase<F
             { name: 'Name', header: 'Name', width: '15rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '15rem', sort: true },
             { name: 'BusinessId', header: 'BusinessId', width: '15rem', sort: true },
-            { name: 'PhoneNumber', header: 'Phone', width: '15rem', sort: true },
-            { name: 'Email', header: 'Email', width: '15rem', sort: true },
-            { name: 'Website', header: 'Website', width: '15rem', sort: true },
-            { name: 'TaxRegistrationNumber', header: 'TaxNumber', width: '15rem', sort: true }
+            { name: 'PhoneNumber', header: 'Phone', width: '15rem', sort: true }
         ];
 
         if (!this.useCode) this.columns = this.columns.filter(f => f.name != "Code");
