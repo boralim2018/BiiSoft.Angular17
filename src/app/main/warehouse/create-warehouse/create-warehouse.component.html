@@ -45,6 +45,28 @@
             <abp-validation-summary [control]="codeModel"
                                     [controlEl]="codeEl"></abp-validation-summary>
         </div>
+        <div class="field col-12">
+            <div class="flex flex-wrap gap-4">
+                <label for="sharing" class="text-900 font-medium">{{l('Sharing')}}<span class="text-red-600">*</span></label>
+                <div class="flex items-center">
+                    <p-radioButton name="sharing" value="0" [(ngModel)]="model.sharing" inputId="sharingAll" />
+                    <label for="sharingAll" class="ml-2">{{l("All")}}</label>
+                </div>
+                <div class="flex items-center">
+                    <p-radioButton name="sharing" value="1" [(ngModel)]="model.sharing" inputId="sharingSpecificBranch" />
+                    <label for="sharingSpecificBranch" class="ml-2">{{l("SpecificBranch")}}</label>
+                </div>
+            </div>
+            <div class="field mt-2"
+                 findBranch
+                 name="branch"
+                 [multiple]="true"
+                 [(ngModel)]="branches"
+                 (ngModelChange)="onBranchesChange($event)"
+                 *ngIf="model.sharing==1">
+            </div>
+        </div>
+
     </div>
 
     <div class="p-dialog-footer">

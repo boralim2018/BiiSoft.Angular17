@@ -56377,8 +56377,7 @@ export interface IVillageListDtoPagedResultDto {
 }
 
 export class WarehouseBranchDto implements IWarehouseBranchDto {
-    id: string;
-    warehouseId: string;
+    id: string | undefined;
     branchId: string;
     branchName: string | undefined;
 
@@ -56394,7 +56393,6 @@ export class WarehouseBranchDto implements IWarehouseBranchDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.warehouseId = _data["warehouseId"];
             this.branchId = _data["branchId"];
             this.branchName = _data["branchName"];
         }
@@ -56410,7 +56408,6 @@ export class WarehouseBranchDto implements IWarehouseBranchDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["warehouseId"] = this.warehouseId;
         data["branchId"] = this.branchId;
         data["branchName"] = this.branchName;
         return data;
@@ -56425,8 +56422,7 @@ export class WarehouseBranchDto implements IWarehouseBranchDto {
 }
 
 export interface IWarehouseBranchDto {
-    id: string;
-    warehouseId: string;
+    id: string | undefined;
     branchId: string;
     branchName: string | undefined;
 }

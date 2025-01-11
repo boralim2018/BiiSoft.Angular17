@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
-import { CreateUpdateWarehouseInputDto, WarehouseServiceProxy } from '@shared/service-proxies/service-proxies';
+import { CreateUpdateWarehouseInputDto, WarehouseBranchDto, WarehouseServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
@@ -11,18 +11,21 @@ import { AbpValidationSummaryComponent } from '../../../../shared/components/val
 import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { NgIf } from '@angular/common';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { FindBranchComponent } from '../../../../shared/components/find-branch/find-branch.component';
 
 @Component({
     selector: 'app-create-warehouse',
     templateUrl: './create-warehouse.component.html',
     providers: [WarehouseServiceProxy],
     standalone: true,
-    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, RadioButtonModule, FindBranchComponent, AbpValidationSummaryComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class CreateWarehouseComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateWarehouseInputDto = new CreateUpdateWarehouseInputDto();
-  
+    branches: any[]=[];
+
     constructor(
         injector: Injector,
         public _warehouseService: WarehouseServiceProxy,
@@ -38,6 +41,8 @@ export class CreateWarehouseComponent extends DynamicDialogBase implements OnIni
 
     initModel() {
         this.model = new CreateUpdateWarehouseInputDto();
+        this.model.warehouseBranches = [];
+        this.model.sharing = 0;
     };
 
     save(form?: NgForm): void {
@@ -60,5 +65,19 @@ export class CreateWarehouseComponent extends DynamicDialogBase implements OnIni
 
     saveNew(form: NgForm) {
         this.save(form);
+    }
+
+    onBranchesChange(event) {
+        if (!this.branches || !this.branches.length) {
+            this.model.warehouseBranches = [];
+            return;
+        }
+
+        this.model.warehouseBranches = this.branches.map(b => {
+            let branch = new WarehouseBranchDto();
+            branch.branchId = b.id;
+            branch.branchName = b.name;
+            return branch;
+        });
     }
 }

@@ -12,7 +12,7 @@ import { ConfirmDeleteComponent } from '@shared/components/confirm-delete/confir
 import { Mixin } from 'ts-mixer';
 import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
-import { NgIf, DatePipe } from '@angular/common';
+import { NgIf, NgFor, DatePipe } from '@angular/common';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NavBarComponent } from '../../../../shared/components/nav-bar/nav-bar.component';
@@ -24,7 +24,7 @@ import { BusyDirective } from '../../../../shared/directives/busy.directive';
     animations: [appModuleAnimation()],
     providers: [DialogService, WarehouseServiceProxy],
     standalone: true,
-    imports: [BusyDirective, NavBarComponent, ButtonDirective, Ripple, NgIf, DividerModule, TagModule, DatePipe]
+    imports: [BusyDirective, NavBarComponent, ButtonDirective, Ripple, NgIf, NgFor, DividerModule, TagModule, DatePipe]
 })
 export class ViewWarehouseComponent extends Mixin(AppComponentBase, NavBarComponentBase) implements OnInit {
 
