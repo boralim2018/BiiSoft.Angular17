@@ -6,8 +6,8 @@ import { WarehouseComponent } from './warehouse.component';
 @NgModule({
     imports: [
         RouterModule.forChild([
-            { path: '', component: WarehouseComponent, data: { Permissions: AppPermissions.pages.setup.warehouses.page },},
-            { path: 'view-detail/:id', loadComponent: () => import('./view-warehouse/view-warehouse.component').then(c => c.ViewWarehouseComponent), data: { Permissions: AppPermissions.pages.setup.warehouses.view }, }
+            { path: '', component: WarehouseComponent, data: { Permissions: AppPermissions.pages.setup.warehouses.warehouseList.page },},
+            { path: 'view-detail/:id', loadComponent: () => import('./view-warehouse/view-warehouse.component').then(c => c.ViewWarehouseComponent), data: { Permissions: AppPermissions.pages.setup.warehouses.warehouseList.view }, }
         ])
     ],
     exports: [

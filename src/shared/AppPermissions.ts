@@ -449,15 +449,18 @@ export class AppPermissions {
             //#region Warehoues
             warehouses: {
                 page: "Pages.Setup.Warehouses",
-                create: "Pages.Setup.Warehouses.Create",
-                view: "Pages.Setup.Warehouses.View",
-                edit: "Pages.Setup.Warehouses.Edit",
-                delete: "Pages.Setup.Warehouses.Delete",
-                importExcel: "Pages.Setup.Warehouses.ImportExcel",
-                exportExcel: "Pages.Setup.Warehouses.ExportExcel",
-                enable: "Pages.Setup.Warehouses.Enable",
-                disable: "Pages.Setup.Warehouses.Disable",
-                setAsDefault: "Pages.Setup.Warehouses.SetAsDefault",
+                warehouseList: {
+                    page: "Pages.Setup.Warehouses.List",
+                    create: "Pages.Setup.Warehouses.Create",
+                    view: "Pages.Setup.Warehouses.View",
+                    edit: "Pages.Setup.Warehouses.Edit",
+                    delete: "Pages.Setup.Warehouses.Delete",
+                    importExcel: "Pages.Setup.Warehouses.ImportExcel",
+                    exportExcel: "Pages.Setup.Warehouses.ExportExcel",
+                    enable: "Pages.Setup.Warehouses.Enable",
+                    disable: "Pages.Setup.Warehouses.Disable",
+                    setAsDefault: "Pages.Setup.Warehouses.SetAsDefault",
+                },
                 zones: {
                     page: "Pages.Setup.Warehouses.Zones",
                     create: "Pages.Setup.Warehouses.Zones.Create",

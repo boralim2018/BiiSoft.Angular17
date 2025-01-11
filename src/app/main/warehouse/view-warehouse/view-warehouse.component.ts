@@ -31,11 +31,11 @@ export class ViewWarehouseComponent extends Mixin(AppComponentBase, NavBarCompon
     loading: boolean;
     model: WarehouseDetailDto;
 
-    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.edit);
-    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.delete);
-    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.enable);
-    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.disable);
-    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.setAsDefault);
+    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.edit);
+    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.delete);
+    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.enable);
+    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.disable);
+    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.setAsDefault);
 
     constructor(
         injector: Injector,

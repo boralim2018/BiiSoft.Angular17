@@ -61,7 +61,7 @@ export abstract class AppMenuBase extends AppMenuPermission {
                 { label: this.l('Currency'), icon: 'fa-solid fa-dollar-sign', routerLink: ['/app/admin/currencies'], permissionName: AppPermissions.pages.setup.currencies.page },
                 {
                     label: this.l('Items'),
-                    icon: 'fa-solid fa-box',
+                    icon: 'fa-solid fa-cubes',
                     items: [
                         { label: this.l('ItemList'), icon: 'fa-solid fa-images', routerLink: ['/app/main/items'], permissionName: AppPermissions.pages.setup.items.itemList.page },
                         { label: this.l('Units'), icon: 'fa-solid fa-pen-ruler', routerLink: ['/app/main/units'], permissionName: AppPermissions.pages.setup.items.units.page },
@@ -84,8 +84,14 @@ export abstract class AppMenuBase extends AppMenuPermission {
                         { label: this.l('FieldCs'), icon: 'fa-solid fa-database', routerLink: ['/app/main/field-c'], permissionName: AppPermissions.pages.setup.items.fieldCs.page },
                     ]
                 },
-                { label: this.l('Warehouse'), icon: 'fa-solid fa-warehouse', routerLink: ['/app/main/warehouses'], permissionName: AppPermissions.pages.setup.warehouses.page },
-                { label: this.l('Zone'), icon: 'fa-solid fa-pallet', routerLink: ['/app/main/zones'], permissionName: AppPermissions.pages.setup.warehouses.zones.page },
+                {
+                    label: this.l('Warehouses'),
+                    icon: 'fa-solid fa-boxes-packing',
+                    items: [
+                        { label: this.l('WarehouseList'), icon: 'fa-solid fa-warehouse', routerLink: ['/app/main/warehouses'], permissionName: AppPermissions.pages.setup.warehouses.warehouseList.page },
+                        { label: this.l('Zone'), icon: 'fa-solid fa-pallet', routerLink: ['/app/main/zones'], permissionName: AppPermissions.pages.setup.warehouses.zones.page },
+                    ]
+                },
                 {
                     label: this.l('Location'),
                     icon: 'fa-solid fa-earth-asia',

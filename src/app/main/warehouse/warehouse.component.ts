@@ -59,15 +59,15 @@ export class WarehouseComponent extends Mixin(PrimeNgListComponentBase<Warehouse
     protected get sortField(): string { return 'Name'; }
 
     @ViewChild('warehouseTable') table: Table;
-    canCreate: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.create);
-    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.edit);
-    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.delete);
-    canView: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.view);
-    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.enable);
-    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.disable);
-    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.setAsDefault);
-    canImportExcel: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.importExcel);
-    canExportExcel: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.exportExcel);
+    canCreate: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.create);
+    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.edit);
+    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.delete);
+    canView: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.view);
+    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.enable);
+    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.disable);
+    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.setAsDefault);
+    canImportExcel: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.importExcel);
+    canExportExcel: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.exportExcel);
 
     actionMenuItems: any[];
 
