@@ -48,6 +48,8 @@ export class CreateWarehouseComponent extends DynamicDialogBase implements OnIni
     save(form?: NgForm): void {
         this.saving = true;
 
+        this.mapBranches();
+
         this._warehouseService.create(this.model)
             .pipe(finalize(() => this.saving = false))
             .subscribe((result) => {
@@ -67,8 +69,8 @@ export class CreateWarehouseComponent extends DynamicDialogBase implements OnIni
         this.save(form);
     }
 
-    onBranchesChange(event) {
-        if (!this.branches || !this.branches.length) {
+    mapBranches() {
+        if (this.model.sharing == 0 || !this.branches || !this.branches.length) {
             this.model.warehouseBranches = [];
             return;
         }

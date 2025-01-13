@@ -11,8 +11,6 @@ import {
     Int64NullableFilterInputDto,
     GuidEntityDto,
 } from '@shared/service-proxies/service-proxies';
-import { CreateBranchComponent } from './create-branch/create-branch.component';
-import { EditBranchComponent } from './edit-branch/edit-branch.component';
 import { PrimeNgListComponentBase } from '@shared/prime-ng-list-component-base';
 import { Menu, MenuModule } from 'primeng/menu';
 import { AppPermissions } from '@shared/AppPermissions';
@@ -134,6 +132,7 @@ export class BranchComponent extends Mixin(PrimeNgListComponentBase<BranchListDt
             { name: 'Email', header: 'Email', width: '15rem', sort: true },
             { name: 'Website', header: 'Website', width: '15rem', sort: true },
             { name: 'TaxRegistrationNumber', header: 'TaxNumber', width: '15rem', sort: true },
+            { name: 'SharingName', header: 'Sharing', width: '15rem', sort: true },
             { name: 'IsDefault', header: 'Default', width: '15rem', sort: true },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '15rem', sort: true, type: ColumnType.WrapText},

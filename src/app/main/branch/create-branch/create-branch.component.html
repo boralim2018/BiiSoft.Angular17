@@ -136,6 +136,28 @@
                  [required]="true">
             </div>
 
+            <div class="field col-12">
+                <div class="flex flex-wrap gap-4">
+                    <label for="sharing" class="text-900 font-medium">{{l('Sharing')}}<span class="text-red-600">*</span></label>
+                    <div class="flex items-center">
+                        <p-radioButton name="sharing" value="0" [(ngModel)]="model.sharing" inputId="sharingAll" />
+                        <label for="sharingAll" class="ml-2">{{l("All")}}</label>
+                    </div>
+                    <div class="flex items-center">
+                        <p-radioButton name="sharing" value="1" [(ngModel)]="model.sharing" inputId="sharingSpecificUser" />
+                        <label for="sharingSpecificUser" class="ml-2">{{l("SpecificUser")}}</label>
+                    </div>
+                </div>
+                <div class="field mt-2"
+                     findUser
+                     name="user"
+                     [required]="true"
+                     [multiple]="true"
+                     [(ngModel)]="users"
+                     *ngIf="model.sharing==1">
+                </div>
+            </div>
+
             <p-divider></p-divider>
 
             <div class="flex justify-content-end flex-wrap gap-3">

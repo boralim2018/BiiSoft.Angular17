@@ -31013,6 +31013,8 @@ export class BranchDetailDto implements IBranchDetailDto {
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
     sharing: Sharing;
+    sharingName: string | undefined;
+    branchUsers: BranchUserDto[] | undefined;
 
     constructor(data?: IBranchDetailDto) {
         if (data) {
@@ -31050,6 +31052,12 @@ export class BranchDetailDto implements IBranchDetailDto {
             this.sameAsBillingAddress = _data["sameAsBillingAddress"];
             this.shippingAddress = _data["shippingAddress"] ? ContactAddressDto.fromJS(_data["shippingAddress"]) : <any>undefined;
             this.sharing = _data["sharing"];
+            this.sharingName = _data["sharingName"];
+            if (Array.isArray(_data["branchUsers"])) {
+                this.branchUsers = [] as any;
+                for (let item of _data["branchUsers"])
+                    this.branchUsers.push(BranchUserDto.fromJS(item));
+            }
         }
     }
 
@@ -31087,6 +31095,12 @@ export class BranchDetailDto implements IBranchDetailDto {
         data["sameAsBillingAddress"] = this.sameAsBillingAddress;
         data["shippingAddress"] = this.shippingAddress ? this.shippingAddress.toJSON() : <any>undefined;
         data["sharing"] = this.sharing;
+        data["sharingName"] = this.sharingName;
+        if (Array.isArray(this.branchUsers)) {
+            data["branchUsers"] = [];
+            for (let item of this.branchUsers)
+                data["branchUsers"].push(item.toJSON());
+        }
         return data;
     }
 
@@ -31124,6 +31138,8 @@ export interface IBranchDetailDto {
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
     sharing: Sharing;
+    sharingName: string | undefined;
+    branchUsers: BranchUserDto[] | undefined;
 }
 
 export class BranchListDto implements IBranchListDto {
@@ -31144,6 +31160,8 @@ export class BranchListDto implements IBranchListDto {
     email: string | undefined;
     website: string | undefined;
     taxRegistrationNumber: string | undefined;
+    sharing: Sharing;
+    sharingName: string | undefined;
 
     constructor(data?: IBranchListDto) {
         if (data) {
@@ -31173,6 +31191,8 @@ export class BranchListDto implements IBranchListDto {
             this.email = _data["email"];
             this.website = _data["website"];
             this.taxRegistrationNumber = _data["taxRegistrationNumber"];
+            this.sharing = _data["sharing"];
+            this.sharingName = _data["sharingName"];
         }
     }
 
@@ -31202,6 +31222,8 @@ export class BranchListDto implements IBranchListDto {
         data["email"] = this.email;
         data["website"] = this.website;
         data["taxRegistrationNumber"] = this.taxRegistrationNumber;
+        data["sharing"] = this.sharing;
+        data["sharingName"] = this.sharingName;
         return data;
     }
 
@@ -31231,6 +31253,8 @@ export interface IBranchListDto {
     email: string | undefined;
     website: string | undefined;
     taxRegistrationNumber: string | undefined;
+    sharing: Sharing;
+    sharingName: string | undefined;
 }
 
 export class BranchListDtoPagedResultDto implements IBranchListDtoPagedResultDto {
@@ -31291,6 +31315,57 @@ export interface IBranchListDtoPagedResultDto {
 export enum BranchSharing {
     _0 = 0,
     _1 = 1,
+}
+
+export class BranchUserDto implements IBranchUserDto {
+    id: string | undefined;
+    memberId: number;
+    userName: string | undefined;
+
+    constructor(data?: IBranchUserDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.memberId = _data["memberId"];
+            this.userName = _data["userName"];
+        }
+    }
+
+    static fromJS(data: any): BranchUserDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BranchUserDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["memberId"] = this.memberId;
+        data["userName"] = this.userName;
+        return data;
+    }
+
+    clone(): BranchUserDto {
+        const json = this.toJSON();
+        let result = new BranchUserDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBranchUserDto {
+    id: string | undefined;
+    memberId: number;
+    userName: string | undefined;
 }
 
 export class CPUDetailDto implements ICPUDetailDto {
@@ -34107,6 +34182,7 @@ export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
     sharing: Sharing;
+    branchUsers: BranchUserDto[] | undefined;
 
     constructor(data?: ICreateUpdateBranchInputDto) {
         if (data) {
@@ -34131,6 +34207,11 @@ export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
             this.sameAsBillingAddress = _data["sameAsBillingAddress"];
             this.shippingAddress = _data["shippingAddress"] ? ContactAddressDto.fromJS(_data["shippingAddress"]) : <any>undefined;
             this.sharing = _data["sharing"];
+            if (Array.isArray(_data["branchUsers"])) {
+                this.branchUsers = [] as any;
+                for (let item of _data["branchUsers"])
+                    this.branchUsers.push(BranchUserDto.fromJS(item));
+            }
         }
     }
 
@@ -34155,6 +34236,11 @@ export class CreateUpdateBranchInputDto implements ICreateUpdateBranchInputDto {
         data["sameAsBillingAddress"] = this.sameAsBillingAddress;
         data["shippingAddress"] = this.shippingAddress ? this.shippingAddress.toJSON() : <any>undefined;
         data["sharing"] = this.sharing;
+        if (Array.isArray(this.branchUsers)) {
+            data["branchUsers"] = [];
+            for (let item of this.branchUsers)
+                data["branchUsers"].push(item.toJSON());
+        }
         return data;
     }
 
@@ -34179,6 +34265,7 @@ export interface ICreateUpdateBranchInputDto {
     sameAsBillingAddress: boolean;
     shippingAddress: ContactAddressDto;
     sharing: Sharing;
+    branchUsers: BranchUserDto[] | undefined;
 }
 
 export class CreateUpdateCPUInputDto implements ICreateUpdateCPUInputDto {

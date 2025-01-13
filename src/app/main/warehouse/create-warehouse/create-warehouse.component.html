@@ -60,9 +60,9 @@
             <div class="field mt-2"
                  findBranch
                  name="branch"
+                 [required]="true"
                  [multiple]="true"
                  [(ngModel)]="branches"
-                 (ngModelChange)="onBranchesChange($event)"
                  *ngIf="model.sharing==1">
             </div>
         </div>

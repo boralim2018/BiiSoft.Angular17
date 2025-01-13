@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
-import { CreateUpdateBranchInputDto, BranchDetailDto, BranchServiceProxy, ContactAddressDto } from '@shared/service-proxies/service-proxies';
+import { CreateUpdateBranchInputDto, BranchDetailDto, BranchServiceProxy, ContactAddressDto, BranchUserDto } from '@shared/service-proxies/service-proxies';
 import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
@@ -12,19 +12,24 @@ import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DividerModule } from 'primeng/divider';
-import { of } from 'rxjs';
+import { FindUserComponent } from '../../../../shared/components/find-user/find-user.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { NgIf } from '@angular/common';
+import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
 
 @Component({
     selector: 'app-edit-branch',
     templateUrl: './edit-branch.component.html',
+    animations: [appModuleAnimation()],
     providers: [BranchServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule]
+    imports: [FormsModule, BusyDirective, NgIf, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent, ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule]
 })
 export class EditBranchComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateBranchInputDto;
-    
+    users: any[] = [];
+
     constructor(
         injector: Injector,
         public _branchService: BranchServiceProxy,
@@ -57,6 +62,13 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
                 this.model.init(result);
                 this.setAddressDetails(result.billingAddress);
                 this.setAddressDetails(result.shippingAddress);
+
+                if (result.branchUsers && result.branchUsers.length) {
+                    this.users = result.branchUsers.map(b => {
+                        return { id: b.memberId, userName: b.userName };
+                    });
+                }
+
             });
     }
 
@@ -68,8 +80,28 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
         if (address.villageId) address['village'] = { id: address.villageId, name: address.villageName };
     }
 
+    mapUsers() {
+        if (this.model.sharing == 0 || !this.users || !this.users.length) {
+            this.model.branchUsers = [];
+            return;
+        }
+
+        this.model.branchUsers = this.users.map(b => {
+            let find = this.model.branchUsers.find(f => f.memberId == b.id);
+            if (!find) {
+                find = new BranchUserDto();
+                find.memberId = b.id;
+                find.userName = b.name;
+            }
+
+            return find;
+        });
+    }
+
     save(): void {
         this.saving = true;
+
+        this.mapUsers();
 
         this._branchService.update(this.model)
             .pipe(finalize(() => this.saving = false))

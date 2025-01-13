@@ -43,7 +43,6 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf, DatePipe } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
-import { of } from 'rxjs';
 
 @Component({
     selector: 'app-item-brand',

@@ -49,8 +49,7 @@ export class EditWarehouseComponent extends DynamicDialogBase implements OnInit 
                 this.model = new CreateUpdateWarehouseInputDto(result);
                 if (result.warehouseBranches && result.warehouseBranches.length) {
                     this.branches = result.warehouseBranches.map(b => {
-                        let branch = { id: b.branchId, name: b.branchName };
-                        return branch;
+                        return { id: b.branchId, name: b.branchName };
                     });
                 }
             });

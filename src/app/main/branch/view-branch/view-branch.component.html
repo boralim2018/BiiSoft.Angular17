@@ -70,7 +70,17 @@
         </div>
 
         <view-contact-address [model]="model.billingAddress" [title]="l('BillingAddress')"></view-contact-address>
-        <view-contact-address [model]="model.shippingAddress" [isShippingAddress]="true" [sameAsBillingAddress]="model.sameAsBillingAddress"></view-contact-address>        
+        <view-contact-address [model]="model.shippingAddress" [isShippingAddress]="true" [sameAsBillingAddress]="model.sameAsBillingAddress"></view-contact-address>
+
+        <div class="grid">
+            <div class="col-2 py-2"> {{l('Sharing')}} </div>
+            <div class="col-10 py-2 font-bold">
+                : {{model.sharingName}}
+                <ng-container *ngFor="let b of model.branchUsers">
+                    <p-tag [value]="b.userName" />
+                </ng-container>
+            </div>
+        </div>
 
         <p-divider></p-divider>
 
