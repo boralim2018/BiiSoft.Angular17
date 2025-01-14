@@ -74,8 +74,6 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
     
     canEdit: boolean = this.isGranted(AppPermissions.pages.company.edit);
 
-    @ViewChild('timezone') timezone: SelectTimezoneComponent;
-
     constructor(
         injector: Injector,
         private _companySettingService: CompanySettingServiceProxy)
@@ -159,8 +157,6 @@ export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBas
                         this.customTransactionNoEnable = customAll;
                         this.requiredReference = requiredAll;
                     }
-
-                    if (this.timezone) this.timezone.onLazyLoad({ first: 0, last: this.timezone.maxResultCount }, result.generalSetting.defaultTimeZone);
                 }
                
             });
