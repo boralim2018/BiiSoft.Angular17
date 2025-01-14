@@ -5472,6 +5472,108 @@ export class CommonLookupServiceProxy {
         }
         return _observableOf(null as any);
     }
+
+    /**
+     * @return OK
+     */
+    getItemTypes(): Observable<ItemTypeNameValueDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetItemTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetItemTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetItemTypes(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ItemTypeNameValueDtoListResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ItemTypeNameValueDtoListResultDto>;
+        }));
+    }
+
+    protected processGetItemTypes(response: HttpResponseBase): Observable<ItemTypeNameValueDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ItemTypeNameValueDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getItemCategories(): Observable<ItemCategoryNameValueDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetItemCategories";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetItemCategories(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetItemCategories(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ItemCategoryNameValueDtoListResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ItemCategoryNameValueDtoListResultDto>;
+        }));
+    }
+
+    protected processGetItemCategories(response: HttpResponseBase): Observable<ItemCategoryNameValueDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ItemCategoryNameValueDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
 }
 
 @Injectable()
@@ -46573,6 +46675,132 @@ export interface IItemBrandListDtoPagedResultDto {
     totalCount: number;
 }
 
+export enum ItemCategory {
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
+    _7 = 7,
+    _8 = 8,
+    _9 = 9,
+    _10 = 10,
+    _11 = 11,
+    _12 = 12,
+    _13 = 13,
+    _14 = 14,
+    _15 = 15,
+    _16 = 16,
+    _17 = 17,
+    _18 = 18,
+    _19 = 19,
+    _20 = 20,
+    _21 = 21,
+    _22 = 22,
+    _23 = 23,
+    _24 = 24,
+    _99 = 99,
+}
+
+export class ItemCategoryNameValueDto implements IItemCategoryNameValueDto {
+    name: string | undefined;
+    value: ItemCategory;
+
+    constructor(data?: IItemCategoryNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): ItemCategoryNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ItemCategoryNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): ItemCategoryNameValueDto {
+        const json = this.toJSON();
+        let result = new ItemCategoryNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IItemCategoryNameValueDto {
+    name: string | undefined;
+    value: ItemCategory;
+}
+
+export class ItemCategoryNameValueDtoListResultDto implements IItemCategoryNameValueDtoListResultDto {
+    items: ItemCategoryNameValueDto[] | undefined;
+
+    constructor(data?: IItemCategoryNameValueDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(ItemCategoryNameValueDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ItemCategoryNameValueDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ItemCategoryNameValueDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): ItemCategoryNameValueDtoListResultDto {
+        const json = this.toJSON();
+        let result = new ItemCategoryNameValueDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IItemCategoryNameValueDtoListResultDto {
+    items: ItemCategoryNameValueDto[] | undefined;
+}
+
 export class ItemFieldSettingDto implements IItemFieldSettingDto {
     tenantId: number;
     useCode: boolean;
@@ -47963,6 +48191,113 @@ export class ItemSizeListDtoPagedResultDto implements IItemSizeListDtoPagedResul
 export interface IItemSizeListDtoPagedResultDto {
     items: ItemSizeListDto[] | undefined;
     totalCount: number;
+}
+
+export enum ItemType {
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
+}
+
+export class ItemTypeNameValueDto implements IItemTypeNameValueDto {
+    name: string | undefined;
+    value: ItemType;
+
+    constructor(data?: IItemTypeNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): ItemTypeNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ItemTypeNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): ItemTypeNameValueDto {
+        const json = this.toJSON();
+        let result = new ItemTypeNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IItemTypeNameValueDto {
+    name: string | undefined;
+    value: ItemType;
+}
+
+export class ItemTypeNameValueDtoListResultDto implements IItemTypeNameValueDtoListResultDto {
+    items: ItemTypeNameValueDto[] | undefined;
+
+    constructor(data?: IItemTypeNameValueDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(ItemTypeNameValueDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ItemTypeNameValueDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ItemTypeNameValueDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): ItemTypeNameValueDtoListResultDto {
+        const json = this.toJSON();
+        let result = new ItemTypeNameValueDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IItemTypeNameValueDtoListResultDto {
+    items: ItemTypeNameValueDto[] | undefined;
 }
 
 export enum JournalType {
