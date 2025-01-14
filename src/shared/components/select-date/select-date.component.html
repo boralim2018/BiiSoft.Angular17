@@ -7,7 +7,7 @@
             [showButtonBar]="true"
             [required]="required"
             [(ngModel)]="model"
-            (onChange)="onChange($event.value)"
+            (ngModelChange)="onChange(model)"
             (onBlur)="onTouched()"
             [disabled]="disabled"
             dateFormat="dd-mm-yy"

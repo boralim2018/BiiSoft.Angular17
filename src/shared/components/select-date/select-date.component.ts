@@ -19,6 +19,7 @@ import { ControlValueAccessorComponentBase } from '../../control-value-accessor-
 })
 export class SelectDateComponent extends ControlValueAccessorComponentBase implements OnInit {
 
+    @Input() name: string;
     @Input() label: string;
     @Input() placeholder: string;
     @Input() inputId: string;
@@ -34,5 +35,5 @@ export class SelectDateComponent extends ControlValueAccessorComponentBase imple
     ngOnInit(): void {      
         
     }
-    
+
 }
