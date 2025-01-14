@@ -101,7 +101,7 @@ export abstract class AppMenuBase extends AppMenuPermission {
                         { label: this.l('CityProvinces'), icon: 'fa-solid fa-city', routerLink: ['/app/admin/city-provinces'], permissionName: AppPermissions.pages.setup.locations.cityProvinces.page },
                         { label: this.l('KhanDistricts'), icon: 'fa-solid fa-mountain-city', routerLink: ['/app/admin/khan-districts'], permissionName: AppPermissions.pages.setup.locations.khanDistricts.page },
                         { label: this.l('SangkatCommunes'), icon: 'fa-solid fa-building-flag', routerLink: ['/app/admin/sangkat-communes'], permissionName: AppPermissions.pages.setup.locations.sangkatCommunes.page },
-                        { label: this.l('Villages'), icon: 'fa-solid fa-house-flag', routerLink: ['/app/admin/villages'], permissionName: AppPermissions.pages.setup.locations.villages.page },
+                        { label: this.l('Villages'), icon: 'fa-solid fa-tree-city', routerLink: ['/app/admin/villages'], permissionName: AppPermissions.pages.setup.locations.villages.page },
                     ]
                 },
             ]
