@@ -11,6 +11,7 @@ import { AppPermissions } from '../../shared/AppPermissions';
             { path: 'chart-of-accounts', loadChildren: () => import('./chart-of-account/chart-of-account-routing.module').then(m => m.ChartOfAccountRoutingModule), data: { permission: AppPermissions.pages.accounting.chartOfAccounts.page } },
             { path: 'taxes', loadChildren: () => import('./tax/tax-routing.module').then(m => m.TaxRoutingModule), data: { permission: AppPermissions.pages.setup.taxes.page } },
 
+            { path: 'items', loadChildren: () => import('./item/item-routing.module').then(m => m.ItemRoutingModule), data: { permission: AppPermissions.pages.setup.items.itemList.page } },
             { path: 'units', loadChildren: () => import('./unit/unit-routing.module').then(m => m.UnitRoutingModule), data: { permission: AppPermissions.pages.setup.items.units.page } },
             { path: 'item-groups', loadChildren: () => import('./item-group/item-group-routing.module').then(m => m.ItemGroupRoutingModule), data: { permission: AppPermissions.pages.setup.items.itemGroups.page } },
             { path: 'item-brands', loadChildren: () => import('./item-brand/item-brand-routing.module').then(m => m.ItemBrandRoutingModule), data: { permission: AppPermissions.pages.setup.items.brands.page } },

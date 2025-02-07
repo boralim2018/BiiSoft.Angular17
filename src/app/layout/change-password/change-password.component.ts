@@ -1,21 +1,20 @@
+import { NgClass, NgIf } from '@angular/common';
 import { Component, Injector, OnInit } from '@angular/core';
-import { ChangePasswordInput, ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
-import { catchError, finalize } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
+import { LocalizePipe } from '@shared/pipes/localize.pipe';
+import { ChangePasswordInput, ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
+import { ButtonDirective } from 'primeng/button';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { Ripple } from 'primeng/ripple';
+import { finalize } from 'rxjs/operators';
 import { Mixin } from 'ts-mixer';
 import { PasswordComponentBase } from '../../../shared/app-component-base';
-import { LocalizePipe } from '@shared/pipes/localize.pipe';
-import { Ripple } from 'primeng/ripple';
-import { ButtonDirective } from 'primeng/button';
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
-import { EqualValidator } from '../../../shared/directives/equal-validator.directive';
-import { InputTextModule } from 'primeng/inputtext';
-import { NgClass, NgIf } from '@angular/common';
-import { PasswordModule } from 'primeng/password';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
-import { FormsModule } from '@angular/forms';
-import { of } from 'rxjs';
+import { EqualValidator } from '../../../shared/directives/equal-validator.directive';
 
 @Component({
     selector: 'changePassword',
