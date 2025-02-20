@@ -31,11 +31,10 @@ export class ViewItemComponent extends Mixin(AppComponentBase, NavBarComponentBa
     loading: boolean;
     model: ItemDetailDto;
 
-    canEdit: boolean = this.isGranted(AppPermissions.pages.company.items.edit);
-    canDelete: boolean = this.isGranted(AppPermissions.pages.company.items.delete);
-    canEnable: boolean = this.isGranted(AppPermissions.pages.company.items.enable);
-    canDisable: boolean = this.isGranted(AppPermissions.pages.company.items.disable);
-    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.company.items.setAsDefault);
+    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.edit);
+    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.delete);
+    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.enable);
+    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.disable);
 
     constructor(
         injector: Injector,
@@ -141,46 +140,7 @@ export class ViewItemComponent extends Mixin(AppComponentBase, NavBarComponentBa
             }
         );
     }
-
-    setAsDefault() {
-        this.message.confirm(
-            this.l('DefaultWarningMessage', this.model.name), this.l('SetAsDefault'), (result) => {
-                if (result) {
-
-                    let input = new GuidEntityDto();
-                    input.id = this.model.id;
-
-                    this.loading = true;
-                    this._itemService.setAsDefault(input)
-                        .pipe(finalize(() => this.loading = false))
-                        .subscribe(() => {
-                            this.notify.success(this.l('SavedSuccessfully'));
-                            this.getDetail();
-                        });
-                }
-            }
-        );
-    }
     
-    unsetAsDefault() {
-        this.message.confirm(
-            this.l('DefaultWarningMessage', this.model.name), this.l('UnsetAsDefault'), (result) => {
-                if (result) {
-
-                    let input = new GuidEntityDto();
-                    input.id = this.model.id;
-
-                    this.loading = true;
-                    this._itemService.unsetAsDefault(input)
-                        .pipe(finalize(() => this.loading = false))
-                        .subscribe(() => {
-                            this.notify.success(this.l('SavedSuccessfully'));
-                            this.getDetail();
-                        });
-                }
-            }
-        );
-    }
 
     showEdit() {
         this.router.navigate(['/app/main/items/edit', this.model.id]);

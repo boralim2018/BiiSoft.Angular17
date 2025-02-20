@@ -38,122 +38,37 @@
                                             [controlEl]="displayNameEl"></abp-validation-summary>
                 </div>
                 <div class="field col-12 md:col-6">
-                    <label class="text-900 font-medium">{{l('BusinessId')}}</label>
+                    <label class="text-900 font-medium">{{l('Code')}}</label>
                     <input type="text"
                            pInputText
                            class="w-full"
-                           name="businessId"
-                           id="businessId"
+                           name="code"
+                           id="code"
                            minlength="2"
                            maxlength="32"
-                           [(ngModel)]="model.businessId"
-                           #businessIdModel="ngModel"
-                           #businessIdEl />
-                    <abp-validation-summary [control]="businessIdModel"
-                                            [controlEl]="businessIdEl"></abp-validation-summary>
+                           [(ngModel)]="model.code"
+                           #codeModel="ngModel"
+                           #codeEl />
+                    <abp-validation-summary [control]="codeModel"
+                                            [controlEl]="codeEl"></abp-validation-summary>
                 </div>
 
                 <div class="field col-12 md:col-6">
-                    <label class="text-900 font-medium">{{l('PhoneNumber')}}</label>
+                    <label class="text-900 font-medium">{{l('Description')}}</label>
                     <input type="text"
                            pInputText
                            class="w-full"
-                           name="phoneNumber"
-                           id="phoneNumber"
-                           minlength="9"
-                           maxlength="12"
-                           [(ngModel)]="model.phoneNumber"
-                           #phoneNumberModel="ngModel"
-                           #phoneNumberEl />
-                    <abp-validation-summary [control]="phoneNumberModel"
-                                            [controlEl]="phoneNumberEl"></abp-validation-summary>
-                </div>
-
-                <div class="field col-12 md:col-6">
-                    <label class="text-900 font-medium">{{l('Email')}}</label>
-                    <input type="text"
-                           pInputText
-                           class="w-full"
-                           name="email"
-                           id="email"
+                           name="description"
+                           id="description"
                            minlength="5"
                            maxlength="32"
-                           [(ngModel)]="model.email"
-                           #emailModel="ngModel"
-                           #emailEl />
-                    <abp-validation-summary [control]="emailModel"
-                                            [controlEl]="emailEl"></abp-validation-summary>
+                           [(ngModel)]="model.description"
+                           #descriptionModel="ngModel"
+                           #descriptionEl />
+                    <abp-validation-summary [control]="descriptionModel"
+                                            [controlEl]="descriptionEl"></abp-validation-summary>
                 </div>
 
-                <div class="field col-12 md:col-6">
-                    <label class="text-900 font-medium">{{l('Website')}}</label>
-                    <input type="text"
-                           pInputText
-                           class="w-full"
-                           name="website"
-                           id="website"
-                           minlength="5"
-                           maxlength="32"
-                           [(ngModel)]="model.website"
-                           #websiteModel="ngModel"
-                           #websiteEl />
-                    <abp-validation-summary [control]="websiteModel"
-                                            [controlEl]="websiteEl"></abp-validation-summary>
-                </div>
-
-                <div class="field col-12 md:col-6">
-                    <label class="text-900 font-medium">{{l('TaxRegistrationNumber')}}</label>
-                    <input type="text"
-                           pInputText
-                           class="w-full"
-                           name="taxRegistrationNumber"
-                           id="taxRegistrationNumber"
-                           minlength="2"
-                           maxlength="32"
-                           [(ngModel)]="model.taxRegistrationNumber"
-                           #taxRegistrationNumberModel="ngModel"
-                           #taxRegistrationNumberEl />
-                    <abp-validation-summary [control]="taxRegistrationNumberModel"
-                                            [controlEl]="taxRegistrationNumberEl"></abp-validation-summary>
-                </div>
-
-            </div>
-
-            <div class="formgrid grid m-0"
-                 contactAddress
-                 name="billingAddress"
-                 [(ngModel)]="model.billingAddress"
-                 [required]="true">
-            </div>
-            <div class="formgrid grid m-0"
-                 contactAddress
-                 name="shippingAddress"
-                 [isShippingAddress]="true"
-                 [(sameAsBillingAddress)]="model.sameAsBillingAddress"
-                 [(ngModel)]="model.shippingAddress"
-                 [required]="true">
-            </div>
-
-            <div class="field col-12">
-                <div class="flex flex-wrap gap-4">
-                    <label for="sharing" class="text-900 font-medium">{{l('Sharing')}}<span class="text-red-600">*</span></label>
-                    <div class="flex items-center">
-                        <p-radioButton name="sharing" value="0" [(ngModel)]="model.sharing" inputId="sharingAll" />
-                        <label for="sharingAll" class="ml-2">{{l("All")}}</label>
-                    </div>
-                    <div class="flex items-center">
-                        <p-radioButton name="sharing" value="1" [(ngModel)]="model.sharing" inputId="sharingSpecificUser" />
-                        <label for="sharingSpecificUser" class="ml-2">{{l("SpecificUser")}}</label>
-                    </div>
-                </div>
-                <div class="field mt-2"
-                     findUser
-                     name="user"
-                     [required]="true"
-                     [multiple]="true"
-                     [(ngModel)]="users"
-                     *ngIf="model.sharing==1">
-                </div>
             </div>
 
             <p-divider></p-divider>

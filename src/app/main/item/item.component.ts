@@ -10,6 +10,9 @@ import {
     FileTokenInput,
     Int64NullableFilterInputDto,
     GuidEntityDto,
+    ItemTypeFilterInputDto,
+    ItemCategoryFilterInputDto,
+    GuidFilterInputDto,
 } from '@shared/service-proxies/service-proxies';
 import { PrimeNgListComponentBase } from '@shared/prime-ng-list-component-base';
 import { Menu, MenuModule } from 'primeng/menu';
@@ -56,15 +59,14 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
 
     title: string = this.l('Items');
     @ViewChild('itemTable') table: Table;
-    canCreate: boolean = this.isGranted(AppPermissions.pages.company.items.create);
-    canEdit: boolean = this.isGranted(AppPermissions.pages.company.items.edit);
-    canDelete: boolean = this.isGranted(AppPermissions.pages.company.items.delete);
-    canView: boolean = this.isGranted(AppPermissions.pages.company.items.view);
-    canEnable: boolean = this.isGranted(AppPermissions.pages.company.items.enable);
-    canDisable: boolean = this.isGranted(AppPermissions.pages.company.items.disable);
-    canImportExcel: boolean = this.isGranted(AppPermissions.pages.company.items.importExcel);
-    canExportExcel: boolean = this.isGranted(AppPermissions.pages.company.items.exportExcel);
-    canSetAsDefault: boolean = this.isGranted(AppPermissions.pages.company.items.setAsDefault);
+    canCreate: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.create);
+    canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.edit);
+    canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.delete);
+    canView: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.view);
+    canEnable: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.enable);
+    canDisable: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.disable);
+    canImportExcel: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.importExcel);
+    canExportExcel: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.exportExcel);
 
     actionMenuItems: any[];
 
@@ -118,6 +120,26 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         this.filterInput.isActive = undefined;
         this.filterInput.creators = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.modifiers = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.itemTypeFilter = new ItemTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.itemCategoryFilter = new ItemCategoryFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.unitFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.itemGroupFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.itemBrandFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.itemModelFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.itemGradeFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.itemSizeFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.itemSeriesFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.colorPatternFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.cPUFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.rAMFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.vGAFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.hDDFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.screenFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.cameraFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.batteryFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.fieldAFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.fieldBFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.fieldCFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
 
         this.creators = undefined;
         this.modifiers = undefined;
@@ -127,13 +149,8 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         this.columns = [
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
-            { name: 'BusinessId', header: 'BusinessId', width: '15rem', sort: true },
-            { name: 'PhoneNumber', header: 'Phone', width: '15rem', sort: true },
-            { name: 'Email', header: 'Email', width: '15rem', sort: true },
-            { name: 'Website', header: 'Website', width: '15rem', sort: true },
-            { name: 'TaxRegistrationNumber', header: 'TaxNumber', width: '15rem', sort: true },
-            { name: 'SharingName', header: 'Sharing', width: '15rem', sort: true },
-            { name: 'IsDefault', header: 'Default', width: '15rem', sort: true },
+            { name: 'Code', header: 'Code', width: '15rem', sort: true },
+            { name: 'Description', header: 'Description', width: '15rem', sort: true },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '15rem', sort: true, type: ColumnType.WrapText},
             { name: 'LastModifierUserName', header: 'Modified', width: '15rem', sort: true, type: ColumnType.WrapText, visible: false },
@@ -163,7 +180,58 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
     protected getList(input: any, callBack: Function) {
 
         this._itemService
-            .getList(input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
+            .getList(
+                input.itemTypeFilter.exclude,
+                input.itemTypeFilter.ids,
+                input.itemCategoryFilter.exclude,
+                input.itemCategoryFilter.ids,
+                input.unitFilter.exclude,
+                input.unitFilter.ids,
+                input.itemGroupFilter.exclude,
+                input.itemGroupFilter.ids,
+                input.itemBrandFilter.exclude,
+                input.itemBrandFilter.ids,
+                input.itemGradeFilter.exclude,
+                input.itemGradeFilter.ids,
+                input.itemModelFilter.exclude,
+                input.itemModelFilter.ids,
+                input.itemSizeFilter.exclude,
+                input.itemSizeFilter.ids,
+                input.itemSeriesFilter.exclude,
+                input.itemSeriesFilter.ids,
+                input.colorPatternFilter.exclude,
+                input.colorPatternFilter.ids,
+                input.cPUFilter.exclude,
+                input.cPUFilter.ids,
+                input.rAMFilter.exclude,
+                input.rAMFilter.ids,
+                input.vGAFilter.exclude,
+                input.vGAFilter.ids,
+                input.hDDFilter.exclude,
+                input.hDDFilter.ids,
+                input.screenFilter.exclude,
+                input.screenFilter.ids,
+                input.cameraFilter.exclude,
+                input.cameraFilter.ids,
+                input.batteryFilter.exclude,
+                input.batteryFilter.ids,
+                input.fieldAFilter.exclude,
+                input.fieldAFilter.ids,
+                input.fieldBFilter.exclude,
+                input.fieldBFilter.ids,
+                input.fieldCFilter.exclude,
+                input.fieldCFilter.ids,
+                input.isActive,
+                input.creators.exclude,
+                input.creators.ids,
+                input.modifiers.exclue,
+                input.modifiers.ids,
+                input.keyword,
+                input.sortField,
+                input.sortMode,
+                input.usePagination,
+                input.skipCount,
+                input.maxResultCount)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
@@ -313,46 +381,6 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         );
     }
 
-    setAsDefault(item: ItemListDto) {
-        this.message.confirm(
-            this.l('DefaultWarningMessage', item.name), this.l('SetAsDefault'), (result) => {
-                if (result) {
-
-                    let input = new GuidEntityDto();
-                    input.id = item.id;
-
-                    this.isTableLoading = true;
-                    this._itemService.setAsDefault(input)
-                        .pipe(finalize(() => this.isTableLoading = false))
-                        .subscribe(() => {
-                            this.notify.success(this.l('SavedSuccessfully'));
-                            this.refresh();
-                        });
-                }
-            }
-        );
-    }
-    
-    unsetAsDefault(item: ItemListDto) {
-        this.message.confirm(
-            this.l('DefaultWarningMessage', item.name), this.l('UnsetAsDefault'), (result) => {
-                if (result) {
-
-                    let input = new GuidEntityDto();
-                    input.id = item.id;
-
-                    this.isTableLoading = true;
-                    this._itemService.unsetAsDefault(input)
-                        .pipe(finalize(() => this.isTableLoading = false))
-                        .subscribe(() => {
-                            this.notify.success(this.l('SavedSuccessfully'));
-                            this.refresh();
-                        });
-                }
-            }
-        );
-    }
-
     viewDetail(item: ItemListDto) {
         this._router.navigate(['/app/main/items/view-detail', item.id]);
     }
@@ -366,8 +394,6 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         if (this.canDelete) this.inlineActionMenu.model.push({ label: this.l('Delete'), icon: 'pi pi-trash', command: () => { this.delete(item); } });
         if (this.canEnable && !item.isActive) this.inlineActionMenu.model.push({ label: this.l('Enable'), icon: 'pi pi-check', command: () => { this.enable(item); } });
         if (this.canDisable && item.isActive) this.inlineActionMenu.model.push({ label: this.l('Disable'), icon: 'pi pi-ban', command: () => { this.disable(item); } });
-        if (this.canSetAsDefault && !item.isDefault) this.inlineActionMenu.model.push({ label: this.l('SetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.setAsDefault(item); } });
-        if (this.canSetAsDefault && item.isDefault) this.inlineActionMenu.model.push({ label: this.l('UnsetAsDefault'), icon: 'fa-solid fa-check-double', command: () => { this.unsetAsDefault(item); } });
 
         this.inlineActionMenu.show(event);
     }

@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { CreateUpdateItemInputDto, ItemServiceProxy, ContactAddressDto, ItemUserDto } from '@shared/service-proxies/service-proxies';
-import { catchError, finalize } from 'rxjs/operators';
+import { CreateUpdateItemInputDto, ItemServiceProxy, ContactAddressDto, ItemZoneDto } from '@shared/service-proxies/service-proxies';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
@@ -43,29 +43,11 @@ export class CreateItemComponent extends AppComponentBase implements OnInit {
 
     initModel() {
         this.model = new CreateUpdateItemInputDto();
-        this.model.billingAddress = new ContactAddressDto();
-        this.model.sameAsBillingAddress = true;
-        this.model.shippingAddress = new ContactAddressDto();
+        this.model.itemZones = [];
     };
-
-    mapUsers() {
-        if (this.model.sharing == 0 || !this.users || !this.users.length) {
-            this.model.itemUsers = [];
-            return;
-        }
-
-        this.model.itemUsers = this.users.map(b => {
-            let user = new ItemUserDto();
-            user.memberId = b.id;
-            user.userName = b.name;
-            return user;
-        });
-    }
 
     save(form?: NgForm): void {
         this.saving = true;
-
-        this.mapUsers();
 
         this._itemService.create(this.model)
             .pipe(finalize(() => this.saving = false))
