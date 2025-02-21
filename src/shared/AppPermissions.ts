@@ -166,6 +166,7 @@ export class AppPermissions {
                     edit: "Pages.Setup.Items.List.Edit",
                     editAccount: "Pages.Setup.Items.List.EditAccount",
                     seeAccount: "Pages.Setup.Items.List.SeeAccount",
+                    canSetting: "Pages.Setup.Items.List.ChangeSetting",
                     delete: "Pages.Setup.Items.List.Delete",
                     importExcel: "Pages.Setup.Items.List.ImportExcel",
                     exportExcel: "Pages.Setup.Items.List.ExportExcel",
