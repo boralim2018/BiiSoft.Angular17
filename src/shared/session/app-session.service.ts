@@ -6,6 +6,7 @@ import {
     GeneralSettingDto,
     GetCurrentLoginInformationsOutput,
     ItemFieldSettingDto,
+    ItemSettingDto,
     SessionServiceProxy,
     TenantLoginInfoDto,
     UserLoginInfoDto
@@ -19,6 +20,7 @@ export class AppSessionService {
     private _application: ApplicationInfoDto;
     private _generalSetting: GeneralSettingDto;
     private _advanceSetting: AdvanceSettingDto;
+    private _itemSetting: ItemSettingDto;
     private _itemFieldSetting: ItemFieldSettingDto;
 
     constructor(
@@ -54,6 +56,10 @@ export class AppSessionService {
         return this._advanceSetting;
     }
 
+    get itemSetting(): ItemSettingDto {
+        return this._itemSetting;
+    }
+
     get itemFieldSetting(): ItemFieldSettingDto {
         return this._itemFieldSetting;
     }
@@ -75,6 +81,7 @@ export class AppSessionService {
                 this._tenant = result.tenant;
                 this._generalSetting = result.generalSetting;
                 this._advanceSetting = result.advanceSetting;
+                this._itemSetting = result.itemSetting;
                 this._itemFieldSetting = result.itemFieldSetting;
                 resolve(true);
             }, (err) => {
