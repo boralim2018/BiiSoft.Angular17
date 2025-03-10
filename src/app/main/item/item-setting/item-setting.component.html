@@ -1,0 +1,475 @@
+<div class="pt-3">
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useCodeFormula" [(ngModel)]="model.useCodeFormula"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('CodeFormula'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useSerial" [(ngModel)]="model.useSerial"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Serial'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useExpired" [(ngModel)]="model.useExpired"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Expired'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useBatchNo" [(ngModel)]="model.useBatchNo"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('BatchNo'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useInventoryStatus" [(ngModel)]="model.useInventoryStatus"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('InventoryStatus'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useNetWeight" [(ngModel)]="model.useNetWeight"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('NetWeight'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="netWeightRequired" [(ngModel)]="model.netWeightRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('NetWeight'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useGrossWeight" [(ngModel)]="model.useGrossWeight"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('GrossWeight'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="grossWeightRequired" [(ngModel)]="model.grossWeightRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('GrossWeight'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useWidth" [(ngModel)]="model.useWidth"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Width'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="widthRequired" [(ngModel)]="model.widthRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Width'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useHeight" [(ngModel)]="model.useHeight"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Height'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="heightRequired" [(ngModel)]="model.heightRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Height'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useLength" [(ngModel)]="model.useLength"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Length'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="lengthRequired" [(ngModel)]="model.lengthRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Length'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useDiameter" [(ngModel)]="model.useDiameter"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Diameter'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="diameterRequired" [(ngModel)]="model.diameterRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Diameter'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useArea" [(ngModel)]="model.useArea"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Area'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="areaRequired" [(ngModel)]="model.areaRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Area'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useVolume" [(ngModel)]="model.useVolume"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Volume'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="volumeRequired" [(ngModel)]="model.volumeRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Volume'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useReorderStock" [(ngModel)]="model.useReorderStock"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('ReorderStock'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="reorderStockRequired" [(ngModel)]="model.reorderStockRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('ReorderStock'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useMaxStock" [(ngModel)]="model.useMaxStock"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('MaxStock'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="maxStockRequired" [(ngModel)]="model.maxStockRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('MaxStock'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useMinStock" [(ngModel)]="model.useMinStock"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('MinStock'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="minStockRequired" [(ngModel)]="model.minStockRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('MinStock'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useItemGroup" [(ngModel)]="model.useItemGroup"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('ItemGroup'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="itemGroupRequired" [(ngModel)]="model.itemGroupRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('ItemGroup'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useBrand" [(ngModel)]="model.useBrand"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Brand'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="brandRequired" [(ngModel)]="model.brandRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Brand'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useModel" [(ngModel)]="model.useModel"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Model'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="modelRequired" [(ngModel)]="model.modelRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Model'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useSeries" [(ngModel)]="model.useSeries"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Series'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="seriesRequired" [(ngModel)]="model.seriesRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Series'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useSize" [(ngModel)]="model.useSize"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Size'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="sizeRequired" [(ngModel)]="model.sizeRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Size'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useGrade" [(ngModel)]="model.useGrade"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Grade'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="gradeRequired" [(ngModel)]="model.gradeRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Grade'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useColorPattern" [(ngModel)]="model.useColorPattern"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('ColorPattern'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="colorPatternRequired" [(ngModel)]="model.colorPatternRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('ColorPattern'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useCPU" [(ngModel)]="model.useCPU"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('CPU'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="cpuRequired" [(ngModel)]="model.cpuRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('CPU'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useRAM" [(ngModel)]="model.useRAM"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('RAM'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="ramRequired" [(ngModel)]="model.ramRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('RAM'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useVGA" [(ngModel)]="model.useVGA"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('VGA'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="vgaRequired" [(ngModel)]="model.vgaRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('VGA'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useHDD" [(ngModel)]="model.useHDD"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('HDD'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="hddRequired" [(ngModel)]="model.hddRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('HDD'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useScreen" [(ngModel)]="model.useScreen"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Screen'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="screenRequired" [(ngModel)]="model.screenRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Screen'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useCamera" [(ngModel)]="model.useCamera"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Camera'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="cameraRequired" [(ngModel)]="model.cameraRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Camera'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useBattery" [(ngModel)]="model.useBattery"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Battery'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="batteryRequired" [(ngModel)]="model.batteryRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Battery'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useFieldA" [(ngModel)]="model.useFieldA"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('FieldA'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="fieldARequired" [(ngModel)]="model.fieldARequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('FieldA'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-items-center gap-3">
+                <label class="text-900 font-medium w-6rem">{{l('Label_', l('FieldA'))}}</label>
+                <input type="text"
+                       pInputText
+                       class="w-full"
+                       name="fieldALabel"
+                       id="fieldALabel"
+                       maxlength="32"
+                       [(ngModel)]="model.fieldALabel" />
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useFieldB" [(ngModel)]="model.useFieldB"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('FieldB'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="fieldBRequired" [(ngModel)]="model.fieldBRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('FieldB'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-items-center gap-3">
+                <label class="text-900 font-medium w-6rem">{{l('Label_', l('FieldB'))}}</label>
+                <input type="text"
+                       pInputText
+                       class="w-full"
+                       name="fieldBLabel"
+                       id="fieldBLabel"
+                       maxlength="32"
+                       [(ngModel)]="model.fieldBLabel" />
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid m-0">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useFieldC" [(ngModel)]="model.useFieldC"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('FieldC'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="fieldCRequired" [(ngModel)]="model.fieldCRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('FieldC'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-items-center gap-3">
+                <label class="text-900 font-medium w-6rem">{{l('Label_', l('FieldC'))}}</label>
+                <input type="text"
+                       pInputText
+                       class="w-full"
+                       name="fieldCLabel"
+                       id="fieldCLabel"
+                       maxlength="32"
+                       [(ngModel)]="model.fieldCLabel" />
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-content-end gap-2 py-4">
+        <p-button [label]="l('Save')" (onClick)="save()" [loading]="saving" />
+    </div>
+
+</div>

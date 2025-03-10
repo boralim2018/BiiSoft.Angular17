@@ -17,7 +17,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { finalize } from 'rxjs/operators';
 import { Mixin } from 'ts-mixer';
 import { appModuleAnimation } from '../../../shared/animations/routerTransition';
-import { AppComponentBase, BFileComponentBase, NavBarComponentBase } from '../../../shared/app-component-base';
+import { BFileComponentBase, NavBarComponentBase } from '../../../shared/app-component-base';
 import { AppPermissions } from '../../../shared/AppPermissions';
 import { ContactAddressComponent } from '../../../shared/components/contact-address/contact-address.component';
 import { FindCountryComponent } from '../../../shared/components/find-country/find-country.component';
@@ -47,7 +47,7 @@ import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, Creat
         SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple, MessageModule
     ],
 })
-export class CompanyComponent extends Mixin(AppComponentBase, NavBarComponentBase, BFileComponentBase) implements OnInit {
+export class CompanyComponent extends Mixin(NavBarComponentBase, BFileComponentBase) implements OnInit {
 
     title: string = this.l('CompanySetup');
     activeStep: number = 0;    
