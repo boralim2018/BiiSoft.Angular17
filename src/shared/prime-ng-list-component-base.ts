@@ -86,7 +86,7 @@ export abstract class PrimeNgListComponentBase<TOutputDto> extends AppComponentB
     protected saveTableCache() {
         if (!this.tableCacheKey) return;
         let cache = this.getInitCache();
-        this.carchService.set(this.tableCacheKey, JSON.stringify(cache));
+        this.cacheService.set(this.tableCacheKey, JSON.stringify(cache));
     }
 
     protected getInitCache(): any {
@@ -100,7 +100,7 @@ export abstract class PrimeNgListComponentBase<TOutputDto> extends AppComponentB
 
     deleteTableCache() {
         if (!this.tableCacheKey) return;
-        this.carchService.remove(this.tableCacheKey);
+        this.cacheService.remove(this.tableCacheKey);
         this.initModel();
         this.refresh();
     }
@@ -112,7 +112,7 @@ export abstract class PrimeNgListComponentBase<TOutputDto> extends AppComponentB
 
         //override data from cache
         if (this.tableCacheKey) {
-            let cacheString = this.carchService.get(this.tableCacheKey);
+            let cacheString = this.cacheService.get(this.tableCacheKey);
 
             if (cacheString) {
                 let cache = JSON.parse(cacheString);

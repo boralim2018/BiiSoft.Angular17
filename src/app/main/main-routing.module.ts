@@ -12,6 +12,7 @@ import { AppPermissions } from '../../shared/AppPermissions';
             { path: 'taxes', loadChildren: () => import('./tax/tax-routing.module').then(m => m.TaxRoutingModule), data: { permission: AppPermissions.pages.setup.taxes.page } },
 
             { path: 'items', loadChildren: () => import('./item/item-routing.module').then(m => m.ItemRoutingModule), data: { permission: AppPermissions.pages.setup.items.itemList.page } },
+            { path: 'item-code-formulas', loadChildren: () => import('./item-code-formula/item-code-formula-routing.module').then(m => m.ItemCodeFormulaRoutingModule), data: { permission: AppPermissions.pages.setup.items.itemCodeFormulas.page } },
             { path: 'units', loadChildren: () => import('./unit/unit-routing.module').then(m => m.UnitRoutingModule), data: { permission: AppPermissions.pages.setup.items.units.page } },
             { path: 'item-groups', loadChildren: () => import('./item-group/item-group-routing.module').then(m => m.ItemGroupRoutingModule), data: { permission: AppPermissions.pages.setup.items.itemGroups.page } },
             { path: 'item-brands', loadChildren: () => import('./item-brand/item-brand-routing.module').then(m => m.ItemBrandRoutingModule), data: { permission: AppPermissions.pages.setup.items.brands.page } },

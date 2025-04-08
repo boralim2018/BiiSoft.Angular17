@@ -174,6 +174,16 @@ export class AppPermissions {
                     disable: "Pages.Setup.Items.List.Disable",
                 },
 
+                itemCodeFormulas: {
+                    page: "Pages.Setup.Items.ItemCodeFormulas",
+                    create: "Pages.Setup.Items.ItemCodeFormulas.Create",
+                    view: "Pages.Setup.Items.ItemCodeFormulas.View",
+                    edit: "Pages.Setup.Items.ItemCodeFormulas.Edit",
+                    delete: "Pages.Setup.Items.ItemCodeFormulas.Delete",
+                    enable: "Pages.Setup.Items.ItemCodeFormulas.Enable",
+                    disable: "Pages.Setup.Items.ItemCodeFormulas.Disable"
+                },
+
                 units: {
                     page: "Pages.Setup.Units",
                     create: "Pages.Setup.Items.Units.Create",

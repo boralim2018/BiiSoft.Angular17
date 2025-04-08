@@ -14,6 +14,8 @@ export class ColumnType {
     static Date: number = 5;
     static CheckBox: number = 6;
     static WrapText: number = 7;
+    static Lookup: number = 8;
+    static List: number = 9;
 }
 
 export class CellFormat {

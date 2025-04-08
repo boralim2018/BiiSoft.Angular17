@@ -152,7 +152,7 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
             { name: 'Code', header: 'Code', width: '15rem', sort: true },
             { name: 'Description', header: 'Description', width: '15rem', sort: true },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
-            { name: 'CreatorUserName', header: 'Created', width: '15rem', sort: true, type: ColumnType.WrapText},
+            { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
             { name: 'LastModifierUserName', header: 'Modified', width: '15rem', sort: true, type: ColumnType.WrapText, visible: false },
         ];
 

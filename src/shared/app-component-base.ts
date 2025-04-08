@@ -83,7 +83,7 @@ export abstract class AppComponentBase extends LocalizeComponent {
     multiTenancy: AbpMultiTenancyService;
     appSession: AppSessionService;
     elementRef: ElementRef;
-    carchService: CacheService;
+    cacheService: CacheService;
 
     isHost: boolean;
 
@@ -101,7 +101,7 @@ export abstract class AppComponentBase extends LocalizeComponent {
         this.multiTenancy = injector.get(AbpMultiTenancyService);
         this.appSession = injector.get(AppSessionService);
         this.elementRef = injector.get(ElementRef);
-        this.carchService = injector.get(CacheService);
+        this.cacheService = injector.get(CacheService);
        
         this.isHost = this.appSession.tenantId === undefined || this.appSession.tenantId === null;
     }
