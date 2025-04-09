@@ -6,7 +6,7 @@
             <p-divider></p-divider>
 
             <div class="formgrid grid m-0">
-                <div class="field col-12 md:col-6">
+                <div class="field col-12 md:col-6 lg:col-4">
                     <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
                     <input type="text"
                            pInputText
@@ -21,7 +21,7 @@
                     <abp-validation-summary [control]="nameModel"
                                             [controlEl]="nameEl"></abp-validation-summary>
                 </div>
-                <div class="field col-12 md:col-6">
+                <div class="field col-12 md:col-6 lg:col-4">
                     <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
                     <input type="text"
                            pInputText
@@ -37,7 +37,7 @@
                     <abp-validation-summary [control]="displayNameModel"
                                             [controlEl]="displayNameEl"></abp-validation-summary>
                 </div>
-                <div class="field col-12 md:col-6">
+                <div class="field col-12 md:col-6 lg:col-4">
                     <label class="text-900 font-medium">{{l('Code')}}</label>
                     <input type="text"
                            pInputText
@@ -53,7 +53,7 @@
                                             [controlEl]="codeEl"></abp-validation-summary>
                 </div>
 
-                <div class="field col-12 md:col-6">
+                <div class="field col-12 md:col-6 lg:col-4">
                     <label class="text-900 font-medium">{{l('Description')}}</label>
                     <input type="text"
                            pInputText

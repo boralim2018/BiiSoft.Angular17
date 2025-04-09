@@ -30,10 +30,10 @@ export class SelectItemCategoryComponent extends SelectComponentBase implements 
         private _service: CommonLookupServiceProxy
     ) {
         super(injector);
-        this.validateMessage = this.l("IsRequired", this.l('ItemCategory'));
     }
 
     ngOnInit() {
+        super.ngOnInit();
         this.getModels();
     }
 

@@ -5,7 +5,7 @@ import { ControlValueAccessorComponentBase } from 'shared/control-value-accessor
 
 
 @Component({ template: '' })
-export abstract class SelectComponentBase extends ControlValueAccessorComponentBase{
+export abstract class SelectComponentBase extends ControlValueAccessorComponentBase implements OnInit {
 
     @Input() name: string;
     @Input() label: string;
@@ -26,7 +26,13 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
    
     constructor(injector: Injector) {
         super(injector);
-        this.placeholder = this.l('Select_', this.label);
+    }
+
+    ngOnInit(): void {
+        if (this.label) {
+            this.validateMessage = this.l("IsRequired", this.label);
+            if(!this.placeholder) this.placeholder = this.l('Select_', this.label);
+        }
     }
 
 }
@@ -56,6 +62,8 @@ export abstract class LazySelectComponentBase extends SelectComponentBase implem
     }
 
     ngOnInit(): void {
+        super.ngOnInit();
+
         if (this.lazy) this.onLazyLoad({ first: 0, last: this.maxResultCount });
     }
 

@@ -30,10 +30,10 @@ export class SelectItemTypeComponent extends SelectComponentBase implements OnIn
         private _service: CommonLookupServiceProxy
     ) {
         super(injector);
-        this.validateMessage = this.l("IsRequired", this.l('ItemType'));
     }
 
     ngOnInit() {
+        super.ngOnInit();
         this.getModels();
     }
 

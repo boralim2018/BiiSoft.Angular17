@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { CreateUpdateItemInputDto, ItemServiceProxy, ContactAddressDto, ItemZoneDto } from '@shared/service-proxies/service-proxies';
+import { CreateUpdateItemInputDto, ItemServiceProxy } from '@shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
@@ -11,11 +11,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { DividerModule } from 'primeng/divider';
-import { of } from 'rxjs';
 import { FindUserComponent } from '../../../../shared/components/find-user/find-user.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
+import { SelectItemCategoryComponent } from '../../../../shared/components/select-item-type/select-item-category.component';
 
 @Component({
     selector: 'app-create-item',
@@ -23,7 +23,9 @@ import { appModuleAnimation } from '../../../../shared/animations/routerTransiti
     animations: [appModuleAnimation()],
     providers: [ItemServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, NgIf, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent, ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule]
+    imports: [
+        FormsModule, BusyDirective, NgIf, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent,
+        ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, SelectItemCategoryComponent]
 })
 export class CreateItemComponent extends AppComponentBase implements OnInit {
     saving = false;
