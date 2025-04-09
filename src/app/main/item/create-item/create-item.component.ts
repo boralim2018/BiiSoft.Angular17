@@ -16,6 +16,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
 import { SelectItemCategoryComponent } from '../../../../shared/components/select-item-type/select-item-category.component';
+import { AttachFileComponent } from '../../../../shared/components/attach-file/attach-file.component';
 
 @Component({
     selector: 'app-create-item',
@@ -25,7 +26,7 @@ import { SelectItemCategoryComponent } from '../../../../shared/components/selec
     standalone: true,
     imports: [
         FormsModule, BusyDirective, NgIf, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent,
-        ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, SelectItemCategoryComponent]
+        ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, SelectItemCategoryComponent, AttachFileComponent ]
 })
 export class CreateItemComponent extends AppComponentBase implements OnInit {
     saving = false;

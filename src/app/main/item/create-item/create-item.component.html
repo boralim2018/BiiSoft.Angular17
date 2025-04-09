@@ -5,6 +5,15 @@
             <h4>{{l('Create_', l('Item'))}}</h4>
             <p-divider></p-divider>
 
+            <div class="pt-3"
+                 attachFile
+                 [(fileId)]="model.imageId"
+                 [alt]="l('Image')"
+                 [label]="l('Image')">
+            </div>
+
+            <p-divider></p-divider>
+
             <div class="formgrid grid m-0">
                 <div class="field col-12 md:col-6 lg:col-4">
                     <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>

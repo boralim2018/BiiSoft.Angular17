@@ -17,7 +17,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { finalize } from 'rxjs/operators';
 import { Mixin } from 'ts-mixer';
 import { appModuleAnimation } from '../../../shared/animations/routerTransition';
-import { BFileComponentBase, NavBarComponentBase } from '../../../shared/app-component-base';
+import { AppComponentBase, NavBarComponentBase } from '../../../shared/app-component-base';
 import { AppPermissions } from '../../../shared/AppPermissions';
 import { ContactAddressComponent } from '../../../shared/components/contact-address/contact-address.component';
 import { FindCountryComponent } from '../../../shared/components/find-country/find-country.component';
@@ -27,6 +27,7 @@ import { SelectDateComponent } from '../../../shared/components/select-date/sele
 import { SelectTimezoneComponent } from '../../../shared/components/select-timezone/select-timezone.component';
 import { TableSettingComponent } from '../../../shared/components/table-setting/table-setting.component';
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
+import { AttachFileComponent } from '../../../shared/components/attach-file/attach-file.component';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
@@ -44,10 +45,11 @@ import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, Creat
         TableSettingComponent, DividerModule, NavBarComponent, BusyDirective, TooltipModule,
         InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, FloatLabelModule,
         LocalizePipe, FindCountryComponent, InputSwitchModule, FindCurrencyComponent, SelectDateComponent,
-        SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple, MessageModule
+        SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple,
+        MessageModule, AttachFileComponent
     ],
 })
-export class CompanyComponent extends Mixin(NavBarComponentBase, BFileComponentBase) implements OnInit {
+export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBase) implements OnInit {
 
     title: string = this.l('CompanySetup');
     activeStep: number = 0;    
@@ -62,8 +64,8 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, BFileComponentB
     transactionNos: CreateUpdateTransactionNoSettingInputDto[];
     addressLevels: any[];
 
+    logoUrl: string = 'assets/images/logo.png';
     uploadUrl: string = '/CompanyProfile/Upload';
-    logoImageUrl: string = this.blankImageUrl;
 
     regionCountry: any;
     currency: any;
@@ -117,7 +119,6 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, BFileComponentB
                     this.model = result;
 
                     this.logo = result.companyLogo;
-                    if (result.companyLogo.logoId) this.loadLogo();
 
                     if (result.generalSetting) {
                         this.generalSetting.init(result.generalSetting);
@@ -257,42 +258,6 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, BFileComponentB
                 if (next) next.emit();
                 this.notify.info(this.l('SavedSuccessfully'));
             });
-    }
-
-
-    loadLogo() {
-        if (this.logo.logoId) {
-            this.download(this.logo.logoId, "blob", (result) => {
-                this.logoImageUrl = window.URL.createObjectURL(result);
-            });
-        }
-        else {
-            this.logoImageUrl = this.blankImageUrl;
-        }
-    }
-    
-    fileChange(event: Event) {
-        let file = event.currentTarget as HTMLInputElement;
-        if (file && file.files.length) {
-            this.logoImageUrl = window.URL.createObjectURL(file.files[0]);
-        }
-    }
-
-    clearUpload(file: HTMLInputElement) {
-        file.value = '';
-        this.loadLogo();
-    }
-
-    uploadLogo(file: HTMLInputElement) {
-        if (file && file.files.length) {
-            this.upload(file.files[0], 1, (result) => {
-                if (result && result.id) {
-                    this.logo.logoId = result.id;
-                    this.clearUpload(file);
-                    this.notify.info(this.l('SavedSuccessfully'));
-                }
-            })
-        }
     }
 
     getTransactionNoFormat(t: TransactionNoSettingDto) : string {
