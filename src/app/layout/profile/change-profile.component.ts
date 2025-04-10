@@ -5,7 +5,7 @@ import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LayoutService } from '../service/app.layout.service';
 import { Mixin } from 'ts-mixer';
-import { ProfileComponentBase } from '@shared/app-component-base';
+import { BFileComponentBase } from '@shared/app-component-base';
 import { SafeUrlPipe } from '@shared/pipes/safe-resource-url.pipe';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { AbpValidationSummaryComponent } from '../../../shared/components/validation/abp-validation.summary.component';
@@ -16,22 +16,30 @@ import { NgClass, NgIf } from '@angular/common';
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
+import { AttachFileComponent } from '../../../shared/components/attach-file/attach-file.component';
+import { UploadSource } from '../../../shared/AppEnums';
+import { AppConsts } from '../../../shared/AppConsts';
 
 @Component({
     selector: 'changeProfile',
     templateUrl: './change-profile.component.html',
     providers: [ProfileServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, NgClass, NgIf, ButtonDirective, Ripple, InputTextModule, AbpValidationSummaryComponent, LocalizePipe, SafeUrlPipe]
+    imports: [FormsModule, BusyDirective, NgClass, NgIf, ButtonDirective, Ripple, InputTextModule, AbpValidationSummaryComponent, LocalizePipe, SafeUrlPipe, AttachFileComponent ]
 })
-export class ChangeProfileComponent extends Mixin(DynamicDialogBase, ProfileComponentBase) implements OnInit {
+export class ChangeProfileComponent extends Mixin(DynamicDialogBase, BFileComponentBase) implements OnInit {
 
     saving = false;
     model: CurrentUserProfileEditDto = new CurrentUserProfileEditDto();
     containerClass: string = ".change-profile-dialog";  
-    profileImageUrl: string = this.blankImageUrl;
     parent: any;
     profileUploaded: boolean;
+
+    blankImageUrl: string = AppConsts.blankUserUrl;
+    uploadUrl: string = '/UserProfile/Upload';
+    uploadSource: number = UploadSource.UserProfile;
+
+    profileImageUrl: string = this.blankImageUrl;
 
     constructor(
         injector: Injector,
@@ -84,13 +92,13 @@ export class ChangeProfileComponent extends Mixin(DynamicDialogBase, ProfileComp
 
     clearUpload(file: HTMLInputElement) {
         file.value = '';
-        this.loadProfilePicture();        
+        this.loadProfilePicture();
     }
 
     uploadProfile(file: HTMLInputElement) {
         if (file && file.files.length) {
-            this.upload(file.files[0], 1, (result) => {
-                if (result && result.id) {                   
+            this.upload(file.files[0], this.uploadSource, (result) => {
+                if (result && result.id) {
                     this.appSession.user.profilePictureId = result.id;
                     this.profileUploaded = true;
                     this.clearUpload(file);

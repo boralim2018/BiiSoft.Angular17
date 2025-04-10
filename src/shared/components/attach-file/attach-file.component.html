@@ -1,7 +1,7 @@
 <div class="flex flex-column align-items-start gap-2">
     <div class="flex justify-content-center">
         <img #image
-             class="attachment-box"
+             [ngClass]="styleClass"
              [src]="fileUrl | safeResourceUrl"
              [alt]="alt" />
     </div>
@@ -15,7 +15,7 @@
         <button pButton pRipple class="p-button-outlined py-0" icon="pi pi-times" type="button" (click)="clearUpload(inputFile)" *ngIf="inputFile.files.length">
             <span class="px-2">{{l("Cancel")}}</span>
         </button>
-        <button pButton pRipple class="p-button-outlined py-0 ml-3" icon="pi pi-cloud-upload" type="button" (click)="uploadLogo(inputFile)" [loading]="loading" *ngIf="inputFile.files.length">
+        <button pButton pRipple class="p-button-outlined py-0 ml-3" icon="pi pi-cloud-upload" type="button" (click)="uploadFile(inputFile)" [loading]="loading" *ngIf="inputFile.files.length">
             <span class="px-2">{{l("Upload")}}</span>
         </button>
     </div>

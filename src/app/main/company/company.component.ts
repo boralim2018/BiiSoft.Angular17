@@ -32,6 +32,8 @@ import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
 import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAccountSettingInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
+import { UploadSource } from '../../../shared/AppEnums';
+import { AppConsts } from '../../../shared/AppConsts';
 
 @Component({
     selector: 'app-company',
@@ -64,8 +66,9 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBas
     transactionNos: CreateUpdateTransactionNoSettingInputDto[];
     addressLevels: any[];
 
-    logoUrl: string = 'assets/images/logo.png';
+    blankImageUrl: string = AppConsts.blankLogoUrl;
     uploadUrl: string = '/CompanyProfile/Upload';
+    uploadSource: number = UploadSource.CompanyLogo; 
 
     regionCountry: any;
     currency: any;

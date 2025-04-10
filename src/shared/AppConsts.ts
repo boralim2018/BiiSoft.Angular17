@@ -1,5 +1,9 @@
 export class AppConsts {
 
+    static readonly blankImageUrl: string = 'assets/images/blank-image.png';
+    static readonly blankLogoUrl: string = 'assets/images/logo.png';
+    static readonly blankUserUrl: string = 'assets/images/blank-user.png';
+
     static readonly tenancyNamePlaceHolderInUrl = '{TENANCY_NAME}';
 
     static appName: string;

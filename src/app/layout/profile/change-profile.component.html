@@ -1,5 +1,6 @@
 <form novalidate autocomplete="off" #changeProfileForm="ngForm" (ngSubmit)="save()" [busy]="saving || loading">
     <div class="p-3">
+
         <div class="mb-3">
             <div class="flex justify-content-center">
                 <img #image
@@ -23,6 +24,7 @@
                 </button>
             </div>
         </div>
+
         <div class="field">
             <label for="name" class="text-900 font-medium">{{l('Name')}}</label>
             <span class="p-input-icon-right w-full">

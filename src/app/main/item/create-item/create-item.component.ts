@@ -17,6 +17,8 @@ import { NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
 import { SelectItemCategoryComponent } from '../../../../shared/components/select-item-type/select-item-category.component';
 import { AttachFileComponent } from '../../../../shared/components/attach-file/attach-file.component';
+import { UploadSource } from '../../../../shared/AppEnums';
+import { AppConsts } from '../../../../shared/AppConsts';
 
 @Component({
     selector: 'app-create-item',
@@ -32,6 +34,10 @@ export class CreateItemComponent extends AppComponentBase implements OnInit {
     saving = false;
     model: CreateUpdateItemInputDto = new CreateUpdateItemInputDto();
     users: any[] = [];
+
+    blankImageUrl: string = AppConsts.blankImageUrl;
+    uploadUrl: string = '/CompanyProfile/Upload';
+    uploadSource: number = UploadSource.CompanyLogo; 
 
     constructor(
         injector: Injector,

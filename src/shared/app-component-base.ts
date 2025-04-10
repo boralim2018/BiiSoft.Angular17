@@ -1,4 +1,4 @@
-import { Injector, ElementRef, Component, OnInit } from '@angular/core';
+import { Injector, ElementRef, Component, OnInit, Input } from '@angular/core';
 import { AppConsts } from '@shared/AppConsts';
 import {
     LocalizationService,
@@ -309,13 +309,10 @@ export abstract class ExcelFileComponentBase extends AppComponentBase {
     }
 }
 
-export abstract class BFileComponentBase extends AppComponentBase {
+export abstract class FileDownloadComponentBase extends AppComponentBase {
 
-    private http: HttpClient;
-    private _tokenService: TokenService;
-
-    blankImageUrl: string = 'assets/images/logo.png';
-    uploadUrl: string = '/BFile/Upload';
+    protected http: HttpClient;
+    protected _tokenService: TokenService;
 
     loading: boolean;
 
@@ -323,6 +320,31 @@ export abstract class BFileComponentBase extends AppComponentBase {
         super(injector);
         this.http = injector.get(HttpClient);
         this._tokenService = injector.get(TokenService);
+    }
+
+    download(fileId: string, responeType: any, onSuccess?: (result: any) => void) {
+        this.loading = true;
+
+        this.http.get(
+            AppConsts.remoteServiceBaseUrl + "/BFile/Index?id=" + fileId,
+            {
+                headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
+                responseType: responeType
+            })
+            .pipe(finalize(() => this.loading = false))
+            .subscribe((response: any) => {
+                if (onSuccess) onSuccess(response);
+            });
+    }
+
+}
+
+export abstract class BFileComponentBase extends FileDownloadComponentBase {
+
+    uploadUrl: string = '/BFile/Upload';
+
+    constructor(injector: Injector) {
+        super(injector);
     }
 
     upload(file: File, uploadFrom: number, onSuccess?: (result: any) => void) {
@@ -346,29 +368,5 @@ export abstract class BFileComponentBase extends AppComponentBase {
                     if (onSuccess) onSuccess(response.result);
                 }
             });
-    }
-
-    download(fileId: string, responeType: any, onSuccess?: (result: any) => void) {
-        this.loading = true;
-
-        this.http.get(
-            AppConsts.remoteServiceBaseUrl + "/BFile/Index?id=" + fileId,
-            {
-                headers: { 'Authorization': `Bearer ${this._tokenService.getToken()}` },
-                responseType: responeType
-            })
-            .pipe(finalize(() => this.loading = false))
-            .subscribe((response: any) => {
-                if (onSuccess) onSuccess(response);
-            });
-    }
-
-}
-
-export abstract class ProfileComponentBase extends BFileComponentBase {
-    blankImageUrl: string = 'assets/images/blank-user.png';
-    uploadUrl: string = '/UserProfile/Upload';
-    constructor(injector: Injector) {
-        super(injector);
     }
 }

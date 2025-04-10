@@ -24,3 +24,11 @@ export class CellFormat {
     static Percentage: number = 2;
     static Accouting: number = 3;
 }
+
+export class UploadSource {
+    static Attachment: number = 0;
+    static CompanyLogo: number = 1;
+    static UserProfile: number = 2;
+    static Item: number = 3;
+    static FormTemplate: number = 4;
+}

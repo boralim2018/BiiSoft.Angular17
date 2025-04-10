@@ -1,26 +1,30 @@
 import { Component, Injector, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { BFileComponentBase } from '../../app-component-base';
 import { ButtonDirective, ButtonModule } from 'primeng/button';
 import { SafeUrlPipe } from '../../pipes/safe-resource-url.pipe';
+import { UploadSource } from '../../AppEnums';
+import { AppConsts } from '../../AppConsts';
 
 @Component({
     selector: 'attach-file, [attachFile]',
     templateUrl: './attach-file.component.html',
     standalone: true,
-    imports: [NgIf, FormsModule, ButtonModule, ButtonDirective, SafeUrlPipe ]
+    imports: [NgIf, NgClass, FormsModule, ButtonModule, ButtonDirective, SafeUrlPipe ]
 })
 export class AttachFileComponent extends BFileComponentBase implements OnInit, OnChanges {
 
     @Input() alt: string = this.l('Attach File');
     @Input() label: string = this.l('File');
+    @Input() styleClass: string = 'attachment-box';
+    @Input() uploadSource: number = UploadSource.Attachment; 
     @Input() acceptType: string = 'image/*';
-    @Input() uploadUrl: string;
+    @Input() uploadUrl: string = '/BFile/Upload';
+    @Input() blankImageUrl: string = AppConsts.blankImageUrl;
     @Input() fileId: string;
     @Output() fileIdChange: EventEmitter<string> = new EventEmitter<string>();
-    @Input() blankImageUrl: string = 'assets/images/blank-image.png';
-
+  
     fileUrl: string = this.blankImageUrl;
 
     constructor(
@@ -62,9 +66,9 @@ export class AttachFileComponent extends BFileComponentBase implements OnInit, O
         this.loadFile();
     }
 
-    uploadLogo(file: HTMLInputElement) {
+    uploadFile(file: HTMLInputElement) {
         if (file && file.files.length) {
-            this.upload(file.files[0], 1, (result) => {
+            this.upload(file.files[0], this.uploadSource, (result) => {
                 if (result && result.id) {
                     this.fileId = result.id;
                     this.fileIdChange.emit(this.fileId);

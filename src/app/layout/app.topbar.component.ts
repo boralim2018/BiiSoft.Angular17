@@ -1,5 +1,5 @@
 import { Component, ElementRef, Injector, ViewChild } from '@angular/core';
-import { BFileComponentBase } from '@shared/app-component-base';
+import { FileDownloadComponentBase } from '@shared/app-component-base';
 import { ChangeUserLanguageDto, LinkedUserDto, UserLinkServiceProxy, AccountServiceProxy, UserSettingsServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppAuthService } from '@shared/auth/app-auth.service';
 import { LayoutService } from "./service/app.layout.service";
@@ -32,7 +32,7 @@ import { RouterLink } from '@angular/router';
     standalone: true,
     imports: [RouterLink, NgClass, NgIf, NgFor, BadgeModule, SidebarModule, ButtonDirective, Ripple, DividerModule, InputSwitchModule, FormsModule, SafeUrlPipe]
 })
-export class AppTopBarComponent extends BFileComponentBase {
+export class AppTopBarComponent extends FileDownloadComponentBase {
 
     @ViewChild('menubutton') menuButton!: ElementRef;
     @ViewChild('topbarmenubutton') topbarMenuButton!: ElementRef;
@@ -51,7 +51,7 @@ export class AppTopBarComponent extends BFileComponentBase {
     recentlyLinkedUsers: LinkedUserDto[] = [];
     loading: boolean;
 
-    profilePictureUrl: string = "assets/images/blank-user.png";
+    profilePictureUrl: string = AppConsts.blankUserUrl;
 
     constructor(
         injector: Injector,
