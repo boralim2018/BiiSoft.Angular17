@@ -3,7 +3,7 @@
         <img #image
              [ngClass]="styleClass"
              [src]="fileUrl | safeResourceUrl"
-             [alt]="alt" />
+             [alt]="label" />
     </div>
     <div class="flex justify-content-center">
         <input type="file" name="file" [accept]="acceptType" class="hidden" #inputFile (change)="fileChange($event)" />

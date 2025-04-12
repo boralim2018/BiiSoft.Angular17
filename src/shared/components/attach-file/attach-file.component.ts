@@ -15,7 +15,6 @@ import { AppConsts } from '../../AppConsts';
 })
 export class AttachFileComponent extends BFileComponentBase implements OnInit, OnChanges {
 
-    @Input() alt: string = this.l('Attach File');
     @Input() label: string = this.l('File');
     @Input() styleClass: string = 'attachment-box';
     @Input() uploadSource: number = UploadSource.Attachment; 

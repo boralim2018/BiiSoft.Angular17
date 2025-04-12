@@ -5574,6 +5574,210 @@ export class CommonLookupServiceProxy {
         }
         return _observableOf(null as any);
     }
+
+    /**
+     * @return OK
+     */
+    getLengthUnits(): Observable<LengthUnitNameValueDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetLengthUnits";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetLengthUnits(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetLengthUnits(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<LengthUnitNameValueDtoListResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<LengthUnitNameValueDtoListResultDto>;
+        }));
+    }
+
+    protected processGetLengthUnits(response: HttpResponseBase): Observable<LengthUnitNameValueDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = LengthUnitNameValueDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getWeightUnits(): Observable<WeightUnitNameValueDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetWeightUnits";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetWeightUnits(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetWeightUnits(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<WeightUnitNameValueDtoListResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<WeightUnitNameValueDtoListResultDto>;
+        }));
+    }
+
+    protected processGetWeightUnits(response: HttpResponseBase): Observable<WeightUnitNameValueDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = WeightUnitNameValueDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getAreaUnits(): Observable<AreaUnitNameValueDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetAreaUnits";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAreaUnits(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAreaUnits(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AreaUnitNameValueDtoListResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AreaUnitNameValueDtoListResultDto>;
+        }));
+    }
+
+    protected processGetAreaUnits(response: HttpResponseBase): Observable<AreaUnitNameValueDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = AreaUnitNameValueDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getVolumeUnits(): Observable<VolumeUnitNameValueDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetVolumeUnits";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetVolumeUnits(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetVolumeUnits(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<VolumeUnitNameValueDtoListResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<VolumeUnitNameValueDtoListResultDto>;
+        }));
+    }
+
+    protected processGetVolumeUnits(response: HttpResponseBase): Observable<VolumeUnitNameValueDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = VolumeUnitNameValueDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
 }
 
 @Injectable()
@@ -32062,6 +32266,104 @@ export enum AreaUnit {
     _6 = 6,
 }
 
+export class AreaUnitNameValueDto implements IAreaUnitNameValueDto {
+    name: string | undefined;
+    value: AreaUnit;
+
+    constructor(data?: IAreaUnitNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): AreaUnitNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AreaUnitNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): AreaUnitNameValueDto {
+        const json = this.toJSON();
+        let result = new AreaUnitNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAreaUnitNameValueDto {
+    name: string | undefined;
+    value: AreaUnit;
+}
+
+export class AreaUnitNameValueDtoListResultDto implements IAreaUnitNameValueDtoListResultDto {
+    items: AreaUnitNameValueDto[] | undefined;
+
+    constructor(data?: IAreaUnitNameValueDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(AreaUnitNameValueDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): AreaUnitNameValueDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new AreaUnitNameValueDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): AreaUnitNameValueDtoListResultDto {
+        const json = this.toJSON();
+        let result = new AreaUnitNameValueDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAreaUnitNameValueDtoListResultDto {
+    items: AreaUnitNameValueDto[] | undefined;
+}
+
 export class AuditLogListDto implements IAuditLogListDto {
     id: number;
     userId: number | undefined;
@@ -51171,10 +51473,6 @@ export class ItemSettingDto implements IItemSettingDto {
     diameterRequired: boolean;
     areaRequired: boolean;
     volumeRequired: boolean;
-    serialRequired: boolean;
-    expiredRequired: boolean;
-    batchNoRequired: boolean;
-    inventoryStatusRequired: boolean;
     reorderStockRequired: boolean;
     minStockRequired: boolean;
     maxStockRequired: boolean;
@@ -51252,10 +51550,6 @@ export class ItemSettingDto implements IItemSettingDto {
             this.diameterRequired = _data["diameterRequired"];
             this.areaRequired = _data["areaRequired"];
             this.volumeRequired = _data["volumeRequired"];
-            this.serialRequired = _data["serialRequired"];
-            this.expiredRequired = _data["expiredRequired"];
-            this.batchNoRequired = _data["batchNoRequired"];
-            this.inventoryStatusRequired = _data["inventoryStatusRequired"];
             this.reorderStockRequired = _data["reorderStockRequired"];
             this.minStockRequired = _data["minStockRequired"];
             this.maxStockRequired = _data["maxStockRequired"];
@@ -51333,10 +51627,6 @@ export class ItemSettingDto implements IItemSettingDto {
         data["diameterRequired"] = this.diameterRequired;
         data["areaRequired"] = this.areaRequired;
         data["volumeRequired"] = this.volumeRequired;
-        data["serialRequired"] = this.serialRequired;
-        data["expiredRequired"] = this.expiredRequired;
-        data["batchNoRequired"] = this.batchNoRequired;
-        data["inventoryStatusRequired"] = this.inventoryStatusRequired;
         data["reorderStockRequired"] = this.reorderStockRequired;
         data["minStockRequired"] = this.minStockRequired;
         data["maxStockRequired"] = this.maxStockRequired;
@@ -51414,10 +51704,6 @@ export interface IItemSettingDto {
     diameterRequired: boolean;
     areaRequired: boolean;
     volumeRequired: boolean;
-    serialRequired: boolean;
-    expiredRequired: boolean;
-    batchNoRequired: boolean;
-    inventoryStatusRequired: boolean;
     reorderStockRequired: boolean;
     minStockRequired: boolean;
     maxStockRequired: boolean;
@@ -52381,6 +52667,104 @@ export enum LengthUnit {
     _4 = 4,
     _5 = 5,
     _6 = 6,
+}
+
+export class LengthUnitNameValueDto implements ILengthUnitNameValueDto {
+    name: string | undefined;
+    value: LengthUnit;
+
+    constructor(data?: ILengthUnitNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): LengthUnitNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new LengthUnitNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): LengthUnitNameValueDto {
+        const json = this.toJSON();
+        let result = new LengthUnitNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ILengthUnitNameValueDto {
+    name: string | undefined;
+    value: LengthUnit;
+}
+
+export class LengthUnitNameValueDtoListResultDto implements ILengthUnitNameValueDtoListResultDto {
+    items: LengthUnitNameValueDto[] | undefined;
+
+    constructor(data?: ILengthUnitNameValueDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(LengthUnitNameValueDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): LengthUnitNameValueDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new LengthUnitNameValueDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): LengthUnitNameValueDtoListResultDto {
+        const json = this.toJSON();
+        let result = new LengthUnitNameValueDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ILengthUnitNameValueDtoListResultDto {
+    items: LengthUnitNameValueDto[] | undefined;
 }
 
 export class LinkToUserInput implements ILinkToUserInput {
@@ -60567,6 +60951,104 @@ export enum VolumeUnit {
     _13 = 13,
 }
 
+export class VolumeUnitNameValueDto implements IVolumeUnitNameValueDto {
+    name: string | undefined;
+    value: VolumeUnit;
+
+    constructor(data?: IVolumeUnitNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): VolumeUnitNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new VolumeUnitNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): VolumeUnitNameValueDto {
+        const json = this.toJSON();
+        let result = new VolumeUnitNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVolumeUnitNameValueDto {
+    name: string | undefined;
+    value: VolumeUnit;
+}
+
+export class VolumeUnitNameValueDtoListResultDto implements IVolumeUnitNameValueDtoListResultDto {
+    items: VolumeUnitNameValueDto[] | undefined;
+
+    constructor(data?: IVolumeUnitNameValueDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(VolumeUnitNameValueDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): VolumeUnitNameValueDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new VolumeUnitNameValueDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): VolumeUnitNameValueDtoListResultDto {
+        const json = this.toJSON();
+        let result = new VolumeUnitNameValueDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IVolumeUnitNameValueDtoListResultDto {
+    items: VolumeUnitNameValueDto[] | undefined;
+}
+
 export class WarehouseBranchDto implements IWarehouseBranchDto {
     id: string | undefined;
     branchId: string;
@@ -60908,6 +61390,104 @@ export enum WeightUnit {
     _5 = 5,
     _6 = 6,
     _7 = 7,
+}
+
+export class WeightUnitNameValueDto implements IWeightUnitNameValueDto {
+    name: string | undefined;
+    value: WeightUnit;
+
+    constructor(data?: IWeightUnitNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): WeightUnitNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new WeightUnitNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): WeightUnitNameValueDto {
+        const json = this.toJSON();
+        let result = new WeightUnitNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IWeightUnitNameValueDto {
+    name: string | undefined;
+    value: WeightUnit;
+}
+
+export class WeightUnitNameValueDtoListResultDto implements IWeightUnitNameValueDtoListResultDto {
+    items: WeightUnitNameValueDto[] | undefined;
+
+    constructor(data?: IWeightUnitNameValueDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(WeightUnitNameValueDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): WeightUnitNameValueDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new WeightUnitNameValueDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): WeightUnitNameValueDtoListResultDto {
+        const json = this.toJSON();
+        let result = new WeightUnitNameValueDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IWeightUnitNameValueDtoListResultDto {
+    items: WeightUnitNameValueDto[] | undefined;
 }
 
 export class ZoneDetailDto implements IZoneDetailDto {

@@ -1,0 +1,39 @@
+<label class="text-900 font-medium" *ngIf="label">{{label}}</label>
+<div class="flex">
+    <p-inputNumber styleClass="w-full"
+                   inputStyleClass="border-noround-right"
+                   class="w-full border-noround-right"
+                   name="{{name}}"
+                   [attr.name]="name"
+                   [inputId]="name"
+                   [placeholder]="placeholder"
+                   [required]="required"
+                   [(ngModel)]="model"
+                   (ngModelChange)="onChange($event)"
+                   (onBlur)="onTouched()"
+                   [disabled]="disabled"
+                   [minFractionDigits]="minDigits"
+                   [maxFractionDigits]="maxDigits" />
+    <p-dropdown [options]="units"
+                [(ngModel)]="unit"
+                (onChange)="onUnitChange($event)"
+                (onBlur)="onTouched()"
+                [disabled]="disabled"
+                panelStyleClass="p-0"
+                styleClass="w-7rem border-noround-left border-left-none"
+                appendTo="body"
+                [emptyFilterMessage]="l('RecordNotFound')"
+                [emptyMessage]="l('RecordNotFound')"
+                [required]="required"
+                optionLabel="name"
+                optionValue="value"
+                [virtualScroll]="true"
+                [virtualScrollItemSize]="38"
+                [filter]="true"
+                filterBy="name"
+                showClear="false"
+                [loading]="loading">
+
+    </p-dropdown>
+</div>
+<small *ngIf="required && invalid && validateMessage" class="p-error block">{{ validateMessage }}</small>

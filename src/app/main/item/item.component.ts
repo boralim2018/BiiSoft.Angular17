@@ -150,11 +150,31 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
             { name: 'Code', header: 'Code', width: '15rem', sort: true },
-            { name: 'Description', header: 'Description', width: '15rem', sort: true },
+            { name: 'ItemCategoryName', header: 'ItemCategory', width: '15rem', sort: true },
+            { name: 'UnitName', header: 'Unit', width: '15rem', sort: true },
+            { name: 'Description', header: 'Description', width: '15rem', sort: true, visible: false },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
             { name: 'LastModifierUserName', header: 'Modified', width: '15rem', sort: true, type: ColumnType.WrapText, visible: false },
         ];
+
+        if (this.appSession.itemSetting?.useItemGroup) this.columns.push({ name: 'ItemGroupName', header: 'ItemGroup', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useBrand) this.columns.push({ name: 'ItemBrandName', header: 'ItemBrand', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useGrade) this.columns.push({ name: 'ItemGradeName', header: 'ItemGrade', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useModel) this.columns.push({ name: 'ItemModelName', header: 'ItemModel', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useSize) this.columns.push({ name: 'ItemSizeName', header: 'ItemSize', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useSeries) this.columns.push({ name: 'ItemSeriesName', header: 'ItemSeries', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useColorPattern) this.columns.push({ name: 'ColorPatternName', header: 'ColorPattern', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useCPU) this.columns.push({ name: 'CPUName', header: 'CPU', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useRAM) this.columns.push({ name: 'RAMName', header: 'RAM', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useVGA) this.columns.push({ name: 'VAGName', header: 'VGA', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useHDD) this.columns.push({ name: 'HDDName', header: 'HDD', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useScreen) this.columns.push({ name: 'ScreenName', header: 'Screen', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useCamera) this.columns.push({ name: 'CameraName', header: 'Camera', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useBattery) this.columns.push({ name: 'BatteryName', header: 'Battery', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useFieldA) this.columns.push({ name: 'FieldAName', header: this.appSession.itemSetting?.fieldALabel ? this.appSession.itemSetting?.fieldALabel : 'FieldA', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useFieldB) this.columns.push({ name: 'FieldBName', header: this.appSession.itemSetting?.fieldBLabel ? this.appSession.itemSetting?.fieldBLabel : 'FieldB', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useFieldC) this.columns.push({ name: 'FieldCName', header: this.appSession.itemSetting?.fieldCLabel ? this.appSession.itemSetting?.fieldCLabel : 'FieldC', width: '15rem', sort: true, visible: false });
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }

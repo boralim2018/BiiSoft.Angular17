@@ -9,6 +9,7 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
 
     @Input() name: string;
     @Input() label: string;
+    @Input() styleClass: string = 'w-full';
     @Input() placeholder: string;
     @Input() appendTo: any = 'body'
     @Input() showClear: boolean = true;

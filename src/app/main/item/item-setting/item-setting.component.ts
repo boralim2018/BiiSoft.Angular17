@@ -48,6 +48,7 @@ export class ItemSettingComponent extends AppComponentBase implements OnInit {
             .subscribe((result) => {
                 if (result && !this.model.id) this.model.id = result;
                 this.notify.success(this.l('SavedSuccessfully'));
+                window.location.reload();
             });
     }
 }
