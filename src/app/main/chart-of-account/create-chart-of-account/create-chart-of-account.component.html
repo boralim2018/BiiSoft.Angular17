@@ -5,10 +5,7 @@
              name="selectAccountType"
              [label]="l('AccountType')"
              [required]="true"
-             [(ngModel)]="model.accountType"
-             [invalid]="createChartOfAccountForm.invalid &&
-                createChartOfAccountForm.controls.selectAccountType.touched &&
-                createChartOfAccountForm.controls.selectAccountType.errors?.required">
+             [(ngModel)]="model.accountType">
         </div>
         <div class="field"
              selectSubAccountType
@@ -16,10 +13,7 @@
              [label]="l('SubAccountType')"
              [(accountTypeIds)]="model.accountType"
              [required]="true"
-             [(ngModel)]="model.subAccountType"
-             [invalid]="createChartOfAccountForm.invalid &&
-                       createChartOfAccountForm.controls.selectSubAccountType.touched &&
-                       createChartOfAccountForm.controls.selectSubAccountType.errors?.required">
+             [(ngModel)]="model.subAccountType">
         </div>
         <div class="field" *ngIf="customCodeEnble">
             <label for="code" class="text-900 font-medium">{{l('Code')}}<span class="text-red-600">*</span></label>

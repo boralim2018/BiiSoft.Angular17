@@ -118,6 +118,10 @@ export abstract class AppComponentBase extends LocalizeComponent {
         return str === null || str === undefined || str.match(/^ *$/) !== null;
     }
 
+    isNullOrUndefined(val: any) {
+        return val === null || val === undefined;
+    }
+
     get isMobile(): boolean {
         return window.innerWidth <= 960;
     }

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessorComponentBase } from './control-value-accessor-component-base';
+import { AbstractControl, Validator } from '@angular/forms';
 
 @Component({ template: '' })
-export abstract class FindComponentBase extends ControlValueAccessorComponentBase implements OnInit {
+export abstract class FindComponentBase extends ControlValueAccessorComponentBase implements OnInit, Validator {
 
     @Input() name: string;
     @Input() label: string;
@@ -57,6 +58,13 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
         else {
             this.setValue(result);
         }
+    }
+
+    validate(control: AbstractControl): { [key: string]: any } | null {
+        this.invalid = this.required && (this.isNullOrUndefined(this.model) || (this.multiple && this.model?.length == 0));
+
+        let result = this.invalid ? { invalid: true } : null;
+        return result;
     }
 
 }

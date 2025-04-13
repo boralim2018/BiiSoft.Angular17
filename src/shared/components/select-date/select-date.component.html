@@ -11,6 +11,7 @@
             (onBlur)="onTouched()"
             [disabled]="disabled"
             dateFormat="dd-mm-yy"
-            styleClass="w-full"></p-calendar>
-<small *ngIf="required && invalid" class="p-error block">{{ l('IsRequired', label)}}</small>      
+            styleClass="w-full"
+            [ngClass]="{'ng-invalid': invalid, 'ng-dirty': dirty }"></p-calendar>
+<small *ngIf="required && invalid && dirty" class="p-error block">{{ l('IsRequired', label)}}</small>      
 

@@ -1,4 +1,7 @@
-<label class="text-900 font-medium" *ngIf="label">{{label}}</label>
+<label class="text-900 font-medium" *ngIf="label">
+    {{label}}/{{dirty}}/{{invalid}}/{{required}}
+    <span class="text-red-500" *ngIf="required">*</span>
+</label>
 <div class="flex">
     <p-inputNumber styleClass="w-full"
                    inputStyleClass="border-noround-right"
@@ -13,14 +16,14 @@
                    (onBlur)="onTouched()"
                    [disabled]="disabled"
                    [minFractionDigits]="minDigits"
-                   [maxFractionDigits]="maxDigits" />
+                   [maxFractionDigits]="maxDigits"
+                   [ngClass]="{'ng-dirty': dirty, 'ng-invalid': invalid}"/>
     <p-dropdown [options]="units"
                 [(ngModel)]="unit"
                 (onChange)="onUnitChange($event)"
                 (onBlur)="onTouched()"
                 [disabled]="disabled"
-                panelStyleClass="p-0"
-                styleClass="w-7rem border-noround-left border-left-none"
+                styleClass="w-6rem border-noround-left border-left-none"
                 appendTo="body"
                 [emptyFilterMessage]="l('RecordNotFound')"
                 [emptyMessage]="l('RecordNotFound')"
@@ -32,8 +35,8 @@
                 [filter]="true"
                 filterBy="name"
                 showClear="false"
-                [loading]="loading">
-
+                [loading]="loading"
+                [ngClass]="{'ng-dirty': dirty, 'ng-invalid': invalid}">
     </p-dropdown>
 </div>
-<small *ngIf="required && invalid && validateMessage" class="p-error block">{{ validateMessage }}</small>
+<small *ngIf="required && invalid && dirty && validateMessage" class="p-error block">{{ validateMessage }}</small>

@@ -54,7 +54,6 @@
                                    class="w-full"
                                    name="displayName"
                                    id="displayName"
-                                   minlength="2"
                                    maxlength="64"
                                    required
                                    [(ngModel)]="model.displayName"
@@ -78,8 +77,8 @@
                            class="w-full"
                            name="code"
                            id="code"
-                           minlength="2"
                            maxlength="32"
+                           required
                            [(ngModel)]="model.code"
                            #codeModel="ngModel"
                            #codeEl />

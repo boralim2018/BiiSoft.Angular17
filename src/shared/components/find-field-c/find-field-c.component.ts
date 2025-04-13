@@ -2,7 +2,7 @@ import { Component, forwardRef, Injector, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FindComponentBase } from 'shared/find-component-base';
 import { FindFieldCDialogComponent } from './find-field-c-dialog.component';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgIf, NgClass, NgFor } from '@angular/common';
 
@@ -14,6 +14,11 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => FindFieldCComponent),
             multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => FindFieldCComponent),
+            multi: true,
         },
         DialogService
     ],

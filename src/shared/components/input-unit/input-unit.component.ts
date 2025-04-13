@@ -2,14 +2,14 @@ import { Component, forwardRef, Injector, Input, Output, OnInit, EventEmitter } 
 import { CommonLookupServiceProxy } from '@shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { InputTextModule } from 'primeng/inputtext';
-import { NgIf } from '@angular/common';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
+import { AbstractControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ControlValueAccessorComponentBase } from '../../control-value-accessor-component-base';
 import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({ template: '' })
-export abstract class InputUnitComponentBase extends ControlValueAccessorComponentBase implements OnInit {
+export abstract class InputUnitComponentBase extends ControlValueAccessorComponentBase implements OnInit, Validator {
 
     @Input() name: string;
     @Input() label: string;
@@ -33,6 +33,7 @@ export abstract class InputUnitComponentBase extends ControlValueAccessorCompone
             this.validateMessage = this.l("IsRequired", this.label);
             if (!this.placeholder) this.placeholder = this.l('Select_', this.label);
         }
+        this.invalid = true;
     }
 
     onUnitChange(event: any) {
@@ -44,8 +45,15 @@ export abstract class InputUnitComponentBase extends ControlValueAccessorCompone
             this.unitObjChange.emit(obj);
         }
         this.unitChange.emit(event.value);
+        this.onChange(this.model);
     }
 
+    validate(control: AbstractControl): { [key: string]: any } | null {
+        this.invalid = this.required && (this.isNullOrUndefined(this.model) || this.isNullOrUndefined(this.unit));
+
+        let result = this.invalid ? { invalid: true } : null;
+        return result;
+    }
 }
 
 @Component({
@@ -58,10 +66,15 @@ export abstract class InputUnitComponentBase extends ControlValueAccessorCompone
             useExisting: forwardRef(() => InputLengthUnitComponent),
             multi: true,
         },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => InputLengthUnitComponent),
+            multi: true,
+        },
         CommonLookupServiceProxy
     ],
     standalone: true,
-    imports: [DropdownModule, FormsModule, NgIf, InputTextModule, InputNumberModule]
+    imports: [DropdownModule, FormsModule, NgIf, NgClass, InputTextModule, InputNumberModule]
 })
 export class InputLengthUnitComponent extends InputUnitComponentBase implements OnInit {
 
@@ -97,10 +110,15 @@ export class InputLengthUnitComponent extends InputUnitComponentBase implements 
             useExisting: forwardRef(() => InputWeightUnitComponent),
             multi: true,
         },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => InputWeightUnitComponent),
+            multi: true,
+        },
         CommonLookupServiceProxy
     ],
     standalone: true,
-    imports: [DropdownModule, FormsModule, NgIf, InputTextModule, InputNumberModule]
+    imports: [DropdownModule, FormsModule, NgIf, NgClass, InputTextModule, InputNumberModule]
 })
 export class InputWeightUnitComponent extends InputUnitComponentBase implements OnInit {
 
@@ -137,10 +155,15 @@ export class InputWeightUnitComponent extends InputUnitComponentBase implements 
             useExisting: forwardRef(() => InputAreaUnitComponent),
             multi: true,
         },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => InputAreaUnitComponent),
+            multi: true,
+        },
         CommonLookupServiceProxy
     ],
     standalone: true,
-    imports: [DropdownModule, FormsModule, NgIf, InputTextModule, InputNumberModule]
+    imports: [DropdownModule, FormsModule, NgIf, NgClass, InputTextModule, InputNumberModule]
 })
 export class InputAreaUnitComponent extends InputUnitComponentBase implements OnInit {
 
@@ -176,10 +199,15 @@ export class InputAreaUnitComponent extends InputUnitComponentBase implements On
             useExisting: forwardRef(() => InputVolumeUnitComponent),
             multi: true,
         },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => InputVolumeUnitComponent),
+            multi: true,
+        },
         CommonLookupServiceProxy
     ],
     standalone: true,
-    imports: [DropdownModule, FormsModule, NgIf, InputTextModule, InputNumberModule]
+    imports: [DropdownModule, FormsModule, NgIf, NgClass, InputTextModule, InputNumberModule]
 })
 export class InputVolumeUnitComponent extends InputUnitComponentBase implements OnInit {
 

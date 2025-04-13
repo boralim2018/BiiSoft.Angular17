@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit, Input, forwardRef } from '@angular/core';
-import { NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
+import { AbstractControl, FormsModule, NG_VALIDATORS, Validator } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbpValidationSummaryComponent } from '../validation/abp-validation.summary.component';
@@ -9,23 +9,28 @@ import { ControlValueAccessorComponentBase } from '../../control-value-accessor-
 @Component({
     selector: 'select-date, [selectDate]',
     templateUrl: './select-date.component.html',
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => SelectDateComponent),
-        multi: true
-    }],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SelectDateComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => SelectDateComponent),
+            multi: true,
+        },
+    ],
     standalone: true,
-    imports: [FormsModule, NgIf, CalendarModule, AbpValidationSummaryComponent]
+    imports: [FormsModule, NgIf, NgClass, CalendarModule, AbpValidationSummaryComponent]
 })
-export class SelectDateComponent extends ControlValueAccessorComponentBase implements OnInit {
+export class SelectDateComponent extends ControlValueAccessorComponentBase implements OnInit, Validator {
 
     @Input() name: string;
     @Input() label: string;
     @Input() placeholder: string;
     @Input() inputId: string;
     @Input() appendTo: any = 'body'
-    @Input() required: boolean;
-    @Input() invalid: boolean;
     
     constructor(injector: Injector) {
         super(injector);
@@ -34,6 +39,13 @@ export class SelectDateComponent extends ControlValueAccessorComponentBase imple
 
     ngOnInit(): void {      
         
+    }
+
+    validate(control: AbstractControl): { [key: string]: any } | null {
+        this.invalid = this.required && this.isNullOrUndefined(this.model);
+
+        let result = this.invalid ? { invalid: true } : null;
+        return result;
     }
 
 }

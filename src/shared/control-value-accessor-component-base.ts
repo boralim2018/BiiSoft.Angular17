@@ -6,8 +6,9 @@ import { ControlValueAccessor } from '@angular/forms';
 export abstract class ControlValueAccessorComponentBase extends AppComponentBase implements ControlValueAccessor {
 
     @Input() required: boolean;
-    @Input() invalid: boolean;
 
+    invalid: boolean;
+    dirty: boolean;
     disabled: boolean;
     model: any;
 
@@ -20,10 +21,14 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
 
     writeValue(value: any): void {
         this.model = value;
+        this.dirty = false;
     }
 
     registerOnChange(fn: (value: any) => void): void {
-        this.onChange = fn;
+        this.onChange = (value: any) => {
+            this.dirty = true; // Mark as dirty when the value changes
+            fn(value);
+        };
     }
 
     registerOnTouched(fn: () => void): void {
@@ -36,6 +41,7 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
 
     setValue(value: any) {
         this.model = value;
+        this.dirty = true; // Mark as dirty when the value is set manually
         this.onChange(value);
     }
 }

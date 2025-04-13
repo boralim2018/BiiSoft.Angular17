@@ -1,3 +1,5 @@
-::ng-deep .p-inputtext.p-dropdown-label {
+:host ::ng-deep .p-inputtext.p-dropdown-label {
     padding-right: 0 !important;
+    padding-left: 0.5rem;
+    text-align: center;
 }

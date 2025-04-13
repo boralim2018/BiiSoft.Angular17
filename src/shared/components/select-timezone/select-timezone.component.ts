@@ -3,8 +3,8 @@ import { CommonLookupServiceProxy } from '@shared/service-proxies/service-proxie
 import { finalize } from 'rxjs/operators';
 import { SelectComponentBase } from 'shared/select-component-base';
 import { InputTextModule } from 'primeng/inputtext';
-import { NgIf } from '@angular/common';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
+import { FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -18,10 +18,15 @@ import { MultiSelectModule } from 'primeng/multiselect';
             useExisting: forwardRef(() => SelectTimezoneComponent),
             multi: true,
         },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => SelectTimezoneComponent),
+            multi: true,
+        },
         CommonLookupServiceProxy
     ],
     standalone: true,
-    imports: [DropdownModule, MultiSelectModule, CheckboxModule, FormsModule, NgIf, InputTextModule]
+    imports: [DropdownModule, MultiSelectModule, CheckboxModule, FormsModule, NgIf, NgClass, InputTextModule]
 })
 export class SelectTimezoneComponent extends SelectComponentBase implements OnInit {
 
@@ -29,10 +34,10 @@ export class SelectTimezoneComponent extends SelectComponentBase implements OnIn
         private _service: CommonLookupServiceProxy
     ) {
         super(injector);
-        this.placeholder = this.l('Select_', this.l('Timezone'));
     }
 
     ngOnInit() {
+        super.ngOnInit();
         this.getModels();
     }
     

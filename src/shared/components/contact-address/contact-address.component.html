@@ -15,8 +15,7 @@
          [label]="l('Country')"
          [(ngModel)]="model.country"
          (ngModelChange)="onCountryChange($event)"
-         [required]="true"
-         [invalid]="invalid && touchedCountry && !model.countryId">
+         [required]="true">
     </div>
     <div class="field col-12 md:col-6"
          findCityProvince
@@ -25,8 +24,7 @@
          [countries]="model.country"
          [(ngModel)]="model.cityProvince"
          (ngModelChange)="onCityProvinceChange($event)"
-         [required]="addressLevel >= 1"
-         [invalid]="invalid && touchedCityProvince && !model.cityProvinceId">
+         [required]="addressLevel >= 1">
     </div>
     <div class="field col-12 md:col-6"
          findKhanDistrict
@@ -36,8 +34,7 @@
          [cityProvinces]="model.cityProvince"
          [(ngModel)]="model.khanDistrict"
          (ngModelChange)="onKhanDistrictChange($event)"
-         [required]="addressLevel >= 2"
-         [invalid]="invalid && touchedKhanDistrict && !model.khanDistrictId">
+         [required]="addressLevel >= 2">
     </div>
     <div class="field col-12 md:col-6"
          findSangkatCommune
@@ -48,8 +45,7 @@
          [khanDistricts]="model.khanDistrict"
          [(ngModel)]="model.sangkatCommune"
          (ngModelChange)="onSangkatCommuneChange($event)"
-         [required]="addressLevel >= 3"
-         [invalid]="invalid && touchedSangkatCommune && !model.sangkatCommuneId">
+         [required]="addressLevel >= 3">
     </div>
     <div class="field col-12 md:col-6"
          findVillage
@@ -61,8 +57,7 @@
          [sangkatCommunes]="model.sangkatCommune"
          [(ngModel)]="model.village"
          (ngModelChange)="onVillageChange($event)"
-         [required]="addressLevel >= 4"
-         [invalid]="invalid && touchedVillage && !model.villageId">
+         [required]="addressLevel >= 4">
     </div>
     <div class="field col-12 md:col-6">
         <label class="text-900 font-medium">{{l('PostalCode')}}<span class="text-red-500" *ngIf="requiredPostalCode">*</span></label>

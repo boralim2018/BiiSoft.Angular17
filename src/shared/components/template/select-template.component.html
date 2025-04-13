@@ -1,5 +1,5 @@
 <label *ngIf="label" class="flex flex-wrap align-items-center gap-1 mb-2">
-    {{label}}
+    {{label}}/{{dirty}}/{{invalid}}/{{required}}/{{validateMessage}}
     <p-checkbox name="{{'exclude_' + name}}"
                 [label]="l('Exclude')"
                 [binary]="true"
@@ -30,7 +30,8 @@
             filterBy="name"
             [showClear]="showClear"
             [loading]="loading"
-            *ngIf="!multiple">
+            *ngIf="!multiple"
+            [ngClass]="{'ng-dirty': dirty, 'ng-invalid': invalid}">
 </p-dropdown>
 <p-multiSelect [options]="models"
                [(ngModel)]="model"
@@ -54,6 +55,7 @@
                filterBy="name"
                [showClear]="showClear"
                [loading]="loading"
-               *ngIf="multiple">
+               *ngIf="multiple"
+               [ngClass]="{'ng-dirty': dirty, 'ng-invalid': invalid}">
 </p-multiSelect>
-<small *ngIf="required && invalid && validateMessage" class="p-error block">{{ validateMessage }}</small>
+<small *ngIf="required && invalid && dirty && validateMessage" class="p-error block">{{ validateMessage }}</small>

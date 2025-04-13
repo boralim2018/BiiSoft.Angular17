@@ -30,8 +30,7 @@
                                  [required]="true"
                                  [label]="l('RegionCountry')"
                                  [(ngModel)]="regionCountry"
-                                 (ngModelChange)="onRegionCountryChange($event)"
-                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.selectRegionCountry.errors?.required">
+                                 (ngModelChange)="onRegionCountryChange($event)">
                             </div>
                             <div class="field col-12 md:col-6"
                                  findCurrency
@@ -39,8 +38,7 @@
                                  [required]="true"
                                  [label]="l('Currency')"
                                  [(ngModel)]="currency"
-                                 (ngModelChange)="generalSetting.currencyId = $event?.id"
-                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.currency.errors?.required">
+                                 (ngModelChange)="generalSetting.currencyId = $event?.id">
                             </div>
                             <div class="field col-12 md:col-6"
                                  selectTimezone
@@ -48,7 +46,6 @@
                                  [required]="true"
                                  [label]="l('Timezone')"
                                  [(ngModel)]="generalSetting.defaultTimeZone"
-                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.selectTimezone.errors?.required"
                                  #timezone>
                             </div>
                             <div class="field col-12 md:col-6"
@@ -59,8 +56,7 @@
                                  [placeholder]="l('BusinessStartDate')"
                                  [label]="l('BusinessStartDate')"
                                  [required]="true"
-                                 [disabled]="false"
-                                 [invalid]="genaralSettingForm.invalid && genaralSettingForm.touched && genaralSettingForm.controls.businessStartDate.errors?.required">
+                                 [disabled]="false">
                             </div>
 
                             <div class="field col-12 md:col-6">
@@ -294,8 +290,7 @@
                                  [requiredPostalCode]="true"
                                  [requiredStreet]="true"
                                  [requiredHouseNo]="true"
-                                 [required]="true"
-                                 [invalid]="companyProfileForm.invalid && companyProfileForm.touched && companyProfileForm.controls.billingAddress.errors?.invalid">
+                                 [required]="true">
                             </div>
                             <div class="formgrid grid m-0"
                                  contactAddress
@@ -306,8 +301,7 @@
                                  [requiredPostalCode]="true"
                                  [requiredStreet]="true"
                                  [requiredHouseNo]="true"
-                                 [required]="true"
-                                 [invalid]="companyProfileForm.invalid && companyProfileForm.touched && companyProfileForm.controls.shippingAddress.errors?.invalid">
+                                 [required]="true">
                             </div>
 
                             <div class="flex justify-content-end gap-2 py-4">

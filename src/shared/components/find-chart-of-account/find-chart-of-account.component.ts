@@ -2,7 +2,7 @@ import { Component, Injector, OnInit, Input, Output, EventEmitter, forwardRef } 
 import { DialogService } from 'primeng/dynamicdialog';
 import { FindComponentBase } from 'shared/find-component-base';
 import { FindChartOfAccountDialogComponent } from './find-chart-of-account-dialog.component';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgIf, NgClass, NgFor } from '@angular/common';
 import { AccountTypeFilterInputDto, SubAccountTypeFilterInputDto } from '../../service-proxies/service-proxies';
@@ -15,6 +15,11 @@ import { AccountTypeFilterInputDto, SubAccountTypeFilterInputDto } from '../../s
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => FindChartOfAccountComponent),
             multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => FindChartOfAccountComponent),
+            multi: true,
         },
         DialogService
     ],

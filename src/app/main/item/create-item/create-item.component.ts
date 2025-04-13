@@ -14,7 +14,7 @@ import { AppComponentBase } from '../../../../shared/app-component-base';
 import { DividerModule } from 'primeng/divider';
 import { FindUserComponent } from '../../../../shared/components/find-user/find-user.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
 import { SelectItemCategoryComponent } from '../../../../shared/components/select-item-type/select-item-category.component';
 import { AttachFileComponent } from '../../../../shared/components/attach-file/attach-file.component';
@@ -51,7 +51,7 @@ import { InputAreaUnitComponent, InputLengthUnitComponent, InputVolumeUnitCompon
     providers: [ItemServiceProxy],
     standalone: true,
     imports: [
-        FormsModule, BusyDirective, NgIf, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent, InputTextareaModule,
+        FormsModule, BusyDirective, NgIf, NgClass, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent, InputTextareaModule,
         ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, SelectItemCategoryComponent, AttachFileComponent,
         SelectItemTypeComponent, FindUnitComponent, FindItemGroupComponent, FindItemBrandComponent, FindItemGradeComponent, FindItemModelComponent,
         FindItemSizeComponent, FindItemSeriesComponent, FindColorPatternComponent, FindCPUComponent, FindRAMComponent, FindVGAComponent,
