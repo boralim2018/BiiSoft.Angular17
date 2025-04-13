@@ -34,15 +34,14 @@ export class SelectDateComponent extends ControlValueAccessorComponentBase imple
     
     constructor(injector: Injector) {
         super(injector);
-        this.placeholder = this.l('Select_', this.l('Date'));
     }
 
     ngOnInit(): void {      
-        
+        this.placeholder = this.l('Select_', this.l('Date'));
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        this.invalid = this.required && this.isNullOrUndefined(this.model);
+        this.invalid = this.isNullOrUndefined(this.model);
 
         let result = this.invalid ? { invalid: true } : null;
         return result;

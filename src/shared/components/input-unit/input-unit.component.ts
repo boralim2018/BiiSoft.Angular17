@@ -33,10 +33,10 @@ export abstract class InputUnitComponentBase extends ControlValueAccessorCompone
             this.validateMessage = this.l("IsRequired", this.label);
             if (!this.placeholder) this.placeholder = this.l('Select_', this.label);
         }
-        this.invalid = true;
     }
 
     onUnitChange(event: any) {
+        this.markAsDirty(); // Mark as dirty when the value changes
         if (event.value == undefined || event.value == null) {
             this.unitObjChange.emit(undefined);
         }

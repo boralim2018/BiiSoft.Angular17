@@ -32,7 +32,6 @@ export class FindBranchComponent extends FindComponentBase implements OnInit {
         private _dialogService: DialogService,
     ) {
         super(injector);
-        this.placeholder = this.l('Select_', this.l('Branch'));
     }
 
     ngOnInit() {

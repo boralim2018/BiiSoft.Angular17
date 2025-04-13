@@ -24,9 +24,15 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
         this.dirty = false;
     }
 
+    setValue(value: any) {
+        this.model = value;
+        this.markAsDirty(); // Mark as dirty when the value is set manually
+        this.onChange(value);
+    }
+
     registerOnChange(fn: (value: any) => void): void {
         this.onChange = (value: any) => {
-            this.dirty = true; // Mark as dirty when the value changes
+            this.markAsDirty(); // Mark as dirty when the value changes
             fn(value);
         };
     }
@@ -39,9 +45,7 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
         this.disabled = isDisabled;
     }
 
-    setValue(value: any) {
-        this.model = value;
-        this.dirty = true; // Mark as dirty when the value is set manually
-        this.onChange(value);
+    protected markAsDirty() {
+        this.dirty = true;
     }
 }

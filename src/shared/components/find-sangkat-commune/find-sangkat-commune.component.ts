@@ -36,7 +36,6 @@ export class FindSangkatCommuneComponent extends FindComponentBase implements On
         private _dialogService: DialogService,
     ) {
         super(injector);
-        this.placeholder = this.l('Select_', this.l('SangkatCommune'));
     }
 
     ngOnInit() {

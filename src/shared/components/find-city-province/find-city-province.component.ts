@@ -34,7 +34,6 @@ export class FindCityProvinceComponent extends FindComponentBase implements OnIn
         private _dialogService: DialogService,
     ) {
         super(injector);
-        this.placeholder = this.l('Select_', this.l('CityProvince'));
     }
 
     ngOnInit() {

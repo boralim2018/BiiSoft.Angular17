@@ -39,10 +39,10 @@ export class SelectSubAccountTypeComponent extends SelectComponentBase implement
         private _service: CommonLookupServiceProxy
     ) {
         super(injector);
-        this.validateMessage = this.l("IsRequired", this.l('SubAccountType'));
     }
 
     ngOnInit() {
+        super.ngOnInit();
         this.getModels();
     }
 

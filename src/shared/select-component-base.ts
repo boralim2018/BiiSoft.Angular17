@@ -38,7 +38,7 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        this.invalid = this.required && (this.isNullOrUndefined(this.model) || (this.multiple && this.model?.length == 0));
+        this.invalid = this.isNullOrUndefined(this.model) || (this.multiple && this.model?.length == 0);
 
         let result = this.invalid ? { invalid: true } : null;
         return result;

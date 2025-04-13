@@ -34,10 +34,10 @@ export class SelectAccountTypeComponent extends SelectComponentBase implements O
         private _service: CommonLookupServiceProxy
     ) {
         super(injector);
-        this.validateMessage = this.l("IsRequired", this.l('AccountType'));
     }
 
     ngOnInit() {
+        super.ngOnInit();
         this.getModels();
     }
 

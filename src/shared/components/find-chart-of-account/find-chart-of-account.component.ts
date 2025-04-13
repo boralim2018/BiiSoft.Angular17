@@ -37,7 +37,6 @@ export class FindChartOfAccountComponent extends FindComponentBase implements On
         private _dialogService: DialogService,
     ) {
         super(injector);
-        this.placeholder = this.l('Select_', this.l('ChartOfAccount'));
     }
 
     ngOnInit() {

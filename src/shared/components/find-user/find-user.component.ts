@@ -33,7 +33,6 @@ export class FindUserComponent extends FindComponentBase implements OnInit {
     ) {
         super(injector);
         this.optionLabel = 'userName';
-        this.placeholder = this.l('Select_', this.l('User'));
     }
 
     ngOnInit() {

@@ -32,7 +32,6 @@ export class FindColorPatternComponent extends FindComponentBase implements OnIn
         private _dialogService: DialogService,
     ) {
         super(injector);
-        this.placeholder = this.l('Select_', this.l('ColorPattern'));
     }
 
     ngOnInit() {

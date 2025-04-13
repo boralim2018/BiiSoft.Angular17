@@ -67,7 +67,7 @@ export class CreateItemComponent extends AppComponentBase implements OnInit {
 
     blankImageUrl: string = AppConsts.blankImageUrl;
     uploadUrl: string = '/CompanyProfile/Upload';
-    uploadSource: number = UploadSource.CompanyLogo; 
+    uploadSource: number = UploadSource.CompanyLogo;
 
     constructor(
         injector: Injector,
@@ -77,7 +77,7 @@ export class CreateItemComponent extends AppComponentBase implements OnInit {
     }
 
     ngOnInit(): void {
-        this.initModel();
+        this.initModel(); 
     }
 
     initModel() {
