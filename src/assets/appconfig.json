@@ -1,4 +1,5 @@
 {
+  "appName": "BiiSoft",
   "remoteServiceBaseUrl": "https://localhost:44311",
   "appBaseUrl": "http://localhost:4200",
   "localeMappings": [

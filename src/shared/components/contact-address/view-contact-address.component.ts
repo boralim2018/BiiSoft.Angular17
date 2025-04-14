@@ -18,6 +18,10 @@ export class ViewContactAddressComponent extends AppComponentBase implements OnI
     @Input() isShippingAddress: boolean;
     @Input() sameAsBillingAddress: boolean;
 
+    khanDistrictEnable: boolean = this.feature.isEnabled("App.Setup.Locations.KhanDistricts");
+    sangkatCommuneEnable: boolean = this.feature.isEnabled("App.Setup.Locations.SangkatCommunes");
+    villageEnable: boolean = this.feature.isEnabled("App.Setup.Locations.Villages");
+
     constructor(
         injector: Injector
     ) {

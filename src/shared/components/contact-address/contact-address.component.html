@@ -34,7 +34,8 @@
          [cityProvinces]="model.cityProvince"
          [(ngModel)]="model.khanDistrict"
          (ngModelChange)="onKhanDistrictChange($event)"
-         [required]="addressLevel >= 2">
+         [required]="addressLevel >= 2"
+         *ngIf="khanDistrictEnable">
     </div>
     <div class="field col-12 md:col-6"
          findSangkatCommune
@@ -45,7 +46,8 @@
          [khanDistricts]="model.khanDistrict"
          [(ngModel)]="model.sangkatCommune"
          (ngModelChange)="onSangkatCommuneChange($event)"
-         [required]="addressLevel >= 3">
+         [required]="addressLevel >= 3"
+         *ngIf="sangkatCommuneEnable">
     </div>
     <div class="field col-12 md:col-6"
          findVillage
@@ -57,7 +59,8 @@
          [sangkatCommunes]="model.sangkatCommune"
          [(ngModel)]="model.village"
          (ngModelChange)="onVillageChange($event)"
-         [required]="addressLevel >= 4">
+         [required]="addressLevel >= 4"
+         *ngIf="villageEnable">
     </div>
     <div class="field col-12 md:col-6">
         <label class="text-900 font-medium">{{l('PostalCode')}}<span class="text-red-500" *ngIf="requiredPostalCode">*</span></label>

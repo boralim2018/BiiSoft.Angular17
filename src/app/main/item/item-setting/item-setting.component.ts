@@ -33,11 +33,12 @@ export class ItemSettingComponent extends AppComponentBase implements OnInit {
     }
 
     getModel() {
+        this.model = new ItemSettingDto();
         this.loading = true;
         this._itemService.getItemSetting()
             .pipe(finalize(() => this.loading = false))
             .subscribe((result) => {
-                this.model = result ?? new ItemSettingDto();
+                this.model.init(result);
             });
     }
 

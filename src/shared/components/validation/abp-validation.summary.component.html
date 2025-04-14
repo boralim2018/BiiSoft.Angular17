@@ -8,7 +8,7 @@
     </ng-container>
 </ng-container>-->
 
-<ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
+<ng-container *ngIf="control.invalid && (control.dirty)">
     <ng-container *ngFor="let validationError of validationErrors">        
         <small *ngIf="!!this.control.errors[validationError.name]"
                class="p-error mt-1"

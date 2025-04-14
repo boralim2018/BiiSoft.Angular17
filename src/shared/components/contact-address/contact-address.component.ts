@@ -47,6 +47,10 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
     touchedSangkatCommune: boolean;
     touchedVillage: boolean;
 
+    khanDistrictEnable: boolean = this.feature.isEnabled("App.Setup.Locations.KhanDistricts");
+    sangkatCommuneEnable: boolean = this.feature.isEnabled("App.Setup.Locations.SangkatCommunes");
+    villageEnable: boolean = this.feature.isEnabled("App.Setup.Locations.Villages");
+
     get addressLevel(): number {
         return this.appSession.generalSetting?.contactAddressLevel ?? 0;
     }

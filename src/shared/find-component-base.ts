@@ -27,6 +27,9 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
             this.validateMessage = this.l("IsRequired", this.label);
             if (!this.placeholder) this.placeholder = this.l('Select_', this.label);
         }
+        else if (this.placeholder) {
+            this.validateMessage = this.placeholder;
+        }
     }
     
     getDisplay(model: any): any {

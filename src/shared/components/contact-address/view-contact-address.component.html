@@ -25,14 +25,14 @@
         <div class="col-4 lg:col-2 py-2"> {{l('PostalCode')}} </div>
         <div class="col-8 lg:col-4 py-2 font-bold">: {{model.postalCode}} </div>
 
-        <div class="col-4 lg:col-2 py-2"> {{l('Village')}} </div>
-        <div class="col-8 lg:col-4 py-2 font-bold">: {{model.vilageName}}</div>
+        <div class="col-4 lg:col-2 py-2" *ngIf="villageEnable"> {{l('Village')}} </div>
+        <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="villageEnable">: {{model.vilageName}}</div>
 
-        <div class="col-4 lg:col-2 py-2"> {{l('SangkatCommune')}} </div>
-        <div class="col-8 lg:col-4 py-2 font-bold">: {{model.sangkatCommuneName}}</div>
+        <div class="col-4 lg:col-2 py-2" *ngIf="sangkatCommuneEnable"> {{l('SangkatCommune')}} </div>
+        <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="sangkatCommuneEnable">: {{model.sangkatCommuneName}}</div>
 
-        <div class="col-4 lg:col-2 py-2"> {{l('KhanDistrict')}} </div>
-        <div class="col-8 lg:col-4 py-2 font-bold">: {{model.khanDistrictName}}</div>
+        <div class="col-4 lg:col-2 py-2" *ngIf="khanDistrictEnable"> {{l('KhanDistrict')}} </div>
+        <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="khanDistrictEnable">: {{model.khanDistrictName}}</div>
 
         <div class="col-4 lg:col-2 py-2"> {{l('CityProvince')}} </div>
         <div class="col-8 lg:col-4 py-2 font-bold">: {{model.cityProvinceName}}</div>

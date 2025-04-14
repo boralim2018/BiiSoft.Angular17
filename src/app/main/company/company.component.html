@@ -67,8 +67,10 @@
                                             [placeholder]="l('Select_', l('Rounding'))"
                                             styleClass="w-full"
                                             required
-                                            #roundTotalDigits="ngModel" />
-                                <small *ngIf="roundTotalDigits.invalid && (roundTotalDigits.dirty || roundTotalDigits.touched)"
+                                            #roundTotalDigitsModel="ngModel"
+                                            [showClear]="true"
+                                            [ngClass]="{'ng-invalid': roundTotalDigitsModel.invalid, 'ng-dirty': roundTotalDigitsModel.dirty}"/>
+                                <small *ngIf="roundTotalDigitsModel.invalid && roundTotalDigitsModel.dirty"
                                        class="p-error block">{{l('IsRequired', l('Rounding_', l('Total')))}}</small>
                             </div>
                             <div class="field col-12 md:col-6">
@@ -79,8 +81,10 @@
                                             [placeholder]="l('Select_', l('Rounding'))"
                                             styleClass="w-full"
                                             required
-                                            #roundCostDigits="ngModel" />
-                                <small *ngIf="roundCostDigits.invalid && (roundCostDigits.dirty || roundCostDigits.touched)"
+                                            #roundCostDigitsModel="ngModel"
+                                            [showClear]="true"
+                                            [ngClass]="{'ng-invalid': roundCostDigitsModel.invalid, 'ng-dirty': roundCostDigitsModel.dirty}"/>
+                                <small *ngIf="roundCostDigitsModel.invalid && roundCostDigitsModel.dirty"
                                        class="p-error block">{{l('IsRequired', l('Rounding_', l('Cost')))}}</small>
                             </div>
                             <div class="field col-12 md:col-6">
@@ -92,7 +96,12 @@
                                             required
                                             optionValue="id"
                                             optionLabel="name"
-                                            styleClass="w-full" />
+                                            styleClass="w-full"
+                                            #addressLevelModel="ngModel"
+                                            [showClear]="true"
+                                            [ngClass]="{'ng-invalid': addressLevelModel.invalid, 'ng-dirty': addressLevelModel.dirty}" />
+                                <small *ngIf="addressLevelModel.invalid && addressLevelModel.dirty"
+                                       class="p-error block">{{l('IsRequired', l('ContactAddressLevel'))}}</small>
                             </div>
                         </div>
 

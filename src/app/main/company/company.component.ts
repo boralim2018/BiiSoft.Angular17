@@ -139,8 +139,8 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBas
 
                     if (result.branch) {
                         this.branch.init(result.branch);
-                        this.setAddressDetails(result.branch.billingAddress);
-                        this.setAddressDetails(result.branch.shippingAddress);
+                        this.setAddressDetails(this.branch.billingAddress);
+                        this.setAddressDetails(this.branch.shippingAddress);
                     }
                   
                     if (result.advanceSetting) this.advanceSetting.init(result.advanceSetting);

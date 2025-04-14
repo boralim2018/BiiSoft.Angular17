@@ -33,7 +33,10 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     ngOnInit(): void {
         if (this.label) {
             this.validateMessage = this.l("IsRequired", this.label);
-            if(!this.placeholder) this.placeholder = this.l('Select_', this.label);
+            if (!this.placeholder) this.placeholder = this.l('Select_', this.label);
+        }
+        else if (this.placeholder) {
+            this.validateMessage = this.placeholder;
         }
     }
 

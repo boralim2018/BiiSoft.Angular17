@@ -2,7 +2,7 @@
     <div class="card mb-5">
         <form novalidate autocomplete="off" #editLocationForm="ngForm" (ngSubmit)="save()" [busy]="saving">
 
-            <h4>{{l('Create_', l('Branch'))}}</h4>
+            <h4>{{l('Edit_', l('Branch'))}}</h4>
             <p-divider></p-divider>
 
             <div class="formgrid grid m-0">
@@ -149,6 +149,7 @@
                 <div class="field mt-2"
                      findUser
                      name="user"
+                     [placeholder]="l('Select_', l('Users'))"
                      [required]="true"
                      [multiple]="true"
                      [(ngModel)]="users"

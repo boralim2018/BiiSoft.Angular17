@@ -60,8 +60,8 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
             .pipe(finalize(() => this.saving = false))
             .subscribe((result: BranchDetailDto) => {
                 this.model.init(result);
-                this.setAddressDetails(result.billingAddress);
-                this.setAddressDetails(result.shippingAddress);
+                this.setAddressDetails(this.model.billingAddress);
+                this.setAddressDetails(this.model.shippingAddress);
 
                 if (result.branchUsers && result.branchUsers.length) {
                     this.users = result.branchUsers.map(b => {

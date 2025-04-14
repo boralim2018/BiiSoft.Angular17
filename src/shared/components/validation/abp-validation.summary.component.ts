@@ -71,8 +71,8 @@ export class AbpValidationSummaryComponent extends AppComponentBase implements O
     if (this.controlEl) {
       this.control.valueChanges.subscribe(() => {
         if (
-          this.control.valid &&
-          (this.control.dirty || this.control.touched)
+          this.control.valid && this.control.dirty
+            //(this.control.dirty || this.control.touched)
         ) {
           this._renderer.removeClass(this.controlEl, 'is-invalid');
         }
