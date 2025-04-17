@@ -2,24 +2,21 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateCameraInputDto, CameraDetailDto, CameraServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
-import { of } from 'rxjs';
-import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
 import { NgIf } from '@angular/common';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-edit-camera',
     templateUrl: './edit-camera.component.html',
     providers: [CameraServiceProxy],
     standalone: true,
-    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindChartOfAccountComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class EditCameraComponent extends DynamicDialogBase implements OnInit {
     saving = false;

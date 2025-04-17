@@ -2,19 +2,17 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateChartOfAccountInputDto, ChartOfAccountDetailDto, ChartOfAccountServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
-import { of } from 'rxjs';
 import { SelectAccountTypeComponent } from '../../../../shared/components/select-account-type/select-account-type.component';
 import { SelectSubAccountTypeComponent } from '../../../../shared/components/select-account-type/select-sub-account-type.component';
 import { NgIf } from '@angular/common';
 import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-edit-chart-of-account',
@@ -27,7 +25,7 @@ import { FindChartOfAccountComponent } from '../../../../shared/components/find-
         FindChartOfAccountComponent,
         FormsModule, NgIf,
         BusyDirective, LocalizePipe,
-        InputTextModule, AbpValidationSummaryComponent,
+        InputTextComponent, 
         ButtonDirective, Ripple]
 })
 export class EditChartOfAccountComponent extends DynamicDialogBase implements OnInit {

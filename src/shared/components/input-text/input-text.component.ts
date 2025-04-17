@@ -59,14 +59,10 @@ export class InputTextComponent extends ControlValueAccessorComponentBase implem
         this.invalidPattern = null; // Reset invalidPattern flag
 
         // Skip validation if required is false and value is empty
-        if (!this.required && this.isNullOrSpaces(value)) {
-            return null;
-        }
+        if (!this.required && this.isNullOrSpaces(value)) return null;
 
         // Check for required validation
-        if (this.required && this.isNullOrSpaces(value)) {
-            return { required: true };
-        }
+        if (this.required && this.isNullOrSpaces(value))  return { required: true };
 
         // Validate minlength
         if (this.minlength != null && value?.length < +this.minlength) {

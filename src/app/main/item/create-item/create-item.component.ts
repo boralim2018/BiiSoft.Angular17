@@ -40,9 +40,8 @@ import { FindFieldAComponent } from '../../../../shared/components/find-field-a/
 import { FindFieldBComponent } from '../../../../shared/components/find-field-b/find-field-b.component';
 import { FindFieldCComponent } from '../../../../shared/components/find-field-c/find-field-c.component';
 import { SelectWeightUnitComponent, SelectLengthUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent } from '../../../../shared/components/select-unit/select-unit.component';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputAreaUnitComponent, InputLengthUnitComponent, InputVolumeUnitComponent, InputWeightUnitComponent } from '../../../../shared/components/input-unit/input-unit.component';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-create-item',
@@ -51,13 +50,13 @@ import { InputAreaUnitComponent, InputLengthUnitComponent, InputVolumeUnitCompon
     providers: [ItemServiceProxy],
     standalone: true,
     imports: [
-        FormsModule, BusyDirective, NgIf, NgClass, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent, InputTextareaModule,
+        FormsModule, BusyDirective, NgIf, NgClass, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent, InputTextareaModule,
         ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, SelectItemCategoryComponent, AttachFileComponent,
         SelectItemTypeComponent, FindUnitComponent, FindItemGroupComponent, FindItemBrandComponent, FindItemGradeComponent, FindItemModelComponent,
         FindItemSizeComponent, FindItemSeriesComponent, FindColorPatternComponent, FindCPUComponent, FindRAMComponent, FindVGAComponent,
         FindHDDComponent, FindScreenComponent, FindCameraComponent, FindBatteryComponent, FindFieldAComponent, FindFieldBComponent,
         FindFieldCComponent, SelectWeightUnitComponent, SelectLengthUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent,
-        InputGroupModule, InputGroupAddonModule, InputLengthUnitComponent, InputWeightUnitComponent, InputAreaUnitComponent, InputVolumeUnitComponent,
+        InputTextComponent, InputLengthUnitComponent, InputWeightUnitComponent, InputAreaUnitComponent, InputVolumeUnitComponent,
     ]
 })
 export class CreateItemComponent extends AppComponentBase implements OnInit {

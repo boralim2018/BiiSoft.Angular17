@@ -54,9 +54,13 @@ export class InputNumberComponent extends ControlValueAccessorComponentBase impl
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        this.invalid = this.isNullOrUndefined(this.model);
+        const value = this.model;
 
-        if(this.invalid) return { invalid: true };
+        if (!this.required && this.isNullOrUndefined(value)) return null;
+
+        this.invalid = this.isNullOrUndefined(value);
+
+        if (this.invalid) return { invalid: true };
       
         return null; // Valid
     }

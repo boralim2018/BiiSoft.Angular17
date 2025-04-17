@@ -6,15 +6,13 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { catchError, finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
-import { ButtonDirective, ButtonModule } from 'primeng/button';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
+import { ButtonDirective } from 'primeng/button';
 import { SelectAccountTypeComponent } from "../../../../shared/components/select-account-type/select-account-type.component";
 import { SelectSubAccountTypeComponent } from "../../../../shared/components/select-account-type/select-sub-account-type.component";
 import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
-import { of } from 'rxjs';
 import { NgIf } from '@angular/common';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-create-chart-of-account',
@@ -27,7 +25,7 @@ import { NgIf } from '@angular/common';
         FindChartOfAccountComponent,
         FormsModule, NgIf,
         BusyDirective, LocalizePipe,
-        InputTextModule, AbpValidationSummaryComponent,
+        InputTextComponent,
         ButtonDirective, Ripple]
 })
 export class CreateChartOfAccountComponent extends DynamicDialogBase implements OnInit {

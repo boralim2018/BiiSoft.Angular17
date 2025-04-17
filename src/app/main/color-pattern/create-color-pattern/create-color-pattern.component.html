@@ -1,49 +1,29 @@
 <form novalidate autocomplete="off" #createColorPatternForm="ngForm" (ngSubmit)="save()" [busy]="saving">
     <div class="formgrid grid p-3 m-0">
-        <div class="field col-12 md:col-6">
-            <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="name"
-                   id="name"
-                   maxlength="128"
-                   required
-                   [(ngModel)]="model.name"
-                   #nameModel="ngModel"
-                   #nameEl />
-            <abp-validation-summary [control]="nameModel"
-                                    [controlEl]="nameEl"></abp-validation-summary>
+        <div class="field col-12 md:col-6"
+             inputText
+             name="name"
+             [label]="l('Name')"
+             maxlength="128"
+             [(ngModel)]="model.name"
+             [required]="true">
         </div>
-        <div class="field col-12 md:col-6">
-            <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="displayName"
-                   id="displayName"
-                   maxlength="64"
-                   required
-                   [(ngModel)]="model.displayName"
-                   #displayNameModel="ngModel"
-                   #displayNameEl />
-            <abp-validation-summary [control]="displayNameModel"
-                                    [controlEl]="displayNameEl"></abp-validation-summary>
+        <div class="field col-12 md:col-6"
+             inputText
+             name="displayName"
+             [label]="l('DisplayName')"
+             maxlength="128"
+             [(ngModel)]="model.displayName"
+             [required]="true">
         </div>
-        <div class="field col-12 md:col-6" *ngIf="useCode">
-            <label for="code" class="text-900 font-medium">{{l('Code')}}<span class="text-red-600">*</span></label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="code"
-                   id="code"
-                   required
-                   maxlength="4"
-                   [(ngModel)]="model.code"
-                   #codeModel="ngModel"
-                   #codeEl />
-            <abp-validation-summary [control]="codeModel"
-                                    [controlEl]="codeEl"></abp-validation-summary>
+        <div class="field col-12 md:col-6"
+             inputText
+             name="code"
+             [label]="l('Code')"
+             maxlength="32"
+             [(ngModel)]="model.code"
+             [required]="true"
+             *ngIf="useCode">
         </div>
     </div>
 

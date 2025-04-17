@@ -56,10 +56,17 @@ export abstract class InputUnitComponentBase extends ControlValueAccessorCompone
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        this.invalid = this.required && (this.isNullOrUndefined(this.model) || this.isNullOrUndefined(this.unit));
 
-        let result = this.invalid ? { invalid: true } : null;
-        return result;
+        const value = this.model;
+        const unit = this.unit;
+
+        if (!this.required && this.isNullOrUndefined(value) && this.isNullOrUndefined(unit)) return null;
+
+        this.invalid = this.required && (this.isNullOrUndefined(value) || this.isNullOrUndefined(unit));
+
+        if (this.invalid) return { invalid: true };
+
+        return null; // Valid
     }
 }
 

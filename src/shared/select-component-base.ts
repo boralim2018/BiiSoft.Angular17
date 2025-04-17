@@ -35,7 +35,11 @@ export abstract class DropdownComponentBase extends ControlValueAccessorComponen
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        this.invalid = this.isNullOrUndefined(this.model);
+        const value = this.model;
+
+        if (!this.required && this.isNullOrUndefined(value)) return null;
+
+        this.invalid = this.isNullOrUndefined(value);
 
         if (this.invalid) return { invalid: true };
 
@@ -59,11 +63,15 @@ export abstract class SelectComponentBase extends DropdownComponentBase {
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        this.invalid = this.isNullOrUndefined(this.model) || (this.multiple && this.model?.length == 0);
+        const value = this.model;
+
+        if (!this.required && this.isNullOrUndefined(value)) return null;
+
+        this.invalid = this.isNullOrUndefined(value) || (this.multiple && value?.length == 0);
 
         if (this.invalid) return { invalid: true };
 
-        return null; // Valid
+        return null;
     }
 
 }
