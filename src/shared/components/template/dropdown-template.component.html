@@ -1,0 +1,18 @@
+<div *ngIf="label">
+    {{label}}
+    <span class="text-red-500" *ngIf="required">*</span>
+</div>
+<p-dropdown name="{{name}}"
+            [options]="models"
+            [(ngModel)]="model"
+            (onChange)="onChange($event.value)"
+            (onBlur)="onTouched()"
+            [disabled]="disabled"
+            [placeholder]="placeholder"
+            [styleClass]="styleClass"
+            required
+            [showClear]="showClear"
+            [filter]="showFilter"
+            [ngClass]="{'ng-invalid': invalid, 'ng-dirty': dirty}" />
+<small *ngIf="required && invalid && dirty"
+       class="p-error block">{{l('IsRequired', label)}}</small>

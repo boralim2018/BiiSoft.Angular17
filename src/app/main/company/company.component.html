@@ -58,50 +58,29 @@
                                  [required]="true"
                                  [disabled]="false">
                             </div>
-
-                            <div class="field col-12 md:col-6">
-                                <label>{{l('Rounding_',l('Total'))}} <span class="text-red-500">*</span></label>
-                                <p-dropdown name="roundTotalDigits"
-                                            [options]="[1,2,3,4,5,6]"
-                                            [(ngModel)]="generalSetting.roundTotalDigits"
-                                            [placeholder]="l('Select_', l('Rounding'))"
-                                            styleClass="w-full"
-                                            required
-                                            #roundTotalDigitsModel="ngModel"
-                                            [showClear]="true"
-                                            [ngClass]="{'ng-invalid': roundTotalDigitsModel.invalid, 'ng-dirty': roundTotalDigitsModel.dirty}"/>
-                                <small *ngIf="roundTotalDigitsModel.invalid && roundTotalDigitsModel.dirty"
-                                       class="p-error block">{{l('IsRequired', l('Rounding_', l('Total')))}}</small>
+                            <div class="field col-12 md:col-6"
+                                 selectDigit
+                                 name="roundTotalDigits"
+                                 [label]="l('Rounding_',l('Total'))"
+                                 [required]="true"
+                                 [showClear]="true"
+                                 [(ngModel)]="generalSetting.roundTotalDigits">
                             </div>
-                            <div class="field col-12 md:col-6">
-                                <label>{{l('Rounding_',l('Cost'))}} <span class="text-red-500">*</span></label>
-                                <p-dropdown name="roundCostDigits"
-                                            [options]="[1,2,3,4,5,6]"
-                                            [(ngModel)]="generalSetting.roundCostDigits"
-                                            [placeholder]="l('Select_', l('Rounding'))"
-                                            styleClass="w-full"
-                                            required
-                                            #roundCostDigitsModel="ngModel"
-                                            [showClear]="true"
-                                            [ngClass]="{'ng-invalid': roundCostDigitsModel.invalid, 'ng-dirty': roundCostDigitsModel.dirty}"/>
-                                <small *ngIf="roundCostDigitsModel.invalid && roundCostDigitsModel.dirty"
-                                       class="p-error block">{{l('IsRequired', l('Rounding_', l('Cost')))}}</small>
+                            <div class="field col-12 md:col-6"
+                                 selectDigit
+                                 name="roundCostDigits"
+                                 [label]="l('Rounding_',l('Cost'))"
+                                 [required]="true"
+                                 [showClear]="true"
+                                 [(ngModel)]="generalSetting.roundCostDigits">
                             </div>
-                            <div class="field col-12 md:col-6">
-                                <label>{{l('ContactAddressLevel')}}</label>
-                                <p-dropdown [options]="addressLevels"
-                                            [(ngModel)]="generalSetting.contactAddressLevel"
-                                            [placeholder]="l('Select_',l('ContactAddressLevel'))"
-                                            name="addressLevel"
-                                            required
-                                            optionValue="id"
-                                            optionLabel="name"
-                                            styleClass="w-full"
-                                            #addressLevelModel="ngModel"
-                                            [showClear]="true"
-                                            [ngClass]="{'ng-invalid': addressLevelModel.invalid, 'ng-dirty': addressLevelModel.dirty}" />
-                                <small *ngIf="addressLevelModel.invalid && addressLevelModel.dirty"
-                                       class="p-error block">{{l('IsRequired', l('ContactAddressLevel'))}}</small>
+                            <div class="field col-12 md:col-6"
+                                 selectAddressLevel
+                                 name="roundCostDigits"
+                                 [label]="l('ContactAddressLevel')"
+                                 [required]="true"
+                                 [showClear]="true"
+                                 [(ngModel)]="generalSetting.contactAddressLevel">
                             </div>
                         </div>
 
@@ -211,7 +190,7 @@
                                                             [controlEl]="displayNameEl"></abp-validation-summary>
                                 </div>
                                 <div class="field col-12 md:col-6">
-                                    <label class="text-900 font-medium">{{l('BusinessId')}}</label>
+                                    <label for="businessId" class="text-900 font-medium">{{l('BusinessId')}}</label>
                                     <input type="text"
                                            pInputText
                                            class="w-full"
@@ -227,7 +206,7 @@
                                 </div>
 
                                 <div class="field col-12 md:col-6">
-                                    <label class="text-900 font-medium">{{l('PhoneNumber')}}</label>
+                                    <label for="phoneNumber" class="text-900 font-medium">{{l('PhoneNumber')}}</label>
                                     <input type="text"
                                            pInputText
                                            class="w-full"
@@ -243,7 +222,7 @@
                                 </div>
 
                                 <div class="field col-12 md:col-6">
-                                    <label class="text-900 font-medium">{{l('Email')}}</label>
+                                    <label for="email" class="text-900 font-medium">{{l('Email')}}</label>
                                     <input type="text"
                                            pInputText
                                            class="w-full"
@@ -259,7 +238,7 @@
                                 </div>
 
                                 <div class="field col-12 md:col-6">
-                                    <label class="text-900 font-medium">{{l('Website')}}</label>
+                                    <label for="website" class="text-900 font-medium">{{l('Website')}}</label>
                                     <input type="text"
                                            pInputText
                                            class="w-full"
@@ -275,7 +254,7 @@
                                 </div>
 
                                 <div class="field col-12 md:col-6">
-                                    <label class="text-900 font-medium">{{l('TaxRegistrationNumber')}}</label>
+                                    <label for="taxRegistrationNumber" class="text-900 font-medium">{{l('TaxRegistrationNumber')}}</label>
                                     <input type="text"
                                            pInputText
                                            class="w-full"
@@ -296,9 +275,6 @@
                                  name="billingAddress"
                                  contactAddress
                                  [(ngModel)]="branch.billingAddress"
-                                 [requiredPostalCode]="true"
-                                 [requiredStreet]="true"
-                                 [requiredHouseNo]="true"
                                  [required]="true">
                             </div>
                             <div class="formgrid grid m-0"
@@ -307,9 +283,6 @@
                                  [isShippingAddress]="true"
                                  [(sameAsBillingAddress)]="branch.sameAsBillingAddress"
                                  [(ngModel)]="branch.shippingAddress"
-                                 [requiredPostalCode]="true"
-                                 [requiredStreet]="true"
-                                 [requiredHouseNo]="true"
                                  [required]="true">
                             </div>
 
@@ -356,11 +329,11 @@
                             <p-message severity="info" [text]="prefixMessage" styleClass="w-full justify-content-start"></p-message>
                         </div>
                         <div class="flex flex-column md:flex-row md:align-items-center gap-3">
-                            <label class="w-full md:w-2 hidden md:block font-medium text-900">{{l("Name_",l("TransactionType"))}}</label>
-                            <label class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Prefix')}}</label>
-                            <label class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Digits')}}</label>
-                            <label class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Start')}}</label>
-                            <label class="w-full md:w-2 hidden md:block text-900 font-medium">{{l('Format')}}</label>
+                            <div class="w-full md:w-2 hidden md:block font-medium text-900">{{l("Name_",l("TransactionType"))}}</div>
+                            <div class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Prefix')}}</div>
+                            <div class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Digits')}}</div>
+                            <div class="w-full md:w-1 hidden md:block text-900 font-medium">{{l('Start')}}</div>
+                            <div class="w-full md:w-2 hidden md:block text-900 font-medium">{{l('Format')}}</div>
                             <div class="flex align-items-center gap-3">
                                 <p-inputSwitch name="customTransactionNoEnable"
                                                class="flex align-items-center"
@@ -373,7 +346,7 @@
                                                class="flex align-items-center"
                                                [(ngModel)]="requiredReference"
                                                (onChange)="requiredReferenceChange($event)"></p-inputSwitch>
-                                <span>{{l('RequiredReference')}}</span>
+                                <span>{{l('Required')}}</span>
                             </div>
                         </div>
 
@@ -459,7 +432,7 @@
                                     <p-inputSwitch name="requiredReference"
                                                    class="flex align-items-center"
                                                    [(ngModel)]="t.requiredReference"></p-inputSwitch>
-                                    <span>{{l('RequiredReference')}}</span>
+                                    <span>{{l('Required')}}</span>
                                 </div>
                             </div>
 

@@ -16,6 +16,7 @@ import { FindUserComponent } from '../../../../shared/components/find-user/find-
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-create-branch',
@@ -23,7 +24,9 @@ import { appModuleAnimation } from '../../../../shared/animations/routerTransiti
     animations: [appModuleAnimation()],
     providers: [BranchServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, NgIf, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent, ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule]
+    imports: [
+        FormsModule, BusyDirective, NgIf, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent,
+        ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, InputTextComponent]
 })
 export class CreateBranchComponent extends AppComponentBase implements OnInit {
     saving = false;

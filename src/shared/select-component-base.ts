@@ -6,7 +6,7 @@ import { ControlValueAccessorComponentBase } from 'shared/control-value-accessor
 
 
 @Component({ template: '' })
-export abstract class SelectComponentBase extends ControlValueAccessorComponentBase implements OnInit, Validator {
+export abstract class DropdownComponentBase extends ControlValueAccessorComponentBase implements OnInit, Validator {
 
     @Input() name: string;
     @Input() label: string;
@@ -14,18 +14,12 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     @Input() placeholder: string;
     @Input() appendTo: any = 'body'
     @Input() showClear: boolean = true;
-    @Input() multiple: boolean;
     @Input() showFilter: boolean = true;
-    @Input() showExclude: boolean;
-    @Input() exclude: boolean;
-    @Output() excludeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-    @Output() onHide: EventEmitter<any> = new EventEmitter<any>();
-    @Output() onClear: EventEmitter<any> = new EventEmitter<any>();
-   
+
     models: any[] = [];
     loading: boolean;
     validateMessage: string;
-   
+
     constructor(injector: Injector) {
         super(injector);
     }
@@ -41,16 +35,41 @@ export abstract class SelectComponentBase extends ControlValueAccessorComponentB
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        this.invalid = this.isNullOrUndefined(this.model) || (this.multiple && this.model?.length == 0);
+        this.invalid = this.isNullOrUndefined(this.model);
 
-        let result = this.invalid ? { invalid: true } : null;
-        return result;
+        if (this.invalid) return { invalid: true };
+
+        return null; // Valid
     }
 
 }
 
 @Component({ template: '' })
-export abstract class LazySelectComponentBase extends SelectComponentBase implements OnInit, OnDestroy {
+export abstract class SelectComponentBase extends DropdownComponentBase {
+
+    @Input() multiple: boolean;
+    @Input() showExclude: boolean;
+    @Input() exclude: boolean;
+    @Output() excludeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() onHide: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onClear: EventEmitter<any> = new EventEmitter<any>();
+   
+    constructor(injector: Injector) {
+        super(injector);
+    }
+
+    validate(control: AbstractControl): { [key: string]: any } | null {
+        this.invalid = this.isNullOrUndefined(this.model) || (this.multiple && this.model?.length == 0);
+
+        if (this.invalid) return { invalid: true };
+
+        return null; // Valid
+    }
+
+}
+
+@Component({ template: '' })
+export abstract class LazySelectComponentBase extends SelectComponentBase implements OnDestroy {
 
     @Input() lazy: boolean = true;
     

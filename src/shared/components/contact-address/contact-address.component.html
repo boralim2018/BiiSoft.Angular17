@@ -4,8 +4,8 @@
                 (onChange)="sameAsBillingAddressChange.emit($event.checked)"
                 [binary]="true"
                 inputId="binary"
-                [label]="l('SameAsBillingAddress')" 
-                *ngIf="isShippingAddress"/>
+                [label]="l('SameAsBillingAddress')"
+                *ngIf="isShippingAddress" />
 </div>
 <ng-container *ngIf="!isShippingAddress || !sameAsBillingAddress">
 
@@ -62,13 +62,44 @@
          [required]="addressLevel >= 4"
          *ngIf="villageEnable">
     </div>
-    <div class="field col-12 md:col-6">
-        <label class="text-900 font-medium">{{l('PostalCode')}}<span class="text-red-500" *ngIf="requiredPostalCode">*</span></label>
+    <div class="field col-12 md:col-6"
+         inputText
+         name="postalCode"
+         [label]="l('PostalCode')"
+         maxlength="32"
+         [(ngModel)]="model.postalCode"
+         (ngModelChange)="onPostalCodeChange($event)"
+         [required]="requiredPostalCode"
+         #postalCodeInput>
+    </div>
+     
+    <div class="field col-12 md:col-6"
+         inputText
+         name="street"
+         [label]="l('Street')"
+         maxlength="32"
+         [(ngModel)]="model.street"
+         (ngModelChange)="onStreetChange($event)"
+         [required]="requiredStreet"
+         #streetInput>
+    </div>
+    <div class="field col-12 md:col-6"
+         inputText
+         name="hostNo"
+         [label]="l('HouseNo')"
+         maxlength="32"
+         [(ngModel)]="model.houseNo"
+         (ngModelChange)="onHouseNoChange($event)"
+         [required]="requiredHouseNo"
+         #houseNoInput>
+    </div>
+    <!--<div class="field col-12 md:col-6">
+        <div class="text-900 font-medium">{{l('PostalCode')}}<span class="text-red-500" *ngIf="requiredPostalCode">*</span></div>
         <input type="text"
                pInputText
                class="w-full"
                name="postalCode"
-               id="postalCode"
+               minlength="2"
                maxlength="32"
                [(ngModel)]="model.postalCode"
                (ngModelChange)="onPostalCodeChange($event)"
@@ -79,12 +110,12 @@
                                 [controlEl]="postalCodeEl"></abp-validation-summary>
     </div>
     <div class="field col-12 md:col-6">
-        <label class="text-900 font-medium">{{l('Street')}}<span class="text-red-500" *ngIf="requiredStreet">*</span></label>
+        <div class="text-900 font-medium">{{l('Street')}}<span class="text-red-500" *ngIf="requiredStreet">*</span></div>
         <input type="text"
                pInputText
                class="w-full"
                name="street"
-               id="street"
+               minlength="2"
                maxlength="32"
                [(ngModel)]="model.street"
                (ngModelChange)="onStreetChange($event)"
@@ -95,12 +126,11 @@
                                 [controlEl]="streetEl"></abp-validation-summary>
     </div>
     <div class="field col-12 md:col-6">
-        <label class="text-900 font-medium">{{l('HouseNo')}}<span class="text-red-500" *ngIf="requiredHouseNo">*</span></label>
+        <div class="text-900 font-medium">{{l('HouseNo')}}<span class="text-red-500" *ngIf="requiredHouseNo">*</span></div>
         <input type="text"
                pInputText
                class="w-full"
                name="houseNo"
-               id="houseNo"
                maxlength="32"
                [(ngModel)]="model.houseNo"
                (ngModelChange)="onHouseNoChange($event)"
@@ -109,5 +139,5 @@
                #houseNoEl />
         <abp-validation-summary [control]="houseNoModel"
                                 [controlEl]="houseNoEl"></abp-validation-summary>
-    </div>
+    </div>-->
 </ng-container>

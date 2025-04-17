@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, EventEmitter, Output, Input, forwardRef } from '@angular/core';
+import { Component, Injector, OnInit, EventEmitter, Output, Input, forwardRef, ViewChild } from '@angular/core';
 import { AbpValidationSummaryComponent } from '../validation/abp-validation.summary.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { AbstractControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
@@ -10,6 +10,7 @@ import { FindCountryComponent } from '../find-country/find-country.component';
 import { NgIf } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ControlValueAccessorComponentBase } from '../../control-value-accessor-component-base';
+import { InputTextComponent } from '../input-text/input-text.component'; 
 
 @Component({
     selector: '[contactAddress], contact-address',
@@ -27,9 +28,11 @@ import { ControlValueAccessorComponentBase } from '../../control-value-accessor-
         }
     ],
     standalone: true,
-    imports: [NgIf, FindCountryComponent, FindCityProvinceComponent, FindKhanDistrictComponent, FindSangkatCommuneComponent, FindVillageComponent, FormsModule, InputTextModule, AbpValidationSummaryComponent, CheckboxModule]
+    imports: [
+        NgIf, FindCountryComponent, FindCityProvinceComponent, FindKhanDistrictComponent, FindSangkatCommuneComponent,
+        FindVillageComponent, FormsModule, InputTextModule, AbpValidationSummaryComponent, CheckboxModule, InputTextComponent]
 })
-export class ContactAddressComponent extends ControlValueAccessorComponentBase implements OnInit, Validator {
+export class ContactAddressComponent extends ControlValueAccessorComponentBase implements OnInit,  Validator {
 
     @Input() name: string;
     @Input() title: string = this.l('ContactAddress');
@@ -39,6 +42,10 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
     @Input() isShippingAddress: boolean;
     @Input() sameAsBillingAddress: boolean;
     @Output() sameAsBillingAddressChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    @ViewChild('postalCodeInput') postalCodeInput: InputTextComponent;
+    @ViewChild('streetInput') streetInput: InputTextComponent;
+    @ViewChild('houseNoInput') houseNoInput: InputTextComponent;
 
     
     touchedCountry: boolean;
@@ -117,19 +124,35 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        const isValid = this.sameAsBillingAddress || (
+        this.invalid = !((this.isShippingAddress && this.sameAsBillingAddress) || (
             this.model && this.model.countryId &&
             (this.addressLevel < 1 || this.model.cityProvinceId) && 
             (this.addressLevel < 2 || this.model.khanDistrictId) && 
             (this.addressLevel < 3 || this.model.sangkatCommuneId) && 
-            (this.addressLevel < 4 || this.model.villageId) &&
-            (!this.requiredPostalCode || this.model.postalCode) &&
-            (!this.requiredStreet || this.model.street) &&
-            (!this.requiredHouseNo || this.model.houseNo)
-        );
+            (this.addressLevel < 4 || this.model.villageId)
+        ));
 
-        let result = isValid ? null : { invalid: true };
-        return result;
+        if (this.invalid) return { invalid: true };
+
+        if (this.requiredPostalCode) {
+            if (control.value.postalCode != this.postalCodeInput.model) this.postalCodeInput.model = control.value.postalCode;
+            let validate = this.postalCodeInput.validate(control);
+            if (validate) return validate;
+        }
+
+        if (this.requiredStreet) {
+            if (control.value.street != this.streetInput.model) this.streetInput.model = control.value.street;
+            let validate = this.streetInput.validate(control);
+            if (validate) return validate;
+        }
+
+        if (this.requiredHouseNo) {
+            if (control.value.houseNo != this.houseNoInput.model) this.houseNoInput.model = control.value.houseNo;
+            let validate = this.houseNoInput.validate(control);
+            if (validate) return validate;
+        }
+        
+        return null;
     }
 
 }

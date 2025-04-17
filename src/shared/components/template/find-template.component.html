@@ -1,4 +1,4 @@
-<label *ngIf="label" class="flex flex-wrap align-items-center gap-1 mb-2">
+<div *ngIf="label" class="flex flex-wrap align-items-center gap-1 mb-2">
     {{label}}
     <p-checkbox name="{{'exclude_' + name}}"
                 [label]="l('Exclude')"
@@ -8,7 +8,7 @@
                 inputId="'exclude' + name"
                 *ngIf="showExclude"></p-checkbox>
     <span class="text-red-500" *ngIf="required">*</span>
-</label>
+</div>
 
 <div class="find" [ngClass]="{'ng-invalid': invalid, 'ng-dirty': dirty }">
     <div class="p-multiselect"

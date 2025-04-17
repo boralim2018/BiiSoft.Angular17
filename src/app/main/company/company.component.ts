@@ -34,6 +34,8 @@ import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
 import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAccountSettingInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
 import { UploadSource } from '../../../shared/AppEnums';
 import { AppConsts } from '../../../shared/AppConsts';
+import { SelectDigitComponent } from '../../../shared/components/select-digit/select-digit.component';
+import { SelectAddressLevelComponent } from '../../../shared/components/select-address-level/select-address-level.component';
 
 @Component({
     selector: 'app-company',
@@ -48,7 +50,7 @@ import { AppConsts } from '../../../shared/AppConsts';
         InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, FloatLabelModule,
         LocalizePipe, FindCountryComponent, InputSwitchModule, FindCurrencyComponent, SelectDateComponent,
         SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple,
-        MessageModule, AttachFileComponent
+        MessageModule, AttachFileComponent, SelectDigitComponent, SelectAddressLevelComponent
     ],
 })
 export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBase) implements OnInit {
@@ -64,7 +66,6 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBas
     advanceSetting: CreateUpdateCompanyAdvanceSettingInputDto;
     accountSetting: CreateUpdateCompanyAccountSettingInputDto;
     transactionNos: CreateUpdateTransactionNoSettingInputDto[];
-    addressLevels: any[];
 
     blankImageUrl: string = AppConsts.blankLogoUrl;
     uploadUrl: string = '/CompanyProfile/Upload';
@@ -102,14 +103,7 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBas
         this.advanceSetting = new CreateUpdateCompanyAdvanceSettingInputDto();
         this.accountSetting = new CreateUpdateCompanyAccountSettingInputDto();
         this.transactionNos = [];
-        this.addressLevels = [
-            { id: 0, name: `L0 : ${this.l('Country')}` },
-            { id: 1, name: `L1 : ${this.l('CityProvince')}` }
-        ];
-
-        if (this.feature.isEnabled("App.Setup.Locations.KhanDistricts")) this.addressLevels.push({ id: 2, name: `L2 : ${this.l('KhanDistrict')}` });
-        if (this.feature.isEnabled("App.Setup.Locations.SangkatCommunes")) this.addressLevels.push({ id: 3, name: `L3 : ${this.l('SangkatCommune')}` });
-        if (this.feature.isEnabled("App.Setup.Locations.Villages")) this.addressLevels.push({ id: 4, name: `L4 : ${this.l('Village')}` });
+        this.logo = new UpdateLogoInput();
     }
 
     getDetail() {        
@@ -170,6 +164,7 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBas
         this.generalSetting.countryId = event?.id;
 
         if (event?.currencyId) {
+            this.generalSetting.currencyId = event.currencyId;
             this.currency = { id: event.currencyId, code: event.currencyCode };
         }
     }

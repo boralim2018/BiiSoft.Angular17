@@ -16,6 +16,7 @@ import { FindUserComponent } from '../../../../shared/components/find-user/find-
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-edit-branch',
@@ -23,7 +24,9 @@ import { appModuleAnimation } from '../../../../shared/animations/routerTransiti
     animations: [appModuleAnimation()],
     providers: [BranchServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, NgIf, InputTextModule, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent, ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule]
+    imports: [
+        FormsModule, BusyDirective, NgIf, InputTextModule, RadioButtonModule, FindUserComponent, Ripple, LocalizePipe, DividerModule,
+        AbpValidationSummaryComponent, ContactAddressComponent, ButtonDirective, InputTextComponent]
 })
 export class EditBranchComponent extends DynamicDialogBase implements OnInit {
     saving = false;
@@ -59,16 +62,18 @@ export class EditBranchComponent extends DynamicDialogBase implements OnInit {
             .getDetail(this.route.snapshot.params.id)
             .pipe(finalize(() => this.saving = false))
             .subscribe((result: BranchDetailDto) => {
-                this.model.init(result);
-                this.setAddressDetails(this.model.billingAddress);
-                this.setAddressDetails(this.model.shippingAddress);
+                if (result) {
+                    
+                    this.model.init(result);
+                    this.setAddressDetails(this.model.billingAddress);
+                    this.setAddressDetails(this.model.shippingAddress);
 
-                if (result.branchUsers && result.branchUsers.length) {
-                    this.users = result.branchUsers.map(b => {
-                        return { id: b.memberId, userName: b.userName };
-                    });
+                    if (result.branchUsers && result.branchUsers.length) {
+                        this.users = result.branchUsers.map(b => {
+                            return { id: b.memberId, userName: b.userName };
+                        });
+                    }
                 }
-
             });
     }
 

@@ -69,8 +69,9 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
     validate(control: AbstractControl): { [key: string]: any } | null {
         this.invalid = this.isNullOrUndefined(this.model) || (this.multiple && this.model?.length == 0);
 
-        let result = this.invalid ? { invalid: true } : null;
-        return result;
+        if (this.invalid) return { invalid: true };
+
+        return null; // Valid
     }
 
 }
