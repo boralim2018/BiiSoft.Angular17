@@ -15,7 +15,8 @@ export abstract class InputUnitComponentBase extends ControlValueAccessorCompone
     @Input() label: string;
     @Input() placeholder: string = '';
     @Input() minDigits: number = 0;
-    @Input() maxDigits: number = 4;
+    @Input() maxDigits: number = 6;
+    @Input() RTL: boolean;
     @Input() unit: any;
     @Output() unitChange: EventEmitter<any> = new EventEmitter<any>();
     @Output() unitObjChange: EventEmitter<any> = new EventEmitter<any>();
@@ -23,6 +24,7 @@ export abstract class InputUnitComponentBase extends ControlValueAccessorCompone
     units: any[] = [];    
     loading: boolean;
     validateMessage: string;
+    inputStyleClass: string = "border-noround-right";
 
     constructor(injector: Injector) {
         super(injector);
@@ -31,11 +33,13 @@ export abstract class InputUnitComponentBase extends ControlValueAccessorCompone
     ngOnInit(): void {
         if (this.label) {
             this.validateMessage = this.l("IsRequired", this.label);
-            if (!this.placeholder) this.placeholder = this.l('Select_', this.label);
+            if (!this.placeholder) this.placeholder = this.l('PleaseEnter_', this.label);
         }
         else if (this.placeholder) {
             this.validateMessage = this.placeholder;
         }
+
+        if (this.RTL) this.inputStyleClass = 'border-noround-right text-right';
     }
 
     onUnitChange(event: any) {

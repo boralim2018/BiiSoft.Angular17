@@ -6,7 +6,7 @@
             <p-divider></p-divider>
 
             <div class="formgrid grid nested-grid m-0">
-                <div class="col-12 md:col-6 lg:col-4 mb-3"
+                <div class="col-12 md:col-6 xl:col-4 mb-3"
                      attachFile
                      [(fileId)]="model.imageId"
                      [label]="l('Image')"
@@ -14,9 +14,9 @@
                      [uploadUrl]="uploadUrl"
                      [uploadSource]="uploadSource">
                 </div>
-                <div class="col-12 md:col-6 lg:col-8 pt-3">
+                <div class="col-12 md:col-6 xl:col-8 pt-3">
                     <div class="grid">
-                        <div class="field col-12 lg:col-6"
+                        <div class="field col-12 xl:col-6"
                              selectItemType
                              name="itemType"
                              [required]="true"
@@ -24,7 +24,7 @@
                              [(ngModel)]="model.itemType">
                         </div>
 
-                        <div class="field col-12 lg:col-6"
+                        <div class="field col-12 xl:col-6"
                              selectItemCategory
                              name="itemCategory"
                              [required]="true"
@@ -32,7 +32,7 @@
                              [(ngModel)]="model.itemCategory">
                         </div>
 
-                        <div class="field col-12 lg:col-6">
+                        <div class="field col-12 xl:col-6">
                             <label for="name" class="text-900 font-medium">{{l('Name')}}<span class="text-red-600">*</span></label>
                             <input type="text"
                                    pInputText
@@ -47,7 +47,7 @@
                             <abp-validation-summary [control]="nameModel"
                                                     [controlEl]="nameEl"></abp-validation-summary>
                         </div>
-                        <div class="field col-12 lg:col-6">
+                        <div class="field col-12 xl:col-6">
                             <label for="displayName" class="text-900 font-medium">{{l('DisplayName')}}<span class="text-red-600">*</span></label>
                             <input type="text"
                                    pInputText
@@ -70,7 +70,7 @@
 
             <div class="formgrid grid m-0">
 
-                <div class="field col-12 md:col-6 lg:col-4">
+                <div class="field col-12 md:col-6 xl:col-4">
                     <label class="text-900 font-medium">{{l('Code')}}</label>
                     <input type="text"
                            pInputText
@@ -86,7 +86,7 @@
                                             [controlEl]="codeEl"></abp-validation-summary>
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputWeightUnit
                      name="grossWeight"
                      [label]="l('GrossWeight')"
@@ -96,7 +96,7 @@
                      *ngIf="appSession.itemSetting.useGrossWeight">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputWeightUnit
                      name="netWeight"
                      [label]="l('NetWeight')"
@@ -106,7 +106,7 @@
                      *ngIf="appSession.itemSetting.useNetWeight">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputLengthUnit
                      name="width"
                      [label]="l('Width')"
@@ -116,7 +116,7 @@
                      *ngIf="appSession.itemSetting.useWidth">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputLengthUnit
                      name="height"
                      [label]="l('Height')"
@@ -126,7 +126,7 @@
                      *ngIf="appSession.itemSetting.useHeight">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputLengthUnit
                      name="length"
                      [label]="l('Length')"
@@ -136,7 +136,7 @@
                      *ngIf="appSession.itemSetting.useLength">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputLengthUnit
                      name="diameter"
                      [label]="l('Diameter')"
@@ -146,7 +146,7 @@
                      *ngIf="appSession.itemSetting.useDiameter">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputAreaUnit
                      name="area"
                      [label]="l('Area')"
@@ -156,7 +156,7 @@
                      *ngIf="appSession.itemSetting.useArea">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputVolumeUnit
                      name="volume"
                      [label]="l('Volume')"
@@ -166,7 +166,7 @@
                      *ngIf="appSession.itemSetting.useVolume">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findUnit
                      name="unit"
                      [required]="true"
@@ -174,7 +174,7 @@
                      [(ngModel)]="model.unitId">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findItemGroup
                      name="itemGroup"
                      [required]="appSession.itemSetting.itemGroupRequired"
@@ -183,7 +183,7 @@
                      *ngIf="appSession.itemSetting.useItemGroup">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findItemBrand
                      name="itemBrand"
                      [required]="appSession.itemSetting.brandRequired"
@@ -192,7 +192,7 @@
                      *ngIf="appSession.itemSetting.useBrand">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findItemGrade
                      name="itemGrade"
                      [required]="appSession.itemSetting.gradeRequired"
@@ -201,7 +201,7 @@
                      *ngIf="appSession.itemSetting.useGrade">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findItemModel
                      name="itemModel"
                      [required]="appSession.itemSetting.modelRequired"
@@ -210,7 +210,7 @@
                      *ngIf="appSession.itemSetting.useModel">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findItemSize
                      name="itemSize"
                      [required]="appSession.itemSetting.sizeRequired"
@@ -219,7 +219,7 @@
                      *ngIf="appSession.itemSetting.useSize">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findItemSeries
                      name="itemSeries"
                      [required]="appSession.itemSetting.seriesRequired"
@@ -228,7 +228,7 @@
                      *ngIf="appSession.itemSetting.useSeries">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findColorPattern
                      name="colorPattern"
                      [required]="appSession.itemSetting.colorPatternRequired"
@@ -237,7 +237,7 @@
                      *ngIf="appSession.itemSetting.useColorPattern">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findCPU
                      name="cpu"
                      [required]="appSession.itemSetting.cpuRequired"
@@ -246,7 +246,7 @@
                      *ngIf="appSession.itemSetting.useCPU">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findRAM
                      name="ram"
                      [required]="appSession.itemSetting.ramRequired"
@@ -255,7 +255,7 @@
                      *ngIf="appSession.itemSetting.useRAM">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findVGA
                      name="vga"
                      [required]="appSession.itemSetting.vgaRequired"
@@ -264,7 +264,7 @@
                      *ngIf="appSession.itemSetting.useVGA">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findHDD
                      name="hdd"
                      [required]="appSession.itemSetting.hddRequired"
@@ -273,7 +273,7 @@
                      *ngIf="appSession.itemSetting.useHDD">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findScreen
                      name="screen"
                      [required]="appSession.itemSetting.screenRequired"
@@ -282,7 +282,7 @@
                      *ngIf="appSession.itemSetting.useScreen">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findCamera
                      name="camera"
                      [required]="appSession.itemSetting.cameraRequired"
@@ -291,7 +291,7 @@
                      *ngIf="appSession.itemSetting.useCamera">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findBattery
                      name="battery"
                      [required]="appSession.itemSetting.batteryRequired"
@@ -300,7 +300,7 @@
                      *ngIf="appSession.itemSetting.useBattery">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findFieldA
                      name="fieldA"
                      [required]="appSession.itemSetting.fieldARequired"
@@ -309,7 +309,7 @@
                      *ngIf="appSession.itemSetting.useFieldA">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findFieldB
                      name="fieldB"
                      [required]="appSession.itemSetting.fieldBRequired"
@@ -318,7 +318,7 @@
                      *ngIf="appSession.itemSetting.useFieldB">
                 </div>
 
-                <div class="field col-12 md:col-6 lg:col-4"
+                <div class="field col-12 md:col-6 xl:col-4"
                      findFieldC
                      name="fieldC"
                      [required]="appSession.itemSetting.fieldCRequired"

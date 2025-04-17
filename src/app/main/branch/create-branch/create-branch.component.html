@@ -6,7 +6,7 @@
             <p-divider></p-divider>
 
             <div class="formgrid grid m-0">
-                <div class="field col-12 md:col-6"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputText
                      name="name"
                      [label]="l('Name')"
@@ -14,7 +14,7 @@
                      [(ngModel)]="model.name"
                      [required]="true">
                 </div>
-                <div class="field col-12 md:col-6"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputText
                      name="displayName"
                      [label]="l('DisplayName')"
@@ -22,20 +22,20 @@
                      [(ngModel)]="model.displayName"
                      [required]="true">
                 </div>
-                <div class="field col-12 md:col-6"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputText
                      name="businessId"
                      [label]="l('BusinessId')"
                      maxlength="32"
                      [(ngModel)]="model.businessId">
                 </div>
-                <div class="field col-12 md:col-6"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputText
                      name="phoneNumber"
                      [label]="l('PhoneNumber')"
                      [(ngModel)]="model.phoneNumber">
                 </div>
-                <div class="field col-12 md:col-6"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputText
                      type="email"
                      name="email"
@@ -44,7 +44,7 @@
                      maxlength="64"
                      [(ngModel)]="model.email">
                 </div>
-                <div class="field col-12 md:col-6"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputText
                      type="url"
                      name="website"
@@ -52,7 +52,7 @@
                      maxlength="64"
                      [(ngModel)]="model.website">
                 </div>
-                <div class="field col-12 md:col-6"
+                <div class="field col-12 md:col-6 xl:col-4"
                      inputText
                      name="taxRegistrationNumber"
                      [label]="l('TaxRegistrationNumber')"

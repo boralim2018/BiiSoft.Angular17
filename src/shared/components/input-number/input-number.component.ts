@@ -30,7 +30,7 @@ export class InputNumberComponent extends ControlValueAccessorComponentBase impl
     @Input() placeholder: string;
     @Input() minDigits: number = 0;
     @Input() maxDigits: number = 0;
-    @Input() RTL: boolean = false;
+    @Input() RTL: boolean = true;
     @Input() format: boolean = true;
 
     inputStyleClass: string;
@@ -44,7 +44,7 @@ export class InputNumberComponent extends ControlValueAccessorComponentBase impl
     ngOnInit(): void {
         if (this.label) {
             this.validateMessage = this.l("IsRequired", this.label);
-            if (!this.placeholder) this.placeholder = this.l('Select_', this.label);
+            if (!this.placeholder) this.placeholder = this.l('PleaseEnter_', this.label);
         }
         else if (this.placeholder) {
             this.validateMessage = this.placeholder;

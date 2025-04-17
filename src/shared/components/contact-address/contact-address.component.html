@@ -9,7 +9,7 @@
 </div>
 <ng-container *ngIf="!isShippingAddress || !sameAsBillingAddress">
 
-    <div class="field col-12 md:col-6"
+    <div class="field col-12 md:col-6 xl:col-4"
          findCountry
          name="selectCountry"
          [label]="l('Country')"
@@ -17,7 +17,7 @@
          (ngModelChange)="onCountryChange($event)"
          [required]="true">
     </div>
-    <div class="field col-12 md:col-6"
+    <div class="field col-12 md:col-6 xl:col-4"
          findCityProvince
          name="selectCityProvince"
          [label]="l('CityProvince')"
@@ -26,7 +26,7 @@
          (ngModelChange)="onCityProvinceChange($event)"
          [required]="addressLevel >= 1">
     </div>
-    <div class="field col-12 md:col-6"
+    <div class="field col-12 md:col-6 xl:col-4"
          findKhanDistrict
          name="selectKhanDistrict"
          [label]="l('KhanDistrict')"
@@ -37,7 +37,7 @@
          [required]="addressLevel >= 2"
          *ngIf="khanDistrictEnable">
     </div>
-    <div class="field col-12 md:col-6"
+    <div class="field col-12 md:col-6 xl:col-4"
          findSangkatCommune
          name="selectSangkatCommune"
          [label]="l('SangkatCommune')"
@@ -49,7 +49,7 @@
          [required]="addressLevel >= 3"
          *ngIf="sangkatCommuneEnable">
     </div>
-    <div class="field col-12 md:col-6"
+    <div class="field col-12 md:col-6 xl:col-4"
          findVillage
          name="selectVillage"
          [label]="l('Village')"
@@ -62,7 +62,7 @@
          [required]="addressLevel >= 4"
          *ngIf="villageEnable">
     </div>
-    <div class="field col-12 md:col-6"
+    <div class="field col-12 md:col-6 xl:col-4"
          inputText
          name="postalCode"
          [label]="l('PostalCode')"
@@ -73,7 +73,7 @@
          #postalCodeInput>
     </div>
      
-    <div class="field col-12 md:col-6"
+    <div class="field col-12 md:col-6 xl:col-4"
          inputText
          name="street"
          [label]="l('Street')"
@@ -83,7 +83,7 @@
          [required]="requiredStreet"
          #streetInput>
     </div>
-    <div class="field col-12 md:col-6"
+    <div class="field col-12 md:col-6 xl:col-4"
          inputText
          name="hostNo"
          [label]="l('HouseNo')"
@@ -93,51 +93,4 @@
          [required]="requiredHouseNo"
          #houseNoInput>
     </div>
-    <!--<div class="field col-12 md:col-6">
-        <div class="text-900 font-medium">{{l('PostalCode')}}<span class="text-red-500" *ngIf="requiredPostalCode">*</span></div>
-        <input type="text"
-               pInputText
-               class="w-full"
-               name="postalCode"
-               minlength="2"
-               maxlength="32"
-               [(ngModel)]="model.postalCode"
-               (ngModelChange)="onPostalCodeChange($event)"
-               [required]="requiredPostalCode"
-               #postalCodeModel="ngModel"
-               #postalCodeEl />
-        <abp-validation-summary [control]="postalCodeModel"
-                                [controlEl]="postalCodeEl"></abp-validation-summary>
-    </div>
-    <div class="field col-12 md:col-6">
-        <div class="text-900 font-medium">{{l('Street')}}<span class="text-red-500" *ngIf="requiredStreet">*</span></div>
-        <input type="text"
-               pInputText
-               class="w-full"
-               name="street"
-               minlength="2"
-               maxlength="32"
-               [(ngModel)]="model.street"
-               (ngModelChange)="onStreetChange($event)"
-               [required]="requiredStreet"
-               #streetModel="ngModel"
-               #streetEl />
-        <abp-validation-summary [control]="streetModel"
-                                [controlEl]="streetEl"></abp-validation-summary>
-    </div>
-    <div class="field col-12 md:col-6">
-        <div class="text-900 font-medium">{{l('HouseNo')}}<span class="text-red-500" *ngIf="requiredHouseNo">*</span></div>
-        <input type="text"
-               pInputText
-               class="w-full"
-               name="houseNo"
-               maxlength="32"
-               [(ngModel)]="model.houseNo"
-               (ngModelChange)="onHouseNoChange($event)"
-               [required]="requiredHouseNo"
-               #houseNoModel="ngModel"
-               #houseNoEl />
-        <abp-validation-summary [control]="houseNoModel"
-                                [controlEl]="houseNoEl"></abp-validation-summary>
-    </div>-->
 </ng-container>

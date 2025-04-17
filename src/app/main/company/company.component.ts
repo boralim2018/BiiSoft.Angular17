@@ -36,6 +36,7 @@ import { UploadSource } from '../../../shared/AppEnums';
 import { AppConsts } from '../../../shared/AppConsts';
 import { SelectDigitComponent } from '../../../shared/components/select-digit/select-digit.component';
 import { SelectAddressLevelComponent } from '../../../shared/components/select-address-level/select-address-level.component';
+import { InputTextComponent } from '../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-company',
@@ -50,7 +51,7 @@ import { SelectAddressLevelComponent } from '../../../shared/components/select-a
         InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, FloatLabelModule,
         LocalizePipe, FindCountryComponent, InputSwitchModule, FindCurrencyComponent, SelectDateComponent,
         SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple,
-        MessageModule, AttachFileComponent, SelectDigitComponent, SelectAddressLevelComponent
+        MessageModule, AttachFileComponent, SelectDigitComponent, SelectAddressLevelComponent, InputTextComponent
     ],
 })
 export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBase) implements OnInit {
