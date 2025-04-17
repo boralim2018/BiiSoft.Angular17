@@ -9,12 +9,16 @@
                [inputId]="name"
                [placeholder]="placeholder"
                [required]="required"
-               [useGrouping]="format"
+               [useGrouping]="useGrouping"
+               [format]="format"
                [(ngModel)]="model"
                (ngModelChange)="onChange($event)"
                (onBlur)="onTouched()"
                [disabled]="disabled"
                [minFractionDigits]="minDigits"
                [maxFractionDigits]="maxDigits"
+               [min]="min"
+               [max]="max"
+               [maxlength]="maxlength"
                [ngClass]="{'ng-dirty': dirty, 'ng-invalid': invalid}" />
 <small *ngIf="required && invalid && dirty && validateMessage" class="p-error block">{{ validateMessage }}</small>

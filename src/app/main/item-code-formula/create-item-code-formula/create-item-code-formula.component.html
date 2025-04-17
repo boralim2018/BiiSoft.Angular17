@@ -33,55 +33,33 @@
             </div>
         </div>
 
-
-        <div class="field col-12 md:col-6" *ngIf="model.type==1">
-            <label for="prefix" class="text-900 font-medium">{{l('Perfix')}}<span class="text-red-600">*</span></label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="prefix"
-                   id="prefix"
-                   maxlength="128"
-                   required
-                   [(ngModel)]="model.prefix"
-                   #prefixModel="ngModel"
-                   #prefixEl />
-            <abp-validation-summary [control]="prefixModel"
-                                    [controlEl]="prefixEl"></abp-validation-summary>
+        <div class="field col-12 md:col-6"
+             inputText
+             name="prefix"
+             [label]="l('Perfix')"
+             [maxlength]="6"
+             [(ngModel)]="model.prefix"
+             *ngIf="model.type==1">
         </div>
-
-        <div class="field col-12 md:col-6" *ngIf="model.type==1">
-            <label for="digits" class="text-900 font-medium">{{l('Digits')}}<span class="text-red-600">*</span></label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="digits"
-                   id="digits"
-                   required
-                   maxlength="4"
-                   [(ngModel)]="model.digits"
-                   #digitsModel="ngModel"
-                   #digitsEl />
-            <abp-validation-summary [control]="digitsModel"
-                                    [controlEl]="digitsEl"></abp-validation-summary>
+        <div class="field col-12 md:col-6"
+             inputNumber
+             name="digits"
+             [label]="l('Digits')"
+             [max]="32"
+             [maxlength]="2"
+             [(ngModel)]="model.digits"
+             [required]="true"
+             *ngIf="model.type==1">
         </div>
-
-        <div class="field col-12 md:col-6" *ngIf="model.type==1">
-            <label for="start" class="text-900 font-medium">{{l('Start')}}<span class="text-red-600">*</span></label>
-            <input type="text"
-                   pInputText
-                   class="w-full"
-                   name="start"
-                   id="start"
-                   maxlength="64"
-                   required
-                   [(ngModel)]="model.start"
-                   #startModel="ngModel"
-                   #startEl />
-            <abp-validation-summary [control]="startModel"
-                                    [controlEl]="startEl"></abp-validation-summary>
+        <div class="field col-12 md:col-6"
+             inputNumber
+             name="start"
+             [label]="l('Start')"
+             [maxlength]="4"
+             [(ngModel)]="model.start"
+             [required]="true"
+             *ngIf="model.type==1">
         </div>
-
     </div>
 
     <div class="p-dialog-footer">

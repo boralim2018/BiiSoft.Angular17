@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit, EventEmitter, Output, Input, forwardRef, ViewChild } from '@angular/core';
 import { AbpValidationSummaryComponent } from '../validation/abp-validation.summary.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { AbstractControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { AbstractControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FindVillageComponent } from '../find-village/find-village.component';
 import { FindSangkatCommuneComponent } from '../find-sangkat-commune/find-sangkat-commune.component';
 import { FindKhanDistrictComponent } from '../find-khan-district/find-khan-district.component';
@@ -32,7 +32,7 @@ import { InputTextComponent } from '../input-text/input-text.component';
         NgIf, FindCountryComponent, FindCityProvinceComponent, FindKhanDistrictComponent, FindSangkatCommuneComponent,
         FindVillageComponent, FormsModule, InputTextModule, AbpValidationSummaryComponent, CheckboxModule, InputTextComponent]
 })
-export class ContactAddressComponent extends ControlValueAccessorComponentBase implements OnInit,  Validator {
+export class ContactAddressComponent extends ControlValueAccessorComponentBase implements OnInit {
 
     @Input() name: string;
     @Input() title: string = this.l('ContactAddress');
@@ -43,9 +43,14 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
     @Input() sameAsBillingAddress: boolean;
     @Output() sameAsBillingAddressChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    @ViewChild('postalCodeInput') postalCodeInput: InputTextComponent;
-    @ViewChild('streetInput') streetInput: InputTextComponent;
-    @ViewChild('houseNoInput') houseNoInput: InputTextComponent;
+    @ViewChild('countryRef') countryRef: FindCountryComponent;
+    @ViewChild('cityProvinceRef') cityProvinceRef: FindCityProvinceComponent;
+    @ViewChild('khanDistrictRef') khanDistrictRef: FindKhanDistrictComponent;
+    @ViewChild('sangkatCommuneRef') sangkatCommuneRef: FindSangkatCommuneComponent;
+    @ViewChild('villageRef') villageRef: FindVillageComponent;
+    @ViewChild('postalCodeRef') postalCodeRef: InputTextComponent;
+    @ViewChild('streetRef') streetRef: InputTextComponent;
+    @ViewChild('houseNoRef') houseNoRef: InputTextComponent;
 
     
     touchedCountry: boolean;
@@ -124,31 +129,51 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        this.invalid = !((this.isShippingAddress && this.sameAsBillingAddress) || (
-            this.model && this.model.countryId &&
-            (this.addressLevel < 1 || this.model.cityProvinceId) && 
-            (this.addressLevel < 2 || this.model.khanDistrictId) && 
-            (this.addressLevel < 3 || this.model.sangkatCommuneId) && 
-            (this.addressLevel < 4 || this.model.villageId)
-        ));
+       
+        if (this.isShippingAddress && this.sameAsBillingAddress) return null;
 
-        if (this.invalid) return { invalid: true };
+        if (this.isNullOrUndefined(this.model)) return { required: true };
+
+        let countryValidate = control.value?.country?.id && !this.countryRef.model ? null : this.countryRef.validate(control);
+        if (countryValidate) return countryValidate;
+
+        const addressLevel = this.addressLevel;
+
+        if (addressLevel >= 1) {
+            let validate = control.value?.cityProvince?.id && !this.cityProvinceRef.model ? null : this.cityProvinceRef.validate(control);
+            if (validate) return validate;
+        }
+
+        if (addressLevel >= 2 && this.khanDistrictEnable) {
+            let validate = control.value?.khanDistrict?.id && !this.khanDistrictRef.model ? null : this.khanDistrictRef.validate(control);
+            if (validate) return validate;
+        }
+
+        if (addressLevel >= 3 && this.sangkatCommuneEnable) {
+            let validate = control.value?.sangkatCommune?.id && !this.sangkatCommuneRef.model ? null : this.sangkatCommuneRef.validate(control);
+            if (validate) return validate;
+        }
+
+        if (addressLevel >= 4 && this.villageEnable) {
+            let validate = control.value?.village?.id && !this.villageRef.model ? null : this.villageRef.validate(control);
+            if (validate) return validate;
+        }
 
         if (this.requiredPostalCode) {
-            if (control.value.postalCode != this.postalCodeInput.model) this.postalCodeInput.model = control.value.postalCode;
-            let validate = this.postalCodeInput.validate(control);
+            if (control.value.postalCode != this.postalCodeRef.model) this.postalCodeRef.model = control.value.postalCode;
+            let validate = this.postalCodeRef.validate(control);
             if (validate) return validate;
         }
 
         if (this.requiredStreet) {
-            if (control.value.street != this.streetInput.model) this.streetInput.model = control.value.street;
-            let validate = this.streetInput.validate(control);
+            if (control.value.street != this.streetRef.model) this.streetRef.model = control.value.street;
+            let validate = this.streetRef.validate(control);
             if (validate) return validate;
         }
 
         if (this.requiredHouseNo) {
-            if (control.value.houseNo != this.houseNoInput.model) this.houseNoInput.model = control.value.houseNo;
-            let validate = this.houseNoInput.validate(control);
+            if (control.value.houseNo != this.houseNoRef.model) this.houseNoRef.model = control.value.houseNo;
+            let validate = this.houseNoRef.validate(control);
             if (validate) return validate;
         }
         

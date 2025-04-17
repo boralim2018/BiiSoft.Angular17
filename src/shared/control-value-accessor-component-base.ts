@@ -1,9 +1,9 @@
 import { Component, Injector, Input } from '@angular/core';
 import { AppComponentBase } from 'shared/app-component-base';
-import { ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, AbstractControl, Validator } from '@angular/forms';
 
 @Component({ template: '' })
-export abstract class ControlValueAccessorComponentBase extends AppComponentBase implements ControlValueAccessor {
+export abstract class ControlValueAccessorComponentBase extends AppComponentBase implements ControlValueAccessor, Validator {
 
     @Input() required: boolean;
 
@@ -47,5 +47,17 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
 
     protected markAsDirty() {
         this.dirty = true;
+    }
+
+    validate(control: AbstractControl): { [key: string]: any } | null {
+        const value = this.model;
+
+        if (!this.required && this.isNullOrUndefined(value)) return null;
+
+        this.invalid = this.isNullOrUndefined(value);
+
+        if (this.invalid) return { required: true };
+
+        return null; // Valid
     }
 }

@@ -3,13 +3,13 @@ import { CommonLookupServiceProxy } from '@shared/service-proxies/service-proxie
 import { finalize } from 'rxjs/operators';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgClass, NgIf } from '@angular/common';
-import { AbstractControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { AbstractControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ControlValueAccessorComponentBase } from '../../control-value-accessor-component-base';
 import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({ template: '' })
-export abstract class InputUnitComponentBase extends ControlValueAccessorComponentBase implements OnInit, Validator {
+export abstract class InputUnitComponentBase extends ControlValueAccessorComponentBase implements OnInit {
 
     @Input() name: string;
     @Input() label: string;
@@ -64,7 +64,7 @@ export abstract class InputUnitComponentBase extends ControlValueAccessorCompone
 
         this.invalid = this.required && (this.isNullOrUndefined(value) || this.isNullOrUndefined(unit));
 
-        if (this.invalid) return { invalid: true };
+        if (this.invalid) return { required: true };
 
         return null; // Valid
     }

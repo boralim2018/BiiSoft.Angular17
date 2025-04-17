@@ -1,12 +1,12 @@
 import { Component, Injector, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { AbstractControl, Validator } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ControlValueAccessorComponentBase } from 'shared/control-value-accessor-component-base';
 
 
 @Component({ template: '' })
-export abstract class DropdownComponentBase extends ControlValueAccessorComponentBase implements OnInit, Validator {
+export abstract class DropdownComponentBase extends ControlValueAccessorComponentBase implements OnInit {
 
     @Input() name: string;
     @Input() label: string;
@@ -33,19 +33,6 @@ export abstract class DropdownComponentBase extends ControlValueAccessorComponen
             this.validateMessage = this.placeholder;
         }
     }
-
-    validate(control: AbstractControl): { [key: string]: any } | null {
-        const value = this.model;
-
-        if (!this.required && this.isNullOrUndefined(value)) return null;
-
-        this.invalid = this.isNullOrUndefined(value);
-
-        if (this.invalid) return { invalid: true };
-
-        return null; // Valid
-    }
-
 }
 
 @Component({ template: '' })
@@ -69,7 +56,7 @@ export abstract class SelectComponentBase extends DropdownComponentBase {
 
         this.invalid = this.isNullOrUndefined(value) || (this.multiple && value?.length == 0);
 
-        if (this.invalid) return { invalid: true };
+        if (this.invalid) return { required: true };
 
         return null;
     }

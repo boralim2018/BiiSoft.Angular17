@@ -25,7 +25,7 @@ import { InputTextModule } from 'primeng/inputtext';
     standalone: true,
     imports: [FormsModule, NgIf, NgClass, AbpValidationSummaryComponent, InputTextModule]
 })
-export class InputTextComponent extends ControlValueAccessorComponentBase implements OnInit, Validator {
+export class InputTextComponent extends ControlValueAccessorComponentBase implements OnInit {
 
     @Input() name: string;
     @Input() label: string;
@@ -61,8 +61,10 @@ export class InputTextComponent extends ControlValueAccessorComponentBase implem
         // Skip validation if required is false and value is empty
         if (!this.required && this.isNullOrSpaces(value)) return null;
 
+        this.invalid = this.isNullOrSpaces(value); // Set invalid flag if required and value is null or undefined
+
         // Check for required validation
-        if (this.required && this.isNullOrSpaces(value))  return { required: true };
+        if (this.required && this.invalid)  return { required: true };
 
         // Validate minlength
         if (this.minlength != null && value?.length < +this.minlength) {

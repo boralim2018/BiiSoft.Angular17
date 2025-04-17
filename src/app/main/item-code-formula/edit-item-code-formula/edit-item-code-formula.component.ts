@@ -2,24 +2,24 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateItemCodeFormulaInputDto, ItemCodeFormulaDetailDto, ItemCodeFormulaItemTypeDto, ItemCodeFormulaServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { SelectItemTypeComponent } from '../../../../shared/components/select-item-type/select-item-type.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
+import { InputNumberComponent } from '../../../../shared/components/input-number/input-number.component';
 
 @Component({
     selector: 'app-edit-item-code-formula',
     templateUrl: './edit-item-code-formula.component.html',
     providers: [ItemCodeFormulaServiceProxy],
     standalone: true,
-    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, SelectItemTypeComponent, RadioButtonModule, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextComponent, InputNumberComponent, SelectItemTypeComponent, RadioButtonModule, ButtonDirective, Ripple, LocalizePipe]
 })
 export class EditItemCodeFormulaComponent extends DynamicDialogBase implements OnInit {
     saving = false;

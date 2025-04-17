@@ -15,7 +15,8 @@
          [label]="l('Country')"
          [(ngModel)]="model.country"
          (ngModelChange)="onCountryChange($event)"
-         [required]="true">
+         [required]="true"
+         #countryRef>
     </div>
     <div class="field col-12 md:col-6 xl:col-4"
          findCityProvince
@@ -24,7 +25,8 @@
          [countries]="model.country"
          [(ngModel)]="model.cityProvince"
          (ngModelChange)="onCityProvinceChange($event)"
-         [required]="addressLevel >= 1">
+         [required]="addressLevel >= 1"
+         #cityProvinceRef>
     </div>
     <div class="field col-12 md:col-6 xl:col-4"
          findKhanDistrict
@@ -35,7 +37,8 @@
          [(ngModel)]="model.khanDistrict"
          (ngModelChange)="onKhanDistrictChange($event)"
          [required]="addressLevel >= 2"
-         *ngIf="khanDistrictEnable">
+         *ngIf="khanDistrictEnable"
+         #khanDistrictRef>
     </div>
     <div class="field col-12 md:col-6 xl:col-4"
          findSangkatCommune
@@ -47,7 +50,8 @@
          [(ngModel)]="model.sangkatCommune"
          (ngModelChange)="onSangkatCommuneChange($event)"
          [required]="addressLevel >= 3"
-         *ngIf="sangkatCommuneEnable">
+         *ngIf="sangkatCommuneEnable"
+         #sangkatCommuneRef>
     </div>
     <div class="field col-12 md:col-6 xl:col-4"
          findVillage
@@ -60,7 +64,8 @@
          [(ngModel)]="model.village"
          (ngModelChange)="onVillageChange($event)"
          [required]="addressLevel >= 4"
-         *ngIf="villageEnable">
+         *ngIf="villageEnable"
+         #villageRef>
     </div>
     <div class="field col-12 md:col-6 xl:col-4"
          inputText
@@ -70,7 +75,7 @@
          [(ngModel)]="model.postalCode"
          (ngModelChange)="onPostalCodeChange($event)"
          [required]="requiredPostalCode"
-         #postalCodeInput>
+         #postalCodeRef>
     </div>
      
     <div class="field col-12 md:col-6 xl:col-4"
@@ -81,7 +86,7 @@
          [(ngModel)]="model.street"
          (ngModelChange)="onStreetChange($event)"
          [required]="requiredStreet"
-         #streetInput>
+         #streetRef>
     </div>
     <div class="field col-12 md:col-6 xl:col-4"
          inputText
@@ -91,6 +96,6 @@
          [(ngModel)]="model.houseNo"
          (ngModelChange)="onHouseNoChange($event)"
          [required]="requiredHouseNo"
-         #houseNoInput>
+         #houseNoRef>
     </div>
 </ng-container>

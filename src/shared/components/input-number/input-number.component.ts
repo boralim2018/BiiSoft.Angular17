@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit, Input, forwardRef } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
-import { AbstractControl, FormsModule, NG_VALIDATORS, Validator } from '@angular/forms';
+import { FormsModule, NG_VALIDATORS } from '@angular/forms';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ControlValueAccessorComponentBase } from '../../control-value-accessor-component-base';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -23,15 +23,19 @@ import { InputNumberModule } from 'primeng/inputnumber';
     standalone: true,
     imports: [FormsModule, NgIf, NgClass, InputNumberModule]
 })
-export class InputNumberComponent extends ControlValueAccessorComponentBase implements OnInit, Validator {
+export class InputNumberComponent extends ControlValueAccessorComponentBase implements OnInit {
 
     @Input() name: string;
     @Input() label: string;
     @Input() placeholder: string;
     @Input() minDigits: number = 0;
     @Input() maxDigits: number = 0;
-    @Input() RTL: boolean = true;
+    @Input() RTL: boolean;
     @Input() format: boolean = true;
+    @Input() useGrouping: boolean = true;
+    @Input() min: number;
+    @Input() max: number;
+    @Input() maxlength: number;
 
     inputStyleClass: string;
 
@@ -51,18 +55,6 @@ export class InputNumberComponent extends ControlValueAccessorComponentBase impl
         }
 
         if (this.RTL) this.inputStyleClass = 'text-right';
-    }
-
-    validate(control: AbstractControl): { [key: string]: any } | null {
-        const value = this.model;
-
-        if (!this.required && this.isNullOrUndefined(value)) return null;
-
-        this.invalid = this.isNullOrUndefined(value);
-
-        if (this.invalid) return { invalid: true };
-      
-        return null; // Valid
     }
 
 }

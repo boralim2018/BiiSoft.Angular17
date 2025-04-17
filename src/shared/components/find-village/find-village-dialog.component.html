@@ -7,15 +7,15 @@
                        (gridLineChange)="showGridLineChange($event)"></table-setting>
     </p-overlayPanel>
     <div class="p-dialog-title surface-card p-3">
-        <div class="flex justify-content-between flex-wrap gap-3">
-            <div class="field flex-1"
+        <div class="formgrid grid p-0">
+            <div class="field col-12 md:col-6"
                  findCountry
                  name="selectCountries"
                  [multiple]="multiple"
                  [(ngModel)]="countries"
                  (ngModelChange)="onCountriesChange($event)">
             </div>
-            <div class="field flex-1"
+            <div class="field col-12 md:col-6"
                  findCityProvince
                  name="selectCityProvinces"
                  [countries]="countries"
@@ -23,7 +23,7 @@
                  [(ngModel)]="cityProvinces"
                  (ngModelChange)="onCityProvincesChange($event)">
             </div>
-            <div class="field flex-1"
+            <div class="field col-12 md:col-6"
                  findKhanDistrict
                  name="selectKhanDistricts"
                  [countries]="countries"
@@ -32,7 +32,7 @@
                  [(ngModel)]="khanDistricts"
                  (ngModelChange)="onKhanDistrictsChange($event)">
             </div>
-            <div class="field flex-1"
+            <div class="field col-12 md:col-6"
                  findSangkatCommune
                  name="selectSangkatCommunes"
                  [countries]="countries"

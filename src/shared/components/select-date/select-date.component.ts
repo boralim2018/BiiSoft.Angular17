@@ -24,7 +24,7 @@ import { ControlValueAccessorComponentBase } from '../../control-value-accessor-
     standalone: true,
     imports: [FormsModule, NgIf, NgClass, CalendarModule, AbpValidationSummaryComponent]
 })
-export class SelectDateComponent extends ControlValueAccessorComponentBase implements OnInit, Validator {
+export class SelectDateComponent extends ControlValueAccessorComponentBase implements OnInit {
 
     @Input() name: string;
     @Input() label: string;
@@ -38,13 +38,6 @@ export class SelectDateComponent extends ControlValueAccessorComponentBase imple
 
     ngOnInit(): void {      
         this.placeholder = this.l('Select_', this.l('Date'));
-    }
-
-    validate(control: AbstractControl): { [key: string]: any } | null {
-        this.invalid = this.isNullOrUndefined(this.model);
-
-        let result = this.invalid ? { invalid: true } : null;
-        return result;
     }
 
 }

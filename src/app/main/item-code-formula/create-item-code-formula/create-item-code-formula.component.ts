@@ -3,23 +3,23 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateItemCodeFormulaInputDto, ItemCodeFormulaItemTypeDto, ItemCodeFormulaServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
 import { SelectItemTypeComponent } from '../../../../shared/components/select-item-type/select-item-type.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { NgIf } from '@angular/common';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
+import { InputNumberComponent } from '../../../../shared/components/input-number/input-number.component';
 
 @Component({
     selector: 'app-create-item-code-formula',
     templateUrl: './create-item-code-formula.component.html',
     providers: [ItemCodeFormulaServiceProxy],
     standalone: true,
-    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, SelectItemTypeComponent, ButtonDirective, Ripple, LocalizePipe, RadioButtonModule ]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextComponent, InputNumberComponent, SelectItemTypeComponent, ButtonDirective, Ripple, LocalizePipe, RadioButtonModule ]
 })
 export class CreateItemCodeFormulaComponent extends DynamicDialogBase implements OnInit {
     saving = false;
