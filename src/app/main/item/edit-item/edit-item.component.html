@@ -13,7 +13,7 @@
                            class="w-full"
                            name="name"
                            id="name"
-                           maxlength="128"
+                           [maxlength]="128"
                            required
                            [(ngModel)]="model.name"
                            #nameModel="ngModel"
@@ -28,8 +28,8 @@
                            class="w-full"
                            name="displayName"
                            id="displayName"
-                           minlength="2"
-                           maxlength="64"
+                           [minlength]="2"
+                           [maxlength]="64"
                            required
                            [(ngModel)]="model.displayName"
                            #displayNameModel="ngModel"
@@ -44,8 +44,8 @@
                            class="w-full"
                            name="code"
                            id="code"
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            [(ngModel)]="model.code"
                            #codeModel="ngModel"
                            #codeEl />
@@ -60,8 +60,8 @@
                            class="w-full"
                            name="description"
                            id="description"
-                           minlength="5"
-                           maxlength="32"
+                           [minlength]="5"
+                           [maxlength]="32"
                            [(ngModel)]="model.description"
                            #descriptionModel="ngModel"
                            #descriptionEl />

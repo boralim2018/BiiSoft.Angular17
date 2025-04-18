@@ -36,7 +36,7 @@
                              inputText
                              name="name"
                              [label]="l('Name')"
-                             maxlength="128"
+                             [maxlength]="128"
                              [(ngModel)]="model.name"
                              [required]="true">
                         </div>
@@ -44,7 +44,7 @@
                              inputText
                              name="displayName"
                              [label]="l('DisplayName')"
-                             maxlength="128"
+                             [maxlength]="128"
                              [(ngModel)]="model.displayName"
                              [required]="true">
                         </div>
@@ -60,7 +60,7 @@
                      inputText
                      name="code"
                      [label]="l('Code')"
-                     maxlength="32"
+                     [maxlength]="32"
                      [(ngModel)]="model.code"
                      [required]="true">
                 </div>
@@ -313,7 +313,7 @@
                               name="description"
                               id="description"
                               rows="3"
-                              maxlength="512"
+                              [maxlength]="512"
                               [(ngModel)]="model.description"
                               #descriptionModel="ngModel"
                               #descriptionEl></textarea>

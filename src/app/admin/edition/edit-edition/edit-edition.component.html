@@ -11,8 +11,8 @@
                            name="name"
                            id="name"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            [(ngModel)]="edition.name"
                            #nameModel="ngModel"
                            #nameEl />
@@ -27,8 +27,8 @@
                            name="displayName"
                            id="displayName"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            [(ngModel)]="edition.displayName"
                            #displayNameModel="ngModel"
                            #displayNameEl />

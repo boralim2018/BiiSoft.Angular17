@@ -7,7 +7,7 @@
                    class="w-full"
                    name="tenancyName"
                    id="tenancyName"
-                   maxlength="64"
+                   [maxlength]="64"
                    [(ngModel)]="linkUser.tenancyName"
                    #tenancyNameModel="ngModel"
                    #tenancyNameEl />
@@ -27,8 +27,8 @@
                        [(ngModel)]="linkUser.userNameOrEmailAddress"
                        [ngClass]="{'ng-dirty': userNameOrEmailAddress.invalid && userNameOrEmailAddress.dirty }"
                        required
-                       minlength="2"
-                       maxlength="32"
+                       [minlength]="2"
+                       [maxlength]="32"
                        #userNameOrEmailAddress="ngModel"
                        #userNameOrEmailAddressEl>
             </span>

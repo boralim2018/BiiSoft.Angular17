@@ -13,8 +13,8 @@
                            [placeholder]="l('Name')"
                            id="name"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            [(ngModel)]="user.name"
                            #nameModel="ngModel"
                            #nameEl />
@@ -30,8 +30,8 @@
                            [placeholder]="l('Surname')"
                            id="surname"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            [(ngModel)]="user.surname"
                            #surnameModel="ngModel"
                            #surnameEl />
@@ -47,8 +47,8 @@
                            [placeholder]="l('UserName')"
                            id="userName"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            [(ngModel)]="user.userName"
                            #userNameModel="ngModel"
                            #userNameEl />
@@ -72,7 +72,7 @@
                            [placeholder]="l('Email')"
                            id="emailAddress"
                            required
-                           maxlength="256"
+                           [maxlength]="256"
                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
                            [(ngModel)]="user.emailAddress"
                            #emailAddressModel="ngModel"

@@ -153,7 +153,7 @@
                                            id="requiredLength"
                                            disabled="disabled"
                                            required
-                                           maxlength="32"
+                                           [maxlength]="32"
                                            [(ngModel)]="hostSettings.security.defaultPasswordComplexity.requiredLength"
                                            #requiredLengthModel="ngModel"
                                            #requiredLengthEl />
@@ -167,7 +167,7 @@
                                            name="requiredLength"
                                            id="requiredLength"
                                            required
-                                           maxlength="32"
+                                           [maxlength]="32"
                                            [(ngModel)]="hostSettings.security.passwordComplexity.requiredLength"
                                            #requiredLengthModel="ngModel"
                                            #requiredLengthEl />
@@ -231,7 +231,7 @@
                                        name="maxFailedAccessAttemptsBeforeLockout"
                                        id="maxFailedAccessAttemptsBeforeLockout"
                                        required
-                                       maxlength="32"
+                                       [maxlength]="32"
                                        [(ngModel)]="hostSettings.security.userLockOut.maxFailedAccessAttemptsBeforeLockout"
                                        #maxFailedAccessAttemptsBeforeLockoutModel="ngModel"
                                        #maxFailedAccessAttemptsBeforeLockoutEl />
@@ -246,7 +246,7 @@
                                        name="defaultAccountLockoutSeconds"
                                        id="defaultAccountLockoutSeconds"
                                        required
-                                       maxlength="32"
+                                       [maxlength]="32"
                                        [(ngModel)]="hostSettings.security.userLockOut.defaultAccountLockoutSeconds"
                                        #defaultAccountLockoutSecondsModel="ngModel"
                                        #defaultAccountLockoutSecondsEl />
@@ -267,7 +267,7 @@
                                        name="defaultFromDisplayName"
                                        id="defaultFromDisplayName"
                                        required
-                                       maxlength="32"
+                                       [maxlength]="32"
                                        [(ngModel)]="hostSettings.email.defaultFromDisplayName"
                                        #defaultFromDisplayNameModel="ngModel"
                                        #defaultFromDisplayNameEl />
@@ -282,7 +282,7 @@
                                        name="defaultFromAddress"
                                        id="defaultFromAddress"
                                        required
-                                       maxlength="32"
+                                       [maxlength]="32"
                                        [(ngModel)]="hostSettings.email.defaultFromAddress"
                                        #defaultFromAddressModel="ngModel"
                                        #defaultFromAddressEl />
@@ -297,7 +297,7 @@
                                        name="smtpHost"
                                        id="smtpHost"
                                        required
-                                       maxlength="64"
+                                       [maxlength]="64"
                                        [(ngModel)]="hostSettings.email.smtpHost"
                                        #smtpHostModel="ngModel"
                                        #smtpHostEl />
@@ -312,7 +312,7 @@
                                        name="smtpPort"
                                        id="smtpPort"
                                        required
-                                       maxlength="32"
+                                       [maxlength]="32"
                                        [(ngModel)]="hostSettings.email.smtpPort"
                                        #smtpPortModel="ngModel"
                                        #smtpPortEl />
@@ -343,7 +343,7 @@
                                        class="w-full"
                                        name="smtpDomain"
                                        id="smtpDomain"
-                                       maxlength="32"
+                                       [maxlength]="32"
                                        [(ngModel)]="hostSettings.email.smtpDomain"
                                        #smtpDomainModel="ngModel"
                                        #smtpDomainEl />
@@ -359,7 +359,7 @@
                                        name="smtpUser"
                                        id="smtpUser"
                                        required
-                                       maxlength="32"
+                                       [maxlength]="32"
                                        [(ngModel)]="hostSettings.email.smtpUserName"
                                        #smtpUserModel="ngModel"
                                        #smtpUserEl />
@@ -374,7 +374,7 @@
                                        name="smtpPassword"
                                        id="smtpPassword"
                                        required
-                                       maxlength="32"
+                                       [maxlength]="32"
                                        [(ngModel)]="hostSettings.email.smtpPassword"
                                        #smtpPasswordModel="ngModel"
                                        #smtpPasswordEl />
@@ -395,7 +395,7 @@
                                        class="w-full"
                                        name="legalName"
                                        id="legalName"
-                                       maxlength="64"
+                                       [maxlength]="64"
                                        [(ngModel)]="hostSettings.billing.legalName"
                                        #legalNameModel="ngModel"
                                        #legalNameEl />
@@ -411,7 +411,7 @@
                                           class="w-full"
                                           name="address"
                                           id="address"
-                                          maxlength="128"
+                                          [maxlength]="128"
                                           #addressModel="ngModel"
                                           #addressEl></textarea>
                                 <abp-validation-summary [control]="addressModel"

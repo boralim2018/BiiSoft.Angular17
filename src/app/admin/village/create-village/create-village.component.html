@@ -7,7 +7,7 @@
                    class="w-full"
                    name="name"
                    id="name"
-                   maxlength="128"
+                   [maxlength]="128"
                    required
                    [(ngModel)]="model.name"
                    #nameModel="ngModel"
@@ -22,8 +22,8 @@
                    class="w-full"
                    name="displayName"
                    id="displayName"
-                   minlength="2"
-                   maxlength="64"
+                   [minlength]="2"
+                   [maxlength]="64"
                    required
                    [(ngModel)]="model.displayName"
                    #displayNameModel="ngModel"
@@ -39,8 +39,8 @@
                    class="w-full"
                    name="code"
                    id="code"
-                   minlength="15"
-                   maxlength="15"
+                   [minlength]="15"
+                   [maxlength]="15"
                    required
                    [(ngModel)]="model.code"
                    #codeModel="ngModel"

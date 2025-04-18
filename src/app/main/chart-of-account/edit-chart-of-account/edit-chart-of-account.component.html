@@ -19,7 +19,7 @@
              inputText
              name="code"
              [label]="l('Code')"
-             maxlength="6"
+             [maxlength]="6"
              [(ngModel)]="model.code"
              [required]="true"
              *ngIf="customCodeEnble">
@@ -28,7 +28,7 @@
              inputText
              name="name"
              [label]="l('Name')"
-             maxlength="128"
+             [maxlength]="128"
              [(ngModel)]="model.name"
              [required]="true">
         </div>
@@ -36,7 +36,7 @@
              inputText
              name="displayName"
              [label]="l('DisplayName')"
-             maxlength="128"
+             [maxlength]="128"
              [(ngModel)]="model.displayName"
              [required]="true">
         </div>

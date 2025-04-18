@@ -21,8 +21,8 @@
                            [(ngModel)]="authService.authenticateModel.userNameOrEmailAddress"
                            [ngClass]="{'ng-dirty': userNameOrEmailAddress.invalid && userNameOrEmailAddress.dirty }"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            #userNameOrEmailAddress="ngModel"
                            #userNameOrEmailAddressEl>
                 </span>

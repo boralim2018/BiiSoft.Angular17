@@ -8,7 +8,7 @@
                        name="name"
                        placeholder="{{ 'Name' | localize }}"
                        required
-                       maxlength="64"
+                       [maxlength]="64"
                        [(ngModel)]="model.name"
                        #nameModel="ngModel"
                        #nameEl />
@@ -28,7 +28,7 @@
                        name="surname"
                        placeholder="{{ 'Surname' | localize }}"
                        required
-                       maxlength="64"
+                       [maxlength]="64"
                        [(ngModel)]="model.surname"
                        #surnameModel="ngModel"
                        #surnameEl />
@@ -48,7 +48,7 @@
                        name="emailAddress"
                        placeholder="{{ 'EmailAddress' | localize }}"
                        required
-                       maxlength="256"
+                       [maxlength]="256"
                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
                        [(ngModel)]="model.emailAddress"
                        #emailAddressModel="ngModel"
@@ -69,7 +69,7 @@
                        name="userName"
                        placeholder=" {{ 'UserName' | localize }}"
                        required
-                       maxlength="32"
+                       [maxlength]="32"
                        [(ngModel)]="model.userName"
                        #userNameModel="ngModel"
                        #userNameEl />
@@ -90,7 +90,7 @@
                        placeholder="{{ 'Password' | localize }}"
                        [(ngModel)]="model.password"
                        required
-                       maxlength="32"
+                       [maxlength]="32"
                        #passwordModel="ngModel"
                        #passwordEl />
                 <div class="input-group-append">
@@ -141,8 +141,8 @@
                            [(ngModel)]="model.name"
                            [ngClass]="{'ng-dirty': name.invalid && name.dirty }"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            #name="ngModel"
                            #nameEl>
                 </span>
@@ -164,8 +164,8 @@
                            [(ngModel)]="model.surname"
                            [ngClass]="{'ng-dirty': surname.invalid && surname.dirty }"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            #surname="ngModel"
                            #surnameEl>
                 </span>
@@ -187,8 +187,8 @@
                            [(ngModel)]="model.emailAddress"
                            [ngClass]="{'ng-dirty': emailAddress.invalid && emailAddress.dirty }"
                            required
-                           minlength="2"
-                           maxlength="256"
+                           [minlength]="2"
+                           [maxlength]="256"
                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
                            #emailAddress="ngModel"
                            #emailAddressEl>
@@ -211,8 +211,8 @@
                            [(ngModel)]="model.userName"
                            [ngClass]="{'ng-dirty': userName.invalid && userName.dirty }"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            #userName="ngModel"
                            #userNameEl>
                 </span>
@@ -234,7 +234,7 @@
                            name="password"
                            id="password"
                            required
-                           maxlength="32"
+                           [maxlength]="32"
                            validateEqual="confirmPassword"
                            reverse="true"
                            pattern="{{passwordComplexitySetting.pattern}}"
@@ -259,7 +259,7 @@
                            name="confirmPassword"
                            id="confirmPassword"
                            required
-                           maxlength="32"
+                           [maxlength]="32"
                            validateEqual="password"
                            reverse="false"
                            ngModel

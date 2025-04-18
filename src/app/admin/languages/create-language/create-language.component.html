@@ -37,8 +37,8 @@
                        [(ngModel)]="model.displayName"
                        [ngClass]="{'ng-dirty': displayName.invalid && displayName.dirty }"
                        required
-                       minlength="2"
-                       maxlength="10"
+                       [minlength]="2"
+                       [maxlength]="10"
                        #displayName="ngModel"
                        #displayNameEl>
             </span>

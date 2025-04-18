@@ -105,7 +105,7 @@
                                      inputText
                                      name="name"
                                      [label]="l('Name')"
-                                     maxlength="128"
+                                     [maxlength]="128"
                                      [(ngModel)]="branch.name"
                                      [required]="true">
                                 </div>
@@ -113,7 +113,7 @@
                                      inputText
                                      name="displayName"
                                      [label]="l('DisplayName')"
-                                     maxlength="128"
+                                     [maxlength]="128"
                                      [(ngModel)]="branch.displayName"
                                      [required]="true">
                                 </div>
@@ -121,7 +121,7 @@
                                      inputText
                                      name="businessId"
                                      [label]="l('BusinessId')"
-                                     maxlength="32"
+                                     [maxlength]="32"
                                      [(ngModel)]="branch.businessId">
                                 </div>
                                 <div class="field col-12 md:col-6 xl:col-4"
@@ -135,8 +135,8 @@
                                      type="email"
                                      name="email"
                                      [label]="l('Email')"
-                                     minlength="5"
-                                     maxlength="64"
+                                     [minlength]="5"
+                                     [maxlength]="64"
                                      [(ngModel)]="branch.email">
                                 </div>
                                 <div class="field col-12 md:col-6 xl:col-4"
@@ -144,14 +144,14 @@
                                      type="url"
                                      name="website"
                                      [label]="l('Website')"
-                                     maxlength="64"
+                                     [maxlength]="64"
                                      [(ngModel)]="branch.website">
                                 </div>
                                 <div class="field col-12 md:col-6 xl:col-4"
                                      inputText
                                      name="taxRegistrationNumber"
                                      [label]="l('TaxRegistrationNumber')"
-                                     maxlength="32"
+                                     [maxlength]="32"
                                      [(ngModel)]="branch.taxRegistrationNumber">
                                 </div>
                             </div>
@@ -250,7 +250,7 @@
                                                class="w-full"
                                                name="prefex_{{i}}"
                                                id="prefix_{{i}}"
-                                               maxlength="8"
+                                               [maxlength]="8"
                                                [placeholder]="l('Prefix')"
                                                [(ngModel)]="t.prefix"
                                                [pTooltip]="prefixMessage"
@@ -270,8 +270,8 @@
                                                class="w-full"
                                                name="digits_{{i}}"
                                                id="digits_{{i}}"
-                                               minlength="1"
-                                               maxlength="2"
+                                               [minlength]="1"
+                                               [maxlength]="2"
                                                [placeholder]="l('Digits')"
                                                [(ngModel)]="t.digits"
                                                [disabled]="t.customTransactionNoEnable"
@@ -290,8 +290,8 @@
                                                class="w-full"
                                                name="start_{{i}}"
                                                id="start_{{i}}"
-                                               minlength="1"
-                                               maxlength="3"
+                                               [minlength]="1"
+                                               [maxlength]="3"
                                                [placeholder]="l('Start')"
                                                [(ngModel)]="t.start"
                                                [disabled]="t.customTransactionNoEnable"

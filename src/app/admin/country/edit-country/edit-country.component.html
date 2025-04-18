@@ -7,7 +7,7 @@
                    class="w-full"
                    name="name"
                    id="name"
-                   maxlength="128"
+                   [maxlength]="128"
                    required
                    [(ngModel)]="model.name"
                    #nameModel="ngModel"
@@ -22,8 +22,8 @@
                    class="w-full"
                    name="displayName"
                    id="displayName"
-                   minlength="2"
-                   maxlength="64"
+                   [minlength]="2"
+                   [maxlength]="64"
                    required
                    [(ngModel)]="model.displayName"
                    #displayNameModel="ngModel"
@@ -38,8 +38,8 @@
                    class="w-full"
                    name="iso"
                    id="iso"
-                   minlength="3"
-                   maxlength="3"
+                   [minlength]="3"
+                   [maxlength]="3"
                    required
                    [(ngModel)]="model.iso"
                    #isoModel="ngModel"
@@ -54,8 +54,8 @@
                    class="w-full"
                    name="isO2"
                    id="isO2"
-                   minlength="2"
-                   maxlength="2"
+                   [minlength]="2"
+                   [maxlength]="2"
                    required
                    [(ngModel)]="model.isO2"
                    #isO2Model="ngModel"
@@ -71,8 +71,8 @@
                    class="w-full"
                    name="code"
                    id="code"
-                   minlength="3"
-                   maxlength="3"
+                   [minlength]="3"
+                   [maxlength]="3"
                    required
                    [(ngModel)]="model.code"
                    #codeModel="ngModel"
@@ -88,8 +88,8 @@
                    class="w-full"
                    name="phonePrefix"
                    id="phonePrefix"
-                   minlength="2"
-                   maxlength="6"
+                   [minlength]="2"
+                   [maxlength]="6"
                    [(ngModel)]="model.phonePrefix"
                    #phonePrefixModel="ngModel"
                    #phonePrefixEl />

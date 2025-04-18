@@ -12,8 +12,8 @@
                            [placeholder]="l('Name')"
                            id="name"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            [(ngModel)]="user.name"
                            #nameModel="ngModel"
                            #nameEl />
@@ -29,8 +29,8 @@
                            [placeholder]="l('Surname')"
                            id="surname"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            [(ngModel)]="user.surname"
                            #surnameModel="ngModel"
                            #surnameEl />
@@ -46,8 +46,8 @@
                            [placeholder]="l('UserName')"
                            id="userName"
                            required
-                           minlength="2"
-                           maxlength="32"
+                           [minlength]="2"
+                           [maxlength]="32"
                            [(ngModel)]="user.userName"
                            #userNameModel="ngModel"
                            #userNameEl />
@@ -68,7 +68,7 @@
                                [placeholder]="l('Password')"
                                id="password"
                                required
-                               maxlength="32"
+                               [maxlength]="32"
                                validateEqual="confirmPassword"
                                reverse="true"
                                pattern="{{passwordComplexitySetting.pattern}}"
@@ -95,7 +95,7 @@
                                [placeholder]="l('ConfirmPassword')"
                                id="confirmPassword"
                                required
-                               maxlength="32"
+                               [maxlength]="32"
                                validateEqual="password"
                                reverse="false"
                                ngModel
@@ -123,7 +123,7 @@
                            [placeholder]="l('Email')"
                            id="emailAddress"
                            required
-                           maxlength="256"
+                           [maxlength]="256"
                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
                            [(ngModel)]="user.emailAddress"
                            #emailAddressModel="ngModel"

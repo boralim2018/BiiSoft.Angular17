@@ -38,8 +38,8 @@
                        [(ngModel)]="model.name"
                        [ngClass]="{'ng-dirty': name.invalid && name.dirty }"
                        required
-                       minlength="2"
-                       maxlength="32"
+                       [minlength]="2"
+                       [maxlength]="32"
                        #name="ngModel"
                        #nameEl>
             </span>
@@ -61,8 +61,8 @@
                        [(ngModel)]="model.surname"
                        [ngClass]="{'ng-dirty': surname.invalid && surname.dirty }"
                        required
-                       minlength="2"
-                       maxlength="32"
+                       [minlength]="2"
+                       [maxlength]="32"
                        #surname="ngModel"
                        #surnameEl>
             </span>
@@ -83,8 +83,8 @@
                        [(ngModel)]="model.userName"
                        [ngClass]="{'ng-dirty': userName.invalid && userName.dirty }"
                        required
-                       minlength="2"
-                       maxlength="32"
+                       [minlength]="2"
+                       [maxlength]="32"
                        #userName="ngModel"
                        #userNameEl>
             </span>
@@ -105,8 +105,8 @@
                        [(ngModel)]="model.emailAddress"
                        [ngClass]="{'ng-dirty': emailAddress.invalid && emailAddress.dirty }"
                        required
-                       minlength="2"
-                       maxlength="256"
+                       [minlength]="2"
+                       [maxlength]="256"
                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
                        #emailAddress="ngModel"
                        #emailAddressEl>
@@ -128,8 +128,8 @@
                        class="w-full"
                        [(ngModel)]="model.phoneNumber"
                        [ngClass]="{'ng-dirty': phoneNumber.invalid && phoneNumber.dirty }"
-                       minlength="9"
-                       maxlength="64"
+                       [minlength]="9"
+                       [maxlength]="64"
                        #phoneNumber="ngModel"
                        #phoneNumberEl>
             </span>

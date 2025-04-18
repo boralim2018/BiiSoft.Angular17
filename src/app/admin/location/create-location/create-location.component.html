@@ -7,7 +7,7 @@
                    class="w-full"
                    name="name"
                    id="name"
-                   maxlength="128"
+                   [maxlength]="128"
                    required
                    [(ngModel)]="model.name"
                    #nameModel="ngModel"
@@ -22,8 +22,8 @@
                    class="w-full"
                    name="displayName"
                    id="displayName"
-                   minlength="2"
-                   maxlength="64"
+                   [minlength]="2"
+                   [maxlength]="64"
                    required
                    [(ngModel)]="model.displayName"
                    #displayNameModel="ngModel"
@@ -38,8 +38,8 @@
                    class="w-full"
                    name="latitude"
                    id="latitude"
-                   minlength="2"
-                   maxlength="64"
+                   [minlength]="2"
+                   [maxlength]="64"
                    [(ngModel)]="model.latitude"
                    #latitudeModel="ngModel"
                    #latitudeEl />
@@ -53,8 +53,8 @@
                    class="w-full"
                    name="longitude"
                    id="longitude"
-                   minlength="2"
-                   maxlength="64"
+                   [minlength]="2"
+                   [maxlength]="64"
                    [(ngModel)]="model.longitude"
                    #longitudeModel="ngModel"
                    #longitudeEl />

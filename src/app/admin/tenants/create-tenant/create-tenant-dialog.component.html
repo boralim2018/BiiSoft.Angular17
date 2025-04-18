@@ -7,8 +7,8 @@
                    class="w-full"
                    name="tenancyName"
                    id="tenancyName"
-                   minlength="2"
-                   maxlength="64"
+                   [minlength]="2"
+                   [maxlength]="64"
                    required
                    [(ngModel)]="tenant.tenancyName"
                    #tenancyNameModel="ngModel"
@@ -23,7 +23,7 @@
                    class="w-full"
                    name="name"
                    id="name"
-                   maxlength="128"
+                   [maxlength]="128"
                    required
                    [(ngModel)]="tenant.name"
                    #nameModel="ngModel"
@@ -39,7 +39,7 @@
                    name="adminEmailAddress"
                    id="adminEmailAddress"
                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
-                   maxlength="256"
+                   [maxlength]="256"
                    required
                    [(ngModel)]="tenant.adminEmailAddress"
                    #adminEmailAddressModel="ngModel"
@@ -64,7 +64,7 @@
                    class="w-full"
                    name="connectionString"
                    id="connectionString"
-                   maxlength="1024"
+                   [maxlength]="1024"
                    [(ngModel)]="tenant.connectionString" />
         </div>
 

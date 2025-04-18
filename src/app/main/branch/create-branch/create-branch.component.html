@@ -10,7 +10,7 @@
                      inputText
                      name="name"
                      [label]="l('Name')"
-                     maxlength="128"
+                     [maxlength]="128"
                      [(ngModel)]="model.name"
                      [required]="true">
                 </div>
@@ -18,7 +18,7 @@
                      inputText
                      name="displayName"
                      [label]="l('DisplayName')"
-                     maxlength="128"
+                     [maxlength]="128"
                      [(ngModel)]="model.displayName"
                      [required]="true">
                 </div>
@@ -26,7 +26,7 @@
                      inputText
                      name="businessId"
                      [label]="l('BusinessId')"
-                     maxlength="32"
+                     [maxlength]="32"
                      [(ngModel)]="model.businessId">
                 </div>
                 <div class="field col-12 md:col-6 xl:col-4"
@@ -40,8 +40,8 @@
                      type="email"
                      name="email"
                      [label]="l('Email')"
-                     minlength="5"
-                     maxlength="64"
+                     [minlength]="5"
+                     [maxlength]="64"
                      [(ngModel)]="model.email">
                 </div>
                 <div class="field col-12 md:col-6 xl:col-4"
@@ -49,14 +49,14 @@
                      type="url"
                      name="website"
                      [label]="l('Website')"
-                     maxlength="64"
+                     [maxlength]="64"
                      [(ngModel)]="model.website">
                 </div>
                 <div class="field col-12 md:col-6 xl:col-4"
                      inputText
                      name="taxRegistrationNumber"
                      [label]="l('TaxRegistrationNumber')"
-                     maxlength="32"
+                     [maxlength]="32"
                      [(ngModel)]="model.taxRegistrationNumber">
                 </div>
             </div>

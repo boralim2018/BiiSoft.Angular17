@@ -71,7 +71,7 @@
          inputText
          name="postalCode"
          [label]="l('PostalCode')"
-         maxlength="32"
+         [maxlength]="32"
          [(ngModel)]="model.postalCode"
          (ngModelChange)="onPostalCodeChange($event)"
          [required]="requiredPostalCode"
@@ -82,7 +82,7 @@
          inputText
          name="street"
          [label]="l('Street')"
-         maxlength="32"
+         [maxlength]="32"
          [(ngModel)]="model.street"
          (ngModelChange)="onStreetChange($event)"
          [required]="requiredStreet"
@@ -92,7 +92,7 @@
          inputText
          name="hostNo"
          [label]="l('HouseNo')"
-         maxlength="32"
+         [maxlength]="32"
          [(ngModel)]="model.houseNo"
          (ngModelChange)="onHouseNoChange($event)"
          [required]="requiredHouseNo"
