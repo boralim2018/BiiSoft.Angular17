@@ -3,23 +3,22 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateWarehouseInputDto, WarehouseBranchDto, WarehouseServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { NgIf } from '@angular/common';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FindBranchComponent } from '../../../../shared/components/find-branch/find-branch.component';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-create-warehouse',
     templateUrl: './create-warehouse.component.html',
     providers: [WarehouseServiceProxy],
     standalone: true,
-    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, RadioButtonModule, FindBranchComponent, AbpValidationSummaryComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextComponent, RadioButtonModule, FindBranchComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class CreateWarehouseComponent extends DynamicDialogBase implements OnInit {
     saving = false;
