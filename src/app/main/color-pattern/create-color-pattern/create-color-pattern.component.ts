@@ -50,7 +50,7 @@ export class CreateColorPatternComponent extends DynamicDialogBase implements On
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this._dialogRef.close(result);

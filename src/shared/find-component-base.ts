@@ -66,15 +66,18 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
         }
     }
 
+    get isModelNullOrEmpty() {
+        return this.isNullOrUndefined(this.model) || (this.multiple && (!Array.isArray(this.model) || this.model.length == 0));
+    }
+
     validate(control: AbstractControl): { [key: string]: any } | null {
+        this.invalid = false; // Reset invalid flag
 
-        const value = this.model;
+        const modelNullOrEmpty = this.isModelNullOrEmpty;
 
-        if (!this.required && this.isNullOrUndefined(value)) return null;
+        if (!this.required && modelNullOrEmpty) return null;
 
-        this.invalid = this.isNullOrUndefined(value) || (this.multiple && value?.length == 0);
-
-        if (this.invalid) return { required: true };
+        if (modelNullOrEmpty) return this.setError({ required: true });
 
         return null; // Valid
     }

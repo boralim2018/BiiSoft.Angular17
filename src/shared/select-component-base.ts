@@ -49,14 +49,18 @@ export abstract class SelectComponentBase extends DropdownComponentBase {
         super(injector);
     }
 
+    get isModelNullOrEmpty() {
+        return this.isNullOrUndefined(this.model) || (this.multiple && (!Array.isArray(this.model) || this.model.length == 0));
+    }
+
     validate(control: AbstractControl): { [key: string]: any } | null {
-        const value = this.model;
+        this.invalid = false; // Reset invalid flag
 
-        if (!this.required && this.isNullOrUndefined(value)) return null;
+        const modelNullOrEmpty = this.isModelNullOrEmpty;
 
-        this.invalid = this.isNullOrUndefined(value) || (this.multiple && value?.length == 0);
+        if (!this.required && modelNullOrEmpty) return null;
 
-        if (this.invalid) return { required: true };
+        if (modelNullOrEmpty) return this.setError({ required: true });
 
         return null;
     }

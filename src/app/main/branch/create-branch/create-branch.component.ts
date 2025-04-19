@@ -46,9 +46,16 @@ export class CreateBranchComponent extends AppComponentBase implements OnInit {
 
     initModel() {
         this.model = new CreateUpdateBranchInputDto();
-        this.model.billingAddress = new ContactAddressDto();
-        this.model.sameAsBillingAddress = true;
+        this.model.billingAddress = new ContactAddressDto();        
         this.model.shippingAddress = new ContactAddressDto();
+        this.model.sameAsBillingAddress = true;
+        if (this.appSession.generalSetting?.countryId) {
+            let country = { id: this.appSession.generalSetting.countryId, name: this.appSession.generalSetting.countryName };
+            this.model.billingAddress['country'] = country;
+            this.model.shippingAddress['country'] = country;
+            this.model.billingAddress.countryId = this.appSession.generalSetting.countryId;
+            this.model.shippingAddress.countryId = this.appSession.generalSetting.countryId;
+        }
     };
 
     mapUsers() {
@@ -77,7 +84,7 @@ export class CreateBranchComponent extends AppComponentBase implements OnInit {
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this.cancel();

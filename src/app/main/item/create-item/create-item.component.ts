@@ -94,7 +94,7 @@ export class CreateItemComponent extends AppComponentBase implements OnInit {
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this.cancel();

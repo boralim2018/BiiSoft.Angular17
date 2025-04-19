@@ -15,8 +15,8 @@
          [attr.disabled]="disabled">
         <div class="p-inputtext border-none pr-0 flex justify-content-between align-items-center">
             <div class="flex-1 flex justify-content-between align-items-center">
-                <div class="p-placeholder cursor-pointer" *ngIf="invalid" (click)="find()">{{placeholder}}</div>
-                <ng-container *ngIf="!invalid">
+                <div class="p-placeholder cursor-pointer" *ngIf="isModelNullOrEmpty" (click)="find()">{{placeholder}}</div>
+                <ng-container *ngIf="!isModelNullOrEmpty">
                     <span *ngIf="!multiple">{{getDisplay(model)}}</span>
                     <div class="flex flex-wrap gap-1" *ngIf="multiple">
                         <ng-container *ngFor="let m of model; let i=index">

@@ -1,4 +1,4 @@
-<div class="text-900 font-medium" *ngIf="label">
+<div *ngIf="label" class="flex flex-wrap align-items-center gap-1 mb-2">
     {{label}}
     <span class="text-red-500" *ngIf="required">*</span>
 </div>
@@ -14,11 +14,8 @@
        (onBlur)="onTouched()"
        [disabled]="disabled"
        [required]="required"
-       [ngClass]="{'border-red-600': invalidPattern }"
+       [pattern]="pattern"
        #inputModel="ngModel"
        #inputEl/>
 <abp-validation-summary [control]="inputModel"
                         [controlEl]="inputEl"></abp-validation-summary>
-<small *ngIf="dirty && invalidPattern && type=='email'" class="p-error">{{l('InvalidEmailAddress')}}</small>
-<small *ngIf="dirty && invalidPattern && type=='url'" class="p-error">{{l('InvalidURL')}}</small>
-<small *ngIf="dirty && invalidPattern && type!='email' && type!='url'" class="p-error">{{l('InvalidPattern')}}</small>

@@ -52,7 +52,7 @@ export class CreateTaxComponent extends DynamicDialogBase implements OnInit {
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this._dialogRef.close(result);

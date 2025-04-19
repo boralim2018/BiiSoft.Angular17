@@ -3,7 +3,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateVillageInputDto, VillageServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
@@ -11,17 +11,15 @@ import { FindSangkatCommuneComponent } from '../../../../shared/components/find-
 import { FindKhanDistrictComponent } from '../../../../shared/components/find-khan-district/find-khan-district.component';
 import { FindCityProvinceComponent } from '../../../../shared/components/find-city-province/find-city-province.component';
 import { FindCountryComponent } from '../../../../shared/components/find-country/find-country.component';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
-import { of } from 'rxjs';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-create-village',
     templateUrl: './create-village.component.html',
     providers: [VillageServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindCountryComponent, FindCityProvinceComponent, FindKhanDistrictComponent, FindSangkatCommuneComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, BusyDirective, InputTextComponent, FindCountryComponent, FindCityProvinceComponent, FindKhanDistrictComponent, FindSangkatCommuneComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class CreateVillageComponent extends DynamicDialogBase implements OnInit {
     saving = false;
@@ -58,7 +56,7 @@ export class CreateVillageComponent extends DynamicDialogBase implements OnInit 
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this._dialogRef.close(result);

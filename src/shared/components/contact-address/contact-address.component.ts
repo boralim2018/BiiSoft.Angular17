@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit, EventEmitter, Output, Input, forwardRef, ViewChild } from '@angular/core';
 import { AbpValidationSummaryComponent } from '../validation/abp-validation.summary.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { AbstractControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { FindVillageComponent } from '../find-village/find-village.component';
 import { FindSangkatCommuneComponent } from '../find-sangkat-commune/find-sangkat-commune.component';
 import { FindKhanDistrictComponent } from '../find-khan-district/find-khan-district.component';
@@ -43,22 +43,6 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
     @Input() sameAsBillingAddress: boolean;
     @Output() sameAsBillingAddressChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    @ViewChild('countryRef') countryRef: FindCountryComponent;
-    @ViewChild('cityProvinceRef') cityProvinceRef: FindCityProvinceComponent;
-    @ViewChild('khanDistrictRef') khanDistrictRef: FindKhanDistrictComponent;
-    @ViewChild('sangkatCommuneRef') sangkatCommuneRef: FindSangkatCommuneComponent;
-    @ViewChild('villageRef') villageRef: FindVillageComponent;
-    @ViewChild('postalCodeRef') postalCodeRef: InputTextComponent;
-    @ViewChild('streetRef') streetRef: InputTextComponent;
-    @ViewChild('houseNoRef') houseNoRef: InputTextComponent;
-
-    
-    touchedCountry: boolean;
-    touchedCityProvince: boolean;
-    touchedKhanDistrict: boolean;
-    touchedSangkatCommune: boolean;
-    touchedVillage: boolean;
-
     khanDistrictEnable: boolean = this.feature.isEnabled("App.Setup.Locations.KhanDistricts");
     sangkatCommuneEnable: boolean = this.feature.isEnabled("App.Setup.Locations.SangkatCommunes");
     villageEnable: boolean = this.feature.isEnabled("App.Setup.Locations.Villages");
@@ -78,39 +62,40 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
         if (!this.model) this.model = {};
     }
 
+    onSameAsBillingAddressChange(event) {
+        this.sameAsBillingAddressChange.emit(event);
+        this.onChange(this.model);
+        this.onTouched();
+    }
+
     onCountryChange(event) {
         this.model.countryId = event?.id;
         this.onChange(this.model);
         this.onTouched();
-        this.touchedCountry = true;
     }
 
     onCityProvinceChange(event) {
         this.model.cityProvinceId = event?.id;
         this.onChange(this.model);
         this.onTouched();
-        this.touchedCityProvince = true;
     }
 
     onKhanDistrictChange(event) {
         this.model.khanDistrictId = event?.id;
         this.onChange(this.model);
         this.onTouched();
-        this.touchedKhanDistrict = true;
     }
 
     onSangkatCommuneChange(event) {
         this.model.sangkatCommuneId = event?.id;
         this.onChange(this.model);
         this.onTouched();
-        this.touchedSangkatCommune = true;
     }
 
     onVillageChange(event) {
         this.model.villageId = event?.id;
         this.onChange(this.model);
         this.onTouched();
-        this.touchedVillage = true;
     }
 
     onPostalCodeChange(event) {
@@ -129,53 +114,61 @@ export class ContactAddressComponent extends ControlValueAccessorComponentBase i
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-       
+        this.invalid = false; // Reset invalid flag
+
         if (this.isShippingAddress && this.sameAsBillingAddress) return null;
 
-        if (this.isNullOrUndefined(this.model)) return { required: true };
+        const value = control.value;
 
-        let countryValidate = control.value?.country?.id && !this.countryRef.model ? null : this.countryRef.validate(control);
-        if (countryValidate) return countryValidate;
+        if (this.isNullOrUndefined(value)) {
+            return this.setError({ required: true });
+        }
+
+        if (!value?.countryId) {
+            return this.setError({ required: { requiredCountry: true } });
+        }
 
         const addressLevel = this.addressLevel;
 
-        if (addressLevel >= 1) {
-            let validate = control.value?.cityProvince?.id && !this.cityProvinceRef.model ? null : this.cityProvinceRef.validate(control);
-            if (validate) return validate;
+        if (addressLevel >= 1 && !value?.cityProvinceId) {
+            return this.setError({ required: { requiredCityProvince: true } });
         }
 
-        if (addressLevel >= 2 && this.khanDistrictEnable) {
-            let validate = control.value?.khanDistrict?.id && !this.khanDistrictRef.model ? null : this.khanDistrictRef.validate(control);
-            if (validate) return validate;
+        if (addressLevel >= 2 && !value?.khanDistrictId) {
+            return this.setError({ required: { requiredKhanDistrict: true } });
         }
 
-        if (addressLevel >= 3 && this.sangkatCommuneEnable) {
-            let validate = control.value?.sangkatCommune?.id && !this.sangkatCommuneRef.model ? null : this.sangkatCommuneRef.validate(control);
-            if (validate) return validate;
+        if (addressLevel >= 3 && !value?.sangkatCommuneId) {
+            return this.setError({ required: { requiredSangkatCommune: true } });
         }
 
-        if (addressLevel >= 4 && this.villageEnable) {
-            let validate = control.value?.village?.id && !this.villageRef.model ? null : this.villageRef.validate(control);
-            if (validate) return validate;
+        if (addressLevel >= 4 && !value?.villageId) {
+            return this.setError({ required: { requiredVillage: true } });
         }
 
-        if (this.requiredPostalCode) {
-            if (control.value.postalCode != this.postalCodeRef.model) this.postalCodeRef.model = control.value.postalCode;
-            let validate = this.postalCodeRef.validate(control);
-            if (validate) return validate;
+        if (this.isWhiteSpace(value?.postalCode)) {
+            return this.setError({ whitespace: { invalidPostalCode: true } });
         }
 
-        if (this.requiredStreet) {
-            if (control.value.street != this.streetRef.model) this.streetRef.model = control.value.street;
-            let validate = this.streetRef.validate(control);
-            if (validate) return validate;
+        if (this.requiredPostalCode && !value?.postalCode) {
+            return this.setError({ required: { requiredPostalCode: true } });
+        }
+        
+        if (this.isWhiteSpace(value?.street)) {
+            return this.setError({ whitespace: { invalidStreet: true } });
         }
 
-        if (this.requiredHouseNo) {
-            if (control.value.houseNo != this.houseNoRef.model) this.houseNoRef.model = control.value.houseNo;
-            let validate = this.houseNoRef.validate(control);
-            if (validate) return validate;
+        if (this.requiredStreet && !value?.street) {
+            return this.setError({ required: { requiredStreet: true } });
         }
+
+        if (this.isWhiteSpace(value?.houseNo)) {
+            return this.setError({ whitespace: { invalidHouseNo: true } });
+        }
+
+        if (this.requiredHouseNo && !value?.houseNo) {
+            return this.setError({ required: { requiredHouseNo: true } });
+        }        
         
         return null;
     }

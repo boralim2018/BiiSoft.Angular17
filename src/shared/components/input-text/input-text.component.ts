@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit, Input, forwardRef } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
-import { AbstractControl, FormsModule, NG_VALIDATORS, Validator } from '@angular/forms';
+import { AbstractControl, FormsModule, NG_VALIDATORS } from '@angular/forms';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AbpValidationSummaryComponent } from '../validation/abp-validation.summary.component';
 import { ControlValueAccessorComponentBase } from '../../control-value-accessor-component-base';
@@ -35,8 +35,6 @@ export class InputTextComponent extends ControlValueAccessorComponentBase implem
     @Input() pattern: string | RegExp;
     @Input() type: string = 'text';
 
-    invalidPattern: any;
-
     constructor(injector: Injector) {
         super(injector);
     }
@@ -52,37 +50,46 @@ export class InputTextComponent extends ControlValueAccessorComponentBase implem
         else if (this.type.toLocaleLowerCase() === 'url') {
             this.pattern = this.pattern || /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/; // URL regex pattern
         }
+        else if (this.type.toLocaleLowerCase() === 'text') {
+            this.pattern = this.pattern || /^(?!^\s+$).*$/;
+        }
     }
 
     validate(control: AbstractControl): { [key: string]: any } | null {
-        const value = this.model;
-        this.invalidPattern = null; // Reset invalidPattern flag
+        this.invalid = false; // Reset invalid flag
+
+        const value = control.value;
+        const nullOrEmpty = this.isNullOrEmpty(value);
 
         // Skip validation if required is false and value is empty
-        if (!this.required && this.isNullOrSpaces(value)) return null;
+        if (!this.required && nullOrEmpty) return null;
 
-        this.invalid = this.isNullOrSpaces(value); // Set invalid flag if required and value is null or undefined
+        if (this.isWhiteSpace(value)) {
+            return this.setError({ whitespace: true });
+        }
 
         // Check for required validation
-        if (this.required && this.invalid)  return { required: true };
+        if (this.required && nullOrEmpty) {
+            return this.setError({ required: true });
+        }
 
         // Validate minlength
         if (this.minlength != null && value?.length < +this.minlength) {
-            return { minlength: { requiredLength: +this.minlength, actualLength: value.length } };
+            return this.setError({ minlength: { requiredLength: +this.minlength, actualLength: value.length, HTML:'' } });
         }
 
         // Validate maxlength
         if (this.maxlength != null && value?.length > +this.maxlength) {
-            return { maxlength: { requiredLength: +this.maxlength, actualLength: value.length } };
+            return this.setError({ maxlength: { requiredLength: +this.maxlength, actualLength: value.length } });
         }
 
         // Validate pattern
         if (this.pattern && value) {
             const regex = typeof this.pattern === 'string' ? new RegExp(this.pattern) : this.pattern;
-            if (!regex.test(value)) {              
-                if (this.type.toLocaleLowerCase() === 'email') return this.invalidPattern = { email: true }; // Email validation error
-                if (this.type.toLocaleLowerCase() === 'url') return this.invalidPattern = { url: true }; // URL validation error
-                return this.invalidPattern = { pattern: { requiredPattern: this.pattern.toString(), actualValue: value } };
+            if (!regex.test(value)) {
+                if (this.type.toLocaleLowerCase() === 'email') return this.setError({ email: true }); 
+                if (this.type.toLocaleLowerCase() === 'url') return this.setError({ url: true }); 
+                return this.setError({ pattern: { requiredPattern: this.pattern.toString(), actualValue: value } });
             }
         }
 

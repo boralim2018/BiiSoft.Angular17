@@ -50,7 +50,7 @@ export class CreateItemSeriesComponent extends DynamicDialogBase implements OnIn
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this._dialogRef.close(result);

@@ -49,14 +49,19 @@ export abstract class ControlValueAccessorComponentBase extends AppComponentBase
         this.dirty = true;
     }
 
+    protected setError(err: any) {
+        this.invalid = true;
+        return err;
+    }
+
     validate(control: AbstractControl): { [key: string]: any } | null {
-        const value = this.model;
+        this.invalid = false; // Reset invalid flag
 
-        if (!this.required && this.isNullOrUndefined(value)) return null;
+        const nullOrUndefined = this.isNullOrUndefined(control.value);
 
-        this.invalid = this.isNullOrUndefined(value);
+        if (!this.required && nullOrUndefined) return null;
 
-        if (this.invalid) return { required: true };
+        if (nullOrUndefined) return this.setError({ required: true });
 
         return null; // Valid
     }

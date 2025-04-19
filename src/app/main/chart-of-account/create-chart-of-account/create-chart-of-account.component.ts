@@ -63,7 +63,7 @@ export class CreateChartOfAccountComponent extends DynamicDialogBase implements 
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this.model.id = result;

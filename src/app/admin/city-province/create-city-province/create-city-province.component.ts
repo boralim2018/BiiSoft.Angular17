@@ -3,22 +3,20 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateCityProvinceInputDto, CityProvinceServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { FindCountryComponent } from '../../../../shared/components/find-country/find-country.component';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
-import { of } from 'rxjs';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-create-city-province',
     templateUrl: './create-city-province.component.html',
     providers: [CityProvinceServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindCountryComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, BusyDirective, InputTextComponent, FindCountryComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class CreateCityProvinceComponent extends DynamicDialogBase implements OnInit {
     saving = false;
@@ -52,7 +50,7 @@ export class CreateCityProvinceComponent extends DynamicDialogBase implements On
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this._dialogRef.close(result);

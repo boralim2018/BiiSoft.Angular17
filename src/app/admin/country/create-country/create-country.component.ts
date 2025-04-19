@@ -3,22 +3,20 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateCountryInputDto, CountryServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { FindCurrencyComponent } from '../../../../shared/components/find-currency/find-currency.component';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
-import { of } from 'rxjs';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-create-country',
     templateUrl: './create-country.component.html',
     providers: [CountryServiceProxy],
     standalone: true,
-    imports: [FormsModule, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindCurrencyComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, BusyDirective, InputTextComponent, FindCurrencyComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class CreateCountryComponent extends DynamicDialogBase implements OnInit {
     saving = false;
@@ -52,7 +50,7 @@ export class CreateCountryComponent extends DynamicDialogBase implements OnInit 
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this._dialogRef.close(result);

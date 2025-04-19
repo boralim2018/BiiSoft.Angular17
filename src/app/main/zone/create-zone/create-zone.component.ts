@@ -3,22 +3,21 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { CreateUpdateZoneInputDto, ZoneServiceProxy } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FindWarehouseComponent } from '../../../../shared/components/find-warehouse/find-warehouse.component';
 import { NgIf } from '@angular/common';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 
 @Component({
     selector: 'app-create-zone',
     templateUrl: './create-zone.component.html',
     providers: [ZoneServiceProxy],
     standalone: true,
-    imports: [FormsModule, NgIf, BusyDirective, InputTextModule, AbpValidationSummaryComponent, FindWarehouseComponent, FindWarehouseComponent, ButtonDirective, Ripple, LocalizePipe]
+    imports: [FormsModule, NgIf, BusyDirective, InputTextComponent, FindWarehouseComponent, ButtonDirective, Ripple, LocalizePipe]
 })
 export class CreateZoneComponent extends DynamicDialogBase implements OnInit {
     saving = false;
@@ -52,7 +51,7 @@ export class CreateZoneComponent extends DynamicDialogBase implements OnInit {
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this._dialogRef.close(result);

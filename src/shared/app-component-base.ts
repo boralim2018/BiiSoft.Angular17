@@ -118,8 +118,17 @@ export abstract class AppComponentBase extends LocalizeComponent {
         return str === null || str === undefined || str.match(/^ *$/) !== null;
     }
 
+    isNullOrEmpty(val: any) {
+        return val === null || val === undefined || val === '';
+    }
+
     isNullOrUndefined(val: any) {
         return val === null || val === undefined;
+    }
+
+    isWhiteSpace(value: any): boolean {
+        if (value === '' || value === null || value === undefined) return false;
+        return typeof value === 'string' && value.trim().length === 0;
     }
 
     get isMobile(): boolean {

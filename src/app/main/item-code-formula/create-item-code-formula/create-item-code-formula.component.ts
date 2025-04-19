@@ -61,7 +61,7 @@ export class CreateItemCodeFormulaComponent extends DynamicDialogBase implements
 
                 if (form) {
                     this.initModel();
-                    form.resetForm();
+                    form.resetForm(this.model);
                 }
                 else {
                     this._dialogRef.close(result);
