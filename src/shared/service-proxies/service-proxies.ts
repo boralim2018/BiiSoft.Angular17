@@ -37353,7 +37353,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
     trackSerial: boolean;
     trackExpired: boolean;
     trackBatchNo: boolean;
-    trackInventoryStatus: boolean;
+    trackAssetStatus: boolean;
     reorderStock: number;
     minStock: number;
     maxStock: number;
@@ -37415,7 +37415,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
             this.trackSerial = _data["trackSerial"];
             this.trackExpired = _data["trackExpired"];
             this.trackBatchNo = _data["trackBatchNo"];
-            this.trackInventoryStatus = _data["trackInventoryStatus"];
+            this.trackAssetStatus = _data["trackAssetStatus"];
             this.reorderStock = _data["reorderStock"];
             this.minStock = _data["minStock"];
             this.maxStock = _data["maxStock"];
@@ -37481,7 +37481,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
         data["trackSerial"] = this.trackSerial;
         data["trackExpired"] = this.trackExpired;
         data["trackBatchNo"] = this.trackBatchNo;
-        data["trackInventoryStatus"] = this.trackInventoryStatus;
+        data["trackAssetStatus"] = this.trackAssetStatus;
         data["reorderStock"] = this.reorderStock;
         data["minStock"] = this.minStock;
         data["maxStock"] = this.maxStock;
@@ -37547,7 +37547,7 @@ export interface ICreateUpdateItemInputDto {
     trackSerial: boolean;
     trackExpired: boolean;
     trackBatchNo: boolean;
-    trackInventoryStatus: boolean;
+    trackAssetStatus: boolean;
     reorderStock: number;
     minStock: number;
     maxStock: number;
@@ -49683,7 +49683,7 @@ export class ItemDetailDto implements IItemDetailDto {
     trackSerial: boolean;
     trackExpired: boolean;
     trackBatchNo: boolean;
-    trackInventoryStatus: boolean;
+    trackAssetStatus: boolean;
     reorderStock: number;
     minStock: number;
     maxStock: number;
@@ -49783,7 +49783,7 @@ export class ItemDetailDto implements IItemDetailDto {
             this.trackSerial = _data["trackSerial"];
             this.trackExpired = _data["trackExpired"];
             this.trackBatchNo = _data["trackBatchNo"];
-            this.trackInventoryStatus = _data["trackInventoryStatus"];
+            this.trackAssetStatus = _data["trackAssetStatus"];
             this.reorderStock = _data["reorderStock"];
             this.minStock = _data["minStock"];
             this.maxStock = _data["maxStock"];
@@ -49887,7 +49887,7 @@ export class ItemDetailDto implements IItemDetailDto {
         data["trackSerial"] = this.trackSerial;
         data["trackExpired"] = this.trackExpired;
         data["trackBatchNo"] = this.trackBatchNo;
-        data["trackInventoryStatus"] = this.trackInventoryStatus;
+        data["trackAssetStatus"] = this.trackAssetStatus;
         data["reorderStock"] = this.reorderStock;
         data["minStock"] = this.minStock;
         data["maxStock"] = this.maxStock;
@@ -49991,7 +49991,7 @@ export interface IItemDetailDto {
     trackSerial: boolean;
     trackExpired: boolean;
     trackBatchNo: boolean;
-    trackInventoryStatus: boolean;
+    trackAssetStatus: boolean;
     reorderStock: number;
     minStock: number;
     maxStock: number;
@@ -50631,7 +50631,7 @@ export class ItemListDto implements IItemListDto {
     trackSerial: boolean;
     trackExpired: boolean;
     trackBatchNo: boolean;
-    trackInventoryStatus: boolean;
+    trackAssetStatus: boolean;
     reorderStock: number;
     minStock: number;
     maxStock: number;
@@ -50701,7 +50701,7 @@ export class ItemListDto implements IItemListDto {
             this.trackSerial = _data["trackSerial"];
             this.trackExpired = _data["trackExpired"];
             this.trackBatchNo = _data["trackBatchNo"];
-            this.trackInventoryStatus = _data["trackInventoryStatus"];
+            this.trackAssetStatus = _data["trackAssetStatus"];
             this.reorderStock = _data["reorderStock"];
             this.minStock = _data["minStock"];
             this.maxStock = _data["maxStock"];
@@ -50771,7 +50771,7 @@ export class ItemListDto implements IItemListDto {
         data["trackSerial"] = this.trackSerial;
         data["trackExpired"] = this.trackExpired;
         data["trackBatchNo"] = this.trackBatchNo;
-        data["trackInventoryStatus"] = this.trackInventoryStatus;
+        data["trackAssetStatus"] = this.trackAssetStatus;
         data["reorderStock"] = this.reorderStock;
         data["minStock"] = this.minStock;
         data["maxStock"] = this.maxStock;
@@ -50841,7 +50841,7 @@ export interface IItemListDto {
     trackSerial: boolean;
     trackExpired: boolean;
     trackBatchNo: boolean;
-    trackInventoryStatus: boolean;
+    trackAssetStatus: boolean;
     reorderStock: number;
     minStock: number;
     maxStock: number;
@@ -51441,7 +51441,7 @@ export class ItemSettingDto implements IItemSettingDto {
     useSerial: boolean;
     useExpired: boolean;
     useBatchNo: boolean;
-    useInventoryStatus: boolean;
+    useAssetStatus: boolean;
     useReorderStock: boolean;
     useMinStock: boolean;
     useMaxStock: boolean;
@@ -51518,7 +51518,7 @@ export class ItemSettingDto implements IItemSettingDto {
             this.useSerial = _data["useSerial"];
             this.useExpired = _data["useExpired"];
             this.useBatchNo = _data["useBatchNo"];
-            this.useInventoryStatus = _data["useInventoryStatus"];
+            this.useAssetStatus = _data["useAssetStatus"];
             this.useReorderStock = _data["useReorderStock"];
             this.useMinStock = _data["useMinStock"];
             this.useMaxStock = _data["useMaxStock"];
@@ -51595,7 +51595,7 @@ export class ItemSettingDto implements IItemSettingDto {
         data["useSerial"] = this.useSerial;
         data["useExpired"] = this.useExpired;
         data["useBatchNo"] = this.useBatchNo;
-        data["useInventoryStatus"] = this.useInventoryStatus;
+        data["useAssetStatus"] = this.useAssetStatus;
         data["useReorderStock"] = this.useReorderStock;
         data["useMinStock"] = this.useMinStock;
         data["useMaxStock"] = this.useMaxStock;
@@ -51672,7 +51672,7 @@ export interface IItemSettingDto {
     useSerial: boolean;
     useExpired: boolean;
     useBatchNo: boolean;
-    useInventoryStatus: boolean;
+    useAssetStatus: boolean;
     useReorderStock: boolean;
     useMinStock: boolean;
     useMaxStock: boolean;

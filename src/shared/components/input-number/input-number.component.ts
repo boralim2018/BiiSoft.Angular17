@@ -33,7 +33,7 @@ export class InputNumberComponent extends ControlValueAccessorComponentBase impl
     @Input() RTL: boolean;
     @Input() format: boolean = true;
     @Input() useGrouping: boolean = true;
-    @Input() min: number;
+    @Input() min: number = 0;
     @Input() max: number;
     @Input() maxlength: number;
 

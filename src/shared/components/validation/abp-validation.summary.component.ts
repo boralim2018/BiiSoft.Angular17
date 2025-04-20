@@ -21,7 +21,6 @@ export class AbpValidationSummaryComponent extends AppComponentBase implements O
 
     defaultValidationErrors: Partial<AbpValidationError>[] = [
         { name: 'required', localizationKey: 'ThisFieldIsRequired' },
-        { name: 'whitespace', localizationKey: 'Whitespace' },
         {
             name: 'minlength',
             localizationKey: 'PleaseEnterAtLeastNCharacter',

@@ -6,14 +6,10 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { ContactAddressComponent } from '../../../../shared/components/contact-address/contact-address.component';
-import { AbpValidationSummaryComponent } from '../../../../shared/components/validation/abp-validation.summary.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { AppComponentBase } from '../../../../shared/app-component-base';
 import { DividerModule } from 'primeng/divider';
-import { FindUserComponent } from '../../../../shared/components/find-user/find-user.component';
-import { RadioButtonModule } from 'primeng/radiobutton';
 import { NgClass, NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
 import { SelectItemCategoryComponent } from '../../../../shared/components/select-item-type/select-item-category.component';
@@ -42,6 +38,8 @@ import { FindFieldCComponent } from '../../../../shared/components/find-field-c/
 import { SelectWeightUnitComponent, SelectLengthUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent } from '../../../../shared/components/select-unit/select-unit.component';
 import { InputAreaUnitComponent, InputLengthUnitComponent, InputVolumeUnitComponent, InputWeightUnitComponent } from '../../../../shared/components/input-unit/input-unit.component';
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
+import { InputNumberComponent } from '../../../../shared/components/input-number/input-number.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
     selector: 'app-create-item',
@@ -50,13 +48,14 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
     providers: [ItemServiceProxy],
     standalone: true,
     imports: [
-        FormsModule, BusyDirective, NgIf, NgClass, RadioButtonModule, FindUserComponent, AbpValidationSummaryComponent, InputTextareaModule,
-        ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, SelectItemCategoryComponent, AttachFileComponent,
-        SelectItemTypeComponent, FindUnitComponent, FindItemGroupComponent, FindItemBrandComponent, FindItemGradeComponent, FindItemModelComponent,
-        FindItemSizeComponent, FindItemSeriesComponent, FindColorPatternComponent, FindCPUComponent, FindRAMComponent, FindVGAComponent,
+        FormsModule, BusyDirective, NgIf, NgClass, InputTextareaModule, FindItemModelComponent, SelectItemCategoryComponent,
+        ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, AttachFileComponent, SelectItemTypeComponent,
+        FindUnitComponent, FindItemGroupComponent, FindItemBrandComponent, FindItemGradeComponent, FindVGAComponent, CheckboxModule,
+        FindItemSizeComponent, FindItemSeriesComponent, FindColorPatternComponent, FindCPUComponent, FindRAMComponent, 
         FindHDDComponent, FindScreenComponent, FindCameraComponent, FindBatteryComponent, FindFieldAComponent, FindFieldBComponent,
         FindFieldCComponent, SelectWeightUnitComponent, SelectLengthUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent,
         InputTextComponent, InputLengthUnitComponent, InputWeightUnitComponent, InputAreaUnitComponent, InputVolumeUnitComponent,
+        InputNumberComponent
     ]
 })
 export class CreateItemComponent extends AppComponentBase implements OnInit {

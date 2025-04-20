@@ -48,6 +48,21 @@
                              [(ngModel)]="model.displayName"
                              [required]="true">
                         </div>
+                        <div class="field col-12 xl:col-6"
+                             inputText
+                             name="code"
+                             [label]="l('Code')"
+                             [maxlength]="32"
+                             [(ngModel)]="model.code"
+                             [required]="true">
+                        </div>
+                        <div class="field col-12 xl:col-6"
+                             findUnit
+                             name="unit"
+                             [required]="true"
+                             [label]="l('Unit')"
+                             [(ngModel)]="model.unitId">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,13 +71,64 @@
 
             <div class="formgrid grid m-0">
 
-                <div class="field col-12 md:col-6 xl:col-4"
-                     inputText
-                     name="code"
-                     [label]="l('Code')"
-                     [maxlength]="32"
-                     [(ngModel)]="model.code"
-                     [required]="true">
+               
+                <ng-container *ngIf="model.itemType==4 || model.itemType==5">
+                    <div class="field col-12 md:col-6 xl:col-4"
+                         inputNumber
+                         name="minStock"
+                         [label]="l('MinStock')"
+                         [(ngModel)]="model.minStock"
+                         [required]="true">
+                    </div>
+
+                    <div class="field col-12 md:col-6 xl:col-4"
+                         inputNumber
+                         name="maxStock"
+                         [label]="l('MaxStock')"
+                         [(ngModel)]="model.maxStock"
+                         [required]="true">
+                    </div>
+
+                    <div class="field col-12 md:col-6 xl:col-4"
+                         inputNumber
+                         name="reorderStock"
+                         [label]="l('ReorderStock')"
+                         [(ngModel)]="model.reorderStock"
+                         [required]="true">
+                    </div>
+
+                    <div class="field col-12 md:col-6 xl:col-4">
+                        <p-checkbox name="trackSerial"
+                                    inputId="trackSerial"
+                                    [label]="l('TrackSerial')"
+                                    [(ngModel)]="model.trackSerial"
+                                    [binary]="true"/>
+                    </div>
+
+                </ng-container>
+
+                <div class="field col-12 md:col-6 xl:col-4" *ngIf="model.itemType==4">
+                    <p-checkbox name="trackBatchNo"
+                                inputId="trackBatchNo"
+                                [label]="l('TrackBatchNo')"
+                                [(ngModel)]="model.trackBatchNo"
+                                [binary]="true" />
+                </div>
+
+                <div class="field col-12 md:col-6 xl:col-4" *ngIf="model.itemType==4">
+                    <p-checkbox name="trackExpired"
+                                inputId="trackTrackExpired"
+                                [label]="l('TrackExpired')"
+                                [(ngModel)]="model.trackExpired"
+                                [binary]="true" />
+                </div>
+
+                <div class="field col-12 md:col-6 xl:col-4" *ngIf="model.itemType==5">
+                    <p-checkbox name="trackAssetStatus"
+                                inputId="trackAssetStatus"
+                                [label]="l('TrackAssetStatus')"
+                                [(ngModel)]="model.trackAssetStatus"
+                                [binary]="true" />
                 </div>
 
                 <div class="field col-12 md:col-6 xl:col-4"
@@ -143,14 +209,6 @@
                      [(ngModel)]="model.volume"
                      [(unit)]="model.volumeUnit"
                      *ngIf="appSession.itemSetting.useVolume">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findUnit
-                     name="unit"
-                     [required]="true"
-                     [label]="l('Unit')"
-                     [(ngModel)]="model.unitId">
                 </div>
 
                 <div class="field col-12 md:col-6 xl:col-4"
@@ -314,11 +372,8 @@
                               id="description"
                               rows="3"
                               [maxlength]="512"
-                              [(ngModel)]="model.description"
-                              #descriptionModel="ngModel"
-                              #descriptionEl></textarea>
-                    <abp-validation-summary [control]="descriptionModel"
-                                            [controlEl]="descriptionEl"></abp-validation-summary>
+                              [(ngModel)]="model.description">
+                    </textarea>
                 </div>
 
             </div>
