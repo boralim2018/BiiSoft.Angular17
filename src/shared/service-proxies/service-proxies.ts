@@ -37338,6 +37338,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
     name: string | undefined;
     displayName: string | undefined;
     code: string | undefined;
+    barcode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -37400,6 +37401,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.code = _data["code"];
+            this.barcode = _data["barcode"];
             this.netWeight = _data["netWeight"];
             this.grossWeight = _data["grossWeight"];
             this.length = _data["length"];
@@ -37466,6 +37468,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["code"] = this.code;
+        data["barcode"] = this.barcode;
         data["netWeight"] = this.netWeight;
         data["grossWeight"] = this.grossWeight;
         data["length"] = this.length;
@@ -37532,6 +37535,7 @@ export interface ICreateUpdateItemInputDto {
     name: string | undefined;
     displayName: string | undefined;
     code: string | undefined;
+    barcode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -44934,6 +44938,7 @@ export class FindItemDto implements IFindItemDto {
     displayName: string | undefined;
     isActive: boolean;
     code: string | undefined;
+    barcode: string | undefined;
 
     constructor(data?: IFindItemDto) {
         if (data) {
@@ -44951,6 +44956,7 @@ export class FindItemDto implements IFindItemDto {
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
             this.code = _data["code"];
+            this.barcode = _data["barcode"];
         }
     }
 
@@ -44968,6 +44974,7 @@ export class FindItemDto implements IFindItemDto {
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
         data["code"] = this.code;
+        data["barcode"] = this.barcode;
         return data;
     }
 
@@ -44985,6 +44992,7 @@ export interface IFindItemDto {
     displayName: string | undefined;
     isActive: boolean;
     code: string | undefined;
+    barcode: string | undefined;
 }
 
 export class FindItemDtoPagedResultDto implements IFindItemDtoPagedResultDto {
@@ -49154,6 +49162,8 @@ export enum ItemCategory {
     _22 = 22,
     _23 = 23,
     _24 = 24,
+    _25 = 25,
+    _26 = 26,
     _99 = 99,
 }
 
@@ -49664,6 +49674,7 @@ export class ItemDetailDto implements IItemDetailDto {
     itemCategory: ItemCategory;
     itemCategoryName: string | undefined;
     code: string | undefined;
+    barcode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -49764,6 +49775,7 @@ export class ItemDetailDto implements IItemDetailDto {
             this.itemCategory = _data["itemCategory"];
             this.itemCategoryName = _data["itemCategoryName"];
             this.code = _data["code"];
+            this.barcode = _data["barcode"];
             this.netWeight = _data["netWeight"];
             this.grossWeight = _data["grossWeight"];
             this.length = _data["length"];
@@ -49868,6 +49880,7 @@ export class ItemDetailDto implements IItemDetailDto {
         data["itemCategory"] = this.itemCategory;
         data["itemCategoryName"] = this.itemCategoryName;
         data["code"] = this.code;
+        data["barcode"] = this.barcode;
         data["netWeight"] = this.netWeight;
         data["grossWeight"] = this.grossWeight;
         data["length"] = this.length;
@@ -49972,6 +49985,7 @@ export interface IItemDetailDto {
     itemCategory: ItemCategory;
     itemCategoryName: string | undefined;
     code: string | undefined;
+    barcode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -50612,6 +50626,7 @@ export class ItemListDto implements IItemListDto {
     itemCategory: ItemCategory;
     itemCategoryName: string | undefined;
     code: string | undefined;
+    barcode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -50682,6 +50697,7 @@ export class ItemListDto implements IItemListDto {
             this.itemCategory = _data["itemCategory"];
             this.itemCategoryName = _data["itemCategoryName"];
             this.code = _data["code"];
+            this.barcode = _data["barcode"];
             this.netWeight = _data["netWeight"];
             this.grossWeight = _data["grossWeight"];
             this.length = _data["length"];
@@ -50752,6 +50768,7 @@ export class ItemListDto implements IItemListDto {
         data["itemCategory"] = this.itemCategory;
         data["itemCategoryName"] = this.itemCategoryName;
         data["code"] = this.code;
+        data["barcode"] = this.barcode;
         data["netWeight"] = this.netWeight;
         data["grossWeight"] = this.grossWeight;
         data["length"] = this.length;
@@ -50822,6 +50839,7 @@ export interface IItemListDto {
     itemCategory: ItemCategory;
     itemCategoryName: string | undefined;
     code: string | undefined;
+    barcode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -51986,7 +52004,6 @@ export enum ItemType {
     _4 = 4,
     _5 = 5,
     _6 = 6,
-    _7 = 7,
 }
 
 export class ItemTypeFilterInputDto implements IItemTypeFilterInputDto {
@@ -52147,6 +52164,7 @@ export class ItemZoneDto implements IItemZoneDto {
     zoneId: string;
     zoneName: string | undefined;
     warehouseId: string;
+    warehouseName: string | undefined;
 
     constructor(data?: IItemZoneDto) {
         if (data) {
@@ -52163,6 +52181,7 @@ export class ItemZoneDto implements IItemZoneDto {
             this.zoneId = _data["zoneId"];
             this.zoneName = _data["zoneName"];
             this.warehouseId = _data["warehouseId"];
+            this.warehouseName = _data["warehouseName"];
         }
     }
 
@@ -52179,6 +52198,7 @@ export class ItemZoneDto implements IItemZoneDto {
         data["zoneId"] = this.zoneId;
         data["zoneName"] = this.zoneName;
         data["warehouseId"] = this.warehouseId;
+        data["warehouseName"] = this.warehouseName;
         return data;
     }
 
@@ -52195,6 +52215,7 @@ export interface IItemZoneDto {
     zoneId: string;
     zoneName: string | undefined;
     warehouseId: string;
+    warehouseName: string | undefined;
 }
 
 export enum JournalType {

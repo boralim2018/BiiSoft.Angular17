@@ -18,21 +18,21 @@ export abstract class DropdownComponentBase extends ControlValueAccessorComponen
 
     models: any[] = [];
     loading: boolean;
-    validateMessage: string;
-
+   
     constructor(injector: Injector) {
         super(injector);
     }
 
     ngOnInit(): void {
         if (this.label) {
-            this.validateMessage = this.l("IsRequired", this.label);
             if (!this.placeholder) this.placeholder = this.l('Select_', this.label);
         }
-        else if (this.placeholder) {
-            this.validateMessage = this.placeholder;
-        }
     }
+
+    get validateMessage(): string {
+        return this.label ? this.l('Select_', this.label) : this.placeholder ? this.placeholder : undefined;
+    }
+
 }
 
 @Component({ template: '' })

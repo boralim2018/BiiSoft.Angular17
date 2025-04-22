@@ -16,20 +16,17 @@ export abstract class FindComponentBase extends ControlValueAccessorComponentBas
     @Input() exclude: boolean;
     @Output() excludeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
     
-    validateMessage: string;
-    
     constructor(injector: Injector) {
         super(injector);
     }
     
-    ngOnInit(): void {        
+    ngOnInit(): void {
         if (this.label) {
-            this.validateMessage = this.l("IsRequired", this.label);
             if (!this.placeholder) this.placeholder = this.l('Select_', this.label);
         }
-        else if (this.placeholder) {
-            this.validateMessage = this.placeholder;
-        }
+    }
+    get validateMessage(): string {
+        return this.label ? this.l('Select_', this.label) : this.placeholder ? this.placeholder : undefined;
     }
     
     getDisplay(model: any): any {

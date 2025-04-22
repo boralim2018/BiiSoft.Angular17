@@ -383,3 +383,25 @@ export abstract class BFileComponentBase extends FileDownloadComponentBase {
             });
     }
 }
+
+export abstract class TabViewCacheComponentBase extends AppComponentBase {
+
+    activeIndex: number;
+    abstract tabCacheKey: string;
+
+    constructor(injector: Injector) {
+        super(injector);
+    }
+
+    protected initTabViewFromCache() {
+        if (this.tabCacheKey) {
+            let cache = this.cacheService.get(this.tabCacheKey);
+            if (cache != undefined) this.activeIndex = cache;
+        }
+    }
+
+    saveCache() {
+        if (!this.tabCacheKey) return;
+        this.cacheService.set(this.tabCacheKey, this.activeIndex);
+    }
+}

@@ -12,7 +12,6 @@
                  selectAccountType
                  name="selectAccountType"
                  [label]="l('AccountType')"
-                 [required]="true"
                  [multiple]="true"
                  [showExclude]="true"
                  [(exclude)]="filterInput.accountTypeFilter.exclude"
@@ -27,7 +26,6 @@
                  [label]="l('SubAccountType')"
                  [accountTypeExclude]="filterInput.accountTypeFilter.exclude"
                  [accountTypeIds]="filterInput.accountTypeFilter.ids"
-                 [required]="true"
                  [multiple]="true"
                  [showExclude]="true"
                  [(exclude)]="filterInput.subAccountTypeFilter.exclude"

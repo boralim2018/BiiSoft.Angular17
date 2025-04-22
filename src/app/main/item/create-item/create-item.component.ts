@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { CreateUpdateItemInputDto, ItemServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AccountTypeFilterInputDto, CreateUpdateItemInputDto, ItemServiceProxy } from '@shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
@@ -8,7 +8,7 @@ import { ButtonDirective } from 'primeng/button';
 import { ContactAddressComponent } from '../../../../shared/components/contact-address/contact-address.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
-import { AppComponentBase } from '../../../../shared/app-component-base';
+import { TabViewCacheComponentBase } from '../../../../shared/app-component-base';
 import { DividerModule } from 'primeng/divider';
 import { NgClass, NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
@@ -40,6 +40,8 @@ import { InputAreaUnitComponent, InputLengthUnitComponent, InputVolumeUnitCompon
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 import { InputNumberComponent } from '../../../../shared/components/input-number/input-number.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { TabViewModule } from 'primeng/tabview';
+import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
 
 @Component({
     selector: 'app-create-item',
@@ -51,14 +53,15 @@ import { CheckboxModule } from 'primeng/checkbox';
         FormsModule, BusyDirective, NgIf, NgClass, InputTextareaModule, FindItemModelComponent, SelectItemCategoryComponent,
         ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, AttachFileComponent, SelectItemTypeComponent,
         FindUnitComponent, FindItemGroupComponent, FindItemBrandComponent, FindItemGradeComponent, FindVGAComponent, CheckboxModule,
-        FindItemSizeComponent, FindItemSeriesComponent, FindColorPatternComponent, FindCPUComponent, FindRAMComponent, 
+        FindItemSizeComponent, FindItemSeriesComponent, FindColorPatternComponent, FindCPUComponent, FindRAMComponent, TabViewModule,
         FindHDDComponent, FindScreenComponent, FindCameraComponent, FindBatteryComponent, FindFieldAComponent, FindFieldBComponent,
         FindFieldCComponent, SelectWeightUnitComponent, SelectLengthUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent,
         InputTextComponent, InputLengthUnitComponent, InputWeightUnitComponent, InputAreaUnitComponent, InputVolumeUnitComponent,
-        InputNumberComponent
+        InputNumberComponent, SelectLengthUnitComponent, SelectWeightUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent,
+        FindChartOfAccountComponent
     ]
 })
-export class CreateItemComponent extends AppComponentBase implements OnInit {
+export class CreateItemComponent extends TabViewCacheComponentBase implements OnInit {
     saving = false;
     model: CreateUpdateItemInputDto = new CreateUpdateItemInputDto();
     users: any[] = [];
@@ -66,6 +69,17 @@ export class CreateItemComponent extends AppComponentBase implements OnInit {
     blankImageUrl: string = AppConsts.blankImageUrl;
     uploadUrl: string = '/CompanyProfile/Upload';
     uploadSource: number = UploadSource.CompanyLogo;
+
+    tabCacheKey: string = 'createItemTabCache';
+
+    inventoryAccount: any;
+    purchaseAccount: any;
+    saleAccount: any;
+    inventoryAccountTypeFilter: AccountTypeFilterInputDto;
+    purchaseAccountTypeFilter: AccountTypeFilterInputDto;
+    saleAccountTypeFilter: AccountTypeFilterInputDto;
+
+    chartOfAccountEnable: boolean = this.feature.isEnabled("App.Accounting.ChartOfAccounts");
 
     constructor(
         injector: Injector,
@@ -75,12 +89,39 @@ export class CreateItemComponent extends AppComponentBase implements OnInit {
     }
 
     ngOnInit(): void {
-        this.initModel(); 
+        this.initModel();
+        this.initTabViewFromCache();
     }
 
     initModel() {
+        //Cash = 10,
+        //Bank = 11,
+        //AccountReceivable = 12,
+        //Inventory = 13,
+        //CurrentAsset = 14,
+        //FixedAsset = 15,
+        //NoneCurrentAsset = 16,
+        //AccountPayable = 20,
+        //CreditCard = 21,
+        //CurrentLiability = 22,
+        //NoneCurrentLiability = 23,
+        //Equity = 30,
+        //Revenue = 40,
+        //OtherRevenue = 41,
+        //CostOfSale = 50,
+        //Expense = 51,
+        //OtherExpense = 52
+        this.inventoryAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [13], exclude: false });
+        this.purchaseAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [50, 51, 52], exclude: false });
+        this.saleAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [40, 41], exclude: false });
+
         this.model = new CreateUpdateItemInputDto();
         this.model.itemZones = [];
+
+        if (this.appSession) {
+            
+        }
+
     };
 
     save(form?: NgForm): void {
@@ -107,6 +148,27 @@ export class CreateItemComponent extends AppComponentBase implements OnInit {
 
     cancel() {
         window.history.back();
+    }
+
+    onItemTypeChange(type) {
+        //Service = 1,
+        //Menu = 2,
+        //NonInvnetory = 3,
+        //Inventory = 4,
+        //Asset = 5,
+        //Bundle = 6,
+
+        if (type == 4) {
+            this.inventoryAccountTypeFilter.ids = [13];
+            this.purchaseAccountTypeFilter.ids = [50];
+        }
+        else if (type == 5) {
+            this.inventoryAccountTypeFilter.ids = [15];
+            this.purchaseAccountTypeFilter.ids = [50, 51, 52];
+        }
+        else {
+            this.purchaseAccountTypeFilter.ids = [50, 51, 52];
+        }
     }
 
 }

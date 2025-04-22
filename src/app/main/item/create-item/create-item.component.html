@@ -21,7 +21,8 @@
                              name="itemType"
                              [required]="true"
                              [label]="l('ItemType')"
-                             [(ngModel)]="model.itemType">
+                             [(ngModel)]="model.itemType"
+                             (ngModelChange)="onItemTypeChange($event)">
                         </div>
 
                         <div class="field col-12 xl:col-6"
@@ -48,320 +49,26 @@
                              [(ngModel)]="model.displayName"
                              [required]="true">
                         </div>
-                        <div class="field col-12 xl:col-6"
-                             inputText
-                             name="code"
-                             [label]="l('Code')"
-                             [maxlength]="32"
-                             [(ngModel)]="model.code"
-                             [required]="true">
-                        </div>
-                        <div class="field col-12 xl:col-6"
-                             findUnit
-                             name="unit"
-                             [required]="true"
-                             [label]="l('Unit')"
-                             [(ngModel)]="model.unitId">
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <p-divider class="hidden md:block"></p-divider>
-
             <div class="formgrid grid m-0">
-
-               
-                <ng-container *ngIf="model.itemType==4 || model.itemType==5">
-                    <div class="field col-12 md:col-6 xl:col-4"
-                         inputNumber
-                         name="minStock"
-                         [label]="l('MinStock')"
-                         [(ngModel)]="model.minStock"
-                         [required]="true">
-                    </div>
-
-                    <div class="field col-12 md:col-6 xl:col-4"
-                         inputNumber
-                         name="maxStock"
-                         [label]="l('MaxStock')"
-                         [(ngModel)]="model.maxStock"
-                         [required]="true">
-                    </div>
-
-                    <div class="field col-12 md:col-6 xl:col-4"
-                         inputNumber
-                         name="reorderStock"
-                         [label]="l('ReorderStock')"
-                         [(ngModel)]="model.reorderStock"
-                         [required]="true">
-                    </div>
-
-                    <div class="field col-12 md:col-6 xl:col-4">
-                        <p-checkbox name="trackSerial"
-                                    inputId="trackSerial"
-                                    [label]="l('TrackSerial')"
-                                    [(ngModel)]="model.trackSerial"
-                                    [binary]="true"/>
-                    </div>
-
-                </ng-container>
-
-                <div class="field col-12 md:col-6 xl:col-4" *ngIf="model.itemType==4">
-                    <p-checkbox name="trackBatchNo"
-                                inputId="trackBatchNo"
-                                [label]="l('TrackBatchNo')"
-                                [(ngModel)]="model.trackBatchNo"
-                                [binary]="true" />
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4" *ngIf="model.itemType==4">
-                    <p-checkbox name="trackExpired"
-                                inputId="trackTrackExpired"
-                                [label]="l('TrackExpired')"
-                                [(ngModel)]="model.trackExpired"
-                                [binary]="true" />
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4" *ngIf="model.itemType==5">
-                    <p-checkbox name="trackAssetStatus"
-                                inputId="trackAssetStatus"
-                                [label]="l('TrackAssetStatus')"
-                                [(ngModel)]="model.trackAssetStatus"
-                                [binary]="true" />
+                <div class="field col-12 md:col-6 xl:col-4"
+                     inputText
+                     name="code"
+                     [label]="l('Code')"
+                     [maxlength]="32"
+                     [(ngModel)]="model.code"
+                     [required]="true">
                 </div>
 
                 <div class="field col-12 md:col-6 xl:col-4"
-                     inputWeightUnit
-                     name="grossWeight"
-                     [label]="l('GrossWeight')"
-                     [required]="appSession.itemSetting.grossWeightRequired"
-                     [(ngModel)]="model.grossWeight"
-                     [(unit)]="model.weightUnit"
-                     *ngIf="appSession.itemSetting.useGrossWeight">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     inputWeightUnit
-                     name="netWeight"
-                     [label]="l('NetWeight')"
-                     [required]="appSession.itemSetting.netWeightRequired"
-                     [(ngModel)]="model.netWeight"
-                     [(unit)]="model.weightUnit"
-                     *ngIf="appSession.itemSetting.useNetWeight">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     inputLengthUnit
-                     name="width"
-                     [label]="l('Width')"
-                     [required]="appSession.itemSetting.widthRequired"
-                     [(ngModel)]="model.width"
-                     [(unit)]="model.lengthUnit"
-                     *ngIf="appSession.itemSetting.useWidth">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     inputLengthUnit
-                     name="height"
-                     [label]="l('Height')"
-                     [required]="appSession.itemSetting.heightRequired"
-                     [(ngModel)]="model.height"
-                     [(unit)]="model.lengthUnit"
-                     *ngIf="appSession.itemSetting.useHeight">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     inputLengthUnit
-                     name="length"
-                     [label]="l('Length')"
-                     [required]="appSession.itemSetting.lengthRequired"
-                     [(ngModel)]="model.length"
-                     [(unit)]="model.lengthUnit"
-                     *ngIf="appSession.itemSetting.useLength">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     inputLengthUnit
-                     name="diameter"
-                     [label]="l('Diameter')"
-                     [required]="appSession.itemSetting.diameterRequired"
-                     [(ngModel)]="model.diameter"
-                     [(unit)]="model.lengthUnit"
-                     *ngIf="appSession.itemSetting.useDiameter">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     inputAreaUnit
-                     name="area"
-                     [label]="l('Area')"
-                     [required]="appSession.itemSetting.areaRequired"
-                     [(ngModel)]="model.area"
-                     [(unit)]="model.areaUnit"
-                     *ngIf="appSession.itemSetting.useArea">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     inputVolumeUnit
-                     name="volume"
-                     [label]="l('Volume')"
-                     [required]="appSession.itemSetting.volumeRequired"
-                     [(ngModel)]="model.volume"
-                     [(unit)]="model.volumeUnit"
-                     *ngIf="appSession.itemSetting.useVolume">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findItemGroup
-                     name="itemGroup"
-                     [required]="appSession.itemSetting.itemGroupRequired"
-                     [label]="l('ItemGroup')"
-                     [(ngModel)]="model.itemGroupId"
-                     *ngIf="appSession.itemSetting.useItemGroup">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findItemBrand
-                     name="itemBrand"
-                     [required]="appSession.itemSetting.brandRequired"
-                     [label]="l('ItemBrand')"
-                     [(ngModel)]="model.itemBrandId"
-                     *ngIf="appSession.itemSetting.useBrand">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findItemGrade
-                     name="itemGrade"
-                     [required]="appSession.itemSetting.gradeRequired"
-                     [label]="l('ItemGrade')"
-                     [(ngModel)]="model.itemGradeId"
-                     *ngIf="appSession.itemSetting.useGrade">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findItemModel
-                     name="itemModel"
-                     [required]="appSession.itemSetting.modelRequired"
-                     [label]="l('ItemModel')"
-                     [(ngModel)]="model.itemModelId"
-                     *ngIf="appSession.itemSetting.useModel">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findItemSize
-                     name="itemSize"
-                     [required]="appSession.itemSetting.sizeRequired"
-                     [label]="l('ItemSize')"
-                     [(ngModel)]="model.itemSizeId"
-                     *ngIf="appSession.itemSetting.useSize">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findItemSeries
-                     name="itemSeries"
-                     [required]="appSession.itemSetting.seriesRequired"
-                     [label]="l('ItemSeries')"
-                     [(ngModel)]="model.itemSeriesId"
-                     *ngIf="appSession.itemSetting.useSeries">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findColorPattern
-                     name="colorPattern"
-                     [required]="appSession.itemSetting.colorPatternRequired"
-                     [label]="l('ColorPattern')"
-                     [(ngModel)]="model.colorPatternId"
-                     *ngIf="appSession.itemSetting.useColorPattern">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findCPU
-                     name="cpu"
-                     [required]="appSession.itemSetting.cpuRequired"
-                     [label]="l('CPU')"
-                     [(ngModel)]="model.cpuId"
-                     *ngIf="appSession.itemSetting.useCPU">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findRAM
-                     name="ram"
-                     [required]="appSession.itemSetting.ramRequired"
-                     [label]="l('RAM')"
-                     [(ngModel)]="model.ramId"
-                     *ngIf="appSession.itemSetting.useRAM">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findVGA
-                     name="vga"
-                     [required]="appSession.itemSetting.vgaRequired"
-                     [label]="l('VGA')"
-                     [(ngModel)]="model.vgaId"
-                     *ngIf="appSession.itemSetting.useVGA">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findHDD
-                     name="hdd"
-                     [required]="appSession.itemSetting.hddRequired"
-                     [label]="l('HDD')"
-                     [(ngModel)]="model.hddId"
-                     *ngIf="appSession.itemSetting.useHDD">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findScreen
-                     name="screen"
-                     [required]="appSession.itemSetting.screenRequired"
-                     [label]="l('Screen')"
-                     [(ngModel)]="model.screenId"
-                     *ngIf="appSession.itemSetting.useScreen">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findCamera
-                     name="camera"
-                     [required]="appSession.itemSetting.cameraRequired"
-                     [label]="l('Camera')"
-                     [(ngModel)]="model.cameraId"
-                     *ngIf="appSession.itemSetting.useCamera">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findBattery
-                     name="battery"
-                     [required]="appSession.itemSetting.batteryRequired"
-                     [label]="l('Battery')"
-                     [(ngModel)]="model.batteryId"
-                     *ngIf="appSession.itemSetting.useBattery">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findFieldA
-                     name="fieldA"
-                     [required]="appSession.itemSetting.fieldARequired"
-                     [label]="appSession.itemSetting.fieldALabel? l(appSession.itemSetting.fieldALabel) : l('FieldA')"
-                     [(ngModel)]="model.fieldAId"
-                     *ngIf="appSession.itemSetting.useFieldA">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findFieldB
-                     name="fieldB"
-                     [required]="appSession.itemSetting.fieldBRequired"
-                     [label]="appSession.itemSetting.fieldBLabel? l(appSession.itemSetting.fieldBLabel) : l('FieldB')"
-                     [(ngModel)]="model.fieldBId"
-                     *ngIf="appSession.itemSetting.useFieldB">
-                </div>
-
-                <div class="field col-12 md:col-6 xl:col-4"
-                     findFieldC
-                     name="fieldC"
-                     [required]="appSession.itemSetting.fieldCRequired"
-                     [label]="appSession.itemSetting.fieldCLabel? l(appSession.itemSetting.fieldCLabel) : l('FieldC')"
-                     [(ngModel)]="model.fieldCId"
-                     *ngIf="appSession.itemSetting.useFieldC">
+                     inputText
+                     name="barcode"
+                     [label]="l('Barcode')"
+                     [maxlength]="32"
+                     [(ngModel)]="model.barcode">
                 </div>
 
                 <div class="field col-12">
@@ -375,8 +82,393 @@
                               [(ngModel)]="model.description">
                     </textarea>
                 </div>
-
             </div>
+
+            <p-tabView [(activeIndex)]="activeIndex" (activeIndexChange)="saveCache()">
+                <p-tabPanel header="{{l('UOM')}}">
+                    <div class="formgrid grid">
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findUnit
+                             name="unit"
+                             [required]="true"
+                             [label]="l('PackageUnit')"
+                             [(ngModel)]="model.unitId">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             selectWeightUnit
+                             name="weightUnit"
+                             [label]="l('WeightUnit')"
+                             [(ngModel)]="model.grossWeight"
+                             [required]="appSession.itemSetting.grossWeightRequired || appSession.itemSetting.netWeightRequired"
+                             *ngIf="appSession.itemSetting.useGrossWeight || appSession.itemSetting.useNetWeight">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             selectLengthUnit
+                             name="lengthUnit"
+                             [label]="l('LengthUnit')"
+                             [(ngModel)]="model.lengthUnit"
+                             [required]="appSession.itemSetting.useWidth || appSession.itemSetting.useHeight || appSession.itemSetting.useLength || appSession.itemSetting.useDiameter"
+                             *ngIf="appSession.itemSetting.useWidth || appSession.itemSetting.useHeight || appSession.itemSetting.useLength || appSession.itemSetting.useDiameter">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             selectAreaUnit
+                             name="areaUnit"
+                             [label]="l('AreaUnit')"
+                             [(ngModel)]="model.areaUnit"
+                             [required]="appSession.itemSetting.useArea"
+                             *ngIf="appSession.itemSetting.useArea">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             selectVolumeUnit
+                             name="volumeUnit"
+                             [label]="l('VolumeUnit')"
+                             [(ngModel)]="model.volumeUnit"
+                             [required]="appSession.itemSetting.useVolume"
+                             *ngIf="appSession.itemSetting.useVolume">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputWeightUnit
+                             name="grossWeight"
+                             [label]="l('GrossWeight')"
+                             [required]="appSession.itemSetting.grossWeightRequired"
+                             [(ngModel)]="model.grossWeight"
+                             [(unit)]="model.weightUnit"
+                             *ngIf="appSession.itemSetting.useGrossWeight">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputWeightUnit
+                             name="netWeight"
+                             [label]="l('NetWeight')"
+                             [required]="appSession.itemSetting.netWeightRequired"
+                             [(ngModel)]="model.netWeight"
+                             [(unit)]="model.weightUnit"
+                             *ngIf="appSession.itemSetting.useNetWeight">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputLengthUnit
+                             name="width"
+                             [label]="l('Width')"
+                             [required]="appSession.itemSetting.widthRequired"
+                             [(ngModel)]="model.width"
+                             [(unit)]="model.lengthUnit"
+                             *ngIf="appSession.itemSetting.useWidth">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputLengthUnit
+                             name="height"
+                             [label]="l('Height')"
+                             [required]="appSession.itemSetting.heightRequired"
+                             [(ngModel)]="model.height"
+                             [(unit)]="model.lengthUnit"
+                             *ngIf="appSession.itemSetting.useHeight">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputLengthUnit
+                             name="length"
+                             [label]="l('Length')"
+                             [required]="appSession.itemSetting.lengthRequired"
+                             [(ngModel)]="model.length"
+                             [(unit)]="model.lengthUnit"
+                             *ngIf="appSession.itemSetting.useLength">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputLengthUnit
+                             name="diameter"
+                             [label]="l('Diameter')"
+                             [required]="appSession.itemSetting.diameterRequired"
+                             [(ngModel)]="model.diameter"
+                             [(unit)]="model.lengthUnit"
+                             *ngIf="appSession.itemSetting.useDiameter">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputAreaUnit
+                             name="area"
+                             [label]="l('Area')"
+                             [required]="appSession.itemSetting.areaRequired"
+                             [(ngModel)]="model.area"
+                             [(unit)]="model.areaUnit"
+                             *ngIf="appSession.itemSetting.useArea">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputVolumeUnit
+                             name="volume"
+                             [label]="l('Volume')"
+                             [required]="appSession.itemSetting.volumeRequired"
+                             [(ngModel)]="model.volume"
+                             [(unit)]="model.volumeUnit"
+                             *ngIf="appSession.itemSetting.useVolume">
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="{{l('Filter')}}" *ngIf="appSession.itemFilterEnable">
+                    <div class="formgrid grid">
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemGroup
+                             name="itemGroup"
+                             [required]="appSession.itemSetting.itemGroupRequired"
+                             [label]="l('ItemGroup')"
+                             [(ngModel)]="model.itemGroupId"
+                             *ngIf="appSession.itemSetting.useItemGroup">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemBrand
+                             name="itemBrand"
+                             [required]="appSession.itemSetting.brandRequired"
+                             [label]="l('ItemBrand')"
+                             [(ngModel)]="model.itemBrandId"
+                             *ngIf="appSession.itemSetting.useBrand">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemGrade
+                             name="itemGrade"
+                             [required]="appSession.itemSetting.gradeRequired"
+                             [label]="l('ItemGrade')"
+                             [(ngModel)]="model.itemGradeId"
+                             *ngIf="appSession.itemSetting.useGrade">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemModel
+                             name="itemModel"
+                             [required]="appSession.itemSetting.modelRequired"
+                             [label]="l('ItemModel')"
+                             [(ngModel)]="model.itemModelId"
+                             *ngIf="appSession.itemSetting.useModel">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemSize
+                             name="itemSize"
+                             [required]="appSession.itemSetting.sizeRequired"
+                             [label]="l('ItemSize')"
+                             [(ngModel)]="model.itemSizeId"
+                             *ngIf="appSession.itemSetting.useSize">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemSeries
+                             name="itemSeries"
+                             [required]="appSession.itemSetting.seriesRequired"
+                             [label]="l('ItemSeries')"
+                             [(ngModel)]="model.itemSeriesId"
+                             *ngIf="appSession.itemSetting.useSeries">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findColorPattern
+                             name="colorPattern"
+                             [required]="appSession.itemSetting.colorPatternRequired"
+                             [label]="l('ColorPattern')"
+                             [(ngModel)]="model.colorPatternId"
+                             *ngIf="appSession.itemSetting.useColorPattern">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findCPU
+                             name="cpu"
+                             [required]="appSession.itemSetting.cpuRequired"
+                             [label]="l('CPU')"
+                             [(ngModel)]="model.cpuId"
+                             *ngIf="appSession.itemSetting.useCPU">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findRAM
+                             name="ram"
+                             [required]="appSession.itemSetting.ramRequired"
+                             [label]="l('RAM')"
+                             [(ngModel)]="model.ramId"
+                             *ngIf="appSession.itemSetting.useRAM">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findVGA
+                             name="vga"
+                             [required]="appSession.itemSetting.vgaRequired"
+                             [label]="l('VGA')"
+                             [(ngModel)]="model.vgaId"
+                             *ngIf="appSession.itemSetting.useVGA">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findHDD
+                             name="hdd"
+                             [required]="appSession.itemSetting.hddRequired"
+                             [label]="l('HDD')"
+                             [(ngModel)]="model.hddId"
+                             *ngIf="appSession.itemSetting.useHDD">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findScreen
+                             name="screen"
+                             [required]="appSession.itemSetting.screenRequired"
+                             [label]="l('Screen')"
+                             [(ngModel)]="model.screenId"
+                             *ngIf="appSession.itemSetting.useScreen">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findCamera
+                             name="camera"
+                             [required]="appSession.itemSetting.cameraRequired"
+                             [label]="l('Camera')"
+                             [(ngModel)]="model.cameraId"
+                             *ngIf="appSession.itemSetting.useCamera">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findBattery
+                             name="battery"
+                             [required]="appSession.itemSetting.batteryRequired"
+                             [label]="l('Battery')"
+                             [(ngModel)]="model.batteryId"
+                             *ngIf="appSession.itemSetting.useBattery">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findFieldA
+                             name="fieldA"
+                             [required]="appSession.itemSetting.fieldARequired"
+                             [label]="appSession.itemSetting.fieldALabel? l(appSession.itemSetting.fieldALabel) : l('FieldA')"
+                             [(ngModel)]="model.fieldAId"
+                             *ngIf="appSession.itemSetting.useFieldA">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findFieldB
+                             name="fieldB"
+                             [required]="appSession.itemSetting.fieldBRequired"
+                             [label]="appSession.itemSetting.fieldBLabel? l(appSession.itemSetting.fieldBLabel) : l('FieldB')"
+                             [(ngModel)]="model.fieldBId"
+                             *ngIf="appSession.itemSetting.useFieldB">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findFieldC
+                             name="fieldC"
+                             [required]="appSession.itemSetting.fieldCRequired"
+                             [label]="appSession.itemSetting.fieldCLabel? l(appSession.itemSetting.fieldCLabel) : l('FieldC')"
+                             [(ngModel)]="model.fieldCId"
+                             *ngIf="appSession.itemSetting.useFieldC">
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="{{l('Account')}}" *ngIf="chartOfAccountEnable">
+                    <div class="formgrid grid">
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findChartOfAccount
+                             name="purchaseAccount"
+                             [label]="l('PurchaseAccount')"
+                             [accountTypeFilter]="purchaseAccountTypeFilter"
+                             [(ngModel)]="purchaseAccount"
+                             (ngModelChagne)="model.purchaseAccountId = $event.id"
+                             [required]="true">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findChartOfAccount
+                             name="saleAccount"
+                             [label]="l('SaleAccount')"
+                             [accountTypeFilter]="saleAccountTypeFilter"
+                             [(ngModel)]="saleAccount"
+                             (ngModelChagne)="model.saleAccountId = $event.id"
+                             [required]="true">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findChartOfAccount
+                             name="inventoryAccount"
+                             [label]="model.itemType==4 ? l('InventoryAccount') : l('AssetAccount')"
+                             [placeholder]="model.itemType==4 ? l('Select_', l('InventoryAccount')) : l('Select_', l('AssetAccount'))"
+                             [accountTypeFilter]="inventoryAccountTypeFilter"
+                             [(ngModel)]="inventoryAccount"
+                             (ngModelChagne)="model.inventoryAccountId = $event.id"
+                             [required]="true"
+                             *ngIf="model.itemType==4 || model.itemType==5">
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="{{l('StockTracking')}}" *ngIf="model.itemType==4 || model.itemType==5">
+                    <div class="formgrid grid">
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputNumber
+                             name="minStock"
+                             [label]="l('MinStock')"
+                             [(ngModel)]="model.minStock"
+                             [required]="true">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputNumber
+                             name="maxStock"
+                             [label]="l('MaxStock')"
+                             [(ngModel)]="model.maxStock"
+                             [required]="true">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             inputNumber
+                             name="reorderStock"
+                             [label]="l('ReorderStock')"
+                             [(ngModel)]="model.reorderStock"
+                             [required]="true">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4">
+                            <p-checkbox name="trackSerial"
+                                        inputId="trackSerial"
+                                        [label]="l('TrackSerial')"
+                                        [(ngModel)]="model.trackSerial"
+                                        [binary]="true" />
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4" *ngIf="model.itemType==4">
+                            <p-checkbox name="trackBatchNo"
+                                        inputId="trackBatchNo"
+                                        [label]="l('TrackBatchNo')"
+                                        [(ngModel)]="model.trackBatchNo"
+                                        [binary]="true" />
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4" *ngIf="model.itemType==4">
+                            <p-checkbox name="trackExpired"
+                                        inputId="trackTrackExpired"
+                                        [label]="l('TrackExpired')"
+                                        [(ngModel)]="model.trackExpired"
+                                        [binary]="true" />
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4" *ngIf="model.itemType==5">
+                            <p-checkbox name="trackAssetStatus"
+                                        inputId="trackAssetStatus"
+                                        [label]="l('TrackAssetStatus')"
+                                        [(ngModel)]="model.trackAssetStatus"
+                                        [binary]="true" />
+                        </div>
+
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="{{l('Zones')}}" *ngIf="true">
+                    <div class="formgrid grid">
+
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
 
             <p-divider></p-divider>
 

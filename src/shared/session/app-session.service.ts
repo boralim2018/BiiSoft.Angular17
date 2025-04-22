@@ -60,6 +60,26 @@ export class AppSessionService {
         return this._itemSetting;
     }
 
+    get itemFilterEnable() {
+        return this._itemSetting?.useItemGroup ||
+            this._itemSetting?.useBrand ||
+            this._itemSetting?.useGrade ||
+            this._itemSetting?.useModel ||
+            this._itemSetting?.useSize ||
+            this._itemSetting?.useSeries ||
+            this._itemSetting?.useColorPattern ||
+            this._itemSetting?.useCPU ||
+            this._itemSetting?.useRAM ||
+            this._itemSetting?.useVGA ||
+            this._itemSetting?.useHDD ||
+            this._itemSetting?.useScreen ||
+            this._itemSetting?.useCamera ||
+            this._itemSetting?.useBattery ||
+            this._itemSetting?.useFieldA ||
+            this._itemSetting?.useFieldB ||
+            this._itemSetting?.useFieldC;
+    }
+
     get itemFieldSetting(): ItemFieldSettingDto {
         return this._itemFieldSetting;
     }
