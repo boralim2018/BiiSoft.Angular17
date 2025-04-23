@@ -72,6 +72,14 @@
                      [(ngModel)]="model.barcode">
                 </div>
 
+                <div class="field col-12 md:col-6 xl:col-4"
+                     inputText
+                     name="altCode"
+                     [label]="l('ALTCode')"
+                     [maxlength]="32"
+                     [(ngModel)]="model.altCode">
+                </div>
+
                 <div class="field col-12">
                     <label class="text-900 font-medium">{{l('Description')}}</label>
                     <textarea pInputTextarea

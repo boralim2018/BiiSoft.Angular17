@@ -12483,7 +12483,7 @@ export class ItemServiceProxy {
      * @param body (optional) 
      * @return OK
      */
-    find(body: PageItemInputDto | undefined): Observable<FindItemDtoPagedResultDto> {
+    find(body: FindItemInputDto | undefined): Observable<FindItemDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Item/Find";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -37343,6 +37343,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
     displayName: string | undefined;
     code: string | undefined;
     barcode: string | undefined;
+    altCode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -37410,6 +37411,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
             this.displayName = _data["displayName"];
             this.code = _data["code"];
             this.barcode = _data["barcode"];
+            this.altCode = _data["altCode"];
             this.netWeight = _data["netWeight"];
             this.grossWeight = _data["grossWeight"];
             this.length = _data["length"];
@@ -37481,6 +37483,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
         data["displayName"] = this.displayName;
         data["code"] = this.code;
         data["barcode"] = this.barcode;
+        data["altCode"] = this.altCode;
         data["netWeight"] = this.netWeight;
         data["grossWeight"] = this.grossWeight;
         data["length"] = this.length;
@@ -37552,6 +37555,7 @@ export interface ICreateUpdateItemInputDto {
     displayName: string | undefined;
     code: string | undefined;
     barcode: string | undefined;
+    altCode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -44959,6 +44963,7 @@ export class FindItemDto implements IFindItemDto {
     isActive: boolean;
     code: string | undefined;
     barcode: string | undefined;
+    altCode: string | undefined;
 
     constructor(data?: IFindItemDto) {
         if (data) {
@@ -44977,6 +44982,7 @@ export class FindItemDto implements IFindItemDto {
             this.isActive = _data["isActive"];
             this.code = _data["code"];
             this.barcode = _data["barcode"];
+            this.altCode = _data["altCode"];
         }
     }
 
@@ -44995,6 +45001,7 @@ export class FindItemDto implements IFindItemDto {
         data["isActive"] = this.isActive;
         data["code"] = this.code;
         data["barcode"] = this.barcode;
+        data["altCode"] = this.altCode;
         return data;
     }
 
@@ -45013,6 +45020,7 @@ export interface IFindItemDto {
     isActive: boolean;
     code: string | undefined;
     barcode: string | undefined;
+    altCode: string | undefined;
 }
 
 export class FindItemDtoPagedResultDto implements IFindItemDtoPagedResultDto {
@@ -45296,6 +45304,165 @@ export class FindItemGroupDtoPagedResultDto implements IFindItemGroupDtoPagedRes
 export interface IFindItemGroupDtoPagedResultDto {
     items: FindItemGroupDto[] | undefined;
     totalCount: number;
+}
+
+export class FindItemInputDto implements IFindItemInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    itemTypeFilter: ItemTypeFilterInputDto;
+    itemCategoryFilter: ItemCategoryFilterInputDto;
+    unitFilter: GuidFilterInputDto;
+    itemGroupFilter: GuidFilterInputDto;
+    itemBrandFilter: GuidFilterInputDto;
+    itemGradeFilter: GuidFilterInputDto;
+    itemModelFilter: GuidFilterInputDto;
+    itemSizeFilter: GuidFilterInputDto;
+    itemSeriesFilter: GuidFilterInputDto;
+    colorPatternFilter: GuidFilterInputDto;
+    cpuFilter: GuidFilterInputDto;
+    ramFilter: GuidFilterInputDto;
+    vgaFilter: GuidFilterInputDto;
+    hddFilter: GuidFilterInputDto;
+    screenFilter: GuidFilterInputDto;
+    cameraFilter: GuidFilterInputDto;
+    batteryFilter: GuidFilterInputDto;
+    fieldAFilter: GuidFilterInputDto;
+    fieldBFilter: GuidFilterInputDto;
+    fieldCFilter: GuidFilterInputDto;
+    searchOption: SearchOption;
+
+    constructor(data?: IFindItemInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.itemTypeFilter = _data["itemTypeFilter"] ? ItemTypeFilterInputDto.fromJS(_data["itemTypeFilter"]) : <any>undefined;
+            this.itemCategoryFilter = _data["itemCategoryFilter"] ? ItemCategoryFilterInputDto.fromJS(_data["itemCategoryFilter"]) : <any>undefined;
+            this.unitFilter = _data["unitFilter"] ? GuidFilterInputDto.fromJS(_data["unitFilter"]) : <any>undefined;
+            this.itemGroupFilter = _data["itemGroupFilter"] ? GuidFilterInputDto.fromJS(_data["itemGroupFilter"]) : <any>undefined;
+            this.itemBrandFilter = _data["itemBrandFilter"] ? GuidFilterInputDto.fromJS(_data["itemBrandFilter"]) : <any>undefined;
+            this.itemGradeFilter = _data["itemGradeFilter"] ? GuidFilterInputDto.fromJS(_data["itemGradeFilter"]) : <any>undefined;
+            this.itemModelFilter = _data["itemModelFilter"] ? GuidFilterInputDto.fromJS(_data["itemModelFilter"]) : <any>undefined;
+            this.itemSizeFilter = _data["itemSizeFilter"] ? GuidFilterInputDto.fromJS(_data["itemSizeFilter"]) : <any>undefined;
+            this.itemSeriesFilter = _data["itemSeriesFilter"] ? GuidFilterInputDto.fromJS(_data["itemSeriesFilter"]) : <any>undefined;
+            this.colorPatternFilter = _data["colorPatternFilter"] ? GuidFilterInputDto.fromJS(_data["colorPatternFilter"]) : <any>undefined;
+            this.cpuFilter = _data["cpuFilter"] ? GuidFilterInputDto.fromJS(_data["cpuFilter"]) : <any>undefined;
+            this.ramFilter = _data["ramFilter"] ? GuidFilterInputDto.fromJS(_data["ramFilter"]) : <any>undefined;
+            this.vgaFilter = _data["vgaFilter"] ? GuidFilterInputDto.fromJS(_data["vgaFilter"]) : <any>undefined;
+            this.hddFilter = _data["hddFilter"] ? GuidFilterInputDto.fromJS(_data["hddFilter"]) : <any>undefined;
+            this.screenFilter = _data["screenFilter"] ? GuidFilterInputDto.fromJS(_data["screenFilter"]) : <any>undefined;
+            this.cameraFilter = _data["cameraFilter"] ? GuidFilterInputDto.fromJS(_data["cameraFilter"]) : <any>undefined;
+            this.batteryFilter = _data["batteryFilter"] ? GuidFilterInputDto.fromJS(_data["batteryFilter"]) : <any>undefined;
+            this.fieldAFilter = _data["fieldAFilter"] ? GuidFilterInputDto.fromJS(_data["fieldAFilter"]) : <any>undefined;
+            this.fieldBFilter = _data["fieldBFilter"] ? GuidFilterInputDto.fromJS(_data["fieldBFilter"]) : <any>undefined;
+            this.fieldCFilter = _data["fieldCFilter"] ? GuidFilterInputDto.fromJS(_data["fieldCFilter"]) : <any>undefined;
+            this.searchOption = _data["searchOption"];
+        }
+    }
+
+    static fromJS(data: any): FindItemInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindItemInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["itemTypeFilter"] = this.itemTypeFilter ? this.itemTypeFilter.toJSON() : <any>undefined;
+        data["itemCategoryFilter"] = this.itemCategoryFilter ? this.itemCategoryFilter.toJSON() : <any>undefined;
+        data["unitFilter"] = this.unitFilter ? this.unitFilter.toJSON() : <any>undefined;
+        data["itemGroupFilter"] = this.itemGroupFilter ? this.itemGroupFilter.toJSON() : <any>undefined;
+        data["itemBrandFilter"] = this.itemBrandFilter ? this.itemBrandFilter.toJSON() : <any>undefined;
+        data["itemGradeFilter"] = this.itemGradeFilter ? this.itemGradeFilter.toJSON() : <any>undefined;
+        data["itemModelFilter"] = this.itemModelFilter ? this.itemModelFilter.toJSON() : <any>undefined;
+        data["itemSizeFilter"] = this.itemSizeFilter ? this.itemSizeFilter.toJSON() : <any>undefined;
+        data["itemSeriesFilter"] = this.itemSeriesFilter ? this.itemSeriesFilter.toJSON() : <any>undefined;
+        data["colorPatternFilter"] = this.colorPatternFilter ? this.colorPatternFilter.toJSON() : <any>undefined;
+        data["cpuFilter"] = this.cpuFilter ? this.cpuFilter.toJSON() : <any>undefined;
+        data["ramFilter"] = this.ramFilter ? this.ramFilter.toJSON() : <any>undefined;
+        data["vgaFilter"] = this.vgaFilter ? this.vgaFilter.toJSON() : <any>undefined;
+        data["hddFilter"] = this.hddFilter ? this.hddFilter.toJSON() : <any>undefined;
+        data["screenFilter"] = this.screenFilter ? this.screenFilter.toJSON() : <any>undefined;
+        data["cameraFilter"] = this.cameraFilter ? this.cameraFilter.toJSON() : <any>undefined;
+        data["batteryFilter"] = this.batteryFilter ? this.batteryFilter.toJSON() : <any>undefined;
+        data["fieldAFilter"] = this.fieldAFilter ? this.fieldAFilter.toJSON() : <any>undefined;
+        data["fieldBFilter"] = this.fieldBFilter ? this.fieldBFilter.toJSON() : <any>undefined;
+        data["fieldCFilter"] = this.fieldCFilter ? this.fieldCFilter.toJSON() : <any>undefined;
+        data["searchOption"] = this.searchOption;
+        return data;
+    }
+
+    clone(): FindItemInputDto {
+        const json = this.toJSON();
+        let result = new FindItemInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindItemInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    itemTypeFilter: ItemTypeFilterInputDto;
+    itemCategoryFilter: ItemCategoryFilterInputDto;
+    unitFilter: GuidFilterInputDto;
+    itemGroupFilter: GuidFilterInputDto;
+    itemBrandFilter: GuidFilterInputDto;
+    itemGradeFilter: GuidFilterInputDto;
+    itemModelFilter: GuidFilterInputDto;
+    itemSizeFilter: GuidFilterInputDto;
+    itemSeriesFilter: GuidFilterInputDto;
+    colorPatternFilter: GuidFilterInputDto;
+    cpuFilter: GuidFilterInputDto;
+    ramFilter: GuidFilterInputDto;
+    vgaFilter: GuidFilterInputDto;
+    hddFilter: GuidFilterInputDto;
+    screenFilter: GuidFilterInputDto;
+    cameraFilter: GuidFilterInputDto;
+    batteryFilter: GuidFilterInputDto;
+    fieldAFilter: GuidFilterInputDto;
+    fieldBFilter: GuidFilterInputDto;
+    fieldCFilter: GuidFilterInputDto;
+    searchOption: SearchOption;
 }
 
 export class FindItemModelDto implements IFindItemModelDto {
@@ -49707,6 +49874,7 @@ export class ItemDetailDto implements IItemDetailDto {
     itemCategoryName: string | undefined;
     code: string | undefined;
     barcode: string | undefined;
+    altCode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -49812,6 +49980,7 @@ export class ItemDetailDto implements IItemDetailDto {
             this.itemCategoryName = _data["itemCategoryName"];
             this.code = _data["code"];
             this.barcode = _data["barcode"];
+            this.altCode = _data["altCode"];
             this.netWeight = _data["netWeight"];
             this.grossWeight = _data["grossWeight"];
             this.length = _data["length"];
@@ -49921,6 +50090,7 @@ export class ItemDetailDto implements IItemDetailDto {
         data["itemCategoryName"] = this.itemCategoryName;
         data["code"] = this.code;
         data["barcode"] = this.barcode;
+        data["altCode"] = this.altCode;
         data["netWeight"] = this.netWeight;
         data["grossWeight"] = this.grossWeight;
         data["length"] = this.length;
@@ -50030,6 +50200,7 @@ export interface IItemDetailDto {
     itemCategoryName: string | undefined;
     code: string | undefined;
     barcode: string | undefined;
+    altCode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -50675,6 +50846,7 @@ export class ItemListDto implements IItemListDto {
     itemCategoryName: string | undefined;
     code: string | undefined;
     barcode: string | undefined;
+    altCode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -50750,6 +50922,7 @@ export class ItemListDto implements IItemListDto {
             this.itemCategoryName = _data["itemCategoryName"];
             this.code = _data["code"];
             this.barcode = _data["barcode"];
+            this.altCode = _data["altCode"];
             this.netWeight = _data["netWeight"];
             this.grossWeight = _data["grossWeight"];
             this.length = _data["length"];
@@ -50825,6 +50998,7 @@ export class ItemListDto implements IItemListDto {
         data["itemCategoryName"] = this.itemCategoryName;
         data["code"] = this.code;
         data["barcode"] = this.barcode;
+        data["altCode"] = this.altCode;
         data["netWeight"] = this.netWeight;
         data["grossWeight"] = this.grossWeight;
         data["length"] = this.length;
@@ -50900,6 +51074,7 @@ export interface IItemListDto {
     itemCategoryName: string | undefined;
     code: string | undefined;
     barcode: string | undefined;
+    altCode: string | undefined;
     netWeight: number;
     grossWeight: number;
     length: number;
@@ -55088,161 +55263,6 @@ export interface IPageItemGroupInputDto {
     isActive: boolean | undefined;
 }
 
-export class PageItemInputDto implements IPageItemInputDto {
-    maxResultCount: number;
-    skipCount: number;
-    usePagination: boolean;
-    sortField: string | undefined;
-    sortMode: SortMode;
-    keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
-    isActive: boolean | undefined;
-    itemTypeFilter: ItemTypeFilterInputDto;
-    itemCategoryFilter: ItemCategoryFilterInputDto;
-    unitFilter: GuidFilterInputDto;
-    itemGroupFilter: GuidFilterInputDto;
-    itemBrandFilter: GuidFilterInputDto;
-    itemGradeFilter: GuidFilterInputDto;
-    itemModelFilter: GuidFilterInputDto;
-    itemSizeFilter: GuidFilterInputDto;
-    itemSeriesFilter: GuidFilterInputDto;
-    colorPatternFilter: GuidFilterInputDto;
-    cpuFilter: GuidFilterInputDto;
-    ramFilter: GuidFilterInputDto;
-    vgaFilter: GuidFilterInputDto;
-    hddFilter: GuidFilterInputDto;
-    screenFilter: GuidFilterInputDto;
-    cameraFilter: GuidFilterInputDto;
-    batteryFilter: GuidFilterInputDto;
-    fieldAFilter: GuidFilterInputDto;
-    fieldBFilter: GuidFilterInputDto;
-    fieldCFilter: GuidFilterInputDto;
-
-    constructor(data?: IPageItemInputDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.maxResultCount = _data["maxResultCount"];
-            this.skipCount = _data["skipCount"];
-            this.usePagination = _data["usePagination"];
-            this.sortField = _data["sortField"];
-            this.sortMode = _data["sortMode"];
-            this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
-            this.isActive = _data["isActive"];
-            this.itemTypeFilter = _data["itemTypeFilter"] ? ItemTypeFilterInputDto.fromJS(_data["itemTypeFilter"]) : <any>undefined;
-            this.itemCategoryFilter = _data["itemCategoryFilter"] ? ItemCategoryFilterInputDto.fromJS(_data["itemCategoryFilter"]) : <any>undefined;
-            this.unitFilter = _data["unitFilter"] ? GuidFilterInputDto.fromJS(_data["unitFilter"]) : <any>undefined;
-            this.itemGroupFilter = _data["itemGroupFilter"] ? GuidFilterInputDto.fromJS(_data["itemGroupFilter"]) : <any>undefined;
-            this.itemBrandFilter = _data["itemBrandFilter"] ? GuidFilterInputDto.fromJS(_data["itemBrandFilter"]) : <any>undefined;
-            this.itemGradeFilter = _data["itemGradeFilter"] ? GuidFilterInputDto.fromJS(_data["itemGradeFilter"]) : <any>undefined;
-            this.itemModelFilter = _data["itemModelFilter"] ? GuidFilterInputDto.fromJS(_data["itemModelFilter"]) : <any>undefined;
-            this.itemSizeFilter = _data["itemSizeFilter"] ? GuidFilterInputDto.fromJS(_data["itemSizeFilter"]) : <any>undefined;
-            this.itemSeriesFilter = _data["itemSeriesFilter"] ? GuidFilterInputDto.fromJS(_data["itemSeriesFilter"]) : <any>undefined;
-            this.colorPatternFilter = _data["colorPatternFilter"] ? GuidFilterInputDto.fromJS(_data["colorPatternFilter"]) : <any>undefined;
-            this.cpuFilter = _data["cpuFilter"] ? GuidFilterInputDto.fromJS(_data["cpuFilter"]) : <any>undefined;
-            this.ramFilter = _data["ramFilter"] ? GuidFilterInputDto.fromJS(_data["ramFilter"]) : <any>undefined;
-            this.vgaFilter = _data["vgaFilter"] ? GuidFilterInputDto.fromJS(_data["vgaFilter"]) : <any>undefined;
-            this.hddFilter = _data["hddFilter"] ? GuidFilterInputDto.fromJS(_data["hddFilter"]) : <any>undefined;
-            this.screenFilter = _data["screenFilter"] ? GuidFilterInputDto.fromJS(_data["screenFilter"]) : <any>undefined;
-            this.cameraFilter = _data["cameraFilter"] ? GuidFilterInputDto.fromJS(_data["cameraFilter"]) : <any>undefined;
-            this.batteryFilter = _data["batteryFilter"] ? GuidFilterInputDto.fromJS(_data["batteryFilter"]) : <any>undefined;
-            this.fieldAFilter = _data["fieldAFilter"] ? GuidFilterInputDto.fromJS(_data["fieldAFilter"]) : <any>undefined;
-            this.fieldBFilter = _data["fieldBFilter"] ? GuidFilterInputDto.fromJS(_data["fieldBFilter"]) : <any>undefined;
-            this.fieldCFilter = _data["fieldCFilter"] ? GuidFilterInputDto.fromJS(_data["fieldCFilter"]) : <any>undefined;
-        }
-    }
-
-    static fromJS(data: any): PageItemInputDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PageItemInputDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["maxResultCount"] = this.maxResultCount;
-        data["skipCount"] = this.skipCount;
-        data["usePagination"] = this.usePagination;
-        data["sortField"] = this.sortField;
-        data["sortMode"] = this.sortMode;
-        data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
-        data["isActive"] = this.isActive;
-        data["itemTypeFilter"] = this.itemTypeFilter ? this.itemTypeFilter.toJSON() : <any>undefined;
-        data["itemCategoryFilter"] = this.itemCategoryFilter ? this.itemCategoryFilter.toJSON() : <any>undefined;
-        data["unitFilter"] = this.unitFilter ? this.unitFilter.toJSON() : <any>undefined;
-        data["itemGroupFilter"] = this.itemGroupFilter ? this.itemGroupFilter.toJSON() : <any>undefined;
-        data["itemBrandFilter"] = this.itemBrandFilter ? this.itemBrandFilter.toJSON() : <any>undefined;
-        data["itemGradeFilter"] = this.itemGradeFilter ? this.itemGradeFilter.toJSON() : <any>undefined;
-        data["itemModelFilter"] = this.itemModelFilter ? this.itemModelFilter.toJSON() : <any>undefined;
-        data["itemSizeFilter"] = this.itemSizeFilter ? this.itemSizeFilter.toJSON() : <any>undefined;
-        data["itemSeriesFilter"] = this.itemSeriesFilter ? this.itemSeriesFilter.toJSON() : <any>undefined;
-        data["colorPatternFilter"] = this.colorPatternFilter ? this.colorPatternFilter.toJSON() : <any>undefined;
-        data["cpuFilter"] = this.cpuFilter ? this.cpuFilter.toJSON() : <any>undefined;
-        data["ramFilter"] = this.ramFilter ? this.ramFilter.toJSON() : <any>undefined;
-        data["vgaFilter"] = this.vgaFilter ? this.vgaFilter.toJSON() : <any>undefined;
-        data["hddFilter"] = this.hddFilter ? this.hddFilter.toJSON() : <any>undefined;
-        data["screenFilter"] = this.screenFilter ? this.screenFilter.toJSON() : <any>undefined;
-        data["cameraFilter"] = this.cameraFilter ? this.cameraFilter.toJSON() : <any>undefined;
-        data["batteryFilter"] = this.batteryFilter ? this.batteryFilter.toJSON() : <any>undefined;
-        data["fieldAFilter"] = this.fieldAFilter ? this.fieldAFilter.toJSON() : <any>undefined;
-        data["fieldBFilter"] = this.fieldBFilter ? this.fieldBFilter.toJSON() : <any>undefined;
-        data["fieldCFilter"] = this.fieldCFilter ? this.fieldCFilter.toJSON() : <any>undefined;
-        return data;
-    }
-
-    clone(): PageItemInputDto {
-        const json = this.toJSON();
-        let result = new PageItemInputDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IPageItemInputDto {
-    maxResultCount: number;
-    skipCount: number;
-    usePagination: boolean;
-    sortField: string | undefined;
-    sortMode: SortMode;
-    keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
-    isActive: boolean | undefined;
-    itemTypeFilter: ItemTypeFilterInputDto;
-    itemCategoryFilter: ItemCategoryFilterInputDto;
-    unitFilter: GuidFilterInputDto;
-    itemGroupFilter: GuidFilterInputDto;
-    itemBrandFilter: GuidFilterInputDto;
-    itemGradeFilter: GuidFilterInputDto;
-    itemModelFilter: GuidFilterInputDto;
-    itemSizeFilter: GuidFilterInputDto;
-    itemSeriesFilter: GuidFilterInputDto;
-    colorPatternFilter: GuidFilterInputDto;
-    cpuFilter: GuidFilterInputDto;
-    ramFilter: GuidFilterInputDto;
-    vgaFilter: GuidFilterInputDto;
-    hddFilter: GuidFilterInputDto;
-    screenFilter: GuidFilterInputDto;
-    cameraFilter: GuidFilterInputDto;
-    batteryFilter: GuidFilterInputDto;
-    fieldAFilter: GuidFilterInputDto;
-    fieldBFilter: GuidFilterInputDto;
-    fieldCFilter: GuidFilterInputDto;
-}
-
 export class PageItemModelInputDto implements IPageItemModelInputDto {
     maxResultCount: number;
     skipCount: number;
@@ -57880,6 +57900,11 @@ export class ScreenListDtoPagedResultDto implements IScreenListDtoPagedResultDto
 export interface IScreenListDtoPagedResultDto {
     items: ScreenListDto[] | undefined;
     totalCount: number;
+}
+
+export enum SearchOption {
+    _0 = 0,
+    _1 = 1,
 }
 
 export class SecuritySettingsEditDto implements ISecuritySettingsEditDto {
