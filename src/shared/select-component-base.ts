@@ -38,6 +38,8 @@ export abstract class DropdownComponentBase extends ControlValueAccessorComponen
 @Component({ template: '' })
 export abstract class SelectComponentBase extends DropdownComponentBase {
 
+    @Input() optionLabel: string = 'name';
+    @Input() optionValue: string = 'value';
     @Input() multiple: boolean;
     @Input() showExclude: boolean;
     @Input() exclude: boolean;

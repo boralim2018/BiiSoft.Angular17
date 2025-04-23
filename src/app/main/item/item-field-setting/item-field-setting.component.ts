@@ -32,6 +32,8 @@ export class ItemFieldSettingComponent extends AppComponentBase implements OnIni
     }
 
     getModel() {
+        this.model = new ItemFieldSettingDto();
+
         this.loading = true;
         this._itemService.getItemFieldSetting()
             .pipe(finalize(() => this.loading = false))

@@ -1,5 +1,9 @@
 <div class="pt-3">
-    <div class="formgrid grid m-0">
+
+    <h5>{{l('CodeSetting')}}</h5>
+    <p-divider></p-divider>
+
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useCodeFormula" [(ngModel)]="model.useCodeFormula"></p-inputSwitch>
@@ -7,7 +11,11 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+
+    <h5>{{l('ItemFields')}}</h5>
+    <p-divider></p-divider>
+
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useSerial" [(ngModel)]="model.useSerial"></p-inputSwitch>
@@ -15,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useExpired" [(ngModel)]="model.useExpired"></p-inputSwitch>
@@ -23,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useBatchNo" [(ngModel)]="model.useBatchNo"></p-inputSwitch>
@@ -31,7 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useAssetStatus" [(ngModel)]="model.useAssetStatus"></p-inputSwitch>
@@ -39,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useNetWeight" [(ngModel)]="model.useNetWeight"></p-inputSwitch>
@@ -53,7 +61,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useGrossWeight" [(ngModel)]="model.useGrossWeight"></p-inputSwitch>
@@ -67,7 +75,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useWidth" [(ngModel)]="model.useWidth"></p-inputSwitch>
@@ -81,7 +89,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useHeight" [(ngModel)]="model.useHeight"></p-inputSwitch>
@@ -95,7 +103,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useLength" [(ngModel)]="model.useLength"></p-inputSwitch>
@@ -109,7 +117,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useDiameter" [(ngModel)]="model.useDiameter"></p-inputSwitch>
@@ -123,7 +131,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useArea" [(ngModel)]="model.useArea"></p-inputSwitch>
@@ -137,7 +145,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useVolume" [(ngModel)]="model.useVolume"></p-inputSwitch>
@@ -151,7 +159,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useReorderStock" [(ngModel)]="model.useReorderStock"></p-inputSwitch>
@@ -165,7 +173,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useMaxStock" [(ngModel)]="model.useMaxStock"></p-inputSwitch>
@@ -179,7 +187,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useMinStock" [(ngModel)]="model.useMinStock"></p-inputSwitch>
@@ -193,7 +201,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useItemGroup" [(ngModel)]="model.useItemGroup"></p-inputSwitch>
@@ -207,7 +215,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useBrand" [(ngModel)]="model.useBrand"></p-inputSwitch>
@@ -221,7 +229,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useModel" [(ngModel)]="model.useModel"></p-inputSwitch>
@@ -235,7 +243,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useSeries" [(ngModel)]="model.useSeries"></p-inputSwitch>
@@ -249,7 +257,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useSize" [(ngModel)]="model.useSize"></p-inputSwitch>
@@ -263,7 +271,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useGrade" [(ngModel)]="model.useGrade"></p-inputSwitch>
@@ -277,7 +285,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useColorPattern" [(ngModel)]="model.useColorPattern"></p-inputSwitch>
@@ -291,7 +299,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useCPU" [(ngModel)]="model.useCPU"></p-inputSwitch>
@@ -305,7 +313,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useRAM" [(ngModel)]="model.useRAM"></p-inputSwitch>
@@ -319,7 +327,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useVGA" [(ngModel)]="model.useVGA"></p-inputSwitch>
@@ -333,7 +341,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useHDD" [(ngModel)]="model.useHDD"></p-inputSwitch>
@@ -347,7 +355,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useScreen" [(ngModel)]="model.useScreen"></p-inputSwitch>
@@ -361,7 +369,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useCamera" [(ngModel)]="model.useCamera"></p-inputSwitch>
@@ -375,7 +383,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useBattery" [(ngModel)]="model.useBattery"></p-inputSwitch>
@@ -389,7 +397,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useFieldA" [(ngModel)]="model.useFieldA"></p-inputSwitch>
@@ -415,7 +423,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useFieldB" [(ngModel)]="model.useFieldB"></p-inputSwitch>
@@ -441,7 +449,7 @@
             </div>
         </div>
     </div>
-    <div class="formgrid grid m-0">
+    <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useFieldC" [(ngModel)]="model.useFieldC"></p-inputSwitch>
@@ -467,6 +475,92 @@
             </div>
         </div>
     </div>
+
+    <ng-container *ngIf="model.useGrossWeight||model.useNetWeight||model.useWidth||model.useHeight||model.useLength||model.useDiameter||model.useArea||model.useVolume">
+        <h5>{{l('Unit')}}</h5>
+        <p-divider></p-divider>
+
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6 xl:col-4"
+                 selectWeightUnit
+                 name="weightUnit"
+                 [label]="l('WeightUnit')"
+                 [(ngModel)]="model.weightUnit"
+                 *ngIf="model.useGrossWeight || model.useNetWeight">
+            </div>
+
+            <div class="field col-12 md:col-6 xl:col-4"
+                 selectLengthUnit
+                 name="lengthUnit"
+                 [label]="l('LengthUnit')"
+                 [(ngModel)]="model.lengthUnit"
+                 *ngIf="model.useWidth || model.useHeight || model.useLength || model.useDiameter">
+            </div>
+
+            <div class="field col-12 md:col-6 xl:col-4"
+                 selectAreaUnit
+                 name="areaUnit"
+                 [label]="l('AreaUnit')"
+                 [(ngModel)]="model.areaUnit"
+                 *ngIf="model.useArea">
+            </div>
+
+            <div class="field col-12 md:col-6 xl:col-4"
+                 selectVolumeUnit
+                 name="volumeUnit"
+                 [label]="l('VolumeUnit')"
+                 [(ngModel)]="model.volumeUnit"
+                 *ngIf="model.useVolume">
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="chartOfAccountEnable">
+        <h5>{{l('Account')}}</h5>
+        <p-divider></p-divider>
+
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6 xl:col-4"
+                 findChartOfAccount
+                 name="inventoryAccount"
+                 [label]="l('InventoryAccount')"
+                 [(ngModel)]="inventoryAccount"
+                 (ngModelChange)="model.inventoryAccountId=$event.id">
+            </div>
+
+            <div class="field col-12 md:col-6 xl:col-4"
+                 findChartOfAccount
+                 name="assetAccount"
+                 [label]="l('AssetAccount')"
+                 [(ngModel)]="assetAccount"
+                 (ngModelChange)="model.assetAccountId=$event.id">
+            </div>
+
+            <div class="field col-12 md:col-6 xl:col-4"
+                 findChartOfAccount
+                 name="expenseAccount"
+                 [label]="l('ExpenseAccount')"
+                 [(ngModel)]="expenseAccount"
+                 (ngModelChange)="model.expenseAccountId=$event.id">
+            </div>
+
+            <div class="field col-12 md:col-6 xl:col-4"
+                 findChartOfAccount
+                 name="cogsAccount"
+                 [label]="l('COGSAccount')"
+                 [(ngModel)]="cogsAccount"
+                 (ngModelChange)="model.cogsAccountId=$event.id">
+            </div>
+
+            <div class="field col-12 md:col-6 xl:col-4"
+                 findChartOfAccount
+                 name="revenueAccount"
+                 [label]="l('RevenueAccount')"
+                 [(ngModel)]="revenueAccount"
+                 (ngModelChange)="model.revenueAccountId=$event.id">
+            </div>
+        </div>
+    </ng-container>
 
     <div class="flex justify-content-end gap-2 py-4">
         <p-button [label]="l('Save')" (onClick)="save()" [loading]="saving" />

@@ -1,22 +1,14 @@
 <p-tabView [(activeIndex)]="activeIndex" (activeIndexChange)="saveCache()">
     <p-tabPanel header="{{l('Items')}}" *ngIf="canViewItem">
-        <ng-template pTemplate="content">
-            <app-item></app-item>
-        </ng-template>
+        <app-item></app-item>
     </p-tabPanel>
     <p-tabPanel header="{{l('Settings')}}" *ngIf="canViewItemSetting">
-        <ng-template pTemplate="content">
-            <app-item-setting></app-item-setting>
-        </ng-template>
+        <app-item-setting></app-item-setting>
     </p-tabPanel>
     <p-tabPanel header="{{l('ItemFieldSetting')}}" *ngIf="canViewItemSetting">
-        <ng-template pTemplate="content">
-            <app-item-field-setting></app-item-field-setting>
-        </ng-template>
+        <app-item-field-setting></app-item-field-setting>
     </p-tabPanel>
     <p-tabPanel header="{{l('CodeFormula')}}" *ngIf="canViewItemCodeFormula">
-        <ng-template pTemplate="content">
-            <app-item-code-formula></app-item-code-formula>
-        </ng-template>
+        <app-item-code-formula></app-item-code-formula>
     </p-tabPanel>
 </p-tabView>

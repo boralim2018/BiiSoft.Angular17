@@ -50,4 +50,9 @@ export class AppConsts {
         }
 
     }
+
+    static readonly WeightUnit: any = { value: 6, name: 'kg' };
+    static readonly LengthUnit: any = { value: 3, name: 'm' };
+    static readonly AreaUnit: any = { value: 3, name: 'm²' };
+    static readonly VolumeUnit: any = { value: 10, name: 'L' };
 }

@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { AccountTypeFilterInputDto, CreateUpdateItemInputDto, ItemServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AccountTypeFilterInputDto, CreateUpdateItemInputDto, ItemServiceProxy, ItemZoneDto } from '@shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
@@ -10,7 +10,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { TabViewCacheComponentBase } from '../../../../shared/app-component-base';
 import { DividerModule } from 'primeng/divider';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
 import { SelectItemCategoryComponent } from '../../../../shared/components/select-item-type/select-item-category.component';
 import { AttachFileComponent } from '../../../../shared/components/attach-file/attach-file.component';
@@ -42,6 +42,8 @@ import { InputNumberComponent } from '../../../../shared/components/input-number
 import { CheckboxModule } from 'primeng/checkbox';
 import { TabViewModule } from 'primeng/tabview';
 import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
+import { FindZoneComponent } from '../../../../shared/components/find-zone/find-zone.component';
+import { TableModule } from 'primeng/table';
 
 @Component({
     selector: 'app-create-item',
@@ -50,7 +52,7 @@ import { FindChartOfAccountComponent } from '../../../../shared/components/find-
     providers: [ItemServiceProxy],
     standalone: true,
     imports: [
-        FormsModule, BusyDirective, NgIf, NgClass, InputTextareaModule, FindItemModelComponent, SelectItemCategoryComponent,
+        FormsModule, BusyDirective, NgIf, NgFor, NgClass, InputTextareaModule, FindItemModelComponent, SelectItemCategoryComponent,
         ContactAddressComponent, ButtonDirective, Ripple, LocalizePipe, DividerModule, AttachFileComponent, SelectItemTypeComponent,
         FindUnitComponent, FindItemGroupComponent, FindItemBrandComponent, FindItemGradeComponent, FindVGAComponent, CheckboxModule,
         FindItemSizeComponent, FindItemSeriesComponent, FindColorPatternComponent, FindCPUComponent, FindRAMComponent, TabViewModule,
@@ -58,7 +60,7 @@ import { FindChartOfAccountComponent } from '../../../../shared/components/find-
         FindFieldCComponent, SelectWeightUnitComponent, SelectLengthUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent,
         InputTextComponent, InputLengthUnitComponent, InputWeightUnitComponent, InputAreaUnitComponent, InputVolumeUnitComponent,
         InputNumberComponent, SelectLengthUnitComponent, SelectWeightUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent,
-        FindChartOfAccountComponent
+        FindChartOfAccountComponent, FindZoneComponent, TableModule
     ]
 })
 export class CreateItemComponent extends TabViewCacheComponentBase implements OnInit {
@@ -79,6 +81,13 @@ export class CreateItemComponent extends TabViewCacheComponentBase implements On
     purchaseAccountTypeFilter: AccountTypeFilterInputDto;
     saleAccountTypeFilter: AccountTypeFilterInputDto;
 
+    weightUnit: any = AppConsts.WeightUnit;
+    lengthUnit: any = AppConsts.LengthUnit;
+    areaUnit: any = AppConsts.AreaUnit;
+    volumeUnit: any = AppConsts.VolumeUnit;
+
+    selectedZones: any[] = [];
+
     chartOfAccountEnable: boolean = this.feature.isEnabled("App.Accounting.ChartOfAccounts");
 
     constructor(
@@ -90,7 +99,7 @@ export class CreateItemComponent extends TabViewCacheComponentBase implements On
 
     ngOnInit(): void {
         this.initModel();
-        this.initTabViewFromCache();
+        this.initTabViewFromCache();this.appSession.itemSetting.useAssetStatus
     }
 
     initModel() {
@@ -115,8 +124,21 @@ export class CreateItemComponent extends TabViewCacheComponentBase implements On
         this.purchaseAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [50, 51, 52], exclude: false });
         this.saleAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [40, 41], exclude: false });
 
-        this.model = new CreateUpdateItemInputDto();
-        this.model.itemZones = [];
+        this.model = CreateUpdateItemInputDto.fromJS({
+            itemType: 4,
+            grossWeight: 0,
+            netWeight: 0,
+            width: 0,
+            height: 0,
+            length: 0,
+            diameter: 0,
+            area: 0,
+            volume: 0,
+            minStock: 0,
+            maxStock: 0,
+            reorderStock: 0,
+            itemZones: [],
+        });
 
         if (this.appSession) {
             
@@ -171,4 +193,42 @@ export class CreateItemComponent extends TabViewCacheComponentBase implements On
         }
     }
 
+    onZoneChange(zones: any[]) {
+        if (!zones || !zones.length) return;
+
+        if (!this.model.itemZones) this.model.itemZones = [];
+
+        let addZones: ItemZoneDto[] = [];
+        const warehouseIds = new Set(this.model.itemZones.map((z) => z.warehouseId));
+
+        for (let z of zones) {
+            
+            if (warehouseIds.has(z.warehouseId)) {
+                this.message.error(this.l('Duplicate', this.l('Zones')));
+                this.selectedZones = [];
+                return;
+            }
+
+            const itemzone = ItemZoneDto.fromJS({
+                zoneId: z.id,
+                name: z.name,
+                displayName: z.displayName,
+                warehouseId: z.warehouseId,
+                warehouseName: z.warehouseName,
+            });
+            addZones.push(itemzone);
+            warehouseIds.add(z.warehouseId);
+        }
+
+        this.model.itemZones = [...this.model.itemZones, ...addZones];
+        this.selectedZones = [];
+    }
+
+    clearItemZones() {
+        this.model.itemZones = [];
+    }
+
+    removeItemZone(itemZone: ItemZoneDto) {
+        this.model.itemZones = this.model.itemZones.filter((z) => z.zoneId != itemZone.zoneId);
+    }
 }

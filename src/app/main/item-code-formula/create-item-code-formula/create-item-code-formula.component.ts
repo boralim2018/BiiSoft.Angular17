@@ -41,6 +41,7 @@ export class CreateItemCodeFormulaComponent extends DynamicDialogBase implements
 
     initModel() {
         this.model = new CreateUpdateItemCodeFormulaInputDto();
+        this.model.isAllItemType = true;
         this.model.type = 0;
         this.model.itemTypes = [];
     };

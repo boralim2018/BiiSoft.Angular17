@@ -37151,6 +37151,7 @@ export interface ICreateUpdateItemBrandInputDto {
 
 export class CreateUpdateItemCodeFormulaInputDto implements ICreateUpdateItemCodeFormulaInputDto {
     id: string | undefined;
+    isAllItemType: boolean;
     itemTypes: ItemCodeFormulaItemTypeDto[] | undefined;
     type: ItemCodeFormulaType;
     prefix: string | undefined;
@@ -37169,6 +37170,7 @@ export class CreateUpdateItemCodeFormulaInputDto implements ICreateUpdateItemCod
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
+            this.isAllItemType = _data["isAllItemType"];
             if (Array.isArray(_data["itemTypes"])) {
                 this.itemTypes = [] as any;
                 for (let item of _data["itemTypes"])
@@ -37191,6 +37193,7 @@ export class CreateUpdateItemCodeFormulaInputDto implements ICreateUpdateItemCod
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["isAllItemType"] = this.isAllItemType;
         if (Array.isArray(this.itemTypes)) {
             data["itemTypes"] = [];
             for (let item of this.itemTypes)
@@ -37213,6 +37216,7 @@ export class CreateUpdateItemCodeFormulaInputDto implements ICreateUpdateItemCod
 
 export interface ICreateUpdateItemCodeFormulaInputDto {
     id: string | undefined;
+    isAllItemType: boolean;
     itemTypes: ItemCodeFormulaItemTypeDto[] | undefined;
     type: ItemCodeFormulaType;
     prefix: string | undefined;
@@ -37382,6 +37386,10 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
     inventoryAccountId: string | undefined;
     description: string | undefined;
     itemZones: ItemZoneDto[] | undefined;
+    isModified: boolean;
+    isAddOn: boolean;
+    useBOM: boolean;
+    displayBOM: boolean;
 
     constructor(data?: ICreateUpdateItemInputDto) {
         if (data) {
@@ -37449,6 +37457,10 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
                 for (let item of _data["itemZones"])
                     this.itemZones.push(ItemZoneDto.fromJS(item));
             }
+            this.isModified = _data["isModified"];
+            this.isAddOn = _data["isAddOn"];
+            this.useBOM = _data["useBOM"];
+            this.displayBOM = _data["displayBOM"];
         }
     }
 
@@ -37516,6 +37528,10 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
             for (let item of this.itemZones)
                 data["itemZones"].push(item.toJSON());
         }
+        data["isModified"] = this.isModified;
+        data["isAddOn"] = this.isAddOn;
+        data["useBOM"] = this.useBOM;
+        data["displayBOM"] = this.displayBOM;
         return data;
     }
 
@@ -37579,6 +37595,10 @@ export interface ICreateUpdateItemInputDto {
     inventoryAccountId: string | undefined;
     description: string | undefined;
     itemZones: ItemZoneDto[] | undefined;
+    isModified: boolean;
+    isAddOn: boolean;
+    useBOM: boolean;
+    displayBOM: boolean;
 }
 
 export class CreateUpdateItemModelInputDto implements ICreateUpdateItemModelInputDto {
@@ -47006,6 +47026,7 @@ export class FindZoneDto implements IFindZoneDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    warehouseId: string;
     warehouseName: string | undefined;
 
     constructor(data?: IFindZoneDto) {
@@ -47023,6 +47044,7 @@ export class FindZoneDto implements IFindZoneDto {
             this.name = _data["name"];
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
+            this.warehouseId = _data["warehouseId"];
             this.warehouseName = _data["warehouseName"];
         }
     }
@@ -47040,6 +47062,7 @@ export class FindZoneDto implements IFindZoneDto {
         data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isActive"] = this.isActive;
+        data["warehouseId"] = this.warehouseId;
         data["warehouseName"] = this.warehouseName;
         return data;
     }
@@ -47057,6 +47080,7 @@ export interface IFindZoneDto {
     name: string | undefined;
     displayName: string | undefined;
     isActive: boolean;
+    warehouseId: string;
     warehouseName: string | undefined;
 }
 
@@ -49334,6 +49358,7 @@ export class ItemCodeFormulaDetailDto implements IItemCodeFormulaDetailDto {
     lastModificationTime: moment.Moment | undefined;
     isActive: boolean;
     no: number;
+    isAllItemType: boolean;
     itemTypes: ItemCodeFormulaItemTypeDto[] | undefined;
     type: ItemCodeFormulaType;
     typeName: string | undefined;
@@ -49365,6 +49390,7 @@ export class ItemCodeFormulaDetailDto implements IItemCodeFormulaDetailDto {
             this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
             this.isActive = _data["isActive"];
             this.no = _data["no"];
+            this.isAllItemType = _data["isAllItemType"];
             if (Array.isArray(_data["itemTypes"])) {
                 this.itemTypes = [] as any;
                 for (let item of _data["itemTypes"])
@@ -49400,6 +49426,7 @@ export class ItemCodeFormulaDetailDto implements IItemCodeFormulaDetailDto {
         data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
         data["isActive"] = this.isActive;
         data["no"] = this.no;
+        data["isAllItemType"] = this.isAllItemType;
         if (Array.isArray(this.itemTypes)) {
             data["itemTypes"] = [];
             for (let item of this.itemTypes)
@@ -49435,6 +49462,7 @@ export interface IItemCodeFormulaDetailDto {
     lastModificationTime: moment.Moment | undefined;
     isActive: boolean;
     no: number;
+    isAllItemType: boolean;
     itemTypes: ItemCodeFormulaItemTypeDto[] | undefined;
     type: ItemCodeFormulaType;
     typeName: string | undefined;
@@ -49500,6 +49528,7 @@ export class ItemCodeFormulaListDto implements IItemCodeFormulaListDto {
     lastModificationTime: moment.Moment | undefined;
     isActive: boolean;
     no: number;
+    isAllItemType: boolean;
     itemTypes: string[] | undefined;
     type: string | undefined;
     prefix: string | undefined;
@@ -49526,6 +49555,7 @@ export class ItemCodeFormulaListDto implements IItemCodeFormulaListDto {
             this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
             this.isActive = _data["isActive"];
             this.no = _data["no"];
+            this.isAllItemType = _data["isAllItemType"];
             if (Array.isArray(_data["itemTypes"])) {
                 this.itemTypes = [] as any;
                 for (let item of _data["itemTypes"])
@@ -49556,6 +49586,7 @@ export class ItemCodeFormulaListDto implements IItemCodeFormulaListDto {
         data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
         data["isActive"] = this.isActive;
         data["no"] = this.no;
+        data["isAllItemType"] = this.isAllItemType;
         if (Array.isArray(this.itemTypes)) {
             data["itemTypes"] = [];
             for (let item of this.itemTypes)
@@ -49586,6 +49617,7 @@ export interface IItemCodeFormulaListDto {
     lastModificationTime: moment.Moment | undefined;
     isActive: boolean;
     no: number;
+    isAllItemType: boolean;
     itemTypes: string[] | undefined;
     type: string | undefined;
     prefix: string | undefined;
@@ -49743,6 +49775,10 @@ export class ItemDetailDto implements IItemDetailDto {
     inventoryAccountName: string | undefined;
     description: string | undefined;
     itemZones: ItemZoneDto[] | undefined;
+    isModified: boolean;
+    isAddOn: boolean;
+    useBOM: boolean;
+    displayBOM: boolean;
 
     constructor(data?: IItemDetailDto) {
         if (data) {
@@ -49848,6 +49884,10 @@ export class ItemDetailDto implements IItemDetailDto {
                 for (let item of _data["itemZones"])
                     this.itemZones.push(ItemZoneDto.fromJS(item));
             }
+            this.isModified = _data["isModified"];
+            this.isAddOn = _data["isAddOn"];
+            this.useBOM = _data["useBOM"];
+            this.displayBOM = _data["displayBOM"];
         }
     }
 
@@ -49953,6 +49993,10 @@ export class ItemDetailDto implements IItemDetailDto {
             for (let item of this.itemZones)
                 data["itemZones"].push(item.toJSON());
         }
+        data["isModified"] = this.isModified;
+        data["isAddOn"] = this.isAddOn;
+        data["useBOM"] = this.useBOM;
+        data["displayBOM"] = this.displayBOM;
         return data;
     }
 
@@ -50054,6 +50098,10 @@ export interface IItemDetailDto {
     inventoryAccountName: string | undefined;
     description: string | undefined;
     itemZones: ItemZoneDto[] | undefined;
+    isModified: boolean;
+    isAddOn: boolean;
+    useBOM: boolean;
+    displayBOM: boolean;
 }
 
 export class ItemFieldSettingDto implements IItemFieldSettingDto {
@@ -50669,6 +50717,10 @@ export class ItemListDto implements IItemListDto {
     fieldBName: string | undefined;
     fieldCName: string | undefined;
     description: string | undefined;
+    isModified: boolean;
+    isAddOn: boolean;
+    useBOM: boolean;
+    displayBOM: boolean;
 
     constructor(data?: IItemListDto) {
         if (data) {
@@ -50740,6 +50792,10 @@ export class ItemListDto implements IItemListDto {
             this.fieldBName = _data["fieldBName"];
             this.fieldCName = _data["fieldCName"];
             this.description = _data["description"];
+            this.isModified = _data["isModified"];
+            this.isAddOn = _data["isAddOn"];
+            this.useBOM = _data["useBOM"];
+            this.displayBOM = _data["displayBOM"];
         }
     }
 
@@ -50811,6 +50867,10 @@ export class ItemListDto implements IItemListDto {
         data["fieldBName"] = this.fieldBName;
         data["fieldCName"] = this.fieldCName;
         data["description"] = this.description;
+        data["isModified"] = this.isModified;
+        data["isAddOn"] = this.isAddOn;
+        data["useBOM"] = this.useBOM;
+        data["displayBOM"] = this.displayBOM;
         return data;
     }
 
@@ -50882,6 +50942,10 @@ export interface IItemListDto {
     fieldBName: string | undefined;
     fieldCName: string | undefined;
     description: string | undefined;
+    isModified: boolean;
+    isAddOn: boolean;
+    useBOM: boolean;
+    displayBOM: boolean;
 }
 
 export class ItemListDtoPagedResultDto implements IItemListDtoPagedResultDto {
@@ -51511,6 +51575,23 @@ export class ItemSettingDto implements IItemSettingDto {
     fieldARequired: boolean;
     fieldBRequired: boolean;
     fieldCRequired: boolean;
+    weightUnit: WeightUnit;
+    lengthUnit: LengthUnit;
+    areaUnit: AreaUnit;
+    volumeUnit: VolumeUnit;
+    inventoryAccountId: string | undefined;
+    assetAccountId: string | undefined;
+    expenseAccountId: string | undefined;
+    cogsAccountId: string | undefined;
+    revenueAccountId: string | undefined;
+    inventoryAccountName: string | undefined;
+    assetAccountName: string | undefined;
+    expenseAccountName: string | undefined;
+    cogsAccountName: string | undefined;
+    revenueAccountName: string | undefined;
+    readonly itemFilterEnable: boolean;
+    readonly measurementEnable: boolean;
+    readonly stockTrackingEnable: boolean;
 
     constructor(data?: IItemSettingDto) {
         if (data) {
@@ -51588,6 +51669,23 @@ export class ItemSettingDto implements IItemSettingDto {
             this.fieldARequired = _data["fieldARequired"];
             this.fieldBRequired = _data["fieldBRequired"];
             this.fieldCRequired = _data["fieldCRequired"];
+            this.weightUnit = _data["weightUnit"];
+            this.lengthUnit = _data["lengthUnit"];
+            this.areaUnit = _data["areaUnit"];
+            this.volumeUnit = _data["volumeUnit"];
+            this.inventoryAccountId = _data["inventoryAccountId"];
+            this.assetAccountId = _data["assetAccountId"];
+            this.expenseAccountId = _data["expenseAccountId"];
+            this.cogsAccountId = _data["cogsAccountId"];
+            this.revenueAccountId = _data["revenueAccountId"];
+            this.inventoryAccountName = _data["inventoryAccountName"];
+            this.assetAccountName = _data["assetAccountName"];
+            this.expenseAccountName = _data["expenseAccountName"];
+            this.cogsAccountName = _data["cogsAccountName"];
+            this.revenueAccountName = _data["revenueAccountName"];
+            (<any>this).itemFilterEnable = _data["itemFilterEnable"];
+            (<any>this).measurementEnable = _data["measurementEnable"];
+            (<any>this).stockTrackingEnable = _data["stockTrackingEnable"];
         }
     }
 
@@ -51665,6 +51763,23 @@ export class ItemSettingDto implements IItemSettingDto {
         data["fieldARequired"] = this.fieldARequired;
         data["fieldBRequired"] = this.fieldBRequired;
         data["fieldCRequired"] = this.fieldCRequired;
+        data["weightUnit"] = this.weightUnit;
+        data["lengthUnit"] = this.lengthUnit;
+        data["areaUnit"] = this.areaUnit;
+        data["volumeUnit"] = this.volumeUnit;
+        data["inventoryAccountId"] = this.inventoryAccountId;
+        data["assetAccountId"] = this.assetAccountId;
+        data["expenseAccountId"] = this.expenseAccountId;
+        data["cogsAccountId"] = this.cogsAccountId;
+        data["revenueAccountId"] = this.revenueAccountId;
+        data["inventoryAccountName"] = this.inventoryAccountName;
+        data["assetAccountName"] = this.assetAccountName;
+        data["expenseAccountName"] = this.expenseAccountName;
+        data["cogsAccountName"] = this.cogsAccountName;
+        data["revenueAccountName"] = this.revenueAccountName;
+        data["itemFilterEnable"] = this.itemFilterEnable;
+        data["measurementEnable"] = this.measurementEnable;
+        data["stockTrackingEnable"] = this.stockTrackingEnable;
         return data;
     }
 
@@ -51742,6 +51857,23 @@ export interface IItemSettingDto {
     fieldARequired: boolean;
     fieldBRequired: boolean;
     fieldCRequired: boolean;
+    weightUnit: WeightUnit;
+    lengthUnit: LengthUnit;
+    areaUnit: AreaUnit;
+    volumeUnit: VolumeUnit;
+    inventoryAccountId: string | undefined;
+    assetAccountId: string | undefined;
+    expenseAccountId: string | undefined;
+    cogsAccountId: string | undefined;
+    revenueAccountId: string | undefined;
+    inventoryAccountName: string | undefined;
+    assetAccountName: string | undefined;
+    expenseAccountName: string | undefined;
+    cogsAccountName: string | undefined;
+    revenueAccountName: string | undefined;
+    itemFilterEnable: boolean;
+    measurementEnable: boolean;
+    stockTrackingEnable: boolean;
 }
 
 export class ItemSizeDetailDto implements IItemSizeDetailDto {
@@ -52162,7 +52294,8 @@ export interface IItemTypeNameValueDtoListResultDto {
 export class ItemZoneDto implements IItemZoneDto {
     id: string | undefined;
     zoneId: string;
-    zoneName: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
     warehouseId: string;
     warehouseName: string | undefined;
 
@@ -52179,7 +52312,8 @@ export class ItemZoneDto implements IItemZoneDto {
         if (_data) {
             this.id = _data["id"];
             this.zoneId = _data["zoneId"];
-            this.zoneName = _data["zoneName"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
             this.warehouseId = _data["warehouseId"];
             this.warehouseName = _data["warehouseName"];
         }
@@ -52196,7 +52330,8 @@ export class ItemZoneDto implements IItemZoneDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["zoneId"] = this.zoneId;
-        data["zoneName"] = this.zoneName;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
         data["warehouseId"] = this.warehouseId;
         data["warehouseName"] = this.warehouseName;
         return data;
@@ -52213,7 +52348,8 @@ export class ItemZoneDto implements IItemZoneDto {
 export interface IItemZoneDto {
     id: string | undefined;
     zoneId: string;
-    zoneName: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
     warehouseId: string;
     warehouseName: string | undefined;
 }

@@ -13,12 +13,15 @@
                [format]="format"
                [(ngModel)]="model"
                (ngModelChange)="onChange($event)"
-               (onBlur)="onTouched()"
+               (onBlur)="onBlur()"
+               (onFocus)="onFocus()"
                [disabled]="disabled"
                [minFractionDigits]="minDigits"
                [maxFractionDigits]="maxDigits"
                [min]="min"
                [max]="max"
                [maxlength]="maxlength"
+               [prefix]="pre"
+               [suffix]="suf"
                [ngClass]="{'ng-dirty': dirty, 'ng-invalid': invalid}" />
 <small *ngIf="required && invalid && dirty && validateMessage" class="p-error block">{{ validateMessage }}</small>

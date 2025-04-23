@@ -26,8 +26,13 @@
             <div class="col-4 lg:col-2 py-2"> {{l('ItemTypes')}} </div>
             <div class="col-8 lg:col-4 py-2 font-bold">
                 :
-                <ng-container *ngFor="let t of model.itemTypes">
-                    <p-tag styleClass="px-3 ml-1" severity="success" [value]="t.itemTypeName"></p-tag>
+                <ng-container *ngIf="model.isAllItemType">
+                    {{l('All')}}
+                </ng-container>
+                <ng-container *ngIf="!model.isAllItemType">
+                    <ng-container *ngFor="let t of model.itemTypes">
+                        <p-tag styleClass="px-3 ml-1" severity="success" [value]="t.itemTypeName"></p-tag>
+                    </ng-container>
                 </ng-container>
             </div>
 

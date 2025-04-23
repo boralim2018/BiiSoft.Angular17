@@ -1,34 +1,52 @@
 <form novalidate autocomplete="off" #editItemCodeFormulaForm="ngForm" (ngSubmit)="save()" [busy]="saving">
     <div class="formgrid grid p-3 m-0">
+        <div class="field col-12 md:col-6">
+            <label for="prefix" class="text-900 font-medium">{{l('ItemTypes')}}<span class="text-red-600">*</span></label>
+            <div class="flex flex-wrap gap-3">
+                <div class="flex align-items-center cursor-pointer">
+                    <p-radioButton name="isAllItemType"
+                                   [label]="l('All')"
+                                   [value]="true"
+                                   [(ngModel)]="model.isAllItemType"
+                                   inputId="isAllItemType0" />
+                </div>
+
+                <div class="flex align-items-center cursor-pointer">
+                    <p-radioButton name="isAllItemType"
+                                   [label]="l('SpecificItemType')"
+                                   [value]="false"
+                                   [(ngModel)]="model.isAllItemType"
+                                   inputId="isAllItemType1" />
+                </div>
+            </div>
+        </div>
+
         <div class="field col-12 md:col-6"
              selectItemType
              name="itemType"
              [required]="true"
              [label]="l('ItemTypes')"
              [multiple]="true"
-             [(ngModel)]="itemTypes">
+             [(ngModel)]="itemTypes"
+             *ngIf="!model.isAllItemType">
         </div>
         <div class="field col-12 md:col-6">
             <label for="prefix" class="text-900 font-medium">{{l('Type')}}<span class="text-red-600">*</span></label>
             <div class="flex flex-wrap gap-3">
                 <div class="flex align-items-center cursor-pointer">
                     <p-radioButton name="type"
+                                   [label]="l('Manual')"
                                    value="0"
                                    [(ngModel)]="model.type"
                                    inputId="type0" />
-                    <label for="type0" class="ml-2">
-                        {{l('Manual')}}
-                    </label>
                 </div>
 
                 <div class="flex align-items-center cursor-pointer">
                     <p-radioButton name="type"
+                                   [label]="l('Custom')"
                                    value="1"
                                    [(ngModel)]="model.type"
                                    inputId="type1" />
-                    <label for="type1" class="ml-2">
-                        {{l('Custom')}}
-                    </label>
                 </div>
             </div>
         </div>

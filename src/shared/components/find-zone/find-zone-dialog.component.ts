@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { PageCityProvinceInputDto, FindCityProvinceDto, CityProvinceServiceProxy, GuidNullableFilterInputDto } from '@shared/service-proxies/service-proxies';
+import { FindZoneInputDto, FindZoneDto, ZoneServiceProxy, GuidFilterInputDto } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
 import { finalize } from 'rxjs';
@@ -15,30 +15,30 @@ import { RecordNotFoundComponent } from '../record-not-found/record-not-found.co
 import { BusyDirective } from '../../directives/busy.directive';
 import { NgIf, NgStyle, NgFor, NgClass } from '@angular/common';
 import { FindSearchActionComponent } from '../find-search-action/find-search-action.component';
-import { FindCountryComponent } from '../find-country/find-country.component';
+import { FindWarehouseComponent } from '../find-warehouse/find-warehouse.component';
 import { TableSettingComponent } from '../table-setting/table-setting.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
-    selector: 'find-city-province-dialog',
-    templateUrl: './find-city-province-dialog.component.html',
+    selector: 'find-zone-dialog',
+    templateUrl: './find-zone-dialog.component.html',
     animations: [appModuleAnimation()],
-    providers: [CityProvinceServiceProxy],
+    providers: [ZoneServiceProxy],
     standalone: true,
-    imports: [OverlayPanelModule, TableSettingComponent, FindCountryComponent, FindSearchActionComponent, NgIf, NgStyle, BusyDirective, NgFor, NgClass, RecordNotFoundComponent, TableModule, PrimeTemplate, CheckboxModule, FormsModule, PaginatorModule]
+    imports: [OverlayPanelModule, TableSettingComponent, FindWarehouseComponent, FindSearchActionComponent, NgIf, NgStyle, BusyDirective, NgFor, NgClass, RecordNotFoundComponent, TableModule, PrimeTemplate, CheckboxModule, FormsModule, PaginatorModule]
 })
-export class FindCityProvinceDialogComponent extends Mixin(FindCardListComponentBase<FindCityProvinceDto>, AppDynamicDialogBase) implements OnInit {
+export class FindZoneDialogComponent extends Mixin(FindCardListComponentBase<FindZoneDto>, AppDynamicDialogBase) implements OnInit {
 
-    protected get sortField(): string { return 'Code' };
+    protected get sortField(): string { return 'Name' };
 
-    @ViewChild('findCityProvinceTable') table: Table;
+    @ViewChild('findZoneTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
 
-    countries: any;
+    warehouses: any;
 
     constructor(
         injector: Injector,
-        private _cityProvinceService: CityProvinceServiceProxy,
+        private _zoneService: ZoneServiceProxy,
         private _dialogRef: DynamicDialogRef,
         private _dialogConfig: DynamicDialogConfig
     ) {
@@ -46,8 +46,8 @@ export class FindCityProvinceDialogComponent extends Mixin(FindCardListComponent
 
         this.multiple = this._dialogConfig.data.multiple;
         this.multiCache = this.multiple;
-        this.tableCacheKey = "findCityProvinceTableCache";
-        this.containerClass = '.find-city-province-dialog';
+        this.tableCacheKey = "findZoneTableCache";
+        this.containerClass = '.find-zone-dialog';
     }
 
     ngOnInit() {
@@ -57,34 +57,32 @@ export class FindCityProvinceDialogComponent extends Mixin(FindCardListComponent
 
     protected initColumns(): void {
         this.columns = [
-            { name: 'Code', header: 'Code', width: '15rem', sort: true },
             { name: 'Name', header: 'Name', width: '15rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '15rem', sort: true },
-            { name: 'ISO', header: 'ISO', width: '15rem', sort: true },
-            { name: 'CountryName', header: 'Country', width: '15rem', sort: true, visible: false }
+            { name: 'WarehouseName', header: 'Warehouse', width: '15rem', sort: true }
         ];
         
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }
 
-    get showCountry(): boolean {
-        return this.selectedColumns && this.selectedColumns.find(f => f.name === 'CountryName') !== undefined;
+    get showWarehouse(): boolean {
+        return this.selectedColumns && this.selectedColumns.find(f => f.name === 'WarehouseName') !== undefined;
     }
 
     protected initFilterInput() {
         super.initFilterInput();
         this.filterInput.isActive = undefined;
-        this.filterInput.countries = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
-        this.countries = undefined;
+        this.filterInput.warehouseFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.warehouses = undefined;
     }
 
     protected getList(input: any, callBack: Function): void {
        
-        let findInput = new PageCityProvinceInputDto();
+        let findInput = new FindZoneInputDto();
         findInput.init(input);
         findInput.isActive = true;
 
-        this._cityProvinceService.find(findInput)
+        this._zoneService.find(findInput)
             .pipe(finalize(() => callBack()))
             .subscribe(result => {
                 this.totalCount = result.totalCount;
@@ -108,7 +106,7 @@ export class FindCityProvinceDialogComponent extends Mixin(FindCardListComponent
 
         let selected = this.selectedModel;
         if (!selected) {
-            this.message.warn(this.l("PleaseSelect_", this.l("CityProvince")));
+            this.message.warn(this.l("PleaseSelect_", this.l("Zone")));
             return;
         }
         
@@ -120,7 +118,7 @@ export class FindCityProvinceDialogComponent extends Mixin(FindCardListComponent
 
         //Add more data in cache
         cache.cardView = this.cardView;
-        cache.countries = this.countries;
+        cache.warehouses = this.warehouses;
 
         return cache;
     }
@@ -132,21 +130,21 @@ export class FindCityProvinceDialogComponent extends Mixin(FindCardListComponent
         this.cardView = cache.cardView;
 
         //override from input
-        if (this._dialogConfig.data.countries && (!(Array.isArray(this._dialogConfig.data.countries)) || this._dialogConfig.data.countries.length)) {
-            this.countries = this._dialogConfig.data.countries;
-            this.mapCountriesFilter(this.countries);
+        if (this._dialogConfig.data.warehouses && (!(Array.isArray(this._dialogConfig.data.warehouses)) || this._dialogConfig.data.warehouses.length)) {
+            this.warehouses = this._dialogConfig.data.warehouses;
+            this.mapWarehousesFilter(this.warehouses);
         }
         else {
-            this.countries = cache.countries
+            this.warehouses = cache.warehouses
         }
     }
 
-    mapCountriesFilter(event) {
-        this.filterInput.countries.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    mapWarehousesFilter(event) {
+        this.filterInput.warehouseFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
-    onCountriesChange(event) {
-        this.mapCountriesFilter(event);
+    onWarehousesChange(event) {
+        this.mapWarehousesFilter(event);
         this.refresh();
     }
 }

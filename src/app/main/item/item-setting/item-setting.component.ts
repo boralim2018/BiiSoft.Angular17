@@ -6,6 +6,10 @@ import { ButtonDirective, ButtonModule } from 'primeng/button';
 import { finalize } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
+import { SelectLengthUnitComponent, SelectVolumeUnitComponent, SelectWeightUnitComponent, SelectAreaUnitComponent } from '../../../../shared/components/select-unit/select-unit.component';
+import { DividerModule } from 'primeng/divider';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-item-setting',
@@ -13,13 +17,24 @@ import { InputTextModule } from 'primeng/inputtext';
     styleUrl: './item-setting.component.scss',
     providers: [ItemServiceProxy],
     standalone: true,
-    imports: [FormsModule, InputSwitchModule, ButtonModule, ButtonDirective, InputTextModule]
+    imports: [
+        FormsModule, NgIf, InputSwitchModule, ButtonModule, ButtonDirective, InputTextModule, FindChartOfAccountComponent,
+        SelectWeightUnitComponent, SelectVolumeUnitComponent, SelectLengthUnitComponent, SelectAreaUnitComponent, DividerModule
+    ]
 })
 export class ItemSettingComponent extends AppComponentBase implements OnInit {
 
     model: ItemSettingDto;
     saving: boolean;
-    loading: boolean = true;;
+    loading: boolean = true;
+
+    inventoryAccount: any;
+    assetAccount: any;
+    expenseAccount: any;
+    cogsAccount: any;
+    revenueAccount: any;
+
+    chartOfAccountEnable: boolean = this.feature.isEnabled("App.Accounting.ChartOfAccounts");
 
     constructor(
         injector: Injector,
@@ -39,6 +54,22 @@ export class ItemSettingComponent extends AppComponentBase implements OnInit {
             .pipe(finalize(() => this.loading = false))
             .subscribe((result) => {
                 this.model.init(result);
+
+                if (result.inventoryAccountId) {
+                    this.inventoryAccount = { id: result.inventoryAccountId, name: result.inventoryAccountName };
+                }
+                if (result.assetAccountId) {
+                    this.assetAccount = { id: result.assetAccountId, name: result.assetAccountName };
+                }
+                if (result.expenseAccountId) {
+                    this.expenseAccount = { id: result.expenseAccountId, name: result.expenseAccountName };
+                }
+                if (result.cogsAccountId) {
+                    this.cogsAccount = { id: result.cogsAccountId, name: result.cogsAccountName };
+                }
+                if (result.revenueAccountId) {
+                    this.revenueAccount = { id: result.revenueAccountId, name: result.revenueAccountName };
+                }
             });
     }
 

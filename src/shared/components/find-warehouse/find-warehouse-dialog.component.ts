@@ -2,7 +2,7 @@ import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { FindWarehouseInputDto, FindWarehouseDto, WarehouseServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
-import { catchError, finalize, of } from 'rxjs';
+import { finalize, of } from 'rxjs';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { Paginator, PaginatorModule } from 'primeng/paginator';
