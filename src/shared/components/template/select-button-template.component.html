@@ -1,0 +1,22 @@
+<div *ngIf="label" class="flex flex-wrap align-items-center gap-1 mb-2">
+    {{label}}
+    <p-checkbox name="{{'exclude_' + name}}"
+                [label]="l('Exclude')"
+                [binary]="true"
+                [(ngModel)]="exclude"
+                (ngModelChange)="excludeChange.emit($event)"
+                inputId="'exclude' + name"
+                *ngIf="showExclude"></p-checkbox>
+    <span class="text-red-500" *ngIf="required">*</span>
+</div>
+<p-selectButton [options]="models"
+                [(ngModel)]="model"
+                (onChange)="onChange($event.value)"
+                (onBlur)="onTouched()"
+                [optionLabel]="optionLabel"
+                [optionValue]="optionValue"
+                [multiple]="multiple"
+                [disabled]="disabled"
+                [ngClass]="{'ng-dirty': dirty, 'ng-invalid': invalid}" />
+
+<small *ngIf="required && invalid && dirty && validateMessage" class="p-error block">{{ validateMessage }}</small>

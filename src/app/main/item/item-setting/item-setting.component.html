@@ -525,7 +525,7 @@
                  name="inventoryAccount"
                  [label]="l('InventoryAccount')"
                  [(ngModel)]="inventoryAccount"
-                 (ngModelChange)="model.inventoryAccountId=$event.id">
+                 (ngModelChange)="model.inventoryAccountId=$event?.id">
             </div>
 
             <div class="field col-12 md:col-6 xl:col-4"
@@ -533,7 +533,7 @@
                  name="assetAccount"
                  [label]="l('AssetAccount')"
                  [(ngModel)]="assetAccount"
-                 (ngModelChange)="model.assetAccountId=$event.id">
+                 (ngModelChange)="model.assetAccountId=$event?.id">
             </div>
 
             <div class="field col-12 md:col-6 xl:col-4"
@@ -541,7 +541,7 @@
                  name="expenseAccount"
                  [label]="l('ExpenseAccount')"
                  [(ngModel)]="expenseAccount"
-                 (ngModelChange)="model.expenseAccountId=$event.id">
+                 (ngModelChange)="model.expenseAccountId=$event?.id">
             </div>
 
             <div class="field col-12 md:col-6 xl:col-4"
@@ -549,7 +549,7 @@
                  name="cogsAccount"
                  [label]="l('COGSAccount')"
                  [(ngModel)]="cogsAccount"
-                 (ngModelChange)="model.cogsAccountId=$event.id">
+                 (ngModelChange)="model.cogsAccountId=$event?.id">
             </div>
 
             <div class="field col-12 md:col-6 xl:col-4"
@@ -557,7 +557,7 @@
                  name="revenueAccount"
                  [label]="l('RevenueAccount')"
                  [(ngModel)]="revenueAccount"
-                 (ngModelChange)="model.revenueAccountId=$event.id">
+                 (ngModelChange)="model.revenueAccountId=$event?.id">
             </div>
         </div>
     </ng-container>

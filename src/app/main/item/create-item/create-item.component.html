@@ -402,7 +402,7 @@
                              [label]="l('PurchaseAccount')"
                              [accountTypeFilter]="purchaseAccountTypeFilter"
                              [(ngModel)]="purchaseAccount"
-                             (ngModelChagne)="model.purchaseAccountId = $event.id"
+                             (ngModelChagne)="model.purchaseAccountId = $event?.id"
                              [required]="true">
                         </div>
 
@@ -412,7 +412,7 @@
                              [label]="l('SaleAccount')"
                              [accountTypeFilter]="saleAccountTypeFilter"
                              [(ngModel)]="saleAccount"
-                             (ngModelChagne)="model.saleAccountId = $event.id"
+                             (ngModelChagne)="model.saleAccountId = $event?.id"
                              [required]="true">
                         </div>
 
@@ -423,7 +423,7 @@
                              [placeholder]="model.itemType==4 ? l('Select_', l('InventoryAccount')) : l('Select_', l('AssetAccount'))"
                              [accountTypeFilter]="inventoryAccountTypeFilter"
                              [(ngModel)]="inventoryAccount"
-                             (ngModelChagne)="model.inventoryAccountId = $event.id"
+                             (ngModelChagne)="model.inventoryAccountId = $event?.id"
                              [required]="true"
                              *ngIf="model.itemType==4 || model.itemType==5">
                         </div>

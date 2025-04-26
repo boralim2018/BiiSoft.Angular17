@@ -13057,6 +13057,109 @@ export class ItemServiceProxy {
     }
 
     /**
+     * @return OK
+     */
+    exportExcelUpdateZonesTemplate(): Observable<ExportFileOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Item/ExportExcelUpdateZonesTemplate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportExcelUpdateZonesTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportExcelUpdateZonesTemplate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ExportFileOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ExportFileOutput>;
+        }));
+    }
+
+    protected processExportExcelUpdateZonesTemplate(response: HttpResponseBase): Observable<ExportFileOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExportFileOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    importExcelUpdateZones(body: FileTokenInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Item/ImportExcelUpdateZones";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processImportExcelUpdateZones(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processImportExcelUpdateZones(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processImportExcelUpdateZones(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @param body (optional) 
      * @return OK
      */
@@ -31980,69 +32083,6 @@ export enum AddressLevel {
     _4 = 4,
 }
 
-export class AdvanceSettingDto implements IAdvanceSettingDto {
-    multiBranchesEnable: boolean;
-    multiCurrencyEnable: boolean;
-    lineDiscountEnable: boolean;
-    totalDiscountEnable: boolean;
-    customAccountCodeEnable: boolean;
-    classEnable: boolean;
-
-    constructor(data?: IAdvanceSettingDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.multiBranchesEnable = _data["multiBranchesEnable"];
-            this.multiCurrencyEnable = _data["multiCurrencyEnable"];
-            this.lineDiscountEnable = _data["lineDiscountEnable"];
-            this.totalDiscountEnable = _data["totalDiscountEnable"];
-            this.customAccountCodeEnable = _data["customAccountCodeEnable"];
-            this.classEnable = _data["classEnable"];
-        }
-    }
-
-    static fromJS(data: any): AdvanceSettingDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new AdvanceSettingDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["multiBranchesEnable"] = this.multiBranchesEnable;
-        data["multiCurrencyEnable"] = this.multiCurrencyEnable;
-        data["lineDiscountEnable"] = this.lineDiscountEnable;
-        data["totalDiscountEnable"] = this.totalDiscountEnable;
-        data["customAccountCodeEnable"] = this.customAccountCodeEnable;
-        data["classEnable"] = this.classEnable;
-        return data;
-    }
-
-    clone(): AdvanceSettingDto {
-        const json = this.toJSON();
-        let result = new AdvanceSettingDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IAdvanceSettingDto {
-    multiBranchesEnable: boolean;
-    multiCurrencyEnable: boolean;
-    lineDiscountEnable: boolean;
-    totalDiscountEnable: boolean;
-    customAccountCodeEnable: boolean;
-    classEnable: boolean;
-}
-
 export class ApplicationInfoDto implements IApplicationInfoDto {
     version: string | undefined;
     releaseDate: moment.Moment;
@@ -35136,7 +35176,6 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
     customAccountCodeEnable: boolean;
     classEnable: boolean;
     taxEnable: boolean;
-    taxType: TaxType;
 
     constructor(data?: ICompanyAdvanceSettingDto) {
         if (data) {
@@ -35157,7 +35196,6 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
             this.customAccountCodeEnable = _data["customAccountCodeEnable"];
             this.classEnable = _data["classEnable"];
             this.taxEnable = _data["taxEnable"];
-            this.taxType = _data["taxType"];
         }
     }
 
@@ -35178,7 +35216,6 @@ export class CompanyAdvanceSettingDto implements ICompanyAdvanceSettingDto {
         data["customAccountCodeEnable"] = this.customAccountCodeEnable;
         data["classEnable"] = this.classEnable;
         data["taxEnable"] = this.taxEnable;
-        data["taxType"] = this.taxType;
         return data;
     }
 
@@ -35199,7 +35236,6 @@ export interface ICompanyAdvanceSettingDto {
     customAccountCodeEnable: boolean;
     classEnable: boolean;
     taxEnable: boolean;
-    taxType: TaxType;
 }
 
 export class CompanyGeneralSettingDto implements ICompanyGeneralSettingDto {
@@ -36603,7 +36639,6 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
     customAccountCodeEnable: boolean;
     classEnable: boolean;
     taxEnable: boolean;
-    taxType: TaxType;
 
     constructor(data?: ICreateUpdateCompanyAdvanceSettingInputDto) {
         if (data) {
@@ -36624,7 +36659,6 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
             this.customAccountCodeEnable = _data["customAccountCodeEnable"];
             this.classEnable = _data["classEnable"];
             this.taxEnable = _data["taxEnable"];
-            this.taxType = _data["taxType"];
         }
     }
 
@@ -36645,7 +36679,6 @@ export class CreateUpdateCompanyAdvanceSettingInputDto implements ICreateUpdateC
         data["customAccountCodeEnable"] = this.customAccountCodeEnable;
         data["classEnable"] = this.classEnable;
         data["taxEnable"] = this.taxEnable;
-        data["taxType"] = this.taxType;
         return data;
     }
 
@@ -36666,7 +36699,6 @@ export interface ICreateUpdateCompanyAdvanceSettingInputDto {
     customAccountCodeEnable: boolean;
     classEnable: boolean;
     taxEnable: boolean;
-    taxType: TaxType;
 }
 
 export class CreateUpdateCompanyGeneralSettingInputDto implements ICreateUpdateCompanyGeneralSettingInputDto {
@@ -47499,81 +47531,6 @@ export interface IFlatFeatureDtoListResultDto {
     items: FlatFeatureDto[] | undefined;
 }
 
-export class GeneralSettingDto implements IGeneralSettingDto {
-    countryId: string | undefined;
-    countryName: string | undefined;
-    defaultTimeZone: string | undefined;
-    currencyId: number | undefined;
-    currencyCode: string | undefined;
-    businessStartDate: moment.Moment | undefined;
-    roundTotalDigits: number;
-    roundCostDigits: number;
-    contactAddressLevel: AddressLevel;
-
-    constructor(data?: IGeneralSettingDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.countryId = _data["countryId"];
-            this.countryName = _data["countryName"];
-            this.defaultTimeZone = _data["defaultTimeZone"];
-            this.currencyId = _data["currencyId"];
-            this.currencyCode = _data["currencyCode"];
-            this.businessStartDate = _data["businessStartDate"] ? moment(_data["businessStartDate"].toString()) : <any>undefined;
-            this.roundTotalDigits = _data["roundTotalDigits"];
-            this.roundCostDigits = _data["roundCostDigits"];
-            this.contactAddressLevel = _data["contactAddressLevel"];
-        }
-    }
-
-    static fromJS(data: any): GeneralSettingDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new GeneralSettingDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["countryId"] = this.countryId;
-        data["countryName"] = this.countryName;
-        data["defaultTimeZone"] = this.defaultTimeZone;
-        data["currencyId"] = this.currencyId;
-        data["currencyCode"] = this.currencyCode;
-        data["businessStartDate"] = this.businessStartDate ? this.businessStartDate.toISOString() : <any>undefined;
-        data["roundTotalDigits"] = this.roundTotalDigits;
-        data["roundCostDigits"] = this.roundCostDigits;
-        data["contactAddressLevel"] = this.contactAddressLevel;
-        return data;
-    }
-
-    clone(): GeneralSettingDto {
-        const json = this.toJSON();
-        let result = new GeneralSettingDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IGeneralSettingDto {
-    countryId: string | undefined;
-    countryName: string | undefined;
-    defaultTimeZone: string | undefined;
-    currencyId: number | undefined;
-    currencyCode: string | undefined;
-    businessStartDate: moment.Moment | undefined;
-    roundTotalDigits: number;
-    roundCostDigits: number;
-    contactAddressLevel: AddressLevel;
-}
-
 export class GeneralSettingsEditDto implements IGeneralSettingsEditDto {
     timezone: string | undefined;
     timezoneForComparison: string | undefined;
@@ -47625,8 +47582,8 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
     tenant: TenantLoginInfoDto;
-    generalSetting: GeneralSettingDto;
-    advanceSetting: AdvanceSettingDto;
+    generalSetting: CompanyGeneralSettingDto;
+    advanceSetting: CompanyAdvanceSettingDto;
     itemSetting: ItemSettingDto;
     itemFieldSetting: ItemFieldSettingDto;
 
@@ -47644,8 +47601,8 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
             this.application = _data["application"] ? ApplicationInfoDto.fromJS(_data["application"]) : <any>undefined;
             this.user = _data["user"] ? UserLoginInfoDto.fromJS(_data["user"]) : <any>undefined;
             this.tenant = _data["tenant"] ? TenantLoginInfoDto.fromJS(_data["tenant"]) : <any>undefined;
-            this.generalSetting = _data["generalSetting"] ? GeneralSettingDto.fromJS(_data["generalSetting"]) : <any>undefined;
-            this.advanceSetting = _data["advanceSetting"] ? AdvanceSettingDto.fromJS(_data["advanceSetting"]) : <any>undefined;
+            this.generalSetting = _data["generalSetting"] ? CompanyGeneralSettingDto.fromJS(_data["generalSetting"]) : <any>undefined;
+            this.advanceSetting = _data["advanceSetting"] ? CompanyAdvanceSettingDto.fromJS(_data["advanceSetting"]) : <any>undefined;
             this.itemSetting = _data["itemSetting"] ? ItemSettingDto.fromJS(_data["itemSetting"]) : <any>undefined;
             this.itemFieldSetting = _data["itemFieldSetting"] ? ItemFieldSettingDto.fromJS(_data["itemFieldSetting"]) : <any>undefined;
         }
@@ -47682,8 +47639,8 @@ export interface IGetCurrentLoginInformationsOutput {
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
     tenant: TenantLoginInfoDto;
-    generalSetting: GeneralSettingDto;
-    advanceSetting: AdvanceSettingDto;
+    generalSetting: CompanyGeneralSettingDto;
+    advanceSetting: CompanyAdvanceSettingDto;
     itemSetting: ItemSettingDto;
     itemFieldSetting: ItemFieldSettingDto;
 }
@@ -58902,11 +58859,6 @@ export class TaxListDtoPagedResultDto implements ITaxListDtoPagedResultDto {
 export interface ITaxListDtoPagedResultDto {
     items: TaxListDto[] | undefined;
     totalCount: number;
-}
-
-export enum TaxType {
-    _0 = 0,
-    _1 = 1,
 }
 
 export enum TenantAvailabilityState {

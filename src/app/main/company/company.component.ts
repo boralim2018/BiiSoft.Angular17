@@ -17,7 +17,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { finalize } from 'rxjs/operators';
 import { Mixin } from 'ts-mixer';
 import { appModuleAnimation } from '../../../shared/animations/routerTransition';
-import { AppComponentBase, NavBarComponentBase } from '../../../shared/app-component-base';
+import { IndexCacheComponentBase, NavBarComponentBase } from '../../../shared/app-component-base';
 import { AppPermissions } from '../../../shared/AppPermissions';
 import { ContactAddressComponent } from '../../../shared/components/contact-address/contact-address.component';
 import { FindCountryComponent } from '../../../shared/components/find-country/find-country.component';
@@ -31,12 +31,13 @@ import { AttachFileComponent } from '../../../shared/components/attach-file/atta
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
-import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAccountSettingInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
-import { UploadSource } from '../../../shared/AppEnums';
+import { AccountType, AccountTypeFilterInputDto, CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAccountSettingInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, SubAccountTypeFilterInputDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
+import { AccountTypes, UploadSource } from '../../../shared/AppEnums';
 import { AppConsts } from '../../../shared/AppConsts';
 import { SelectDigitComponent } from '../../../shared/components/select-digit/select-digit.component';
 import { SelectAddressLevelComponent } from '../../../shared/components/select-address-level/select-address-level.component';
 import { InputTextComponent } from '../../../shared/components/input-text/input-text.component';
+import { FindChartOfAccountComponent } from '../../../shared/components/find-chart-of-account/find-chart-of-account.component';
 
 @Component({
     selector: 'app-company',
@@ -51,22 +52,49 @@ import { InputTextComponent } from '../../../shared/components/input-text/input-
         InputTextModule, AbpValidationSummaryComponent, ContactAddressComponent, FloatLabelModule,
         LocalizePipe, FindCountryComponent, InputSwitchModule, FindCurrencyComponent, SelectDateComponent,
         SelectTimezoneComponent, CalendarModule, DropdownModule, SafeUrlPipe, ButtonDirective, Ripple,
-        MessageModule, AttachFileComponent, SelectDigitComponent, SelectAddressLevelComponent, InputTextComponent
+        MessageModule, AttachFileComponent, SelectDigitComponent, SelectAddressLevelComponent,
+        InputTextComponent, FindChartOfAccountComponent
     ],
 })
-export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBase) implements OnInit {
+export class CompanyComponent extends Mixin(NavBarComponentBase, IndexCacheComponentBase) implements OnInit {
 
-    title: string = this.l('CompanySetup');
-    activeStep: number = 0;    
+    indexCacheKey: string = "ComapanyStepCacheKey";
+    title: string = this.l('CompanySetup');    
     saving: boolean;
 
     model: CompanySettingDto;
     logo: UpdateLogoInput;
     branch: CreateUpdateBranchInputDto;
     generalSetting: CreateUpdateCompanyGeneralSettingInputDto;
-    advanceSetting: CreateUpdateCompanyAdvanceSettingInputDto;
-    accountSetting: CreateUpdateCompanyAccountSettingInputDto;
+    advanceSetting: CreateUpdateCompanyAdvanceSettingInputDto;    
     transactionNos: CreateUpdateTransactionNoSettingInputDto[];
+
+    accountSetting: CreateUpdateCompanyAccountSettingInputDto;
+    apAccount: any;
+    arAccount: any;
+    purchaseDiscountAccount: any;
+    saleDiscountAccount: any;
+    inventoryPurchaseAccount: any;
+    billPaymentAccount: any;
+    receivePaymentAccount: any;
+    retainEarningAccount: any;
+    exchangeLossGainAccount: any;
+    itemReceiptAccount: any;
+    itemIssueAccount: any;
+    itemAdjustmentAccount: any;
+    itemTransferAccount: any;
+    itemProductionAccount: any;
+    itemExchangeAccount: any;
+    cashTransferAccount: any;
+    cashExchangeAccount: any;
+
+    apAccountTypeFilter: AccountTypeFilterInputDto;
+    arAccountTypeFilter: AccountTypeFilterInputDto;
+    cashBankAccountTypeFilter: AccountTypeFilterInputDto;
+    revenueExpenseAccountTypeFilter: AccountTypeFilterInputDto;
+    currentAssetAccountTypeFilter: AccountTypeFilterInputDto;
+    equityAccountTypeFilter: AccountTypeFilterInputDto;
+    retainEarningSubAccountTypeFilter: SubAccountTypeFilterInputDto;
 
     blankImageUrl: string = AppConsts.blankLogoUrl;
     uploadUrl: string = '/CompanyProfile/Upload';
@@ -91,12 +119,13 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBas
 
     ngOnInit() {
         this.setTitle();
-
         this.initModel();
         this.getDetail();
+        this.initIndexFromCache();
     }
 
     initModel() {
+        this.logo = new UpdateLogoInput();
         this.branch = new CreateUpdateBranchInputDto();
         this.branch.billingAddress = new ContactAddressDto();
         this.branch.shippingAddress = new ContactAddressDto();
@@ -104,7 +133,14 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBas
         this.advanceSetting = new CreateUpdateCompanyAdvanceSettingInputDto();
         this.accountSetting = new CreateUpdateCompanyAccountSettingInputDto();
         this.transactionNos = [];
-        this.logo = new UpdateLogoInput();
+
+        this.apAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.AccountPayable], exclude: false });
+        this.arAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.AccountReceivable], exclude: false });
+        this.cashBankAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Cash, AccountTypes.Bank], exclude: false });
+        this.revenueExpenseAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Revenue, AccountTypes.OtherRevenue, AccountTypes.CostOfSale, AccountTypes.Expense, AccountTypes.OtherExpense], exclude: false });
+        this.currentAssetAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.CurrentAsset], exclude: false });
+        this.equityAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Equity], exclude: false });
+        this.retainEarningSubAccountTypeFilter = new SubAccountTypeFilterInputDto({ ids: [3013], exclude: false });
     }
 
     getDetail() {        
@@ -139,6 +175,27 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBas
                     }
                   
                     if (result.advanceSetting) this.advanceSetting.init(result.advanceSetting);
+
+                    if (result.accountSetting) {
+                        this.accountSetting.init(result.accountSetting);
+                        if (result.accountSetting.defaultAPAccountId) this.apAccount = { id: result.accountSetting.defaultAPAccountId, name: result.accountSetting.defaultAPAccountName };
+                        if (result.accountSetting.defaultARAccountId) this.arAccount = { id: result.accountSetting.defaultARAccountId, name: result.accountSetting.defaultARAccountName };
+                        if (result.accountSetting.defaultSaleDiscountAccountId) this.saleDiscountAccount = { id: result.accountSetting.defaultSaleDiscountAccountId, name: result.accountSetting.defaultSaleDiscountAccountName };
+                        if (result.accountSetting.defaultPurchaseDiscountAccountId) this.purchaseDiscountAccount = { id: result.accountSetting.defaultPurchaseDiscountAccountId, name: result.accountSetting.defaultPurchaseDiscountAccountName };
+                        if (result.accountSetting.defaultInventoryPurchaseAccountId) this.inventoryPurchaseAccount = { id: result.accountSetting.defaultInventoryPurchaseAccountId, name: result.accountSetting.defaultInventoryPurchaseAccountName };
+                        if (result.accountSetting.defaultBillPaymentAccountId) this.billPaymentAccount = { id: result.accountSetting.defaultBillPaymentAccountId, name: result.accountSetting.defaultBillPaymentAccountName };
+                        if (result.accountSetting.defaultReceivePaymentAccountId) this.receivePaymentAccount = { id: result.accountSetting.defaultReceivePaymentAccountId, name: result.accountSetting.defaultReceivePaymentAccountName };
+                        if (result.accountSetting.defaultRetainEarningAccountId) this.retainEarningAccount = { id: result.accountSetting.defaultRetainEarningAccountId, name: result.accountSetting.defaultRetainEarningAccountName };
+                        if (result.accountSetting.defaultExchangeLossGainAccountId) this.exchangeLossGainAccount = { id: result.accountSetting.defaultExchangeLossGainAccountId, name: result.accountSetting.defaultExchangeLossGainAccountName };
+                        if (result.accountSetting.defaultItemReceiptAccountId) this.itemReceiptAccount = { id: result.accountSetting.defaultItemReceiptAccountId, name: result.accountSetting.defaultItemReceiptAccountName };
+                        if (result.accountSetting.defaultItemIssueAccountId) this.itemIssueAccount = { id: result.accountSetting.defaultItemIssueAccountId, name: result.accountSetting.defaultItemIssueAccountName };
+                        if (result.accountSetting.defaultItemAdjustmentAccountId) this.itemAdjustmentAccount = { id: result.accountSetting.defaultItemAdjustmentAccountId, name: result.accountSetting.defaultItemAdjustmentAccountName };
+                        if (result.accountSetting.defaultItemTransferAccountId) this.itemTransferAccount = { id: result.accountSetting.defaultItemTransferAccountId, name: result.accountSetting.defaultItemTransferAccountName };
+                        if (result.accountSetting.defaultItemProductionAccountId) this.itemProductionAccount = { id: result.accountSetting.defaultItemProductionAccountId, name: result.accountSetting.defaultItemProductionAccountName };
+                        if (result.accountSetting.defaultItemExchangeAccountId) this.itemExchangeAccount = { id: result.accountSetting.defaultItemExchangeAccountId, name: result.accountSetting.defaultItemExchangeAccountName };
+                        if (result.accountSetting.defaultCashTransferAccountId) this.cashTransferAccount = { id: result.accountSetting.defaultCashTransferAccountId, name: result.accountSetting.defaultCashTransferAccountName };
+                        if (result.accountSetting.defaultCashExchangeAccountId) this.cashExchangeAccount = { id: result.accountSetting.defaultCashExchangeAccountId, name: result.accountSetting.defaultCashExchangeAccountName };
+                    }
 
                     if (result.transactionNoSettings) {
                         let customAll = true;
@@ -296,5 +353,5 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, AppComponentBas
 
         this.transactionNos.map(m => m.requiredReference = event.checked);
     }
-    
+
 }

@@ -8,13 +8,13 @@ import { ButtonDirective } from 'primeng/button';
 import { ContactAddressComponent } from '../../../../shared/components/contact-address/contact-address.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
-import { TabViewCacheComponentBase } from '../../../../shared/app-component-base';
+import { IndexCacheComponentBase } from '../../../../shared/app-component-base';
 import { DividerModule } from 'primeng/divider';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
 import { SelectItemCategoryComponent } from '../../../../shared/components/select-item-type/select-item-category.component';
 import { AttachFileComponent } from '../../../../shared/components/attach-file/attach-file.component';
-import { UploadSource } from '../../../../shared/AppEnums';
+import { AccountTypes, ItemTypes, UploadSource } from '../../../../shared/AppEnums';
 import { AppConsts } from '../../../../shared/AppConsts';
 import { SelectItemTypeComponent } from '../../../../shared/components/select-item-type/select-item-type.component';
 import { FindUnitComponent } from '../../../../shared/components/find-unit/find-unit.component';
@@ -63,7 +63,7 @@ import { TableModule } from 'primeng/table';
         FindChartOfAccountComponent, FindZoneComponent, TableModule
     ]
 })
-export class CreateItemComponent extends TabViewCacheComponentBase implements OnInit {
+export class CreateItemComponent extends IndexCacheComponentBase implements OnInit {
     saving = false;
     model: CreateUpdateItemInputDto = new CreateUpdateItemInputDto();
     users: any[] = [];
@@ -72,7 +72,7 @@ export class CreateItemComponent extends TabViewCacheComponentBase implements On
     uploadUrl: string = '/CompanyProfile/Upload';
     uploadSource: number = UploadSource.CompanyLogo;
 
-    tabCacheKey: string = 'createItemTabCache';
+    indexCacheKey: string = 'createItemTabCache';
 
     inventoryAccount: any;
     purchaseAccount: any;
@@ -99,30 +99,14 @@ export class CreateItemComponent extends TabViewCacheComponentBase implements On
 
     ngOnInit(): void {
         this.initModel();
-        this.initTabViewFromCache();this.appSession.itemSetting.useAssetStatus
+        this.initIndexFromCache();this.appSession.itemSetting.useAssetStatus
     }
 
     initModel() {
-        //Cash = 10,
-        //Bank = 11,
-        //AccountReceivable = 12,
-        //Inventory = 13,
-        //CurrentAsset = 14,
-        //FixedAsset = 15,
-        //NoneCurrentAsset = 16,
-        //AccountPayable = 20,
-        //CreditCard = 21,
-        //CurrentLiability = 22,
-        //NoneCurrentLiability = 23,
-        //Equity = 30,
-        //Revenue = 40,
-        //OtherRevenue = 41,
-        //CostOfSale = 50,
-        //Expense = 51,
-        //OtherExpense = 52
-        this.inventoryAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [13], exclude: false });
-        this.purchaseAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [50, 51, 52], exclude: false });
-        this.saleAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [40, 41], exclude: false });
+        
+        this.inventoryAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Inventory], exclude: false });
+        this.purchaseAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.CostOfSale, AccountTypes.Expense, AccountTypes.OtherExpense], exclude: false });
+        this.saleAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Revenue, AccountTypes.OtherRevenue], exclude: false });
 
         this.model = CreateUpdateItemInputDto.fromJS({
             itemType: 4,
@@ -173,23 +157,17 @@ export class CreateItemComponent extends TabViewCacheComponentBase implements On
     }
 
     onItemTypeChange(type) {
-        //Service = 1,
-        //Menu = 2,
-        //NonInvnetory = 3,
-        //Inventory = 4,
-        //Asset = 5,
-        //Bundle = 6,
-
-        if (type == 4) {
-            this.inventoryAccountTypeFilter.ids = [13];
-            this.purchaseAccountTypeFilter.ids = [50];
+        
+        if (type == ItemTypes.Inventory) {
+            this.inventoryAccountTypeFilter.ids = [AccountTypes.Inventory];
+            this.purchaseAccountTypeFilter.ids = [AccountTypes.CostOfSale];
         }
-        else if (type == 5) {
-            this.inventoryAccountTypeFilter.ids = [15];
-            this.purchaseAccountTypeFilter.ids = [50, 51, 52];
+        else if (type == ItemTypes.Asset) {
+            this.inventoryAccountTypeFilter.ids = [AccountTypes.FixedAsset];
+            this.purchaseAccountTypeFilter.ids = [AccountTypes.CostOfSale, AccountTypes.Expense , AccountTypes.OtherExpense];
         }
         else {
-            this.purchaseAccountTypeFilter.ids = [50, 51, 52];
+            this.purchaseAccountTypeFilter.ids = [AccountTypes.CostOfSale, AccountTypes.Expense, AccountTypes.OtherExpense];
         }
     }
 

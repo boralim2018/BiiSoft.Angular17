@@ -1,9 +1,9 @@
 import { AbpMultiTenancyService } from 'abp-ng2-module';
 import { Injectable } from '@angular/core';
 import {
-    AdvanceSettingDto,
+    CompanyAdvanceSettingDto,
     ApplicationInfoDto,
-    GeneralSettingDto,
+    CompanyGeneralSettingDto,
     GetCurrentLoginInformationsOutput,
     ItemFieldSettingDto,
     ItemSettingDto,
@@ -18,8 +18,8 @@ export class AppSessionService {
     private _user: UserLoginInfoDto;
     private _tenant: TenantLoginInfoDto;
     private _application: ApplicationInfoDto;
-    private _generalSetting: GeneralSettingDto;
-    private _advanceSetting: AdvanceSettingDto;
+    private _generalSetting: CompanyGeneralSettingDto;
+    private _advanceSetting: CompanyAdvanceSettingDto;
     private _itemSetting: ItemSettingDto;
     private _itemFieldSetting: ItemFieldSettingDto;
 
@@ -48,11 +48,11 @@ export class AppSessionService {
         return this.tenant ? this.tenant.id : null;
     }
 
-    get generalSetting(): GeneralSettingDto {
+    get generalSetting(): CompanyGeneralSettingDto {
         return this._generalSetting;
     }
 
-    get advanceSetting(): AdvanceSettingDto {
+    get advanceSetting(): CompanyAdvanceSettingDto {
         return this._advanceSetting;
     }
 

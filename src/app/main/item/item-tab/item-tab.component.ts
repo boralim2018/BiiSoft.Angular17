@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { TabViewModule } from 'primeng/tabview';
-import { TabViewCacheComponentBase } from '@shared/app-component-base';
+import { IndexCacheComponentBase } from '@shared/app-component-base';
 import { ItemComponent } from '../item.component';
 import { ItemSettingComponent } from '../item-setting/item-setting.component';
 import { ItemFieldSettingComponent } from '../item-field-setting/item-field-setting.component';
@@ -15,9 +15,9 @@ import { NgIf } from '@angular/common';
     standalone: true,
     imports: [TabViewModule, ItemComponent, ItemSettingComponent, ItemFieldSettingComponent, ItemCodeFormulaComponent, NgIf],
 })
-export class ItemTabComponent extends TabViewCacheComponentBase implements OnInit  {
+export class ItemTabComponent extends IndexCacheComponentBase implements OnInit  {
 
-    tabCacheKey: string = 'itemTabCache';
+    indexCacheKey: string = 'itemTabCache';
 
     canViewItem: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.page);
     canViewItemSetting: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.canSetting);
@@ -30,6 +30,6 @@ export class ItemTabComponent extends TabViewCacheComponentBase implements OnIni
     }
 
     ngOnInit() {
-        this.initTabViewFromCache();
+        this.initIndexFromCache();
     }
 }

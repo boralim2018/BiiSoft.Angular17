@@ -5,7 +5,7 @@
             <h4>{{l('Create_', l('Branch'))}}</h4>
             <p-divider></p-divider>
 
-            <div class="formgrid grid m-0">
+            <div class="formgrid grid">
                 <div class="field col-12 md:col-6 xl:col-4"
                      inputText
                      name="name"
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="formgrid grid m-0"
+            <div class="formgrid grid"
                  contactAddress
                  name="billingAddress"
                  [title]="l('BillingAddress')"
@@ -69,7 +69,7 @@
                  [required]="true">
             </div>
 
-            <div class="formgrid grid m-0"
+            <div class="formgrid grid"
                  contactAddress
                  name="shippingAddress"
                  [isShippingAddress]="true"
@@ -78,26 +78,28 @@
                  [required]="true">
             </div>
 
-            <div class="field col-12">
-                <div class="flex flex-wrap gap-4">
-                    <div class="text-900 font-medium">{{l('Sharing')}}<span class="text-red-600">*</span></div>
-                    <div class="flex items-center">
-                        <p-radioButton name="sharing" value="0" [(ngModel)]="model.sharing" inputId="sharingAll" />
-                        <label for="sharingAll" class="ml-2">{{l("All")}}</label>
+            <div class="formgrid grid">
+                <div class="field col-12">
+                    <div class="flex flex-wrap gap-4">
+                        <div class="text-900 font-medium">{{l('Sharing')}}<span class="text-red-600">*</span></div>
+                        <div class="flex items-center">
+                            <p-radioButton name="sharing" value="0" [(ngModel)]="model.sharing" inputId="sharingAll" />
+                            <label for="sharingAll" class="ml-2">{{l("All")}}</label>
+                        </div>
+                        <div class="flex items-center">
+                            <p-radioButton name="sharing" value="1" [(ngModel)]="model.sharing" inputId="sharingSpecificUser" />
+                            <label for="sharingSpecificUser" class="ml-2">{{l("SpecificUser")}}</label>
+                        </div>
                     </div>
-                    <div class="flex items-center">
-                        <p-radioButton name="sharing" value="1" [(ngModel)]="model.sharing" inputId="sharingSpecificUser" />
-                        <label for="sharingSpecificUser" class="ml-2">{{l("SpecificUser")}}</label>
+                    <div class="field mt-2"
+                         findUser
+                         name="user"
+                         [placeholder]="l('Select_', l('Users'))"
+                         [required]="true"
+                         [multiple]="true"
+                         [(ngModel)]="users"
+                         *ngIf="model.sharing==1">
                     </div>
-                </div>
-                <div class="field mt-2"
-                     findUser
-                     name="user"
-                     [placeholder]="l('Select_', l('Users'))"
-                     [required]="true"
-                     [multiple]="true"
-                     [(ngModel)]="users"
-                     *ngIf="model.sharing==1">
                 </div>
             </div>
 
