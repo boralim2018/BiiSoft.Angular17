@@ -10,17 +10,7 @@
         <p-stepper orientation="vertical" [(activeStep)]="activeIndex" (activeStepChange)="saveCache()">
             <p-stepperPanel header="{{l('GeneralSetting')}}">
                 <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
-                    <div class="pt-3"
-                         attachFile
-                         [(fileId)]="logo.logoId"
-                         [label]="l('Logo')"
-                         [blankImageUrl]="blankImageUrl"
-                         [uploadUrl]="uploadUrl"
-                         [uploadSource]="uploadSource">
-                    </div>
-
-                    <p-divider></p-divider>
-
+                    
                     <form novalidate autocomplete="off" #genaralSettingForm="ngForm" (ngSubmit)="saveGeneralSetting()" [busy]="saving">
 
                         <div class="formgrid grid">
@@ -100,36 +90,53 @@
                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
                     <form novalidate autocomplete="off" #companyProfileForm="ngForm" (ngSubmit)="saveProfile()" [busy]="saving">
                         <div class="pt-3">
-                            <div class="formgrid grid">
-                                <div class="field col-12 md:col-6 xl:col-4"
-                                     inputText
-                                     name="name"
-                                     [label]="l('Name')"
-                                     [maxlength]="128"
-                                     [(ngModel)]="branch.name"
-                                     [required]="true">
+
+                            <div class="formgrid grid nested-grid">
+                                <div class="col-12 md:col-6 xl:col-4 mb-3"
+                                     attachFile
+                                     [(fileId)]="logo.logoId"
+                                     [label]="l('Logo')"
+                                     [blankImageUrl]="blankImageUrl"
+                                     [uploadUrl]="uploadUrl"
+                                     [uploadSource]="uploadSource">
                                 </div>
-                                <div class="field col-12 md:col-6 xl:col-4"
-                                     inputText
-                                     name="displayName"
-                                     [label]="l('DisplayName')"
-                                     [maxlength]="128"
-                                     [(ngModel)]="branch.displayName"
-                                     [required]="true">
+                                <div class="col-12 md:col-6 xl:col-8 pt-3">
+                                    <div class="grid">
+
+                                        <div class="field col-12 xl:col-6"
+                                             inputText
+                                             name="name"
+                                             [label]="l('Name')"
+                                             [maxlength]="128"
+                                             [(ngModel)]="branch.name"
+                                             [required]="true">
+                                        </div>
+                                        <div class="field col-12 xl:col-6"
+                                             inputText
+                                             name="displayName"
+                                             [label]="l('DisplayName')"
+                                             [maxlength]="128"
+                                             [(ngModel)]="branch.displayName"
+                                             [required]="true">
+                                        </div>
+                                        <div class="field col-12 xl:col-6"
+                                             inputText
+                                             name="businessId"
+                                             [label]="l('BusinessId')"
+                                             [maxlength]="32"
+                                             [(ngModel)]="branch.businessId">
+                                        </div>
+                                        <div class="field col-12 xl:col-6"
+                                             inputText
+                                             name="phoneNumber"
+                                             [label]="l('PhoneNumber')"
+                                             [(ngModel)]="branch.phoneNumber">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="field col-12 md:col-6 xl:col-4"
-                                     inputText
-                                     name="businessId"
-                                     [label]="l('BusinessId')"
-                                     [maxlength]="32"
-                                     [(ngModel)]="branch.businessId">
-                                </div>
-                                <div class="field col-12 md:col-6 xl:col-4"
-                                     inputText
-                                     name="phoneNumber"
-                                     [label]="l('PhoneNumber')"
-                                     [(ngModel)]="branch.phoneNumber">
-                                </div>
+                            </div>
+
+                            <div class="formgrid grid">                                
                                 <div class="field col-12 md:col-6 xl:col-4"
                                      inputText
                                      type="email"
