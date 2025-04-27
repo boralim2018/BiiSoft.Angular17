@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="field col-12">
-                    <label class="text-900 font-medium">{{l('Description')}}</label>
+                    <label for="description" class="text-900 font-medium">{{l('Description')}}</label>
                     <textarea pInputTextarea
                               class="w-full"
                               name="description"
@@ -399,8 +399,9 @@
                         <div class="field col-12 md:col-6 xl:col-4"
                              findChartOfAccount
                              name="purchaseAccount"
-                             [label]="l('PurchaseAccount')"
-                             [accountTypeFilter]="purchaseAccountTypeFilter"
+                             [label]="model.itemType==4 || model.itemType==5 ? l('COGSAccount') : l('PurchaseAccount')"
+                             [placeholder]="model.itemType==4 || model.itemType==5 ? l('Select_', l('COGSAccount')) : l('Select_', l('PurchaseAccount'))"
+                             [accountType]="purchaseAccountType"
                              [(ngModel)]="purchaseAccount"
                              (ngModelChagne)="model.purchaseAccountId = $event?.id"
                              [required]="true">
@@ -410,7 +411,7 @@
                              findChartOfAccount
                              name="saleAccount"
                              [label]="l('SaleAccount')"
-                             [accountTypeFilter]="saleAccountTypeFilter"
+                             [accountType]="saleAccountType"
                              [(ngModel)]="saleAccount"
                              (ngModelChagne)="model.saleAccountId = $event?.id"
                              [required]="true">
@@ -421,7 +422,7 @@
                              name="inventoryAccount"
                              [label]="model.itemType==4 ? l('InventoryAccount') : l('AssetAccount')"
                              [placeholder]="model.itemType==4 ? l('Select_', l('InventoryAccount')) : l('Select_', l('AssetAccount'))"
-                             [accountTypeFilter]="inventoryAccountTypeFilter"
+                             [accountType]="inventoryAccountType"
                              [(ngModel)]="inventoryAccount"
                              (ngModelChagne)="model.inventoryAccountId = $event?.id"
                              [required]="true"
@@ -506,6 +507,7 @@
                     </div>
 
                     <p-table [value]="model.itemZones"
+                             [rowHover]="true"
                              responsiveLayout="stack"
                              [breakpoint]="'960px'">
                         <ng-template pTemplate="header" let-columns>
@@ -526,6 +528,13 @@
                                 <td>
                                     <span class="p-column-title">{{l('Delete')}}</span>
                                     <i class="pi pi-trash text-red-600 text-red-600 cursor-pointer" (click)="removeItemZone(z)"></i>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns="columns">
+                            <tr>
+                                <td [attr.colspan]="3" class="empty-message">
+                                    <div recordNotFound [minHeight]="150"></div>
                                 </td>
                             </tr>
                         </ng-template>

@@ -524,6 +524,7 @@
                  findChartOfAccount
                  name="inventoryAccount"
                  [label]="l('InventoryAccount')"
+                 [accountType]="inventoryAccountType"
                  [(ngModel)]="inventoryAccount"
                  (ngModelChange)="model.inventoryAccountId=$event?.id">
             </div>
@@ -532,6 +533,7 @@
                  findChartOfAccount
                  name="assetAccount"
                  [label]="l('AssetAccount')"
+                 [accountType]="assetAccountType"
                  [(ngModel)]="assetAccount"
                  (ngModelChange)="model.assetAccountId=$event?.id">
             </div>
@@ -540,6 +542,7 @@
                  findChartOfAccount
                  name="expenseAccount"
                  [label]="l('ExpenseAccount')"
+                 [accountType]="expenseAccountType"
                  [(ngModel)]="expenseAccount"
                  (ngModelChange)="model.expenseAccountId=$event?.id">
             </div>
@@ -548,6 +551,7 @@
                  findChartOfAccount
                  name="cogsAccount"
                  [label]="l('COGSAccount')"
+                 [accountType]="cogsAccountType"
                  [(ngModel)]="cogsAccount"
                  (ngModelChange)="model.cogsAccountId=$event?.id">
             </div>
@@ -556,6 +560,7 @@
                  findChartOfAccount
                  name="revenueAccount"
                  [label]="l('RevenueAccount')"
+                 [accountType]="revenueAccountType"
                  [(ngModel)]="revenueAccount"
                  (ngModelChange)="model.revenueAccountId=$event?.id">
             </div>

@@ -34,6 +34,7 @@ export class InputTextComponent extends ControlValueAccessorComponentBase implem
     @Input() maxlength: number;
     @Input() pattern: string | RegExp;
     @Input() type: string = 'text';
+    @Input() autocomplete: string = "off";
 
     constructor(injector: Injector) {
         super(injector);

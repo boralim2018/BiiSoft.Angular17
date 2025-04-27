@@ -19,7 +19,8 @@
              inputText
              name="code"
              [label]="l('Code')"
-             [maxlength]="6"
+             [minlength]="4"
+             [maxlength]="16"
              [(ngModel)]="model.code"
              [required]="true"
              *ngIf="customCodeEnble">

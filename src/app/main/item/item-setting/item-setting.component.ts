@@ -10,6 +10,8 @@ import { FindChartOfAccountComponent } from '../../../../shared/components/find-
 import { SelectLengthUnitComponent, SelectVolumeUnitComponent, SelectWeightUnitComponent, SelectAreaUnitComponent } from '../../../../shared/components/select-unit/select-unit.component';
 import { DividerModule } from 'primeng/divider';
 import { NgIf } from '@angular/common';
+import { AppConsts } from '../../../../shared/AppConsts';
+import { AccountTypeFilter } from '../../../../shared/AppEnums';
 
 @Component({
     selector: 'app-item-setting',
@@ -34,6 +36,12 @@ export class ItemSettingComponent extends AppComponentBase implements OnInit {
     cogsAccount: any;
     revenueAccount: any;
 
+    revenueAccountType: AccountTypeFilter = AccountTypeFilter.Revenue;
+    cogsAccountType: AccountTypeFilter = AccountTypeFilter.COGS;
+    assetAccountType: AccountTypeFilter = AccountTypeFilter.FixedAsset;
+    expenseAccountType: AccountTypeFilter = AccountTypeFilter.Expense;
+    inventoryAccountType: AccountTypeFilter = AccountTypeFilter.Inventory;
+
     chartOfAccountEnable: boolean = this.feature.isEnabled("App.Accounting.ChartOfAccounts");
 
     constructor(
@@ -48,7 +56,12 @@ export class ItemSettingComponent extends AppComponentBase implements OnInit {
     }
 
     getModel() {
-        this.model = new ItemSettingDto();
+        this.model = ItemSettingDto.fromJS({
+            weightUnit : AppConsts.WeightUnit.value,
+            lengthUnit : AppConsts.LengthUnit.value,
+            areaUnit : AppConsts.AreaUnit.value,
+            volumeUnit : AppConsts.VolumeUnit.value,
+        });
         this.loading = true;
         this._itemService.getItemSetting()
             .pipe(finalize(() => this.loading = false))

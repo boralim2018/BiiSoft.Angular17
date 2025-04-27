@@ -202,7 +202,7 @@
                                  findChartOfAccount
                                  name="apAccount"
                                  [label]="l('AP')"
-                                 [accountTypeFilter]="apAccountTypeFilter"
+                                 [accountType]="apAccountType"
                                  [(ngModel)]="apAccount"
                                  (ngModelChange)="accountSetting.defaultAPAccountId = $event?.id">
                             </div>
@@ -210,7 +210,7 @@
                                  findChartOfAccount
                                  name="arAccount"
                                  [label]="l('AR')"
-                                 [accountTypeFilter]="arAccountTypeFilter"
+                                 [accountType]="arAccountType"
                                  [(ngModel)]="arAccount"
                                  (ngModelChange)="accountSetting.defaultARAccountId = $event?.id">
                             </div>
@@ -218,7 +218,7 @@
                                  findChartOfAccount
                                  name="purchaseDiscountAccount"
                                  [label]="l('Account_',l('PurchaseDiscount'))"
-                                 [accountTypeFilter]="revenueExpenseAccountTypeFilter"
+                                 [accountType]="cogsAccountType"
                                  [(ngModel)]="purchaseDiscountAccount"
                                  (ngModelChange)="accountSetting.defaultPurchaseDiscountAccountId = $event?.id">
                             </div>
@@ -226,7 +226,7 @@
                                  findChartOfAccount
                                  name="saleDiscountAccount"
                                  [label]="l('Account_',l('SaleDiscount'))"
-                                 [accountTypeFilter]="revenueExpenseAccountTypeFilter"
+                                 [accountType]="revenueAccountType"
                                  [(ngModel)]="saleDiscountAccount"
                                  (ngModelChange)="accountSetting.defaultSaleDiscountAccountId = $event?.id">
                             </div>
@@ -234,7 +234,7 @@
                                  findChartOfAccount
                                  name="inventoryPurchaseAccount"
                                  [label]="l('Account_',l('GoodsInTransit'))"
-                                 [accountTypeFilter]="currentAssetAccountTypeFilter"
+                                 [accountType]="currentAssetAccountType"
                                  [(ngModel)]="inventoryPurchaseAccount"
                                  (ngModelChange)="accountSetting.defaultInventoryPurchaseAccountId = $event?.id">
                             </div>
@@ -242,7 +242,7 @@
                                  findChartOfAccount
                                  name="billPaymentAccount"
                                  [label]="l('Account_',l('BillPayment'))"
-                                 [accountTypeFilter]="cashBankAccountTypeFilter"
+                                 [accountType]="cashBankAccountType"
                                  [(ngModel)]="billPaymentAccount"
                                  (ngModelChange)="accountSetting.defaultBillPaymentAccountId = $event?.id">
                             </div>
@@ -250,7 +250,7 @@
                                  findChartOfAccount
                                  name="receivePaymentAccount"
                                  [label]="l('Account_',l('ReceivePayment'))"
-                                 [accountTypeFilter]="cashBankAccountTypeFilter"
+                                 [accountType]="cashBankAccountType"
                                  [(ngModel)]="receivePaymentAccount"
                                  (ngModelChange)="accountSetting.defaultReceivePaymentAccountId = $event?.id">
                             </div>
@@ -258,8 +258,7 @@
                                  findChartOfAccount
                                  name="retainEarningAccount"
                                  [label]="l('Account_',l('RetainEarning'))"
-                                 [accountTypeFilter]="equityAccountTypeFilter"
-                                 [subAccountTypeFilter]="retainEarningSubAccountTypeFilter"
+                                 [accountType]="retainedEarningAccountType"
                                  [(ngModel)]="retainEarningAccount"
                                  (ngModelChange)="accountSetting.defaultRetainEarningAccountId = $event?.id">
                             </div>
@@ -267,7 +266,7 @@
                                  findChartOfAccount
                                  name="exchangeLossGainAccount"
                                  [label]="l('Account_',l('ExchangeLossGain'))"
-                                 [accountTypeFilter]="revenueExpenseAccountTypeFilter"
+                                 [accountType]="revenueCOGSExpenseAccountType"
                                  [(ngModel)]="exchangeLossGainAccount"
                                  (ngModelChange)="accountSetting.defaultExchangeLossGainAccountId = $event?.id">
                             </div>
@@ -275,7 +274,7 @@
                                  findChartOfAccount
                                  name="itemReceiptAccount"
                                  [label]="l('Account_',l('ItemReceipt'))"
-                                 [accountTypeFilter]="currentAssetAccountTypeFilter"
+                                 [accountType]="currentAssetAccountType"
                                  [(ngModel)]="itemReceiptAccount"
                                  (ngModelChange)="accountSetting.defaultItemReceiptAccountId = $event?.id">
                             </div>
@@ -283,7 +282,7 @@
                                  findChartOfAccount
                                  name="itemIssueAccount"
                                  [label]="l('Account_',l('ItemIssue'))"
-                                 [accountTypeFilter]="currentAssetAccountTypeFilter"
+                                 [accountType]="currentAssetAccountType"
                                  [(ngModel)]="itemIssueAccount"
                                  (ngModelChange)="accountSetting.defaultItemIssueAccountId = $event?.id">
                             </div>
@@ -291,7 +290,7 @@
                                  findChartOfAccount
                                  name="itemAdjustmentAccount"
                                  [label]="l('Account_',l('ItemAdjustment'))"
-                                 [accountTypeFilter]="revenueExpenseAccountTypeFilter"
+                                 [accountType]="revenueCOGSExpenseAccountType"
                                  [(ngModel)]="itemAdjustmentAccount"
                                  (ngModelChange)="accountSetting.defaultItemAdjustmentAccountId = $event?.id">
                             </div>
@@ -299,7 +298,7 @@
                                  findChartOfAccount
                                  name="itemTransferAccount"
                                  [label]="l('Account_',l('ItemTransfer'))"
-                                 [accountTypeFilter]="currentAssetAccountTypeFilter"
+                                 [accountType]="currentAssetAccountType"
                                  [(ngModel)]="itemTransferAccount"
                                  (ngModelChange)="accountSetting.defaultItemTransferAccountId = $event?.id">
                             </div>
@@ -307,7 +306,7 @@
                                  findChartOfAccount
                                  name="itemProductionAccount"
                                  [label]="l('Account_',l('ItemProduction'))"
-                                 [accountTypeFilter]="currentAssetAccountTypeFilter"
+                                 [accountType]="currentAssetAccountType"
                                  [(ngModel)]="itemProductionAccount"
                                  (ngModelChange)="accountSetting.defaultItemProductionAccountId = $event?.id">
                             </div>
@@ -315,7 +314,7 @@
                                  findChartOfAccount
                                  name="itemExchangeAccount"
                                  [label]="l('Account_',l('ItemExchange'))"
-                                 [accountTypeFilter]="currentAssetAccountTypeFilter"
+                                 [accountType]="currentAssetAccountType"
                                  [(ngModel)]="itemExchangeAccount"
                                  (ngModelChange)="accountSetting.defaultItemExchangeAccountId = $event?.id">
                             </div>
@@ -323,7 +322,7 @@
                                  findChartOfAccount
                                  name="cashTransferAccount"
                                  [label]="l('Account_',l('CashTransfer'))"
-                                 [accountTypeFilter]="currentAssetAccountTypeFilter"
+                                 [accountType]="currentAssetAccountType"
                                  [(ngModel)]="cashTransferAccount"
                                  (ngModelChange)="accountSetting.defaultCashTransferAccountId = $event?.id">
                             </div>
@@ -331,7 +330,7 @@
                                  findChartOfAccount
                                  name="cashExchangeAccount"
                                  [label]="l('Account_',l('CashExchange'))"
-                                 [accountTypeFilter]="currentAssetAccountTypeFilter"
+                                 [accountType]="currentAssetAccountType"
                                  [(ngModel)]="cashExchangeAccount"
                                  (ngModelChange)="accountSetting.defaultCashExchangeAccountId = $event?.id">
                             </div>

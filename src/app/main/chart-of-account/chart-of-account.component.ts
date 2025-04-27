@@ -135,7 +135,7 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
             { name: 'SubAccountType', header: 'SubAccountType', width: '15rem', sort: true },
             { name: 'ParentAccountName', header: 'ParentAccount', width: '15rem', sort: true },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
-            { name: 'CreatorUserName', header: 'Created', width: '15rem', sort: true, type: ColumnType.WrapText },
+            { name: 'CreatorUserName', header: 'Created', width: '15rem', sort: true, type: ColumnType.WrapText, visible: false },
             { name: 'LastModifierUserName', header: 'Modified', width: '15rem', sort: true, type: ColumnType.WrapText, visible: false },
             { name: 'CannotEdit', header: 'CannotEdit', width: '10rem', sort: true, visible: false },
             { name: 'CannotDelete', header: 'CannotDelete', width: '10rem', sort: true, visible: false },

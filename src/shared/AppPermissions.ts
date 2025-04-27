@@ -1,6 +1,6 @@
 export class AppPermissions {
 
-    static pages = {
+    static readonly pages = {
         page: "Pages",
         dashboard: "Pages.Dashboard",
 

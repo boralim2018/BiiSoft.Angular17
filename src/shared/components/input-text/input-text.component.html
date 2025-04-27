@@ -6,6 +6,9 @@
        pInputText
        class="w-full"
        name="{{name}}"
+       [attr.name]="name"
+       [attr.id]="name"
+       [autocomplete]="autocomplete"
        [placeholder]="placeholder"
        [minlength]="minlength"
        [maxlength]="maxlength"

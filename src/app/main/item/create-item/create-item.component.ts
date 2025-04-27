@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { AccountTypeFilterInputDto, CreateUpdateItemInputDto, ItemServiceProxy, ItemZoneDto } from '@shared/service-proxies/service-proxies';
+import { CreateUpdateItemInputDto, ItemServiceProxy, ItemZoneDto } from '@shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
@@ -14,7 +14,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
 import { SelectItemCategoryComponent } from '../../../../shared/components/select-item-type/select-item-category.component';
 import { AttachFileComponent } from '../../../../shared/components/attach-file/attach-file.component';
-import { AccountTypes, ItemTypes, UploadSource } from '../../../../shared/AppEnums';
+import { AccountTypeFilter, AccountTypes, ItemTypes, UploadSource } from '../../../../shared/AppEnums';
 import { AppConsts } from '../../../../shared/AppConsts';
 import { SelectItemTypeComponent } from '../../../../shared/components/select-item-type/select-item-type.component';
 import { FindUnitComponent } from '../../../../shared/components/find-unit/find-unit.component';
@@ -44,6 +44,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { FindChartOfAccountComponent } from '../../../../shared/components/find-chart-of-account/find-chart-of-account.component';
 import { FindZoneComponent } from '../../../../shared/components/find-zone/find-zone.component';
 import { TableModule } from 'primeng/table';
+import { RecordNotFoundComponent } from '../../../../shared/components/record-not-found/record-not-found.component';
 
 @Component({
     selector: 'app-create-item',
@@ -60,7 +61,7 @@ import { TableModule } from 'primeng/table';
         FindFieldCComponent, SelectWeightUnitComponent, SelectLengthUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent,
         InputTextComponent, InputLengthUnitComponent, InputWeightUnitComponent, InputAreaUnitComponent, InputVolumeUnitComponent,
         InputNumberComponent, SelectLengthUnitComponent, SelectWeightUnitComponent, SelectAreaUnitComponent, SelectVolumeUnitComponent,
-        FindChartOfAccountComponent, FindZoneComponent, TableModule
+        FindChartOfAccountComponent, FindZoneComponent, TableModule, RecordNotFoundComponent
     ]
 })
 export class CreateItemComponent extends IndexCacheComponentBase implements OnInit {
@@ -77,9 +78,9 @@ export class CreateItemComponent extends IndexCacheComponentBase implements OnIn
     inventoryAccount: any;
     purchaseAccount: any;
     saleAccount: any;
-    inventoryAccountTypeFilter: AccountTypeFilterInputDto;
-    purchaseAccountTypeFilter: AccountTypeFilterInputDto;
-    saleAccountTypeFilter: AccountTypeFilterInputDto;
+    inventoryAccountType: AccountTypeFilter = AccountTypeFilter.Inventory;
+    purchaseAccountType: AccountTypeFilter = AccountTypeFilter.COGS;
+    saleAccountType: AccountTypeFilter = AccountTypeFilter.Revenue;
 
     weightUnit: any = AppConsts.WeightUnit;
     lengthUnit: any = AppConsts.LengthUnit;
@@ -103,11 +104,6 @@ export class CreateItemComponent extends IndexCacheComponentBase implements OnIn
     }
 
     initModel() {
-        
-        this.inventoryAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Inventory], exclude: false });
-        this.purchaseAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.CostOfSale, AccountTypes.Expense, AccountTypes.OtherExpense], exclude: false });
-        this.saleAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Revenue, AccountTypes.OtherRevenue], exclude: false });
-
         this.model = CreateUpdateItemInputDto.fromJS({
             itemType: 4,
             grossWeight: 0,
@@ -159,15 +155,15 @@ export class CreateItemComponent extends IndexCacheComponentBase implements OnIn
     onItemTypeChange(type) {
         
         if (type == ItemTypes.Inventory) {
-            this.inventoryAccountTypeFilter.ids = [AccountTypes.Inventory];
-            this.purchaseAccountTypeFilter.ids = [AccountTypes.CostOfSale];
+            this.inventoryAccountType = AccountTypeFilter.Inventory;
+            this.purchaseAccountType = AccountTypeFilter.COGS;
         }
         else if (type == ItemTypes.Asset) {
-            this.inventoryAccountTypeFilter.ids = [AccountTypes.FixedAsset];
-            this.purchaseAccountTypeFilter.ids = [AccountTypes.CostOfSale, AccountTypes.Expense , AccountTypes.OtherExpense];
+            this.inventoryAccountType = AccountTypeFilter.FixedAsset;
+            this.purchaseAccountType = AccountTypeFilter.COGS;
         }
         else {
-            this.purchaseAccountTypeFilter.ids = [AccountTypes.CostOfSale, AccountTypes.Expense, AccountTypes.OtherExpense];
+            this.purchaseAccountType = AccountTypeFilter.COGSExpense;
         }
     }
 

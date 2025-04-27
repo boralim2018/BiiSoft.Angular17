@@ -5,7 +5,7 @@
                 [binary]="true"
                 [(ngModel)]="exclude"
                 (ngModelChange)="excludeChange.emit($event)"
-                inputId="'exclude' + name"
+                [inputId]="'exclude_' + name"
                 *ngIf="showExclude"></p-checkbox>
     <span class="text-red-500" *ngIf="required">*</span>
 </div>

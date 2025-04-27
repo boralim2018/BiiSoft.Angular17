@@ -31,8 +31,8 @@ import { AttachFileComponent } from '../../../shared/components/attach-file/atta
 import { BusyDirective } from '../../../shared/directives/busy.directive';
 import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
-import { AccountType, AccountTypeFilterInputDto, CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAccountSettingInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, SubAccountTypeFilterInputDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
-import { AccountTypes, UploadSource } from '../../../shared/AppEnums';
+import { CompanySettingDto, CompanySettingServiceProxy, ContactAddressDto, CreateUpdateBranchInputDto, CreateUpdateCompanyAccountSettingInputDto, CreateUpdateCompanyAdvanceSettingInputDto, CreateUpdateCompanyGeneralSettingInputDto, CreateUpdateTransactionNoSettingInputDto, FindCountryDto, TransactionNoSettingDto, UpdateLogoInput } from '../../../shared/service-proxies/service-proxies';
+import { AccountTypeFilter, UploadSource } from '../../../shared/AppEnums';
 import { AppConsts } from '../../../shared/AppConsts';
 import { SelectDigitComponent } from '../../../shared/components/select-digit/select-digit.component';
 import { SelectAddressLevelComponent } from '../../../shared/components/select-address-level/select-address-level.component';
@@ -88,13 +88,15 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, IndexCacheCompo
     cashTransferAccount: any;
     cashExchangeAccount: any;
 
-    apAccountTypeFilter: AccountTypeFilterInputDto;
-    arAccountTypeFilter: AccountTypeFilterInputDto;
-    cashBankAccountTypeFilter: AccountTypeFilterInputDto;
-    revenueExpenseAccountTypeFilter: AccountTypeFilterInputDto;
-    currentAssetAccountTypeFilter: AccountTypeFilterInputDto;
-    equityAccountTypeFilter: AccountTypeFilterInputDto;
-    retainEarningSubAccountTypeFilter: SubAccountTypeFilterInputDto;
+    apAccountType: AccountTypeFilter = AccountTypeFilter.AP;
+    arAccountType: AccountTypeFilter = AccountTypeFilter.AR;
+    cashBankAccountType: AccountTypeFilter = AccountTypeFilter.CashBank;
+    revenueAccountType: AccountTypeFilter = AccountTypeFilter.Revenue;
+    cogsAccountType: AccountTypeFilter = AccountTypeFilter.COGS;
+    revenueCOGSExpenseAccountType: AccountTypeFilter = AccountTypeFilter.RevenueCOGSExpense;
+    currentAssetAccountType: AccountTypeFilter = AccountTypeFilter.CurrentAsset;
+    equityAccountType: AccountTypeFilter = AccountTypeFilter.Equity;
+    retainedEarningAccountType: AccountTypeFilter = AccountTypeFilter.RetainedEarning;
 
     blankImageUrl: string = AppConsts.blankLogoUrl;
     uploadUrl: string = '/CompanyProfile/Upload';
@@ -133,14 +135,6 @@ export class CompanyComponent extends Mixin(NavBarComponentBase, IndexCacheCompo
         this.advanceSetting = new CreateUpdateCompanyAdvanceSettingInputDto();
         this.accountSetting = new CreateUpdateCompanyAccountSettingInputDto();
         this.transactionNos = [];
-
-        this.apAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.AccountPayable], exclude: false });
-        this.arAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.AccountReceivable], exclude: false });
-        this.cashBankAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Cash, AccountTypes.Bank], exclude: false });
-        this.revenueExpenseAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Revenue, AccountTypes.OtherRevenue, AccountTypes.CostOfSale, AccountTypes.Expense, AccountTypes.OtherExpense], exclude: false });
-        this.currentAssetAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.CurrentAsset], exclude: false });
-        this.equityAccountTypeFilter = new AccountTypeFilterInputDto({ ids: [AccountTypes.Equity], exclude: false });
-        this.retainEarningSubAccountTypeFilter = new SubAccountTypeFilterInputDto({ ids: [3013], exclude: false });
     }
 
     getDetail() {        
