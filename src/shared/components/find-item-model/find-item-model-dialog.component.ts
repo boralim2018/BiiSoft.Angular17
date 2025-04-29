@@ -32,7 +32,7 @@ export class FindItemModelDialogComponent extends Mixin(FindCardListComponentBas
 
     @ViewChild('findItemModelTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,
@@ -59,7 +59,7 @@ export class FindItemModelDialogComponent extends Mixin(FindCardListComponentBas
             { name: 'Code', header: 'Code', width: '15rem', sort: true }
         ];
 
-        if (!this.useCode) this.columns = this.columns.filter(f => f.name != "Code");
+        
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }

@@ -32,7 +32,7 @@ export class FindBranchDialogComponent extends Mixin(FindCardListComponentBase<F
 
     @ViewChild('findBranchTable') table: Table;
     @ViewChild('pg') paginator: Paginator;
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,
@@ -60,7 +60,7 @@ export class FindBranchDialogComponent extends Mixin(FindCardListComponentBase<F
             { name: 'PhoneNumber', header: 'Phone', width: '15rem', sort: true }
         ];
 
-        if (!this.useCode) this.columns = this.columns.filter(f => f.name != "Code");
+        
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }

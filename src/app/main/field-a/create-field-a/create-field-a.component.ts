@@ -21,7 +21,7 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class CreateFieldAComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateFieldAInputDto = new CreateUpdateFieldAInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,

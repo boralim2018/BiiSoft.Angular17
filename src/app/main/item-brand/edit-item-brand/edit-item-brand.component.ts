@@ -21,7 +21,7 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class EditItemBrandComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateItemBrandInputDto = new CreateUpdateItemBrandInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,

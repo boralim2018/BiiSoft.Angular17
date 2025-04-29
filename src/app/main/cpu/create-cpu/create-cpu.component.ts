@@ -21,7 +21,7 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class CreateCPUComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateCPUInputDto = new CreateUpdateCPUInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,

@@ -21,7 +21,7 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class CreateCameraComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateCameraInputDto = new CreateUpdateCameraInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,

@@ -77,7 +77,7 @@ export class ItemBrandComponent extends Mixin(PrimeNgListComponentBase<ItemBrand
 
     creators: any;
     modifiers: any;
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,
@@ -136,7 +136,7 @@ export class ItemBrandComponent extends Mixin(PrimeNgListComponentBase<ItemBrand
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
         ];
 
-        if (!this.useCode) this.columns = this.columns.filter(f => f.name != "Code");
+        
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }

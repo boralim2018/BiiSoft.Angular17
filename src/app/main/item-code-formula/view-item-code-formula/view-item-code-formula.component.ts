@@ -30,7 +30,7 @@ export class ViewItemCodeFormulaComponent extends Mixin(AppComponentBase, NavBar
 
     loading: boolean;
     model: ItemCodeFormulaDetailDto;
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.itemCodeFormulas.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.itemCodeFormulas.delete);

@@ -21,7 +21,7 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class CreateVGAComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateVGAInputDto = new CreateUpdateVGAInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,

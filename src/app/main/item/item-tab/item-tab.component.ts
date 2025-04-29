@@ -3,7 +3,6 @@ import { TabViewModule } from 'primeng/tabview';
 import { IndexCacheComponentBase } from '@shared/app-component-base';
 import { ItemComponent } from '../item.component';
 import { ItemSettingComponent } from '../item-setting/item-setting.component';
-import { ItemFieldSettingComponent } from '../item-field-setting/item-field-setting.component';
 import { ItemCodeFormulaComponent } from '../../item-code-formula/item-code-formula.component';
 import { AppPermissions } from '../../../../shared/AppPermissions';
 import { NgIf } from '@angular/common';
@@ -13,7 +12,7 @@ import { NgIf } from '@angular/common';
     templateUrl: './item-tab.component.html',
     styleUrl: './item-tab.component.scss',
     standalone: true,
-    imports: [TabViewModule, ItemComponent, ItemSettingComponent, ItemFieldSettingComponent, ItemCodeFormulaComponent, NgIf],
+    imports: [TabViewModule, ItemComponent, ItemSettingComponent, ItemCodeFormulaComponent, NgIf],
 })
 export class ItemTabComponent extends IndexCacheComponentBase implements OnInit  {
 

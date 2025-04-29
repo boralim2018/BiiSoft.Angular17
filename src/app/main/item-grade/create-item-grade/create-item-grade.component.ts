@@ -21,7 +21,7 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class CreateItemGradeComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateItemGradeInputDto = new CreateUpdateItemGradeInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,

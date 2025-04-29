@@ -21,7 +21,7 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class EditHDDComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateHDDInputDto = new CreateUpdateHDDInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,

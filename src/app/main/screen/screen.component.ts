@@ -78,7 +78,7 @@ export class ScreenComponent extends Mixin(PrimeNgListComponentBase<ScreenListDt
 
     creators: any;
     modifiers: any;
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,
@@ -137,7 +137,7 @@ export class ScreenComponent extends Mixin(PrimeNgListComponentBase<ScreenListDt
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
         ];
 
-        if (!this.useCode) this.columns = this.columns.filter(f => f.name != "Code");
+        
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }

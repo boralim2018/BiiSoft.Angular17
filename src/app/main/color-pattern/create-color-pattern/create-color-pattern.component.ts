@@ -21,7 +21,7 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class CreateColorPatternComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateColorPatternInputDto = new CreateUpdateColorPatternInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,

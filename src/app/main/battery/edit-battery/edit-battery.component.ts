@@ -21,7 +21,7 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class EditBatteryComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateBatteryInputDto = new CreateUpdateBatteryInputDto();
-    useCode: boolean = this.appSession.itemFieldSetting?.useCode;
+    
 
     constructor(
         injector: Injector,

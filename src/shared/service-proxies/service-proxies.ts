@@ -13318,114 +13318,6 @@ export class ItemServiceProxy {
         }
         return _observableOf(null as any);
     }
-
-    /**
-     * @return OK
-     */
-    getItemFieldSetting(): Observable<ItemFieldSettingDto> {
-        let url_ = this.baseUrl + "/api/services/app/Item/GetItemFieldSetting";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetItemFieldSetting(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetItemFieldSetting(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<ItemFieldSettingDto>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<ItemFieldSettingDto>;
-        }));
-    }
-
-    protected processGetItemFieldSetting(response: HttpResponseBase): Observable<ItemFieldSettingDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ItemFieldSettingDto.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * @param body (optional) 
-     * @return OK
-     */
-    createOrUpdateItemFieldSetting(body: ItemFieldSettingDto | undefined): Observable<string> {
-        let url_ = this.baseUrl + "/api/services/app/Item/CreateOrUpdateItemFieldSetting";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCreateOrUpdateItemFieldSetting(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processCreateOrUpdateItemFieldSetting(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<string>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<string>;
-        }));
-    }
-
-    protected processCreateOrUpdateItemFieldSetting(response: HttpResponseBase): Observable<string> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
 }
 
 @Injectable()
@@ -34846,6 +34738,7 @@ export class ColumnOutput implements IColumnOutput {
     showCrossForFalse: boolean;
     isRequired: boolean;
     lookupList: string[] | undefined;
+    indirectIndex: number;
 
     constructor(data?: IColumnOutput) {
         if (data) {
@@ -34873,6 +34766,7 @@ export class ColumnOutput implements IColumnOutput {
                 for (let item of _data["lookupList"])
                     this.lookupList.push(item);
             }
+            this.indirectIndex = _data["indirectIndex"];
         }
     }
 
@@ -34900,6 +34794,7 @@ export class ColumnOutput implements IColumnOutput {
             for (let item of this.lookupList)
                 data["lookupList"].push(item);
         }
+        data["indirectIndex"] = this.indirectIndex;
         return data;
     }
 
@@ -34923,6 +34818,7 @@ export interface IColumnOutput {
     showCrossForFalse: boolean;
     isRequired: boolean;
     lookupList: string[] | undefined;
+    indirectIndex: number;
 }
 
 export enum ColumnType {
@@ -34935,6 +34831,7 @@ export enum ColumnType {
     _7 = 7,
     _8 = 8,
     _9 = 9,
+    _10 = 10,
 }
 
 export class ComboboxItemDto implements IComboboxItemDto {
@@ -47585,7 +47482,6 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
     generalSetting: CompanyGeneralSettingDto;
     advanceSetting: CompanyAdvanceSettingDto;
     itemSetting: ItemSettingDto;
-    itemFieldSetting: ItemFieldSettingDto;
 
     constructor(data?: IGetCurrentLoginInformationsOutput) {
         if (data) {
@@ -47604,7 +47500,6 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
             this.generalSetting = _data["generalSetting"] ? CompanyGeneralSettingDto.fromJS(_data["generalSetting"]) : <any>undefined;
             this.advanceSetting = _data["advanceSetting"] ? CompanyAdvanceSettingDto.fromJS(_data["advanceSetting"]) : <any>undefined;
             this.itemSetting = _data["itemSetting"] ? ItemSettingDto.fromJS(_data["itemSetting"]) : <any>undefined;
-            this.itemFieldSetting = _data["itemFieldSetting"] ? ItemFieldSettingDto.fromJS(_data["itemFieldSetting"]) : <any>undefined;
         }
     }
 
@@ -47623,7 +47518,6 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
         data["generalSetting"] = this.generalSetting ? this.generalSetting.toJSON() : <any>undefined;
         data["advanceSetting"] = this.advanceSetting ? this.advanceSetting.toJSON() : <any>undefined;
         data["itemSetting"] = this.itemSetting ? this.itemSetting.toJSON() : <any>undefined;
-        data["itemFieldSetting"] = this.itemFieldSetting ? this.itemFieldSetting.toJSON() : <any>undefined;
         return data;
     }
 
@@ -47642,7 +47536,6 @@ export interface IGetCurrentLoginInformationsOutput {
     generalSetting: CompanyGeneralSettingDto;
     advanceSetting: CompanyAdvanceSettingDto;
     itemSetting: ItemSettingDto;
-    itemFieldSetting: ItemFieldSettingDto;
 }
 
 export class GetEditionEditOutput implements IGetEditionEditOutput {
@@ -50230,53 +50123,6 @@ export interface IItemDetailDto {
     isAddOn: boolean;
     useBOM: boolean;
     displayBOM: boolean;
-}
-
-export class ItemFieldSettingDto implements IItemFieldSettingDto {
-    id: string | undefined;
-    useCode: boolean;
-
-    constructor(data?: IItemFieldSettingDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.useCode = _data["useCode"];
-        }
-    }
-
-    static fromJS(data: any): ItemFieldSettingDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new ItemFieldSettingDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["useCode"] = this.useCode;
-        return data;
-    }
-
-    clone(): ItemFieldSettingDto {
-        const json = this.toJSON();
-        let result = new ItemFieldSettingDto();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IItemFieldSettingDto {
-    id: string | undefined;
-    useCode: boolean;
 }
 
 export class ItemGradeDetailDto implements IItemGradeDetailDto {
