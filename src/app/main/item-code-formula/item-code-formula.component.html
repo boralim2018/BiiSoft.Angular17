@@ -111,8 +111,8 @@
                         <td [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}">
                             <span class="p-column-title">{{l(col.header)}}</span>
                             <ng-container *ngIf="col.name!=='IsActive' && col.name!=='LastModifierUserName' && col.name!=='LastModifierUserName'">
-                                <span *ngIf="col.type != 9">{{getObjValue(row,col.name)}}</span>
-                                <ng-container *ngIf="col.type == 9">
+                                <span *ngIf="col.type != 8">{{getObjValue(row,col.name)}}</span>
+                                <ng-container *ngIf="col.type == 8">
                                     <ng-container *ngIf="row.isAllItemType">
                                         {{l('All')}}
                                     </ng-container>

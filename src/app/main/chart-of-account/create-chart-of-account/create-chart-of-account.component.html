@@ -17,16 +17,6 @@
         </div>
         <div class="field col-12 md:col-6"
              inputText
-             name="code"
-             [label]="l('Code')"
-             [minlength]="4"
-             [maxlength]="16"
-             [(ngModel)]="model.code"
-             [required]="true"
-             *ngIf="customCodeEnble">
-        </div>
-        <div class="field col-12 md:col-6"
-             inputText
              name="name"
              [label]="l('Name')"
              [maxlength]="128"
@@ -40,6 +30,16 @@
              [maxlength]="128"
              [(ngModel)]="model.displayName"
              [required]="true">
+        </div>
+        <div class="field col-12 md:col-6"
+             inputText
+             name="code"
+             [label]="l('Code')"
+             [minlength]="4"
+             [maxlength]="16"
+             [(ngModel)]="model.code"
+             [required]="true"
+             *ngIf="customCodeEnble">
         </div>
         <div class="field col-12 md:col-6"
              findChartOfAccount

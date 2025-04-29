@@ -15,8 +15,9 @@ export class ColumnType {
     static readonly Date : number = 5;
     static readonly CheckBox : number = 6;
     static readonly WrapText : number = 7;
-    static readonly Lookup : number = 8;
-    static readonly List : number = 9;
+    static readonly List: number = 8;
+    static readonly Lookup: number = 9;
+    static readonly IndirectLookup: number = 10;
 }
 
 export class CellFormat {
