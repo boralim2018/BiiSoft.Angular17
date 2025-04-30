@@ -23,7 +23,9 @@ import { InputTextComponent } from '../../../../shared/components/input-text/inp
 export class CreateWarehouseComponent extends DynamicDialogBase implements OnInit {
     saving = false;
     model: CreateUpdateWarehouseInputDto = new CreateUpdateWarehouseInputDto();
-    branches: any[]=[];
+    branches: any[] = [];
+
+    multiBranchesEnable: boolean = this.appSession.advanceSetting?.multiBranchesEnable;
 
     constructor(
         injector: Injector,

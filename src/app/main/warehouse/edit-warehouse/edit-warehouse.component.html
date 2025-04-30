@@ -20,11 +20,11 @@
              inputText
              name="code"
              [label]="l('Code')"
-             [maxlength]="32"
+             [maxlength]="4"
              [(ngModel)]="model.code"
              [required]="true">
         </div>
-        <div class="field col-12">
+        <div class="field col-12" *ngIf="multiBranchesEnable">
             <div class="flex flex-wrap gap-4">
                 <label for="sharing" class="text-900 font-medium">{{l('Sharing')}}<span class="text-red-600">*</span></label>
                 <div class="flex items-center">

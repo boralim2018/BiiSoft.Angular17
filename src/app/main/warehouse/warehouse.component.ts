@@ -140,6 +140,8 @@ export class WarehouseComponent extends Mixin(PrimeNgListComponentBase<Warehouse
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
         ];
 
+        if (!this.appSession.advanceSetting?.multiBranchesEnable) this.columns = this.columns.filter(c => c.name != 'SharingName');
+
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }
 

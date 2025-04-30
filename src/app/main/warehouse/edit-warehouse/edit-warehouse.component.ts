@@ -25,6 +25,7 @@ export class EditWarehouseComponent extends DynamicDialogBase implements OnInit 
     model: CreateUpdateWarehouseInputDto = new CreateUpdateWarehouseInputDto();
     branches: any[] = [];
 
+    multiBranchesEnable: boolean = this.appSession.advanceSetting?.multiBranchesEnable;
     constructor(
         injector: Injector,
         public _warehouseService: WarehouseServiceProxy,

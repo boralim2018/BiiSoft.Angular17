@@ -57,7 +57,7 @@
 
         </div>
 
-        <div class="grid mt-0">
+        <div class="grid mt-0" *ngIf="multiBranchesEnable">
             <div class="col-2 py-2"> {{l('Sharing')}} </div>
             <div class="col-10 py-2 font-bold">
                 : {{model.sharingName}}

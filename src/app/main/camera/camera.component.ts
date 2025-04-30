@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     CameraServiceProxy,
@@ -10,7 +10,6 @@ import {
     FileTokenInput,
     Int64NullableFilterInputDto,
     GuidEntityDto,
-    GuidNullableFilterInputDto,
 } from '@shared/service-proxies/service-proxies';
 import { CreateCameraComponent } from './create-camera/create-camera.component';
 import { EditCameraComponent } from './edit-camera/edit-camera.component';
@@ -43,7 +42,6 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf, DatePipe } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
-import { of } from 'rxjs';
 
 @Component({
     selector: 'app-camera',

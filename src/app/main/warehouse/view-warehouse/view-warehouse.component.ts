@@ -31,6 +31,8 @@ export class ViewWarehouseComponent extends Mixin(AppComponentBase, NavBarCompon
     loading: boolean;
     model: WarehouseDetailDto;
 
+    multiBranchesEnable: boolean = this.appSession.advanceSetting?.multiBranchesEnable;
+
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.delete);
     canEnable: boolean = this.isGranted(AppPermissions.pages.setup.warehouses.warehouseList.enable);
