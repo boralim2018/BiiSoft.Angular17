@@ -23,7 +23,7 @@
                 <div class="card mb-0 cursor-pointer hover:border-primary hover:text-primary w-13rem flex flex-column align-items-center"
                      [ngClass]="{'border-primary text-primary':row.checked}"
                      (click)="multiple? row.checked=!row.checked : select(row)">
-                    <div class="overflow-hidden text-overflow-clip"><span *ngIf="row.code">{{row.code}} : </span>{{getObjLocalizeName(row)}}</div>
+                    <div class="overflow-hidden text-overflow-clip"><span *ngIf="displayCode && row.code">{{row.code}} : </span>{{getObjLocalizeName(row)}}</div>
                 </div>
             </ng-container>
         </div>
@@ -31,7 +31,7 @@
         <div recordNotFound [minHeight]="minHeight" *ngIf="!totalCount"></div>
     </div>
 
-    <p-table #findUnitTable
+    <p-table #findItemFieldTable
              [columns]="selectedColumns"
              [value]="listItems"
              [paginator]="false"

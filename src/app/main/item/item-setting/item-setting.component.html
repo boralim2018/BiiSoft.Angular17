@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <h5>{{l('ItemFields')}}</h5>
+    <h5>{{l('StockTracking')}}</h5>
     <p-divider></p-divider>
 
     <div class="formgrid grid">
@@ -44,118 +44,6 @@
             <div class="flex align-content-center gap-3">
                 <p-inputSwitch name="useAssetStatus" [(ngModel)]="model.useAssetStatus"></p-inputSwitch>
                 <span class="mb-3">{{l('Use_', l('AssetStatus'))}}</span>
-            </div>
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="useNetWeight" [(ngModel)]="model.useNetWeight"></p-inputSwitch>
-                <span class="mb-3">{{l('Use_', l('NetWeight'))}}</span>
-            </div>
-        </div>
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="netWeightRequired" [(ngModel)]="model.netWeightRequired"></p-inputSwitch>
-                <span class="mb-3">{{l('Required_', l('NetWeight'))}}</span>
-            </div>
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="useGrossWeight" [(ngModel)]="model.useGrossWeight"></p-inputSwitch>
-                <span class="mb-3">{{l('Use_', l('GrossWeight'))}}</span>
-            </div>
-        </div>
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="grossWeightRequired" [(ngModel)]="model.grossWeightRequired"></p-inputSwitch>
-                <span class="mb-3">{{l('Required_', l('GrossWeight'))}}</span>
-            </div>
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="useWidth" [(ngModel)]="model.useWidth"></p-inputSwitch>
-                <span class="mb-3">{{l('Use_', l('Width'))}}</span>
-            </div>
-        </div>
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="widthRequired" [(ngModel)]="model.widthRequired"></p-inputSwitch>
-                <span class="mb-3">{{l('Required_', l('Width'))}}</span>
-            </div>
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="useHeight" [(ngModel)]="model.useHeight"></p-inputSwitch>
-                <span class="mb-3">{{l('Use_', l('Height'))}}</span>
-            </div>
-        </div>
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="heightRequired" [(ngModel)]="model.heightRequired"></p-inputSwitch>
-                <span class="mb-3">{{l('Required_', l('Height'))}}</span>
-            </div>
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="useLength" [(ngModel)]="model.useLength"></p-inputSwitch>
-                <span class="mb-3">{{l('Use_', l('Length'))}}</span>
-            </div>
-        </div>
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="lengthRequired" [(ngModel)]="model.lengthRequired"></p-inputSwitch>
-                <span class="mb-3">{{l('Required_', l('Length'))}}</span>
-            </div>
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="useDiameter" [(ngModel)]="model.useDiameter"></p-inputSwitch>
-                <span class="mb-3">{{l('Use_', l('Diameter'))}}</span>
-            </div>
-        </div>
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="diameterRequired" [(ngModel)]="model.diameterRequired"></p-inputSwitch>
-                <span class="mb-3">{{l('Required_', l('Diameter'))}}</span>
-            </div>
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="useArea" [(ngModel)]="model.useArea"></p-inputSwitch>
-                <span class="mb-3">{{l('Use_', l('Area'))}}</span>
-            </div>
-        </div>
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="areaRequired" [(ngModel)]="model.areaRequired"></p-inputSwitch>
-                <span class="mb-3">{{l('Required_', l('Area'))}}</span>
-            </div>
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="useVolume" [(ngModel)]="model.useVolume"></p-inputSwitch>
-                <span class="mb-3">{{l('Use_', l('Volume'))}}</span>
-            </div>
-        </div>
-        <div class="field col-12 md:col-4">
-            <div class="flex align-content-center gap-3">
-                <p-inputSwitch name="volumeRequired" [(ngModel)]="model.volumeRequired"></p-inputSwitch>
-                <span class="mb-3">{{l('Required_', l('Volume'))}}</span>
             </div>
         </div>
     </div>
@@ -201,6 +89,10 @@
             </div>
         </div>
     </div>
+
+    <h5>{{l('Filter')}}</h5>
+    <p-divider></p-divider>
+
     <div class="formgrid grid">
         <div class="field col-12 md:col-4">
             <div class="flex align-content-center gap-3">
@@ -472,6 +364,122 @@
                        id="fieldCLabel"
                        [maxlength]="32"
                        [(ngModel)]="model.fieldCLabel" />
+            </div>
+        </div>
+    </div>
+
+    <h5>{{l('Measurement')}}</h5>
+    <p-divider></p-divider>
+
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useNetWeight" [(ngModel)]="model.useNetWeight"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('NetWeight'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="netWeightRequired" [(ngModel)]="model.netWeightRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('NetWeight'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useGrossWeight" [(ngModel)]="model.useGrossWeight"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('GrossWeight'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="grossWeightRequired" [(ngModel)]="model.grossWeightRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('GrossWeight'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useWidth" [(ngModel)]="model.useWidth"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Width'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="widthRequired" [(ngModel)]="model.widthRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Width'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useHeight" [(ngModel)]="model.useHeight"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Height'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="heightRequired" [(ngModel)]="model.heightRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Height'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useLength" [(ngModel)]="model.useLength"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Length'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="lengthRequired" [(ngModel)]="model.lengthRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Length'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useDiameter" [(ngModel)]="model.useDiameter"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Diameter'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="diameterRequired" [(ngModel)]="model.diameterRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Diameter'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useArea" [(ngModel)]="model.useArea"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Area'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="areaRequired" [(ngModel)]="model.areaRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Area'))}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="useVolume" [(ngModel)]="model.useVolume"></p-inputSwitch>
+                <span class="mb-3">{{l('Use_', l('Volume'))}}</span>
+            </div>
+        </div>
+        <div class="field col-12 md:col-4">
+            <div class="flex align-content-center gap-3">
+                <p-inputSwitch name="volumeRequired" [(ngModel)]="model.volumeRequired"></p-inputSwitch>
+                <span class="mb-3">{{l('Required_', l('Volume'))}}</span>
             </div>
         </div>
     </div>

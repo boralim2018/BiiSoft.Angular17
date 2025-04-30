@@ -75,19 +75,12 @@ export class CreateItemComponent extends IndexCacheComponentBase implements OnIn
 
     indexCacheKey: string = 'createItemTabCache';
 
-    inventoryAccount: any;
-    purchaseAccount: any;
-    saleAccount: any;
     inventoryAccountType: AccountTypeFilter = AccountTypeFilter.Inventory;
     purchaseAccountType: AccountTypeFilter = AccountTypeFilter.COGS;
     saleAccountType: AccountTypeFilter = AccountTypeFilter.Revenue;
 
-    weightUnit: any = AppConsts.WeightUnit;
-    lengthUnit: any = AppConsts.LengthUnit;
-    areaUnit: any = AppConsts.AreaUnit;
-    volumeUnit: any = AppConsts.VolumeUnit;
-
     selectedZones: any[] = [];
+    findModel: any;
 
     chartOfAccountEnable: boolean = this.feature.isEnabled("App.Accounting.ChartOfAccounts");
 
@@ -104,6 +97,34 @@ export class CreateItemComponent extends IndexCacheComponentBase implements OnIn
     }
 
     initModel() {
+        this.findModel = {
+            unit: null,
+            itemGroup: null,
+            itemBrand: null,
+            itemGrade: null,
+            itemModel: null,
+            itemSize: null,
+            itemSeries: null,
+            colorPattern: null,
+            cpu: null,
+            ram: null,
+            vga: null,
+            hdd: null,
+            screen: null,
+            camera: null,
+            battery: null,
+            fieldA: null,
+            fieldB: null,
+            fieldC: null,
+            inventoryAccount: null,
+            purchaseAccount: null,
+            saleAccount: null,
+            weightUnit: AppConsts.WeightUnit,
+            lengthUnit: AppConsts.LengthUnit,
+            areaUnit: AppConsts.AreaUnit,
+            volumeUnit: AppConsts.VolumeUnit,
+        };
+
         this.model = CreateUpdateItemInputDto.fromJS({
             itemType: 4,
             grossWeight: 0,

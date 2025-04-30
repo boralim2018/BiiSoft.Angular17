@@ -5,7 +5,7 @@
     <p-tabPanel header="{{l('Settings')}}" *ngIf="canViewItemSetting">
         <app-item-setting></app-item-setting>
     </p-tabPanel>
-    <p-tabPanel header="{{l('CodeFormula')}}" *ngIf="canViewItemCodeFormula">
+    <p-tabPanel header="{{l('CodeFormula')}}" *ngIf="canViewItemCodeFormula && appSession.itemSetting?.useCodeFormula">
         <app-item-code-formula></app-item-code-formula>
     </p-tabPanel>
 </p-tabView>

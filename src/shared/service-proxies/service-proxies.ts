@@ -51570,6 +51570,7 @@ export class ItemSettingDto implements IItemSettingDto {
     readonly itemFilterEnable: boolean;
     readonly measurementEnable: boolean;
     readonly stockTrackingEnable: boolean;
+    readonly filterRequired: boolean;
 
     constructor(data?: IItemSettingDto) {
         if (data) {
@@ -51664,6 +51665,7 @@ export class ItemSettingDto implements IItemSettingDto {
             (<any>this).itemFilterEnable = _data["itemFilterEnable"];
             (<any>this).measurementEnable = _data["measurementEnable"];
             (<any>this).stockTrackingEnable = _data["stockTrackingEnable"];
+            (<any>this).filterRequired = _data["filterRequired"];
         }
     }
 
@@ -51758,6 +51760,7 @@ export class ItemSettingDto implements IItemSettingDto {
         data["itemFilterEnable"] = this.itemFilterEnable;
         data["measurementEnable"] = this.measurementEnable;
         data["stockTrackingEnable"] = this.stockTrackingEnable;
+        data["filterRequired"] = this.filterRequired;
         return data;
     }
 
@@ -51852,6 +51855,7 @@ export interface IItemSettingDto {
     itemFilterEnable: boolean;
     measurementEnable: boolean;
     stockTrackingEnable: boolean;
+    filterRequired: boolean;
 }
 
 export class ItemSizeDetailDto implements IItemSizeDetailDto {

@@ -94,7 +94,13 @@
             </div>
 
             <p-tabView [(activeIndex)]="activeIndex" (activeIndexChange)="saveCache()">
-                <p-tabPanel header="{{l('UOM')}}">
+                <p-tabPanel>
+                    <ng-template pTemplate="header">
+                        <div class="line-height-1">
+                            {{l('UOM')}} <span class="text-red-500">*</span>
+                        </div>
+                    </ng-template>
+
                     <h5>{{l('Unit')}}</h5>
                     <p-divider></p-divider>
                     <div class="formgrid grid">
@@ -103,14 +109,15 @@
                              name="unit"
                              [required]="true"
                              [label]="l('PackageUnit')"
-                             [(ngModel)]="model.unitId">
+                             [(ngModel)]="findModel.unit"
+                             (ngModelChange)="model.unitId=$event.id">
                         </div>
 
                         <div class="field col-12 md:col-6 xl:col-4"
                              selectWeightUnit
                              name="weightUnit"
                              [label]="l('WeightUnit')"
-                             [(ngModel)]="weightUnit"
+                             [(ngModel)]="findModel.weightUnit"
                              (ngModelChange)="model.weightUnit=$event.value"
                              optionValue=""
                              [required]="appSession.itemSetting?.grossWeightRequired || appSession.itemSetting?.netWeightRequired"
@@ -121,7 +128,7 @@
                              selectLengthUnit
                              name="lengthUnit"
                              [label]="l('LengthUnit')"
-                             [(ngModel)]="lengthUnit"
+                             [(ngModel)]="findModel.lengthUnit"
                              (ngModelChange)="model.lengthUnit=$event.value"
                              optionValue=""
                              [required]="appSession.itemSetting?.widthRequired || appSession.itemSetting?.heightRequired || appSession.itemSetting?.lengthRequired || appSession.itemSetting?.diameterRequired"
@@ -132,7 +139,7 @@
                              selectAreaUnit
                              name="areaUnit"
                              [label]="l('AreaUnit')"
-                             [(ngModel)]="areaUnit"
+                             [(ngModel)]="findModel.areaUnit"
                              (ngModelChange)="model.areaUnit=$event.value"
                              optionValue=""
                              [required]="appSession.itemSetting?.areaRequired"
@@ -143,7 +150,7 @@
                              selectVolumeUnit
                              name="volumeUnit"
                              [label]="l('VolumeUnit')"
-                             [(ngModel)]="volumeUnit"
+                             [(ngModel)]="findModel.volumeUnit"
                              (ngModelChange)="model.volumeUnit=$event.value"
                              optionValue=""
                              [required]="appSession.itemSetting?.volumeRequired"
@@ -163,7 +170,7 @@
                              [label]="l('GrossWeight')"
                              [required]="appSession.itemSetting?.grossWeightRequired"
                              [(ngModel)]="model.grossWeight"
-                             [suffix]="weightUnit?.name"
+                             [suffix]="findModel.weightUnit?.name"
                              *ngIf="appSession.itemSetting?.useGrossWeight">
                         </div>
 
@@ -173,7 +180,7 @@
                              [label]="l('NetWeight')"
                              [required]="appSession.itemSetting?.netWeightRequired"
                              [(ngModel)]="model.netWeight"
-                             [suffix]="weightUnit?.name"
+                             [suffix]="findModel.weightUnit?.name"
                              *ngIf="appSession.itemSetting?.useNetWeight">
                         </div>
 
@@ -183,7 +190,7 @@
                              [label]="l('Width')"
                              [required]="appSession.itemSetting?.widthRequired"
                              [(ngModel)]="model.width"
-                             [suffix]="lengthUnit?.name"
+                             [suffix]="findModel.lengthUnit?.name"
                              *ngIf="appSession.itemSetting?.useWidth">
                         </div>
 
@@ -193,7 +200,7 @@
                              [label]="l('Height')"
                              [required]="appSession.itemSetting?.heightRequired"
                              [(ngModel)]="model.height"
-                             [suffix]="lengthUnit?.name"
+                             [suffix]="findModel.lengthUnit?.name"
                              *ngIf="appSession.itemSetting?.useHeight">
                         </div>
 
@@ -203,7 +210,7 @@
                              [label]="l('Length')"
                              [required]="appSession.itemSetting?.lengthRequired"
                              [(ngModel)]="model.length"
-                             [suffix]="lengthUnit?.name"
+                             [suffix]="findModel.lengthUnit?.name"
                              *ngIf="appSession.itemSetting?.useLength">
                         </div>
 
@@ -213,7 +220,7 @@
                              [label]="l('Diameter')"
                              [required]="appSession.itemSetting?.diameterRequired"
                              [(ngModel)]="model.diameter"
-                             [suffix]="lengthUnit?.name"
+                             [suffix]="findModel.lengthUnit?.name"
                              *ngIf="appSession.itemSetting?.useDiameter">
                         </div>
 
@@ -223,7 +230,7 @@
                              [label]="l('Area')"
                              [required]="appSession.itemSetting?.areaRequired"
                              [(ngModel)]="model.area"
-                             [suffix]="areaUnit?.name"
+                             [suffix]="findModel.areaUnit?.name"
                              *ngIf="appSession.itemSetting?.useArea">
                         </div>
 
@@ -233,168 +240,18 @@
                              [label]="l('Volume')"
                              [required]="appSession.itemSetting?.volumeRequired"
                              [(ngModel)]="model.volume"
-                             [suffix]="volumeUnit?.name"
+                             [suffix]="findModel.volumeUnit?.name"
                              *ngIf="appSession.itemSetting?.useVolume">
                         </div>
                     </div>
                 </p-tabPanel>
-                <p-tabPanel header="{{l('Filter')}}" *ngIf="appSession.itemSetting?.itemFilterEnable">
-                    <div class="formgrid grid">
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findItemGroup
-                             name="itemGroup"
-                             [required]="appSession.itemSetting?.itemGroupRequired"
-                             [label]="l('ItemGroup')"
-                             [(ngModel)]="model.itemGroupId"
-                             *ngIf="appSession.itemSetting?.useItemGroup">
+                <p-tabPanel *ngIf="chartOfAccountEnable">
+                    <ng-template pTemplate="header">
+                        <div class="line-height-1">
+                            {{l('Account')}} <span class="text-red-500">*</span>
                         </div>
+                    </ng-template>
 
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findItemBrand
-                             name="itemBrand"
-                             [required]="appSession.itemSetting?.brandRequired"
-                             [label]="l('ItemBrand')"
-                             [(ngModel)]="model.itemBrandId"
-                             *ngIf="appSession.itemSetting?.useBrand">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findItemGrade
-                             name="itemGrade"
-                             [required]="appSession.itemSetting?.gradeRequired"
-                             [label]="l('ItemGrade')"
-                             [(ngModel)]="model.itemGradeId"
-                             *ngIf="appSession.itemSetting?.useGrade">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findItemModel
-                             name="itemModel"
-                             [required]="appSession.itemSetting?.modelRequired"
-                             [label]="l('ItemModel')"
-                             [(ngModel)]="model.itemModelId"
-                             *ngIf="appSession.itemSetting?.useModel">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findItemSize
-                             name="itemSize"
-                             [required]="appSession.itemSetting?.sizeRequired"
-                             [label]="l('ItemSize')"
-                             [(ngModel)]="model.itemSizeId"
-                             *ngIf="appSession.itemSetting?.useSize">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findItemSeries
-                             name="itemSeries"
-                             [required]="appSession.itemSetting?.seriesRequired"
-                             [label]="l('ItemSeries')"
-                             [(ngModel)]="model.itemSeriesId"
-                             *ngIf="appSession.itemSetting?.useSeries">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findColorPattern
-                             name="colorPattern"
-                             [required]="appSession.itemSetting?.colorPatternRequired"
-                             [label]="l('ColorPattern')"
-                             [(ngModel)]="model.colorPatternId"
-                             *ngIf="appSession.itemSetting?.useColorPattern">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findCPU
-                             name="cpu"
-                             [required]="appSession.itemSetting?.cpuRequired"
-                             [label]="l('CPU')"
-                             [(ngModel)]="model.cpuId"
-                             *ngIf="appSession.itemSetting?.useCPU">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findRAM
-                             name="ram"
-                             [required]="appSession.itemSetting?.ramRequired"
-                             [label]="l('RAM')"
-                             [(ngModel)]="model.ramId"
-                             *ngIf="appSession.itemSetting?.useRAM">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findVGA
-                             name="vga"
-                             [required]="appSession.itemSetting?.vgaRequired"
-                             [label]="l('VGA')"
-                             [(ngModel)]="model.vgaId"
-                             *ngIf="appSession.itemSetting?.useVGA">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findHDD
-                             name="hdd"
-                             [required]="appSession.itemSetting?.hddRequired"
-                             [label]="l('HDD')"
-                             [(ngModel)]="model.hddId"
-                             *ngIf="appSession.itemSetting?.useHDD">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findScreen
-                             name="screen"
-                             [required]="appSession.itemSetting?.screenRequired"
-                             [label]="l('Screen')"
-                             [(ngModel)]="model.screenId"
-                             *ngIf="appSession.itemSetting?.useScreen">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findCamera
-                             name="camera"
-                             [required]="appSession.itemSetting?.cameraRequired"
-                             [label]="l('Camera')"
-                             [(ngModel)]="model.cameraId"
-                             *ngIf="appSession.itemSetting?.useCamera">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findBattery
-                             name="battery"
-                             [required]="appSession.itemSetting?.batteryRequired"
-                             [label]="l('Battery')"
-                             [(ngModel)]="model.batteryId"
-                             *ngIf="appSession.itemSetting?.useBattery">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findFieldA
-                             name="fieldA"
-                             [required]="appSession.itemSetting?.fieldARequired"
-                             [label]="appSession.itemSetting?.fieldALabel? l(appSession.itemSetting?.fieldALabel) : l('FieldA')"
-                             [(ngModel)]="model.fieldAId"
-                             *ngIf="appSession.itemSetting?.useFieldA">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findFieldB
-                             name="fieldB"
-                             [required]="appSession.itemSetting?.fieldBRequired"
-                             [label]="appSession.itemSetting?.fieldBLabel? l(appSession.itemSetting?.fieldBLabel) : l('FieldB')"
-                             [(ngModel)]="model.fieldBId"
-                             *ngIf="appSession.itemSetting?.useFieldB">
-                        </div>
-
-                        <div class="field col-12 md:col-6 xl:col-4"
-                             findFieldC
-                             name="fieldC"
-                             [required]="appSession.itemSetting?.fieldCRequired"
-                             [label]="appSession.itemSetting?.fieldCLabel? l(appSession.itemSetting?.fieldCLabel) : l('FieldC')"
-                             [(ngModel)]="model.fieldCId"
-                             *ngIf="appSession.itemSetting?.useFieldC">
-                        </div>
-                    </div>
-                </p-tabPanel>
-                <p-tabPanel header="{{l('Account')}}" *ngIf="chartOfAccountEnable">
                     <div class="formgrid grid">
                         <div class="field col-12 md:col-6 xl:col-4"
                              findChartOfAccount
@@ -402,8 +259,8 @@
                              [label]="model.itemType==4 || model.itemType==5 ? l('COGSAccount') : l('PurchaseAccount')"
                              [placeholder]="model.itemType==4 || model.itemType==5 ? l('Select_', l('COGSAccount')) : l('Select_', l('PurchaseAccount'))"
                              [accountType]="purchaseAccountType"
-                             [(ngModel)]="purchaseAccount"
-                             (ngModelChagne)="model.purchaseAccountId = $event?.id"
+                             [(ngModel)]="findModel.purchaseAccount"
+                             (ngModelChange)="model.purchaseAccountId = $event?.id"
                              [required]="true">
                         </div>
 
@@ -412,8 +269,8 @@
                              name="saleAccount"
                              [label]="l('SaleAccount')"
                              [accountType]="saleAccountType"
-                             [(ngModel)]="saleAccount"
-                             (ngModelChagne)="model.saleAccountId = $event?.id"
+                             [(ngModel)]="findModel.saleAccount"
+                             (ngModelChange)="model.saleAccountId = $event?.id"
                              [required]="true">
                         </div>
 
@@ -423,10 +280,188 @@
                              [label]="model.itemType==4 ? l('InventoryAccount') : l('AssetAccount')"
                              [placeholder]="model.itemType==4 ? l('Select_', l('InventoryAccount')) : l('Select_', l('AssetAccount'))"
                              [accountType]="inventoryAccountType"
-                             [(ngModel)]="inventoryAccount"
-                             (ngModelChagne)="model.inventoryAccountId = $event?.id"
+                             [(ngModel)]="findModel.inventoryAccount"
+                             (ngModelChange)="model.inventoryAccountId = $event?.id"
                              [required]="true"
                              *ngIf="model.itemType==4 || model.itemType==5">
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel *ngIf="appSession.itemSetting?.itemFilterEnable">
+                    <ng-template pTemplate="header">
+                        <div class="line-height-1">
+                            {{l('Filter')}} <span class="text-red-500" *ngIf="appSession.itemSetting?.filterRequired">*</span>
+                        </div>
+                    </ng-template>
+                    <div class="formgrid grid">
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemGroup
+                             name="itemGroup"
+                             [required]="appSession.itemSetting?.itemGroupRequired"
+                             [label]="l('ItemGroup')"
+                             [(ngModel)]="findModel.itemGroup"
+                             (ngModelChange)="model.itemGroupId=$event?.id"
+                             *ngIf="appSession.itemSetting?.useItemGroup">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemBrand
+                             name="itemBrand"
+                             [required]="appSession.itemSetting?.brandRequired"
+                             [label]="l('ItemBrand')"
+                             [(ngModel)]="findModel.itemBrand"
+                             (ngModelChange)="model.itemBrandId=$event?.id"
+                             *ngIf="appSession.itemSetting?.useBrand">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemGrade
+                             name="itemGrade"
+                             [required]="appSession.itemSetting?.gradeRequired"
+                             [label]="l('ItemGrade')"
+                             [(ngModel)]="findModel.itemGrade"
+                             (ngModelChange)="model.itemGradeId=$event?.id"
+                             *ngIf="appSession.itemSetting?.useGrade">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemModel
+                             name="itemModel"
+                             [required]="appSession.itemSetting?.modelRequired"
+                             [label]="l('ItemModel')"
+                             [(ngModel)]="findModel.itemModel"
+                             (ngModelChange)="model.itemModelId=$event?.id"
+                             *ngIf="appSession.itemSetting?.useModel">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemSize
+                             name="itemSize"
+                             [required]="appSession.itemSetting?.sizeRequired"
+                             [label]="l('ItemSize')"
+                             [(ngModel)]="findModel.itemSize"
+                             (ngModelChange)="model.itemSizeId=$event?.id"
+                             *ngIf="appSession.itemSetting?.useSize">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findItemSeries
+                             name="itemSeries"
+                             [required]="appSession.itemSetting?.seriesRequired"
+                             [label]="l('ItemSeries')"
+                             [(ngModel)]="findModel.itemSeries"
+                             (ngModelChange)="model.itemSeriesId=$event.id"
+                             *ngIf="appSession.itemSetting?.useSeries">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findColorPattern
+                             name="colorPattern"
+                             [required]="appSession.itemSetting?.colorPatternRequired"
+                             [label]="l('ColorPattern')"
+                             [(ngModel)]="findModel.colorPattern"
+                             (ngModelChange)="model.colorPatternId=$event.id"
+                             *ngIf="appSession.itemSetting?.useColorPattern">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findCPU
+                             name="cpu"
+                             [required]="appSession.itemSetting?.cpuRequired"
+                             [label]="l('CPU')"
+                             [(ngModel)]="findModel.cpu"
+                             (ngModelChange)="model.cpuId=$event.id"
+                             *ngIf="appSession.itemSetting?.useCPU">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findRAM
+                             name="ram"
+                             [required]="appSession.itemSetting?.ramRequired"
+                             [label]="l('RAM')"
+                             [(ngModel)]="findModel.ram"
+                             (ngModelChange)="model.ramId=$event.id"
+                             *ngIf="appSession.itemSetting?.useRAM">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findVGA
+                             name="vga"
+                             [required]="appSession.itemSetting?.vgaRequired"
+                             [label]="l('VGA')"
+                             [(ngModel)]="findModel.vga"
+                             (ngModelChange)="model.vgaId=$event.id"
+                             *ngIf="appSession.itemSetting?.useVGA">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findHDD
+                             name="hdd"
+                             [required]="appSession.itemSetting?.hddRequired"
+                             [label]="l('HDD')"
+                             [(ngModel)]="findModel.hdd"
+                             (ngModelChange)="model.hddId=$event.id"
+                             *ngIf="appSession.itemSetting?.useHDD">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findScreen
+                             name="screen"
+                             [required]="appSession.itemSetting?.screenRequired"
+                             [label]="l('Screen')"
+                             [(ngModel)]="findModel.screen"
+                             (ngModelChange)="model.screenId=$event.id"
+                             *ngIf="appSession.itemSetting?.useScreen">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findCamera
+                             name="camera"
+                             [required]="appSession.itemSetting?.cameraRequired"
+                             [label]="l('Camera')"
+                             [(ngModel)]="findModel.camera"
+                             (ngModelChange)="model.cameraId=$event.id"
+                             *ngIf="appSession.itemSetting?.useCamera">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findBattery
+                             name="battery"
+                             [required]="appSession.itemSetting?.batteryRequired"
+                             [label]="l('Battery')"
+                             [(ngModel)]="findModel.battery"
+                             (ngModelChange)="model.batteryId=$event.id"
+                             *ngIf="appSession.itemSetting?.useBattery">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findFieldA
+                             name="fieldA"
+                             [required]="appSession.itemSetting?.fieldARequired"
+                             [label]="appSession.itemSetting?.fieldALabel? l(appSession.itemSetting?.fieldALabel) : l('FieldA')"
+                             [(ngModel)]="findModel.fieldA"
+                             (ngModelChange)="model.fieldAId=$event.id"
+                             *ngIf="appSession.itemSetting?.useFieldA">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findFieldB
+                             name="fieldB"
+                             [required]="appSession.itemSetting?.fieldBRequired"
+                             [label]="appSession.itemSetting?.fieldBLabel? l(appSession.itemSetting?.fieldBLabel) : l('FieldB')"
+                             [(ngModel)]="findModel.fieldB"
+                             (ngModelChange)="model.fieldBId=$event.id"
+                             *ngIf="appSession.itemSetting?.useFieldB">
+                        </div>
+
+                        <div class="field col-12 md:col-6 xl:col-4"
+                             findFieldC
+                             name="fieldC"
+                             [required]="appSession.itemSetting?.fieldCRequired"
+                             [label]="appSession.itemSetting?.fieldCLabel? l(appSession.itemSetting?.fieldCLabel) : l('FieldC')"
+                             [(ngModel)]="findModel.fieldC"
+                             (ngModelChange)="model.fieldCId=$event.id"
+                             *ngIf="appSession.itemSetting?.useFieldC">
                         </div>
                     </div>
                 </p-tabPanel>
