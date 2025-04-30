@@ -43,7 +43,7 @@ export class FindFieldBComponent extends FindComponentBase implements OnInit {
             data: {
                 multiple: this.multiple
             },
-            header: this.l('FindFieldBs'),
+            header: this.appSession.itemSetting?.fieldBLabel ? this.l(this.appSession.itemSetting?.fieldBLabel) : this.l('FindFieldBs'),
             styleClass: this.responsiveDialogClass + ' find-field-b-dialog'
             })
             .onClose.subscribe(result => {

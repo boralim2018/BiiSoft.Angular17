@@ -20,7 +20,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
     selector: 'find-screen-dialog',
-    templateUrl: './find-screen-dialog.component.html',
+    templateUrl: '../template/find-item-field-dialog-template.component.html',
     animations: [appModuleAnimation()],
     providers: [ScreenServiceProxy],
     standalone: true,

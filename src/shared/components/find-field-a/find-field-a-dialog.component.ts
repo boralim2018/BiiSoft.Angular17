@@ -20,7 +20,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
     selector: 'find-field-a-dialog',
-    templateUrl: './find-field-a-dialog.component.html',
+    templateUrl: '../template/find-item-field-dialog-template.component.html',
     animations: [appModuleAnimation()],
     providers: [FieldAServiceProxy],
     standalone: true,
@@ -32,7 +32,7 @@ export class FindFieldADialogComponent extends Mixin(FindCardListComponentBase<F
 
     @ViewChild('findFieldATable') table: Table;
     @ViewChild('pg') paginator: Paginator;
-    
+
 
     constructor(
         injector: Injector,
@@ -97,7 +97,7 @@ export class FindFieldADialogComponent extends Mixin(FindCardListComponentBase<F
 
         let selected = this.selectedModel;
         if (!selected) {
-            this.message.warn(this.l("PleaseSelect_", this.l("FieldA")));
+            this.message.warn(this.l("PleaseSelect_", this.appSession.itemSetting?.fieldALabel ? this.l(this.appSession.itemSetting?.fieldALabel) : this.l('FindFieldA')));
             return;
         }
         

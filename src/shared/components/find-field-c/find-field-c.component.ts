@@ -43,7 +43,7 @@ export class FindFieldCComponent extends FindComponentBase implements OnInit {
             data: {
                 multiple: this.multiple
             },
-            header: this.l('FindFieldCs'),
+            header: this.appSession.itemSetting?.fieldCLabel ? this.l(this.appSession.itemSetting?.fieldCLabel) : this.l('FindFieldCs'),
             styleClass: this.responsiveDialogClass + ' find-field-c-dialog'
             })
             .onClose.subscribe(result => {

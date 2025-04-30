@@ -20,7 +20,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
     selector: 'find-field-c-dialog',
-    templateUrl: './find-field-c-dialog.component.html',
+    templateUrl: '../template/find-item-field-dialog-template.component.html',
     animations: [appModuleAnimation()],
     providers: [FieldCServiceProxy],
     standalone: true,
@@ -97,7 +97,7 @@ export class FindFieldCDialogComponent extends Mixin(FindCardListComponentBase<F
 
         let selected = this.selectedModel;
         if (!selected) {
-            this.message.warn(this.l("PleaseSelect_", this.l("FieldC")));
+            this.message.warn(this.l("PleaseSelect_", this.appSession.itemSetting?.fieldCLabel ? this.l(this.appSession.itemSetting?.fieldCLabel) : this.l('FindFieldC')));
             return;
         }
         

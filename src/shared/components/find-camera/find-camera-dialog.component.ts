@@ -20,7 +20,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
     selector: 'find-camera-dialog',
-    templateUrl: './find-camera-dialog.component.html',
+    templateUrl: '../template/find-item-field-dialog-template.component.html',
     animations: [appModuleAnimation()],
     providers: [CameraServiceProxy],
     standalone: true,

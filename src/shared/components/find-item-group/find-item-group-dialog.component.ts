@@ -2,7 +2,7 @@ import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { PageItemGroupInputDto, FindItemGroupDto, ItemGroupServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
-import { catchError, finalize, of } from 'rxjs';
+import { finalize, of } from 'rxjs';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { Paginator, PaginatorModule } from 'primeng/paginator';
@@ -20,7 +20,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
     selector: 'find-item-group-dialog',
-    templateUrl: './find-item-group-dialog.component.html',
+    templateUrl: '../template/find-item-field-dialog-template.component.html',
     animations: [appModuleAnimation()],
     providers: [ItemGroupServiceProxy],
     standalone: true,
