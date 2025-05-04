@@ -8,13 +8,7 @@
     <p-tabPanel header="{{l('CodeFormula')}}" *ngIf="canViewItemCodeFormula && appSession.itemSetting?.useCodeFormula">
         <app-item-code-formula></app-item-code-formula>
     </p-tabPanel>
-    <p-tabPanel header="{{l('ModifierItems')}}">
-
-    </p-tabPanel>
-    <p-tabPanel header="{{l('AddOnItems')}}">
-
-    </p-tabPanel>
     <p-tabPanel header="{{l('BOM')}}" *ngIf="canViewBOM">
-
+        <app-bom></app-bom>
     </p-tabPanel>
 </p-tabView>

@@ -1,0 +1,47 @@
+<div [@routerTransition]>
+    <div class="card mb-5">
+        <form novalidate autocomplete="off" #editBOMForm="ngForm" (ngSubmit)="save()" [busy]="saving">
+
+            <h4>{{l('Edit_', l('BOM'))}}</h4>
+            <p-divider></p-divider>
+
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-6 xl:col-4"
+                     inputText
+                     name="name"
+                     [label]="l('Name')"
+                     [maxlength]="128"
+                     [(ngModel)]="model.name"
+                     [required]="true">
+                </div>
+                <div class="field col-12 md:col-6 xl:col-4"
+                     inputText
+                     name="displayName"
+                     [label]="l('DisplayName')"
+                     [maxlength]="128"
+                     [(ngModel)]="model.displayName"
+                     [required]="true">
+                </div>
+
+            </div>
+
+            <p-divider></p-divider>
+
+            <div class="flex justify-content-end flex-wrap gap-3">
+                <button pButton pRipple
+                        label="{{'Cancel' | localize}}"
+                        class=""
+                        [outlined]="true"
+                        icon="pi pi-arrow-circle-left"
+                        type="button"
+                        (click)="cancel()"></button>
+                <button pButton pRipple
+                        label="{{'Save' | localize}}"
+                        class=""
+                        icon="pi pi-save"
+                        type="submit"
+                        [disabled]="!editBOMForm.form.valid|| saving"></button>
+            </div>
+        </form>
+    </div>
+</div>

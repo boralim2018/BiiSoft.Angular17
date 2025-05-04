@@ -6,13 +6,14 @@ import { ItemSettingComponent } from '../item-setting/item-setting.component';
 import { ItemCodeFormulaComponent } from '../../item-code-formula/item-code-formula.component';
 import { AppPermissions } from '../../../../shared/AppPermissions';
 import { NgIf } from '@angular/common';
+import { BOMComponent } from '../../bom/bom.component';
 
 @Component({
     selector: 'app-item-tab',
     templateUrl: './item-tab.component.html',
     styleUrl: './item-tab.component.scss',
     standalone: true,
-    imports: [TabViewModule, ItemComponent, ItemSettingComponent, ItemCodeFormulaComponent, NgIf],
+    imports: [TabViewModule, ItemComponent, ItemSettingComponent, ItemCodeFormulaComponent, NgIf, BOMComponent]
 })
 export class ItemTabComponent extends IndexCacheComponentBase implements OnInit  {
 
