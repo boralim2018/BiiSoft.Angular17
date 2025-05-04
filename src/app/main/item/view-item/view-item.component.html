@@ -18,19 +18,43 @@
 
         <p-divider></p-divider>
 
-        <div class="grid">
+        <div class="grid nested-grid">
+            <div class="col-12 lg:col-6">
+                <img #image
+                     class="attachment-box"
+                     [src]="fileUrl | safeResourceUrl"
+                     alt="l('Image')" />
+            </div>
+            <div class="col-12 lg:col-6">
+                <div class="grid">
+                    <div class="col-4 py-2"> {{l('No.')}} </div>
+                    <div class="col-8 py-2 font-bold">: {{model.no}} </div>
 
-            <div class="col-4 lg:col-2 py-2"> {{l('No.')}} </div>
-            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.no}} </div>
+                    <div class="col-4 py-2"> {{l('Id')}} </div>
+                    <div class="col-8 py-2 font-bold">: {{model.id}} </div>
 
-            <div class="col-4 lg:col-2 py-2"> {{l('Name')}} </div>
-            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.name}} </div>
+                    <div class="col-4 py-2"> {{l('Name')}} </div>
+                    <div class="col-8 py-2 font-bold">: {{model.name}} </div>
 
-            <div class="col-4 lg:col-2 py-2"> {{l('DisplayName')}} </div>
-            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.displayName}} </div>
+                    <div class="col-4 py-2"> {{l('DisplayName')}} </div>
+                    <div class="col-8 py-2 font-bold">: {{model.displayName}} </div>
 
-            <div class="col-4 lg:col-2 py-2"> {{l('BusinessId')}} </div>
+                    <div class="col-4 py-2"> {{l('ItemType')}} </div>
+                    <div class="col-8 py-2 font-bold">: {{model.itemTypeName}} </div>
+
+                    <div class="col-4 py-2"> {{l('ItemCategory')}} </div>
+                    <div class="col-8 py-2 font-bold">: {{model.itemCategoryName}} </div>
+                </div>
+            </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('Code')}} </div>
             <div class="col-8 lg:col-4 py-2 font-bold">: {{model.code}}</div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('Barcode')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.barcode}}</div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('ALTCode')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.altCode}}</div>
 
             <div class="col-4 lg:col-2 py-2"> {{l('Description')}} </div>
             <div class="col-8 lg:col-4 py-2 font-bold">: {{model.description}}</div>
@@ -47,14 +71,171 @@
             <div class="col-4 lg:col-2 py-2"> {{l('LastModificationTime')}} </div>
             <div class="col-8 lg:col-4 py-2 font-bold">: {{model.lastModificationTime?.toDate() | date:'yyyy-MM-dd HH:mm:ss'}} </div>
 
-            <div class="col-4 lg:col-2 py-2"> {{l('Id')}} </div>
-            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.id}} </div>
-
             <div class="col-4 lg:col-2 py-2"> {{l('Status')}} </div>
             <div class="col-8 lg:col-4 py-2 font-bold">: <p-tag styleClass="px-3" [severity]="model.isActive ? 'success' : 'warning'" [value]="model.isActive ? l('Active') : l('Inactive')"></p-tag>   </div>
 
-
         </div>
+
+        <h5 class="text-primary">{{l('Unit')}}</h5>
+        <p-divider></p-divider>
+        <div class="grid">
+            <div class="col-4 lg:col-2 py-2"> {{l('PackageUnit')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.unitName}}</div>
+            <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useGrossWeight || appSession.itemSetting?.useNetWeight"> {{l('WeightUnit')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useGrossWeight || appSession.itemSetting?.useNetWeight">: {{model.weightUnitName}}</div>
+            <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useWidth || appSession.itemSetting?.useHeight || appSession.itemSetting?.useLength || appSession.itemSetting?.useDiameter"> {{l('LengthUnit')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useWidth || appSession.itemSetting?.useHeight || appSession.itemSetting?.useLength || appSession.itemSetting?.useDiameter">: {{model.lengthUnitName}}</div>
+            <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useArea"> {{l('AreaUnit')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useArea">: {{model.areaUnitName}}</div>
+            <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useVolume"> {{l('VolumeUnit')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useVolume">: {{model.volumeUnitName}}</div>
+        </div>
+
+        <ng-container *ngIf="appSession.itemSetting?.measurementEnable">
+            <h5 class="text-primary">{{l('Measurement')}}</h5>
+            <p-divider></p-divider>
+            <div class="grid">
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useGrossWeight"> {{l('GrossWeight')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useGrossWeight">: {{model.grossWeight}} {{model.weightUnitName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useNetWeight"> {{l('NetWeight')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useNetWeight">: {{model.netWeight}} {{model.weightUnitName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useWidth"> {{l('Width')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useWidth">: {{model.width}} {{model.lengthUnitName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useHeight"> {{l('Height')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useHeight">: {{model.height}} {{model.lengthUnitName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useLength"> {{l('Length')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useLength">: {{model.length}} {{model.lengthUnitName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useDiameter"> {{l('Diameter')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useDiameter">: {{model.diameter}} {{model.lengthUnitName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useArea"> {{l('Area')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useArea">: {{model.area}} {{model.areaUnitName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useVolume"> {{l('Volume')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useVolume">: {{model.volume}} {{model.volumeUnitName}}</div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="chartOfAccountEnable">
+            <h5 class="text-primary">{{l('Account')}}</h5>
+            <p-divider></p-divider>
+            <div class="grid">
+                <div class="col-4 lg:col-2 py-2">{{model.itemType==4 || model.itemType==5 ? l('COGSAccount') : l('PurchaseAccount')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold">: {{model.purchaseAccountName}}</div>
+                <div class="col-4 lg:col-2 py-2">{{l('SaleAccount')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold">: {{model.saleAccountName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="model.itemType==4">{{l('InventoryAccount')}} </div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="model.itemType==5">{{l('AssetAccount')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="model.itemType==4 || model.itemType==5">: {{model.inventoryAccountName}}</div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="appSession.itemSetting?.itemFilterEnable">
+            <h5 class="text-primary">{{l('Filter')}}</h5>
+            <p-divider></p-divider>
+            <div class="grid">
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useItemGroup">{{l('ItemGroup')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useItemGroup">: {{model.itemGroupName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useBrand">{{l('ItemBrand')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useBrand">: {{model.itemBrandName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useGrade">{{l('ItemGrade')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useGrade">: {{model.itemGradeName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useModel">{{l('ItemModel')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useModel">: {{model.itemModelName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useSize">{{l('ItemSize')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useSize">: {{model.itemSizeName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useSeries">{{l('ItemSeries')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useSeries">: {{model.itemSeriesName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useColorPattern">{{l('ColorPattern')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useColorPattern">: {{model.colorPatternName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useCPU">{{l('CPU')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useCPU">: {{model.cpuName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useRAM">{{l('RAM')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useRAM">: {{model.ramName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useVGA">{{l('VGA')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useVGA">: {{model.vgaName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useHDD">{{l('HDD')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useHDD">: {{model.hddName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useScreen">{{l('Screen')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useScreen">: {{model.screenName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useCamera">{{l('Camera')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useCamera">: {{model.cameraName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useBattery">{{l('Battery')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useBattery">: {{model.batteryName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useFieldA">{{appSession.itemSetting?.fieldALabel ? l(appSession.itemSetting?.fieldALabel) : l('FieldA')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useFieldA">: {{model.fieldAName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useFieldB">{{appSession.itemSetting?.fieldBLabel ? l(appSession.itemSetting?.fieldBLabel) : l('FieldB')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useFieldB">: {{model.fieldBName}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useFieldC">{{appSession.itemSetting?.fieldCLabel ? l(appSession.itemSetting?.fieldCLabel) : l('FieldC')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useFieldC">: {{model.fieldCName}}</div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="appSession.itemSetting?.stockTrackingEnable && (model.itemType==4 || model.itemType==5)">
+            <h5 class="text-primary">{{l('StockTracking')}}</h5>
+            <p-divider></p-divider>
+            <div class="grid">
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useMaxStock">{{l('MaxStock')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useMaxStock">: {{model.maxStock}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useMinStock">{{l('MinStock')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useMinStock">: {{model.minStock}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useReorderStock">{{l('ReorderStock')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useReorderStock">: {{model.reorderStock}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useSerial">{{l('TrackSerial')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useSerial">: {{model.trackSerial ? l('Yes') : l('No')}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useBatchNo && model.itemType==4">{{l('TrackBatchNo')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useBatchNo && model.itemType==4">: {{model.trackBatchNo ? l('Yes') : l('No')}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useExpired && model.itemType==4">{{l('TrackExpired')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useExpired && model.itemType==4">: {{model.trackExpired ? l('Yes') : l('No')}}</div>
+                <div class="col-4 lg:col-2 py-2" *ngIf="appSession.itemSetting?.useAssetStatus && model.itemType==5">{{l('TrackAssetStatus')}} </div>
+                <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="appSession.itemSetting?.useAssetStatus && model.itemType==5">: {{model.trackAssetStatus ? l('Yes') : l('No')}}</div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="model.itemType==4 || model.itemType==5">
+            <h5 class="block md:hidden text-primary">{{l('Zones')}}</h5>
+            <p-divider class="block md:hidden"></p-divider>
+            <p-table [value]="model.itemZones"
+                     [rowHover]="true"
+                     responsiveLayout="stack"
+                     [breakpoint]="'960px'">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th class="text-primary pl-0">{{l('Zone')}}</th>
+                        <th class="text-primary pl-0">{{l('Warehouse')}}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-z let-columns="columns">
+                    <tr>
+                        <td class="pl-0">
+                            <span class="p-column-title">{{l('Zone')}}</span>{{getObjLocalizeName(z)}}
+                        </td>
+                        <td class="pl-0">
+                            <span class="p-column-title">{{l('Warehouse')}}</span>{{z.warehouseName}}
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns="columns">
+                    <tr>
+                        <td [attr.colspan]="2" class="empty-message">
+                            <div recordNotFound [minHeight]="100"></div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-container>
+
+        <h5 class="text-primary">{{l('Other')}}</h5>
+        <p-divider></p-divider>
+        <div class="grid">
+            <div class="col-4 lg:col-2 py-2">{{l('IsModifier')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.isModifier ? l('Yes') : l('No')}}</div>
+            <div class="col-4 lg:col-2 py-2">{{l('IsAddOn')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.isAddOn ? l('Yes') : l('No')}}</div>
+            <div class="col-4 lg:col-2 py-2">{{l('UseBOM')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.useBOM ? l('Yes') : l('No')}}</div>
+            <div class="col-4 lg:col-2 py-2" *ngIf="model.useBOM">{{l('DisplayBOM')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold" *ngIf="model.useBOM">: {{model.displayBOM ? l('Yes') : l('No')}}</div>
+        </div>
+
 
         <p-divider></p-divider>
 

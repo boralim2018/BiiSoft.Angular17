@@ -37,9 +37,9 @@ export class AttachFileComponent extends BFileComponentBase implements OnInit, O
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        //if (changes['fileId'] && !changes['fileId'].firstChange) {
-        //    this.loadFile();
-        //}
+        if (changes['fileId'] /*&& !changes['fileId'].firstChange*/) {
+            this.loadFile();
+        }
     }
 
     loadFile() {
@@ -62,7 +62,6 @@ export class AttachFileComponent extends BFileComponentBase implements OnInit, O
 
     clearUpload(file: HTMLInputElement) {
         file.value = '';
-        this.loadFile();
     }
 
     uploadFile(file: HTMLInputElement) {
@@ -70,9 +69,9 @@ export class AttachFileComponent extends BFileComponentBase implements OnInit, O
             this.upload(file.files[0], this.uploadSource, (result) => {
                 if (result && result.id) {
                     this.fileId = result.id;
-                    this.fileIdChange.emit(this.fileId);
                     this.clearUpload(file);
-                    this.notify.info(this.l('SavedSuccessfully'));
+                    this.fileIdChange.emit(this.fileId);
+                    this.notify.info(this.l('UploadSuccessfully'));
                 }
             })
         }

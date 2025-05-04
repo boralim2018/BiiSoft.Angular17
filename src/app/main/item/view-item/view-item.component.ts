@@ -1,11 +1,10 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
-import { AppComponentBase, NavBarComponentBase } from '@shared/app-component-base';
+import { FileDownloadComponentBase, NavBarComponentBase } from '@shared/app-component-base';
 import { ItemDetailDto, ItemServiceProxy, GuidEntityDto } from '@shared/service-proxies/service-proxies';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, finalize, of } from 'rxjs';
-import * as moment from 'moment';
+import { finalize } from 'rxjs';
 import { AppPermissions } from '@shared/AppPermissions';
 import { ConfirmDeleteComponent } from '@shared/components/confirm-delete/confirm-delete.component';
 import { Mixin } from 'ts-mixer';
@@ -17,6 +16,10 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NavBarComponent } from '../../../../shared/components/nav-bar/nav-bar.component';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
+import { SafeUrlPipe } from '../../../../shared/pipes/safe-resource-url.pipe';
+import { AppConsts } from '../../../../shared/AppConsts';
+import { RecordNotFoundComponent } from '../../../../shared/components/record-not-found/record-not-found.component';
+import { TableModule } from 'primeng/table';
 
 @Component({
     selector: 'app-view-item',
@@ -24,17 +27,22 @@ import { BusyDirective } from '../../../../shared/directives/busy.directive';
     animations: [appModuleAnimation()],
     providers: [DialogService, ItemServiceProxy],
     standalone: true,
-    imports: [BusyDirective, NavBarComponent, ButtonDirective, Ripple, NgIf, DividerModule, TagModule, NgFor, ViewContactAddressComponent, DatePipe]
+    imports: [
+        BusyDirective, NavBarComponent, ButtonDirective, Ripple, NgIf, DividerModule, TagModule, NgFor,
+        ViewContactAddressComponent, DatePipe, SafeUrlPipe, TableModule, RecordNotFoundComponent]
 })
-export class ViewItemComponent extends Mixin(AppComponentBase, NavBarComponentBase) implements OnInit {
+export class ViewItemComponent extends Mixin(FileDownloadComponentBase, NavBarComponentBase) implements OnInit {
 
     loading: boolean;
     model: ItemDetailDto;
+    fileUrl: string = AppConsts.blankImageUrl;
 
     canEdit: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.edit);
     canDelete: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.delete);
     canEnable: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.enable);
     canDisable: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.disable);
+
+    chartOfAccountEnable: boolean = this.feature.isEnabled("App.Accounting.ChartOfAccounts");
 
     constructor(
         injector: Injector,
@@ -54,6 +62,17 @@ export class ViewItemComponent extends Mixin(AppComponentBase, NavBarComponentBa
         });
     }
 
+    loadFile() {
+        if (this.model.imageId) {
+            this.download(this.model.imageId, "blob", (result) => {
+                this.fileUrl = window.URL.createObjectURL(result);
+            });
+        }
+        else {
+            this.fileUrl = AppConsts.blankImageUrl;
+        }
+    }
+
     initNavBar() {
         this.title = this.l("View_", this.l("Item"));
         this.navBarItems.push({ label: this.l("Items"), routerLink: "/app/main/items" });
@@ -67,6 +86,8 @@ export class ViewItemComponent extends Mixin(AppComponentBase, NavBarComponentBa
             .pipe(finalize(() => this.loading = false))
             .subscribe((result: ItemDetailDto) => {
                 this.model = result;
+
+                this.loadFile();
             });
     }
 

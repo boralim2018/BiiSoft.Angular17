@@ -21,6 +21,7 @@ export class ItemTabComponent extends IndexCacheComponentBase implements OnInit 
     canViewItem: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.page);
     canViewItemSetting: boolean = this.isGranted(AppPermissions.pages.setup.items.itemList.canSetting);
     canViewItemCodeFormula: boolean = this.isGranted(AppPermissions.pages.setup.items.itemCodeFormulas.page);
+    canViewBOM: boolean = this.isGranted(AppPermissions.pages.setup.items.boms.page);
 
     constructor(
         injector: Injector

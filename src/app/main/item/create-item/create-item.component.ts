@@ -14,7 +14,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { appModuleAnimation } from '../../../../shared/animations/routerTransition';
 import { SelectItemCategoryComponent } from '../../../../shared/components/select-item-type/select-item-category.component';
 import { AttachFileComponent } from '../../../../shared/components/attach-file/attach-file.component';
-import { AccountTypeFilter, AccountTypes, ItemTypes, UploadSource } from '../../../../shared/AppEnums';
+import { AccountTypeFilter, ItemTypes, UploadSource } from '../../../../shared/AppEnums';
 import { AppConsts } from '../../../../shared/AppConsts';
 import { SelectItemTypeComponent } from '../../../../shared/components/select-item-type/select-item-type.component';
 import { FindUnitComponent } from '../../../../shared/components/find-unit/find-unit.component';
@@ -66,21 +66,17 @@ import { RecordNotFoundComponent } from '../../../../shared/components/record-no
 })
 export class CreateItemComponent extends IndexCacheComponentBase implements OnInit {
     saving = false;
-    model: CreateUpdateItemInputDto = new CreateUpdateItemInputDto();
-    users: any[] = [];
+    model: CreateUpdateItemInputDto;
+    findModel: any;
+    selectedZones: any[] = [];
+    inventoryAccountType: AccountTypeFilter;;
+    purchaseAccountType: AccountTypeFilter;
+    saleAccountType: AccountTypeFilter;
 
     blankImageUrl: string = AppConsts.blankImageUrl;
-    uploadUrl: string = '/CompanyProfile/Upload';
-    uploadSource: number = UploadSource.CompanyLogo;
-
+    uploadUrl: string = '/BFile/UploadImage';
+    uploadSource: UploadSource = UploadSource.Item;
     indexCacheKey: string = 'createItemTabCache';
-
-    inventoryAccountType: AccountTypeFilter = AccountTypeFilter.Inventory;
-    purchaseAccountType: AccountTypeFilter = AccountTypeFilter.COGS;
-    saleAccountType: AccountTypeFilter = AccountTypeFilter.Revenue;
-
-    selectedZones: any[] = [];
-    findModel: any;
 
     chartOfAccountEnable: boolean = this.feature.isEnabled("App.Accounting.ChartOfAccounts");
 
@@ -93,11 +89,20 @@ export class CreateItemComponent extends IndexCacheComponentBase implements OnIn
 
     ngOnInit(): void {
         this.initModel();
-        this.initIndexFromCache();this.appSession.itemSetting.useAssetStatus
+        this.initIndexFromCache();
     }
 
     initModel() {
+
+        this.inventoryAccountType = AccountTypeFilter.Inventory;
+        this.purchaseAccountType = AccountTypeFilter.COGS;
+        this.saleAccountType = AccountTypeFilter.Revenue;
+
         this.findModel = {
+            weightUnit: AppConsts.WeightUnit,
+            lengthUnit: AppConsts.LengthUnit,
+            areaUnit: AppConsts.AreaUnit,
+            volumeUnit: AppConsts.VolumeUnit,
             unit: null,
             itemGroup: null,
             itemBrand: null,
@@ -119,14 +124,14 @@ export class CreateItemComponent extends IndexCacheComponentBase implements OnIn
             inventoryAccount: null,
             purchaseAccount: null,
             saleAccount: null,
-            weightUnit: AppConsts.WeightUnit,
-            lengthUnit: AppConsts.LengthUnit,
-            areaUnit: AppConsts.AreaUnit,
-            volumeUnit: AppConsts.VolumeUnit,
         };
 
         this.model = CreateUpdateItemInputDto.fromJS({
-            itemType: 4,
+            itemType: ItemTypes.Inventory,
+            weightUnit: AppConsts.WeightUnit.value,
+            lengthUnit: AppConsts.LengthUnit.value,
+            areaUnit: AppConsts.AreaUnit.value,
+            VolumeUnit: AppConsts.VolumeUnit.value,
             grossWeight: 0,
             netWeight: 0,
             width: 0,
@@ -139,12 +144,14 @@ export class CreateItemComponent extends IndexCacheComponentBase implements OnIn
             maxStock: 0,
             reorderStock: 0,
             itemZones: [],
+            inventoryAccountId: this.appSession.itemSetting?.inventoryAccountId,
+            purchaseAccountId: this.appSession.itemSetting?.cogsAccountId,
+            saleAccountId: this.appSession.itemSetting?.revenueAccountId,
         });
 
-        if (this.appSession) {
-            
-        }
-
+        if (this.appSession.itemSetting?.inventoryAccountId) this.findModel.inventoryAccount = { id: this.appSession.itemSetting?.inventoryAccountId, name: this.appSession.itemSetting?.inventoryAccountName };
+        if (this.appSession.itemSetting?.cogsAccountId) this.findModel.purchaseAccount = { id: this.appSession.itemSetting?.cogsAccountId, name: this.appSession.itemSetting?.cogsAccountName };
+        if (this.appSession.itemSetting?.revenueAccountId) this.findModel.saleAccount = { id: this.appSession.itemSetting?.revenueAccountId, name: this.appSession.itemSetting?.revenueAccountName };
     };
 
     save(form?: NgForm): void {
@@ -177,15 +184,55 @@ export class CreateItemComponent extends IndexCacheComponentBase implements OnIn
         
         if (type == ItemTypes.Inventory) {
             this.inventoryAccountType = AccountTypeFilter.Inventory;
-            this.purchaseAccountType = AccountTypeFilter.COGS;
+
+            if (this.appSession.itemSetting?.inventoryAccountId) {
+                this.findModel.inventoryAccount = { id: this.appSession.itemSetting?.inventoryAccountId, name: this.appSession.itemSetting?.inventoryAccountName };
+                this.model.inventoryAccountId = this.appSession.itemSetting?.inventoryAccountId;
+            }
+            else {
+                this.findModel.inventoryAccount = null;
+                this.model.inventoryAccountId = null;
+            }
         }
         else if (type == ItemTypes.Asset) {
             this.inventoryAccountType = AccountTypeFilter.FixedAsset;
+
+            if (this.appSession.itemSetting?.assetAccountId) {
+                this.findModel.inventoryAccount = { id: this.appSession.itemSetting?.assetAccountId, name: this.appSession.itemSetting?.assetAccountName };
+                this.model.inventoryAccountId = this.appSession.itemSetting?.assetAccountId;
+            }
+            else {
+                this.findModel.inventoryAccount = null;
+                this.model.inventoryAccountId = null;
+            }
+        }
+
+        if (type == ItemTypes.Inventory || type == ItemTypes.Asset) {
             this.purchaseAccountType = AccountTypeFilter.COGS;
+
+            if (this.appSession.itemSetting?.cogsAccountId) {
+                this.findModel.purchaseAccount = { id: this.appSession.itemSetting?.cogsAccountId, name: this.appSession.itemSetting?.cogsAccountName };
+                this.model.purchaseAccountId = this.appSession.itemSetting?.cogsAccountId;
+            }
+            else {
+                this.findModel.purchaseAccount = null;
+                this.model.purchaseAccountId = null;
+            }
         }
         else {
             this.purchaseAccountType = AccountTypeFilter.COGSExpense;
+
+            if (this.appSession.itemSetting?.expenseAccountId) {
+                this.findModel.purchaseAccount = { id: this.appSession.itemSetting?.expenseAccountId, name: this.appSession.itemSetting?.expenseAccountName };
+                this.model.purchaseAccountId = this.appSession.itemSetting?.expenseAccountId;
+            }
+            else {
+                this.findModel.purchaseAccount = null;
+                this.model.purchaseAccountId = null;
+            }
         }
+
+        this.model.useBOM = type == ItemTypes.Menu || type == ItemTypes.Bundle;
     }
 
     onZoneChange(zones: any[]) {

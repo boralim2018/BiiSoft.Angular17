@@ -150,13 +150,33 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
             { name: 'Code', header: 'Code', width: '15rem', sort: true },
-            { name: 'ItemCategoryName', header: 'ItemCategory', width: '15rem', sort: true },
+            { name: 'Barcode', header: 'Barcode', width: '15rem', sort: true },
+            { name: 'ALTCode', header: 'ALTCode', width: '15rem', sort: true, visible: false },
+            { name: 'ItemType', header: 'ItemType', width: '15rem', sort: true, display: 'ItemTypeName' },
+            { name: 'ItemCategory', header: 'ItemCategory', width: '15rem', sort: true, display: 'ItemCategoryName' },
             { name: 'UnitName', header: 'Unit', width: '15rem', sort: true },
             { name: 'Description', header: 'Description', width: '15rem', sort: true, visible: false },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
+            { name: 'IsModifier', header: 'IsModifier', width: '15rem', sort: true, visible: false },
+            { name: 'IsAddOn', header: 'IsAddOn', width: '15rem', sort: true, visible: false },
+            { name: 'UseBOM', header: 'UseBOM', width: '15rem', sort: true, visible: false },
+            { name: 'DisplayBOM', header: 'DisplayBOM', width: '15rem', sort: true, visible: false },
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
             { name: 'LastModifierUserName', header: 'Modified', width: '15rem', sort: true, type: ColumnType.WrapText, visible: false },
         ];
+
+        if (this.appSession.itemSetting?.useGrossWeight) this.columns.push({ name: 'GrossWeight', header: 'GrossWeight', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useNetWeight) this.columns.push({ name: 'NetWeight', header: 'NetWeight', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useWidth) this.columns.push({ name: 'Width', header: 'Width', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useHeight) this.columns.push({ name: 'Height', header: 'Height', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useLength) this.columns.push({ name: 'Length', header: 'Length', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useDiameter) this.columns.push({ name: 'Diameter', header: 'Diameter', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useArea) this.columns.push({ name: 'Area', header: 'Area', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useVolume) this.columns.push({ name: 'Volume', header: 'Volume', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useSerial) this.columns.push({ name: 'TrackSerial', header: 'TrackSerial', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useBatchNo) this.columns.push({ name: 'TrackBatchNo', header: 'TrackBatchNo', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useExpired) this.columns.push({ name: 'TrackExpired', header: 'TrackExpired', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useAssetStatus) this.columns.push({ name: 'TrackAssetStatus', header: 'TrackAssetStatus', width: '15rem', sort: true, visible: false });
 
         if (this.appSession.itemSetting?.useItemGroup) this.columns.push({ name: 'ItemGroupName', header: 'ItemGroup', width: '15rem', sort: true, visible: false });
         if (this.appSession.itemSetting?.useBrand) this.columns.push({ name: 'ItemBrandName', header: 'ItemBrand', width: '15rem', sort: true, visible: false });
@@ -167,7 +187,7 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         if (this.appSession.itemSetting?.useColorPattern) this.columns.push({ name: 'ColorPatternName', header: 'ColorPattern', width: '15rem', sort: true, visible: false });
         if (this.appSession.itemSetting?.useCPU) this.columns.push({ name: 'CPUName', header: 'CPU', width: '15rem', sort: true, visible: false });
         if (this.appSession.itemSetting?.useRAM) this.columns.push({ name: 'RAMName', header: 'RAM', width: '15rem', sort: true, visible: false });
-        if (this.appSession.itemSetting?.useVGA) this.columns.push({ name: 'VAGName', header: 'VGA', width: '15rem', sort: true, visible: false });
+        if (this.appSession.itemSetting?.useVGA) this.columns.push({ name: 'VGAName', header: 'VGA', width: '15rem', sort: true, visible: false });
         if (this.appSession.itemSetting?.useHDD) this.columns.push({ name: 'HDDName', header: 'HDD', width: '15rem', sort: true, visible: false });
         if (this.appSession.itemSetting?.useScreen) this.columns.push({ name: 'ScreenName', header: 'Screen', width: '15rem', sort: true, visible: false });
         if (this.appSession.itemSetting?.useCamera) this.columns.push({ name: 'CameraName', header: 'Camera', width: '15rem', sort: true, visible: false });

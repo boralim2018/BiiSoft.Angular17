@@ -405,6 +405,19 @@ export class AppPermissions {
                     setAsDefault: "Pages.Setup.Items.FieldCs.SetAsDefault",
                 },
 
+                boms: {
+                    page: "Pages.Setup.Items.BOMs",
+                    create: "Pages.Setup.Items.BOMs.Create",
+                    view: "Pages.Setup.Items.BOMs.View",
+                    edit: "Pages.Setup.Items.BOMs.Edit",
+                    delete: "Pages.Setup.Items.BOMs.Delete",
+                    importExcel: "Pages.Setup.Items.BOMs.ImportExcel",
+                    exportExcel: "Pages.Setup.Items.BOMs.ExportExcel",
+                    enable: "Pages.Setup.Items.BOMs.Enable",
+                    disable: "Pages.Setup.Items.BOMs.Disable",
+                    setAsDefault: "Pages.Setup.Items.BOMs.SetAsDefault",
+                },
+
                 priceList: {
                     page: "Pages.Setup.Items.PriceList",
                     create: "Pages.Setup.Items.PriceList.Create",

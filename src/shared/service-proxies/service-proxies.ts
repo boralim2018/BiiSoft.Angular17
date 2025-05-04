@@ -1525,6 +1525,835 @@ export class BatteryServiceProxy {
 }
 
 @Injectable()
+export class BOMServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    create(body: CreateUpdateBOMInputDto | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<string>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<string>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<string> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return OK
+     */
+    delete(id: string | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    disable(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/Disable";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDisable(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDisable(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDisable(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    enable(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/Enable";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEnable(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEnable(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processEnable(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    setAsDefault(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/SetAsDefault";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSetAsDefault(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSetAsDefault(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processSetAsDefault(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    unsetAsDefault(body: GuidEntityDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/UnsetAsDefault";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUnsetAsDefault(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUnsetAsDefault(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUnsetAsDefault(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getDefaultValue(): Observable<FindBOMDto> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/GetDefaultValue";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDefaultValue(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDefaultValue(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FindBOMDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FindBOMDto>;
+        }));
+    }
+
+    protected processGetDefaultValue(response: HttpResponseBase): Observable<FindBOMDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FindBOMDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    find(body: FindBOMInputDto | undefined): Observable<FindBOMDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/Find";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFind(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFind(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FindBOMDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FindBOMDtoPagedResultDto>;
+        }));
+    }
+
+    protected processFind(response: HttpResponseBase): Observable<FindBOMDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FindBOMDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return OK
+     */
+    getDetail(id: string | undefined): Observable<BOMDetailDto> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/GetDetail?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDetail(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDetail(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<BOMDetailDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<BOMDetailDto>;
+        }));
+    }
+
+    protected processGetDetail(response: HttpResponseBase): Observable<BOMDetailDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = BOMDetailDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param typeFilter_Exclude (optional) 
+     * @param typeFilter_Ids (optional) 
+     * @param itemFilter_Exclude (optional) 
+     * @param itemFilter_Ids (optional) 
+     * @param isActive (optional) 
+     * @param creators_Exclude (optional) 
+     * @param creators_Ids (optional) 
+     * @param modifiers_Exclude (optional) 
+     * @param modifiers_Ids (optional) 
+     * @param keyword (optional) 
+     * @param sortField (optional) 
+     * @param sortMode (optional) 
+     * @param usePagination (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return OK
+     */
+    getList(typeFilter_Exclude: boolean | undefined, typeFilter_Ids: BOMType[] | undefined, itemFilter_Exclude: boolean | undefined, itemFilter_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<BOMListDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/GetList?";
+        if (typeFilter_Exclude === null)
+            throw new Error("The parameter 'typeFilter_Exclude' cannot be null.");
+        else if (typeFilter_Exclude !== undefined)
+            url_ += "TypeFilter.Exclude=" + encodeURIComponent("" + typeFilter_Exclude) + "&";
+        if (typeFilter_Ids === null)
+            throw new Error("The parameter 'typeFilter_Ids' cannot be null.");
+        else if (typeFilter_Ids !== undefined)
+            typeFilter_Ids && typeFilter_Ids.forEach(item => { url_ += "TypeFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (itemFilter_Exclude === null)
+            throw new Error("The parameter 'itemFilter_Exclude' cannot be null.");
+        else if (itemFilter_Exclude !== undefined)
+            url_ += "ItemFilter.Exclude=" + encodeURIComponent("" + itemFilter_Exclude) + "&";
+        if (itemFilter_Ids === null)
+            throw new Error("The parameter 'itemFilter_Ids' cannot be null.");
+        else if (itemFilter_Ids !== undefined)
+            itemFilter_Ids && itemFilter_Ids.forEach(item => { url_ += "ItemFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (isActive === null)
+            throw new Error("The parameter 'isActive' cannot be null.");
+        else if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (creators_Exclude === null)
+            throw new Error("The parameter 'creators_Exclude' cannot be null.");
+        else if (creators_Exclude !== undefined)
+            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
+        if (creators_Ids === null)
+            throw new Error("The parameter 'creators_Ids' cannot be null.");
+        else if (creators_Ids !== undefined)
+            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifiers_Exclude === null)
+            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
+        else if (modifiers_Exclude !== undefined)
+            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
+        if (modifiers_Ids === null)
+            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
+        else if (modifiers_Ids !== undefined)
+            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
+            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (sortField === null)
+            throw new Error("The parameter 'sortField' cannot be null.");
+        else if (sortField !== undefined)
+            url_ += "SortField=" + encodeURIComponent("" + sortField) + "&";
+        if (sortMode === null)
+            throw new Error("The parameter 'sortMode' cannot be null.");
+        else if (sortMode !== undefined)
+            url_ += "SortMode=" + encodeURIComponent("" + sortMode) + "&";
+        if (usePagination === null)
+            throw new Error("The parameter 'usePagination' cannot be null.");
+        else if (usePagination !== undefined)
+            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetList(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<BOMListDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<BOMListDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetList(response: HttpResponseBase): Observable<BOMListDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = BOMListDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    exportExcel(body: ExportExcelBOMInputDto | undefined): Observable<ExportFileOutput> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/ExportExcel";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportExcel(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ExportFileOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ExportFileOutput>;
+        }));
+    }
+
+    protected processExportExcel(response: HttpResponseBase): Observable<ExportFileOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExportFileOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    exportExcelTemplate(): Observable<ExportFileOutput> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/ExportExcelTemplate";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportExcelTemplate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportExcelTemplate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ExportFileOutput>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ExportFileOutput>;
+        }));
+    }
+
+    protected processExportExcelTemplate(response: HttpResponseBase): Observable<ExportFileOutput> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExportFileOutput.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    importExcel(body: FileTokenInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/ImportExcel";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processImportExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processImportExcel(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processImportExcel(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    update(body: CreateUpdateBOMInputDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BOM/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+}
+
+@Injectable()
 export class BranchServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -13310,6 +14139,58 @@ export class ItemServiceProxy {
                 result200 = resultData200 !== undefined ? resultData200 : <any>null;
     
             return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return OK
+     */
+    updateImage(body: GuidUpdateFileInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Item/UpdateImage";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateImage(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateImage(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdateImage(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -32564,6 +33445,413 @@ export interface IAuthenticateResultModel {
     userId: number;
 }
 
+export class BOMDetailDto implements IBOMDetailDto {
+    id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    isDefault: boolean;
+    no: number;
+    type: BOMType;
+    typeName: string | undefined;
+    itemId: string;
+    itemName: string | undefined;
+    bomItems: BOMItemDto[] | undefined;
+
+    constructor(data?: IBOMDetailDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.firstId = _data["firstId"];
+            this.nextId = _data["nextId"];
+            this.previousId = _data["previousId"];
+            this.lastId = _data["lastId"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creatorUserName = _data["creatorUserName"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModifierUserName = _data["lastModifierUserName"];
+            this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.isDefault = _data["isDefault"];
+            this.no = _data["no"];
+            this.type = _data["type"];
+            this.typeName = _data["typeName"];
+            this.itemId = _data["itemId"];
+            this.itemName = _data["itemName"];
+            if (Array.isArray(_data["bomItems"])) {
+                this.bomItems = [] as any;
+                for (let item of _data["bomItems"])
+                    this.bomItems.push(BOMItemDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): BOMDetailDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BOMDetailDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["firstId"] = this.firstId;
+        data["nextId"] = this.nextId;
+        data["previousId"] = this.previousId;
+        data["lastId"] = this.lastId;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creatorUserName"] = this.creatorUserName;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModifierUserName"] = this.lastModifierUserName;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["isDefault"] = this.isDefault;
+        data["no"] = this.no;
+        data["type"] = this.type;
+        data["typeName"] = this.typeName;
+        data["itemId"] = this.itemId;
+        data["itemName"] = this.itemName;
+        if (Array.isArray(this.bomItems)) {
+            data["bomItems"] = [];
+            for (let item of this.bomItems)
+                data["bomItems"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): BOMDetailDto {
+        const json = this.toJSON();
+        let result = new BOMDetailDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBOMDetailDto {
+    id: string;
+    firstId: string | undefined;
+    nextId: string | undefined;
+    previousId: string | undefined;
+    lastId: string | undefined;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    isDefault: boolean;
+    no: number;
+    type: BOMType;
+    typeName: string | undefined;
+    itemId: string;
+    itemName: string | undefined;
+    bomItems: BOMItemDto[] | undefined;
+}
+
+export class BOMItemDto implements IBOMItemDto {
+    id: string | undefined;
+    itemId: string;
+    itemName: string | undefined;
+    qty: number;
+
+    constructor(data?: IBOMItemDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.itemId = _data["itemId"];
+            this.itemName = _data["itemName"];
+            this.qty = _data["qty"];
+        }
+    }
+
+    static fromJS(data: any): BOMItemDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BOMItemDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["itemId"] = this.itemId;
+        data["itemName"] = this.itemName;
+        data["qty"] = this.qty;
+        return data;
+    }
+
+    clone(): BOMItemDto {
+        const json = this.toJSON();
+        let result = new BOMItemDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBOMItemDto {
+    id: string | undefined;
+    itemId: string;
+    itemName: string | undefined;
+    qty: number;
+}
+
+export class BOMListDto implements IBOMListDto {
+    id: string;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    isDefault: boolean;
+    no: number;
+    type: BOMType;
+    typeName: string | undefined;
+    itemId: string;
+    itemName: string | undefined;
+
+    constructor(data?: IBOMListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.creatorUserId = _data["creatorUserId"];
+            this.creatorUserName = _data["creatorUserName"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.lastModifierUserId = _data["lastModifierUserId"];
+            this.lastModifierUserName = _data["lastModifierUserName"];
+            this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.isDefault = _data["isDefault"];
+            this.no = _data["no"];
+            this.type = _data["type"];
+            this.typeName = _data["typeName"];
+            this.itemId = _data["itemId"];
+            this.itemName = _data["itemName"];
+        }
+    }
+
+    static fromJS(data: any): BOMListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BOMListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["creatorUserId"] = this.creatorUserId;
+        data["creatorUserName"] = this.creatorUserName;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId;
+        data["lastModifierUserName"] = this.lastModifierUserName;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["isDefault"] = this.isDefault;
+        data["no"] = this.no;
+        data["type"] = this.type;
+        data["typeName"] = this.typeName;
+        data["itemId"] = this.itemId;
+        data["itemName"] = this.itemName;
+        return data;
+    }
+
+    clone(): BOMListDto {
+        const json = this.toJSON();
+        let result = new BOMListDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBOMListDto {
+    id: string;
+    creatorUserId: number | undefined;
+    creatorUserName: string | undefined;
+    creationTime: moment.Moment | undefined;
+    lastModifierUserId: number | undefined;
+    lastModifierUserName: string | undefined;
+    lastModificationTime: moment.Moment | undefined;
+    isActive: boolean;
+    name: string | undefined;
+    displayName: string | undefined;
+    isDefault: boolean;
+    no: number;
+    type: BOMType;
+    typeName: string | undefined;
+    itemId: string;
+    itemName: string | undefined;
+}
+
+export class BOMListDtoPagedResultDto implements IBOMListDtoPagedResultDto {
+    items: BOMListDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IBOMListDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(BOMListDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): BOMListDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BOMListDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): BOMListDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new BOMListDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBOMListDtoPagedResultDto {
+    items: BOMListDto[] | undefined;
+    totalCount: number;
+}
+
+export enum BOMType {
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+}
+
+export class BOMTypeFilterInputDto implements IBOMTypeFilterInputDto {
+    exclude: boolean;
+    ids: BOMType[] | undefined;
+
+    constructor(data?: IBOMTypeFilterInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.exclude = _data["exclude"];
+            if (Array.isArray(_data["ids"])) {
+                this.ids = [] as any;
+                for (let item of _data["ids"])
+                    this.ids.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): BOMTypeFilterInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BOMTypeFilterInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["exclude"] = this.exclude;
+        if (Array.isArray(this.ids)) {
+            data["ids"] = [];
+            for (let item of this.ids)
+                data["ids"].push(item);
+        }
+        return data;
+    }
+
+    clone(): BOMTypeFilterInputDto {
+        const json = this.toJSON();
+        let result = new BOMTypeFilterInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBOMTypeFilterInputDto {
+    exclude: boolean;
+    ids: BOMType[] | undefined;
+}
+
 export class BatteryDetailDto implements IBatteryDetailDto {
     id: string;
     firstId: string | undefined;
@@ -35967,6 +37255,77 @@ export interface ICreateTenantDto {
     editionId: number | undefined;
 }
 
+export class CreateUpdateBOMInputDto implements ICreateUpdateBOMInputDto {
+    id: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
+    type: BOMType;
+    itemId: string;
+    bomBranches: BOMItemDto[] | undefined;
+
+    constructor(data?: ICreateUpdateBOMInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.type = _data["type"];
+            this.itemId = _data["itemId"];
+            if (Array.isArray(_data["bomBranches"])) {
+                this.bomBranches = [] as any;
+                for (let item of _data["bomBranches"])
+                    this.bomBranches.push(BOMItemDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateUpdateBOMInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateUpdateBOMInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["type"] = this.type;
+        data["itemId"] = this.itemId;
+        if (Array.isArray(this.bomBranches)) {
+            data["bomBranches"] = [];
+            for (let item of this.bomBranches)
+                data["bomBranches"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): CreateUpdateBOMInputDto {
+        const json = this.toJSON();
+        let result = new CreateUpdateBOMInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateUpdateBOMInputDto {
+    id: string | undefined;
+    name: string | undefined;
+    displayName: string | undefined;
+    type: BOMType;
+    itemId: string;
+    bomBranches: BOMItemDto[] | undefined;
+}
+
 export class CreateUpdateBatteryInputDto implements ICreateUpdateBatteryInputDto {
     id: string | undefined;
     name: string | undefined;
@@ -37316,7 +38675,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
     inventoryAccountId: string | undefined;
     description: string | undefined;
     itemZones: ItemZoneDto[] | undefined;
-    isModified: boolean;
+    isModifier: boolean;
     isAddOn: boolean;
     useBOM: boolean;
     displayBOM: boolean;
@@ -37388,7 +38747,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
                 for (let item of _data["itemZones"])
                     this.itemZones.push(ItemZoneDto.fromJS(item));
             }
-            this.isModified = _data["isModified"];
+            this.isModifier = _data["isModifier"];
             this.isAddOn = _data["isAddOn"];
             this.useBOM = _data["useBOM"];
             this.displayBOM = _data["displayBOM"];
@@ -37460,7 +38819,7 @@ export class CreateUpdateItemInputDto implements ICreateUpdateItemInputDto {
             for (let item of this.itemZones)
                 data["itemZones"].push(item.toJSON());
         }
-        data["isModified"] = this.isModified;
+        data["isModifier"] = this.isModifier;
         data["isAddOn"] = this.isAddOn;
         data["useBOM"] = this.useBOM;
         data["displayBOM"] = this.displayBOM;
@@ -37528,7 +38887,7 @@ export interface ICreateUpdateItemInputDto {
     inventoryAccountId: string | undefined;
     description: string | undefined;
     itemZones: ItemZoneDto[] | undefined;
-    isModified: boolean;
+    isModifier: boolean;
     isAddOn: boolean;
     useBOM: boolean;
     displayBOM: boolean;
@@ -39225,6 +40584,101 @@ export interface IExportAuditLogsInput {
     hasException: boolean | undefined;
     minExecutionDuration: number | undefined;
     maxExecutionDuration: number | undefined;
+    columns: ColumnOutput[] | undefined;
+}
+
+export class ExportExcelBOMInputDto implements IExportExcelBOMInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    typeFilter: BOMTypeFilterInputDto;
+    itemFilter: GuidFilterInputDto;
+    columns: ColumnOutput[] | undefined;
+
+    constructor(data?: IExportExcelBOMInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.typeFilter = _data["typeFilter"] ? BOMTypeFilterInputDto.fromJS(_data["typeFilter"]) : <any>undefined;
+            this.itemFilter = _data["itemFilter"] ? GuidFilterInputDto.fromJS(_data["itemFilter"]) : <any>undefined;
+            if (Array.isArray(_data["columns"])) {
+                this.columns = [] as any;
+                for (let item of _data["columns"])
+                    this.columns.push(ColumnOutput.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ExportExcelBOMInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ExportExcelBOMInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["typeFilter"] = this.typeFilter ? this.typeFilter.toJSON() : <any>undefined;
+        data["itemFilter"] = this.itemFilter ? this.itemFilter.toJSON() : <any>undefined;
+        if (Array.isArray(this.columns)) {
+            data["columns"] = [];
+            for (let item of this.columns)
+                data["columns"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): ExportExcelBOMInputDto {
+        const json = this.toJSON();
+        let result = new ExportExcelBOMInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IExportExcelBOMInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    typeFilter: BOMTypeFilterInputDto;
+    itemFilter: GuidFilterInputDto;
     columns: ColumnOutput[] | undefined;
 }
 
@@ -43140,6 +44594,215 @@ export class FileTokenInput implements IFileTokenInput {
 
 export interface IFileTokenInput {
     token: string | undefined;
+}
+
+export class FindBOMDto implements IFindBOMDto {
+    id: string;
+    name: string | undefined;
+    displayName: string | undefined;
+    isActive: boolean;
+    type: BOMType;
+    typeName: string | undefined;
+    itemId: string;
+    itemName: string | undefined;
+
+    constructor(data?: IFindBOMDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+            this.isActive = _data["isActive"];
+            this.type = _data["type"];
+            this.typeName = _data["typeName"];
+            this.itemId = _data["itemId"];
+            this.itemName = _data["itemName"];
+        }
+    }
+
+    static fromJS(data: any): FindBOMDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindBOMDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        data["isActive"] = this.isActive;
+        data["type"] = this.type;
+        data["typeName"] = this.typeName;
+        data["itemId"] = this.itemId;
+        data["itemName"] = this.itemName;
+        return data;
+    }
+
+    clone(): FindBOMDto {
+        const json = this.toJSON();
+        let result = new FindBOMDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindBOMDto {
+    id: string;
+    name: string | undefined;
+    displayName: string | undefined;
+    isActive: boolean;
+    type: BOMType;
+    typeName: string | undefined;
+    itemId: string;
+    itemName: string | undefined;
+}
+
+export class FindBOMDtoPagedResultDto implements IFindBOMDtoPagedResultDto {
+    items: FindBOMDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IFindBOMDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(FindBOMDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): FindBOMDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindBOMDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): FindBOMDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new FindBOMDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindBOMDtoPagedResultDto {
+    items: FindBOMDto[] | undefined;
+    totalCount: number;
+}
+
+export class FindBOMInputDto implements IFindBOMInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    typeFilter: BOMTypeFilterInputDto;
+    itemFilter: GuidFilterInputDto;
+
+    constructor(data?: IFindBOMInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
+            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.typeFilter = _data["typeFilter"] ? BOMTypeFilterInputDto.fromJS(_data["typeFilter"]) : <any>undefined;
+            this.itemFilter = _data["itemFilter"] ? GuidFilterInputDto.fromJS(_data["itemFilter"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): FindBOMInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new FindBOMInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
+        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["typeFilter"] = this.typeFilter ? this.typeFilter.toJSON() : <any>undefined;
+        data["itemFilter"] = this.itemFilter ? this.itemFilter.toJSON() : <any>undefined;
+        return data;
+    }
+
+    clone(): FindBOMInputDto {
+        const json = this.toJSON();
+        let result = new FindBOMInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFindBOMInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creators: Int64NullableFilterInputDto;
+    modifiers: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    typeFilter: BOMTypeFilterInputDto;
+    itemFilter: GuidFilterInputDto;
 }
 
 export class FindBatteryDto implements IFindBatteryDto {
@@ -48061,6 +49724,53 @@ export interface IGuidNullableFilterInputDto {
     ids: string[] | undefined;
 }
 
+export class GuidUpdateFileInput implements IGuidUpdateFileInput {
+    id: string;
+    fileId: string | undefined;
+
+    constructor(data?: IGuidUpdateFileInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.fileId = _data["fileId"];
+        }
+    }
+
+    static fromJS(data: any): GuidUpdateFileInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new GuidUpdateFileInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["fileId"] = this.fileId;
+        return data;
+    }
+
+    clone(): GuidUpdateFileInput {
+        const json = this.toJSON();
+        let result = new GuidUpdateFileInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGuidUpdateFileInput {
+    id: string;
+    fileId: string | undefined;
+}
+
 export class HDDDetailDto implements IHDDDetailDto {
     id: string;
     firstId: string | undefined;
@@ -49793,7 +51503,7 @@ export class ItemDetailDto implements IItemDetailDto {
     inventoryAccountName: string | undefined;
     description: string | undefined;
     itemZones: ItemZoneDto[] | undefined;
-    isModified: boolean;
+    isModifier: boolean;
     isAddOn: boolean;
     useBOM: boolean;
     displayBOM: boolean;
@@ -49903,7 +51613,7 @@ export class ItemDetailDto implements IItemDetailDto {
                 for (let item of _data["itemZones"])
                     this.itemZones.push(ItemZoneDto.fromJS(item));
             }
-            this.isModified = _data["isModified"];
+            this.isModifier = _data["isModifier"];
             this.isAddOn = _data["isAddOn"];
             this.useBOM = _data["useBOM"];
             this.displayBOM = _data["displayBOM"];
@@ -50013,7 +51723,7 @@ export class ItemDetailDto implements IItemDetailDto {
             for (let item of this.itemZones)
                 data["itemZones"].push(item.toJSON());
         }
-        data["isModified"] = this.isModified;
+        data["isModifier"] = this.isModifier;
         data["isAddOn"] = this.isAddOn;
         data["useBOM"] = this.useBOM;
         data["displayBOM"] = this.displayBOM;
@@ -50119,7 +51829,7 @@ export interface IItemDetailDto {
     inventoryAccountName: string | undefined;
     description: string | undefined;
     itemZones: ItemZoneDto[] | undefined;
-    isModified: boolean;
+    isModifier: boolean;
     isAddOn: boolean;
     useBOM: boolean;
     displayBOM: boolean;
@@ -50692,7 +52402,7 @@ export class ItemListDto implements IItemListDto {
     fieldBName: string | undefined;
     fieldCName: string | undefined;
     description: string | undefined;
-    isModified: boolean;
+    isModifier: boolean;
     isAddOn: boolean;
     useBOM: boolean;
     displayBOM: boolean;
@@ -50768,7 +52478,7 @@ export class ItemListDto implements IItemListDto {
             this.fieldBName = _data["fieldBName"];
             this.fieldCName = _data["fieldCName"];
             this.description = _data["description"];
-            this.isModified = _data["isModified"];
+            this.isModifier = _data["isModifier"];
             this.isAddOn = _data["isAddOn"];
             this.useBOM = _data["useBOM"];
             this.displayBOM = _data["displayBOM"];
@@ -50844,7 +52554,7 @@ export class ItemListDto implements IItemListDto {
         data["fieldBName"] = this.fieldBName;
         data["fieldCName"] = this.fieldCName;
         data["description"] = this.description;
-        data["isModified"] = this.isModified;
+        data["isModifier"] = this.isModifier;
         data["isAddOn"] = this.isAddOn;
         data["useBOM"] = this.useBOM;
         data["displayBOM"] = this.displayBOM;
@@ -50920,7 +52630,7 @@ export interface IItemListDto {
     fieldBName: string | undefined;
     fieldCName: string | undefined;
     description: string | undefined;
-    isModified: boolean;
+    isModifier: boolean;
     isAddOn: boolean;
     useBOM: boolean;
     displayBOM: boolean;

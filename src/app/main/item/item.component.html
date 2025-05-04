@@ -111,7 +111,7 @@
                     <ng-container *ngFor="let col of columns">
                         <td [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}">
                             <span class="p-column-title">{{l(col.header)}}</span>
-                            <ng-container *ngIf="col.name!=='IsActive'">{{getObjValue(row,col.name)}}</ng-container>
+                            <ng-container *ngIf="col.name!=='IsActive'">{{getObjValue(row, col.display ? col.display : col.name)}}</ng-container>
                             <ng-container *ngIf="col.name==='CreatorUserName'">
                                 <br />
                                 <p-tag styleClass="bg-primary-reverse text-color" [value]="row.creationTime|date:'yyyy-MM-dd HH:mm:ss'"></p-tag>
