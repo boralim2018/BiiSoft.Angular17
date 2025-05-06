@@ -1208,10 +1208,10 @@ export class BatteryServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -1220,28 +1220,28 @@ export class BatteryServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<BatteryListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<BatteryListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Battery/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -2021,10 +2021,10 @@ export class BOMServiceProxy {
      * @param itemFilter_Exclude (optional) 
      * @param itemFilter_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -2033,7 +2033,7 @@ export class BOMServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(typeFilter_Exclude: boolean | undefined, typeFilter_Ids: BOMType[] | undefined, itemFilter_Exclude: boolean | undefined, itemFilter_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<BOMListDtoPagedResultDto> {
+    getList(typeFilter_Exclude: boolean | undefined, typeFilter_Ids: BOMType[] | undefined, itemFilter_Exclude: boolean | undefined, itemFilter_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<BOMListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/BOM/GetList?";
         if (typeFilter_Exclude === null)
             throw new Error("The parameter 'typeFilter_Exclude' cannot be null.");
@@ -2055,22 +2055,22 @@ export class BOMServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -2846,10 +2846,10 @@ export class BranchServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -2858,28 +2858,28 @@ export class BranchServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<BranchListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<BranchListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Branch/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -3655,10 +3655,10 @@ export class CameraServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -3667,28 +3667,28 @@ export class CameraServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CameraListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CameraListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Camera/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -4315,10 +4315,10 @@ export class ChartOfAccountServiceProxy {
      * @param parentFilter_Exclude (optional) 
      * @param parentFilter_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -4327,7 +4327,7 @@ export class ChartOfAccountServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(accountTypeFilter_Exclude: boolean | undefined, accountTypeFilter_Ids: AccountType[] | undefined, subAccountTypeFilter_Exclude: boolean | undefined, subAccountTypeFilter_Ids: SubAccountType[] | undefined, parentFilter_Exclude: boolean | undefined, parentFilter_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ChartOfAccountListDtoPagedResultDto> {
+    getList(accountTypeFilter_Exclude: boolean | undefined, accountTypeFilter_Ids: AccountType[] | undefined, subAccountTypeFilter_Exclude: boolean | undefined, subAccountTypeFilter_Ids: SubAccountType[] | undefined, parentFilter_Exclude: boolean | undefined, parentFilter_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ChartOfAccountListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/GetList?";
         if (accountTypeFilter_Exclude === null)
             throw new Error("The parameter 'accountTypeFilter_Exclude' cannot be null.");
@@ -4357,22 +4357,22 @@ export class ChartOfAccountServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -4995,10 +4995,10 @@ export class CityProvinceServiceProxy {
      * @param countries_Exclude (optional) 
      * @param countries_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -5007,7 +5007,7 @@ export class CityProvinceServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CityProvinceListDtoPagedResultDto> {
+    getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CityProvinceListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/CityProvince/GetList?";
         if (countries_Exclude === null)
             throw new Error("The parameter 'countries_Exclude' cannot be null.");
@@ -5021,22 +5021,22 @@ export class CityProvinceServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -5812,10 +5812,10 @@ export class ColorPatternServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -5824,28 +5824,28 @@ export class ColorPatternServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ColorPatternListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ColorPatternListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ColorPattern/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -7367,10 +7367,10 @@ export class CountryServiceProxy {
      * @param currencies_Exclude (optional) 
      * @param currencies_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -7379,7 +7379,7 @@ export class CountryServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(currencies_Exclude: boolean | undefined, currencies_Ids: number[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CountryListDtoPagedResultDto> {
+    getList(currencies_Exclude: boolean | undefined, currencies_Ids: number[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CountryListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Country/GetList?";
         if (currencies_Exclude === null)
             throw new Error("The parameter 'currencies_Exclude' cannot be null.");
@@ -7393,22 +7393,22 @@ export class CountryServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -8184,10 +8184,10 @@ export class CPUServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -8196,28 +8196,28 @@ export class CPUServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CPUListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CPUListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/CPU/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -8993,10 +8993,10 @@ export class CurrencyServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -9005,28 +9005,28 @@ export class CurrencyServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CurrencyListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<CurrencyListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Currency/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -10174,10 +10174,10 @@ export class FieldAServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -10186,28 +10186,28 @@ export class FieldAServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FieldAListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FieldAListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/FieldA/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -10983,10 +10983,10 @@ export class FieldBServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -10995,28 +10995,28 @@ export class FieldBServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FieldBListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FieldBListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/FieldB/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -11792,10 +11792,10 @@ export class FieldCServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -11804,28 +11804,28 @@ export class FieldCServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FieldCListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FieldCListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/FieldC/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -12601,10 +12601,10 @@ export class HDDServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -12613,28 +12613,28 @@ export class HDDServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<HDDListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<HDDListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/HDD/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -13462,10 +13462,10 @@ export class ItemServiceProxy {
      * @param fieldCFilter_Exclude (optional) 
      * @param fieldCFilter_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -13474,7 +13474,7 @@ export class ItemServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(itemTypeFilter_Exclude: boolean | undefined, itemTypeFilter_Ids: ItemType[] | undefined, itemCategoryFilter_Exclude: boolean | undefined, itemCategoryFilter_Ids: ItemCategory[] | undefined, unitFilter_Exclude: boolean | undefined, unitFilter_Ids: string[] | undefined, itemGroupFilter_Exclude: boolean | undefined, itemGroupFilter_Ids: string[] | undefined, itemBrandFilter_Exclude: boolean | undefined, itemBrandFilter_Ids: string[] | undefined, itemGradeFilter_Exclude: boolean | undefined, itemGradeFilter_Ids: string[] | undefined, itemModelFilter_Exclude: boolean | undefined, itemModelFilter_Ids: string[] | undefined, itemSizeFilter_Exclude: boolean | undefined, itemSizeFilter_Ids: string[] | undefined, itemSeriesFilter_Exclude: boolean | undefined, itemSeriesFilter_Ids: string[] | undefined, colorPatternFilter_Exclude: boolean | undefined, colorPatternFilter_Ids: string[] | undefined, cPUFilter_Exclude: boolean | undefined, cPUFilter_Ids: string[] | undefined, rAMFilter_Exclude: boolean | undefined, rAMFilter_Ids: string[] | undefined, vGAFilter_Exclude: boolean | undefined, vGAFilter_Ids: string[] | undefined, hDDFilter_Exclude: boolean | undefined, hDDFilter_Ids: string[] | undefined, screenFilter_Exclude: boolean | undefined, screenFilter_Ids: string[] | undefined, cameraFilter_Exclude: boolean | undefined, cameraFilter_Ids: string[] | undefined, batteryFilter_Exclude: boolean | undefined, batteryFilter_Ids: string[] | undefined, fieldAFilter_Exclude: boolean | undefined, fieldAFilter_Ids: string[] | undefined, fieldBFilter_Exclude: boolean | undefined, fieldBFilter_Ids: string[] | undefined, fieldCFilter_Exclude: boolean | undefined, fieldCFilter_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemListDtoPagedResultDto> {
+    getList(itemTypeFilter_Exclude: boolean | undefined, itemTypeFilter_Ids: ItemType[] | undefined, itemCategoryFilter_Exclude: boolean | undefined, itemCategoryFilter_Ids: ItemCategory[] | undefined, unitFilter_Exclude: boolean | undefined, unitFilter_Ids: string[] | undefined, itemGroupFilter_Exclude: boolean | undefined, itemGroupFilter_Ids: string[] | undefined, itemBrandFilter_Exclude: boolean | undefined, itemBrandFilter_Ids: string[] | undefined, itemGradeFilter_Exclude: boolean | undefined, itemGradeFilter_Ids: string[] | undefined, itemModelFilter_Exclude: boolean | undefined, itemModelFilter_Ids: string[] | undefined, itemSizeFilter_Exclude: boolean | undefined, itemSizeFilter_Ids: string[] | undefined, itemSeriesFilter_Exclude: boolean | undefined, itemSeriesFilter_Ids: string[] | undefined, colorPatternFilter_Exclude: boolean | undefined, colorPatternFilter_Ids: string[] | undefined, cPUFilter_Exclude: boolean | undefined, cPUFilter_Ids: string[] | undefined, rAMFilter_Exclude: boolean | undefined, rAMFilter_Ids: string[] | undefined, vGAFilter_Exclude: boolean | undefined, vGAFilter_Ids: string[] | undefined, hDDFilter_Exclude: boolean | undefined, hDDFilter_Ids: string[] | undefined, screenFilter_Exclude: boolean | undefined, screenFilter_Ids: string[] | undefined, cameraFilter_Exclude: boolean | undefined, cameraFilter_Ids: string[] | undefined, batteryFilter_Exclude: boolean | undefined, batteryFilter_Ids: string[] | undefined, fieldAFilter_Exclude: boolean | undefined, fieldAFilter_Ids: string[] | undefined, fieldBFilter_Exclude: boolean | undefined, fieldBFilter_Ids: string[] | undefined, fieldCFilter_Exclude: boolean | undefined, fieldCFilter_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Item/GetList?";
         if (itemTypeFilter_Exclude === null)
             throw new Error("The parameter 'itemTypeFilter_Exclude' cannot be null.");
@@ -13640,22 +13640,22 @@ export class ItemServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -14694,10 +14694,10 @@ export class ItemBrandServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -14706,28 +14706,28 @@ export class ItemBrandServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemBrandListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemBrandListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ItemBrand/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -15292,10 +15292,10 @@ export class ItemCodeFormulaServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -15304,28 +15304,28 @@ export class ItemCodeFormulaServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemCodeFormulaListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemCodeFormulaListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ItemCodeFormula/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -15942,10 +15942,10 @@ export class ItemGradeServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -15954,28 +15954,28 @@ export class ItemGradeServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemGradeListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemGradeListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ItemGrade/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -16751,10 +16751,10 @@ export class ItemGroupServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -16763,28 +16763,28 @@ export class ItemGroupServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemGroupListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemGroupListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ItemGroup/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -17560,10 +17560,10 @@ export class ItemModelServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -17572,28 +17572,28 @@ export class ItemModelServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemModelListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemModelListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ItemModel/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -18369,10 +18369,10 @@ export class ItemSeriesServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -18381,28 +18381,28 @@ export class ItemSeriesServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemSeriesListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemSeriesListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ItemSeries/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -19178,10 +19178,10 @@ export class ItemSizeServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -19190,28 +19190,28 @@ export class ItemSizeServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemSizeListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemSizeListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/ItemSize/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -19836,10 +19836,10 @@ export class KhanDistrictServiceProxy {
      * @param cityProvinces_Exclude (optional) 
      * @param cityProvinces_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -19848,7 +19848,7 @@ export class KhanDistrictServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, cityProvinces_Exclude: boolean | undefined, cityProvinces_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<KhanDistrictListDtoPagedResultDto> {
+    getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, cityProvinces_Exclude: boolean | undefined, cityProvinces_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<KhanDistrictListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/KhanDistrict/GetList?";
         if (countries_Exclude === null)
             throw new Error("The parameter 'countries_Exclude' cannot be null.");
@@ -19870,22 +19870,22 @@ export class KhanDistrictServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -21066,10 +21066,10 @@ export class LocationServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -21078,28 +21078,28 @@ export class LocationServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<LocationListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<LocationListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Location/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -22772,10 +22772,10 @@ export class RAMServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -22784,28 +22784,28 @@ export class RAMServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<RAMListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<RAMListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/RAM/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -23908,10 +23908,10 @@ export class SangkatCommuneServiceProxy {
      * @param khanDistricts_Exclude (optional) 
      * @param khanDistricts_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -23920,7 +23920,7 @@ export class SangkatCommuneServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, cityProvinces_Exclude: boolean | undefined, cityProvinces_Ids: string[] | undefined, khanDistricts_Exclude: boolean | undefined, khanDistricts_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<SangkatCommuneListDtoPagedResultDto> {
+    getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, cityProvinces_Exclude: boolean | undefined, cityProvinces_Ids: string[] | undefined, khanDistricts_Exclude: boolean | undefined, khanDistricts_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<SangkatCommuneListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/SangkatCommune/GetList?";
         if (countries_Exclude === null)
             throw new Error("The parameter 'countries_Exclude' cannot be null.");
@@ -23950,22 +23950,22 @@ export class SangkatCommuneServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -24741,10 +24741,10 @@ export class ScreenServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -24753,28 +24753,28 @@ export class ScreenServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ScreenListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ScreenListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Screen/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -25613,10 +25613,10 @@ export class TaxServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -25625,28 +25625,28 @@ export class TaxServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<TaxListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<TaxListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Tax/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -27884,10 +27884,10 @@ export class UnitServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -27896,28 +27896,28 @@ export class UnitServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<UnitListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<UnitListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Unit/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -30022,10 +30022,10 @@ export class VGAServiceProxy {
 
     /**
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -30034,28 +30034,28 @@ export class VGAServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<VGAListDtoPagedResultDto> {
+    getList(isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<VGAListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/VGA/GetList?";
         if (isActive === null)
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -30684,10 +30684,10 @@ export class VillageServiceProxy {
      * @param sangkatCommunes_Exclude (optional) 
      * @param sangkatCommunes_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -30696,7 +30696,7 @@ export class VillageServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, cityProvinces_Exclude: boolean | undefined, cityProvinces_Ids: string[] | undefined, khanDistricts_Exclude: boolean | undefined, khanDistricts_Ids: string[] | undefined, sangkatCommunes_Exclude: boolean | undefined, sangkatCommunes_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<VillageListDtoPagedResultDto> {
+    getList(countries_Exclude: boolean | undefined, countries_Ids: string[] | undefined, cityProvinces_Exclude: boolean | undefined, cityProvinces_Ids: string[] | undefined, khanDistricts_Exclude: boolean | undefined, khanDistricts_Ids: string[] | undefined, sangkatCommunes_Exclude: boolean | undefined, sangkatCommunes_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<VillageListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Village/GetList?";
         if (countries_Exclude === null)
             throw new Error("The parameter 'countries_Exclude' cannot be null.");
@@ -30734,22 +30734,22 @@ export class VillageServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -31527,10 +31527,10 @@ export class WarehouseServiceProxy {
      * @param branchFilter_Exclude (optional) 
      * @param branchFilter_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -31539,7 +31539,7 @@ export class WarehouseServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(branchFilter_Exclude: boolean | undefined, branchFilter_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<WarehouseListDtoPagedResultDto> {
+    getList(branchFilter_Exclude: boolean | undefined, branchFilter_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<WarehouseListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Warehouse/GetList?";
         if (branchFilter_Exclude === null)
             throw new Error("The parameter 'branchFilter_Exclude' cannot be null.");
@@ -31553,22 +31553,22 @@ export class WarehouseServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -32351,10 +32351,10 @@ export class ZoneServiceProxy {
      * @param warehouseFilter_Exclude (optional) 
      * @param warehouseFilter_Ids (optional) 
      * @param isActive (optional) 
-     * @param creators_Exclude (optional) 
-     * @param creators_Ids (optional) 
-     * @param modifiers_Exclude (optional) 
-     * @param modifiers_Ids (optional) 
+     * @param creatorFilter_Exclude (optional) 
+     * @param creatorFilter_Ids (optional) 
+     * @param modifierFilter_Exclude (optional) 
+     * @param modifierFilter_Ids (optional) 
      * @param keyword (optional) 
      * @param sortField (optional) 
      * @param sortMode (optional) 
@@ -32363,7 +32363,7 @@ export class ZoneServiceProxy {
      * @param maxResultCount (optional) 
      * @return OK
      */
-    getList(warehouseFilter_Exclude: boolean | undefined, warehouseFilter_Ids: string[] | undefined, isActive: boolean | undefined, creators_Exclude: boolean | undefined, creators_Ids: number[] | undefined, modifiers_Exclude: boolean | undefined, modifiers_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ZoneListDtoPagedResultDto> {
+    getList(warehouseFilter_Exclude: boolean | undefined, warehouseFilter_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ZoneListDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Zone/GetList?";
         if (warehouseFilter_Exclude === null)
             throw new Error("The parameter 'warehouseFilter_Exclude' cannot be null.");
@@ -32377,22 +32377,22 @@ export class ZoneServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creators_Exclude === null)
-            throw new Error("The parameter 'creators_Exclude' cannot be null.");
-        else if (creators_Exclude !== undefined)
-            url_ += "Creators.Exclude=" + encodeURIComponent("" + creators_Exclude) + "&";
-        if (creators_Ids === null)
-            throw new Error("The parameter 'creators_Ids' cannot be null.");
-        else if (creators_Ids !== undefined)
-            creators_Ids && creators_Ids.forEach(item => { url_ += "Creators.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifiers_Exclude === null)
-            throw new Error("The parameter 'modifiers_Exclude' cannot be null.");
-        else if (modifiers_Exclude !== undefined)
-            url_ += "Modifiers.Exclude=" + encodeURIComponent("" + modifiers_Exclude) + "&";
-        if (modifiers_Ids === null)
-            throw new Error("The parameter 'modifiers_Ids' cannot be null.");
-        else if (modifiers_Ids !== undefined)
-            modifiers_Ids && modifiers_Ids.forEach(item => { url_ += "Modifiers.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (creatorFilter_Exclude === null)
+            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
+        else if (creatorFilter_Exclude !== undefined)
+            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
+        if (creatorFilter_Ids === null)
+            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
+        else if (creatorFilter_Ids !== undefined)
+            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
+        if (modifierFilter_Exclude === null)
+            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
+        else if (modifierFilter_Exclude !== undefined)
+            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
+        if (modifierFilter_Ids === null)
+            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
+        else if (modifierFilter_Ids !== undefined)
+            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -40594,8 +40594,8 @@ export class ExportExcelBOMInputDto implements IExportExcelBOMInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     typeFilter: BOMTypeFilterInputDto;
     itemFilter: GuidFilterInputDto;
@@ -40618,8 +40618,8 @@ export class ExportExcelBOMInputDto implements IExportExcelBOMInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.typeFilter = _data["typeFilter"] ? BOMTypeFilterInputDto.fromJS(_data["typeFilter"]) : <any>undefined;
             this.itemFilter = _data["itemFilter"] ? GuidFilterInputDto.fromJS(_data["itemFilter"]) : <any>undefined;
@@ -40646,8 +40646,8 @@ export class ExportExcelBOMInputDto implements IExportExcelBOMInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["typeFilter"] = this.typeFilter ? this.typeFilter.toJSON() : <any>undefined;
         data["itemFilter"] = this.itemFilter ? this.itemFilter.toJSON() : <any>undefined;
@@ -40674,8 +40674,8 @@ export interface IExportExcelBOMInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     typeFilter: BOMTypeFilterInputDto;
     itemFilter: GuidFilterInputDto;
@@ -40689,8 +40689,8 @@ export class ExportExcelBatteryInputDto implements IExportExcelBatteryInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -40711,8 +40711,8 @@ export class ExportExcelBatteryInputDto implements IExportExcelBatteryInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -40737,8 +40737,8 @@ export class ExportExcelBatteryInputDto implements IExportExcelBatteryInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -40763,8 +40763,8 @@ export interface IExportExcelBatteryInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -40776,8 +40776,8 @@ export class ExportExcelBranchInputDto implements IExportExcelBranchInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -40798,8 +40798,8 @@ export class ExportExcelBranchInputDto implements IExportExcelBranchInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -40824,8 +40824,8 @@ export class ExportExcelBranchInputDto implements IExportExcelBranchInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -40850,8 +40850,8 @@ export interface IExportExcelBranchInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -40863,8 +40863,8 @@ export class ExportExcelCPUInputDto implements IExportExcelCPUInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -40885,8 +40885,8 @@ export class ExportExcelCPUInputDto implements IExportExcelCPUInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -40911,8 +40911,8 @@ export class ExportExcelCPUInputDto implements IExportExcelCPUInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -40937,8 +40937,8 @@ export interface IExportExcelCPUInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -40950,8 +40950,8 @@ export class ExportExcelCameraInputDto implements IExportExcelCameraInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -40972,8 +40972,8 @@ export class ExportExcelCameraInputDto implements IExportExcelCameraInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -40998,8 +40998,8 @@ export class ExportExcelCameraInputDto implements IExportExcelCameraInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -41024,8 +41024,8 @@ export interface IExportExcelCameraInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -41037,8 +41037,8 @@ export class ExportExcelChartOfAccountInputDto implements IExportExcelChartOfAcc
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     accountTypeFilter: AccountTypeFilterInputDto;
     subAccountTypeFilter: SubAccountTypeFilterInputDto;
@@ -41062,8 +41062,8 @@ export class ExportExcelChartOfAccountInputDto implements IExportExcelChartOfAcc
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.accountTypeFilter = _data["accountTypeFilter"] ? AccountTypeFilterInputDto.fromJS(_data["accountTypeFilter"]) : <any>undefined;
             this.subAccountTypeFilter = _data["subAccountTypeFilter"] ? SubAccountTypeFilterInputDto.fromJS(_data["subAccountTypeFilter"]) : <any>undefined;
@@ -41091,8 +41091,8 @@ export class ExportExcelChartOfAccountInputDto implements IExportExcelChartOfAcc
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["accountTypeFilter"] = this.accountTypeFilter ? this.accountTypeFilter.toJSON() : <any>undefined;
         data["subAccountTypeFilter"] = this.subAccountTypeFilter ? this.subAccountTypeFilter.toJSON() : <any>undefined;
@@ -41120,8 +41120,8 @@ export interface IExportExcelChartOfAccountInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     accountTypeFilter: AccountTypeFilterInputDto;
     subAccountTypeFilter: SubAccountTypeFilterInputDto;
@@ -41136,8 +41136,8 @@ export class ExportExcelCityProvinceInputDto implements IExportExcelCityProvince
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     columns: ColumnOutput[] | undefined;
@@ -41159,8 +41159,8 @@ export class ExportExcelCityProvinceInputDto implements IExportExcelCityProvince
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.countries = _data["countries"] ? GuidNullableFilterInputDto.fromJS(_data["countries"]) : <any>undefined;
             if (Array.isArray(_data["columns"])) {
@@ -41186,8 +41186,8 @@ export class ExportExcelCityProvinceInputDto implements IExportExcelCityProvince
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["countries"] = this.countries ? this.countries.toJSON() : <any>undefined;
         if (Array.isArray(this.columns)) {
@@ -41213,8 +41213,8 @@ export interface IExportExcelCityProvinceInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     columns: ColumnOutput[] | undefined;
@@ -41227,8 +41227,8 @@ export class ExportExcelColorPatternInputDto implements IExportExcelColorPattern
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -41249,8 +41249,8 @@ export class ExportExcelColorPatternInputDto implements IExportExcelColorPattern
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -41275,8 +41275,8 @@ export class ExportExcelColorPatternInputDto implements IExportExcelColorPattern
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -41301,8 +41301,8 @@ export interface IExportExcelColorPatternInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -41314,8 +41314,8 @@ export class ExportExcelCountryInputDto implements IExportExcelCountryInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     currencies: Int64FilterInputDto;
     columns: ColumnOutput[] | undefined;
@@ -41337,8 +41337,8 @@ export class ExportExcelCountryInputDto implements IExportExcelCountryInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.currencies = _data["currencies"] ? Int64FilterInputDto.fromJS(_data["currencies"]) : <any>undefined;
             if (Array.isArray(_data["columns"])) {
@@ -41364,8 +41364,8 @@ export class ExportExcelCountryInputDto implements IExportExcelCountryInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["currencies"] = this.currencies ? this.currencies.toJSON() : <any>undefined;
         if (Array.isArray(this.columns)) {
@@ -41391,8 +41391,8 @@ export interface IExportExcelCountryInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     currencies: Int64FilterInputDto;
     columns: ColumnOutput[] | undefined;
@@ -41405,8 +41405,8 @@ export class ExportExcelCurrencyInputDto implements IExportExcelCurrencyInputDto
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -41427,8 +41427,8 @@ export class ExportExcelCurrencyInputDto implements IExportExcelCurrencyInputDto
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -41453,8 +41453,8 @@ export class ExportExcelCurrencyInputDto implements IExportExcelCurrencyInputDto
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -41479,8 +41479,8 @@ export interface IExportExcelCurrencyInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -41492,8 +41492,8 @@ export class ExportExcelFieldAInputDto implements IExportExcelFieldAInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -41514,8 +41514,8 @@ export class ExportExcelFieldAInputDto implements IExportExcelFieldAInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -41540,8 +41540,8 @@ export class ExportExcelFieldAInputDto implements IExportExcelFieldAInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -41566,8 +41566,8 @@ export interface IExportExcelFieldAInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -41579,8 +41579,8 @@ export class ExportExcelFieldBInputDto implements IExportExcelFieldBInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -41601,8 +41601,8 @@ export class ExportExcelFieldBInputDto implements IExportExcelFieldBInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -41627,8 +41627,8 @@ export class ExportExcelFieldBInputDto implements IExportExcelFieldBInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -41653,8 +41653,8 @@ export interface IExportExcelFieldBInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -41666,8 +41666,8 @@ export class ExportExcelFieldCInputDto implements IExportExcelFieldCInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -41688,8 +41688,8 @@ export class ExportExcelFieldCInputDto implements IExportExcelFieldCInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -41714,8 +41714,8 @@ export class ExportExcelFieldCInputDto implements IExportExcelFieldCInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -41740,8 +41740,8 @@ export interface IExportExcelFieldCInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -41753,8 +41753,8 @@ export class ExportExcelHDDInputDto implements IExportExcelHDDInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -41775,8 +41775,8 @@ export class ExportExcelHDDInputDto implements IExportExcelHDDInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -41801,8 +41801,8 @@ export class ExportExcelHDDInputDto implements IExportExcelHDDInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -41827,8 +41827,8 @@ export interface IExportExcelHDDInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -41840,8 +41840,8 @@ export class ExportExcelItemBrandInputDto implements IExportExcelItemBrandInputD
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -41862,8 +41862,8 @@ export class ExportExcelItemBrandInputDto implements IExportExcelItemBrandInputD
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -41888,8 +41888,8 @@ export class ExportExcelItemBrandInputDto implements IExportExcelItemBrandInputD
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -41914,8 +41914,8 @@ export interface IExportExcelItemBrandInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -41927,8 +41927,8 @@ export class ExportExcelItemGradeInputDto implements IExportExcelItemGradeInputD
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -41949,8 +41949,8 @@ export class ExportExcelItemGradeInputDto implements IExportExcelItemGradeInputD
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -41975,8 +41975,8 @@ export class ExportExcelItemGradeInputDto implements IExportExcelItemGradeInputD
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -42001,8 +42001,8 @@ export interface IExportExcelItemGradeInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -42014,8 +42014,8 @@ export class ExportExcelItemGroupInputDto implements IExportExcelItemGroupInputD
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -42036,8 +42036,8 @@ export class ExportExcelItemGroupInputDto implements IExportExcelItemGroupInputD
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -42062,8 +42062,8 @@ export class ExportExcelItemGroupInputDto implements IExportExcelItemGroupInputD
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -42088,8 +42088,8 @@ export interface IExportExcelItemGroupInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -42101,8 +42101,8 @@ export class ExportExcelItemInputDto implements IExportExcelItemInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     itemTypeFilter: ItemTypeFilterInputDto;
     itemCategoryFilter: ItemCategoryFilterInputDto;
@@ -42143,8 +42143,8 @@ export class ExportExcelItemInputDto implements IExportExcelItemInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.itemTypeFilter = _data["itemTypeFilter"] ? ItemTypeFilterInputDto.fromJS(_data["itemTypeFilter"]) : <any>undefined;
             this.itemCategoryFilter = _data["itemCategoryFilter"] ? ItemCategoryFilterInputDto.fromJS(_data["itemCategoryFilter"]) : <any>undefined;
@@ -42189,8 +42189,8 @@ export class ExportExcelItemInputDto implements IExportExcelItemInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["itemTypeFilter"] = this.itemTypeFilter ? this.itemTypeFilter.toJSON() : <any>undefined;
         data["itemCategoryFilter"] = this.itemCategoryFilter ? this.itemCategoryFilter.toJSON() : <any>undefined;
@@ -42235,8 +42235,8 @@ export interface IExportExcelItemInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     itemTypeFilter: ItemTypeFilterInputDto;
     itemCategoryFilter: ItemCategoryFilterInputDto;
@@ -42268,8 +42268,8 @@ export class ExportExcelItemModelInputDto implements IExportExcelItemModelInputD
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -42290,8 +42290,8 @@ export class ExportExcelItemModelInputDto implements IExportExcelItemModelInputD
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -42316,8 +42316,8 @@ export class ExportExcelItemModelInputDto implements IExportExcelItemModelInputD
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -42342,8 +42342,8 @@ export interface IExportExcelItemModelInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -42355,8 +42355,8 @@ export class ExportExcelItemSeriesInputDto implements IExportExcelItemSeriesInpu
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -42377,8 +42377,8 @@ export class ExportExcelItemSeriesInputDto implements IExportExcelItemSeriesInpu
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -42403,8 +42403,8 @@ export class ExportExcelItemSeriesInputDto implements IExportExcelItemSeriesInpu
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -42429,8 +42429,8 @@ export interface IExportExcelItemSeriesInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -42442,8 +42442,8 @@ export class ExportExcelItemSizeInputDto implements IExportExcelItemSizeInputDto
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -42464,8 +42464,8 @@ export class ExportExcelItemSizeInputDto implements IExportExcelItemSizeInputDto
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -42490,8 +42490,8 @@ export class ExportExcelItemSizeInputDto implements IExportExcelItemSizeInputDto
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -42516,8 +42516,8 @@ export interface IExportExcelItemSizeInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -42529,8 +42529,8 @@ export class ExportExcelKhanDistrictInputDto implements IExportExcelKhanDistrict
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -42553,8 +42553,8 @@ export class ExportExcelKhanDistrictInputDto implements IExportExcelKhanDistrict
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.countries = _data["countries"] ? GuidNullableFilterInputDto.fromJS(_data["countries"]) : <any>undefined;
             this.cityProvinces = _data["cityProvinces"] ? GuidNullableFilterInputDto.fromJS(_data["cityProvinces"]) : <any>undefined;
@@ -42581,8 +42581,8 @@ export class ExportExcelKhanDistrictInputDto implements IExportExcelKhanDistrict
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["countries"] = this.countries ? this.countries.toJSON() : <any>undefined;
         data["cityProvinces"] = this.cityProvinces ? this.cityProvinces.toJSON() : <any>undefined;
@@ -42609,8 +42609,8 @@ export interface IExportExcelKhanDistrictInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -42624,8 +42624,8 @@ export class ExportExcelLocationInputDto implements IExportExcelLocationInputDto
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -42646,8 +42646,8 @@ export class ExportExcelLocationInputDto implements IExportExcelLocationInputDto
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -42672,8 +42672,8 @@ export class ExportExcelLocationInputDto implements IExportExcelLocationInputDto
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -42698,8 +42698,8 @@ export interface IExportExcelLocationInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -42711,8 +42711,8 @@ export class ExportExcelRAMInputDto implements IExportExcelRAMInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -42733,8 +42733,8 @@ export class ExportExcelRAMInputDto implements IExportExcelRAMInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -42759,8 +42759,8 @@ export class ExportExcelRAMInputDto implements IExportExcelRAMInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -42785,8 +42785,8 @@ export interface IExportExcelRAMInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -42798,8 +42798,8 @@ export class ExportExcelSangkatCommuneInputDto implements IExportExcelSangkatCom
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -42823,8 +42823,8 @@ export class ExportExcelSangkatCommuneInputDto implements IExportExcelSangkatCom
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.countries = _data["countries"] ? GuidNullableFilterInputDto.fromJS(_data["countries"]) : <any>undefined;
             this.cityProvinces = _data["cityProvinces"] ? GuidNullableFilterInputDto.fromJS(_data["cityProvinces"]) : <any>undefined;
@@ -42852,8 +42852,8 @@ export class ExportExcelSangkatCommuneInputDto implements IExportExcelSangkatCom
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["countries"] = this.countries ? this.countries.toJSON() : <any>undefined;
         data["cityProvinces"] = this.cityProvinces ? this.cityProvinces.toJSON() : <any>undefined;
@@ -42881,8 +42881,8 @@ export interface IExportExcelSangkatCommuneInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -42897,8 +42897,8 @@ export class ExportExcelScreenInputDto implements IExportExcelScreenInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -42919,8 +42919,8 @@ export class ExportExcelScreenInputDto implements IExportExcelScreenInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -42945,8 +42945,8 @@ export class ExportExcelScreenInputDto implements IExportExcelScreenInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -42971,8 +42971,8 @@ export interface IExportExcelScreenInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -42984,8 +42984,8 @@ export class ExportExcelTaxInputDto implements IExportExcelTaxInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -43006,8 +43006,8 @@ export class ExportExcelTaxInputDto implements IExportExcelTaxInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -43032,8 +43032,8 @@ export class ExportExcelTaxInputDto implements IExportExcelTaxInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -43058,8 +43058,8 @@ export interface IExportExcelTaxInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -43071,8 +43071,8 @@ export class ExportExcelUnitInputDto implements IExportExcelUnitInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -43093,8 +43093,8 @@ export class ExportExcelUnitInputDto implements IExportExcelUnitInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -43119,8 +43119,8 @@ export class ExportExcelUnitInputDto implements IExportExcelUnitInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -43145,8 +43145,8 @@ export interface IExportExcelUnitInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -43158,8 +43158,8 @@ export class ExportExcelVGAInputDto implements IExportExcelVGAInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 
@@ -43180,8 +43180,8 @@ export class ExportExcelVGAInputDto implements IExportExcelVGAInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             if (Array.isArray(_data["columns"])) {
                 this.columns = [] as any;
@@ -43206,8 +43206,8 @@ export class ExportExcelVGAInputDto implements IExportExcelVGAInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         if (Array.isArray(this.columns)) {
             data["columns"] = [];
@@ -43232,8 +43232,8 @@ export interface IExportExcelVGAInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     columns: ColumnOutput[] | undefined;
 }
@@ -43245,8 +43245,8 @@ export class ExportExcelVillageInputDto implements IExportExcelVillageInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -43271,8 +43271,8 @@ export class ExportExcelVillageInputDto implements IExportExcelVillageInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.countries = _data["countries"] ? GuidNullableFilterInputDto.fromJS(_data["countries"]) : <any>undefined;
             this.cityProvinces = _data["cityProvinces"] ? GuidNullableFilterInputDto.fromJS(_data["cityProvinces"]) : <any>undefined;
@@ -43301,8 +43301,8 @@ export class ExportExcelVillageInputDto implements IExportExcelVillageInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["countries"] = this.countries ? this.countries.toJSON() : <any>undefined;
         data["cityProvinces"] = this.cityProvinces ? this.cityProvinces.toJSON() : <any>undefined;
@@ -43331,8 +43331,8 @@ export interface IExportExcelVillageInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -43348,8 +43348,8 @@ export class ExportExcelWarehouseInputDto implements IExportExcelWarehouseInputD
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     branchFilter: GuidFilterInputDto;
     columns: ColumnOutput[] | undefined;
@@ -43371,8 +43371,8 @@ export class ExportExcelWarehouseInputDto implements IExportExcelWarehouseInputD
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.branchFilter = _data["branchFilter"] ? GuidFilterInputDto.fromJS(_data["branchFilter"]) : <any>undefined;
             if (Array.isArray(_data["columns"])) {
@@ -43398,8 +43398,8 @@ export class ExportExcelWarehouseInputDto implements IExportExcelWarehouseInputD
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["branchFilter"] = this.branchFilter ? this.branchFilter.toJSON() : <any>undefined;
         if (Array.isArray(this.columns)) {
@@ -43425,8 +43425,8 @@ export interface IExportExcelWarehouseInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     branchFilter: GuidFilterInputDto;
     columns: ColumnOutput[] | undefined;
@@ -43439,8 +43439,8 @@ export class ExportExcelZoneInputDto implements IExportExcelZoneInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     warehouseFilter: GuidFilterInputDto;
     columns: ColumnOutput[] | undefined;
@@ -43462,8 +43462,8 @@ export class ExportExcelZoneInputDto implements IExportExcelZoneInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.warehouseFilter = _data["warehouseFilter"] ? GuidFilterInputDto.fromJS(_data["warehouseFilter"]) : <any>undefined;
             if (Array.isArray(_data["columns"])) {
@@ -43489,8 +43489,8 @@ export class ExportExcelZoneInputDto implements IExportExcelZoneInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["warehouseFilter"] = this.warehouseFilter ? this.warehouseFilter.toJSON() : <any>undefined;
         if (Array.isArray(this.columns)) {
@@ -43516,8 +43516,8 @@ export interface IExportExcelZoneInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     warehouseFilter: GuidFilterInputDto;
     columns: ColumnOutput[] | undefined;
@@ -44729,8 +44729,8 @@ export class FindBOMInputDto implements IFindBOMInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     typeFilter: BOMTypeFilterInputDto;
     itemFilter: GuidFilterInputDto;
@@ -44752,8 +44752,8 @@ export class FindBOMInputDto implements IFindBOMInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.typeFilter = _data["typeFilter"] ? BOMTypeFilterInputDto.fromJS(_data["typeFilter"]) : <any>undefined;
             this.itemFilter = _data["itemFilter"] ? GuidFilterInputDto.fromJS(_data["itemFilter"]) : <any>undefined;
@@ -44775,8 +44775,8 @@ export class FindBOMInputDto implements IFindBOMInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["typeFilter"] = this.typeFilter ? this.typeFilter.toJSON() : <any>undefined;
         data["itemFilter"] = this.itemFilter ? this.itemFilter.toJSON() : <any>undefined;
@@ -44798,8 +44798,8 @@ export interface IFindBOMInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     typeFilter: BOMTypeFilterInputDto;
     itemFilter: GuidFilterInputDto;
@@ -45402,8 +45402,8 @@ export class FindChartOfAccountInputDto implements IFindChartOfAccountInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     accountTypeFilter: AccountTypeFilterInputDto;
     subAccountTypeFilter: SubAccountTypeFilterInputDto;
@@ -45427,8 +45427,8 @@ export class FindChartOfAccountInputDto implements IFindChartOfAccountInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.accountTypeFilter = _data["accountTypeFilter"] ? AccountTypeFilterInputDto.fromJS(_data["accountTypeFilter"]) : <any>undefined;
             this.subAccountTypeFilter = _data["subAccountTypeFilter"] ? SubAccountTypeFilterInputDto.fromJS(_data["subAccountTypeFilter"]) : <any>undefined;
@@ -45452,8 +45452,8 @@ export class FindChartOfAccountInputDto implements IFindChartOfAccountInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["accountTypeFilter"] = this.accountTypeFilter ? this.accountTypeFilter.toJSON() : <any>undefined;
         data["subAccountTypeFilter"] = this.subAccountTypeFilter ? this.subAccountTypeFilter.toJSON() : <any>undefined;
@@ -45477,8 +45477,8 @@ export interface IFindChartOfAccountInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     accountTypeFilter: AccountTypeFilterInputDto;
     subAccountTypeFilter: SubAccountTypeFilterInputDto;
@@ -46905,8 +46905,8 @@ export class FindItemInputDto implements IFindItemInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     itemTypeFilter: ItemTypeFilterInputDto;
     itemCategoryFilter: ItemCategoryFilterInputDto;
@@ -46947,8 +46947,8 @@ export class FindItemInputDto implements IFindItemInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.itemTypeFilter = _data["itemTypeFilter"] ? ItemTypeFilterInputDto.fromJS(_data["itemTypeFilter"]) : <any>undefined;
             this.itemCategoryFilter = _data["itemCategoryFilter"] ? ItemCategoryFilterInputDto.fromJS(_data["itemCategoryFilter"]) : <any>undefined;
@@ -46989,8 +46989,8 @@ export class FindItemInputDto implements IFindItemInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["itemTypeFilter"] = this.itemTypeFilter ? this.itemTypeFilter.toJSON() : <any>undefined;
         data["itemCategoryFilter"] = this.itemCategoryFilter ? this.itemCategoryFilter.toJSON() : <any>undefined;
@@ -47031,8 +47031,8 @@ export interface IFindItemInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     itemTypeFilter: ItemTypeFilterInputDto;
     itemCategoryFilter: ItemCategoryFilterInputDto;
@@ -48708,8 +48708,8 @@ export class FindWarehouseInputDto implements IFindWarehouseInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     branchFilter: GuidFilterInputDto;
 
@@ -48730,8 +48730,8 @@ export class FindWarehouseInputDto implements IFindWarehouseInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.branchFilter = _data["branchFilter"] ? GuidFilterInputDto.fromJS(_data["branchFilter"]) : <any>undefined;
         }
@@ -48752,8 +48752,8 @@ export class FindWarehouseInputDto implements IFindWarehouseInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["branchFilter"] = this.branchFilter ? this.branchFilter.toJSON() : <any>undefined;
         return data;
@@ -48774,8 +48774,8 @@ export interface IFindWarehouseInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     branchFilter: GuidFilterInputDto;
 }
@@ -48905,8 +48905,8 @@ export class FindZoneInputDto implements IFindZoneInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     warehouseFilter: GuidFilterInputDto;
 
@@ -48927,8 +48927,8 @@ export class FindZoneInputDto implements IFindZoneInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.warehouseFilter = _data["warehouseFilter"] ? GuidFilterInputDto.fromJS(_data["warehouseFilter"]) : <any>undefined;
         }
@@ -48949,8 +48949,8 @@ export class FindZoneInputDto implements IFindZoneInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["warehouseFilter"] = this.warehouseFilter ? this.warehouseFilter.toJSON() : <any>undefined;
         return data;
@@ -48971,8 +48971,8 @@ export interface IFindZoneInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     warehouseFilter: GuidFilterInputDto;
 }
@@ -55654,8 +55654,8 @@ export class PageBatteryInputDto implements IPageBatteryInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageBatteryInputDto) {
@@ -55675,8 +55675,8 @@ export class PageBatteryInputDto implements IPageBatteryInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -55696,8 +55696,8 @@ export class PageBatteryInputDto implements IPageBatteryInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -55717,8 +55717,8 @@ export interface IPageBatteryInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -55729,8 +55729,8 @@ export class PageBranchInputDto implements IPageBranchInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageBranchInputDto) {
@@ -55750,8 +55750,8 @@ export class PageBranchInputDto implements IPageBranchInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -55771,8 +55771,8 @@ export class PageBranchInputDto implements IPageBranchInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -55792,8 +55792,8 @@ export interface IPageBranchInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -55804,8 +55804,8 @@ export class PageCPUInputDto implements IPageCPUInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageCPUInputDto) {
@@ -55825,8 +55825,8 @@ export class PageCPUInputDto implements IPageCPUInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -55846,8 +55846,8 @@ export class PageCPUInputDto implements IPageCPUInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -55867,8 +55867,8 @@ export interface IPageCPUInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -55879,8 +55879,8 @@ export class PageCameraInputDto implements IPageCameraInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageCameraInputDto) {
@@ -55900,8 +55900,8 @@ export class PageCameraInputDto implements IPageCameraInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -55921,8 +55921,8 @@ export class PageCameraInputDto implements IPageCameraInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -55942,8 +55942,8 @@ export interface IPageCameraInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -55954,8 +55954,8 @@ export class PageCityProvinceInputDto implements IPageCityProvinceInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
 
@@ -55976,8 +55976,8 @@ export class PageCityProvinceInputDto implements IPageCityProvinceInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.countries = _data["countries"] ? GuidNullableFilterInputDto.fromJS(_data["countries"]) : <any>undefined;
         }
@@ -55998,8 +55998,8 @@ export class PageCityProvinceInputDto implements IPageCityProvinceInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["countries"] = this.countries ? this.countries.toJSON() : <any>undefined;
         return data;
@@ -56020,8 +56020,8 @@ export interface IPageCityProvinceInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
 }
@@ -56033,8 +56033,8 @@ export class PageColorPatternInputDto implements IPageColorPatternInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageColorPatternInputDto) {
@@ -56054,8 +56054,8 @@ export class PageColorPatternInputDto implements IPageColorPatternInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56075,8 +56075,8 @@ export class PageColorPatternInputDto implements IPageColorPatternInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56096,8 +56096,8 @@ export interface IPageColorPatternInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56108,8 +56108,8 @@ export class PageCountryInputDto implements IPageCountryInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     currencies: Int64FilterInputDto;
 
@@ -56130,8 +56130,8 @@ export class PageCountryInputDto implements IPageCountryInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.currencies = _data["currencies"] ? Int64FilterInputDto.fromJS(_data["currencies"]) : <any>undefined;
         }
@@ -56152,8 +56152,8 @@ export class PageCountryInputDto implements IPageCountryInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["currencies"] = this.currencies ? this.currencies.toJSON() : <any>undefined;
         return data;
@@ -56174,8 +56174,8 @@ export interface IPageCountryInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     currencies: Int64FilterInputDto;
 }
@@ -56187,8 +56187,8 @@ export class PageCurrencyInputDto implements IPageCurrencyInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageCurrencyInputDto) {
@@ -56208,8 +56208,8 @@ export class PageCurrencyInputDto implements IPageCurrencyInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56229,8 +56229,8 @@ export class PageCurrencyInputDto implements IPageCurrencyInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56250,8 +56250,8 @@ export interface IPageCurrencyInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56262,8 +56262,8 @@ export class PageFieldAInputDto implements IPageFieldAInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageFieldAInputDto) {
@@ -56283,8 +56283,8 @@ export class PageFieldAInputDto implements IPageFieldAInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56304,8 +56304,8 @@ export class PageFieldAInputDto implements IPageFieldAInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56325,8 +56325,8 @@ export interface IPageFieldAInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56337,8 +56337,8 @@ export class PageFieldBInputDto implements IPageFieldBInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageFieldBInputDto) {
@@ -56358,8 +56358,8 @@ export class PageFieldBInputDto implements IPageFieldBInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56379,8 +56379,8 @@ export class PageFieldBInputDto implements IPageFieldBInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56400,8 +56400,8 @@ export interface IPageFieldBInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56412,8 +56412,8 @@ export class PageFieldCInputDto implements IPageFieldCInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageFieldCInputDto) {
@@ -56433,8 +56433,8 @@ export class PageFieldCInputDto implements IPageFieldCInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56454,8 +56454,8 @@ export class PageFieldCInputDto implements IPageFieldCInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56475,8 +56475,8 @@ export interface IPageFieldCInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56487,8 +56487,8 @@ export class PageHDDInputDto implements IPageHDDInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageHDDInputDto) {
@@ -56508,8 +56508,8 @@ export class PageHDDInputDto implements IPageHDDInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56529,8 +56529,8 @@ export class PageHDDInputDto implements IPageHDDInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56550,8 +56550,8 @@ export interface IPageHDDInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56562,8 +56562,8 @@ export class PageItemBrandInputDto implements IPageItemBrandInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageItemBrandInputDto) {
@@ -56583,8 +56583,8 @@ export class PageItemBrandInputDto implements IPageItemBrandInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56604,8 +56604,8 @@ export class PageItemBrandInputDto implements IPageItemBrandInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56625,8 +56625,8 @@ export interface IPageItemBrandInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56637,8 +56637,8 @@ export class PageItemGradeInputDto implements IPageItemGradeInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageItemGradeInputDto) {
@@ -56658,8 +56658,8 @@ export class PageItemGradeInputDto implements IPageItemGradeInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56679,8 +56679,8 @@ export class PageItemGradeInputDto implements IPageItemGradeInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56700,8 +56700,8 @@ export interface IPageItemGradeInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56712,8 +56712,8 @@ export class PageItemGroupInputDto implements IPageItemGroupInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageItemGroupInputDto) {
@@ -56733,8 +56733,8 @@ export class PageItemGroupInputDto implements IPageItemGroupInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56754,8 +56754,8 @@ export class PageItemGroupInputDto implements IPageItemGroupInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56775,8 +56775,8 @@ export interface IPageItemGroupInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56787,8 +56787,8 @@ export class PageItemModelInputDto implements IPageItemModelInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageItemModelInputDto) {
@@ -56808,8 +56808,8 @@ export class PageItemModelInputDto implements IPageItemModelInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56829,8 +56829,8 @@ export class PageItemModelInputDto implements IPageItemModelInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56850,8 +56850,8 @@ export interface IPageItemModelInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56862,8 +56862,8 @@ export class PageItemSeriesInputDto implements IPageItemSeriesInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageItemSeriesInputDto) {
@@ -56883,8 +56883,8 @@ export class PageItemSeriesInputDto implements IPageItemSeriesInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56904,8 +56904,8 @@ export class PageItemSeriesInputDto implements IPageItemSeriesInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -56925,8 +56925,8 @@ export interface IPageItemSeriesInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -56937,8 +56937,8 @@ export class PageItemSizeInputDto implements IPageItemSizeInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageItemSizeInputDto) {
@@ -56958,8 +56958,8 @@ export class PageItemSizeInputDto implements IPageItemSizeInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -56979,8 +56979,8 @@ export class PageItemSizeInputDto implements IPageItemSizeInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -57000,8 +57000,8 @@ export interface IPageItemSizeInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -57012,8 +57012,8 @@ export class PageKhanDistrictInputDto implements IPageKhanDistrictInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -57035,8 +57035,8 @@ export class PageKhanDistrictInputDto implements IPageKhanDistrictInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.countries = _data["countries"] ? GuidNullableFilterInputDto.fromJS(_data["countries"]) : <any>undefined;
             this.cityProvinces = _data["cityProvinces"] ? GuidNullableFilterInputDto.fromJS(_data["cityProvinces"]) : <any>undefined;
@@ -57058,8 +57058,8 @@ export class PageKhanDistrictInputDto implements IPageKhanDistrictInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["countries"] = this.countries ? this.countries.toJSON() : <any>undefined;
         data["cityProvinces"] = this.cityProvinces ? this.cityProvinces.toJSON() : <any>undefined;
@@ -57081,8 +57081,8 @@ export interface IPageKhanDistrictInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -57095,8 +57095,8 @@ export class PageLocationInputDto implements IPageLocationInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageLocationInputDto) {
@@ -57116,8 +57116,8 @@ export class PageLocationInputDto implements IPageLocationInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -57137,8 +57137,8 @@ export class PageLocationInputDto implements IPageLocationInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -57158,8 +57158,8 @@ export interface IPageLocationInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -57170,8 +57170,8 @@ export class PageRAMInputDto implements IPageRAMInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageRAMInputDto) {
@@ -57191,8 +57191,8 @@ export class PageRAMInputDto implements IPageRAMInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -57212,8 +57212,8 @@ export class PageRAMInputDto implements IPageRAMInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -57233,8 +57233,8 @@ export interface IPageRAMInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -57245,8 +57245,8 @@ export class PageSangkatCommuneInputDto implements IPageSangkatCommuneInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -57269,8 +57269,8 @@ export class PageSangkatCommuneInputDto implements IPageSangkatCommuneInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.countries = _data["countries"] ? GuidNullableFilterInputDto.fromJS(_data["countries"]) : <any>undefined;
             this.cityProvinces = _data["cityProvinces"] ? GuidNullableFilterInputDto.fromJS(_data["cityProvinces"]) : <any>undefined;
@@ -57293,8 +57293,8 @@ export class PageSangkatCommuneInputDto implements IPageSangkatCommuneInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["countries"] = this.countries ? this.countries.toJSON() : <any>undefined;
         data["cityProvinces"] = this.cityProvinces ? this.cityProvinces.toJSON() : <any>undefined;
@@ -57317,8 +57317,8 @@ export interface IPageSangkatCommuneInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -57332,8 +57332,8 @@ export class PageScreenInputDto implements IPageScreenInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageScreenInputDto) {
@@ -57353,8 +57353,8 @@ export class PageScreenInputDto implements IPageScreenInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -57374,8 +57374,8 @@ export class PageScreenInputDto implements IPageScreenInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -57395,8 +57395,8 @@ export interface IPageScreenInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -57407,8 +57407,8 @@ export class PageTaxInputDto implements IPageTaxInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageTaxInputDto) {
@@ -57428,8 +57428,8 @@ export class PageTaxInputDto implements IPageTaxInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -57449,8 +57449,8 @@ export class PageTaxInputDto implements IPageTaxInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -57470,8 +57470,8 @@ export interface IPageTaxInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -57482,8 +57482,8 @@ export class PageUnitInputDto implements IPageUnitInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageUnitInputDto) {
@@ -57503,8 +57503,8 @@ export class PageUnitInputDto implements IPageUnitInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -57524,8 +57524,8 @@ export class PageUnitInputDto implements IPageUnitInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -57545,8 +57545,8 @@ export interface IPageUnitInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -57557,8 +57557,8 @@ export class PageVGAInputDto implements IPageVGAInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 
     constructor(data?: IPageVGAInputDto) {
@@ -57578,8 +57578,8 @@ export class PageVGAInputDto implements IPageVGAInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
         }
     }
@@ -57599,8 +57599,8 @@ export class PageVGAInputDto implements IPageVGAInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         return data;
     }
@@ -57620,8 +57620,8 @@ export interface IPageVGAInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
 }
 
@@ -57632,8 +57632,8 @@ export class PageVillageInputDto implements IPageVillageInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;
@@ -57657,8 +57657,8 @@ export class PageVillageInputDto implements IPageVillageInputDto {
             this.sortField = _data["sortField"];
             this.sortMode = _data["sortMode"];
             this.keyword = _data["keyword"];
-            this.creators = _data["creators"] ? Int64NullableFilterInputDto.fromJS(_data["creators"]) : <any>undefined;
-            this.modifiers = _data["modifiers"] ? Int64NullableFilterInputDto.fromJS(_data["modifiers"]) : <any>undefined;
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
             this.isActive = _data["isActive"];
             this.countries = _data["countries"] ? GuidNullableFilterInputDto.fromJS(_data["countries"]) : <any>undefined;
             this.cityProvinces = _data["cityProvinces"] ? GuidNullableFilterInputDto.fromJS(_data["cityProvinces"]) : <any>undefined;
@@ -57682,8 +57682,8 @@ export class PageVillageInputDto implements IPageVillageInputDto {
         data["sortField"] = this.sortField;
         data["sortMode"] = this.sortMode;
         data["keyword"] = this.keyword;
-        data["creators"] = this.creators ? this.creators.toJSON() : <any>undefined;
-        data["modifiers"] = this.modifiers ? this.modifiers.toJSON() : <any>undefined;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
         data["isActive"] = this.isActive;
         data["countries"] = this.countries ? this.countries.toJSON() : <any>undefined;
         data["cityProvinces"] = this.cityProvinces ? this.cityProvinces.toJSON() : <any>undefined;
@@ -57707,8 +57707,8 @@ export interface IPageVillageInputDto {
     sortField: string | undefined;
     sortMode: SortMode;
     keyword: string | undefined;
-    creators: Int64NullableFilterInputDto;
-    modifiers: Int64NullableFilterInputDto;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
     countries: GuidNullableFilterInputDto;
     cityProvinces: GuidNullableFilterInputDto;

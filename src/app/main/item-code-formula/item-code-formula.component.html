@@ -20,7 +20,7 @@
                          [label]="l('Created')"
                          [multiple]="true"
                          [showExclude]="true"
-                         [(exclude)]="filterInput.creators.exclude"
+                         [(exclude)]="filterInput.creatorFilter.exclude"
                          [(ngModel)]="creators"
                          (ngModelChange)="onCreatorsChange($event)">
                     </div>
@@ -30,7 +30,7 @@
                          [label]="l('Modified')"
                          [multiple]="true"
                          [showExclude]="true"
-                         [(exclude)]="filterInput.modifiers.exclude"
+                         [(exclude)]="filterInput.modifierFilter.exclude"
                          [(ngModel)]="modifiers"
                          (ngModelChange)="onModifiersChange($event)">
                     </div>

@@ -125,8 +125,8 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
     protected initFilterInput() {
         super.initFilterInput();
         this.filterInput.isActive = undefined;
-        this.filterInput.creators = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.modifiers = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.creatorFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.modifierFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.countries = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.cityProvinces = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.khanDistricts = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
@@ -188,7 +188,7 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
     protected getList(input: any, callBack: Function) {
 
         this._villageService
-            .getList(input.countries.exclude, input.countries.ids, input.cityProvinces.exclude, input.cityProvinces.ids, input.khanDistricts.exclude, input.khanDistricts.ids, input.sangkatCommunes.exclude, input.sangkatCommunes.ids, input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
+            .getList(input.countries.exclude, input.countries.ids, input.cityProvinces.exclude, input.cityProvinces.ids, input.khanDistricts.exclude, input.khanDistricts.ids, input.sangkatCommunes.exclude, input.sangkatCommunes.ids, input.isActive, input.creatorFilter.exclude, input.creatorFilter.ids, input.modifierFilter.exclude, input.modifierFilter.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
@@ -377,11 +377,11 @@ export class VillageComponent extends Mixin(PrimeNgListComponentBase<VillageList
     }
 
     onCreatorsChange(event) {
-        this.filterInput.creators.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+        this.filterInput.creatorFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
     onModifiersChange(event) {
-        this.filterInput.modifiers.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+        this.filterInput.modifierFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
     onCountriesChange(event) {

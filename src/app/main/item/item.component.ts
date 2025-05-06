@@ -118,8 +118,8 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
     protected initFilterInput() {
         super.initFilterInput();
         this.filterInput.isActive = undefined;
-        this.filterInput.creators = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.modifiers = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.creatorFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.modifierFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.itemTypeFilter = new ItemTypeFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.itemCategoryFilter = new ItemCategoryFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.unitFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
@@ -262,10 +262,10 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
                 input.fieldCFilter.exclude,
                 input.fieldCFilter.ids,
                 input.isActive,
-                input.creators.exclude,
-                input.creators.ids,
-                input.modifiers.exclue,
-                input.modifiers.ids,
+                input.creatorFilter.exclude,
+                input.creatorFilter.ids,
+                input.modifierFilter.exclude,
+                input.modifierFilter.ids,
                 input.keyword,
                 input.sortField,
                 input.sortMode,
@@ -439,10 +439,10 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
     }
 
     onCreatorsChange(event) {
-        this.filterInput.creators.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+        this.filterInput.creatorFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
     onModifiersChange(event) {
-        this.filterInput.modifiers.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+        this.filterInput.modifierFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 }

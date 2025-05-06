@@ -118,8 +118,8 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
     protected initFilterInput() {
         super.initFilterInput();
         this.filterInput.isActive = undefined;
-        this.filterInput.creators = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.modifiers = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.creatorFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.modifierFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.accountTypes = new AccountTypeFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.subAccountTypes = new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.parents = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
@@ -165,7 +165,7 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
     protected getList(input: any, callBack: Function) {
 
         this._chartOfAccountService
-            .getList(input.accountTypes.exclude, input.accountTypes.ids, input.subAccountTypes.exclude, input.subAccountTypes.ids, input.parents.exclude, input.parents.ids, input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
+            .getList(input.accountTypes.exclude, input.accountTypes.ids, input.subAccountTypes.exclude, input.subAccountTypes.ids, input.parents.exclude, input.parents.ids, input.isActive, input.creatorFilter.exclude, input.creatorFilter.ids, input.modifierFilter.exclude, input.modifierFilter.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
@@ -354,11 +354,11 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
     }
 
     onCreatorsChange(event) {
-        this.filterInput.creators.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+        this.filterInput.creatorFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
     onModifiersChange(event) {
-        this.filterInput.modifiers.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+        this.filterInput.modifierFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
 }

@@ -124,8 +124,8 @@ export class BOMComponent extends Mixin(PrimeNgListComponentBase<BOMListDto>, Ex
     protected initFilterInput() {
         super.initFilterInput();
         this.filterInput.isActive = undefined;
-        this.filterInput.creators = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.modifiers = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.creatorFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.modifierFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.typeFilter = new BOMTypeFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.itemFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
 
@@ -171,7 +171,7 @@ export class BOMComponent extends Mixin(PrimeNgListComponentBase<BOMListDto>, Ex
     protected getList(input: any, callBack: Function) {
 
         this._bomService
-            .getList(input.typeFilter.exclude, input.typeFilter.ids, input.itemFilter.exclude, input.itemFilter.ids, input.isActive, input.creators.exclude, input.creators.ids, input.modifiers.exclue, input.modifiers.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
+            .getList(input.typeFilter.exclude, input.typeFilter.ids, input.itemFilter.exclude, input.itemFilter.ids, input.isActive, input.creatorFilter.exclude, input.creatorFilter.ids, input.modifierFilter.exclude, input.modifierFilter.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
@@ -403,11 +403,11 @@ export class BOMComponent extends Mixin(PrimeNgListComponentBase<BOMListDto>, Ex
     }
 
     onCreatorsChange(event) {
-        this.filterInput.creators.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+        this.filterInput.creatorFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
     onModifiersChange(event) {
-        this.filterInput.modifiers.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+        this.filterInput.modifierFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
     onItemsChange(event) {
