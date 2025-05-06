@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     ItemServiceProxy,
@@ -13,12 +13,13 @@ import {
     ItemTypeFilterInputDto,
     ItemCategoryFilterInputDto,
     GuidFilterInputDto,
+    PageItemInputDto
 } from '@shared/service-proxies/service-proxies';
 import { PrimeNgListComponentBase } from '@shared/prime-ng-list-component-base';
 import { Menu, MenuModule } from 'primeng/menu';
 import { AppPermissions } from '@shared/AppPermissions';
 import { Table, TableModule } from 'primeng/table';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
 import { ConfirmDeleteComponent } from '@shared/components/confirm-delete/confirm-delete.component';
 import { ColumnType } from '@shared/AppEnums';
@@ -43,7 +44,6 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf, DatePipe } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
-import { of } from 'rxjs';
 
 @Component({
     selector: 'app-item',
@@ -117,6 +117,9 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
 
     protected initFilterInput() {
         super.initFilterInput();
+
+        this.filterInput = PageItemInputDto.fromJS(this.filterInput); //Reset filter input to default type
+
         this.filterInput.isActive = undefined;
         this.filterInput.creatorFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.modifierFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
@@ -130,10 +133,10 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         this.filterInput.itemSizeFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.itemSeriesFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.colorPatternFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.cPUFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.rAMFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.vGAFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.hDDFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.cpuFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.ramFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.vgaFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.hddFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.screenFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.cameraFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.batteryFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
@@ -220,58 +223,7 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
     protected getList(input: any, callBack: Function) {
 
         this._itemService
-            .getList(
-                input.itemTypeFilter.exclude,
-                input.itemTypeFilter.ids,
-                input.itemCategoryFilter.exclude,
-                input.itemCategoryFilter.ids,
-                input.unitFilter.exclude,
-                input.unitFilter.ids,
-                input.itemGroupFilter.exclude,
-                input.itemGroupFilter.ids,
-                input.itemBrandFilter.exclude,
-                input.itemBrandFilter.ids,
-                input.itemGradeFilter.exclude,
-                input.itemGradeFilter.ids,
-                input.itemModelFilter.exclude,
-                input.itemModelFilter.ids,
-                input.itemSizeFilter.exclude,
-                input.itemSizeFilter.ids,
-                input.itemSeriesFilter.exclude,
-                input.itemSeriesFilter.ids,
-                input.colorPatternFilter.exclude,
-                input.colorPatternFilter.ids,
-                input.cPUFilter.exclude,
-                input.cPUFilter.ids,
-                input.rAMFilter.exclude,
-                input.rAMFilter.ids,
-                input.vGAFilter.exclude,
-                input.vGAFilter.ids,
-                input.hDDFilter.exclude,
-                input.hDDFilter.ids,
-                input.screenFilter.exclude,
-                input.screenFilter.ids,
-                input.cameraFilter.exclude,
-                input.cameraFilter.ids,
-                input.batteryFilter.exclude,
-                input.batteryFilter.ids,
-                input.fieldAFilter.exclude,
-                input.fieldAFilter.ids,
-                input.fieldBFilter.exclude,
-                input.fieldBFilter.ids,
-                input.fieldCFilter.exclude,
-                input.fieldCFilter.ids,
-                input.isActive,
-                input.creatorFilter.exclude,
-                input.creatorFilter.ids,
-                input.modifierFilter.exclude,
-                input.modifierFilter.ids,
-                input.keyword,
-                input.sortField,
-                input.sortMode,
-                input.usePagination,
-                input.skipCount,
-                input.maxResultCount)
+            .getList(input)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;

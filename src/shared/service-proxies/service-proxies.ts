@@ -13421,276 +13421,26 @@ export class ItemServiceProxy {
     }
 
     /**
-     * @param itemTypeFilter_Exclude (optional) 
-     * @param itemTypeFilter_Ids (optional) 
-     * @param itemCategoryFilter_Exclude (optional) 
-     * @param itemCategoryFilter_Ids (optional) 
-     * @param unitFilter_Exclude (optional) 
-     * @param unitFilter_Ids (optional) 
-     * @param itemGroupFilter_Exclude (optional) 
-     * @param itemGroupFilter_Ids (optional) 
-     * @param itemBrandFilter_Exclude (optional) 
-     * @param itemBrandFilter_Ids (optional) 
-     * @param itemGradeFilter_Exclude (optional) 
-     * @param itemGradeFilter_Ids (optional) 
-     * @param itemModelFilter_Exclude (optional) 
-     * @param itemModelFilter_Ids (optional) 
-     * @param itemSizeFilter_Exclude (optional) 
-     * @param itemSizeFilter_Ids (optional) 
-     * @param itemSeriesFilter_Exclude (optional) 
-     * @param itemSeriesFilter_Ids (optional) 
-     * @param colorPatternFilter_Exclude (optional) 
-     * @param colorPatternFilter_Ids (optional) 
-     * @param cPUFilter_Exclude (optional) 
-     * @param cPUFilter_Ids (optional) 
-     * @param rAMFilter_Exclude (optional) 
-     * @param rAMFilter_Ids (optional) 
-     * @param vGAFilter_Exclude (optional) 
-     * @param vGAFilter_Ids (optional) 
-     * @param hDDFilter_Exclude (optional) 
-     * @param hDDFilter_Ids (optional) 
-     * @param screenFilter_Exclude (optional) 
-     * @param screenFilter_Ids (optional) 
-     * @param cameraFilter_Exclude (optional) 
-     * @param cameraFilter_Ids (optional) 
-     * @param batteryFilter_Exclude (optional) 
-     * @param batteryFilter_Ids (optional) 
-     * @param fieldAFilter_Exclude (optional) 
-     * @param fieldAFilter_Ids (optional) 
-     * @param fieldBFilter_Exclude (optional) 
-     * @param fieldBFilter_Ids (optional) 
-     * @param fieldCFilter_Exclude (optional) 
-     * @param fieldCFilter_Ids (optional) 
-     * @param isActive (optional) 
-     * @param creatorFilter_Exclude (optional) 
-     * @param creatorFilter_Ids (optional) 
-     * @param modifierFilter_Exclude (optional) 
-     * @param modifierFilter_Ids (optional) 
-     * @param keyword (optional) 
-     * @param sortField (optional) 
-     * @param sortMode (optional) 
-     * @param usePagination (optional) 
-     * @param skipCount (optional) 
-     * @param maxResultCount (optional) 
+     * @param body (optional) 
      * @return OK
      */
-    getList(itemTypeFilter_Exclude: boolean | undefined, itemTypeFilter_Ids: ItemType[] | undefined, itemCategoryFilter_Exclude: boolean | undefined, itemCategoryFilter_Ids: ItemCategory[] | undefined, unitFilter_Exclude: boolean | undefined, unitFilter_Ids: string[] | undefined, itemGroupFilter_Exclude: boolean | undefined, itemGroupFilter_Ids: string[] | undefined, itemBrandFilter_Exclude: boolean | undefined, itemBrandFilter_Ids: string[] | undefined, itemGradeFilter_Exclude: boolean | undefined, itemGradeFilter_Ids: string[] | undefined, itemModelFilter_Exclude: boolean | undefined, itemModelFilter_Ids: string[] | undefined, itemSizeFilter_Exclude: boolean | undefined, itemSizeFilter_Ids: string[] | undefined, itemSeriesFilter_Exclude: boolean | undefined, itemSeriesFilter_Ids: string[] | undefined, colorPatternFilter_Exclude: boolean | undefined, colorPatternFilter_Ids: string[] | undefined, cPUFilter_Exclude: boolean | undefined, cPUFilter_Ids: string[] | undefined, rAMFilter_Exclude: boolean | undefined, rAMFilter_Ids: string[] | undefined, vGAFilter_Exclude: boolean | undefined, vGAFilter_Ids: string[] | undefined, hDDFilter_Exclude: boolean | undefined, hDDFilter_Ids: string[] | undefined, screenFilter_Exclude: boolean | undefined, screenFilter_Ids: string[] | undefined, cameraFilter_Exclude: boolean | undefined, cameraFilter_Ids: string[] | undefined, batteryFilter_Exclude: boolean | undefined, batteryFilter_Ids: string[] | undefined, fieldAFilter_Exclude: boolean | undefined, fieldAFilter_Ids: string[] | undefined, fieldBFilter_Exclude: boolean | undefined, fieldBFilter_Ids: string[] | undefined, fieldCFilter_Exclude: boolean | undefined, fieldCFilter_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ItemListDtoPagedResultDto> {
-        let url_ = this.baseUrl + "/api/services/app/Item/GetList?";
-        if (itemTypeFilter_Exclude === null)
-            throw new Error("The parameter 'itemTypeFilter_Exclude' cannot be null.");
-        else if (itemTypeFilter_Exclude !== undefined)
-            url_ += "ItemTypeFilter.Exclude=" + encodeURIComponent("" + itemTypeFilter_Exclude) + "&";
-        if (itemTypeFilter_Ids === null)
-            throw new Error("The parameter 'itemTypeFilter_Ids' cannot be null.");
-        else if (itemTypeFilter_Ids !== undefined)
-            itemTypeFilter_Ids && itemTypeFilter_Ids.forEach(item => { url_ += "ItemTypeFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (itemCategoryFilter_Exclude === null)
-            throw new Error("The parameter 'itemCategoryFilter_Exclude' cannot be null.");
-        else if (itemCategoryFilter_Exclude !== undefined)
-            url_ += "ItemCategoryFilter.Exclude=" + encodeURIComponent("" + itemCategoryFilter_Exclude) + "&";
-        if (itemCategoryFilter_Ids === null)
-            throw new Error("The parameter 'itemCategoryFilter_Ids' cannot be null.");
-        else if (itemCategoryFilter_Ids !== undefined)
-            itemCategoryFilter_Ids && itemCategoryFilter_Ids.forEach(item => { url_ += "ItemCategoryFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (unitFilter_Exclude === null)
-            throw new Error("The parameter 'unitFilter_Exclude' cannot be null.");
-        else if (unitFilter_Exclude !== undefined)
-            url_ += "UnitFilter.Exclude=" + encodeURIComponent("" + unitFilter_Exclude) + "&";
-        if (unitFilter_Ids === null)
-            throw new Error("The parameter 'unitFilter_Ids' cannot be null.");
-        else if (unitFilter_Ids !== undefined)
-            unitFilter_Ids && unitFilter_Ids.forEach(item => { url_ += "UnitFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (itemGroupFilter_Exclude === null)
-            throw new Error("The parameter 'itemGroupFilter_Exclude' cannot be null.");
-        else if (itemGroupFilter_Exclude !== undefined)
-            url_ += "ItemGroupFilter.Exclude=" + encodeURIComponent("" + itemGroupFilter_Exclude) + "&";
-        if (itemGroupFilter_Ids === null)
-            throw new Error("The parameter 'itemGroupFilter_Ids' cannot be null.");
-        else if (itemGroupFilter_Ids !== undefined)
-            itemGroupFilter_Ids && itemGroupFilter_Ids.forEach(item => { url_ += "ItemGroupFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (itemBrandFilter_Exclude === null)
-            throw new Error("The parameter 'itemBrandFilter_Exclude' cannot be null.");
-        else if (itemBrandFilter_Exclude !== undefined)
-            url_ += "ItemBrandFilter.Exclude=" + encodeURIComponent("" + itemBrandFilter_Exclude) + "&";
-        if (itemBrandFilter_Ids === null)
-            throw new Error("The parameter 'itemBrandFilter_Ids' cannot be null.");
-        else if (itemBrandFilter_Ids !== undefined)
-            itemBrandFilter_Ids && itemBrandFilter_Ids.forEach(item => { url_ += "ItemBrandFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (itemGradeFilter_Exclude === null)
-            throw new Error("The parameter 'itemGradeFilter_Exclude' cannot be null.");
-        else if (itemGradeFilter_Exclude !== undefined)
-            url_ += "ItemGradeFilter.Exclude=" + encodeURIComponent("" + itemGradeFilter_Exclude) + "&";
-        if (itemGradeFilter_Ids === null)
-            throw new Error("The parameter 'itemGradeFilter_Ids' cannot be null.");
-        else if (itemGradeFilter_Ids !== undefined)
-            itemGradeFilter_Ids && itemGradeFilter_Ids.forEach(item => { url_ += "ItemGradeFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (itemModelFilter_Exclude === null)
-            throw new Error("The parameter 'itemModelFilter_Exclude' cannot be null.");
-        else if (itemModelFilter_Exclude !== undefined)
-            url_ += "ItemModelFilter.Exclude=" + encodeURIComponent("" + itemModelFilter_Exclude) + "&";
-        if (itemModelFilter_Ids === null)
-            throw new Error("The parameter 'itemModelFilter_Ids' cannot be null.");
-        else if (itemModelFilter_Ids !== undefined)
-            itemModelFilter_Ids && itemModelFilter_Ids.forEach(item => { url_ += "ItemModelFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (itemSizeFilter_Exclude === null)
-            throw new Error("The parameter 'itemSizeFilter_Exclude' cannot be null.");
-        else if (itemSizeFilter_Exclude !== undefined)
-            url_ += "ItemSizeFilter.Exclude=" + encodeURIComponent("" + itemSizeFilter_Exclude) + "&";
-        if (itemSizeFilter_Ids === null)
-            throw new Error("The parameter 'itemSizeFilter_Ids' cannot be null.");
-        else if (itemSizeFilter_Ids !== undefined)
-            itemSizeFilter_Ids && itemSizeFilter_Ids.forEach(item => { url_ += "ItemSizeFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (itemSeriesFilter_Exclude === null)
-            throw new Error("The parameter 'itemSeriesFilter_Exclude' cannot be null.");
-        else if (itemSeriesFilter_Exclude !== undefined)
-            url_ += "ItemSeriesFilter.Exclude=" + encodeURIComponent("" + itemSeriesFilter_Exclude) + "&";
-        if (itemSeriesFilter_Ids === null)
-            throw new Error("The parameter 'itemSeriesFilter_Ids' cannot be null.");
-        else if (itemSeriesFilter_Ids !== undefined)
-            itemSeriesFilter_Ids && itemSeriesFilter_Ids.forEach(item => { url_ += "ItemSeriesFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (colorPatternFilter_Exclude === null)
-            throw new Error("The parameter 'colorPatternFilter_Exclude' cannot be null.");
-        else if (colorPatternFilter_Exclude !== undefined)
-            url_ += "ColorPatternFilter.Exclude=" + encodeURIComponent("" + colorPatternFilter_Exclude) + "&";
-        if (colorPatternFilter_Ids === null)
-            throw new Error("The parameter 'colorPatternFilter_Ids' cannot be null.");
-        else if (colorPatternFilter_Ids !== undefined)
-            colorPatternFilter_Ids && colorPatternFilter_Ids.forEach(item => { url_ += "ColorPatternFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (cPUFilter_Exclude === null)
-            throw new Error("The parameter 'cPUFilter_Exclude' cannot be null.");
-        else if (cPUFilter_Exclude !== undefined)
-            url_ += "CPUFilter.Exclude=" + encodeURIComponent("" + cPUFilter_Exclude) + "&";
-        if (cPUFilter_Ids === null)
-            throw new Error("The parameter 'cPUFilter_Ids' cannot be null.");
-        else if (cPUFilter_Ids !== undefined)
-            cPUFilter_Ids && cPUFilter_Ids.forEach(item => { url_ += "CPUFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (rAMFilter_Exclude === null)
-            throw new Error("The parameter 'rAMFilter_Exclude' cannot be null.");
-        else if (rAMFilter_Exclude !== undefined)
-            url_ += "RAMFilter.Exclude=" + encodeURIComponent("" + rAMFilter_Exclude) + "&";
-        if (rAMFilter_Ids === null)
-            throw new Error("The parameter 'rAMFilter_Ids' cannot be null.");
-        else if (rAMFilter_Ids !== undefined)
-            rAMFilter_Ids && rAMFilter_Ids.forEach(item => { url_ += "RAMFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (vGAFilter_Exclude === null)
-            throw new Error("The parameter 'vGAFilter_Exclude' cannot be null.");
-        else if (vGAFilter_Exclude !== undefined)
-            url_ += "VGAFilter.Exclude=" + encodeURIComponent("" + vGAFilter_Exclude) + "&";
-        if (vGAFilter_Ids === null)
-            throw new Error("The parameter 'vGAFilter_Ids' cannot be null.");
-        else if (vGAFilter_Ids !== undefined)
-            vGAFilter_Ids && vGAFilter_Ids.forEach(item => { url_ += "VGAFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (hDDFilter_Exclude === null)
-            throw new Error("The parameter 'hDDFilter_Exclude' cannot be null.");
-        else if (hDDFilter_Exclude !== undefined)
-            url_ += "HDDFilter.Exclude=" + encodeURIComponent("" + hDDFilter_Exclude) + "&";
-        if (hDDFilter_Ids === null)
-            throw new Error("The parameter 'hDDFilter_Ids' cannot be null.");
-        else if (hDDFilter_Ids !== undefined)
-            hDDFilter_Ids && hDDFilter_Ids.forEach(item => { url_ += "HDDFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (screenFilter_Exclude === null)
-            throw new Error("The parameter 'screenFilter_Exclude' cannot be null.");
-        else if (screenFilter_Exclude !== undefined)
-            url_ += "ScreenFilter.Exclude=" + encodeURIComponent("" + screenFilter_Exclude) + "&";
-        if (screenFilter_Ids === null)
-            throw new Error("The parameter 'screenFilter_Ids' cannot be null.");
-        else if (screenFilter_Ids !== undefined)
-            screenFilter_Ids && screenFilter_Ids.forEach(item => { url_ += "ScreenFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (cameraFilter_Exclude === null)
-            throw new Error("The parameter 'cameraFilter_Exclude' cannot be null.");
-        else if (cameraFilter_Exclude !== undefined)
-            url_ += "CameraFilter.Exclude=" + encodeURIComponent("" + cameraFilter_Exclude) + "&";
-        if (cameraFilter_Ids === null)
-            throw new Error("The parameter 'cameraFilter_Ids' cannot be null.");
-        else if (cameraFilter_Ids !== undefined)
-            cameraFilter_Ids && cameraFilter_Ids.forEach(item => { url_ += "CameraFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (batteryFilter_Exclude === null)
-            throw new Error("The parameter 'batteryFilter_Exclude' cannot be null.");
-        else if (batteryFilter_Exclude !== undefined)
-            url_ += "BatteryFilter.Exclude=" + encodeURIComponent("" + batteryFilter_Exclude) + "&";
-        if (batteryFilter_Ids === null)
-            throw new Error("The parameter 'batteryFilter_Ids' cannot be null.");
-        else if (batteryFilter_Ids !== undefined)
-            batteryFilter_Ids && batteryFilter_Ids.forEach(item => { url_ += "BatteryFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (fieldAFilter_Exclude === null)
-            throw new Error("The parameter 'fieldAFilter_Exclude' cannot be null.");
-        else if (fieldAFilter_Exclude !== undefined)
-            url_ += "FieldAFilter.Exclude=" + encodeURIComponent("" + fieldAFilter_Exclude) + "&";
-        if (fieldAFilter_Ids === null)
-            throw new Error("The parameter 'fieldAFilter_Ids' cannot be null.");
-        else if (fieldAFilter_Ids !== undefined)
-            fieldAFilter_Ids && fieldAFilter_Ids.forEach(item => { url_ += "FieldAFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (fieldBFilter_Exclude === null)
-            throw new Error("The parameter 'fieldBFilter_Exclude' cannot be null.");
-        else if (fieldBFilter_Exclude !== undefined)
-            url_ += "FieldBFilter.Exclude=" + encodeURIComponent("" + fieldBFilter_Exclude) + "&";
-        if (fieldBFilter_Ids === null)
-            throw new Error("The parameter 'fieldBFilter_Ids' cannot be null.");
-        else if (fieldBFilter_Ids !== undefined)
-            fieldBFilter_Ids && fieldBFilter_Ids.forEach(item => { url_ += "FieldBFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (fieldCFilter_Exclude === null)
-            throw new Error("The parameter 'fieldCFilter_Exclude' cannot be null.");
-        else if (fieldCFilter_Exclude !== undefined)
-            url_ += "FieldCFilter.Exclude=" + encodeURIComponent("" + fieldCFilter_Exclude) + "&";
-        if (fieldCFilter_Ids === null)
-            throw new Error("The parameter 'fieldCFilter_Ids' cannot be null.");
-        else if (fieldCFilter_Ids !== undefined)
-            fieldCFilter_Ids && fieldCFilter_Ids.forEach(item => { url_ += "FieldCFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (isActive === null)
-            throw new Error("The parameter 'isActive' cannot be null.");
-        else if (isActive !== undefined)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creatorFilter_Exclude === null)
-            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
-        else if (creatorFilter_Exclude !== undefined)
-            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
-        if (creatorFilter_Ids === null)
-            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
-        else if (creatorFilter_Ids !== undefined)
-            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifierFilter_Exclude === null)
-            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
-        else if (modifierFilter_Exclude !== undefined)
-            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
-        if (modifierFilter_Ids === null)
-            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
-        else if (modifierFilter_Ids !== undefined)
-            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (keyword === null)
-            throw new Error("The parameter 'keyword' cannot be null.");
-        else if (keyword !== undefined)
-            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
-        if (sortField === null)
-            throw new Error("The parameter 'sortField' cannot be null.");
-        else if (sortField !== undefined)
-            url_ += "SortField=" + encodeURIComponent("" + sortField) + "&";
-        if (sortMode === null)
-            throw new Error("The parameter 'sortMode' cannot be null.");
-        else if (sortMode !== undefined)
-            url_ += "SortMode=" + encodeURIComponent("" + sortMode) + "&";
-        if (usePagination === null)
-            throw new Error("The parameter 'usePagination' cannot be null.");
-        else if (usePagination !== undefined)
-            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
-        if (skipCount === null)
-            throw new Error("The parameter 'skipCount' cannot be null.");
-        else if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
-        if (maxResultCount === null)
-            throw new Error("The parameter 'maxResultCount' cannot be null.");
-        else if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+    getList(body: PageItemInputDto | undefined): Observable<ItemListDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Item/GetList";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(body);
+
         let options_ : any = {
+            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Content-Type": "application/json",
                 "Accept": "text/plain"
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
             return this.processGetList(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
@@ -56778,6 +56528,161 @@ export interface IPageItemGroupInputDto {
     creatorFilter: Int64NullableFilterInputDto;
     modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
+}
+
+export class PageItemInputDto implements IPageItemInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    itemTypeFilter: ItemTypeFilterInputDto;
+    itemCategoryFilter: ItemCategoryFilterInputDto;
+    unitFilter: GuidFilterInputDto;
+    itemGroupFilter: GuidFilterInputDto;
+    itemBrandFilter: GuidFilterInputDto;
+    itemGradeFilter: GuidFilterInputDto;
+    itemModelFilter: GuidFilterInputDto;
+    itemSizeFilter: GuidFilterInputDto;
+    itemSeriesFilter: GuidFilterInputDto;
+    colorPatternFilter: GuidFilterInputDto;
+    cpuFilter: GuidFilterInputDto;
+    ramFilter: GuidFilterInputDto;
+    vgaFilter: GuidFilterInputDto;
+    hddFilter: GuidFilterInputDto;
+    screenFilter: GuidFilterInputDto;
+    cameraFilter: GuidFilterInputDto;
+    batteryFilter: GuidFilterInputDto;
+    fieldAFilter: GuidFilterInputDto;
+    fieldBFilter: GuidFilterInputDto;
+    fieldCFilter: GuidFilterInputDto;
+
+    constructor(data?: IPageItemInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.itemTypeFilter = _data["itemTypeFilter"] ? ItemTypeFilterInputDto.fromJS(_data["itemTypeFilter"]) : <any>undefined;
+            this.itemCategoryFilter = _data["itemCategoryFilter"] ? ItemCategoryFilterInputDto.fromJS(_data["itemCategoryFilter"]) : <any>undefined;
+            this.unitFilter = _data["unitFilter"] ? GuidFilterInputDto.fromJS(_data["unitFilter"]) : <any>undefined;
+            this.itemGroupFilter = _data["itemGroupFilter"] ? GuidFilterInputDto.fromJS(_data["itemGroupFilter"]) : <any>undefined;
+            this.itemBrandFilter = _data["itemBrandFilter"] ? GuidFilterInputDto.fromJS(_data["itemBrandFilter"]) : <any>undefined;
+            this.itemGradeFilter = _data["itemGradeFilter"] ? GuidFilterInputDto.fromJS(_data["itemGradeFilter"]) : <any>undefined;
+            this.itemModelFilter = _data["itemModelFilter"] ? GuidFilterInputDto.fromJS(_data["itemModelFilter"]) : <any>undefined;
+            this.itemSizeFilter = _data["itemSizeFilter"] ? GuidFilterInputDto.fromJS(_data["itemSizeFilter"]) : <any>undefined;
+            this.itemSeriesFilter = _data["itemSeriesFilter"] ? GuidFilterInputDto.fromJS(_data["itemSeriesFilter"]) : <any>undefined;
+            this.colorPatternFilter = _data["colorPatternFilter"] ? GuidFilterInputDto.fromJS(_data["colorPatternFilter"]) : <any>undefined;
+            this.cpuFilter = _data["cpuFilter"] ? GuidFilterInputDto.fromJS(_data["cpuFilter"]) : <any>undefined;
+            this.ramFilter = _data["ramFilter"] ? GuidFilterInputDto.fromJS(_data["ramFilter"]) : <any>undefined;
+            this.vgaFilter = _data["vgaFilter"] ? GuidFilterInputDto.fromJS(_data["vgaFilter"]) : <any>undefined;
+            this.hddFilter = _data["hddFilter"] ? GuidFilterInputDto.fromJS(_data["hddFilter"]) : <any>undefined;
+            this.screenFilter = _data["screenFilter"] ? GuidFilterInputDto.fromJS(_data["screenFilter"]) : <any>undefined;
+            this.cameraFilter = _data["cameraFilter"] ? GuidFilterInputDto.fromJS(_data["cameraFilter"]) : <any>undefined;
+            this.batteryFilter = _data["batteryFilter"] ? GuidFilterInputDto.fromJS(_data["batteryFilter"]) : <any>undefined;
+            this.fieldAFilter = _data["fieldAFilter"] ? GuidFilterInputDto.fromJS(_data["fieldAFilter"]) : <any>undefined;
+            this.fieldBFilter = _data["fieldBFilter"] ? GuidFilterInputDto.fromJS(_data["fieldBFilter"]) : <any>undefined;
+            this.fieldCFilter = _data["fieldCFilter"] ? GuidFilterInputDto.fromJS(_data["fieldCFilter"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): PageItemInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageItemInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["itemTypeFilter"] = this.itemTypeFilter ? this.itemTypeFilter.toJSON() : <any>undefined;
+        data["itemCategoryFilter"] = this.itemCategoryFilter ? this.itemCategoryFilter.toJSON() : <any>undefined;
+        data["unitFilter"] = this.unitFilter ? this.unitFilter.toJSON() : <any>undefined;
+        data["itemGroupFilter"] = this.itemGroupFilter ? this.itemGroupFilter.toJSON() : <any>undefined;
+        data["itemBrandFilter"] = this.itemBrandFilter ? this.itemBrandFilter.toJSON() : <any>undefined;
+        data["itemGradeFilter"] = this.itemGradeFilter ? this.itemGradeFilter.toJSON() : <any>undefined;
+        data["itemModelFilter"] = this.itemModelFilter ? this.itemModelFilter.toJSON() : <any>undefined;
+        data["itemSizeFilter"] = this.itemSizeFilter ? this.itemSizeFilter.toJSON() : <any>undefined;
+        data["itemSeriesFilter"] = this.itemSeriesFilter ? this.itemSeriesFilter.toJSON() : <any>undefined;
+        data["colorPatternFilter"] = this.colorPatternFilter ? this.colorPatternFilter.toJSON() : <any>undefined;
+        data["cpuFilter"] = this.cpuFilter ? this.cpuFilter.toJSON() : <any>undefined;
+        data["ramFilter"] = this.ramFilter ? this.ramFilter.toJSON() : <any>undefined;
+        data["vgaFilter"] = this.vgaFilter ? this.vgaFilter.toJSON() : <any>undefined;
+        data["hddFilter"] = this.hddFilter ? this.hddFilter.toJSON() : <any>undefined;
+        data["screenFilter"] = this.screenFilter ? this.screenFilter.toJSON() : <any>undefined;
+        data["cameraFilter"] = this.cameraFilter ? this.cameraFilter.toJSON() : <any>undefined;
+        data["batteryFilter"] = this.batteryFilter ? this.batteryFilter.toJSON() : <any>undefined;
+        data["fieldAFilter"] = this.fieldAFilter ? this.fieldAFilter.toJSON() : <any>undefined;
+        data["fieldBFilter"] = this.fieldBFilter ? this.fieldBFilter.toJSON() : <any>undefined;
+        data["fieldCFilter"] = this.fieldCFilter ? this.fieldCFilter.toJSON() : <any>undefined;
+        return data;
+    }
+
+    clone(): PageItemInputDto {
+        const json = this.toJSON();
+        let result = new PageItemInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPageItemInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    itemTypeFilter: ItemTypeFilterInputDto;
+    itemCategoryFilter: ItemCategoryFilterInputDto;
+    unitFilter: GuidFilterInputDto;
+    itemGroupFilter: GuidFilterInputDto;
+    itemBrandFilter: GuidFilterInputDto;
+    itemGradeFilter: GuidFilterInputDto;
+    itemModelFilter: GuidFilterInputDto;
+    itemSizeFilter: GuidFilterInputDto;
+    itemSeriesFilter: GuidFilterInputDto;
+    colorPatternFilter: GuidFilterInputDto;
+    cpuFilter: GuidFilterInputDto;
+    ramFilter: GuidFilterInputDto;
+    vgaFilter: GuidFilterInputDto;
+    hddFilter: GuidFilterInputDto;
+    screenFilter: GuidFilterInputDto;
+    cameraFilter: GuidFilterInputDto;
+    batteryFilter: GuidFilterInputDto;
+    fieldAFilter: GuidFilterInputDto;
+    fieldBFilter: GuidFilterInputDto;
+    fieldCFilter: GuidFilterInputDto;
 }
 
 export class PageItemModelInputDto implements IPageItemModelInputDto {
