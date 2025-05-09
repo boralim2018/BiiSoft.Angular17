@@ -16,14 +16,229 @@
                         <p-dropdown [options]="isActiveModels" [(ngModel)]="filterInput.isActive" styleClass="w-full"></p-dropdown>
                     </div>
                     <div class="field"
+                         selectItemType
+                         name="itemType"
+                         [label]="l('ItemType')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.itemTypeFilter.exclude"
+                         [(ngModel)]="filterInput.itemTypeFilter.ids">
+                    </div>
+                    <div class="field"
+                         selectItemCategory
+                         name="itemCategory"
+                         [label]="l('ItemCategory')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.itemCategoryFilter.exclude"
+                         [(ngModel)]="filterInput.itemCategoryFilter.ids">
+                    </div>
+                    <div class="field"
+                         findUnit
+                         name="unit"
+                         [label]="l('Unit')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.unitFilter.exclude"
+                         [(ngModel)]="findModel.unit"
+                         (ngModelChange)="onUnitChange($event)">
+                    </div>
+                    <div class="field"
+                         findItemGroup
+                         name="itemGroup"
+                         [label]="l('ItemGroup')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.itemGroupFilter.exclude"
+                         [(ngModel)]="findModel.itemGroup"
+                         (ngModelChange)="onItemGroupChange($event)"
+                         *ngIf="appSession.itemSetting?.useItemGroup">
+                    </div>
+                    <div class="field"
+                         findItemBrand
+                         name="itemBrand"
+                         [label]="l('ItemBrand')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.itemBrandFilter.exclude"
+                         [(ngModel)]="findModel.itemBrand"
+                         (ngModelChange)="onItemBrandChange($event)"
+                         *ngIf="appSession.itemSetting?.useBrand">
+                    </div>
+                    <div class="field"
+                         findItemGrade
+                         name="itemGrade"
+                         [label]="l('ItemGrade')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.itemGradeFilter.exclude"
+                         [(ngModel)]="findModel.itemGrade"
+                         (ngModelChange)="onItemGradeChange($event)"
+                         *ngIf="appSession.itemSetting?.useGrade">
+                    </div>
+                    <div class="field"
+                         findItemModel
+                         name="itemModel"
+                         [label]="l('ItemModel')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.itemModelFilter.exclude"
+                         [(ngModel)]="findModel.itemModel"
+                         (ngModelChange)="onItemModelChange($event)"
+                         *ngIf="appSession.itemSetting?.useModel">
+                    </div>
+                    <div class="field"
+                         findItemSize
+                         name="itemSize"
+                         [label]="l('ItemSize')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.itemSizeFilter.exclude"
+                         [(ngModel)]="findModel.itemSize"
+                         (ngModelChange)="onItemSizeChange($event)"
+                         *ngIf="appSession.itemSetting?.useSize">
+                    </div>
+                    <div class="field"
+                         findItemSeries
+                         name="itemSeries"
+                         [label]="l('ItemSeries')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.itemSeriesFilter.exclude"
+                         [(ngModel)]="findModel.itemSeries"
+                         (ngModelChange)="onItemSeriesChange($event)"
+                         *ngIf="appSession.itemSetting?.useSeries">
+                    </div>
+                    <div class="field"
+                         findColorPattern
+                         name="colorPattern"
+                         [label]="l('ColorPattern')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.colorPatternFilter.exclude"
+                         [(ngModel)]="findModel.colorPattern"
+                         (ngModelChange)="onColorPatternChange($event)"
+                         *ngIf="appSession.itemSetting?.useColorPattern">
+                    </div>
+                    <div class="field"
+                         findCPU
+                         name="cpu"
+                         [label]="l('CPU')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.cpuFilter.exclude"
+                         [(ngModel)]="findModel.cpu"
+                         (ngModelChange)="onCPUChange($event)"
+                         *ngIf="appSession.itemSetting?.useCPU">
+                    </div>
+                    <div class="field"
+                         findRAM
+                         name="ram"
+                         [label]="l('RAM')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.ramFilter.exclude"
+                         [(ngModel)]="findModel.ram"
+                         (ngModelChange)="onRAMChange($event)"
+                         *ngIf="appSession.itemSetting?.useRAM">
+                    </div>
+                    <div class="field"
+                         findVGA
+                         name="vga"
+                         [label]="l('VGA')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.vgaFilter.exclude"
+                         [(ngModel)]="findModel.vga"
+                         (ngModelChange)="onVGAChange($event)"
+                         *ngIf="appSession.itemSetting?.useVGA">
+                    </div>
+                    <div class="field"
+                         findHDD
+                         name="hdd"
+                         [label]="l('HDD')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.hddFilter.exclude"
+                         [(ngModel)]="findModel.hdd"
+                         (ngModelChange)="onHDDChange($event)"
+                         *ngIf="appSession.itemSetting?.useHDD">
+                    </div>
+                    <div class="field"
+                         findScreen
+                         name="screen"
+                         [label]="l('Screen')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.screenFilter.exclude"
+                         [(ngModel)]="findModel.screen"
+                         (ngModelChange)="onScreenChange($event)"
+                         *ngIf="appSession.itemSetting?.useScreen">
+                    </div>
+                    <div class="field"
+                         findCamera
+                         name="camera"
+                         [label]="l('Camera')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.cameraFilter.exclude"
+                         [(ngModel)]="findModel.camera"
+                         (ngModelChange)="onCameraChange($event)"
+                         *ngIf="appSession.itemSetting?.useCamera">
+                    </div>
+                    <div class="field"
+                         findBattery
+                         name="battery"
+                         [label]="l('Battery')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.batteryFilter.exclude"
+                         [(ngModel)]="findModel.battery"
+                         (ngModelChange)="onBatteryChange($event)"
+                         *ngIf="appSession.itemSetting?.useBattery">
+                    </div>
+                    <div class="field"
+                         findFieldA
+                         name="fieldA"
+                         [label]="appSession.itemSetting?.fieldALabel ? l(appSession.itemSetting?.fieldALabel) : l('FieldA')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.fieldAFilter.exclude"
+                         [(ngModel)]="findModel.fieldA"
+                         (ngModelChange)="onFieldAChange($event)"
+                         *ngIf="appSession.itemSetting?.useFieldA">
+                    </div>
+                    <div class="field"
+                         findFieldB
+                         name="fieldB"
+                         [label]="appSession.itemSetting?.fieldBLabel ? l(appSession.itemSetting?.fieldBLabel) : l('FieldB')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.fieldBFilter.exclude"
+                         [(ngModel)]="findModel.fieldB"
+                         (ngModelChange)="onFieldBChange($event)"
+                         *ngIf="appSession.itemSetting?.useFieldB">
+                    </div>
+                    <div class="field"
+                         findFieldC
+                         name="fieldC"
+                         [label]="appSession.itemSetting?.fieldCLabel ? l(appSession.itemSetting?.fieldCLabel) : l('FieldC')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.fieldCFilter.exclude"
+                         [(ngModel)]="findModel.fieldC"
+                         (ngModelChange)="onFieldCChange($event)"
+                         *ngIf="appSession.itemSetting?.useFieldC">
+                    </div>
+                    <div class="field"
                          findUser
                          name="created"
                          [label]="l('Created')"
                          [multiple]="true"
                          [showExclude]="true"
                          [(exclude)]="filterInput.creatorFilter.exclude"
-                         [(ngModel)]="creators"
-                         (ngModelChange)="onCreatorsChange($event)">
+                         [(ngModel)]="findModel.creator"
+                         (ngModelChange)="onCreatorChange($event)">
                     </div>
                     <div class="field"
                          findUser
@@ -32,8 +247,8 @@
                          [multiple]="true"
                          [showExclude]="true"
                          [(exclude)]="filterInput.modifierFilter.exclude"
-                         [(ngModel)]="modifiers"
-                         (ngModelChange)="onModifiersChange($event)">
+                         [(ngModel)]="findModel.modifier"
+                         (ngModelChange)="onModifierChange($event)">
                     </div>
                 </div>
                 <div class="layout-config-footer" searchFooter [loading]="isTableLoading" (onSearch)="refresh($event)">

@@ -11,9 +11,8 @@
 </div>
 
 <div class="find" [ngClass]="{'ng-invalid': invalid, 'ng-dirty': dirty }">
-    <div class="p-multiselect"
-         [attr.disabled]="disabled">
-        <div class="p-inputtext border-none pr-0 flex justify-content-between align-items-center">
+    <div class="p-multiselect w-full" [attr.disabled]="disabled">
+        <div class="p-inputtext w-full border-none pr-0 flex justify-content-between align-items-center">
             <div class="flex-1 flex justify-content-between align-items-center">
                 <div class="p-placeholder cursor-pointer" *ngIf="isModelNullOrEmpty" (click)="find()">{{placeholder}}</div>
                 <ng-container *ngIf="!isModelNullOrEmpty">

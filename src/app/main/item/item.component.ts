@@ -44,6 +44,26 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf, DatePipe } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
+import { SelectItemCategoryComponent } from '../../../shared/components/select-item-type/select-item-category.component';
+import { SelectItemTypeComponent } from '../../../shared/components/select-item-type/select-item-type.component';
+import { FindUnitComponent } from '../../../shared/components/find-unit/find-unit.component';
+import { FindItemBrandComponent } from '../../../shared/components/find-item-brand/find-item-brand.component';
+import { FindItemGradeComponent } from '../../../shared/components/find-item-grade/find-item-grade.component';
+import { FindItemGroupComponent } from '../../../shared/components/find-item-group/find-item-group.component';
+import { FindItemModelComponent } from '../../../shared/components/find-item-model/find-item-model.component';
+import { FindItemSizeComponent } from '../../../shared/components/find-item-size/find-item-size.component';
+import { FindColorPatternComponent } from '../../../shared/components/find-color-pattern/find-color-pattern.component';
+import { FindCPUComponent } from '../../../shared/components/find-cpu/find-cpu.component';
+import { FindHDDComponent } from '../../../shared/components/find-hdd/find-hdd.component';
+import { FindItemSeriesComponent } from '../../../shared/components/find-item-series/find-item-series.component';
+import { FindRAMComponent } from '../../../shared/components/find-ram/find-ram.component';
+import { FindVGAComponent } from '../../../shared/components/find-vga/find-vga.component';
+import { FindScreenComponent } from '../../../shared/components/find-screen/find-screen.component';
+import { FindBatteryComponent } from '../../../shared/components/find-battery/find-battery.component';
+import { FindCameraComponent } from '../../../shared/components/find-camera/find-camera.component';
+import { FindFieldAComponent } from '../../../shared/components/find-field-a/find-field-a.component';
+import { FindFieldBComponent } from '../../../shared/components/find-field-b/find-field-b.component';
+import { FindFieldCComponent } from '../../../shared/components/find-field-c/find-field-c.component';
 
 @Component({
     selector: 'app-item',
@@ -51,7 +71,14 @@ import { SidebarModule } from 'primeng/sidebar';
     animations: [appModuleAnimation()],
     providers: [DialogService, ItemServiceProxy],
     standalone: true,
-    imports: [MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule, DropdownModule, FindUserComponent, SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule, PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe]
+    imports: [
+        MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule, DropdownModule, FindUserComponent,
+        SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule,
+        PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe, SelectItemTypeComponent, SelectItemCategoryComponent,
+        FindUnitComponent, FindItemGroupComponent, FindItemBrandComponent, FindItemGradeComponent, FindItemModelComponent, FindItemSizeComponent,
+        FindItemSeriesComponent, FindColorPatternComponent, FindCPUComponent, FindRAMComponent, FindVGAComponent, FindHDDComponent,
+        FindScreenComponent, FindCameraComponent, FindBatteryComponent, FindFieldAComponent, FindFieldBComponent, FindFieldCComponent
+    ]
 })
 export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
 
@@ -76,8 +103,10 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
     showFilter: boolean;
     isActiveModels: any[];
 
-    creators: any;
-    modifiers: any;
+    findModel: any;
+
+    //creators: any;
+    //modifiers: any;
 
     constructor(
         injector: Injector,
@@ -144,8 +173,28 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         this.filterInput.fieldBFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.fieldCFilter = new GuidFilterInputDto({ exclude: false, ids: [] });
 
-        this.creators = undefined;
-        this.modifiers = undefined;
+        this.findModel = {
+            unit: undefined,
+            itemGroup: undefined,
+            itemBrand: undefined,
+            itemGrade: undefined,
+            itemModel: undefined,
+            itemSize: undefined,
+            itemSeries: undefined,
+            colorPattern: undefined,
+            cpu: undefined,
+            ram: undefined,
+            vga: undefined,
+            hdd: undefined,
+            screen: undefined,
+            camera: undefined,
+            battery: undefined,
+            fieldA: undefined,
+            fieldB: undefined,
+            fieldC: undefined,
+            creator: undefined,
+            modifier: undefined,
+        };
     }
 
     protected initColumns() {
@@ -206,8 +255,7 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         let cache = super.getInitCache();
 
         //Add more data in cache
-        cache.creators = this.creators;
-        cache.modifiers = this.modifiers;
+        cache.findModel = this.findModel;
 
         return cache;
     }
@@ -216,8 +264,7 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         super.initDataFromCache(cache);
 
         //Init more data
-        this.creators = cache.creators;
-        this.modifiers = cache.modifiers;
+        this.findModel = cache.findModel;
     }
 
     protected getList(input: any, callBack: Function) {
@@ -390,11 +437,84 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         this.inlineActionMenu.show(event);
     }
 
-    onCreatorsChange(event) {
+    onCreatorChange(event) {
         this.filterInput.creatorFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
 
-    onModifiersChange(event) {
+    onModifierChange(event) {
         this.filterInput.modifierFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
+
+    onUnitChange(event) {
+        this.filterInput.unitFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onItemGroupChange(event) {
+        this.filterInput.itemGroupFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onItemBrandChange(event) {
+        this.filterInput.itemBrandFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onItemGradeChange(event) {
+        this.filterInput.itemGradeFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onItemModelChange(event) {
+        this.filterInput.itemModelFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onItemSizeChange(event) {
+        this.filterInput.itemSizeFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onItemSeriesChange(event) {
+        this.filterInput.itemSeriesFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onColorPatternChange(event) {
+        this.filterInput.colorPatternFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onCPUChange(event) {
+        this.filterInput.cpuFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onRAMChange(event) {
+        this.filterInput.ramFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onVGAChange(event) {
+        this.filterInput.vgaFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onHDDChange(event) {
+        this.filterInput.hddFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onScreenChange(event) {
+        this.filterInput.screenFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onCameraChange(event) {
+        this.filterInput.cameraFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onBatteryChange(event) {
+        this.filterInput.batteryFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onFieldAChange(event) {
+        this.filterInput.fieldAFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onFieldBChange(event) {
+        this.filterInput.fieldBFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
+    onFieldCChange(event) {
+        this.filterInput.fieldCFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
+
 }
