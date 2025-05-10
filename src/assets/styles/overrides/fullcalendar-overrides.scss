@@ -44,15 +44,15 @@
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-block-event .fc-event-main {
     color: inherit;
 }
-
+*/
 .layout-theme-dark .fc.fc-theme-standard .fc-view-harness .fc-multimonth-daygrid-table td {
-    background: var(--surface-b);
+    background: var(--surface-a);
 }
 
 .layout-theme-dark .fc.fc-theme-standard .fc-view-harness .fc-multimonth-daygrid-table td.fc-day-disabled {
-    background: var(--surface-a);
+    background: var(--surface-b);
 }
-*/
+
 .layout-theme-dark .fc .fc-list-event:hover td {
     //background-color: var(--surface-b);
     background-color: var(--surface-d);

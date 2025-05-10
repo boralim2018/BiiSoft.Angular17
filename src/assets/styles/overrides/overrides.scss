@@ -259,3 +259,7 @@ p-tree button.p-tree-toggler .pi-chevron-down:before {
 .bg-transparent{ background-color: transparent !important; }
 .bg-none{ background: none !important; }
 .border-none{ border: none !important; }
+
+.p-placeholder {
+    color: var(--surface-300);
+}
