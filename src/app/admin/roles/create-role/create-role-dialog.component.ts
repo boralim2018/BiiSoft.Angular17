@@ -74,6 +74,7 @@ export class CreateRoleDialogComponent extends DynamicDialogBase implements OnIn
             {
                 data: n,
                 label: n.displayName,
+                key: n.name,
                 expandedIcon: "pi pi-folder-open",
                 collapsedIcon: "pi pi-folder",
                 children: []

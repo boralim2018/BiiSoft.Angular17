@@ -3,7 +3,7 @@ import { DynamicDialogBase } from '@shared/dynamic-dialog-base';
 import { RoleServiceProxy, GetRoleForEditOutput, RoleDto, PermissionDto, RoleEditDto } from '@shared/service-proxies/service-proxies';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TreeNode } from 'primeng/api';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
@@ -14,7 +14,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TabViewModule } from 'primeng/tabview';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
 import { FormsModule } from '@angular/forms';
-import { of } from 'rxjs';
 
 @Component({
     templateUrl: 'edit-role-dialog.component.html',
@@ -65,6 +64,7 @@ export class EditRoleDialogComponent extends DynamicDialogBase implements OnInit
             {
                 data: n,
                 label: n.displayName,
+                key: n.name,
                 expandedIcon: "pi pi-folder-open",
                 collapsedIcon: "pi pi-folder",
                 children: []
