@@ -138,14 +138,12 @@ export class BOMComponent extends Mixin(PrimeNgListComponentBase<BOMListDto>, Ex
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
             { name: 'Type', header: 'Type', width: '25rem', sort: true, display: 'TypeName' },
-            { name: 'ItemName', header: 'ItemName', width: '25rem', sort: true },
+            { name: 'ItemName', header: 'OutputItem', width: '25rem', sort: true },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'IsDefault', header: 'Default', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
             { name: 'LastModifierUserName', header: 'Modified', width: '20rem', sort: true, type: ColumnType.WrapText, visible: false },
         ];
-
-        
 
         this.selectedColumns = this.columns.filter(s => s.visible !== false);
     }

@@ -18,6 +18,7 @@ export class ColumnType {
     static readonly List: number = 8;
     static readonly Lookup: number = 9;
     static readonly IndirectLookup: number = 10;
+    static readonly Image: number = 11;
 }
 
 export class CellFormat {

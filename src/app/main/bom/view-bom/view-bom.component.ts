@@ -1,11 +1,10 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { AppComponentBase, NavBarComponentBase } from '@shared/app-component-base';
 import { BOMDetailDto, BOMServiceProxy, GuidEntityDto } from '@shared/service-proxies/service-proxies';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, finalize, of } from 'rxjs';
-import * as moment from 'moment';
+import { finalize } from 'rxjs';
 import { EditBOMComponent } from '../edit-bom/edit-bom.component';
 import { AppPermissions } from '@shared/AppPermissions';
 import { ConfirmDeleteComponent } from '@shared/components/confirm-delete/confirm-delete.component';
@@ -17,6 +16,8 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NavBarComponent } from '../../../../shared/components/nav-bar/nav-bar.component';
 import { BusyDirective } from '../../../../shared/directives/busy.directive';
+import { RecordNotFoundComponent } from '../../../../shared/components/record-not-found/record-not-found.component';
+import { TableModule } from 'primeng/table';
 
 @Component({
     selector: 'app-view-bom',
@@ -24,7 +25,7 @@ import { BusyDirective } from '../../../../shared/directives/busy.directive';
     animations: [appModuleAnimation()],
     providers: [DialogService, BOMServiceProxy],
     standalone: true,
-    imports: [BusyDirective, NavBarComponent, ButtonDirective, Ripple, NgIf, DividerModule, TagModule, DatePipe]
+    imports: [BusyDirective, NavBarComponent, ButtonDirective, Ripple, NgIf, DividerModule, TagModule, DatePipe, RecordNotFoundComponent, TableModule]
 })
 export class ViewBOMComponent extends Mixin(AppComponentBase, NavBarComponentBase) implements OnInit {
 

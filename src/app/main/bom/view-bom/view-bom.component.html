@@ -31,7 +31,10 @@
             <div class="col-4 lg:col-2 py-2"> {{l('DisplayName')}} </div>
             <div class="col-8 lg:col-4 py-2 font-bold">: {{model.displayName}} </div>
 
-            <div class="col-4 lg:col-2 py-2"> {{l('Item')}} </div>
+            <div class="col-4 lg:col-2 py-2"> {{l('Type')}} </div>
+            <div class="col-8 lg:col-4 py-2 font-bold">: {{model.typeName}} </div>
+
+            <div class="col-4 lg:col-2 py-2"> {{l('OutputItem')}} </div>
             <div class="col-8 lg:col-4 py-2 font-bold">: {{model.itemName}} </div>
 
             <div class="col-4 lg:col-2 py-2"> {{l('CreatedBy')}} </div>
@@ -56,6 +59,38 @@
             <div class="col-8 lg:col-4 py-2 font-bold">: <p-tag styleClass="px-3" [severity]="model.isDefault ? 'success' : 'warning' " [value]="model.isDefault ? l('True'): l('False')"></p-tag> </div>
 
         </div>
+
+        <h5 class="block md:hidden text-primary">{{l('Components')}}</h5>
+        <p-divider class="block md:hidden"></p-divider>
+        <p-table [value]="model.bomItems"
+                 [rowHover]="true"
+                 responsiveLayout="stack"
+                 [breakpoint]="'960px'">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th class="text-primary pl-0">{{l('Components')}}</th>
+                    <th class="text-primary pl-0 w-4">{{l('Qty')}}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-z let-columns="columns">
+                <tr>
+                    <td class="pl-0">
+                        <span class="p-column-title">{{l('Components')}}</span>{{z.itemName}}
+                    </td>
+                    <td class="pl-0">
+                        <span class="p-column-title">{{l('Qty')}}</span>{{z.qty}}
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns="columns">
+                <tr>
+                    <td [attr.colspan]="2" class="empty-message">
+                        <div recordNotFound [minHeight]="100"></div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
 
         <p-divider></p-divider>
 

@@ -326,16 +326,24 @@
                     <ng-container *ngFor="let col of columns">
                         <td [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}">
                             <span class="p-column-title">{{l(col.header)}}</span>
-                            <ng-container *ngIf="col.name!=='IsActive'">{{getObjValue(row, col.display ? col.display : col.name)}}</ng-container>
-                            <ng-container *ngIf="col.name==='CreatorUserName'">
-                                <br />
-                                <p-tag styleClass="bg-primary-reverse text-color" [value]="row.creationTime|date:'yyyy-MM-dd HH:mm:ss'"></p-tag>
+
+                            <ng-container *ngIf="col.type===11">
+                                <img class="attachment-box-list"
+                                     [src]="row.fileUrl | safeResourceUrl"
+                                     alt="l('Image')" />
                             </ng-container>
-                            <ng-container *ngIf="col.name==='LastModifierUserName' && row.lastModificationTime">
-                                <br />
-                                <p-tag styleClass="bg-primary-reverse text-color" [value]="row.lastModificationTime|date:'yyyy-MM-dd HH:mm:ss'"></p-tag>
+                            <ng-container *ngIf="col.type!==11">
+                                <ng-container *ngIf="col.name!=='IsActive'">{{getObjValue(row, col.display ? col.display : col.name)}}</ng-container>
+                                <ng-container *ngIf="col.name==='CreatorUserName'">
+                                    <br />
+                                    <p-tag styleClass="bg-primary-reverse text-color" [value]="row.creationTime|date:'yyyy-MM-dd HH:mm:ss'"></p-tag>
+                                </ng-container>
+                                <ng-container *ngIf="col.name==='LastModifierUserName' && row.lastModificationTime">
+                                    <br />
+                                    <p-tag styleClass="bg-primary-reverse text-color" [value]="row.lastModificationTime|date:'yyyy-MM-dd HH:mm:ss'"></p-tag>
+                                </ng-container>
+                                <p-tag *ngIf="col.name==='IsActive'" styleClass="px-3" [severity]="row.isActive ? 'success' : 'warning'" [value]="row.isActive ? this.l('Active') : this.l('Inactive')"></p-tag>
                             </ng-container>
-                            <p-tag *ngIf="col.name==='IsActive'" styleClass="px-3" [severity]="row.isActive ? 'success' : 'warning'" [value]="row.isActive ? this.l('Active') : this.l('Inactive')"></p-tag>
                         </td>
                     </ng-container>
                 </tr>

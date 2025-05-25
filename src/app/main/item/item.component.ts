@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
 import { ConfirmDeleteComponent } from '@shared/components/confirm-delete/confirm-delete.component';
 import { ColumnType } from '@shared/AppEnums';
 import { Mixin } from 'ts-mixer';
-import { ExcelFileComponentBase, NavBarComponentBase } from '@shared/app-component-base';
+import { ExcelFileComponentBase, FileDownloadComponentBase, NavBarComponentBase } from '@shared/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
 import * as moment from 'moment';
 import { ImportExcelComponent } from '@shared/components/import-excel/import-excel.component';
@@ -64,6 +64,7 @@ import { FindCameraComponent } from '../../../shared/components/find-camera/find
 import { FindFieldAComponent } from '../../../shared/components/find-field-a/find-field-a.component';
 import { FindFieldBComponent } from '../../../shared/components/find-field-b/find-field-b.component';
 import { FindFieldCComponent } from '../../../shared/components/find-field-c/find-field-c.component';
+import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
 
 @Component({
     selector: 'app-item',
@@ -73,14 +74,14 @@ import { FindFieldCComponent } from '../../../shared/components/find-field-c/fin
     standalone: true,
     imports: [
         MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule, DropdownModule, FindUserComponent,
-        SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule,
+        SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule, SafeUrlPipe,
         PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe, SelectItemTypeComponent, SelectItemCategoryComponent,
         FindUnitComponent, FindItemGroupComponent, FindItemBrandComponent, FindItemGradeComponent, FindItemModelComponent, FindItemSizeComponent,
         FindItemSeriesComponent, FindColorPatternComponent, FindCPUComponent, FindRAMComponent, FindVGAComponent, FindHDDComponent,
         FindScreenComponent, FindCameraComponent, FindBatteryComponent, FindFieldAComponent, FindFieldBComponent, FindFieldCComponent
     ]
 })
-export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
+export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, ExcelFileComponentBase, NavBarComponentBase, FileDownloadComponentBase) implements OnInit {
 
     protected get sortField(): string { return 'No'; }
 
@@ -199,13 +200,14 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
 
     protected initColumns() {
         this.columns = [
+            { name: 'ImageId', header: 'Image', width: '15rem', sort: true, type: ColumnType.Image },
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
             { name: 'Code', header: 'Code', width: '15rem', sort: true },
             { name: 'Barcode', header: 'Barcode', width: '15rem', sort: true },
             { name: 'ALTCode', header: 'ALTCode', width: '15rem', sort: true, visible: false },
-            { name: 'ItemType', header: 'ItemType', width: '15rem', sort: true, display: 'ItemTypeName' },
-            { name: 'ItemCategory', header: 'ItemCategory', width: '15rem', sort: true, display: 'ItemCategoryName' },
+            { name: 'ItemType', header: 'ItemType', width: '15rem', sort: true, display: 'ItemTypeName', visible: false },
+            { name: 'ItemCategory', header: 'ItemCategory', width: '15rem', sort: true, display: 'ItemCategoryName', visible: false },
             { name: 'UnitName', header: 'Unit', width: '15rem', sort: true },
             { name: 'Description', header: 'Description', width: '15rem', sort: true, visible: false },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
@@ -267,13 +269,29 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         this.findModel = cache.findModel;
     }
 
+    loadFile(row: ItemListDto) {
+        if (row.imageId) {
+            this.download(row.imageId, "blob", (result) => {
+                row['fileUrl'] = window.URL.createObjectURL(result);
+            });
+        }
+        else {
+            row['fileUrl'] = AppConsts.blankImageUrl;
+        }
+    }
+
     protected getList(input: any, callBack: Function) {
+        const self = this;
 
         this._itemService
             .getList(input)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
-                this.listItems = result.items;
+                this.listItems = result.items.map(m => {
+                    self.loadFile(m);
+
+                    return m;
+                });
                 this.totalCount = result.totalCount;
                 //close filter sidebar
                 this.showFilter = false;

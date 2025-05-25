@@ -6607,6 +6607,57 @@ export class CommonLookupServiceProxy {
         }
         return _observableOf(null as any);
     }
+
+    /**
+     * @return OK
+     */
+    getBOMTypes(): Observable<BOMTypeNameValueDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetBOMTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetBOMTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetBOMTypes(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<BOMTypeNameValueDtoListResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<BOMTypeNameValueDtoListResultDto>;
+        }));
+    }
+
+    protected processGetBOMTypes(response: HttpResponseBase): Observable<BOMTypeNameValueDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = BOMTypeNameValueDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
 }
 
 @Injectable()
@@ -33602,6 +33653,104 @@ export interface IBOMTypeFilterInputDto {
     ids: BOMType[] | undefined;
 }
 
+export class BOMTypeNameValueDto implements IBOMTypeNameValueDto {
+    name: string | undefined;
+    value: BOMType;
+
+    constructor(data?: IBOMTypeNameValueDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): BOMTypeNameValueDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BOMTypeNameValueDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+
+    clone(): BOMTypeNameValueDto {
+        const json = this.toJSON();
+        let result = new BOMTypeNameValueDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBOMTypeNameValueDto {
+    name: string | undefined;
+    value: BOMType;
+}
+
+export class BOMTypeNameValueDtoListResultDto implements IBOMTypeNameValueDtoListResultDto {
+    items: BOMTypeNameValueDto[] | undefined;
+
+    constructor(data?: IBOMTypeNameValueDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(BOMTypeNameValueDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): BOMTypeNameValueDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BOMTypeNameValueDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data;
+    }
+
+    clone(): BOMTypeNameValueDtoListResultDto {
+        const json = this.toJSON();
+        let result = new BOMTypeNameValueDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBOMTypeNameValueDtoListResultDto {
+    items: BOMTypeNameValueDto[] | undefined;
+}
+
 export class BatteryDetailDto implements IBatteryDetailDto {
     id: string;
     firstId: string | undefined;
@@ -35870,6 +36019,7 @@ export enum ColumnType {
     _8 = 8,
     _9 = 9,
     _10 = 10,
+    _11 = 11,
 }
 
 export class ComboboxItemDto implements IComboboxItemDto {
@@ -37011,7 +37161,7 @@ export class CreateUpdateBOMInputDto implements ICreateUpdateBOMInputDto {
     displayName: string | undefined;
     type: BOMType;
     itemId: string;
-    bomBranches: BOMItemDto[] | undefined;
+    bomItems: BOMItemDto[] | undefined;
 
     constructor(data?: ICreateUpdateBOMInputDto) {
         if (data) {
@@ -37029,10 +37179,10 @@ export class CreateUpdateBOMInputDto implements ICreateUpdateBOMInputDto {
             this.displayName = _data["displayName"];
             this.type = _data["type"];
             this.itemId = _data["itemId"];
-            if (Array.isArray(_data["bomBranches"])) {
-                this.bomBranches = [] as any;
-                for (let item of _data["bomBranches"])
-                    this.bomBranches.push(BOMItemDto.fromJS(item));
+            if (Array.isArray(_data["bomItems"])) {
+                this.bomItems = [] as any;
+                for (let item of _data["bomItems"])
+                    this.bomItems.push(BOMItemDto.fromJS(item));
             }
         }
     }
@@ -37051,10 +37201,10 @@ export class CreateUpdateBOMInputDto implements ICreateUpdateBOMInputDto {
         data["displayName"] = this.displayName;
         data["type"] = this.type;
         data["itemId"] = this.itemId;
-        if (Array.isArray(this.bomBranches)) {
-            data["bomBranches"] = [];
-            for (let item of this.bomBranches)
-                data["bomBranches"].push(item.toJSON());
+        if (Array.isArray(this.bomItems)) {
+            data["bomItems"] = [];
+            for (let item of this.bomItems)
+                data["bomItems"].push(item.toJSON());
         }
         return data;
     }
@@ -37073,7 +37223,7 @@ export interface ICreateUpdateBOMInputDto {
     displayName: string | undefined;
     type: BOMType;
     itemId: string;
-    bomBranches: BOMItemDto[] | undefined;
+    bomItems: BOMItemDto[] | undefined;
 }
 
 export class CreateUpdateBatteryInputDto implements ICreateUpdateBatteryInputDto {
@@ -46306,6 +46456,7 @@ export class FindItemDto implements IFindItemDto {
     code: string | undefined;
     barcode: string | undefined;
     altCode: string | undefined;
+    imageId: string | undefined;
 
     constructor(data?: IFindItemDto) {
         if (data) {
@@ -46325,6 +46476,7 @@ export class FindItemDto implements IFindItemDto {
             this.code = _data["code"];
             this.barcode = _data["barcode"];
             this.altCode = _data["altCode"];
+            this.imageId = _data["imageId"];
         }
     }
 
@@ -46344,6 +46496,7 @@ export class FindItemDto implements IFindItemDto {
         data["code"] = this.code;
         data["barcode"] = this.barcode;
         data["altCode"] = this.altCode;
+        data["imageId"] = this.imageId;
         return data;
     }
 
@@ -46363,6 +46516,7 @@ export interface IFindItemDto {
     code: string | undefined;
     barcode: string | undefined;
     altCode: string | undefined;
+    imageId: string | undefined;
 }
 
 export class FindItemDtoPagedResultDto implements IFindItemDtoPagedResultDto {
@@ -52156,6 +52310,7 @@ export class ItemListDto implements IItemListDto {
     isAddOn: boolean;
     useBOM: boolean;
     displayBOM: boolean;
+    imageId: string | undefined;
 
     constructor(data?: IItemListDto) {
         if (data) {
@@ -52232,6 +52387,7 @@ export class ItemListDto implements IItemListDto {
             this.isAddOn = _data["isAddOn"];
             this.useBOM = _data["useBOM"];
             this.displayBOM = _data["displayBOM"];
+            this.imageId = _data["imageId"];
         }
     }
 
@@ -52308,6 +52464,7 @@ export class ItemListDto implements IItemListDto {
         data["isAddOn"] = this.isAddOn;
         data["useBOM"] = this.useBOM;
         data["displayBOM"] = this.displayBOM;
+        data["imageId"] = this.imageId;
         return data;
     }
 
@@ -52384,6 +52541,7 @@ export interface IItemListDto {
     isAddOn: boolean;
     useBOM: boolean;
     displayBOM: boolean;
+    imageId: string | undefined;
 }
 
 export class ItemListDtoPagedResultDto implements IItemListDtoPagedResultDto {

@@ -22,8 +22,69 @@
                      [(ngModel)]="model.displayName"
                      [required]="true">
                 </div>
-
+                <div class="field col-12 md:col-6 xl:col-4"
+                     selectBOMType
+                     name="type"
+                     [label]="l('Type')"
+                     [(ngModel)]="model.type"
+                     [required]="true">
+                </div>
+                <div class="field col-12 md:col-6 xl:col-4"
+                     findItem
+                     name="outputItem"
+                     [label]="l('OutputItem')"
+                     [(ngModel)]="outputItem"
+                     (ngModelChange)="model.itemId=$event.id"
+                     [required]="true">
+                </div>
             </div>
+
+            <div class="formgrid grid">
+                <div class="field col-12"
+                     findItem
+                     name="findComponents"
+                     [label]="l('Components')"
+                     [(ngModel)]="selectedComponents"
+                     (ngModelChange)="onComponentChange($event)"
+                     [multiple]="true"
+                     [required]="!model.bomItems || !model.bomItems.length">
+                </div>
+            </div>
+
+            <p-table [value]="model.bomItems"
+                     [rowHover]="true"
+                     responsiveLayout="stack"
+                     [breakpoint]="'960px'">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th>{{l('Item')}}</th>
+                        <th class="w-3">{{l('Qty')}}</th>
+                        <th class="w-1"><i class="pi pi-trash text-red-600 cursor-pointer" (click)="clearComponents()"></i></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-z let-columns="columns" let-i="rowIndex">
+                    <tr>
+                        <td>
+                            <span class="p-column-title">{{l('Item')}}</span>{{z.itemName}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{l('Qty')}}</span>
+                            <div class="" inputNumber name="qty_{{i}}" [min]="1" [(ngModel)]="z.qty" [required]="true"></div>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{l('Delete')}}</span>
+                            <i class="pi pi-trash text-red-600 text-red-600 cursor-pointer" (click)="removeComponent(z)"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns="columns">
+                    <tr>
+                        <td [attr.colspan]="3" class="empty-message">
+                            <div recordNotFound [minHeight]="150"></div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
 
             <p-divider></p-divider>
 
