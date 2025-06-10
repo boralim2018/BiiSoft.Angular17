@@ -106,9 +106,6 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
 
     findModel: any;
 
-    //creators: any;
-    //modifiers: any;
-
     constructor(
         injector: Injector,
         private _itemService: ItemServiceProxy,

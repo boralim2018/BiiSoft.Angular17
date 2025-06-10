@@ -6,15 +6,43 @@
                        [(gridLine)]="showGridLine"
                        (gridLineChange)="showGridLineChange($event)"></table-setting>
     </p-overlayPanel>
-    <div class="p-dialog-title surface-card flex justify-content-between gap-3 p-3"
-         findSearchAction
-         [(searchModel)]="filterInput.keyword"
-         (search)="refresh($event)"
-         [(cardView)]="cardView"
-         (showSetting)="op.show($event)"
-         [hideAction]="!multiple"
-         (select)="select()"
-         [selectDisabled]="!selectedModel || !selectedModel.length">
+    <div class="p-dialog-title surface-card p-3">
+        <div class="flex justify-content-between flex-wrap gap-3">
+            <div class="field flex-1"
+                 selectItemType
+                 name="selectItemType"
+                 [label]="l('ItemType')"
+                 [multiple]="true"
+                 [showExclude]="true"
+                 [(exclude)]="filterInput.itemTypeFilter.exclude"
+                 [(ngModel)]="filterInput.itemTypeFilter.ids"
+                 (excludeChange)="refresh()"
+                 (onHide)="refresh()"
+                 (onClear)="refresh()">
+            </div>
+            <div class="field flex-1"
+                 selectItemCategory
+                 name="selectItemCategory"
+                 [label]="l('ItemCategory')"
+                 [multiple]="true"
+                 [showExclude]="true"
+                 [(exclude)]="filterInput.itemCategoryFilter.exclude"
+                 [(ngModel)]="filterInput.itemCategoryFilter.ids"
+                 (excludeChange)="refresh()"
+                 (onHide)="refresh()"
+                 (onClear)="refresh()">
+            </div>
+        </div>
+        <div class="flex justify-content-between flex-wrap gap-3"
+             findSearchAction
+             [(searchModel)]="filterInput.keyword"
+             (search)="refresh($event)"
+             [(cardView)]="cardView"
+             (showSetting)="op.show($event)"
+             [hideAction]="!multiple"
+             (select)="select()"
+             [selectDisabled]="!selectedModel || !selectedModel.length">
+        </div>
     </div>
     <div [ngStyle]="{'minHeight':minHeight + 'px'}" [busy]="isTableLoading" *ngIf="cardView">
 

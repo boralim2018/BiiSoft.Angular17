@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { FindItemDto, ItemServiceProxy, FindItemInputDto } from '@shared/service-proxies/service-proxies';
+import { FindItemDto, ItemServiceProxy, FindItemInputDto, ItemTypeFilterInputDto, ItemCategoryFilterInputDto } from '@shared/service-proxies/service-proxies';
 import { Table, TableModule } from 'primeng/table';
 import { FindCardListComponentBase } from '@shared/prime-ng-list-component-base';
 import { finalize } from 'rxjs';
@@ -22,6 +22,8 @@ import { FileDownloadComponentBase } from '../../app-component-base';
 import { ColumnType } from '@shared/AppEnums';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-resource-url.pipe';
 import { AppConsts } from '../../AppConsts';
+import { SelectItemCategoryComponent } from '../select-item-type/select-item-category.component';
+import { SelectItemTypeComponent } from '../select-item-type/select-item-type.component';
 
 @Component({
     selector: 'find-item-dialog',
@@ -32,7 +34,8 @@ import { AppConsts } from '../../AppConsts';
     imports: [
         OverlayPanelModule, TableSettingComponent, FindSearchActionComponent, NgIf, NgStyle, BusyDirective,
         NgFor, NgClass, RecordNotFoundComponent, TableModule, PrimeTemplate, CheckboxModule, FormsModule,
-        PaginatorModule, TagModule, SafeUrlPipe ]
+        PaginatorModule, TagModule, SafeUrlPipe, SelectItemTypeComponent, SelectItemCategoryComponent
+    ]
 })
 export class FindItemDialogComponent extends Mixin(FindCardListComponentBase<FindItemDto>, AppDynamicDialogBase, FileDownloadComponentBase) implements OnInit {
 
@@ -78,6 +81,8 @@ export class FindItemDialogComponent extends Mixin(FindCardListComponentBase<Fin
         this.filterInput = FindItemInputDto.fromJS(this.filterInput);
 
         this.filterInput.isActive = undefined;
+        this.filterInput.itemTypeFilter = new ItemTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.itemCategoryFilter = new ItemCategoryFilterInputDto({ exclude: false, ids: [] });
     }
 
 

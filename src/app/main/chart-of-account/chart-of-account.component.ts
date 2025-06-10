@@ -1,5 +1,5 @@
 import { Component, Injector, ViewChild, OnInit } from '@angular/core';
-import { catchError, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
     ChartOfAccountServiceProxy,
@@ -13,6 +13,7 @@ import {
     AccountTypeFilterInputDto,
     SubAccountTypeFilterInputDto,
     GuidNullableFilterInputDto,
+    PageChartOfAccountInputDto,
 } from '@shared/service-proxies/service-proxies';
 import { CreateChartOfAccountComponent } from './create-chart-of-account/create-chart-of-account.component';
 import { EditChartOfAccountComponent } from './edit-chart-of-account/edit-chart-of-account.component';
@@ -45,7 +46,9 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonDirective } from 'primeng/button';
 import { NgClass, NgStyle, NgFor, NgIf, DatePipe } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
-import { of } from 'rxjs';
+import { SelectAccountTypeComponent } from '../../../shared/components/select-account-type/select-account-type.component';
+import { SelectSubAccountTypeComponent } from '../../../shared/components/select-account-type/select-sub-account-type.component';
+import { FindChartOfAccountComponent } from '../../../shared/components/find-chart-of-account/find-chart-of-account.component';
 
 @Component({
     selector: 'app-chart-of-account',
@@ -53,7 +56,13 @@ import { of } from 'rxjs';
     animations: [appModuleAnimation()],
     providers: [DialogService, ChartOfAccountServiceProxy],
     standalone: true,
-    imports: [MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule, DropdownModule, FindUserComponent, SearchFooterComponent, OverlayPanelModule, TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule, PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe]
+    imports: [
+        MenuModule, SidebarModule, NgClass, ButtonDirective, Ripple, FormsModule, InputTextModule,
+        DropdownModule, FindUserComponent, SearchFooterComponent, OverlayPanelModule,
+        TableSettingComponent, NavBarComponent, SearchActionComponent, TableModule,
+        PrimeTemplate, NgStyle, NgFor, NgIf, TagModule, RecordNotFoundComponent, DatePipe,
+        SelectAccountTypeComponent, SelectSubAccountTypeComponent, FindChartOfAccountComponent
+    ]
 })
 export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<ChartOfAccountListDto>, ExcelFileComponentBase, NavBarComponentBase) implements OnInit {
 
@@ -76,8 +85,8 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
 
     showFilter: boolean;
     isActiveModels: any[];
-    creators: any;
-    modifiers: any;
+
+    findModel: any;
 
     constructor(
         injector: Injector,
@@ -117,13 +126,21 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
 
     protected initFilterInput() {
         super.initFilterInput();
+
+        this.filterInput = PageChartOfAccountInputDto.fromJS(this.filterInput);
+
         this.filterInput.isActive = undefined;
         this.filterInput.creatorFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
         this.filterInput.modifierFilter = new Int64NullableFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.accountTypes = new AccountTypeFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.subAccountTypes = new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
-        this.filterInput.parents = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.accountTypeFilter = new AccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.subAccountTypeFilter = new SubAccountTypeFilterInputDto({ exclude: false, ids: [] });
+        this.filterInput.parentFilter = new GuidNullableFilterInputDto({ exclude: false, ids: [] });
 
+        this.findModel = {
+            creator: undefined,
+            modifier: undefined,
+            parent: undefined,
+        };
     }
 
     protected initColumns() {
@@ -131,8 +148,8 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
             { name: 'Code', header: 'Code', width: '25rem', sort: true },
             { name: 'Name', header: 'Name', width: '25rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '25rem', sort: true },
-            { name: 'AccountType', header: 'AccountType', width: '15rem', sort: true },
-            { name: 'SubAccountType', header: 'SubAccountType', width: '15rem', sort: true },
+            { name: 'AccountType', header: 'AccountType', width: '15rem', sort: true, display: 'AccountTypeName' },
+            { name: 'SubAccountType', header: 'SubAccountType', width: '15rem', sort: true, display: 'SubAccountTypeName' },
             { name: 'ParentAccountName', header: 'ParentAccount', width: '15rem', sort: true },
             { name: 'IsActive', header: 'Status', width: '15rem', sort: true },
             { name: 'CreatorUserName', header: 'Created', width: '15rem', sort: true, type: ColumnType.WrapText, visible: false },
@@ -148,8 +165,7 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
         let cache = super.getInitCache();
 
         //Add more data in cache
-        cache.creators = this.creators;
-        cache.modifiers = this.modifiers;
+        cache.findModel = this.findModel;
 
         return cache;
     }
@@ -158,14 +174,13 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
         super.initDataFromCache(cache);
 
         //Init more data
-        this.creators = cache.creators;
-        this.modifiers = cache.modifiers;
+        this.findModel = cache.findModel;
     }
 
     protected getList(input: any, callBack: Function) {
 
         this._chartOfAccountService
-            .getList(input.accountTypes.exclude, input.accountTypes.ids, input.subAccountTypes.exclude, input.subAccountTypes.ids, input.parents.exclude, input.parents.ids, input.isActive, input.creatorFilter.exclude, input.creatorFilter.ids, input.modifierFilter.exclude, input.modifierFilter.ids, input.keyword, input.sortField, input.sortMode, input.usePagination, input.skipCount, input.maxResultCount)
+            .getList(input)
             .pipe(finalize(() => callBack()))
             .subscribe((result) => {
                 this.listItems = result.items;
@@ -360,5 +375,8 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
     onModifiersChange(event) {
         this.filterInput.modifierFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
     }
-
+    
+    onParentChange(event) {
+        this.filterInput.parentFilter.ids = !event ? undefined : Array.isArray(event) ? event.map(f => f.id) : [event.id];
+    }
 }

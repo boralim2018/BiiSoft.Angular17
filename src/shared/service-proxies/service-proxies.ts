@@ -4308,106 +4308,26 @@ export class ChartOfAccountServiceProxy {
     }
 
     /**
-     * @param accountTypeFilter_Exclude (optional) 
-     * @param accountTypeFilter_Ids (optional) 
-     * @param subAccountTypeFilter_Exclude (optional) 
-     * @param subAccountTypeFilter_Ids (optional) 
-     * @param parentFilter_Exclude (optional) 
-     * @param parentFilter_Ids (optional) 
-     * @param isActive (optional) 
-     * @param creatorFilter_Exclude (optional) 
-     * @param creatorFilter_Ids (optional) 
-     * @param modifierFilter_Exclude (optional) 
-     * @param modifierFilter_Ids (optional) 
-     * @param keyword (optional) 
-     * @param sortField (optional) 
-     * @param sortMode (optional) 
-     * @param usePagination (optional) 
-     * @param skipCount (optional) 
-     * @param maxResultCount (optional) 
+     * @param body (optional) 
      * @return OK
      */
-    getList(accountTypeFilter_Exclude: boolean | undefined, accountTypeFilter_Ids: AccountType[] | undefined, subAccountTypeFilter_Exclude: boolean | undefined, subAccountTypeFilter_Ids: SubAccountType[] | undefined, parentFilter_Exclude: boolean | undefined, parentFilter_Ids: string[] | undefined, isActive: boolean | undefined, creatorFilter_Exclude: boolean | undefined, creatorFilter_Ids: number[] | undefined, modifierFilter_Exclude: boolean | undefined, modifierFilter_Ids: number[] | undefined, keyword: string | undefined, sortField: string | undefined, sortMode: SortMode | undefined, usePagination: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<ChartOfAccountListDtoPagedResultDto> {
-        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/GetList?";
-        if (accountTypeFilter_Exclude === null)
-            throw new Error("The parameter 'accountTypeFilter_Exclude' cannot be null.");
-        else if (accountTypeFilter_Exclude !== undefined)
-            url_ += "AccountTypeFilter.Exclude=" + encodeURIComponent("" + accountTypeFilter_Exclude) + "&";
-        if (accountTypeFilter_Ids === null)
-            throw new Error("The parameter 'accountTypeFilter_Ids' cannot be null.");
-        else if (accountTypeFilter_Ids !== undefined)
-            accountTypeFilter_Ids && accountTypeFilter_Ids.forEach(item => { url_ += "AccountTypeFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (subAccountTypeFilter_Exclude === null)
-            throw new Error("The parameter 'subAccountTypeFilter_Exclude' cannot be null.");
-        else if (subAccountTypeFilter_Exclude !== undefined)
-            url_ += "SubAccountTypeFilter.Exclude=" + encodeURIComponent("" + subAccountTypeFilter_Exclude) + "&";
-        if (subAccountTypeFilter_Ids === null)
-            throw new Error("The parameter 'subAccountTypeFilter_Ids' cannot be null.");
-        else if (subAccountTypeFilter_Ids !== undefined)
-            subAccountTypeFilter_Ids && subAccountTypeFilter_Ids.forEach(item => { url_ += "SubAccountTypeFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (parentFilter_Exclude === null)
-            throw new Error("The parameter 'parentFilter_Exclude' cannot be null.");
-        else if (parentFilter_Exclude !== undefined)
-            url_ += "ParentFilter.Exclude=" + encodeURIComponent("" + parentFilter_Exclude) + "&";
-        if (parentFilter_Ids === null)
-            throw new Error("The parameter 'parentFilter_Ids' cannot be null.");
-        else if (parentFilter_Ids !== undefined)
-            parentFilter_Ids && parentFilter_Ids.forEach(item => { url_ += "ParentFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (isActive === null)
-            throw new Error("The parameter 'isActive' cannot be null.");
-        else if (isActive !== undefined)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
-        if (creatorFilter_Exclude === null)
-            throw new Error("The parameter 'creatorFilter_Exclude' cannot be null.");
-        else if (creatorFilter_Exclude !== undefined)
-            url_ += "CreatorFilter.Exclude=" + encodeURIComponent("" + creatorFilter_Exclude) + "&";
-        if (creatorFilter_Ids === null)
-            throw new Error("The parameter 'creatorFilter_Ids' cannot be null.");
-        else if (creatorFilter_Ids !== undefined)
-            creatorFilter_Ids && creatorFilter_Ids.forEach(item => { url_ += "CreatorFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (modifierFilter_Exclude === null)
-            throw new Error("The parameter 'modifierFilter_Exclude' cannot be null.");
-        else if (modifierFilter_Exclude !== undefined)
-            url_ += "ModifierFilter.Exclude=" + encodeURIComponent("" + modifierFilter_Exclude) + "&";
-        if (modifierFilter_Ids === null)
-            throw new Error("The parameter 'modifierFilter_Ids' cannot be null.");
-        else if (modifierFilter_Ids !== undefined)
-            modifierFilter_Ids && modifierFilter_Ids.forEach(item => { url_ += "ModifierFilter.Ids=" + encodeURIComponent("" + item) + "&"; });
-        if (keyword === null)
-            throw new Error("The parameter 'keyword' cannot be null.");
-        else if (keyword !== undefined)
-            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
-        if (sortField === null)
-            throw new Error("The parameter 'sortField' cannot be null.");
-        else if (sortField !== undefined)
-            url_ += "SortField=" + encodeURIComponent("" + sortField) + "&";
-        if (sortMode === null)
-            throw new Error("The parameter 'sortMode' cannot be null.");
-        else if (sortMode !== undefined)
-            url_ += "SortMode=" + encodeURIComponent("" + sortMode) + "&";
-        if (usePagination === null)
-            throw new Error("The parameter 'usePagination' cannot be null.");
-        else if (usePagination !== undefined)
-            url_ += "UsePagination=" + encodeURIComponent("" + usePagination) + "&";
-        if (skipCount === null)
-            throw new Error("The parameter 'skipCount' cannot be null.");
-        else if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
-        if (maxResultCount === null)
-            throw new Error("The parameter 'maxResultCount' cannot be null.");
-        else if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+    getList(body: PageChartOfAccountInputDto | undefined): Observable<ChartOfAccountListDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/ChartOfAccount/GetList";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(body);
+
         let options_ : any = {
+            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Content-Type": "application/json",
                 "Accept": "text/plain"
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
             return this.processGetList(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
@@ -35228,8 +35148,10 @@ export class ChartOfAccountListDto implements IChartOfAccountListDto {
     cannotDelete: boolean;
     no: number;
     code: string | undefined;
-    accountType: string | undefined;
-    subAccountType: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    accountTypeName: string | undefined;
+    subAccountTypeName: string | undefined;
     parentId: string | undefined;
     parentAccountName: string | undefined;
 
@@ -35260,6 +35182,8 @@ export class ChartOfAccountListDto implements IChartOfAccountListDto {
             this.code = _data["code"];
             this.accountType = _data["accountType"];
             this.subAccountType = _data["subAccountType"];
+            this.accountTypeName = _data["accountTypeName"];
+            this.subAccountTypeName = _data["subAccountTypeName"];
             this.parentId = _data["parentId"];
             this.parentAccountName = _data["parentAccountName"];
         }
@@ -35290,6 +35214,8 @@ export class ChartOfAccountListDto implements IChartOfAccountListDto {
         data["code"] = this.code;
         data["accountType"] = this.accountType;
         data["subAccountType"] = this.subAccountType;
+        data["accountTypeName"] = this.accountTypeName;
+        data["subAccountTypeName"] = this.subAccountTypeName;
         data["parentId"] = this.parentId;
         data["parentAccountName"] = this.parentAccountName;
         return data;
@@ -35318,8 +35244,10 @@ export interface IChartOfAccountListDto {
     cannotDelete: boolean;
     no: number;
     code: string | undefined;
-    accountType: string | undefined;
-    subAccountType: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    accountTypeName: string | undefined;
+    subAccountTypeName: string | undefined;
     parentId: string | undefined;
     parentAccountName: string | undefined;
 }
@@ -45175,8 +45103,10 @@ export class FindChartOfAccountDto implements IFindChartOfAccountDto {
     displayName: string | undefined;
     isActive: boolean;
     code: string | undefined;
-    accountType: string | undefined;
-    subAccountType: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    accountTypeName: string | undefined;
+    subAccountTypeName: string | undefined;
     parentAccount: string | undefined;
 
     constructor(data?: IFindChartOfAccountDto) {
@@ -45197,6 +45127,8 @@ export class FindChartOfAccountDto implements IFindChartOfAccountDto {
             this.code = _data["code"];
             this.accountType = _data["accountType"];
             this.subAccountType = _data["subAccountType"];
+            this.accountTypeName = _data["accountTypeName"];
+            this.subAccountTypeName = _data["subAccountTypeName"];
             this.parentAccount = _data["parentAccount"];
         }
     }
@@ -45217,6 +45149,8 @@ export class FindChartOfAccountDto implements IFindChartOfAccountDto {
         data["code"] = this.code;
         data["accountType"] = this.accountType;
         data["subAccountType"] = this.subAccountType;
+        data["accountTypeName"] = this.accountTypeName;
+        data["subAccountTypeName"] = this.subAccountTypeName;
         data["parentAccount"] = this.parentAccount;
         return data;
     }
@@ -45235,8 +45169,10 @@ export interface IFindChartOfAccountDto {
     displayName: string | undefined;
     isActive: boolean;
     code: string | undefined;
-    accountType: string | undefined;
-    subAccountType: string | undefined;
+    accountType: AccountType;
+    subAccountType: SubAccountType;
+    accountTypeName: string | undefined;
+    subAccountTypeName: string | undefined;
     parentAccount: string | undefined;
 }
 
@@ -55853,6 +55789,93 @@ export interface IPageCameraInputDto {
     creatorFilter: Int64NullableFilterInputDto;
     modifierFilter: Int64NullableFilterInputDto;
     isActive: boolean | undefined;
+}
+
+export class PageChartOfAccountInputDto implements IPageChartOfAccountInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    accountTypeFilter: AccountTypeFilterInputDto;
+    subAccountTypeFilter: SubAccountTypeFilterInputDto;
+    parentFilter: GuidNullableFilterInputDto;
+
+    constructor(data?: IPageChartOfAccountInputDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.maxResultCount = _data["maxResultCount"];
+            this.skipCount = _data["skipCount"];
+            this.usePagination = _data["usePagination"];
+            this.sortField = _data["sortField"];
+            this.sortMode = _data["sortMode"];
+            this.keyword = _data["keyword"];
+            this.creatorFilter = _data["creatorFilter"] ? Int64NullableFilterInputDto.fromJS(_data["creatorFilter"]) : <any>undefined;
+            this.modifierFilter = _data["modifierFilter"] ? Int64NullableFilterInputDto.fromJS(_data["modifierFilter"]) : <any>undefined;
+            this.isActive = _data["isActive"];
+            this.accountTypeFilter = _data["accountTypeFilter"] ? AccountTypeFilterInputDto.fromJS(_data["accountTypeFilter"]) : <any>undefined;
+            this.subAccountTypeFilter = _data["subAccountTypeFilter"] ? SubAccountTypeFilterInputDto.fromJS(_data["subAccountTypeFilter"]) : <any>undefined;
+            this.parentFilter = _data["parentFilter"] ? GuidNullableFilterInputDto.fromJS(_data["parentFilter"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): PageChartOfAccountInputDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PageChartOfAccountInputDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["maxResultCount"] = this.maxResultCount;
+        data["skipCount"] = this.skipCount;
+        data["usePagination"] = this.usePagination;
+        data["sortField"] = this.sortField;
+        data["sortMode"] = this.sortMode;
+        data["keyword"] = this.keyword;
+        data["creatorFilter"] = this.creatorFilter ? this.creatorFilter.toJSON() : <any>undefined;
+        data["modifierFilter"] = this.modifierFilter ? this.modifierFilter.toJSON() : <any>undefined;
+        data["isActive"] = this.isActive;
+        data["accountTypeFilter"] = this.accountTypeFilter ? this.accountTypeFilter.toJSON() : <any>undefined;
+        data["subAccountTypeFilter"] = this.subAccountTypeFilter ? this.subAccountTypeFilter.toJSON() : <any>undefined;
+        data["parentFilter"] = this.parentFilter ? this.parentFilter.toJSON() : <any>undefined;
+        return data;
+    }
+
+    clone(): PageChartOfAccountInputDto {
+        const json = this.toJSON();
+        let result = new PageChartOfAccountInputDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPageChartOfAccountInputDto {
+    maxResultCount: number;
+    skipCount: number;
+    usePagination: boolean;
+    sortField: string | undefined;
+    sortMode: SortMode;
+    keyword: string | undefined;
+    creatorFilter: Int64NullableFilterInputDto;
+    modifierFilter: Int64NullableFilterInputDto;
+    isActive: boolean | undefined;
+    accountTypeFilter: AccountTypeFilterInputDto;
+    subAccountTypeFilter: SubAccountTypeFilterInputDto;
+    parentFilter: GuidNullableFilterInputDto;
 }
 
 export class PageCityProvinceInputDto implements IPageCityProvinceInputDto {

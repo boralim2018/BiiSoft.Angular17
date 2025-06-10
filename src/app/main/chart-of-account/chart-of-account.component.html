@@ -16,13 +16,42 @@
                         <p-dropdown [options]="isActiveModels" [(ngModel)]="filterInput.isActive" styleClass="w-full"></p-dropdown>
                     </div>
                     <div class="field"
+                         selectAccountType
+                         name="accountType"
+                         [label]="l('AccountType')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.accountTypeFilter.exclude"
+                         [(ngModel)]="filterInput.accountTypeFilter.ids">
+                    </div>
+                    <div class="field"
+                         selectSubAccountType
+                         name="subAccountType"
+                         [label]="l('SubAccountType')"
+                         [multiple]="true"
+                         [(accountTypeIds)]="filterInput.accountTypeFilter.ids"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.subAccountTypeFilter.exclude"
+                         [(ngModel)]="filterInput.subAccountTypeFilter.ids">
+                    </div>
+                    <div class="field"
+                         findChartOfAccount
+                         name="parentAccount"
+                         [label]="l('ParentAccount')"
+                         [multiple]="true"
+                         [showExclude]="true"
+                         [(exclude)]="filterInput.parentFilter.exclude"
+                         [(ngModel)]="findModel.parent"
+                         (ngModelChange)="onParentChange($event)">
+                    </div>
+                    <div class="field"
                          findUser
                          name="created"
                          [label]="l('Created')"
                          [multiple]="true"
                          [showExclude]="true"
                          [(exclude)]="filterInput.creatorFilter.exclude"
-                         [(ngModel)]="creators"
+                         [(ngModel)]="findModel.creator"
                          (ngModelChange)="onCreatorsChange($event)">
                     </div>
                     <div class="field"
@@ -32,7 +61,7 @@
                          [multiple]="true"
                          [showExclude]="true"
                          [(exclude)]="filterInput.modifierFilter.exclude"
-                         [(ngModel)]="modifiers"
+                         [(ngModel)]="findModel.modifier"
                          (ngModelChange)="onModifiersChange($event)">
                     </div>
                 </div>
@@ -111,7 +140,7 @@
                     <ng-container *ngFor="let col of columns">
                         <td [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}">
                             <span class="p-column-title">{{l(col.header)}}</span>
-                            <ng-container *ngIf="col.name!=='IsActive'">{{getObjValue(row,col.name)}}</ng-container>
+                            <ng-container *ngIf="col.name!=='IsActive'">{{getObjValue(row, col.display ? col.display : col.name)}}</ng-container>
                             <ng-container *ngIf="col.name==='CreatorUserName'">
                                 <br />
                                 <p-tag styleClass="bg-primary-reverse text-color" [value]="row.creationTime|date:'yyyy-MM-dd HH:mm:ss'"></p-tag>

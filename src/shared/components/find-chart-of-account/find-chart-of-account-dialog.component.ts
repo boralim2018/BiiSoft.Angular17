@@ -59,8 +59,8 @@ export class FindChartOfAccountDialogComponent extends Mixin(FindCardListCompone
             { name: 'Code', header: 'Code', width: '15rem', sort: true },
             { name: 'Name', header: 'Name', width: '15rem', sort: true },
             { name: 'DisplayName', header: 'DisplayName', width: '15rem', sort: true },
-            { name: 'AccountType', header: 'AccountType', width: '15rem', sort: true },
-            { name: 'SubAccountType', header: 'SubAccountType', width: '15rem', sort: true, visible: false },
+            { name: 'AccountType', header: 'AccountType', width: '15rem', sort: true, display: "AccountTypeName" },
+            { name: 'SubAccountType', header: 'SubAccountType', width: '15rem', sort: true, display: "SubAccountTypeName", visible: false },
             { name: 'ParentAccount', header: 'ParentAccount', width: '15rem', sort: true, visible: false },
         ];
         

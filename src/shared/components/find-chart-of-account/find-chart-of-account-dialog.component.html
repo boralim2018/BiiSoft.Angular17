@@ -56,7 +56,6 @@
                      (click)="multiple? row.checked=!row.checked : select(row)">
                     <span class="overflow-hidden text-overflow-clip">{{row.code}}</span>
                     <span class="overflow-hidden text-overflow-clip">{{getObjLocalizeName(row)}}</span>
-                    <span class="overflow-hidden text-overflow-clip">{{row.subAccountType}}</span>
                 </div>
             </ng-container>
         </div>
@@ -110,10 +109,10 @@
                 <ng-container *ngFor="let col of columns">
                     <td [ngStyle]="{'width': responsiveWidth(col.width), 'max-width': responsiveWidth(col.width)}">
                         <span class="p-column-title">{{l(col.header)}}</span>
-                        <ng-container *ngIf="multiple">{{getObjValue(row,col.name)}}</ng-container>
+                        <ng-container *ngIf="multiple">{{getObjValue(row, col.display ? col.display : col.name)}}</ng-container>
                         <span *ngIf="!multiple"
                               class="cursor-pointer hover:text-primary hover:underline"
-                              (click)="select(row)">{{getObjValue(row,col.name)}}</span>
+                              (click)="select(row)">{{getObjValue(row, col.display ? col.display : col.name)}}</span>
                     </td>
                 </ng-container>
             </tr>
