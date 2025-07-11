@@ -174,7 +174,7 @@ export class ChartOfAccountComponent extends Mixin(PrimeNgListComponentBase<Char
         super.initDataFromCache(cache);
 
         //Init more data
-        this.findModel = cache.findModel;
+        this.mapObj(this.findModel, cache.findModel);
     }
 
     protected getList(input: any, callBack: Function) {

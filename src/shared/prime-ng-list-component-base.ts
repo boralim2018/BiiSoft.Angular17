@@ -134,7 +134,7 @@ export abstract class PrimeNgListComponentBase<TOutputDto> extends AppComponentB
 
     protected initDataFromCache(cache: any) {
 
-        this.filterInput = cache.filterInput;
+        this.mapObj(this.filterInput, cache.filterInput);
         this.tableWidth = cache.style.width;
         this.showGridLine = cache.style.showGridLine;
 

@@ -263,7 +263,7 @@ export class ItemComponent extends Mixin(PrimeNgListComponentBase<ItemListDto>, 
         super.initDataFromCache(cache);
 
         //Init more data
-        this.findModel = cache.findModel;
+        this.mapObj(this.findModel, cache.findModel);
     }
 
     loadFile(row: ItemListDto) {

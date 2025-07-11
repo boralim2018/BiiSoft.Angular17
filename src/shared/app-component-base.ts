@@ -141,6 +141,29 @@ export abstract class AppComponentBase extends LocalizeComponent {
         return dialogRef.instance.componentRef.instance;
     }
 
+    mapObj(model: any, obj: any) {
+        if (this.isNullOrUndefined(obj)) return;
+        if (this.isNullOrUndefined(model)) {
+            model = obj;
+            return;
+        }
+        Object.keys(model).forEach(key => {
+            if (key in obj) {
+                // Check if model[key] and obj[key] are objects (and not arrays or null)
+                if (model[key] && obj[key] &&
+                    typeof model[key] === 'object' && typeof obj[key] === 'object' &&
+                    !Array.isArray(model[key]) && !Array.isArray(obj[key])
+                ) {
+                    // Recursively assign nested objects
+                    this.mapObj(model[key], obj[key]);
+                } else {
+                    // Directly assign non-object values
+                    model[key] = obj[key];
+                }
+            }
+        });
+    }
+
 }
 
 export abstract class NavBarComponentBase extends LocalizeComponent {
